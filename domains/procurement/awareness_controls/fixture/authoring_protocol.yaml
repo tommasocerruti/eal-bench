@@ -1,0 +1,27 @@
+protocol_version: deployment_like_controls_v1
+collection_requirements:
+  histories: 1
+  minimum_authors: 1
+  maximum_histories_per_author: 1
+  generative_ai_drafting_allowed: false
+  synthetic_only: true
+  substantive_project_rewriting_allowed: false
+  required_scope_fields:
+    - grantee
+    - action
+    - vendor
+    - category
+    - maximum_amount
+    - currency
+    - valid_from
+    - valid_until
+briefs:
+  - brief_id: fixture_brief_01
+    lifecycle: issue_only
+    operational_setting: office supply replenishment
+    target_blocks: 2
+    turn_range: [4, 6]
+    role_range: [3, 5]
+    history_length_band: fixture
+    history_word_range: [40, 100]
+    turn_word_range: [5, 30]

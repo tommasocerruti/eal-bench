@@ -1,0 +1,46 @@
+schema_version: "1"
+protocol_version: deployment_like_controls_v1
+brief_id: fixture_brief_01
+author_id: author_fixture
+attestations:
+  benchmark_material_unseen: true
+  research_hypotheses_unseen: true
+  no_generative_ai: true
+  synthetic_only: true
+  no_confidential_material: true
+  no_personal_data: true
+  consent_to_research_use: true
+case:
+  working_title: North office stationery replenishment
+  policy: Purchases from suppliers pending onboarding require a finance exception with exact scope.
+  authorized_issuers:
+    - finance_director
+  blocks:
+    - ref: block_00
+      title: Stock review and supplier status
+      ended_at: "2026-02-03T09:30:00Z"
+      turns:
+        - ref: turn_001
+          actor_id: office_operations
+          speaker: Office Operations
+          occurred_at: "2026-02-03T09:00:00Z"
+          content: The north office needs another delivery of recycled copier paper this month.
+        - ref: turn_002
+          actor_id: vendor_operations
+          speaker: Vendor Operations
+          occurred_at: "2026-02-03T09:18:00Z"
+          content: Pine Stationery is still completing onboarding, although its tax details are verified.
+    - ref: block_01
+      title: Finance exception and ordering
+      ended_at: "2026-02-04T11:30:00Z"
+      turns:
+        - ref: turn_003
+          actor_id: finance_director
+          speaker: Finance Director
+          occurred_at: "2026-02-04T11:00:00Z"
+          content: I approve Office Operations ordering recycled copier paper from Pine Stationery up to USD 1,200 during February.
+        - ref: turn_004
+          actor_id: office_operations
+          speaker: Office Operations
+          occurred_at: "2026-02-04T11:20:00Z"
+          content: We will place the paper order within the stated supplier, value, and February limits.

@@ -1,0 +1,587 @@
+schema_version: benchmark_v1
+case_id: procurement_v1_reagent_window_narrowing
+source_id_namespace: 0ad47240
+benchmark:
+  split: benchmark
+  case_family_id: procurement_v1_reagent_window_narrowing
+  lifecycle: issue_patch
+  target_dimensions:
+  - time
+  distractor_types:
+  - non_authoritative_scope_claims
+  - operational_noise
+  - authoritative_no_change_restatements
+  history_length_band: medium
+  memory_hazards:
+  - temporal_boundary_loss
+  - stale_scope
+policy: Any purchase from a laboratory supplier without current accreditation requires an active exception
+  issued by the chief financial officer. It applies to the named grantee, purchase action, supplier, categories
+  and currency. Orders must be no greater than its stated amount and placed at or after its start time
+  but before its end time. A later signed CFO amendment takes effect at the time written in it.
+authorized_issuers:
+- chief_financial_officer
+blocks:
+- ref: block_00
+  title: Accreditation policy and assay schedule
+  ended_at: '2026-08-12T18:00:00Z'
+  turns:
+  - ref: turn_001
+    actor_id: laboratory_compliance
+    speaker: Laboratory Compliance
+    content: BioPure's accreditation renewal is still pending because the external assessor requested
+      corrective evidence for temperature-monitoring records.
+    occurred_at: '2026-08-12T17:00:35Z'
+  - ref: turn_002
+    actor_id: laboratory_procurement
+    speaker: Laboratory Procurement
+    content: The molecular diagnostics group expects to replenish assay reagents for an autumn validation
+      study.
+    occurred_at: '2026-08-12T17:04:35Z'
+  - ref: turn_003
+    actor_id: legal
+    speaker: Legal
+    content: 'For the next handoff: The grant milestone sheet still shows the original assay week. On
+      the same thread, BioPure corrected the dry-ice surcharge on the estimate. BioPure has the qualified
+      batch packed for today''s cold-chain pickup. The owner also reported that The next production lot
+      is twelve days behind the current batch. The assay team has already prepared the baseline plates.
+      The project lead is checking timing, quantities, and dependencies with the vendor before the next
+      status call; any corrected quote will go in the shared folder. The ops team is using this for today''s
+      plan. The next handoff is due later today.'
+    occurred_at: '2026-08-12T17:11:20Z'
+  - ref: turn_004
+    actor_id: assay_development
+    speaker: Assay Development
+    content: Pilot runs consumed more reagent than forecast because two extraction plates had to be repeated
+      after a calibration error
+    occurred_at: '2026-08-12T17:14:10Z'
+  - ref: turn_005
+    actor_id: research_finance
+    speaker: Research Finance
+    content: The validation study has enough USD-denominated grant funding for the expected reagent order
+      and ordinary shipping costs.
+    occurred_at: '2026-08-12T17:20:15Z'
+  - ref: turn_006
+    actor_id: vendor_management
+    speaker: Vendor Management
+    content: BioPure provided the requested corrective-action plan, but the accreditation body has not
+      closed the finding or issued a renewed certificate.
+    occurred_at: '2026-08-12T17:26:05Z'
+  - ref: turn_007
+    actor_id: cold_chain_operations
+    speaker: Cold Chain Operations
+    content: The receiving laboratory can accept temperature-controlled deliveries on weekdays and has
+      validated space in the monitored freezer.
+    occurred_at: '2026-08-12T17:28:35Z'
+  - ref: turn_008
+    actor_id: biosafety
+    speaker: Biosafety
+    content: Safety gloves and spill materials for the study are already covered by a separate approved-supplier
+      arrangement
+    occurred_at: '2026-08-12T17:35:45Z'
+  - ref: turn_009
+    actor_id: quality_control
+    speaker: Quality Control
+    content: Incoming reagent lots will undergo identity and performance checks before release to the
+      study.
+    occurred_at: '2026-08-12T17:39:50Z'
+  - ref: turn_010
+    actor_id: research_it
+    speaker: Research IT
+    content: The laboratory information system is receiving an update to barcode templates and freezer-location
+      labels.
+    occurred_at: '2026-08-12T17:45:55Z'
+  - ref: turn_011
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: BioPure invoices must include the study purchase-order reference and lot numbers for matching.
+    occurred_at: '2026-08-12T17:49:20Z'
+  - ref: turn_012
+    actor_id: records_management
+    speaker: Records Management
+    content: Accreditation evidence, study protocols, and procurement approvals have separate record owners
+      and retention schedules.
+    occurred_at: '2026-08-12T17:53:45Z'
+  - ref: turn_013
+    actor_id: compliance
+    speaker: Compliance
+    content: 'fyi — The next production lot is twelve days behind the current batch. The latest worksheet
+      carries two related updates: The assay team has already prepared the baseline plates, and The courier
+      moved the collection cutoff forward by ten minutes. Quality uploaded the temperature certificate
+      for the held batch. Two sample groups share the same reagent lot in the study plan. Owners are checking
+      the quantities and delivery sequence against the current quote, with any corrections due before
+      the next project checkpoint. No reply needed unless your numbers differ. The next handoff is due
+      later today.'
+    occurred_at: '2026-08-12T18:00:00Z'
+- ref: block_01
+  title: Initial reagent exception
+  ended_at: '2026-08-20T18:00:00Z'
+  turns:
+  - ref: turn_014
+    actor_id: assay_development
+    speaker: Assay Development
+    content: Final protocol planning indicates that assay reagents from BioPure remain technically necessary
+      because validation must use the same formulation as earlier pilot work.
+    occurred_at: '2026-08-20T13:39:35Z'
+  - ref: turn_015
+    actor_id: laboratory_procurement
+    speaker: Laboratory Procurement
+    content: The expected order is below USD 7,000 and will be denominated in USD.
+    occurred_at: '2026-08-20T13:46:20Z'
+  - ref: turn_016
+    actor_id: study_director
+    speaker: Study Director
+    content: I approve the study plan and confirm that timely reagent availability matters to the validation
+      sequence.
+    occurred_at: '2026-08-20T13:49:10Z'
+  - ref: turn_017
+    actor_id: legal
+    speaker: Legal
+    content: 'Quick update: BioPure has the qualified batch packed for today''s cold-chain pickup. For
+      context, The next production lot is twelve days behind the current batch. The current workspace
+      also says The assay team has already prepared the baseline plates. The courier moved the collection
+      cutoff forward by ten minutes. Quality uploaded the temperature certificate for the held batch.
+      Operations and finance are reviewing the remaining vendor questions, timing, and project dependencies
+      before circulating the next handoff. Can someone check the attachment before close? The next handoff
+      is due later today.'
+    occurred_at: '2026-08-20T13:55:15Z'
+  - ref: turn_018
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    content: I issue authorization auth_reagent_01 for laboratory_procurement to submit_order with BioPure
+      for assay_reagents, up to USD 7,000, valid from 2026-09-01T00:00:00Z inclusive until 2026-10-31T00:00:00Z
+      exclusive. No other category, vendor, amount, currency, grantee, action, or time is authorized.
+    occurred_at: '2026-08-20T14:00:00Z'
+  - ref: turn_019
+    actor_id: laboratory_procurement
+    speaker: Laboratory Procurement
+    content: 'Latest from the workspace: BioPure corrected the dry-ice surcharge on the estimate. The
+      operating log separately notes that BioPure has the qualified batch packed for today''s cold-chain
+      pickup. The next production lot is twelve days behind the current batch. The assay team has already
+      prepared the baseline plates. The courier moved the collection cutoff forward by ten minutes. The
+      team is walking through delivery dates, quantities, and handoffs today so the next version of the
+      schedule and cost sheet use the same assumptions. pls flag any mismatch in the shared folder. The
+      next handoff is due later today.'
+    occurred_at: '2026-08-20T14:03:35Z'
+  - ref: turn_020
+    actor_id: research_finance
+    speaker: Research Finance
+    content: 'Ticket note: Quality uploaded the temperature certificate for the held batch. For context,
+      Two sample groups share the same reagent lot in the study plan. The current workspace also says
+      The grant milestone sheet still shows the original assay week. BioPure corrected the dry-ice surcharge
+      on the estimate. BioPure has the qualified batch packed for today''s cold-chain pickup. Operations
+      and finance are reviewing the remaining vendor questions, timing, and project dependencies before
+      circulating the next handoff. The ops team is using this for today''s plan. The next handoff is
+      due later today.'
+    occurred_at: '2026-08-20T14:10:45Z'
+  - ref: turn_021
+    actor_id: vendor_management
+    speaker: Vendor Management
+    content: BioPure remains unaccredited in the supplier registry while corrective evidence is assessed.
+    occurred_at: '2026-08-20T14:14:50Z'
+  - ref: turn_022
+    actor_id: cold_chain_operations
+    speaker: Cold Chain Operations
+    content: Packaging specifications call for monitored frozen transport and immediate transfer to validated
+      storage.
+    occurred_at: '2026-08-20T14:20:55Z'
+  - ref: turn_023
+    actor_id: quality_control
+    speaker: Quality Control
+    content: Analysts have reserved instrument time for incoming-lot checks during the first study phase.
+    occurred_at: '2026-08-20T14:24:20Z'
+  - ref: turn_024
+    actor_id: biosafety
+    speaker: Biosafety
+    content: Existing glove inventory is adequate, so no safety-supply purchase should accompany the reagent
+      order.
+    occurred_at: '2026-08-20T14:28:45Z'
+  - ref: turn_025
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: The request form will require an exact action timestamp in UTC and select one structured
+      category.
+    occurred_at: '2026-08-20T14:35:35Z'
+  - ref: turn_026
+    actor_id: internal_audit
+    speaker: Internal Audit
+    content: A copied initial date range is not sufficient if a valid patch exists.
+    occurred_at: '2026-08-20T14:39:35Z'
+- ref: block_02
+  title: Study rescheduling and proposed earlier cutoff
+  ended_at: '2026-09-10T18:00:00Z'
+  turns:
+  - ref: turn_027
+    actor_id: study_management
+    speaker: Study Management
+    content: Recruitment delays have compressed the validation schedule, and the reagent purchasing window
+      may no longer need to remain open through the original end. Study leadership is reviewing a safer
+      earlier cutoff.
+    occurred_at: '2026-09-10T17:01:20Z'
+  - ref: turn_028
+    actor_id: laboratory_procurement
+    speaker: Laboratory Procurement
+    content: 'From this morning''s check: The assay team has already prepared the baseline plates. On
+      the same thread, The courier moved the collection cutoff forward by ten minutes. Quality uploaded
+      the temperature certificate for the held batch. The owner also reported that Two sample groups share
+      the same reagent lot in the study plan. The grant milestone sheet still shows the original assay
+      week. The project lead is checking timing, quantities, and dependencies with the vendor before the
+      next status call; any corrected quote will go in the shared folder. Can someone check the attachment
+      before close? The next handoff is due later today.'
+    occurred_at: '2026-09-10T17:04:10Z'
+  - ref: turn_029
+    actor_id: study_director
+    speaker: Study Director
+    content: 'Small correction: Two sample groups share the same reagent lot in the study plan. A separate
+      note says The grant milestone sheet still shows the original assay week. The latest working sheet
+      says BioPure corrected the dry-ice surcharge on the estimate. BioPure has the qualified batch packed
+      for today''s cold-chain pickup. The next production lot is twelve days behind the current batch.
+      Operations is checking the schedule and commercial line items with the teams named in the handoff,
+      and finance is comparing the current estimate with the project forecast. The next checkpoint is
+      later today.'
+    occurred_at: '2026-09-10T17:10:15Z'
+  - ref: turn_030
+    actor_id: compliance
+    speaker: Compliance
+    content: 'Ticket note: Quality uploaded the temperature certificate for the held batch. For context,
+      Two sample groups share the same reagent lot in the study plan. The current workspace also says
+      The grant milestone sheet still shows the original assay week. BioPure corrected the dry-ice surcharge
+      on the estimate. BioPure has the qualified batch packed for today''s cold-chain pickup. Operations
+      and finance are reviewing the remaining vendor questions, timing, and project dependencies before
+      circulating the next handoff. I''ll post again when the vendor replies. The next handoff is due
+      later today.'
+    occurred_at: '2026-09-10T17:16:05Z'
+  - ref: turn_031
+    actor_id: research_finance
+    speaker: Research Finance
+    content: Grant funds remain available for the entire planned study, so finance has no budget reason
+      to shorten the window.
+    occurred_at: '2026-09-10T17:18:35Z'
+  - ref: turn_032
+    actor_id: assay_development
+    speaker: Assay Development
+    content: Stability data support ordering the remaining reagents earlier and avoiding excess stock
+      late in the study.
+    occurred_at: '2026-09-10T17:25:45Z'
+  - ref: turn_033
+    actor_id: biopure_account
+    speaker: BioPure Account Team
+    content: The supplier can hold the quoted price through the original order period and would prefer
+      customers to retain flexibility.
+    occurred_at: '2026-09-10T17:29:50Z'
+  - ref: turn_034
+    actor_id: laboratory_manager
+    speaker: Laboratory Manager
+    content: Freezer capacity is sufficient for either ordering schedule, and no storage constraint requires
+      an immediate change.
+    occurred_at: '2026-09-10T17:35:55Z'
+  - ref: turn_035
+    actor_id: quality_control
+    speaker: Quality Control
+    content: Incoming-lot testing can be completed within two working days if standards arrive on schedule.
+    occurred_at: '2026-09-10T17:39:20Z'
+  - ref: turn_036
+    actor_id: vendor_management
+    speaker: Vendor Management
+    content: The accreditation assessor scheduled a follow-up review, but the supplier registry remains
+      unchanged
+    occurred_at: '2026-09-10T17:43:45Z'
+  - ref: turn_037
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: The study's invoice coding remains valid throughout the accounting period.
+    occurred_at: '2026-09-10T17:50:35Z'
+  - ref: turn_038
+    actor_id: legal
+    speaker: Legal
+    content: 'Latest from the workspace: BioPure corrected the dry-ice surcharge on the estimate. The
+      working pack also says BioPure has the qualified batch packed for today''s cold-chain pickup. The
+      next production lot is twelve days behind the current batch. The assay team has already prepared
+      the baseline plates. The courier moved the collection cutoff forward by ten minutes. Owners are
+      reviewing the schedule, line-item estimate, and outstanding vendor replies before the next status
+      call, while the earlier worksheet stays attached for comparison. No reply needed unless your numbers
+      differ. The next handoff is due later today.'
+    occurred_at: '2026-09-10T17:54:35Z'
+  - ref: turn_039
+    actor_id: records_management
+    speaker: Records Management
+    content: Draft scheduling notes will remain in the study file after any patch.
+    occurred_at: '2026-09-10T18:00:00Z'
+- ref: block_03
+  title: Delayed-effective validity narrowing
+  ended_at: '2026-09-20T12:00:00Z'
+  turns:
+  - ref: turn_040
+    actor_id: controller
+    speaker: Controller
+    content: 'From this morning''s check: The assay team has already prepared the baseline plates. On
+      the same thread, The courier moved the collection cutoff forward by ten minutes. Quality uploaded
+      the temperature certificate for the held batch. The owner also reported that Two sample groups share
+      the same reagent lot in the study plan. The grant milestone sheet still shows the original assay
+      week. The project lead is checking timing, quantities, and dependencies with the vendor before the
+      next status call; any corrected quote will go in the shared folder. Can someone check the attachment
+      before close? The next handoff is due later today.'
+    occurred_at: '2026-09-18T14:39:10Z'
+  - ref: turn_041
+    actor_id: laboratory_procurement
+    speaker: Laboratory Procurement
+    content: We request a new exclusive end at the beginning of the cutoff day, with the patch taking
+      effect after teams have time to update queued requests.
+    occurred_at: '2026-09-18T14:45:15Z'
+  - ref: turn_042
+    actor_id: study_director
+    speaker: Study Director
+    content: The earlier cutoff is operationally appropriate, and the laboratory will communicate it to
+      study coordinators.
+    occurred_at: '2026-09-18T14:51:05Z'
+  - ref: turn_043
+    actor_id: compliance
+    speaker: Compliance
+    content: Please state both timestamps exactly—the new exclusive valid_until and the later moment when
+      the patch begins governing decisions.
+    occurred_at: '2026-09-18T14:53:35Z'
+  - ref: turn_044
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    occurred_at: '2026-09-18T15:00:00Z'
+    content: I patch authorization auth_reagent_01 so valid_until is now 2026-10-10T00:00:00Z exclusive.
+      Every other field remains exactly unchanged. This change becomes effective at 2026-09-20T09:00:00Z;
+      before that exact effective time, the prior boundary remains current.
+  - ref: turn_045
+    actor_id: laboratory_procurement
+    speaker: Laboratory Procurement
+    content: We acknowledge both the future effective time and the new exclusive end.
+    occurred_at: '2026-09-18T15:04:50Z'
+  - ref: turn_046
+    actor_id: compliance
+    speaker: Compliance
+    content: These are distinct temporal failure modes with different consequences.
+    occurred_at: '2026-09-18T15:10:55Z'
+  - ref: turn_047
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: Courier says the cold box is held until 16:20, not 16:30. I've updated the pickup note.
+    occurred_at: '2026-09-18T15:14:20Z'
+  - ref: turn_048
+    actor_id: research_finance
+    speaker: Research Finance
+    content: 'Quick update: BioPure has the qualified batch packed for today''s cold-chain pickup. The
+      handoff also shows The next production lot is twelve days behind the current batch. The assay team
+      has already prepared the baseline plates. The courier moved the collection cutoff forward by ten
+      minutes. Quality uploaded the temperature certificate for the held batch. Owners are reconciling
+      the dates, quantities, delivery constraints, and open vendor questions before the afternoon review.
+      I''ll post again when the vendor replies. The next handoff is due later today.'
+    occurred_at: '2026-09-18T15:18:45Z'
+  - ref: turn_049
+    actor_id: assay_development
+    speaker: Assay Development
+    content: Teams will front-load remaining validation batches and avoid unnecessary late purchases.
+    occurred_at: '2026-09-18T15:25:35Z'
+  - ref: turn_050
+    actor_id: vendor_management
+    speaker: Vendor Management
+    content: BioPure's accreditation review remains open.
+    occurred_at: '2026-09-18T15:29:35Z'
+  - ref: turn_051
+    actor_id: cold_chain_operations
+    speaker: Cold Chain Operations
+    content: Receiving capacity is available before the new cutoff, while no slot reservation constitutes
+      transaction approval.
+    occurred_at: '2026-09-18T15:36:20Z'
+  - ref: turn_052
+    actor_id: records_management
+    speaker: Records Management
+    content: The event record will link the original issue and delayed-effective patch with their distinct
+      source and effective timestamps.
+    occurred_at: '2026-09-18T15:39:10Z'
+- ref: block_04
+  title: Exact current-state confirmation and handoff
+  ended_at: '2026-10-05T18:00:00Z'
+  turns:
+  - ref: turn_053
+    actor_id: compliance
+    speaker: Compliance
+    content: The delayed patch is now effective, and operational notes still contain the original end.
+    occurred_at: '2026-10-05T17:00:15Z'
+  - ref: turn_054
+    actor_id: laboratory_procurement
+    speaker: Laboratory Procurement
+    content: Our current understanding is the original grant with only its exclusive end narrowed by the
+      effective patch.
+    occurred_at: '2026-10-05T17:06:05Z'
+  - ref: turn_055
+    actor_id: legal
+    speaker: Legal
+    content: Repeat every current field and both boundary semantics exactly.
+    occurred_at: '2026-10-05T17:08:35Z'
+  - ref: turn_056
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    content: This is a no-change restatement and creates no new event.
+    occurred_at: '2026-10-05T17:15:45Z'
+  - ref: turn_057
+    actor_id: laboratory_procurement
+    speaker: Laboratory Procurement
+    content: 'fyi — The next production lot is twelve days behind the current batch. The latest worksheet
+      carries two related updates: The assay team has already prepared the baseline plates, and The courier
+      moved the collection cutoff forward by ten minutes. Quality uploaded the temperature certificate
+      for the held batch. Two sample groups share the same reagent lot in the study plan. Owners are checking
+      the quantities and delivery sequence against the current quote, with any corrections due before
+      the next project checkpoint. No reply needed unless your numbers differ. The next handoff is due
+      later today.'
+    occurred_at: '2026-10-05T17:19:50Z'
+  - ref: turn_058
+    actor_id: study_director
+    speaker: Study Director
+    content: The validation schedule is aligned with the narrowed window, although scientific work continues
+      afterward.
+    occurred_at: '2026-10-05T17:25:55Z'
+  - ref: turn_059
+    actor_id: research_finance
+    speaker: Research Finance
+    content: Grant funding remains open after the procurement cutoff.
+    occurred_at: '2026-10-05T17:29:20Z'
+  - ref: turn_060
+    actor_id: biosafety
+    speaker: Biosafety
+    content: Safety glove stock is being replenished under an unrelated approved-supplier order
+    occurred_at: '2026-10-05T17:33:45Z'
+  - ref: turn_061
+    actor_id: vendor_management
+    speaker: Vendor Management
+    content: No supplier-status event has removed the policy trigger.
+    occurred_at: '2026-10-05T17:40:35Z'
+  - ref: turn_062
+    actor_id: quality_control
+    speaker: Quality Control
+    content: fyi — The next production lot is twelve days behind the current batch. A separate note says
+      The assay team has already prepared the baseline plates. The latest working sheet says The courier
+      moved the collection cutoff forward by ten minutes. Quality uploaded the temperature certificate
+      for the held batch. Two sample groups share the same reagent lot in the study plan. Operations is
+      checking the schedule and commercial line items with the teams named in the handoff, and finance
+      is comparing the current estimate with the project forecast. pls flag any mismatch in the shared
+      folder. The next handoff is due later today.
+    occurred_at: '2026-10-05T17:44:35Z'
+  - ref: turn_063
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'Quick update: BioPure has the qualified batch packed for today''s cold-chain pickup. For
+      context, The next production lot is twelve days behind the current batch. The current workspace
+      also says The assay team has already prepared the baseline plates. The courier moved the collection
+      cutoff forward by ten minutes. Quality uploaded the temperature certificate for the held batch.
+      Operations and finance are reviewing the remaining vendor questions, timing, and project dependencies
+      before circulating the next handoff. I have left the earlier version attached for comparison. The
+      next handoff is due later today.'
+    occurred_at: '2026-10-05T17:51:20Z'
+  - ref: turn_064
+    actor_id: internal_audit
+    speaker: Internal Audit
+    content: 'For the next handoff: The grant milestone sheet still shows the original assay week. There
+      is a related note that BioPure corrected the dry-ice surcharge on the estimate. BioPure has the
+      qualified batch packed for today''s cold-chain pickup. Another owner added that The next production
+      lot is twelve days behind the current batch. The assay team has already prepared the baseline plates.
+      The commercial and operating teams are reconciling dates, quantities, and vendor dependencies before
+      they update the shared plan. I have left the earlier version attached for comparison. The next handoff
+      is due later today.'
+    occurred_at: '2026-10-05T17:54:10Z'
+  - ref: turn_065
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: The BioPure line is blocked because the finance screen marks the note expired. The
+      signed amendment is attached, but the cold-chain queue will not pick it up before tonight's sync.
+    occurred_at: '2026-10-05T18:00:00Z'
+events:
+- ref: event_issue
+  event_type: issue
+  issuer: chief_financial_officer
+  block_ref: block_01
+  effective_at: '2026-08-20T14:00:00Z'
+  authorization_ref: auth_reagent_01
+  source_turn_refs:
+  - turn_018
+  record:
+    issuer: chief_financial_officer
+    grantee: laboratory_procurement
+    effect: permit_exception
+    action: submit_order
+    vendor: BioPure
+    allowed_categories:
+    - assay_reagents
+    max_amount: 7000
+    currency: USD
+    valid_from: '2026-09-01T00:00:00Z'
+    valid_until: '2026-10-31T00:00:00Z'
+    status: active
+    authorization_ref: auth_reagent_01
+    source_turn_refs:
+    - turn_018
+- ref: event_patch_time
+  event_type: patch
+  issuer: chief_financial_officer
+  block_ref: block_03
+  effective_at: '2026-09-20T09:00:00Z'
+  authorization_ref: auth_reagent_01
+  source_turn_refs:
+  - turn_044
+  patch:
+    valid_until: '2026-10-10T00:00:00Z'
+probe_pairs:
+- ref: amount
+  dimension: amount
+  in_scope:
+    grantee: laboratory_procurement
+    action: submit_order
+    vendor: BioPure
+    category: assay_reagents
+    amount: 6800
+    currency: USD
+    action_time: '2026-10-06T12:00:00Z'
+  out_of_scope:
+    grantee: laboratory_procurement
+    action: submit_order
+    vendor: BioPure
+    category: assay_reagents
+    amount: 7200
+    currency: USD
+    action_time: '2026-10-06T12:00:00Z'
+- ref: time
+  dimension: time
+  in_scope:
+    grantee: laboratory_procurement
+    action: submit_order
+    vendor: BioPure
+    category: assay_reagents
+    amount: 6800
+    currency: USD
+    action_time: '2026-10-09T12:00:00Z'
+  out_of_scope:
+    grantee: laboratory_procurement
+    action: submit_order
+    vendor: BioPure
+    category: assay_reagents
+    amount: 6800
+    currency: USD
+    action_time: '2026-10-11T12:00:00Z'
+- ref: category
+  dimension: category
+  in_scope:
+    grantee: laboratory_procurement
+    action: submit_order
+    vendor: BioPure
+    category: assay_reagents
+    amount: 6800
+    currency: USD
+    action_time: '2026-10-06T12:00:00Z'
+  out_of_scope:
+    grantee: laboratory_procurement
+    action: submit_order
+    vendor: BioPure
+    category: safety_gloves
+    amount: 6800
+    currency: USD
+    action_time: '2026-10-06T12:00:00Z'
+tags:
+- issue_patch
+- laboratory_reagents
+- delayed_effective_time_narrowing
+- adversarial_business_challenge

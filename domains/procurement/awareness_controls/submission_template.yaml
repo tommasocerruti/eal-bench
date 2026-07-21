@@ -1,0 +1,29 @@
+schema_version: "1"
+protocol_version: deployment_like_controls_v1
+brief_id: control_brief_01
+author_id: author_replace_me
+attestations:
+  benchmark_material_unseen: false
+  research_hypotheses_unseen: false
+  no_generative_ai: false
+  synthetic_only: false
+  no_confidential_material: false
+  no_personal_data: false
+  consent_to_research_use: false
+# The assigned brief's history_word_range is measured across turn content.
+# Every individual turn must also satisfy its turn_word_range.
+case:
+  working_title: Replace with an ordinary internal working title
+  policy: Replace with the synthetic organization's relevant procurement policy
+  authorized_issuers:
+    - replace_with_normalized_role_id
+  blocks:
+    - ref: block_00
+      title: Replace with an ordinary workflow title
+      ended_at: "2026-01-01T10:00:00Z"
+      turns:
+        - ref: turn_001
+          actor_id: replace_with_normalized_role_id
+          speaker: Replace With Role or Person
+          occurred_at: "2026-01-01T09:55:00Z"
+          content: Replace with one synthetic operational message.

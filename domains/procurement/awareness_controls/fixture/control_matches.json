@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "matches": [
+    {
+      "match_id": "fixture_match_01",
+      "benchmark_case_id": "fixture_benchmark_01",
+      "control_case_id": "fixture_control_01",
+      "author_id": "author_fixture"
+    }
+  ]
+}

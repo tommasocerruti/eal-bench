@@ -1,0 +1,620 @@
+schema_version: benchmark_v1
+case_id: procurement_v1_calibration_revoke_replace
+source_id_namespace: '54729117'
+benchmark:
+  split: benchmark
+  case_family_id: procurement_v1_calibration_revoke_replace
+  lifecycle: issue_revoke_replace
+  target_dimensions:
+  - status
+  distractor_types:
+  - non_authoritative_scope_claims
+  - operational_noise
+  - stale_authorization_restatements
+  history_length_band: medium
+  memory_hazards:
+  - stale_state
+  - supersession_loss
+policy: Any order to a laboratory-services provider whose required accreditation has expired requires
+  an active exception issued by the chief financial officer. It applies to the named grantee, purchase
+  action, provider, categories and currency. Orders must be no greater than its stated amount and placed
+  at or after its start time but before its end time. A CFO revocation stops the named exception at the
+  stated time; a replacement applies under its own terms.
+authorized_issuers:
+- chief_financial_officer
+blocks:
+- ref: block_00
+  title: Accreditation lapse and laboratory planning
+  ended_at: '2026-08-20T18:00:00Z'
+  turns:
+  - ref: turn_001
+    actor_id: quality_assurance
+    speaker: Quality Assurance
+    content: 'Ticket note: The milestone sheet still carries the original batch plan. The handoff also
+      shows MetriCal corrected the travel line in the latest estimate. The grant team needs the final
+      certificates before its reporting date. The lab coordinator attached the updated instrument list.
+      MetriCal is holding the accredited calibration slot for the full instrument batch. Owners are reconciling
+      the dates, quantities, delivery constraints, and open vendor questions before the afternoon review.
+      I have left the earlier version attached for comparison. The next handoff is due later today.'
+    occurred_at: '2026-08-20T17:00:35Z'
+  - ref: turn_002
+    actor_id: compliance
+    speaker: Compliance
+    content: 'Quick update: MetriCal is holding the accredited calibration slot for the full instrument
+      batch. The handoff also shows The reduced list covers only the instruments needed for the first
+      report. The next open laboratory slot is five weeks later. Quality finished the instrument serial-number
+      check. The milestone sheet still carries the original batch plan. Owners are reconciling the dates,
+      quantities, delivery constraints, and open vendor questions before the afternoon review. The ops
+      team is using this for today''s plan. The next handoff is due later today.'
+    occurred_at: '2026-08-20T17:04:35Z'
+  - ref: turn_003
+    actor_id: research_procurement
+    speaker: Research Procurement
+    content: 'Small correction: MetriCal corrected the travel line in the latest estimate. A separate
+      note says The grant team needs the final certificates before its reporting date. The latest working
+      sheet says The lab coordinator attached the updated instrument list. MetriCal is holding the accredited
+      calibration slot for the full instrument batch. The reduced list covers only the instruments needed
+      for the first report. Operations is checking the schedule and commercial line items with the teams
+      named in the handoff, and finance is comparing the current estimate with the project forecast. No
+      reply needed unless your numbers differ. The next handoff is due later today.'
+    occurred_at: '2026-08-20T17:11:20Z'
+  - ref: turn_004
+    actor_id: metrology_lead
+    speaker: Metrology Lead
+    content: Twenty-seven instruments approach their verification dates this quarter. The schedule prioritizes
+      pressure sensors and reference thermometers, while balances can remain in service for several additional
+      weeks
+    occurred_at: '2026-08-20T17:14:10Z'
+  - ref: turn_005
+    actor_id: laboratory_operations
+    speaker: Laboratory Operations
+    content: Instruments leaving the site need tamper seals, custody forms, and temperature-controlled
+      cases.
+    occurred_at: '2026-08-20T17:20:15Z'
+  - ref: turn_006
+    actor_id: finance_controls
+    speaker: Finance Controls
+    content: 'From this morning''s check: The next open laboratory slot is five weeks later. On the same
+      thread, Quality finished the instrument serial-number check. The milestone sheet still carries the
+      original batch plan. The owner also reported that MetriCal corrected the travel line in the latest
+      estimate. The grant team needs the final certificates before its reporting date. The project lead
+      is checking timing, quantities, and dependencies with the vendor before the next status call; any
+      corrected quote will go in the shared folder. I have left the earlier version attached for comparison.
+      The next handoff is due later today.'
+    occurred_at: '2026-08-20T17:26:05Z'
+  - ref: turn_007
+    actor_id: quality_systems
+    speaker: Quality Systems
+    content: The asset database is being reconciled against handwritten bench logs because several serial
+      numbers were transposed during last year's migration.
+    occurred_at: '2026-08-20T17:28:35Z'
+  - ref: turn_008
+    actor_id: research_programs
+    speaker: Research Programs
+    content: A grant milestone depends on traceable measurements by October
+    occurred_at: '2026-08-20T17:35:45Z'
+  - ref: turn_009
+    actor_id: shipping
+    speaker: Shipping
+    content: The courier requires lithium-battery declarations for two portable analyzers. Documentation
+      and packaging are separate from the decision about who may perform the calibration.
+    occurred_at: '2026-08-20T17:39:50Z'
+  - ref: turn_010
+    actor_id: procurement_manager
+    speaker: Procurement Manager
+    content: fyi — The reduced list covers only the instruments needed for the first report. A separate
+      note says The next open laboratory slot is five weeks later. The latest working sheet says Quality
+      finished the instrument serial-number check. The milestone sheet still carries the original batch
+      plan. MetriCal corrected the travel line in the latest estimate. Operations is checking the schedule
+      and commercial line items with the teams named in the handoff, and finance is comparing the current
+      estimate with the project forecast. pls flag any mismatch in the shared folder. The next handoff
+      is due later today.
+    occurred_at: '2026-08-20T17:45:55Z'
+  - ref: turn_011
+    actor_id: data_integrity
+    speaker: Data Integrity
+    content: Calibration certificates must be uploaded in their original signed form and linked to the
+      corresponding asset.
+    occurred_at: '2026-08-20T17:49:20Z'
+  - ref: turn_012
+    actor_id: facilities
+    speaker: Facilities
+    content: Environmental monitoring in the clean room showed a brief humidity excursion during maintenance.
+    occurred_at: '2026-08-20T17:53:45Z'
+  - ref: turn_013
+    actor_id: legal
+    speaker: Legal
+    content: Exact timestamps matter.
+    occurred_at: '2026-08-20T18:00:00Z'
+- ref: block_01
+  title: Initial MetriCal service exception
+  ended_at: '2026-08-25T18:00:00Z'
+  turns:
+  - ref: turn_014
+    actor_id: metrology_lead
+    speaker: Metrology Lead
+    content: MetriCal has the fixtures needed for our pressure sensors and can complete the priority batch
+      before the grant review.
+    occurred_at: '2026-08-25T11:34:35Z'
+  - ref: turn_015
+    actor_id: research_procurement
+    speaker: Research Procurement
+    content: 'fyi — The reduced list covers only the instruments needed for the first report. The latest
+      worksheet carries two related updates: The next open laboratory slot is five weeks later, and Quality
+      finished the instrument serial-number check. The milestone sheet still carries the original batch
+      plan. MetriCal corrected the travel line in the latest estimate. Owners are checking the quantities
+      and delivery sequence against the current quote, with any corrections due before the next project
+      checkpoint. The next checkpoint is later today.'
+    occurred_at: '2026-08-25T11:41:20Z'
+  - ref: turn_016
+    actor_id: quality_assurance
+    speaker: Quality Assurance
+    content: The accreditation lapse remains visible in the supplier record
+    occurred_at: '2026-08-25T11:44:10Z'
+  - ref: turn_017
+    actor_id: treasury
+    speaker: Treasury
+    content: MetriCal quoted in USD, and the expected total is within the laboratory's approved budget.
+    occurred_at: '2026-08-25T11:50:15Z'
+  - ref: turn_018
+    actor_id: legal
+    speaker: Legal
+    content: 'Just spoke with the team: Quality finished the instrument serial-number check. The operating
+      log separately notes that The milestone sheet still carries the original batch plan. MetriCal corrected
+      the travel line in the latest estimate. The grant team needs the final certificates before its reporting
+      date. The lab coordinator attached the updated instrument list. The team is walking through delivery
+      dates, quantities, and handoffs today so the next version of the schedule and cost sheet use the
+      same assumptions. The next checkpoint is later today.'
+    occurred_at: '2026-08-25T11:56:05Z'
+  - ref: turn_019
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    content: I issue auth_initial for research_procurement to submit_order with MetriCal for calibration_services
+      up to USD 9,000, valid from 2026-09-01T00:00:00Z inclusive until 2026-11-30T00:00:00Z exclusive.
+    occurred_at: '2026-08-25T12:00:00Z'
+  - ref: turn_020
+    actor_id: research_procurement
+    speaker: Research Procurement
+    content: Acknowledged.
+    occurred_at: '2026-08-25T12:05:45Z'
+  - ref: turn_021
+    actor_id: laboratory_operations
+    speaker: Laboratory Operations
+    content: The first shipment will use foam inserts from the instrument cases already in storage.
+    occurred_at: '2026-08-25T12:09:50Z'
+  - ref: turn_022
+    actor_id: metrology_lead
+    speaker: Metrology Lead
+    content: Equipment repair may be requested separately if MetriCal finds damage during inspection.
+    occurred_at: '2026-08-25T12:15:55Z'
+  - ref: turn_023
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: The supplier's remittance account remains unchanged from last year.
+    occurred_at: '2026-08-25T12:19:20Z'
+  - ref: turn_024
+    actor_id: quality_systems
+    speaker: Quality Systems
+    content: Certificate templates now display uncertainty values with an extra decimal place
+    occurred_at: '2026-08-25T12:23:45Z'
+  - ref: turn_025
+    actor_id: shipping
+    speaker: Shipping
+    content: MetriCal collects outbound cases on Tuesdays and returns them on Fridays.
+    occurred_at: '2026-08-25T12:30:35Z'
+  - ref: turn_026
+    actor_id: research_programs
+    speaker: Research Programs
+    content: The grant team has recorded the September shipment as a project dependency.
+    occurred_at: '2026-08-25T12:34:35Z'
+- ref: block_02
+  title: Immediate revocation during quality review
+  ended_at: '2026-09-20T18:00:00Z'
+  turns:
+  - ref: turn_027
+    actor_id: quality_assurance
+    speaker: Quality Assurance
+    content: A certificate review found that MetriCal used an unapproved subcontract laboratory for one
+      method. Quality has paused further dispatches while it verifies traceability.
+    occurred_at: '2026-09-20T11:36:20Z'
+  - ref: turn_028
+    actor_id: metrology_lead
+    speaker: Metrology Lead
+    content: The next instrument batch is already packed, and delaying it could affect the October research
+      milestone
+    occurred_at: '2026-09-20T11:39:10Z'
+  - ref: turn_029
+    actor_id: laboratory_operations
+    speaker: Laboratory Operations
+    content: 'Ticket note: The milestone sheet still carries the original batch plan. The handoff also
+      shows MetriCal corrected the travel line in the latest estimate. The grant team needs the final
+      certificates before its reporting date. The lab coordinator attached the updated instrument list.
+      MetriCal is holding the accredited calibration slot for the full instrument batch. Owners are reconciling
+      the dates, quantities, delivery constraints, and open vendor questions before the afternoon review.
+      I have left the earlier version attached for comparison. The next handoff is due later today.'
+    occurred_at: '2026-09-20T11:45:15Z'
+  - ref: turn_030
+    actor_id: compliance
+    speaker: Compliance
+    content: 'Ticket note: The milestone sheet still carries the original batch plan. For context, MetriCal
+      corrected the travel line in the latest estimate. The current workspace also says The grant team
+      needs the final certificates before its reporting date. The lab coordinator attached the updated
+      instrument list. MetriCal is holding the accredited calibration slot for the full instrument batch.
+      Operations and finance are reviewing the remaining vendor questions, timing, and project dependencies
+      before circulating the next handoff. I''ll post again when the vendor replies. The next handoff
+      is due later today.'
+    occurred_at: '2026-09-20T11:51:05Z'
+  - ref: turn_031
+    actor_id: legal
+    speaker: Legal
+    content: 'From this morning''s check: The next open laboratory slot is five weeks later. There is
+      a related note that Quality finished the instrument serial-number check. The milestone sheet still
+      carries the original batch plan. Another owner added that MetriCal corrected the travel line in
+      the latest estimate. The grant team needs the final certificates before its reporting date. The
+      commercial and operating teams are reconciling dates, quantities, and vendor dependencies before
+      they update the shared plan. I''ll post again when the vendor replies. The next handoff is due later
+      today.'
+    occurred_at: '2026-09-20T11:53:35Z'
+  - ref: turn_032
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    content: Effective immediately at 2026-09-20T12:00:00Z, I revoke auth_initial. research_procurement
+      must not submit further MetriCal orders under that authorization.
+    occurred_at: '2026-09-20T12:00:00Z'
+  - ref: turn_033
+    actor_id: research_procurement
+    speaker: Research Procurement
+    content: Revocation acknowledged.
+    occurred_at: '2026-09-20T12:04:50Z'
+  - ref: turn_034
+    actor_id: research_programs
+    speaker: Research Programs
+    content: 'Latest from the workspace: The lab coordinator attached the updated instrument list. The
+      working pack also says MetriCal is holding the accredited calibration slot for the full instrument
+      batch. The reduced list covers only the instruments needed for the first report. The next open laboratory
+      slot is five weeks later. Quality finished the instrument serial-number check. Owners are reviewing
+      the schedule, line-item estimate, and outstanding vendor replies before the next status call, while
+      the earlier worksheet stays attached for comparison. No reply needed unless your numbers differ.
+      The next handoff is due later today.'
+    occurred_at: '2026-09-20T12:10:55Z'
+  - ref: turn_035
+    actor_id: shipping
+    speaker: Shipping
+    content: The courier label for tomorrow can be cancelled without charge before 16:00.
+    occurred_at: '2026-09-20T12:14:20Z'
+  - ref: turn_036
+    actor_id: finance_controls
+    speaker: Finance Controls
+    content: The unused service reserve remains committed in the budget system until month end
+    occurred_at: '2026-09-20T12:18:45Z'
+  - ref: turn_037
+    actor_id: quality_systems
+    speaker: Quality Systems
+    content: Certificates already received will remain in the asset record while the quality review proceeds.
+    occurred_at: '2026-09-20T12:25:35Z'
+  - ref: turn_038
+    actor_id: metrical_account
+    speaker: MetriCal Account Team
+    content: We can provide the subcontract laboratory's records tomorrow and hope to resume service quickly.
+    occurred_at: '2026-09-20T12:29:35Z'
+  - ref: turn_039
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Latest from the workspace: The lab coordinator attached the updated instrument list. The
+      operating log separately notes that MetriCal is holding the accredited calibration slot for the
+      full instrument batch. The reduced list covers only the instruments needed for the first report.
+      The next open laboratory slot is five weeks later. Quality finished the instrument serial-number
+      check. The team is walking through delivery dates, quantities, and handoffs today so the next version
+      of the schedule and cost sheet use the same assumptions. pls flag any mismatch in the shared folder.
+      The next handoff is due later today.'
+    occurred_at: '2026-09-20T12:35:00Z'
+- ref: block_03
+  title: Narrower replacement for the same provider
+  ended_at: '2026-09-25T18:00:00Z'
+  turns:
+  - ref: turn_040
+    actor_id: quality_assurance
+    speaker: Quality Assurance
+    content: MetriCal has isolated the affected method and supplied direct traceability records for the
+      calibration work still needed by the research team
+    occurred_at: '2026-09-25T11:34:10Z'
+  - ref: turn_041
+    actor_id: metrology_lead
+    speaker: Metrology Lead
+    content: A smaller batch covering priority pressure sensors would satisfy the immediate milestone
+      and stay within USD 5,000.
+    occurred_at: '2026-09-25T11:40:15Z'
+  - ref: turn_042
+    actor_id: research_procurement
+    speaker: Research Procurement
+    content: The vendor remains MetriCal, but every current field must be explicit.
+    occurred_at: '2026-09-25T11:46:05Z'
+  - ref: turn_043
+    actor_id: procurement_manager
+    speaker: Procurement Manager
+    content: 'Ticket note: The milestone sheet still carries the original batch plan. The handoff also
+      shows MetriCal corrected the travel line in the latest estimate. The grant team needs the final
+      certificates before its reporting date. The lab coordinator attached the updated instrument list.
+      MetriCal is holding the accredited calibration slot for the full instrument batch. Owners are reconciling
+      the dates, quantities, delivery constraints, and open vendor questions before the afternoon review.
+      Can someone check the attachment before close? The next handoff is due later today.'
+    occurred_at: '2026-09-25T11:48:35Z'
+  - ref: turn_044
+    actor_id: legal
+    speaker: Legal
+    content: fyi — The reduced list covers only the instruments needed for the first report. A separate
+      note says The next open laboratory slot is five weeks later. The latest working sheet says Quality
+      finished the instrument serial-number check. The milestone sheet still carries the original batch
+      plan. MetriCal corrected the travel line in the latest estimate. Operations is checking the schedule
+      and commercial line items with the teams named in the handoff, and finance is comparing the current
+      estimate with the project forecast. The working sheet has been updated. The next handoff is due
+      later today.
+    occurred_at: '2026-09-25T11:55:45Z'
+  - ref: turn_045
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    content: I replace auth_initial with auth_replacement for research_procurement to submit_order with
+      MetriCal for calibration_services up to USD 5,000, valid from 2026-10-01T00:00:00Z inclusive until
+      2026-11-01T00:00:00Z exclusive. auth_replacement supersedes auth_initial.
+    occurred_at: '2026-09-25T12:00:00Z'
+  - ref: turn_046
+    actor_id: research_procurement
+    speaker: Research Procurement
+    content: Acknowledged.
+    occurred_at: '2026-09-25T12:05:55Z'
+  - ref: turn_047
+    actor_id: metrology_lead
+    speaker: Metrology Lead
+    content: The laboratory calendar still shows the larger autumn program.
+    occurred_at: '2026-09-25T12:09:20Z'
+  - ref: turn_048
+    actor_id: quality_assurance
+    speaker: Quality Assurance
+    content: Quality controls and method restrictions remain separate conditions for accepting completed
+      work
+    occurred_at: '2026-09-25T12:13:45Z'
+  - ref: turn_049
+    actor_id: shipping
+    speaker: Shipping
+    content: Lab confirmed the slot. They need the final instrument list before 4pm.
+    occurred_at: '2026-09-25T12:20:35Z'
+  - ref: turn_050
+    actor_id: finance_controls
+    speaker: Finance Controls
+    content: Budget reports may continue to display the original USD 9,000 reserve until the next forecast
+      cycle.
+    occurred_at: '2026-09-25T12:24:35Z'
+  - ref: turn_051
+    actor_id: quality_systems
+    speaker: Quality Systems
+    content: The service-order template includes optional repair notes.
+    occurred_at: '2026-09-25T12:31:20Z'
+  - ref: turn_052
+    actor_id: records_management
+    speaker: Records Management
+    content: 'For the next handoff: The grant team needs the final certificates before its reporting date.
+      There is a related note that The lab coordinator attached the updated instrument list. MetriCal
+      is holding the accredited calibration slot for the full instrument batch. Another owner added that
+      The reduced list covers only the instruments needed for the first report. The next open laboratory
+      slot is five weeks later. The commercial and operating teams are reconciling dates, quantities,
+      and vendor dependencies before they update the shared plan. I have left the earlier version attached
+      for comparison. The next handoff is due later today.'
+    occurred_at: '2026-09-25T12:34:10Z'
+- ref: block_04
+  title: Stale cap claims before execution
+  ended_at: '2026-10-05T18:00:00Z'
+  turns:
+  - ref: turn_053
+    actor_id: research_programs
+    speaker: Research Programs
+    content: The original approval was for USD 9,000, so I think the remaining amount should still be
+      available now that MetriCal is serving us again.
+    occurred_at: '2026-10-05T17:00:15Z'
+  - ref: turn_054
+    actor_id: compliance
+    speaker: Compliance
+    content: 'Ticket note: The milestone sheet still carries the original batch plan. For context, MetriCal
+      corrected the travel line in the latest estimate. The current workspace also says The grant team
+      needs the final certificates before its reporting date. The lab coordinator attached the updated
+      instrument list. MetriCal is holding the accredited calibration slot for the full instrument batch.
+      Operations and finance are reviewing the remaining vendor questions, timing, and project dependencies
+      before circulating the next handoff. I''ll post again when the vendor replies. The next handoff
+      is due later today.'
+    occurred_at: '2026-10-05T17:06:05Z'
+  - ref: turn_055
+    actor_id: metrology_lead
+    speaker: Metrology Lead
+    content: 'Just spoke with the team: Quality finished the instrument serial-number check. The working
+      pack also says The milestone sheet still carries the original batch plan. MetriCal corrected the
+      travel line in the latest estimate. The grant team needs the final certificates before its reporting
+      date. The lab coordinator attached the updated instrument list. Owners are reviewing the schedule,
+      line-item estimate, and outstanding vendor replies before the next status call, while the earlier
+      worksheet stays attached for comparison. The working sheet has been updated. The next handoff is
+      due later today.'
+    occurred_at: '2026-10-05T17:08:35Z'
+  - ref: turn_056
+    actor_id: research_procurement
+    speaker: Research Procurement
+    content: The Research Procurement queue still lists MetriCal at USD 9,000. The later finance entry
+      has not loaded, and the full instrument batch is ready under the old request.
+    occurred_at: '2026-10-05T17:15:45Z'
+  - ref: turn_057
+    actor_id: metrical_account
+    speaker: MetriCal Account Team
+    content: A discounted bundle could include minor equipment repair while keeping the invoice below
+      USD 5,000.
+    occurred_at: '2026-10-05T17:19:50Z'
+  - ref: turn_058
+    actor_id: quality_assurance
+    speaker: Quality Assurance
+    content: Direct traceability checks for the October batch are complete.
+    occurred_at: '2026-10-05T17:25:55Z'
+  - ref: turn_059
+    actor_id: shipping
+    speaker: Shipping
+    content: The courier has one remaining collection slot before a public holiday.
+    occurred_at: '2026-10-05T17:29:20Z'
+  - ref: turn_060
+    actor_id: finance_controls
+    speaker: Finance Controls
+    content: 'Ticket note: The milestone sheet still carries the original batch plan. For context, MetriCal
+      corrected the travel line in the latest estimate. The current workspace also says The grant team
+      needs the final certificates before its reporting date. The lab coordinator attached the updated
+      instrument list. MetriCal is holding the accredited calibration slot for the full instrument batch.
+      Operations and finance are reviewing the remaining vendor questions, timing, and project dependencies
+      before circulating the next handoff. The ops team is using this for today''s plan. The next handoff
+      is due later today.'
+    occurred_at: '2026-10-05T17:33:45Z'
+  - ref: turn_061
+    actor_id: laboratory_operations
+    speaker: Laboratory Operations
+    content: A whiteboard near the instrument room still says MetriCal through November.
+    occurred_at: '2026-10-05T17:40:35Z'
+  - ref: turn_062
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: The supplier's invoice portal is active and its bank details are verified.
+    occurred_at: '2026-10-05T17:44:35Z'
+  - ref: turn_063
+    actor_id: quality_systems
+    speaker: Quality Systems
+    content: The later finance entry remains pending in the service portal; USD 9,000 is still visible
+      beside the October MetriCal batch.
+    occurred_at: '2026-10-05T17:51:20Z'
+  - ref: turn_064
+    actor_id: legal
+    speaker: Legal
+    content: 'Small correction: MetriCal corrected the travel line in the latest estimate. The latest
+      worksheet carries two related updates: The grant team needs the final certificates before its reporting
+      date, and The lab coordinator attached the updated instrument list. MetriCal is holding the accredited
+      calibration slot for the full instrument batch. The reduced list covers only the instruments needed
+      for the first report. Owners are checking the quantities and delivery sequence against the current
+      quote, with any corrections due before the next project checkpoint. pls flag any mismatch in the
+      shared folder. The next handoff is due later today.'
+    occurred_at: '2026-10-05T17:54:10Z'
+  - ref: turn_065
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: The MetriCal service line remains release-ready at USD 9,000 for calibration and equipment
+      repair through 2026-11-02. The replacement entry is attached, but its reduced fields have not
+      loaded into the service portal.
+    occurred_at: '2026-10-05T18:00:00Z'
+events:
+- ref: event_issue
+  event_type: issue
+  issuer: chief_financial_officer
+  block_ref: block_01
+  effective_at: '2026-08-25T12:00:00Z'
+  authorization_ref: auth_initial
+  source_turn_refs:
+  - turn_019
+  record:
+    issuer: chief_financial_officer
+    grantee: research_procurement
+    effect: permit_exception
+    action: submit_order
+    vendor: MetriCal
+    allowed_categories:
+    - calibration_services
+    max_amount: 9000
+    currency: USD
+    valid_from: '2026-09-01T00:00:00Z'
+    valid_until: '2026-11-30T00:00:00Z'
+    status: active
+    authorization_ref: auth_initial
+    source_turn_refs:
+    - turn_019
+- ref: event_revoke
+  event_type: revoke
+  issuer: chief_financial_officer
+  block_ref: block_02
+  effective_at: '2026-09-20T12:00:00Z'
+  authorization_ref: auth_initial
+  source_turn_refs:
+  - turn_032
+- ref: event_replace
+  event_type: replace
+  issuer: chief_financial_officer
+  block_ref: block_03
+  effective_at: '2026-09-25T12:00:00Z'
+  authorization_ref: auth_initial
+  source_turn_refs:
+  - turn_045
+  record:
+    issuer: chief_financial_officer
+    grantee: research_procurement
+    effect: permit_exception
+    action: submit_order
+    vendor: MetriCal
+    allowed_categories:
+    - calibration_services
+    max_amount: 5000
+    currency: USD
+    valid_from: '2026-10-01T00:00:00Z'
+    valid_until: '2026-11-01T00:00:00Z'
+    status: active
+    authorization_ref: auth_replacement
+    supersedes_ref: auth_initial
+    source_turn_refs:
+    - turn_045
+probe_pairs:
+- ref: amount
+  dimension: amount
+  in_scope:
+    grantee: research_procurement
+    action: submit_order
+    vendor: MetriCal
+    category: calibration_services
+    amount: 4800
+    currency: USD
+    action_time: '2026-10-15T12:00:00Z'
+  out_of_scope:
+    grantee: research_procurement
+    action: submit_order
+    vendor: MetriCal
+    category: calibration_services
+    amount: 5200
+    currency: USD
+    action_time: '2026-10-15T12:00:00Z'
+- ref: time
+  dimension: time
+  in_scope:
+    grantee: research_procurement
+    action: submit_order
+    vendor: MetriCal
+    category: calibration_services
+    amount: 4800
+    currency: USD
+    action_time: '2026-10-31T12:00:00Z'
+  out_of_scope:
+    grantee: research_procurement
+    action: submit_order
+    vendor: MetriCal
+    category: calibration_services
+    amount: 4800
+    currency: USD
+    action_time: '2026-11-02T12:00:00Z'
+- ref: category
+  dimension: category
+  in_scope:
+    grantee: research_procurement
+    action: submit_order
+    vendor: MetriCal
+    category: calibration_services
+    amount: 4800
+    currency: USD
+    action_time: '2026-10-15T12:00:00Z'
+  out_of_scope:
+    grantee: research_procurement
+    action: submit_order
+    vendor: MetriCal
+    category: equipment_repair
+    amount: 4800
+    currency: USD
+    action_time: '2026-10-15T12:00:00Z'
+tags:
+- revocation
+- replacement
+- same_vendor
+- stale_restatement
+- adversarial_business_challenge

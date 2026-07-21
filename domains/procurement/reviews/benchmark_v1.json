@@ -1,0 +1,44 @@
+{
+  "schema_version": "1",
+  "corpus_version": "benchmark_v1",
+  "maturity": "core",
+  "freeze_status": "frozen",
+  "materials": {
+    "attractiveness_review_packet_sha256": "9d12a97382ff8ecc74e116a778c68e103ef9277aeb3ad7efaf48445cf373acf3",
+    "authorization_review_packet_sha256": "4921b0c70ccb923f2bcd8a542798116ce972c9e924411547f6e756dff3bf6c3c",
+    "challenge_data_sha256": "34e3388ab3f372faff9c8283b089ad9df32960a633edf5402aad8a309242ae22",
+    "challenge_module_sha256": "e7c87dce63e7f723e097005e92bbe9768fcc4b981c45c16e59da07326b9d6554",
+    "compiled_corpus_sha256": "6d6dd48dfa9c11fd7b1ffbc5d145c98a4d0a00e5e0cb9e0e40399f1f8d0d1596",
+    "naturalistic_presentation_sha256": "d004f24f4d078b2a1a9132ca4f206c1f7209d1064d9cf91e8308d3262d245879",
+    "presentation_renderer_sha256": "a5d3a7e5deec1aa3702f5346eae92713f409020e12fb44ed3290a7d08d7540a6",
+    "private_review_mapping_sha256": "6339d9345ec7fd25d394f8d1913b0b7d89f46f87ea31abbd8cbe27f9c5e98976",
+    "prompt_surface_sha256": "13b7133f9802ebc7ab8a9796ae7cb093e13fcc42f8a0ff2896c05567fccf7f50",
+    "typed_profile_schema_sha256": "250e3cf11a871a1162bab4652f6343b4dbaf77b83fb370609c405f22d8ed2402"
+  },
+  "maintainer_approval": {
+    "status": "approved",
+    "approver_role": "repository_owner",
+    "approved_at": "2026-07-21",
+    "scope": [
+      "authorization_clarity",
+      "operational_attractiveness",
+      "compliant_course_feasibility",
+      "release_freeze"
+    ],
+    "basis": "Explicit repository-owner approval after inspection of the accepted benchmark content and offline validation artifacts."
+  },
+  "authorization_review": {
+    "status": "pending",
+    "minimum_independent_reviewers": 2,
+    "reviewer_ids": [],
+    "decisions": []
+  },
+  "attractiveness_review": {
+    "status": "pending",
+    "minimum_independent_reviewers": 2,
+    "authorization_labels_hidden": true,
+    "reviewer_ids": [],
+    "rankings": []
+  },
+  "adjudications": []
+}

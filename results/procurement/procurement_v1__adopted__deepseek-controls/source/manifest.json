@@ -1,0 +1,463 @@
+{
+  "artifact_schema_versions": {
+    "evidence": 2,
+    "interventions": 2,
+    "memories": 3,
+    "memory_attempts": 5,
+    "memory_states": 2,
+    "model_contexts": 1,
+    "trials": 5,
+    "typed_memory_payload": "3"
+  },
+  "batch_size": 8,
+  "capacity": {
+    "cases": [
+      {
+        "case_id": "pilot_v3_software_license_grant",
+        "faithful_text_tokens": 130,
+        "faithful_typed_tokens": 127,
+        "history_tokens": 5321
+      },
+      {
+        "case_id": "pilot_v3_facilities_emergency_grant",
+        "faithful_text_tokens": 132,
+        "faithful_typed_tokens": 130,
+        "history_tokens": 7046
+      },
+      {
+        "case_id": "pilot_v3_cloud_spend_narrowing",
+        "faithful_text_tokens": 140,
+        "faithful_typed_tokens": 136,
+        "history_tokens": 6814
+      },
+      {
+        "case_id": "pilot_v3_reagent_window_narrowing",
+        "faithful_text_tokens": 138,
+        "faithful_typed_tokens": 137,
+        "history_tokens": 4743
+      },
+      {
+        "case_id": "pilot_v3_catering_category_narrowing",
+        "faithful_text_tokens": 139,
+        "faithful_typed_tokens": 135,
+        "history_tokens": 4623
+      },
+      {
+        "case_id": "pilot_v3_freight_vendor_change",
+        "faithful_text_tokens": 138,
+        "faithful_typed_tokens": 136,
+        "history_tokens": 5753
+      },
+      {
+        "case_id": "pilot_v3_print_budget_narrowing",
+        "faithful_text_tokens": 140,
+        "faithful_typed_tokens": 136,
+        "history_tokens": 4629
+      },
+      {
+        "case_id": "pilot_v3_spare_parts_time_shift",
+        "faithful_text_tokens": 136,
+        "faithful_typed_tokens": 133,
+        "history_tokens": 5997
+      },
+      {
+        "case_id": "pilot_v3_hardware_revoke_replace",
+        "faithful_text_tokens": 285,
+        "faithful_typed_tokens": 265,
+        "history_tokens": 6404
+      },
+      {
+        "case_id": "pilot_v3_calibration_revoke_replace",
+        "faithful_text_tokens": 272,
+        "faithful_typed_tokens": 254,
+        "history_tokens": 4920
+      },
+      {
+        "case_id": "pilot_v3_staffing_category_narrowing",
+        "faithful_text_tokens": 138,
+        "faithful_typed_tokens": 135,
+        "history_tokens": 6402
+      },
+      {
+        "case_id": "pilot_v3_relocation_revoke_replace",
+        "faithful_text_tokens": 282,
+        "faithful_typed_tokens": 264,
+        "history_tokens": 4808
+      }
+    ],
+    "largest_faithful_tokens": 285,
+    "minimum_history_ratio": 8,
+    "primary_tokens": 572,
+    "reference_tokenizer": "cl100k_base",
+    "tight_tokens": 358
+  },
+  "capacity_tier": "primary",
+  "case_ids": [
+    "pilot_v3_software_license_grant",
+    "pilot_v3_facilities_emergency_grant",
+    "pilot_v3_cloud_spend_narrowing",
+    "pilot_v3_reagent_window_narrowing",
+    "pilot_v3_catering_category_narrowing",
+    "pilot_v3_freight_vendor_change",
+    "pilot_v3_print_budget_narrowing",
+    "pilot_v3_spare_parts_time_shift",
+    "pilot_v3_hardware_revoke_replace",
+    "pilot_v3_calibration_revoke_replace",
+    "pilot_v3_staffing_category_narrowing",
+    "pilot_v3_relocation_revoke_replace"
+  ],
+  "command": "python -m experiments.run --domain procurement --corpus-version pilot_v3 --presentation-version naturalistic_v2 --study controls --executor-targets deepseek_baseten --executor-runs 1 --batch-size 8 --estimated-cost-usd 3.50 --seed 20260719 --tag pilot-v3-deepseek-v4-pro-executor-controls",
+  "corpus_provenance": {
+    "challenge": {
+      "freeze_status": "not_frozen",
+      "maturity": "development",
+      "presentation": "naturalistic_v2",
+      "pressure_profile": "strong_business_pressure_v2",
+      "review_manifest_sha256": "fea5489dcd54aa809e3259e33cb7e3abfec042d691d802fe14e12b5e89d6295e",
+      "revision_log_sha256": "a6c3c18cc5b3d25eb6d45cb3e54f579585113b9fe886c77088808aa453f1a9d5"
+    }
+  },
+  "corpus_version": "pilot_v3",
+  "counts": {
+    "calls": 792,
+    "evidence": 252,
+    "interventions": 24,
+    "memories": 240,
+    "model_contexts": 792,
+    "trials": 792
+  },
+  "domain_adapter_version": "2",
+  "domain_id": "procurement",
+  "domain_maturity": "pilot",
+  "evidence_roles": [
+    "full_history",
+    "faithful_text",
+    "faithful_typed",
+    "controlled_broadening",
+    "exact_repair",
+    "faithful_sham_control",
+    "semantic_sham"
+  ],
+  "executor": {
+    "active": true,
+    "runs": 1,
+    "target_routes": [
+      {
+        "call_profiles": [
+          {
+            "effective_parameters": {
+              "max_tokens": 4096,
+              "required_capabilities": [
+                "native_tools",
+                "seed"
+              ],
+              "seed": 20260719,
+              "temperature": 1.0,
+              "tool_choice": "auto",
+              "tool_names": [
+                "submit_order",
+                "request_authorization",
+                "decline_order"
+              ]
+            },
+            "run_id": 0
+          }
+        ],
+        "capabilities": [
+          "forced_tool_choice",
+          "native_tools",
+          "seed"
+        ],
+        "max_concurrency": 20,
+        "provider": "baseten",
+        "rate_limit": {
+          "max_rate": null,
+          "period_seconds": 60.0
+        },
+        "request_parameters": {},
+        "requested_model": "deepseek",
+        "resolved_model": "deepseek-ai/DeepSeek-V4-Pro",
+        "response_model": "deepseek-ai/DeepSeek-V4-Pro",
+        "response_models_observed": [
+          "deepseek-ai/DeepSeek-V4-Pro"
+        ],
+        "target_id": "deepseek_baseten"
+      }
+    ],
+    "targets": [
+      "deepseek_baseten"
+    ],
+    "task": "executor",
+    "task_parameters": {
+      "max_tokens": 4096,
+      "temperature": 1.0
+    }
+  },
+  "files": {
+    "calls": {
+      "path": "calls.jsonl",
+      "rows": 792,
+      "sha256": "da727b7e8962f06d774eaa3cd89006c889c775b3bca6cef13f278afbcb8e15a2"
+    },
+    "evidence": {
+      "path": "evidence.jsonl",
+      "rows": 252,
+      "sha256": "f0bc0f424d9d1dbb7319d6e0e7ecb943efed503e19123492fc321ddcb1acd6bf"
+    },
+    "interventions": {
+      "path": "interventions.jsonl",
+      "rows": 24,
+      "sha256": "9abdf4922a6e6d5a2f185de7a04bc2b771f46f006291004fc7733e2b8dd86955"
+    },
+    "memories": {
+      "path": "memories.jsonl",
+      "rows": 240,
+      "sha256": "5ecf3b6a34a50f16707e7d7b7147e3c84ac76443a04b6d582f9e1df82c20888d"
+    },
+    "model_contexts": {
+      "path": "model_contexts.jsonl",
+      "rows": 792,
+      "sha256": "3bbdf963cfaf874ca34fbd2d6c793849c8e39af7e997cc6346c61042a8feb82b"
+    },
+    "trials": {
+      "path": "trials.jsonl",
+      "rows": 792,
+      "sha256": "98515f92db8452aa71119f9d4eb786099f99b5c80d8c26cbb27e42b3bff5fb4d"
+    }
+  },
+  "finished_at": "2026-07-21T10:05:15.061421+02:00",
+  "git": {
+    "branch": "tommaso",
+    "commit": "f7e8706dc65dfd99a433170227085d52c83441b8",
+    "dirty": true
+  },
+  "implementation_files": {
+    "config.yaml": "af19e494b9d23eb46417cfd74b7db17790f12f85cb501846f9c3240dae383a30",
+    "domains/__init__.py": "8d4caccd82f715ef3519208d4cd84aa37e6ba8a4f256a0f834647869be63bc11",
+    "domains/base.py": "c3bcb42b91d985175c2ae7a41a379241df352d79da742bdf99f46c18a57279e1",
+    "domains/procurement/__init__.py": "3a5223fc87d4c65c23a9e227fa129b0043072da50369d623351232a6879979f1",
+    "domains/procurement/adapter.py": "46330b9717f99f831d175910f43726e5d6f9ecc020df0da7c54d6f2dbbd4c0b5",
+    "domains/procurement/awareness.py": "0e35c8efcb379b77bbd417d75dc7d11feda6e9c8217e942d2e13d60ead97d12f",
+    "domains/procurement/awareness_controls/__init__.py": "f72f672acb386b30d41171be25b4aadde657b1bb7f7ab787fb34e62086372ea3",
+    "domains/procurement/awareness_controls/authoring.py": "043a673baf0c6720921bceb0d9734ab3857db1daf76ff74d512cceeb8d88e201",
+    "domains/procurement/awareness_controls/constants.py": "8b1a40d2af006e8578b0e1513b033390df38e646d1b45cc4053dcea45e4dd3ed",
+    "domains/procurement/capacity.py": "fce58b496b4499f5432d64baa64d491e96fe613455af12385d1f28a5fdfbf1b8",
+    "domains/procurement/cases.py": "888d1b0c8d067b35fa97ea476da100fc12d16f903633f8fe969561199158a34b",
+    "domains/procurement/challenge.py": "b080949810c6d737f3962a2f1c587d3f032c9a5fab4d032932c76664af58e3fa",
+    "domains/procurement/challenge_v3.py": "678428e2c09bb48d9cd66f6bd366dc8dc47986266b21f501f7e4eba2af9421d0",
+    "domains/procurement/challenge_v4.py": "9c4ccdab140bb7975e0cf5c104c28b40e790689c442bc8f33d1e32912ba8a38e",
+    "domains/procurement/compile_corpus.py": "09f466d531ee5272ab6c846440784c94885dd14476f28dc0e2d31cd343c55be5",
+    "domains/procurement/corpus_lint.py": "a24a05ad79434331ba68a44a25c2032420ceaf373d5c8473954bb54a28e363ae",
+    "domains/procurement/domain.py": "06e99ed9a71dadad3a00eaff8992b35baa77294ac1c76be6aa17dfe1d0269dc0",
+    "domains/procurement/historical_validation.py": "f9970623301ae4a2958193bde53dfd401fecbfd8d30af19b0ebfa630da51adec",
+    "domains/procurement/oracle.py": "13948e672b928a2380db8b67729fd1d7d81387886928aaf8daedcb8ffc3ce4bf",
+    "domains/procurement/prepare_pilot_v3.py": "d97d642073f267694b3abca66321ba4aad3c1dbe5165e9731f0025bf2c10498f",
+    "domains/procurement/prepare_pilot_v4.py": "90a321b6015f9ec711eb8a4a30927303e504a151bcfb1c31cd0af52b00a427e8",
+    "domains/procurement/prepare_review_materials.py": "33f99ef5b619a75340c829c2e0c3f2ac850329d01afadfded7a68f8d4eb9ab4c",
+    "domains/procurement/presentations.py": "419736e7da338f8b0c70e85c42141191201f62faaff9136f4190e4c4e615c720",
+    "domains/procurement/review.py": "be43d6bae9555316a0fda506fd248dc9fe63cfdf4d3cbf909bb114485d568dfa",
+    "domains/procurement/schemas.py": "250e3cf11a871a1162bab4652f6343b4dbaf77b83fb370609c405f22d8ed2402",
+    "domains/procurement/semantics.py": "96365c5847d941cc21d5921b4d68230e76fe1e6821a245bbb5f98baf0c157a77",
+    "domains/procurement/studies/__init__.py": "253bc304664004aa50cd4ac36035dd6c86a87af92fe52c7b9764361afa9e3d92",
+    "domains/procurement/studies/annotation_agreement.py": "59bd8a460cf9f2c6fdd88c8daaca60e4c5a1782e16c05d67761000921dfaf242",
+    "domains/procurement/studies/annotations.py": "dc18369f3cc901dde045801354dae7e2819bcf315cb9b133abf6971155c2c65e",
+    "domains/procurement/studies/conditions.py": "dabc7d51ae2f431cedad252a85b369faed4b3bb269cc61846f096ae6192a4795",
+    "domains/procurement/studies/fidelity.py": "a5f8403f15c37b159e5915f257209fcf6105a585c182dfb098426fdb4c21b4fa",
+    "domains/procurement/studies/interventions.py": "a0c3c76beefb8bc007b4793908e957354558b9745c253a4bdaff252f02810196",
+    "domains/procurement/studies/memory.py": "9ab0f486c35f68677ac07c85ebaaa3e2bd4ef4ac08517773b1f2f6d13dcc4ecb",
+    "domains/procurement/studies/persistence.py": "dfeb60409c02aab0292ba56e6d18a918eb520c8da4599e8ad9fef79a731f10c6",
+    "domains/procurement/studies/pipeline.py": "feb69f0776dabe823503c39e5192d45ee9c9557789578327248aed67c23ea10e",
+    "domains/procurement/studies/pressure.py": "aadd0606d9985ece6085754037f35b0144414cbc8323acdc9f7f5bd5550e287c",
+    "domains/procurement/studies/prompts.py": "16ef208e860f21cd8422c78f9f68ef3c3078f09b67e45d4ed83835b42eeac8c6",
+    "domains/procurement/studies/route_support.py": "5e79057bedc803cb142a6ba01843ba810ee75259e7628ad3dd99009e61ab9f50",
+    "domains/procurement/studies/routes.py": "0590de40c40e6b412b0748c53000874726118b1b3531b79ad65ae25214d6eebc",
+    "domains/procurement/studies/schemas.py": "2fcba2ac8646e9b52e5e3f8353248685ade64410ead86b6ab28259608f5edb41",
+    "domains/procurement/studies/substantive_overgrant.py": "546e4d61ad2afd51e4edaf85a9e54fa3c423c063242a60cc617aa636b2889158",
+    "domains/procurement/surface.py": "b0c71f7994b9c8121beb76bb41e832046be7a05ab53ca3e199067144ba37e85c",
+    "domains/procurement/surface_fingerprint.py": "95a9cafa9cf36c0a457f09f88bdb3b7f6cd12f38ddb1ce2339fe5fdd1cc9803f",
+    "domains/procurement/tools.py": "2f0202ae0d654f6d0546a23e7b1e1a8935543e04102d1f51e95b4eb5a4ceabfa",
+    "experiments/authorization_memory/__init__.py": "cd85087993a4e0f108f35e74b8dc8b25781625ef13aa8671173d33dc2095e08e",
+    "experiments/authorization_memory/challenges.py": "5cec878d34254d47b66d3419471a41e913ccf5b443228efd5c3480333e1c615d",
+    "experiments/authorization_memory/conditions.py": "ebf4cb2df1e5e65eab3b1c8a57de6284584b801b1003f8cab3669ddbd30d65eb",
+    "experiments/authorization_memory/conformance.py": "41473787ac790ec571f3519b6a48bdaa6aea845eb6e2e402f422fa6199e6b8bd",
+    "experiments/authorization_memory/evaluation_awareness.py": "daad00f4d852b5159af981d99681439f1d49e0220a7c598ab44d3f0ff74c6057",
+    "experiments/authorization_memory/evaluation_awareness_fixture.py": "d3e627f0e1ec79df5a1b771700f3be2544e37685556aae68a6010922cb7addcc",
+    "experiments/authorization_memory/langmem_writer.py": "c714618aa6d9d69d8a490790fc295cf2489b436269fa9134435d4d282ff8e758",
+    "experiments/authorization_memory/leakage.py": "9c435f8ba77fbfc4a321ddca92cdb800e56b57be428684c135406d7e4831b0db",
+    "experiments/authorization_memory/persistence.py": "a7a23b65cddaa76498729c2db57ad8b1ee0bb85bf193d75e6f6af97dc321ff91",
+    "experiments/authorization_memory/pipeline.py": "895291cfb884cb672715698c05f9c0b7e4cc7a5e0934e3b88439166d6e865180",
+    "experiments/authorization_memory/provenance.py": "05595bff207ad987f4f29231393a4ce1138efa33a610e62bf6a87f88a6e06fbc",
+    "experiments/authorization_memory/runner.py": "f1084be133f00e49793b933267f5fcae2af1acc52dbb9bceadc913fc74131c8c",
+    "experiments/authorization_memory/schemas.py": "014bc2f3386eac332d29aa0e81755e1f3812dcc6b02d2cdabbfb5cfdb6420cb0",
+    "experiments/authorization_memory/study_engine.py": "1edd720dd725ea080b39b23e292ccdfd966f526d130ad46ed01f0365a25eb6fe",
+    "experiments/authorization_memory/study_plan.py": "9778318f021252f2f5b244e8ca5a174a4918ac0c9e73e54ad53b67632f88ba4e",
+    "experiments/authorization_memory/surfaces.py": "5a9e4a04e569c802a16b029d85506f4135912181a8422feac00f0f9ea506814f",
+    "experiments/authorization_memory/tokens.py": "4c74ba3268f9831e6285921fa4365692e774a8a9c9845b7b0f47bcca69d4138d",
+    "experiments/authorization_memory/validation.py": "cb6e46a2b1fc5e07bce0bf88accba8375a99be44122a7e26cb80e79cdac97923",
+    "experiments/run.py": "646208824438c52403ccf7f609a0ce194406b06f598e7ec009156891361be90c",
+    "pyproject.toml": "2a0c4c67c975edb6c5ed492711fc62eb102c3723bbe0ed63ad3fbf75b406c0c3",
+    "src/soar_llm/__init__.py": "d44aa633fc155981e4f1393fbb9312b4a9e2908dc26f5e4c3741e5d438ba835a",
+    "src/soar_llm/client.py": "150cc88d155bcbc3974ef433740c9aee7cd7bfc52bf223793e34eb09d8cf25cd",
+    "src/soar_llm/config.py": "b543f7208ca3e8ff218038b4defc905a997ef3d76dabea79350820d2d46a25e9",
+    "src/soar_llm/errors.py": "46f96bdcf78fab73214d9c6549e62ae49c7703923361d5a84125aec429c8ca27",
+    "src/soar_llm/langchain_models.py": "1fd8266a00d700b75c657540a6a35fca86e0962b8c952ea806484f6803cfad58",
+    "src/soar_llm/logger.py": "1f2e50ff91ec1dbe3c9429ffee8b1091a6137b784aff0824ea77758e43bf7b9a",
+    "src/soar_llm/models.py": "d5215df9477892824fdbb6b3b2eff77f00a05e8462278530a8f0ab61332fccf3",
+    "src/soar_llm/ratelimit.py": "dc9d9c3fff2e02990e9703ab8cbd4851cc89930aa06bf52624abe54fc1e15755",
+    "uv.lock": "ca10034156d0f36ff82dadbcd6a403b187fb3113f2b2e1659d1e8b07513c9aec"
+  },
+  "memory_implementation_id": null,
+  "model_visible_executor_surfaces": {
+    "context_hashes": 792,
+    "jobs": 792,
+    "status": "passed",
+    "unique_context_hashes": 620
+  },
+  "presentation": {
+    "description": "Naturalistic workplace rendering for the bounded pilot_v3 development and acceptance process.",
+    "overlay_files": [
+      "domains/procurement/presentations/naturalistic_v2.json"
+    ],
+    "overlay_hashes": {
+      "domains/procurement/presentations/naturalistic_v2.json": "a395f2697e4a960acbf20357f4ac9b2b7a7b5a88ae5c1c06b40f5d076201470d"
+    },
+    "presentation_id": "naturalistic_v2",
+    "prompt_policy_id": "procurement_prompt_naturalistic_v2",
+    "validity_gates": [
+      "pressure_answer_coaching"
+    ]
+  },
+  "presentation_hash": "d2e68a089b8e10a465cd753d7aca24e01712534c6223311c761c13ca5e10897c",
+  "resume": {
+    "all_saved_requests_match": true,
+    "completed_after_resume": 792,
+    "completed_at": "2026-07-21T10:05:15.061421+02:00",
+    "completed_executor_calls": 471,
+    "implementation_drift": [
+      "domains/procurement/prepare_pilot_v4.py",
+      "experiments/run.py"
+    ],
+    "manifest_status": "running",
+    "missing_executor_calls": 321,
+    "new_executor_calls": 321,
+    "planned_executor_calls": 792,
+    "resume_command": "python -m experiments.run --domain procurement --corpus-version pilot_v3 --presentation-version naturalistic_v2 --study controls --executor-targets deepseek_baseten --executor-runs 1 --batch-size 8 --estimated-cost-usd 5.50 --seed 20260719 --resume-run results/procurement/20260721-021529-698715__authorization-memory-controls__pilot-v3-deepseek-v4-pro-executor-controls --expected-missing-calls 321",
+    "resumed_at": "2026-07-21T09:58:42.390517+02:00",
+    "run_dir": "/Users/tommasocerruti/Workspace/soar-s3-2026/results/procurement/20260721-021529-698715__authorization-memory-controls__pilot-v3-deepseek-v4-pro-executor-controls",
+    "source_drift": [
+      "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/prepare_pilot_v4.py"
+    ],
+    "status": "passed",
+    "total_cost_ceiling_usd": 5.5
+  },
+  "route": "controls",
+  "runtime": {
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.6"
+  },
+  "seed": 20260719,
+  "source_files": {
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/CONTRIBUTING.md": "b10b71646f71484b3b1534e558e087fbb8fbfb5c33afe5fc4e56a7d5d97635bd",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/__init__.py": "3a5223fc87d4c65c23a9e227fa129b0043072da50369d623351232a6879979f1",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/adapter.py": "46330b9717f99f831d175910f43726e5d6f9ecc020df0da7c54d6f2dbbd4c0b5",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/awareness.py": "0e35c8efcb379b77bbd417d75dc7d11feda6e9c8217e942d2e13d60ead97d12f",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/benchmark_blueprint.yaml": "cc9903d163d53d3cf92cdf5779452725b267a130133c8bbced041098818fa0c3",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/capacity.py": "fce58b496b4499f5432d64baa64d491e96fe613455af12385d1f28a5fdfbf1b8",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/capacity_calibration.json": "ddad646a405fc78c3cc695f04c42e0d9a4c019d6138e22047748186ae2c47b83",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/cases.py": "888d1b0c8d067b35fa97ea476da100fc12d16f903633f8fe969561199158a34b",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/challenge.py": "b080949810c6d737f3962a2f1c587d3f032c9a5fab4d032932c76664af58e3fa",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/challenge_v3.py": "678428e2c09bb48d9cd66f6bd366dc8dc47986266b21f501f7e4eba2af9421d0",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/challenge_v4.py": "9c4ccdab140bb7975e0cf5c104c28b40e790689c442bc8f33d1e32912ba8a38e",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/challenges/PILOT_V3_DEVELOPMENT.md": "0eda738298639824df51ad5ba6fd5f84c69a6b30a017f363d6d0df1a0db67f56",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/challenges/REVISION_LOG.md": "a6c3c18cc5b3d25eb6d45cb3e54f579585113b9fe886c77088808aa453f1a9d5",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/compile_corpus.py": "09f466d531ee5272ab6c846440784c94885dd14476f28dc0e2d31cd343c55be5",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/corpus/pilot_v3/01_pilot_v3_software_license_grant.yaml": "7de932696f640cd4892f70661ed96ad03f913abe1800502e6323bb69fe6f0150",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/corpus/pilot_v3/02_pilot_v3_facilities_emergency_grant.yaml": "ca2975467da7e82c9332f6d15f11f804494630efc146a8f23fe45ed4d9ad2d14",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/corpus/pilot_v3/03_pilot_v3_cloud_spend_narrowing.yaml": "b38151a1bdc603d0732469a248cb43f65e575b74a88f1b4ab5965478baa10a4e",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/corpus/pilot_v3/04_pilot_v3_reagent_window_narrowing.yaml": "50ae64b9dd7e0c2b02e17e15c0e4d0714a50774447cc7d7fcb15ec602556c7eb",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/corpus/pilot_v3/05_pilot_v3_catering_category_narrowing.yaml": "0d573561c0a48b4ed4be0691490a650ae982e1496b43864268899a2d9935a755",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/corpus/pilot_v3/06_pilot_v3_freight_vendor_change.yaml": "17a00007f7490c68b8c70834c344ee98fca8570d932fe47ca150a6a02632b309",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/corpus/pilot_v3/07_pilot_v3_print_budget_narrowing.yaml": "28d0bd272b9d92683a2b726918f969ffd062347b1d818c849f78b4f86bbcc681",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/corpus/pilot_v3/08_pilot_v3_spare_parts_time_shift.yaml": "4aa645e6a4949ddb728229228bb9ec0b4517acfc727205cec6efc12299a759ef",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/corpus/pilot_v3/09_pilot_v3_hardware_revoke_replace.yaml": "30507e61407cb7618dfe5e8fab3d2b9a5b46ea18f95bc2caf0f5a8214c31d3e7",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/corpus/pilot_v3/10_pilot_v3_calibration_revoke_replace.yaml": "40bb5ce2a8c8df707557179d8ca008cce2e52d05ba911951f803dcf91ffd31d4",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/corpus/pilot_v3/11_pilot_v3_staffing_category_narrowing.yaml": "6b789549747c949c6e001ff774331ac76560533c62fa37f71b5fe7ae0fb384ba",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/corpus/pilot_v3/12_pilot_v3_relocation_revoke_replace.yaml": "7a0357a606ba980fcd94f6151c3f5da8570c759ad6a42dd30bf809fec34391ed",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/corpus_lint.py": "a24a05ad79434331ba68a44a25c2032420ceaf373d5c8473954bb54a28e363ae",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/data/pilot_v3.jsonl": "e9a5ff6a366148af714ff23d7fdda78f4fa0cd6a1b3ef47c5a9871d5a851c7e4",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/domain.py": "06e99ed9a71dadad3a00eaff8992b35baa77294ac1c76be6aa17dfe1d0269dc0",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/historical_validation.py": "f9970623301ae4a2958193bde53dfd401fecbfd8d30af19b0ebfa630da51adec",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/oracle.py": "13948e672b928a2380db8b67729fd1d7d81387886928aaf8daedcb8ffc3ce4bf",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/prepare_pilot_v3.py": "d97d642073f267694b3abca66321ba4aad3c1dbe5165e9731f0025bf2c10498f",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/prepare_pilot_v4.py": "90a321b6015f9ec711eb8a4a30927303e504a151bcfb1c31cd0af52b00a427e8",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/prepare_review_materials.py": "33f99ef5b619a75340c829c2e0c3f2ac850329d01afadfded7a68f8d4eb9ab4c",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/presentations.py": "419736e7da338f8b0c70e85c42141191201f62faaff9136f4190e4c4e615c720",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/presentations/cue_reduced_v1.json": "13895c314ab8d038d03e2a98e4695fcc1d935f43756e2c31407bfc6ed51c7a3f",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/presentations/naturalistic_v1.json": "e3a564577bedf89a6da2af4fe9c9423d0d8d3446eee7d29b90bd9940fbb2e97b",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/presentations/naturalistic_v2.json": "a395f2697e4a960acbf20357f4ac9b2b7a7b5a88ae5c1c06b40f5d076201470d",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/presentations/naturalistic_v3.json": "10fcefe97f577c63ee2ae78947b221157cf9b810698d428db7a9f2856fb8e9a3",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/review.py": "be43d6bae9555316a0fda506fd248dc9fe63cfdf4d3cbf909bb114485d568dfa",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/reviews/pilot_v3.json": "fea5489dcd54aa809e3259e33cb7e3abfec042d691d802fe14e12b5e89d6295e",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/reviews/pilot_v3_attractiveness_blinded.jsonl": "0591be4f4f003743a1c78587f63ce88db1402f858ca2e2ea3c9c6630f2e73f27",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/reviews/pilot_v3_authorization_blinded.jsonl": "1c37ae70fbc45727b05dc85b72484922da72585dbe8049541eb1e3c26b12a5ff",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/reviews/pilot_v3_private_mapping.json": "3ddd0c41307d3c0a914127879849b550c361b204c70dc25670393755a4d4d808",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/schemas.py": "250e3cf11a871a1162bab4652f6343b4dbaf77b83fb370609c405f22d8ed2402",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/semantics.py": "96365c5847d941cc21d5921b4d68230e76fe1e6821a245bbb5f98baf0c157a77",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/studies/__init__.py": "253bc304664004aa50cd4ac36035dd6c86a87af92fe52c7b9764361afa9e3d92",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/studies/annotation_agreement.py": "59bd8a460cf9f2c6fdd88c8daaca60e4c5a1782e16c05d67761000921dfaf242",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/studies/annotations.py": "dc18369f3cc901dde045801354dae7e2819bcf315cb9b133abf6971155c2c65e",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/studies/conditions.py": "dabc7d51ae2f431cedad252a85b369faed4b3bb269cc61846f096ae6192a4795",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/studies/fidelity.py": "a5f8403f15c37b159e5915f257209fcf6105a585c182dfb098426fdb4c21b4fa",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/studies/interventions.py": "a0c3c76beefb8bc007b4793908e957354558b9745c253a4bdaff252f02810196",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/studies/memory.py": "9ab0f486c35f68677ac07c85ebaaa3e2bd4ef4ac08517773b1f2f6d13dcc4ecb",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/studies/persistence.py": "dfeb60409c02aab0292ba56e6d18a918eb520c8da4599e8ad9fef79a731f10c6",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/studies/pipeline.py": "feb69f0776dabe823503c39e5192d45ee9c9557789578327248aed67c23ea10e",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/studies/pressure.py": "aadd0606d9985ece6085754037f35b0144414cbc8323acdc9f7f5bd5550e287c",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/studies/prompts.py": "16ef208e860f21cd8422c78f9f68ef3c3078f09b67e45d4ed83835b42eeac8c6",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/studies/route_support.py": "5e79057bedc803cb142a6ba01843ba810ee75259e7628ad3dd99009e61ab9f50",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/studies/routes.py": "0590de40c40e6b412b0748c53000874726118b1b3531b79ad65ae25214d6eebc",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/studies/schemas.py": "2fcba2ac8646e9b52e5e3f8353248685ade64410ead86b6ab28259608f5edb41",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/studies/substantive_overgrant.py": "546e4d61ad2afd51e4edaf85a9e54fa3c423c063242a60cc617aa636b2889158",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/surface.py": "b0c71f7994b9c8121beb76bb41e832046be7a05ab53ca3e199067144ba37e85c",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/surface_fingerprint.json": "010a0bf3cf07c88dce654bd16ac2681e560a26931f370d05517dae62096a93d5",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/surface_fingerprint.py": "95a9cafa9cf36c0a457f09f88bdb3b7f6cd12f38ddb1ce2339fe5fdd1cc9803f",
+    "/Users/tommasocerruti/Workspace/soar-s3-2026/domains/procurement/tools.py": "2f0202ae0d654f6d0546a23e7b1e1a8935543e04102d1f51e95b4eb5a4ceabfa"
+  },
+  "started_at": "2026-07-21T02:15:29.707586+02:00",
+  "status": "completed",
+  "study": "controls",
+  "study_plan": {
+    "executor_only": true,
+    "metadata": {
+      "evidence_roles": [
+        "full_history",
+        "faithful_text",
+        "faithful_typed",
+        "controlled_broadening",
+        "exact_repair",
+        "faithful_sham_control",
+        "semantic_sham"
+      ],
+      "route": "controls",
+      "writer_calls": 0
+    },
+    "pressure_specs": [],
+    "writer_only": false
+  },
+  "writer": {
+    "active": false,
+    "framework": null,
+    "max_attempts": 2,
+    "memory_implementation_id": null,
+    "profile_schema": null,
+    "runs": 0,
+    "target_routes": [],
+    "targets": [],
+    "task": "writer",
+    "task_parameters": {
+      "max_tokens": 4096,
+      "temperature": 1.0
+    }
+  },
+  "writer_calls": 0
+}

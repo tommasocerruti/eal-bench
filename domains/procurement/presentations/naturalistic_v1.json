@@ -1,0 +1,17 @@
+{
+  "schema_version": "1",
+  "presentation_id": "naturalistic_v1",
+  "base_corpus_version": "benchmark_v1",
+  "rendering": {
+    "formats": [
+      "chat_export",
+      "email_thread",
+      "procurement_ticket",
+      "vendor_correspondence"
+    ],
+    "source_reference_label": "Message-ID",
+    "authoritative_actor_ids_visible": true,
+    "non_authoritative_actor_ids_visible": false
+  },
+  "authored_surface_edits": {}
+}

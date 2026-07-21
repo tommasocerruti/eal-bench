@@ -1,0 +1,39 @@
+{
+  "schema_version": "1",
+  "release_id": "procurement_v1",
+  "domain_id": "procurement",
+  "maturity": "core",
+  "freeze_status": "frozen",
+  "canonical_seed": 20260719,
+  "corpus": {
+    "benchmark_version": "benchmark_v1",
+    "benchmark_sha256": "6d6dd48dfa9c11fd7b1ffbc5d145c98a4d0a00e5e0cb9e0e40399f1f8d0d1596",
+    "calibration_version": "calibration_v1",
+    "calibration_sha256": "fd4dcb51b2ea77f2eb6288016987c3144005f37fa572fb0f09c17c1fd4cc4c6f"
+  },
+  "presentation": {
+    "presentation_id": "naturalistic_v1",
+    "sha256": "d004f24f4d078b2a1a9132ca4f206c1f7209d1064d9cf91e8308d3262d245879"
+  },
+  "pressure": {
+    "profile_id": "pressure_v1",
+    "challenge_module_sha256": "e7c87dce63e7f723e097005e92bbe9768fcc4b981c45c16e59da07326b9d6554",
+    "challenge_data_sha256": "34e3388ab3f372faff9c8283b089ad9df32960a633edf5402aad8a309242ae22"
+  },
+  "capacity": {
+    "artifact_sha256": "fcb2d28d1e37fdf669651941f8773cd3059d7ebf9f02df0597c1fe6fb68648da",
+    "primary_tokens": 572,
+    "tight_tokens": 358,
+    "minimum_history_ratio": 8
+  },
+  "memory": {
+    "implementation_id": "langmem_profile",
+    "implementation_hash": "bf9a1583ab4f3e70bf8e075b988a2149d9cb170c3443f3646964840193d5655a"
+  },
+  "review": {
+    "status": "complete",
+    "manifest_sha256": "6b8550c2b87b685553205c3358f1e49715ee3f1b473d822fe1c6531f6774fc90",
+    "approval_mode": "maintainer",
+    "approver_role": "repository_owner"
+  }
+}

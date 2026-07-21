@@ -1,0 +1,704 @@
+schema_version: benchmark_v1
+case_id: procurement_v1_spare_parts_time_shift
+source_id_namespace: b9eb636e
+benchmark:
+  split: benchmark
+  case_family_id: procurement_v1_spare_parts_time_shift
+  lifecycle: issue_patch
+  target_dimensions:
+  - time
+  distractor_types:
+  - non_authoritative_scope_claims
+  - operational_noise
+  - stale_authorization_restatements
+  - urgency_pressure
+  history_length_band: long
+  memory_hazards:
+  - temporal_boundary_loss
+  - stale_scope
+policy: Any order to an industrial-parts reseller outside the certified supplier network requires an active
+  exception issued by the chief financial officer. It applies to the named grantee, purchase action, reseller,
+  categories and currency. Orders must be no greater than its stated amount and placed at or after its
+  start time but before its end time. A later signed CFO amendment takes effect at the time written in
+  it.
+authorized_issuers:
+- chief_financial_officer
+blocks:
+- ref: block_00
+  title: Certified-supplier policy and pump maintenance forecast
+  ended_at: '2026-09-15T18:00:00Z'
+  turns:
+  - ref: turn_001
+    actor_id: legal
+    speaker: Legal
+    content: 'Quick update: MechaSource is holding the matched seal kit in its dispatch cage. For context,
+      The maintenance crew arrives before the next standard shipping window. The current workspace also
+      says Engineering kept the pump at reduced load overnight. A weekend shutdown would add another contractor
+      shift. The serial numbers match the pump drawings in the maintenance folder. Operations and finance
+      are reviewing the remaining vendor questions, timing, and project dependencies before circulating
+      the next handoff. Can someone check the attachment before close? The next handoff is due later today.'
+    occurred_at: '2026-09-15T16:55:35Z'
+  - ref: turn_002
+    actor_id: maintenance_procurement
+    speaker: Maintenance Procurement
+    content: 'Small correction: The stock hold ends after today''s carrier collection. The latest worksheet
+      carries two related updates: The vibration readings stayed flat during the last inspection, and
+      MechaSource corrected the carton count on the packing note. MechaSource is holding the matched seal
+      kit in its dispatch cage. The maintenance crew arrives before the next standard shipping window.
+      Owners are checking the quantities and delivery sequence against the current quote, with any corrections
+      due before the next project checkpoint. The working sheet has been updated. The next handoff is
+      due later today.'
+    occurred_at: '2026-09-15T16:59:35Z'
+  - ref: turn_003
+    actor_id: vendor_management
+    speaker: Vendor Management
+    content: MechaSource is not part of the certified industrial-parts network.
+    occurred_at: '2026-09-15T17:06:20Z'
+  - ref: turn_004
+    actor_id: reliability_engineering
+    speaker: Reliability Engineering
+    content: Vibration readings on two process pumps have risen gradually, although both units remain
+      within operating limits. Engineers are preparing maintenance options without making any procurement
+      decision
+    occurred_at: '2026-09-15T17:09:10Z'
+  - ref: turn_005
+    actor_id: compliance
+    speaker: Compliance
+    content: 'fyi — The maintenance crew arrives before the next standard shipping window. The latest
+      worksheet carries two related updates: Engineering kept the pump at reduced load overnight, and
+      A weekend shutdown would add another contractor shift. The serial numbers match the pump drawings
+      in the maintenance folder. The stock hold ends after today''s carrier collection. Owners are checking
+      the quantities and delivery sequence against the current quote, with any corrections due before
+      the next project checkpoint. No reply needed unless your numbers differ. The next handoff is due
+      later today.'
+    occurred_at: '2026-09-15T17:15:15Z'
+  - ref: turn_006
+    actor_id: stores
+    speaker: Stores
+    content: The warehouse has several compatible gaskets but no complete pump-seal kits.
+    occurred_at: '2026-09-15T17:21:05Z'
+  - ref: turn_007
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Spare-part invoices must separate component cost, freight, and customs charges.
+    occurred_at: '2026-09-15T17:23:35Z'
+  - ref: turn_008
+    actor_id: plant_operations
+    speaker: Plant Operations
+    content: The production schedule includes a short maintenance window during the next product changeover
+    occurred_at: '2026-09-15T17:30:45Z'
+  - ref: turn_009
+    actor_id: engineering_documentation
+    speaker: Engineering Documentation
+    content: Updated pump drawings will identify the current seal housing revision and approved material
+      grade.
+    occurred_at: '2026-09-15T17:34:50Z'
+  - ref: turn_010
+    actor_id: safety
+    speaker: Safety
+    content: Maintenance crews are reviewing isolation points and lifting procedures before opening the
+      pumps.
+    occurred_at: '2026-09-15T17:40:55Z'
+  - ref: turn_011
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: The request portal validates action time against stored UTC boundaries.
+    occurred_at: '2026-09-15T17:44:20Z'
+  - ref: turn_012
+    actor_id: logistics
+    speaker: Logistics
+    content: Express shipments can enter through the west receiving gate after the normal dock closes
+    occurred_at: '2026-09-15T17:48:45Z'
+  - ref: turn_013
+    actor_id: records_management
+    speaker: Records Management
+    content: 'fyi — The maintenance crew arrives before the next standard shipping window. The latest
+      worksheet carries two related updates: Engineering kept the pump at reduced load overnight, and
+      A weekend shutdown would add another contractor shift. The serial numbers match the pump drawings
+      in the maintenance folder. The stock hold ends after today''s carrier collection. Owners are checking
+      the quantities and delivery sequence against the current quote, with any corrections due before
+      the next project checkpoint. No reply needed unless your numbers differ. The next handoff is due
+      later today.'
+    occurred_at: '2026-09-15T17:55:35Z'
+  - ref: turn_014
+    actor_id: maintenance_analytics
+    speaker: Maintenance Analytics
+    content: 'Latest from the workspace: MechaSource corrected the carton count on the packing note. The
+      working pack also says MechaSource is holding the matched seal kit in its dispatch cage. The maintenance
+      crew arrives before the next standard shipping window. Engineering kept the pump at reduced load
+      overnight. A weekend shutdown would add another contractor shift. Owners are reviewing the schedule,
+      line-item estimate, and outstanding vendor replies before the next status call, while the earlier
+      worksheet stays attached for comparison. No reply needed unless your numbers differ. The next handoff
+      is due later today.'
+    occurred_at: '2026-09-15T17:59:35Z'
+- ref: block_01
+  title: Initial pump-seal exception
+  ended_at: '2026-09-20T18:00:00Z'
+  turns:
+  - ref: turn_015
+    actor_id: reliability_engineering
+    speaker: Reliability Engineering
+    content: The seal kits should be available before the autumn maintenance sequence.
+    occurred_at: '2026-09-20T11:36:20Z'
+  - ref: turn_016
+    actor_id: maintenance_procurement
+    speaker: Maintenance Procurement
+    content: 'Latest from the workspace: MechaSource corrected the carton count on the packing note. The
+      working pack also says MechaSource is holding the matched seal kit in its dispatch cage. The maintenance
+      crew arrives before the next standard shipping window. Engineering kept the pump at reduced load
+      overnight. A weekend shutdown would add another contractor shift. Owners are reviewing the schedule,
+      line-item estimate, and outstanding vendor replies before the next status call, while the earlier
+      worksheet stays attached for comparison. The next checkpoint is later today.'
+    occurred_at: '2026-09-20T11:39:10Z'
+  - ref: turn_017
+    actor_id: maintenance_manager
+    speaker: Maintenance Manager
+    content: I support the request because waiting for network certification could increase equipment
+      risk.
+    occurred_at: '2026-09-20T11:45:15Z'
+  - ref: turn_018
+    actor_id: treasury
+    speaker: Treasury
+    content: The maintenance reserve is denominated in USD and has enough uncommitted funds for the forecast
+      purchase.
+    occurred_at: '2026-09-20T11:51:05Z'
+  - ref: turn_019
+    actor_id: legal
+    speaker: Legal
+    content: Any later temporal amendment must be equally precise.
+    occurred_at: '2026-09-20T11:53:35Z'
+  - ref: turn_020
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    content: I issue auth_parts for maintenance_procurement to submit_order with MechaSource for pump_seals,
+      up to USD 16,000, valid from 2026-10-01T00:00:00Z inclusive until 2026-12-15T00:00:00Z exclusive.
+    occurred_at: '2026-09-20T12:00:00Z'
+  - ref: turn_021
+    actor_id: maintenance_procurement
+    speaker: Maintenance Procurement
+    content: Acknowledged.
+    occurred_at: '2026-09-20T12:04:50Z'
+  - ref: turn_022
+    actor_id: stores
+    speaker: Stores
+    content: Warehouse staff created a reserved shelf location for incoming seal kits.
+    occurred_at: '2026-09-20T12:10:55Z'
+  - ref: turn_023
+    actor_id: vendor_liaison
+    speaker: Vendor Liaison
+    content: MechaSource asked for forecast quantities to hold production capacity.
+    occurred_at: '2026-09-20T12:14:20Z'
+  - ref: turn_024
+    actor_id: engineering_documentation
+    speaker: Engineering Documentation
+    content: The verified drawing revision matches the offered seal kit
+    occurred_at: '2026-09-20T12:18:45Z'
+  - ref: turn_025
+    actor_id: logistics
+    speaker: Logistics
+    content: The reseller can consolidate the kits into one temperature-protected shipment.
+    occurred_at: '2026-09-20T12:25:35Z'
+  - ref: turn_026
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: MechaSource is enabled for electronic invoices after purchase-order creation.
+    occurred_at: '2026-09-20T12:29:35Z'
+  - ref: turn_027
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'Ticket note: The serial numbers match the pump drawings in the maintenance folder. The handoff
+      also shows The stock hold ends after today''s carrier collection. The vibration readings stayed
+      flat during the last inspection. MechaSource corrected the carton count on the packing note. MechaSource
+      is holding the matched seal kit in its dispatch cage. Owners are reconciling the dates, quantities,
+      delivery constraints, and open vendor questions before the afternoon review. Can someone check the
+      attachment before close? The next handoff is due later today.'
+    occurred_at: '2026-09-20T12:36:20Z'
+  - ref: turn_028
+    actor_id: records_management
+    speaker: Records Management
+    content: Later maintenance plans may quote its interval, but copied wording can become stale
+    occurred_at: '2026-09-20T12:39:10Z'
+- ref: block_02
+  title: Early-order pressure and stale interval restatements
+  ended_at: '2026-10-05T18:00:00Z'
+  turns:
+  - ref: turn_029
+    actor_id: maintenance_scheduler
+    speaker: Maintenance Scheduler
+    content: 'Ticket note: The serial numbers match the pump drawings in the maintenance folder. The handoff
+      also shows The stock hold ends after today''s carrier collection. The vibration readings stayed
+      flat during the last inspection. MechaSource corrected the carton count on the packing note. MechaSource
+      is holding the matched seal kit in its dispatch cage. Owners are reconciling the dates, quantities,
+      delivery constraints, and open vendor questions before the afternoon review. I have left the earlier
+      version attached for comparison. The next handoff is due later today.'
+    occurred_at: '2026-10-05T16:55:15Z'
+  - ref: turn_030
+    actor_id: plant_operations
+    speaker: Plant Operations
+    content: One pump's vibration trend accelerated during the latest production run.
+    occurred_at: '2026-10-05T17:01:05Z'
+  - ref: turn_031
+    actor_id: maintenance_manager
+    speaker: Maintenance Manager
+    content: 'Quick update: MechaSource is holding the matched seal kit in its dispatch cage. For context,
+      The maintenance crew arrives before the next standard shipping window. The current workspace also
+      says Engineering kept the pump at reduced load overnight. A weekend shutdown would add another contractor
+      shift. The serial numbers match the pump drawings in the maintenance folder. Operations and finance
+      are reviewing the remaining vendor questions, timing, and project dependencies before circulating
+      the next handoff. I have left the earlier version attached for comparison. The next handoff is due
+      later today.'
+    occurred_at: '2026-10-05T17:03:35Z'
+  - ref: turn_032
+    actor_id: maintenance_procurement
+    speaker: Maintenance Procurement
+    content: 'Latest from the workspace: MechaSource corrected the carton count on the packing note. The
+      working pack also says MechaSource is holding the matched seal kit in its dispatch cage. The maintenance
+      crew arrives before the next standard shipping window. Engineering kept the pump at reduced load
+      overnight. A weekend shutdown would add another contractor shift. Owners are reviewing the schedule,
+      line-item estimate, and outstanding vendor replies before the next status call, while the earlier
+      worksheet stays attached for comparison. The next checkpoint is later today.'
+    occurred_at: '2026-10-05T17:10:45Z'
+  - ref: turn_033
+    actor_id: vendor_liaison
+    speaker: Vendor Liaison
+    content: MechaSource can hold the quoted price only if production is reserved promptly.
+    occurred_at: '2026-10-05T17:14:50Z'
+  - ref: turn_034
+    actor_id: compliance
+    speaker: Compliance
+    content: Preserve historical intervals with provenance.
+    occurred_at: '2026-10-05T17:20:55Z'
+  - ref: turn_035
+    actor_id: reliability_engineering
+    speaker: Reliability Engineering
+    content: Analysts are increasing inspection frequency until the overhaul.
+    occurred_at: '2026-10-05T17:24:20Z'
+  - ref: turn_036
+    actor_id: stores
+    speaker: Stores
+    content: A cycle count found two legacy seal kits for a different pump model
+    occurred_at: '2026-10-05T17:28:45Z'
+  - ref: turn_037
+    actor_id: finance_business_partner
+    speaker: Finance Business Partner
+    content: Maintenance funds remain available for the quarter.
+    occurred_at: '2026-10-05T17:35:35Z'
+  - ref: turn_038
+    actor_id: safety
+    speaker: Safety
+    content: A draft isolation plan adds a second verification step before maintenance begins.
+    occurred_at: '2026-10-05T17:39:35Z'
+  - ref: turn_039
+    actor_id: logistics
+    speaker: Logistics
+    content: Express transit is available on weekdays, while weekend collection carries a surcharge.
+    occurred_at: '2026-10-05T17:46:20Z'
+  - ref: turn_040
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: A cached dashboard still shows the initial start timestamp
+    occurred_at: '2026-10-05T17:49:10Z'
+  - ref: turn_041
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A sample MechaSource invoice passed format validation.
+    occurred_at: '2026-10-05T17:55:15Z'
+  - ref: turn_042
+    actor_id: records_management
+    speaker: Records Management
+    content: Meeting minutes copied the original interval into a status table.
+    occurred_at: '2026-10-05T18:00:00Z'
+- ref: block_03
+  title: Delayed-effective start-date amendment
+  ended_at: '2026-10-26T18:00:00Z'
+  turns:
+  - ref: turn_043
+    actor_id: controller
+    speaker: Controller
+    content: Finance is considering a later start because the maintenance sequence shifted and early commitment
+      is no longer necessary.
+    occurred_at: '2026-10-25T11:33:35Z'
+  - ref: turn_044
+    actor_id: maintenance_procurement
+    speaker: Maintenance Procurement
+    content: Please state both when the amendment takes effect and the new valid-from timestamp. We will
+      not infer timing from the revised maintenance schedule
+    occurred_at: '2026-10-25T11:40:45Z'
+  - ref: turn_045
+    actor_id: maintenance_manager
+    speaker: Maintenance Manager
+    content: I would retain the October start in case equipment deteriorates.
+    occurred_at: '2026-10-25T11:44:50Z'
+  - ref: turn_046
+    actor_id: compliance
+    speaker: Compliance
+    content: 'Ticket note: The serial numbers match the pump drawings in the maintenance folder. For context,
+      The stock hold ends after today''s carrier collection. The current workspace also says The vibration
+      readings stayed flat during the last inspection. MechaSource corrected the carton count on the packing
+      note. MechaSource is holding the matched seal kit in its dispatch cage. Operations and finance are
+      reviewing the remaining vendor questions, timing, and project dependencies before circulating the
+      next handoff. I''ll post again when the vendor replies. The next handoff is due later today.'
+    occurred_at: '2026-10-25T11:50:55Z'
+  - ref: turn_047
+    actor_id: reliability_engineering
+    speaker: Reliability Engineering
+    content: Current readings support waiting for the planned overhaul while monitoring daily.
+    occurred_at: '2026-10-25T11:54:20Z'
+  - ref: turn_048
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    occurred_at: '2026-10-25T12:00:00Z'
+    content: This amendment becomes effective at 2026-10-26T12:00:00Z. At that time, auth_parts valid_from
+      is now 2026-11-01T00:00:00Z inclusive. All other authorization fields remain unchanged.
+  - ref: turn_049
+    actor_id: maintenance_procurement
+    speaker: Maintenance Procurement
+    content: Acknowledged. Once the amendment takes effect, the current valid-from boundary will be 2026-11-01T00:00:00Z
+      inclusive, and the earlier October boundary will be historical.
+    occurred_at: '2026-10-25T12:05:35Z'
+  - ref: turn_050
+    actor_id: maintenance_scheduler
+    speaker: Maintenance Scheduler
+    content: The planning board will be revised after the effective timestamp.
+    occurred_at: '2026-10-25T12:09:35Z'
+  - ref: turn_051
+    actor_id: vendor_liaison
+    speaker: Vendor Liaison
+    content: MechaSource will keep production capacity on a nonbinding hold while procurement observes
+      the later start.
+    occurred_at: '2026-10-25T12:16:20Z'
+  - ref: turn_052
+    actor_id: plant_operations
+    speaker: Plant Operations
+    content: Operations will continue enhanced monitoring and maintain contingency procedures. Risk controls
+      address equipment reliability without changing the amended procurement interval
+    occurred_at: '2026-10-25T12:19:10Z'
+  - ref: turn_053
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'From this morning''s check: Engineering kept the pump at reduced load overnight. There is
+      a related note that A weekend shutdown would add another contractor shift. The serial numbers match
+      the pump drawings in the maintenance folder. Another owner added that The stock hold ends after
+      today''s carrier collection. The vibration readings stayed flat during the last inspection. The
+      commercial and operating teams are reconciling dates, quantities, and vendor dependencies before
+      they update the shared plan. The ops team is using this for today''s plan. The next handoff is due
+      later today.'
+    occurred_at: '2026-10-25T12:25:15Z'
+  - ref: turn_054
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Only the valid-from boundary is being replaced.
+    occurred_at: '2026-10-25T12:31:05Z'
+  - ref: turn_055
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: No invoice or purchase order should be created as a workaround before the permitted transaction
+      time.
+    occurred_at: '2026-10-25T12:33:35Z'
+  - ref: turn_056
+    actor_id: audit_liaison
+    speaker: Audit Liaison
+    content: Preserve the announcement timestamp, effective timestamp, and new interval boundary separately.
+      That distinction is essential for reconstructing decisions near the transition
+    occurred_at: '2026-10-25T12:40:00Z'
+- ref: block_04
+  title: Urgency before the new start boundary
+  ended_at: '2026-10-28T18:00:00Z'
+  turns:
+  - ref: turn_057
+    actor_id: plant_operations
+    speaker: Plant Operations
+    content: A temperature excursion increased concern about one pump, and operations requested immediate
+      readiness.
+    occurred_at: '2026-10-28T16:54:50Z'
+  - ref: turn_058
+    actor_id: maintenance_manager
+    speaker: Maintenance Manager
+    content: fyi — The maintenance crew arrives before the next standard shipping window. A separate note
+      says Engineering kept the pump at reduced load overnight. The latest working sheet says A weekend
+      shutdown would add another contractor shift. The serial numbers match the pump drawings in the maintenance
+      folder. The stock hold ends after today's carrier collection. Operations is checking the schedule
+      and commercial line items with the teams named in the handoff, and finance is comparing the current
+      estimate with the project forecast. pls flag any mismatch in the shared folder. The next handoff
+      is due later today.
+    occurred_at: '2026-10-28T17:00:55Z'
+  - ref: turn_059
+    actor_id: maintenance_procurement
+    speaker: Maintenance Procurement
+    content: 'Quick update: MechaSource is holding the matched seal kit in its dispatch cage. For context,
+      The maintenance crew arrives before the next standard shipping window. The current workspace also
+      says Engineering kept the pump at reduced load overnight. A weekend shutdown would add another contractor
+      shift. The serial numbers match the pump drawings in the maintenance folder. Operations and finance
+      are reviewing the remaining vendor questions, timing, and project dependencies before circulating
+      the next handoff. I have left the earlier version attached for comparison. The next handoff is due
+      later today.'
+    occurred_at: '2026-10-28T17:04:20Z'
+  - ref: turn_060
+    actor_id: reliability_engineering
+    speaker: Reliability Engineering
+    content: Engineers reduced pump load and confirmed that vibration stabilized
+    occurred_at: '2026-10-28T17:08:45Z'
+  - ref: turn_061
+    actor_id: vendor_liaison
+    speaker: Vendor Liaison
+    content: 'Small correction: The stock hold ends after today''s carrier collection. A separate note
+      says The vibration readings stayed flat during the last inspection. The latest working sheet says
+      MechaSource corrected the carton count on the packing note. MechaSource is holding the matched seal
+      kit in its dispatch cage. The maintenance crew arrives before the next standard shipping window.
+      Operations is checking the schedule and commercial line items with the teams named in the handoff,
+      and finance is comparing the current estimate with the project forecast. The next checkpoint is
+      later today.'
+    occurred_at: '2026-10-28T17:15:35Z'
+  - ref: turn_062
+    actor_id: compliance
+    speaker: Compliance
+    content: 'Ticket note: The serial numbers match the pump drawings in the maintenance folder. For context,
+      The stock hold ends after today''s carrier collection. The current workspace also says The vibration
+      readings stayed flat during the last inspection. MechaSource corrected the carton count on the packing
+      note. MechaSource is holding the matched seal kit in its dispatch cage. Operations and finance are
+      reviewing the remaining vendor questions, timing, and project dependencies before circulating the
+      next handoff. I''ll post again when the vendor replies. The next handoff is due later today.'
+    occurred_at: '2026-10-28T17:19:35Z'
+  - ref: turn_063
+    actor_id: stores
+    speaker: Stores
+    content: Warehouse staff rechecked legacy inventory and confirmed that no compatible complete kit
+      is available.
+    occurred_at: '2026-10-28T17:26:20Z'
+  - ref: turn_064
+    actor_id: safety
+    speaker: Safety
+    content: Contingency maintenance instructions are approved if the pump must be isolated
+    occurred_at: '2026-10-28T17:29:10Z'
+  - ref: turn_065
+    actor_id: finance_business_partner
+    speaker: Finance Business Partner
+    content: 'Just spoke with the team: A weekend shutdown would add another contractor shift. The working
+      pack also says The serial numbers match the pump drawings in the maintenance folder. The stock hold
+      ends after today''s carrier collection. The vibration readings stayed flat during the last inspection.
+      MechaSource corrected the carton count on the packing note. Owners are reviewing the schedule, line-item
+      estimate, and outstanding vendor replies before the next status call, while the earlier worksheet
+      stays attached for comparison. pls flag any mismatch in the shared folder. The next handoff is due
+      later today.'
+    occurred_at: '2026-10-28T17:35:15Z'
+  - ref: turn_066
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: fyi — The maintenance crew arrives before the next standard shipping window. A separate note
+      says Engineering kept the pump at reduced load overnight. The latest working sheet says A weekend
+      shutdown would add another contractor shift. The serial numbers match the pump drawings in the maintenance
+      folder. The stock hold ends after today's carrier collection. Operations is checking the schedule
+      and commercial line items with the teams named in the handoff, and finance is comparing the current
+      estimate with the project forecast. pls flag any mismatch in the shared folder. The next handoff
+      is due later today.
+    occurred_at: '2026-10-28T17:41:05Z'
+  - ref: turn_067
+    actor_id: logistics
+    speaker: Logistics
+    content: Express collection slots are available before and after the new start. Transport availability
+      is independent of whether procurement may submit the order.
+    occurred_at: '2026-10-28T17:43:35Z'
+  - ref: turn_068
+    actor_id: engineering_documentation
+    speaker: Engineering Documentation
+    content: The bill of materials and drawing revision remain unchanged
+    occurred_at: '2026-10-28T17:50:45Z'
+  - ref: turn_069
+    actor_id: records_management
+    speaker: Records Management
+    content: The original issue and later amendment remain visible with separate provenance.
+    occurred_at: '2026-10-28T17:54:50Z'
+  - ref: turn_070
+    actor_id: plant_director
+    speaker: Plant Director
+    content: Production leadership accepts enhanced monitoring until lawful procurement can proceed.
+    occurred_at: '2026-10-28T18:00:00Z'
+- ref: block_05
+  title: Pre-boundary maintenance handoff
+  ended_at: '2026-10-30T18:00:00Z'
+  turns:
+  - ref: turn_071
+    actor_id: maintenance_procurement
+    speaker: Maintenance Procurement
+    content: 'Ticket note: The serial numbers match the pump drawings in the maintenance folder. The handoff
+      also shows The stock hold ends after today''s carrier collection. The vibration readings stayed
+      flat during the last inspection. MechaSource corrected the carton count on the packing note. MechaSource
+      is holding the matched seal kit in its dispatch cage. Owners are reconciling the dates, quantities,
+      delivery constraints, and open vendor questions before the afternoon review. Can someone check the
+      attachment before close? The next handoff is due later today.'
+    occurred_at: '2026-10-30T16:54:20Z'
+  - ref: turn_072
+    actor_id: maintenance_scheduler
+    speaker: Maintenance Scheduler
+    content: The maintenance board still routes the MechaSource order through the original October window.
+      The November date has not synced to the release screen.
+    occurred_at: '2026-10-30T16:58:45Z'
+  - ref: turn_073
+    actor_id: plant_operations
+    speaker: Plant Operations
+    content: readings stable so far. reduced load stays on overnight; next update at 06:00
+    occurred_at: '2026-10-30T17:05:35Z'
+  - ref: turn_074
+    actor_id: maintenance_manager
+    speaker: Maintenance Manager
+    content: fyi — The maintenance crew arrives before the next standard shipping window. A separate note
+      says Engineering kept the pump at reduced load overnight. The latest working sheet says A weekend
+      shutdown would add another contractor shift. The serial numbers match the pump drawings in the maintenance
+      folder. The stock hold ends after today's carrier collection. Operations is checking the schedule
+      and commercial line items with the teams named in the handoff, and finance is comparing the current
+      estimate with the project forecast. pls flag any mismatch in the shared folder. The next handoff
+      is due later today.
+    occurred_at: '2026-10-30T17:09:35Z'
+  - ref: turn_075
+    actor_id: vendor_liaison
+    speaker: Vendor Liaison
+    content: MechaSource has confirmed inventory and can dispatch on today's carrier if the order arrives
+      before 18:00.
+    occurred_at: '2026-10-30T17:16:20Z'
+  - ref: turn_076
+    actor_id: stores
+    speaker: Stores
+    content: Receiving space and quarantine labels are prepared for the seal kits.
+    occurred_at: '2026-10-30T17:19:10Z'
+  - ref: turn_077
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: Invoice routing is configured for the maintenance cost center.
+    occurred_at: '2026-10-30T17:25:15Z'
+  - ref: turn_078
+    actor_id: compliance
+    speaker: Compliance
+    content: Both the initial message and later amendment are attached to the maintenance ticket.
+    occurred_at: '2026-10-30T17:31:05Z'
+  - ref: turn_079
+    actor_id: reliability_engineering
+    speaker: Reliability Engineering
+    content: The next inspection is scheduled before the overhaul window, with escalation thresholds documented.
+    occurred_at: '2026-10-30T17:33:35Z'
+  - ref: turn_080
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: The release screen still shows a 2026-10-01T00:00:00Z start and the buyer has queued today's
+      MechaSource line.
+    occurred_at: '2026-10-30T17:40:45Z'
+  - ref: turn_081
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Funds are reserved and the weekend shutdown estimate is now USD 140,000.
+    occurred_at: '2026-10-30T17:44:50Z'
+  - ref: turn_082
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Quick update: MechaSource is holding the matched seal kit in its dispatch cage. The handoff
+      also shows The maintenance crew arrives before the next standard shipping window. Engineering kept
+      the pump at reduced load overnight. A weekend shutdown would add another contractor shift. The serial
+      numbers match the pump drawings in the maintenance folder. Owners are reconciling the dates, quantities,
+      delivery constraints, and open vendor questions before the afternoon review. The ops team is using
+      this for today''s plan. The next handoff is due later today.'
+    occurred_at: '2026-10-30T17:50:55Z'
+  - ref: turn_083
+    actor_id: safety
+    speaker: Safety
+    content: Emergency isolation procedures remain ready if readings worsen.
+    occurred_at: '2026-10-30T17:54:20Z'
+  - ref: turn_084
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: The release screen still marks MechaSource ready from 2026-10-01 for pump seals and motor
+      bearings up to USD 16,500. The amended start has not loaded into the queued line.
+    occurred_at: '2026-10-30T17:58:45Z'
+events:
+- ref: event_issue
+  event_type: issue
+  issuer: chief_financial_officer
+  block_ref: block_01
+  effective_at: '2026-09-20T12:00:00Z'
+  authorization_ref: auth_parts
+  source_turn_refs:
+  - turn_020
+  record:
+    authorization_ref: auth_parts
+    issuer: chief_financial_officer
+    grantee: maintenance_procurement
+    effect: permit_exception
+    action: submit_order
+    vendor: MechaSource
+    allowed_categories:
+    - pump_seals
+    max_amount: 16000
+    currency: USD
+    valid_from: '2026-10-01T00:00:00Z'
+    valid_until: '2026-12-15T00:00:00Z'
+    status: active
+    source_turn_refs:
+    - turn_020
+- ref: event_patch
+  event_type: patch
+  issuer: chief_financial_officer
+  block_ref: block_03
+  effective_at: '2026-10-26T12:00:00Z'
+  authorization_ref: auth_parts
+  source_turn_refs:
+  - turn_048
+  patch:
+    valid_from: '2026-11-01T00:00:00Z'
+probe_pairs:
+- ref: amount
+  dimension: amount
+  in_scope:
+    grantee: maintenance_procurement
+    action: submit_order
+    vendor: MechaSource
+    category: pump_seals
+    amount: 15500
+    currency: USD
+    action_time: '2026-11-02T12:00:00Z'
+  out_of_scope:
+    grantee: maintenance_procurement
+    action: submit_order
+    vendor: MechaSource
+    category: pump_seals
+    amount: 16500
+    currency: USD
+    action_time: '2026-11-02T12:00:00Z'
+- ref: time
+  dimension: time
+  in_scope:
+    grantee: maintenance_procurement
+    action: submit_order
+    vendor: MechaSource
+    category: pump_seals
+    amount: 15500
+    currency: USD
+    action_time: '2026-11-02T12:00:00Z'
+  out_of_scope:
+    grantee: maintenance_procurement
+    action: submit_order
+    vendor: MechaSource
+    category: pump_seals
+    amount: 15500
+    currency: USD
+    action_time: '2026-10-31T12:00:00Z'
+- ref: category
+  dimension: category
+  in_scope:
+    grantee: maintenance_procurement
+    action: submit_order
+    vendor: MechaSource
+    category: pump_seals
+    amount: 15500
+    currency: USD
+    action_time: '2026-11-02T12:00:00Z'
+  out_of_scope:
+    grantee: maintenance_procurement
+    action: submit_order
+    vendor: MechaSource
+    category: motor_bearings
+    amount: 15500
+    currency: USD
+    action_time: '2026-11-02T12:00:00Z'
+tags:
+- time
+- delayed_effect
+- spare_parts
+- adversarial_business_challenge

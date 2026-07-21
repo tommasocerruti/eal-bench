@@ -1,0 +1,645 @@
+from __future__ import annotations
+
+import json
+from collections.abc import Mapping, Sequence
+from dataclasses import dataclass, replace
+from datetime import datetime
+from pathlib import Path
+from typing import Any
+
+from eal_bench.llm import LLM
+from eal_bench.llm.logger import JSONLLogger
+
+from domains.base import AuthorizationMemoryDomain
+
+from .persistence import content_hash, file_hash, write_json, write_jsonl
+from .pipeline import (
+    _job_challenge_metadata,
+    _score_executor_response,
+    _study_job_messages,
+    _study_job_model_context,
+    calibrate_capacity,
+    planned_study_job_identity,
+    run_executor_jobs,
+    validate_executor_job_surfaces,
+)
+from .provenance import with_response_model
+from .runner import _record_response_models, _validate_model_context_call_log
+from .schemas import FrozenEvidence, MemoryArtifact
+from .study_plan import ExecutorJob, StudyPlan
+from .surfaces import model_visible_tools
+
+
+@dataclass(frozen=True)
+class PlannedExecutorCall:
+    job: ExecutorJob
+    target_id: str
+    executor_run_id: int
+    executor_seed: int
+    trial_id: str
+    call_id: str
+    executor: Any
+    messages: tuple[Mapping[str, Any], ...]
+
+
+@dataclass(frozen=True)
+class ResumeValidation:
+    run_dir: Path
+    manifest: Mapping[str, Any]
+    calls: tuple[Mapping[str, Any], ...]
+    planned: Mapping[str, PlannedExecutorCall]
+    completed_call_ids: tuple[str, ...]
+    missing_call_ids: tuple[str, ...]
+    implementation_drift: tuple[str, ...]
+    source_drift: tuple[str, ...]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "status": "passed",
+            "run_dir": str(self.run_dir),
+            "manifest_status": self.manifest.get("status"),
+            "planned_executor_calls": len(self.planned),
+            "completed_executor_calls": len(self.completed_call_ids),
+            "missing_executor_calls": len(self.missing_call_ids),
+            "all_saved_requests_match": True,
+            "implementation_drift": list(self.implementation_drift),
+            "source_drift": list(self.source_drift),
+        }
+
+
+def validate_executor_only_resume(
+    domain: AuthorizationMemoryDomain,
+    cases: Sequence[Any],
+    plan: StudyPlan,
+    options: Mapping[str, Any],
+    *,
+    config: Any,
+    require_missing: bool = True,
+) -> ResumeValidation:
+    run_dir = Path(str(options.get("resume_run") or "")).expanduser().resolve()
+    if not run_dir.is_dir():
+        raise ValueError(f"resume run directory does not exist: {run_dir}")
+    manifest_path = run_dir / "manifest.json"
+    calls_path = run_dir / "calls.jsonl"
+    if not manifest_path.is_file() or not calls_path.is_file():
+        raise ValueError("resume run requires manifest.json and calls.jsonl")
+    manifest = _read_json_object(manifest_path, "resume manifest")
+    calls = tuple(_read_jsonl_objects(calls_path, "resume call log"))
+
+    if not plan.executor_only or plan.writer_chains:
+        raise ValueError("resume currently supports executor-only study plans")
+    if plan.job_builder is not None or plan.post_writer_builder is not None:
+        raise ValueError("resume does not support dynamically expanded study plans")
+    if plan.finalizer is not None:
+        raise ValueError("resume does not support study finalizers")
+    if manifest.get("status") not in {"running", "failed", "resuming"}:
+        raise ValueError("only interrupted or failed runs can be resumed")
+
+    presentation = domain.get_presentation(
+        str(options.get("presentation_version") or "") or None
+    )
+    executor_targets = _targets(options.get("executor_targets"))
+    executor_runs = int(options.get("executor_runs", 1))
+    seed = int(options.get("seed", 0))
+    executor_task = str(options.get("executor_task") or "executor")
+    jobs = plan.validate(domain, cases, options)
+    if not jobs:
+        raise ValueError("resume plan has no executor jobs")
+
+    _require_equal(manifest.get("domain_id"), domain.domain_id, "domain")
+    _require_equal(manifest.get("study"), plan.study_id, "study")
+    _require_equal(
+        manifest.get("corpus_version"),
+        str(options.get("corpus_version") or ""),
+        "corpus version",
+    )
+    _require_equal(
+        manifest.get("case_ids"),
+        [domain.corpus.case_id(case) for case in cases],
+        "case IDs",
+    )
+    _require_equal(
+        manifest.get("presentation_hash"),
+        content_hash(presentation.to_dict()),
+        "presentation hash",
+    )
+    _require_equal(manifest.get("seed"), seed, "seed")
+    _require_equal(
+        manifest.get("capacity_tier"),
+        str(options.get("capacity_tier") or "primary"),
+        "capacity tier",
+    )
+    expected_batch_size = options.get("batch_size") or config.batch_size
+    _require_equal(manifest.get("batch_size"), expected_batch_size, "batch size")
+    executor_manifest = manifest.get("executor")
+    if not isinstance(executor_manifest, Mapping):
+        raise ValueError("resume manifest has no executor object")
+    _require_equal(executor_manifest.get("active"), True, "executor active flag")
+    _require_equal(executor_manifest.get("task"), executor_task, "executor task")
+    _require_equal(
+        executor_manifest.get("targets"), list(executor_targets), "executor targets"
+    )
+    _require_equal(executor_manifest.get("runs"), executor_runs, "executor runs")
+    _require_equal(
+        manifest.get("capacity"),
+        calibrate_capacity(
+            domain,
+            cases,
+            corpus_version=str(options["corpus_version"]),
+            presentation=presentation,
+        ).to_dict(),
+        "capacity calibration",
+    )
+    _require_equal(
+        manifest.get("corpus_provenance"),
+        dict(domain.corpus.provenance(str(options["corpus_version"]))),
+        "corpus provenance",
+    )
+
+    planned = _planned_calls(
+        domain,
+        jobs,
+        study_id=plan.study_id,
+        executor_task=executor_task,
+        executor_targets=executor_targets,
+        executor_runs=executor_runs,
+        seed=seed,
+        presentation=presentation,
+        config=config,
+        pressure_specs=plan.pressure_specs,
+    )
+    tools = list(model_visible_tools(domain, presentation))
+    completed: list[str] = []
+    seen: set[str] = set()
+    for row in calls:
+        call_id = row.get("call_id")
+        if not isinstance(call_id, str) or not call_id:
+            raise ValueError("resume call log contains a missing call ID")
+        if call_id in seen:
+            raise ValueError(f"duplicate resume call ID: {call_id}")
+        seen.add(call_id)
+        expected = planned.get(call_id)
+        if expected is None:
+            raise ValueError(f"saved call is outside the frozen plan: {call_id}")
+        _validate_saved_call(row, expected, tools=tools)
+        completed.append(call_id)
+    missing = tuple(call_id for call_id in planned if call_id not in seen)
+    if not missing and require_missing:
+        raise ValueError("resume run has no missing executor calls")
+
+    expected_missing = options.get("expected_missing_calls")
+    if expected_missing is not None and int(expected_missing) != len(missing):
+        raise ValueError(
+            f"resume expected {expected_missing} missing calls, found {len(missing)}"
+        )
+    implementation_drift = _file_drift(
+        manifest.get("implementation_files"), Path.cwd()
+    )
+    source_drift = _file_drift(manifest.get("source_files"), None)
+    return ResumeValidation(
+        run_dir=run_dir,
+        manifest=manifest,
+        calls=calls,
+        planned=planned,
+        completed_call_ids=tuple(completed),
+        missing_call_ids=missing,
+        implementation_drift=implementation_drift,
+        source_drift=source_drift,
+    )
+
+
+def resume_executor_only_study_plan(
+    domain: AuthorizationMemoryDomain,
+    cases: Sequence[Any],
+    plan: StudyPlan,
+    options: Mapping[str, Any],
+) -> Path:
+    calls_path = Path(str(options["resume_run"])).expanduser().resolve() / "calls.jsonl"
+    llm = LLM(logger=JSONLLogger(calls_path))
+    validation = validate_executor_only_resume(
+        domain,
+        cases,
+        plan,
+        options,
+        config=llm.config,
+    )
+    run_dir = validation.run_dir
+    manifest_path = run_dir / "manifest.json"
+    manifest = dict(validation.manifest)
+    resumed_at = datetime.now().astimezone().isoformat()
+    manifest.update(
+        {
+            "status": "resuming",
+            "finished_at": None,
+            "resume": {
+                **validation.to_dict(),
+                "resumed_at": resumed_at,
+                "resume_command": str(options.get("command") or ""),
+                "total_cost_ceiling_usd": options.get("estimated_cost_usd"),
+            },
+        }
+    )
+    write_json(manifest_path, manifest)
+    presentation = domain.get_presentation(
+        str(options.get("presentation_version") or "") or None
+    )
+    missing_jobs = tuple(
+        replace(
+            validation.planned[call_id].job,
+            executor_target_id=validation.planned[call_id].target_id,
+            executor_run_id=validation.planned[call_id].executor_run_id,
+            executor_seed=validation.planned[call_id].executor_seed,
+        )
+        for call_id in validation.missing_call_ids
+    )
+    try:
+        run_executor_jobs(
+            llm,
+            domain,
+            missing_jobs,
+            study_id=plan.study_id,
+            executor_task=str(options.get("executor_task") or "executor"),
+            executor_targets=_targets(options.get("executor_targets")),
+            executor_runs=int(options.get("executor_runs", 1)),
+            batch_size=options.get("batch_size"),
+            seed=int(options.get("seed", 0)),
+            presentation=presentation,
+            pressure_specs=plan.pressure_specs,
+        )
+        final_validation = validate_executor_only_resume(
+            domain,
+            cases,
+            plan,
+            {**dict(options), "expected_missing_calls": None},
+            config=llm.config,
+            require_missing=False,
+        )
+        if final_validation.missing_call_ids:
+            raise ValueError("resume finished with missing executor calls")
+    except BaseException as exc:
+        manifest.update(
+            {
+                "status": "failed",
+                "finished_at": datetime.now().astimezone().isoformat(),
+                "error": f"{type(exc).__name__}: {exc}",
+            }
+        )
+        write_json(manifest_path, manifest)
+        raise
+
+    calls = tuple(_read_jsonl_objects(calls_path, "completed resume call log"))
+    trials, contexts = _reconstruct_trials_and_contexts(
+        domain,
+        plan,
+        final_validation.planned,
+        calls,
+        presentation=presentation,
+    )
+    _validate_model_context_call_log(contexts, calls_path)
+    files, counts = _persist_executor_only_artifacts(
+        run_dir,
+        plan,
+        trials=trials,
+        contexts=contexts,
+    )
+    call_count = len(calls)
+    counts["calls"] = call_count
+    files["calls"] = {
+        "path": calls_path.name,
+        "sha256": file_hash(calls_path),
+        "rows": call_count,
+    }
+    manifest["model_visible_executor_surfaces"] = validate_executor_job_surfaces(
+        domain,
+        tuple(item.job for item in final_validation.planned.values()),
+        presentation=presentation,
+        pressure_specs=plan.pressure_specs,
+    )
+    manifest.update(
+        {
+            "status": "completed",
+            "finished_at": datetime.now().astimezone().isoformat(),
+            "files": files,
+            "counts": counts,
+        }
+    )
+    resume_metadata = dict(manifest.get("resume") or {})
+    resume_metadata.update(
+        {
+            "completed_after_resume": len(calls),
+            "new_executor_calls": len(validation.missing_call_ids),
+            "all_saved_requests_match": True,
+            "completed_at": manifest["finished_at"],
+        }
+    )
+    manifest["resume"] = resume_metadata
+    executor_manifest = manifest.get("executor")
+    if isinstance(executor_manifest, dict):
+        _record_response_models(
+            executor_manifest.get("target_routes", []),
+            (trial.executor for trial in trials),
+        )
+    write_json(manifest_path, manifest)
+    return run_dir
+
+
+def _planned_calls(
+    domain: AuthorizationMemoryDomain,
+    jobs: Sequence[ExecutorJob],
+    *,
+    study_id: str,
+    executor_task: str,
+    executor_targets: Sequence[str],
+    executor_runs: int,
+    seed: int,
+    presentation: Any,
+    config: Any,
+    pressure_specs: Sequence[Any],
+) -> dict[str, PlannedExecutorCall]:
+    pressure_by_id = {item.pressure_id: item for item in pressure_specs}
+    routed: list[tuple[ExecutorJob, str, int, int]] = []
+    for job in jobs:
+        if job.executor_target_id is None:
+            for target_id in executor_targets:
+                for run_id in range(executor_runs):
+                    routed.append((job, target_id, run_id, seed + run_id))
+        else:
+            assert job.executor_run_id is not None
+            assert job.executor_seed is not None
+            routed.append(
+                (
+                    job,
+                    job.executor_target_id,
+                    job.executor_run_id,
+                    job.executor_seed,
+                )
+            )
+    planned: dict[str, PlannedExecutorCall] = {}
+    for job, target_id, run_id, executor_seed in routed:
+        identity = planned_study_job_identity(
+            domain,
+            job,
+            study_id=study_id,
+            executor_task=executor_task,
+            target_id=target_id,
+            executor_run_id=run_id,
+            seed=executor_seed,
+            presentation=presentation,
+            config=config,
+        )
+        pressure = (
+            pressure_by_id[job.pressure_id]
+            if job.pressure_id is not None
+            else None
+        )
+        item = PlannedExecutorCall(
+            job=job,
+            target_id=target_id,
+            executor_run_id=run_id,
+            executor_seed=executor_seed,
+            trial_id=identity["trial_id"],
+            call_id=identity["call_id"],
+            executor=identity["executor"],
+            messages=tuple(
+                _study_job_messages(
+                    domain,
+                    job,
+                    presentation=presentation,
+                    pressure=pressure,
+                )
+            ),
+        )
+        if item.call_id in planned:
+            raise ValueError(f"duplicate planned call ID: {item.call_id}")
+        planned[item.call_id] = item
+    return planned
+
+
+def _validate_saved_call(
+    row: Mapping[str, Any],
+    expected: PlannedExecutorCall,
+    *,
+    tools: Sequence[Mapping[str, Any]],
+) -> None:
+    for key, value in (
+        ("task", "executor"),
+        ("target_id", expected.target_id),
+        ("provider", expected.executor.provider),
+        ("requested_model", expected.executor.requested_model),
+        ("resolved_model", expected.executor.resolved_model),
+    ):
+        _require_equal(row.get(key), value, f"saved call {key}")
+    request = row.get("request")
+    if not isinstance(request, Mapping):
+        raise ValueError(f"saved call {expected.call_id} has no request object")
+    _require_equal(
+        request.get("messages"), list(expected.messages), "saved request messages"
+    )
+    _require_equal(request.get("tools"), list(tools), "saved request tools")
+    params = request.get("params")
+    if not isinstance(params, Mapping):
+        raise ValueError(f"saved call {expected.call_id} has no parameters")
+    expected_params = expected.executor.effective_parameters
+    for key in ("max_tokens", "temperature", "seed", "tool_choice"):
+        _require_equal(params.get(key), expected_params.get(key), f"saved {key}")
+    _require_equal(params.get("tools"), list(tools), "saved parameter tools")
+    _require_equal(
+        request.get("required_capabilities"),
+        ["native_tools", "seed"],
+        "saved required capabilities",
+    )
+    if row.get("error") is None and not isinstance(row.get("response"), Mapping):
+        raise ValueError(f"saved call {expected.call_id} has no response")
+
+
+def _reconstruct_trials_and_contexts(
+    domain: AuthorizationMemoryDomain,
+    plan: StudyPlan,
+    planned: Mapping[str, PlannedExecutorCall],
+    calls: Sequence[Mapping[str, Any]],
+    *,
+    presentation: Any,
+) -> tuple[list[Any], list[Any]]:
+    pressure_by_id = {item.pressure_id: item for item in plan.pressure_specs}
+    presentation_hash = content_hash(presentation.to_dict())
+    trials = []
+    contexts = []
+    by_id = {str(row["call_id"]): row for row in calls}
+    for call_id, item in planned.items():
+        row = by_id[call_id]
+        job = item.job
+        pressure = (
+            pressure_by_id[job.pressure_id]
+            if job.pressure_id is not None
+            else None
+        )
+        context = _study_job_model_context(
+            domain,
+            job,
+            messages=item.messages,
+            tools=model_visible_tools(domain, presentation),
+            executor=item.executor,
+            executor_run_id=item.executor_run_id,
+            call_id=call_id,
+            trial_id=item.trial_id,
+            study_id=plan.study_id,
+            pressure=pressure,
+            presentation=presentation,
+            presentation_hash=presentation_hash,
+        )
+        response_model = row.get("response_model")
+        context = replace(
+            context,
+            model=with_response_model(context.model, response_model),
+        )
+        contexts.append(context)
+        response = _saved_response(row)
+        trials.append(
+            _score_executor_response(
+                domain,
+                job.case,
+                job.probe,
+                job.evidence,
+                response,
+                item.executor,
+                executor_run_id=item.executor_run_id,
+                seed=item.executor_seed,
+                trial_id=item.trial_id,
+                call_id=call_id,
+                model_context_id=context.context_id,
+                presentation=presentation,
+                presentation_hash=presentation_hash,
+                oracle_block_index=job.oracle_block_index,
+                study_id=plan.study_id,
+                study_metadata={
+                    "job_id": job.job_id,
+                    "pressure_id": job.pressure_id,
+                    **dict(job.metadata),
+                },
+                challenge_pressure_id=(
+                    pressure.challenge_pressure_id if pressure is not None else None
+                ),
+                challenge_metadata=_job_challenge_metadata(
+                    domain, job, pressure=pressure
+                ),
+            )
+        )
+    return trials, contexts
+
+
+def _saved_response(row: Mapping[str, Any]) -> Any:
+    error = row.get("error")
+    if error is not None:
+        return RuntimeError(str(error))
+    saved = row.get("response")
+    if not isinstance(saved, Mapping):
+        raise ValueError(f"call {row.get('call_id')} has no saved response")
+    return {
+        "model": row.get("response_model"),
+        "choices": [
+            {
+                "message": {
+                    "content": saved.get("content"),
+                    "tool_calls": saved.get("tool_calls") or [],
+                },
+                "finish_reason": saved.get("finish_reason"),
+            }
+        ],
+    }
+
+
+def _persist_executor_only_artifacts(
+    run_dir: Path,
+    plan: StudyPlan,
+    *,
+    trials: Sequence[Any],
+    contexts: Sequence[Any],
+) -> tuple[dict[str, dict[str, Any]], dict[str, int]]:
+    memories = [
+        item for item in plan.controlled_memories if isinstance(item, MemoryArtifact)
+    ]
+    evidence = [
+        *plan.source_evidence,
+        *(
+            item
+            for item in plan.controlled_memories
+            if isinstance(item, FrozenEvidence)
+        ),
+    ]
+    rows: dict[str, tuple[Path, Sequence[Any]]] = {
+        "memories": (run_dir / "memories.jsonl", memories),
+        "evidence": (run_dir / "evidence.jsonl", evidence),
+        "trials": (run_dir / "trials.jsonl", trials),
+        "model_contexts": (run_dir / "model_contexts.jsonl", contexts),
+        **{
+            name: (run_dir / f"{name}.jsonl", values)
+            for name, values in plan.artifact_rows.items()
+        },
+    }
+    for name, filename in plan.artifact_paths.items():
+        if name not in rows:
+            raise ValueError(f"artifact path {name!r} has no corresponding rows")
+        _, values = rows[name]
+        rows[name] = (run_dir / filename, values)
+    files: dict[str, dict[str, Any]] = {}
+    counts: dict[str, int] = {}
+    for name, (path, values) in rows.items():
+        if not values and name not in plan.persist_empty_artifacts:
+            continue
+        count = write_jsonl(path, values)
+        counts[name] = count
+        files[name] = {
+            "path": path.name,
+            "sha256": file_hash(path),
+            "rows": count,
+        }
+    for alias, target in plan.file_aliases.items():
+        if target not in files:
+            raise ValueError(f"file alias {alias!r} refers to missing artifact {target!r}")
+        files[alias] = dict(files[target])
+    return files, counts
+
+
+def _read_json_object(path: Path, label: str) -> dict[str, Any]:
+    value = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise ValueError(f"{label} must be an object")
+    return value
+
+
+def _read_jsonl_objects(path: Path, label: str) -> list[dict[str, Any]]:
+    rows = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        value = json.loads(line)
+        if not isinstance(value, dict):
+            raise ValueError(f"{label} rows must be objects")
+        rows.append(value)
+    return rows
+
+
+def _file_drift(value: Any, root: Path | None) -> tuple[str, ...]:
+    if not isinstance(value, Mapping):
+        return ()
+    changed = []
+    for raw_path, expected_hash in value.items():
+        path = Path(str(raw_path))
+        if root is not None and not path.is_absolute():
+            path = root / path
+        if not path.is_file() or file_hash(path) != expected_hash:
+            changed.append(str(raw_path))
+    return tuple(sorted(changed))
+
+
+def _targets(value: Any) -> tuple[str, ...]:
+    if value is None:
+        return ()
+    if isinstance(value, str):
+        return tuple(item.strip() for item in value.split(",") if item.strip())
+    return tuple(str(item) for item in value)
+
+
+def _require_equal(actual: Any, expected: Any, label: str) -> None:
+    if actual != expected:
+        raise ValueError(f"resume {label} mismatch")

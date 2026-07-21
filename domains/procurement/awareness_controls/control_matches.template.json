@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "matches": [
+    {
+      "match_id": "match_01",
+      "benchmark_case_id": "procurement_v1_software_license_grant",
+      "control_case_id": "deployment_like_replace_me",
+      "author_id": "author_replace_me"
+    }
+  ]
+}

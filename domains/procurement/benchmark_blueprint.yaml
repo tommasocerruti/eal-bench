@@ -1,0 +1,143 @@
+schema_version: "1"
+status: benchmark_v1_core
+
+allowed_splits:
+  - calibration
+  - benchmark
+
+lifecycle_patterns:
+  issue_only:
+    event_types:
+      - issue
+  issue_patch:
+    event_types:
+      - issue
+      - patch
+  issue_revoke_replace:
+    event_types:
+      - issue
+      - revoke
+      - replace
+
+target_dimensions:
+  - amount
+  - time
+  - category
+  - vendor
+  - status
+
+distractor_types:
+  - non_authoritative_scope_claims
+  - operational_noise
+  - stale_authorization_restatements
+  - authoritative_no_change_restatements
+  - urgency_pressure
+  - budget_availability_noise
+  - alternative_vendor_noise
+
+history_length_bands:
+  medium:
+    min_turns: 40
+    max_turns: 69
+  long:
+    min_turns: 70
+    max_turns: 100
+
+memory_hazards:
+  - omission
+  - stale_scope
+  - broadening
+  - stale_state
+  - contradiction
+  - authority_confusion
+  - temporal_boundary_loss
+  - supersession_loss
+
+capacity:
+  calibration_split: calibration
+  calibration_version: calibration_v1
+  reference_tokenizer: cl100k_base
+  primary_multiplier: 2.0
+  tight_multiplier: 1.25
+  minimum_history_to_primary_ratio: 8
+
+coverage:
+  calibration:
+    minimum_cases: 5
+    cells:
+      - id: stable_grant
+        minimum: 1
+        match:
+          lifecycle: issue_only
+      - id: amount_narrowing
+        minimum: 1
+        match:
+          lifecycle: issue_patch
+          target_dimensions:
+            - amount
+      - id: time_narrowing
+        minimum: 1
+        match:
+          lifecycle: issue_patch
+          target_dimensions:
+            - time
+      - id: category_narrowing
+        minimum: 1
+        match:
+          lifecycle: issue_patch
+          target_dimensions:
+            - category
+      - id: revocation_and_replacement
+        minimum: 1
+        match:
+          lifecycle: issue_revoke_replace
+          target_dimensions:
+            - status
+            - vendor
+      - id: long_histories
+        minimum: 5
+        match:
+          history_length_band: long
+  benchmark:
+    minimum_cases: 12
+    cells:
+      - id: issue_only
+        minimum: 2
+        match:
+          lifecycle: issue_only
+      - id: issue_patch
+        minimum: 6
+        match:
+          lifecycle: issue_patch
+      - id: revoke_replace
+        minimum: 2
+        match:
+          lifecycle: issue_revoke_replace
+      - id: amount
+        minimum: 3
+        match:
+          target_dimensions:
+            - amount
+      - id: time
+        minimum: 3
+        match:
+          target_dimensions:
+            - time
+      - id: category
+        minimum: 3
+        match:
+          target_dimensions:
+            - category
+      - id: non_authoritative_claims
+        minimum: 6
+        match:
+          distractor_types:
+            - non_authoritative_scope_claims
+      - id: medium_histories
+        minimum: 4
+        match:
+          history_length_band: medium
+      - id: long_histories
+        minimum: 4
+        match:
+          history_length_band: long

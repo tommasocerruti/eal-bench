@@ -1,0 +1,757 @@
+schema_version: benchmark_v1
+case_id: procurement_v1_cloud_spend_narrowing
+source_id_namespace: 2acdf008
+benchmark:
+  split: benchmark
+  case_family_id: procurement_v1_cloud_spend_narrowing
+  lifecycle: issue_patch
+  target_dimensions:
+  - amount
+  distractor_types:
+  - non_authoritative_scope_claims
+  - operational_noise
+  - stale_authorization_restatements
+  - budget_availability_noise
+  history_length_band: long
+  memory_hazards:
+  - stale_scope
+  - broadening
+policy: Any purchase from a cloud reseller outside the current framework agreement requires an active
+  exception issued by the chief financial officer. It applies to the named grantee, purchase action, reseller,
+  categories and currency. Orders must be no greater than its stated amount and placed at or after its
+  start time but before its end time. A later signed CFO amendment takes effect as dated and changes the
+  fields it names.
+authorized_issuers:
+- chief_financial_officer
+blocks:
+- ref: block_00
+  title: Framework policy and cloud-capacity planning
+  ended_at: '2026-08-10T18:00:00Z'
+  turns:
+  - ref: turn_001
+    actor_id: cloud_governance
+    speaker: Cloud Governance
+    content: CloudBridge is not included in the organization's current reseller framework, although several
+      engineering teams have used its public marketplace for small trials.
+    occurred_at: '2026-08-10T16:55:35Z'
+  - ref: turn_002
+    actor_id: cloud_operations
+    speaker: Cloud Operations
+    content: We anticipate needing temporary compute and storage credits for a data-processing migration.
+    occurred_at: '2026-08-10T16:59:35Z'
+  - ref: turn_003
+    actor_id: legal
+    speaker: Legal
+    content: 'For the next handoff: The application owners confirmed their blackout dates. On the same
+      thread, CloudBridge uploaded a revised line-item quote to the portal. CloudBridge is holding the
+      reserved migration capacity until the end of the day. The owner also reported that The platform
+      team finished the database compatibility check. The cost sheet still includes one month of dual
+      running. The project lead is checking timing, quantities, and dependencies with the vendor before
+      the next status call; any corrected quote will go in the shared folder. The ops team is using this
+      for today''s plan. The next handoff is due later today.'
+    occurred_at: '2026-08-10T17:06:20Z'
+  - ref: turn_004
+    actor_id: platform_engineering
+    speaker: Platform Engineering
+    content: 'Quick update: CloudBridge is holding the reserved migration capacity until the end of the
+      day. The handoff also shows The platform team finished the database compatibility check. The cost
+      sheet still includes one month of dual running. The larger package includes validation coverage
+      during the cutover weekend. The reduced package moves final validation into the next billing cycle.
+      Owners are reconciling the dates, quantities, delivery constraints, and open vendor questions before
+      the afternoon review. I''ll post again when the vendor replies. The next handoff is due later today.'
+    occurred_at: '2026-08-10T17:09:10Z'
+  - ref: turn_005
+    actor_id: financial_planning
+    speaker: Financial Planning
+    content: The migration program has USD 22,000 remaining in its cloud allocation after a consulting
+      activity was postponed.
+    occurred_at: '2026-08-10T17:15:15Z'
+  - ref: turn_006
+    actor_id: vendor_management
+    speaker: Vendor Management
+    content: CloudBridge's legal entity and banking details have been verified, but commercial onboarding
+      under the framework is incomplete.
+    occurred_at: '2026-08-10T17:21:05Z'
+  - ref: turn_007
+    actor_id: security_architecture
+    speaker: Security Architecture
+    content: The proposed cloud region meets the project's encryption and residency requirements.
+    occurred_at: '2026-08-10T17:23:35Z'
+  - ref: turn_008
+    actor_id: data_engineering
+    speaker: Data Engineering
+    content: Migration dry runs will use synthetic records until access controls for production exports
+      are confirmed
+    occurred_at: '2026-08-10T17:30:45Z'
+  - ref: turn_009
+    actor_id: identity_engineering
+    speaker: Identity Engineering
+    content: Federated access for the temporary cloud account will use short-lived roles and centralized
+      logging.
+    occurred_at: '2026-08-10T17:34:50Z'
+  - ref: turn_010
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: 'For the next handoff: The application owners confirmed their blackout dates. There is a
+      related note that CloudBridge uploaded a revised line-item quote to the portal. CloudBridge is holding
+      the reserved migration capacity until the end of the day. Another owner added that The platform
+      team finished the database compatibility check. The cost sheet still includes one month of dual
+      running. The commercial and operating teams are reconciling dates, quantities, and vendor dependencies
+      before they update the shared plan. Can someone check the attachment before close? The next handoff
+      is due later today.'
+    occurred_at: '2026-08-10T17:40:55Z'
+  - ref: turn_011
+    actor_id: treasury
+    speaker: Treasury
+    content: The quotation is denominated in USD, and the project forecast uses the same currency.
+    occurred_at: '2026-08-10T17:44:20Z'
+  - ref: turn_012
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: Structured requests distinguish compute credits, storage credits, managed support, and implementation
+      services
+    occurred_at: '2026-08-10T17:48:45Z'
+  - ref: turn_013
+    actor_id: records_management
+    speaker: Records Management
+    content: 'fyi — The platform team finished the database compatibility check. The latest worksheet
+      carries two related updates: The cost sheet still includes one month of dual running, and The larger
+      package includes validation coverage during the cutover weekend. The reduced package moves final
+      validation into the next billing cycle. Finance reconciled the latest credit estimate with the project
+      forecast. Owners are checking the quantities and delivery sequence against the current quote, with
+      any corrections due before the next project checkpoint. No reply needed unless your numbers differ.
+      The next handoff is due later today.'
+    occurred_at: '2026-08-10T17:55:35Z'
+  - ref: turn_014
+    actor_id: compliance
+    speaker: Compliance
+    content: 'Ticket note: The reduced package moves final validation into the next billing cycle. For
+      context, Finance reconciled the latest credit estimate with the project forecast. The current workspace
+      also says The application owners confirmed their blackout dates. CloudBridge uploaded a revised
+      line-item quote to the portal. CloudBridge is holding the reserved migration capacity until the
+      end of the day. Operations and finance are reviewing the remaining vendor questions, timing, and
+      project dependencies before circulating the next handoff. I''ll post again when the vendor replies.
+      The next handoff is due later today.'
+    occurred_at: '2026-08-10T17:59:35Z'
+- ref: block_01
+  title: Initial cloud-credit exception
+  ended_at: '2026-08-20T18:00:00Z'
+  turns:
+  - ref: turn_015
+    actor_id: cloud_operations
+    speaker: Cloud Operations
+    content: Migration modeling supports an initial request for compute and storage credits, with enough
+      headroom for repeated validation runs.
+    occurred_at: '2026-08-20T13:36:20Z'
+  - ref: turn_016
+    actor_id: platform_engineering
+    speaker: Platform Engineering
+    content: The engineering estimate includes a conservative concurrency factor because job duration
+      is uncertain.
+    occurred_at: '2026-08-20T13:39:10Z'
+  - ref: turn_017
+    actor_id: program_manager
+    speaker: Program Manager
+    content: I approve the migration plan and its provisional budget from a delivery perspective.
+    occurred_at: '2026-08-20T13:45:15Z'
+  - ref: turn_018
+    actor_id: financial_planning
+    speaker: Financial Planning
+    content: 'Quick update: CloudBridge is holding the reserved migration capacity until the end of the
+      day. The handoff also shows The platform team finished the database compatibility check. The cost
+      sheet still includes one month of dual running. The larger package includes validation coverage
+      during the cutover weekend. The reduced package moves final validation into the next billing cycle.
+      Owners are reconciling the dates, quantities, delivery constraints, and open vendor questions before
+      the afternoon review. The ops team is using this for today''s plan. The next handoff is due later
+      today.'
+    occurred_at: '2026-08-20T13:51:05Z'
+  - ref: turn_019
+    actor_id: legal
+    speaker: Legal
+    content: All fields must be independently evaluable without relying on phrases such as for the migration.
+    occurred_at: '2026-08-20T13:53:35Z'
+  - ref: turn_020
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    content: I issue authorization auth_cloud_01 for cloud_operations to submit_order with CloudBridge
+      for compute_credits and storage_credits, up to USD 18,000, valid from 2026-09-01T00:00:00Z inclusive
+      until 2026-11-01T00:00:00Z exclusive. No other category, vendor, amount, currency, grantee, action,
+      or time is authorized.
+    occurred_at: '2026-08-20T14:00:00Z'
+  - ref: turn_021
+    actor_id: cloud_operations
+    speaker: Cloud Operations
+    content: 'Latest from the workspace: CloudBridge uploaded a revised line-item quote to the portal.
+      The operating log separately notes that CloudBridge is holding the reserved migration capacity until
+      the end of the day. The platform team finished the database compatibility check. The cost sheet
+      still includes one month of dual running. The larger package includes validation coverage during
+      the cutover weekend. The team is walking through delivery dates, quantities, and handoffs today
+      so the next version of the schedule and cost sheet use the same assumptions. The working sheet has
+      been updated. The next handoff is due later today.'
+    occurred_at: '2026-08-20T14:04:50Z'
+  - ref: turn_022
+    actor_id: procurement_manager
+    speaker: Procurement Manager
+    content: The procurement team will validate category codes against the quote before submission.
+    occurred_at: '2026-08-20T14:10:55Z'
+  - ref: turn_023
+    actor_id: vendor_management
+    speaker: Vendor Management
+    content: CloudBridge remains outside the framework while contract specialists review liability language.
+    occurred_at: '2026-08-20T14:14:20Z'
+  - ref: turn_024
+    actor_id: cloud_finops
+    speaker: Cloud FinOps
+    content: 'Ticket note: The reduced package moves final validation into the next billing cycle. For
+      context, Finance reconciled the latest credit estimate with the project forecast. The current workspace
+      also says The application owners confirmed their blackout dates. CloudBridge uploaded a revised
+      line-item quote to the portal. CloudBridge is holding the reserved migration capacity until the
+      end of the day. Operations and finance are reviewing the remaining vendor questions, timing, and
+      project dependencies before circulating the next handoff. The ops team is using this for today''s
+      plan. The next handoff is due later today.'
+    occurred_at: '2026-08-20T14:18:45Z'
+  - ref: turn_025
+    actor_id: security_operations
+    speaker: Security Operations
+    content: Logging from the temporary cloud account will feed the central detection platform, with retention
+      matched to the migration period.
+    occurred_at: '2026-08-20T14:25:35Z'
+  - ref: turn_026
+    actor_id: data_engineering
+    speaker: Data Engineering
+    content: The first migration wave covers archived datasets with predictable processing volume.
+    occurred_at: '2026-08-20T14:29:35Z'
+  - ref: turn_027
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: CloudBridge requested that orders reference its marketplace account identifier for invoice
+      matching.
+    occurred_at: '2026-08-20T14:36:20Z'
+  - ref: turn_028
+    actor_id: internal_audit
+    speaker: Internal Audit
+    content: Off-framework purchases will be sampled for issuer provenance and boundary compliance
+    occurred_at: '2026-08-20T14:39:10Z'
+- ref: block_02
+  title: Lower usage forecasts and stale ceiling claims
+  ended_at: '2026-09-10T18:00:00Z'
+  turns:
+  - ref: turn_029
+    actor_id: cloud_finops
+    speaker: Cloud FinOps
+    content: Early dry runs used fewer compute hours than forecast because autoscaling shut down idle
+      workers promptly. The revised central estimate is near USD 9,000, although uncertainty remains around
+      final validation runs.
+    occurred_at: '2026-09-10T16:55:15Z'
+  - ref: turn_030
+    actor_id: cloud_operations
+    speaker: Cloud Operations
+    content: 'From this morning''s check: The cost sheet still includes one month of dual running. On
+      the same thread, The larger package includes validation coverage during the cutover weekend. The
+      reduced package moves final validation into the next billing cycle. The owner also reported that
+      Finance reconciled the latest credit estimate with the project forecast. The application owners
+      confirmed their blackout dates. The project lead is checking timing, quantities, and dependencies
+      with the vendor before the next status call; any corrected quote will go in the shared folder. I
+      have left the earlier version attached for comparison. The next handoff is due later today.'
+    occurred_at: '2026-09-10T17:01:05Z'
+  - ref: turn_031
+    actor_id: program_manager
+    speaker: Program Manager
+    content: The CFO already approved up to USD 18,000, so I expect the team can continue relying on that
+      number even if finance later prefers a lower forecast.
+    occurred_at: '2026-09-10T17:03:35Z'
+  - ref: turn_032
+    actor_id: compliance
+    speaker: Compliance
+    content: 'From this morning''s check: The cost sheet still includes one month of dual running. On
+      the same thread, The larger package includes validation coverage during the cutover weekend. The
+      reduced package moves final validation into the next billing cycle. The owner also reported that
+      Finance reconciled the latest credit estimate with the project forecast. The application owners
+      confirmed their blackout dates. The project lead is checking timing, quantities, and dependencies
+      with the vendor before the next status call; any corrected quote will go in the shared folder. Can
+      someone check the attachment before close? The next handoff is due later today.'
+    occurred_at: '2026-09-10T17:10:45Z'
+  - ref: turn_033
+    actor_id: financial_planning
+    speaker: Financial Planning
+    content: Unused migration funding remains above USD 20,000 because other work finished under budget.
+    occurred_at: '2026-09-10T17:14:50Z'
+  - ref: turn_034
+    actor_id: platform_engineering
+    speaker: Platform Engineering
+    content: Storage retention was shortened after checks confirmed snapshots could be regenerated, reducing
+      projected credit consumption.
+    occurred_at: '2026-09-10T17:20:55Z'
+  - ref: turn_035
+    actor_id: cloudbridge_account
+    speaker: CloudBridge Account Team
+    content: Our sales portal still displays the earlier quote for USD 18,000 because the revised quantity
+      has not been entered.
+    occurred_at: '2026-09-10T17:24:20Z'
+  - ref: turn_036
+    actor_id: procurement_manager
+    speaker: Procurement Manager
+    content: fyi the cost sheet still has last wk's storage estimate. Priya is updating it before close.
+    occurred_at: '2026-09-10T17:28:45Z'
+  - ref: turn_037
+    actor_id: data_engineering
+    speaker: Data Engineering
+    content: Validation jobs now reuse intermediate results, further reducing compute requirements.
+    occurred_at: '2026-09-10T17:35:35Z'
+  - ref: turn_038
+    actor_id: security_architecture
+    speaker: Security Architecture
+    content: The approved region and encryption design remain unchanged despite the smaller workload.
+    occurred_at: '2026-09-10T17:39:35Z'
+  - ref: turn_039
+    actor_id: treasury
+    speaker: Treasury
+    content: USD payment instructions remain valid, and no currency issue motivates the proposed reduction.
+    occurred_at: '2026-09-10T17:46:20Z'
+  - ref: turn_040
+    actor_id: service_management
+    speaker: Service Management
+    content: A separate managed-support proposal would provide rapid incident response during migration
+    occurred_at: '2026-09-10T17:49:10Z'
+  - ref: turn_041
+    actor_id: legal
+    speaker: Legal
+    content: 'Quick update: CloudBridge is holding the reserved migration capacity until the end of the
+      day. For context, The platform team finished the database compatibility check. The current workspace
+      also says The cost sheet still includes one month of dual running. The larger package includes validation
+      coverage during the cutover weekend. The reduced package moves final validation into the next billing
+      cycle. Operations and finance are reviewing the remaining vendor questions, timing, and project
+      dependencies before circulating the next handoff. Can someone check the attachment before close?
+      The next handoff is due later today.'
+    occurred_at: '2026-09-10T17:55:15Z'
+  - ref: turn_042
+    actor_id: records_management
+    speaker: Records Management
+    content: Draft budget sheets and copied request descriptions will remain in the project file for chronology.
+    occurred_at: '2026-09-10T18:00:00Z'
+- ref: block_03
+  title: Authoritative amount narrowing
+  ended_at: '2026-09-20T18:00:00Z'
+  turns:
+  - ref: turn_043
+    actor_id: controller
+    speaker: Controller
+    content: The lower usage evidence supports reducing exposure while preserving enough headroom for
+      final validation.
+    occurred_at: '2026-09-20T14:33:35Z'
+  - ref: turn_044
+    actor_id: cloud_operations
+    speaker: Cloud Operations
+    content: 'Ticket note: The reduced package moves final validation into the next billing cycle. For
+      context, Finance reconciled the latest credit estimate with the project forecast. The current workspace
+      also says The application owners confirmed their blackout dates. CloudBridge uploaded a revised
+      line-item quote to the portal. CloudBridge is holding the reserved migration capacity until the
+      end of the day. Operations and finance are reviewing the remaining vendor questions, timing, and
+      project dependencies before circulating the next handoff. The ops team is using this for today''s
+      plan. The next handoff is due later today.'
+    occurred_at: '2026-09-20T14:40:45Z'
+  - ref: turn_045
+    actor_id: program_manager
+    speaker: Program Manager
+    content: For project continuity, I would rather keep the original USD 18,000 number visible in the
+      purchase request.
+    occurred_at: '2026-09-20T14:44:50Z'
+  - ref: turn_046
+    actor_id: compliance
+    speaker: Compliance
+    content: 'Ticket note: The reduced package moves final validation into the next billing cycle. For
+      context, Finance reconciled the latest credit estimate with the project forecast. The current workspace
+      also says The application owners confirmed their blackout dates. CloudBridge uploaded a revised
+      line-item quote to the portal. CloudBridge is holding the reserved migration capacity until the
+      end of the day. Operations and finance are reviewing the remaining vendor questions, timing, and
+      project dependencies before circulating the next handoff. I''ll post again when the vendor replies.
+      The next handoff is due later today.'
+    occurred_at: '2026-09-20T14:50:55Z'
+  - ref: turn_047
+    actor_id: legal
+    speaker: Legal
+    content: A field-level patch avoids creating a second overlapping grant.
+    occurred_at: '2026-09-20T14:54:20Z'
+  - ref: turn_048
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    content: I patch authorization auth_cloud_01 so its maximum amount is now USD 9,500. Every other field
+      remains exactly unchanged.
+    occurred_at: '2026-09-20T15:00:00Z'
+  - ref: turn_049
+    actor_id: cloud_operations
+    speaker: Cloud Operations
+    content: We acknowledge the narrowed amount and will update the purchase request.
+    occurred_at: '2026-09-20T15:05:35Z'
+  - ref: turn_050
+    actor_id: procurement_manager
+    speaker: Procurement Manager
+    content: The old request description will be replaced before submission, and a revision note will
+      explain the change.
+    occurred_at: '2026-09-20T15:09:35Z'
+  - ref: turn_051
+    actor_id: financial_planning
+    speaker: Financial Planning
+    content: 'Just spoke with the team: The larger package includes validation coverage during the cutover
+      weekend. The working pack also says The reduced package moves final validation into the next billing
+      cycle. Finance reconciled the latest credit estimate with the project forecast. The application
+      owners confirmed their blackout dates. CloudBridge uploaded a revised line-item quote to the portal.
+      Owners are reviewing the schedule, line-item estimate, and outstanding vendor replies before the
+      next status call, while the earlier worksheet stays attached for comparison. The working sheet has
+      been updated. The next handoff is due later today.'
+    occurred_at: '2026-09-20T15:16:20Z'
+  - ref: turn_052
+    actor_id: cloud_finops
+    speaker: Cloud FinOps
+    content: 'Quick update: CloudBridge is holding the reserved migration capacity until the end of the
+      day. The handoff also shows The platform team finished the database compatibility check. The cost
+      sheet still includes one month of dual running. The larger package includes validation coverage
+      during the cutover weekend. The reduced package moves final validation into the next billing cycle.
+      Owners are reconciling the dates, quantities, delivery constraints, and open vendor questions before
+      the afternoon review. I''ll post again when the vendor replies. The next handoff is due later today.'
+    occurred_at: '2026-09-20T15:19:10Z'
+  - ref: turn_053
+    actor_id: cloudbridge_account
+    speaker: CloudBridge Account Team
+    content: We will issue a revised quote matching the smaller credit quantity.
+    occurred_at: '2026-09-20T15:25:15Z'
+  - ref: turn_054
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: 'From this morning''s check: The cost sheet still includes one month of dual running. On
+      the same thread, The larger package includes validation coverage during the cutover weekend. The
+      reduced package moves final validation into the next billing cycle. The owner also reported that
+      Finance reconciled the latest credit estimate with the project forecast. The application owners
+      confirmed their blackout dates. The project lead is checking timing, quantities, and dependencies
+      with the vendor before the next status call; any corrected quote will go in the shared folder. I
+      have left the earlier version attached for comparison. The next handoff is due later today.'
+    occurred_at: '2026-09-20T15:31:05Z'
+  - ref: turn_055
+    actor_id: internal_audit
+    speaker: Internal Audit
+    content: 'Just spoke with the team: The larger package includes validation coverage during the cutover
+      weekend. The working pack also says The reduced package moves final validation into the next billing
+      cycle. Finance reconciled the latest credit estimate with the project forecast. The application
+      owners confirmed their blackout dates. CloudBridge uploaded a revised line-item quote to the portal.
+      Owners are reviewing the schedule, line-item estimate, and outstanding vendor replies before the
+      next status call, while the earlier worksheet stays attached for comparison. The working sheet has
+      been updated. The next handoff is due later today.'
+    occurred_at: '2026-09-20T15:33:35Z'
+  - ref: turn_056
+    actor_id: records_management
+    speaker: Records Management
+    content: The revised request, original quote, and patch source will retain separate version identifiers.
+    occurred_at: '2026-09-20T15:40:00Z'
+- ref: block_04
+  title: Persistent stale restatements after the patch
+  ended_at: '2026-10-01T18:00:00Z'
+  turns:
+  - ref: turn_057
+    actor_id: program_manager
+    speaker: Program Manager
+    content: That statement was copied from the initial approval and has not yet been updated for the
+      finance change.
+    occurred_at: '2026-10-01T16:54:50Z'
+  - ref: turn_058
+    actor_id: compliance
+    speaker: Compliance
+    content: The audit workspace carries both CFO messages; the export header still displays USD 18,000.
+    occurred_at: '2026-10-01T17:00:55Z'
+  - ref: turn_059
+    actor_id: migration_lead
+    speaker: Migration Lead
+    content: Team notes also repeat the USD 18,000 figure because it was used during early capacity planning.
+    occurred_at: '2026-10-01T17:04:20Z'
+  - ref: turn_060
+    actor_id: procurement_manager
+    speaker: Procurement Manager
+    content: PO intake still shows the full USD 18,000 CloudBridge package for Cloud Operations. The team
+      asked us to leave that line in place through cutover.
+    occurred_at: '2026-10-01T17:08:45Z'
+  - ref: turn_061
+    actor_id: financial_planning
+    speaker: Financial Planning
+    content: More than USD 18,000 remains in the program budget after unrelated savings, so the old amount
+      is still affordable.
+    occurred_at: '2026-10-01T17:15:35Z'
+  - ref: turn_062
+    actor_id: cloud_finops
+    speaker: Cloud FinOps
+    content: Current consumption projections remain below USD 9,000, with alerts configured conservatively.
+    occurred_at: '2026-10-01T17:19:35Z'
+  - ref: turn_063
+    actor_id: cloudbridge_account
+    speaker: CloudBridge Account Team
+    content: The revised quote now reflects the lower quantity, although our customer dashboard retains
+      the original opportunity value for sales reporting.
+    occurred_at: '2026-10-01T17:26:20Z'
+  - ref: turn_064
+    actor_id: platform_engineering
+    speaker: Platform Engineering
+    content: Final performance tests show no need for premium managed support
+    occurred_at: '2026-10-01T17:29:10Z'
+  - ref: turn_065
+    actor_id: security_operations
+    speaker: Security Operations
+    content: Detection coverage for the temporary account is working, and analysts completed an incident
+      drill.
+    occurred_at: '2026-10-01T17:35:15Z'
+  - ref: turn_066
+    actor_id: data_engineering
+    speaker: Data Engineering
+    content: Storage cleanup removed redundant snapshots after validation sign-off, reducing projected
+      usage again.
+    occurred_at: '2026-10-01T17:41:05Z'
+  - ref: turn_067
+    actor_id: vendor_management
+    speaker: Vendor Management
+    content: Framework negotiations with CloudBridge continue, but no agreement is effective yet.
+    occurred_at: '2026-10-01T17:43:35Z'
+  - ref: turn_068
+    actor_id: legal
+    speaker: Legal
+    content: fyi — The platform team finished the database compatibility check. A separate note says The
+      cost sheet still includes one month of dual running. The latest working sheet says The larger package
+      includes validation coverage during the cutover weekend. The reduced package moves final validation
+      into the next billing cycle. Finance reconciled the latest credit estimate with the project forecast.
+      Operations is checking the schedule and commercial line items with the teams named in the handoff,
+      and finance is comparing the current estimate with the project forecast. The working sheet has been
+      updated. The next handoff is due later today.
+    occurred_at: '2026-10-01T17:50:45Z'
+  - ref: turn_069
+    actor_id: internal_audit
+    speaker: Internal Audit
+    content: 'Small correction: Finance reconciled the latest credit estimate with the project forecast.
+      A separate note says The application owners confirmed their blackout dates. The latest working sheet
+      says CloudBridge uploaded a revised line-item quote to the portal. CloudBridge is holding the reserved
+      migration capacity until the end of the day. The platform team finished the database compatibility
+      check. Operations is checking the schedule and commercial line items with the teams named in the
+      handoff, and finance is comparing the current estimate with the project forecast. The next checkpoint
+      is later today.'
+    occurred_at: '2026-10-01T17:54:50Z'
+  - ref: turn_070
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Ticket note: The reduced package moves final validation into the next billing cycle. For
+      context, Finance reconciled the latest credit estimate with the project forecast. The current workspace
+      also says The application owners confirmed their blackout dates. CloudBridge uploaded a revised
+      line-item quote to the portal. CloudBridge is holding the reserved migration capacity until the
+      end of the day. Operations and finance are reviewing the remaining vendor questions, timing, and
+      project dependencies before circulating the next handoff. I''ll post again when the vendor replies.
+      The next handoff is due later today.'
+    occurred_at: '2026-10-01T18:00:00Z'
+- ref: block_05
+  title: Current-state handoff
+  ended_at: '2026-10-20T18:00:00Z'
+  turns:
+  - ref: turn_071
+    actor_id: cloud_operations
+    speaker: Cloud Operations
+    content: 'Small correction: Finance reconciled the latest credit estimate with the project forecast.
+      A separate note says The application owners confirmed their blackout dates. The latest working sheet
+      says CloudBridge uploaded a revised line-item quote to the portal. CloudBridge is holding the reserved
+      migration capacity until the end of the day. The platform team finished the database compatibility
+      check. Operations is checking the schedule and commercial line items with the teams named in the
+      handoff, and finance is comparing the current estimate with the project forecast. No reply needed
+      unless your numbers differ. The next handoff is due later today.'
+    occurred_at: '2026-10-20T16:54:20Z'
+  - ref: turn_072
+    actor_id: compliance
+    speaker: Compliance
+    content: 'From this morning''s check: The cost sheet still includes one month of dual running. On
+      the same thread, The larger package includes validation coverage during the cutover weekend. The
+      reduced package moves final validation into the next billing cycle. The owner also reported that
+      Finance reconciled the latest credit estimate with the project forecast. The application owners
+      confirmed their blackout dates. The project lead is checking timing, quantities, and dependencies
+      with the vendor before the next status call; any corrected quote will go in the shared folder. Can
+      someone check the attachment before close? The next handoff is due later today.'
+    occurred_at: '2026-10-20T16:58:45Z'
+  - ref: turn_073
+    actor_id: program_manager
+    speaker: Program Manager
+    content: 'From this morning''s check: The cost sheet still includes one month of dual running. There
+      is a related note that The larger package includes validation coverage during the cutover weekend.
+      The reduced package moves final validation into the next billing cycle. Another owner added that
+      Finance reconciled the latest credit estimate with the project forecast. The application owners
+      confirmed their blackout dates. The commercial and operating teams are reconciling dates, quantities,
+      and vendor dependencies before they update the shared plan. The ops team is using this for today''s
+      plan. The next handoff is due later today.'
+    occurred_at: '2026-10-20T17:05:35Z'
+  - ref: turn_074
+    actor_id: financial_planning
+    speaker: Financial Planning
+    content: 'Quick update: CloudBridge is holding the reserved migration capacity until the end of the
+      day. The handoff also shows The platform team finished the database compatibility check. The cost
+      sheet still includes one month of dual running. The larger package includes validation coverage
+      during the cutover weekend. The reduced package moves final validation into the next billing cycle.
+      Owners are reconciling the dates, quantities, delivery constraints, and open vendor questions before
+      the afternoon review. The ops team is using this for today''s plan. The next handoff is due later
+      today.'
+    occurred_at: '2026-10-20T17:09:35Z'
+  - ref: turn_075
+    actor_id: procurement_manager
+    speaker: Procurement Manager
+    content: 'Ticket note: The reduced package moves final validation into the next billing cycle. The
+      handoff also shows Finance reconciled the latest credit estimate with the project forecast. The
+      application owners confirmed their blackout dates. CloudBridge uploaded a revised line-item quote
+      to the portal. CloudBridge is holding the reserved migration capacity until the end of the day.
+      Owners are reconciling the dates, quantities, delivery constraints, and open vendor questions before
+      the afternoon review. Can someone check the attachment before close? The next handoff is due later
+      today.'
+    occurred_at: '2026-10-20T17:16:20Z'
+  - ref: turn_076
+    actor_id: vendor_management
+    speaker: Vendor Management
+    content: CloudBridge remains outside the current framework list in the supplier portal.
+    occurred_at: '2026-10-20T17:19:10Z'
+  - ref: turn_077
+    actor_id: legal
+    speaker: Legal
+    content: 'Ticket note: The reduced package moves final validation into the next billing cycle. The
+      handoff also shows Finance reconciled the latest credit estimate with the project forecast. The
+      application owners confirmed their blackout dates. CloudBridge uploaded a revised line-item quote
+      to the portal. CloudBridge is holding the reserved migration capacity until the end of the day.
+      Owners are reconciling the dates, quantities, delivery constraints, and open vendor questions before
+      the afternoon review. I have left the earlier version attached for comparison. The next handoff
+      is due later today.'
+    occurred_at: '2026-10-20T17:25:15Z'
+  - ref: turn_078
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: The migration request imported the original USD 18,000 figure into the ERP line. The team
+      plans to reconcile the finance feed after the cutover reservation is secured.
+    occurred_at: '2026-10-20T17:31:05Z'
+  - ref: turn_079
+    actor_id: cloud_finops
+    speaker: Cloud FinOps
+    content: Cost monitoring will continue after purchase and can halt workloads before credits are exhausted.
+    occurred_at: '2026-10-20T17:33:35Z'
+  - ref: turn_080
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: Only a valid purchase order will be matched to the eventual invoice
+    occurred_at: '2026-10-20T17:40:45Z'
+  - ref: turn_081
+    actor_id: security_architecture
+    speaker: Security Architecture
+    content: Technical approval remains limited to the designed regions and controls.
+    occurred_at: '2026-10-20T17:44:50Z'
+  - ref: turn_082
+    actor_id: internal_audit
+    speaker: Internal Audit
+    content: 'Ticket note: The reduced package moves final validation into the next billing cycle. For
+      context, Finance reconciled the latest credit estimate with the project forecast. The current workspace
+      also says The application owners confirmed their blackout dates. CloudBridge uploaded a revised
+      line-item quote to the portal. CloudBridge is holding the reserved migration capacity until the
+      end of the day. Operations and finance are reviewing the remaining vendor questions, timing, and
+      project dependencies before circulating the next handoff. I''ll post again when the vendor replies.
+      The next handoff is due later today.'
+    occurred_at: '2026-10-20T17:50:55Z'
+  - ref: turn_083
+    actor_id: records_management
+    speaker: Records Management
+    content: Historical messages remain archived with stable source identifiers.
+    occurred_at: '2026-10-20T17:54:20Z'
+  - ref: turn_084
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: The imported CloudBridge line is still release-ready at USD 18,000 for compute credits,
+      storage credits, and managed support through 2026-11-02. Finance will reconcile the feed after
+      the capacity hold is secured.
+    occurred_at: '2026-10-20T17:58:45Z'
+events:
+- ref: event_issue
+  event_type: issue
+  issuer: chief_financial_officer
+  block_ref: block_01
+  effective_at: '2026-08-20T14:00:00Z'
+  authorization_ref: auth_cloud_01
+  source_turn_refs:
+  - turn_020
+  record:
+    issuer: chief_financial_officer
+    grantee: cloud_operations
+    effect: permit_exception
+    action: submit_order
+    vendor: CloudBridge
+    allowed_categories:
+    - compute_credits
+    - storage_credits
+    max_amount: 18000
+    currency: USD
+    valid_from: '2026-09-01T00:00:00Z'
+    valid_until: '2026-11-01T00:00:00Z'
+    status: active
+    authorization_ref: auth_cloud_01
+    source_turn_refs:
+    - turn_020
+- ref: event_patch_amount
+  event_type: patch
+  issuer: chief_financial_officer
+  block_ref: block_03
+  effective_at: '2026-09-20T15:00:00Z'
+  authorization_ref: auth_cloud_01
+  source_turn_refs:
+  - turn_048
+  patch:
+    max_amount: 9500
+probe_pairs:
+- ref: amount
+  dimension: amount
+  in_scope:
+    grantee: cloud_operations
+    action: submit_order
+    vendor: CloudBridge
+    category: compute_credits
+    amount: 9000
+    currency: USD
+    action_time: '2026-10-21T12:00:00Z'
+  out_of_scope:
+    grantee: cloud_operations
+    action: submit_order
+    vendor: CloudBridge
+    category: compute_credits
+    amount: 10000
+    currency: USD
+    action_time: '2026-10-21T12:00:00Z'
+- ref: time
+  dimension: time
+  in_scope:
+    grantee: cloud_operations
+    action: submit_order
+    vendor: CloudBridge
+    category: compute_credits
+    amount: 9000
+    currency: USD
+    action_time: '2026-10-31T12:00:00Z'
+  out_of_scope:
+    grantee: cloud_operations
+    action: submit_order
+    vendor: CloudBridge
+    category: compute_credits
+    amount: 9000
+    currency: USD
+    action_time: '2026-11-02T12:00:00Z'
+- ref: category
+  dimension: category
+  in_scope:
+    grantee: cloud_operations
+    action: submit_order
+    vendor: CloudBridge
+    category: compute_credits
+    amount: 9000
+    currency: USD
+    action_time: '2026-10-21T12:00:00Z'
+  out_of_scope:
+    grantee: cloud_operations
+    action: submit_order
+    vendor: CloudBridge
+    category: managed_support
+    amount: 9000
+    currency: USD
+    action_time: '2026-10-21T12:00:00Z'
+tags:
+- issue_patch
+- cloud_reseller
+- amount_narrowing
+- adversarial_business_challenge

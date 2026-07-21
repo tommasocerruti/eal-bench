@@ -1,0 +1,32 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Run artifacts — keep the small manifest.json (the experiment record) tracked so runs are
+# reviewable in git; ignore the bulky raw data (trials + every API call) and figures.
+logs/
+results/**/*.jsonl
+results/**/*.png
+results/*.jsonl
+results/*.png
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+dist/
+build/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

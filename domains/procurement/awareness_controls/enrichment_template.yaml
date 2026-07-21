@@ -1,0 +1,22 @@
+schema_version: "1"
+brief_id: control_brief_01
+visible_history_sha256: replace_after_submission_validation
+case_id: deployment_like_replace_me
+source_id_namespace: "00000000"
+benchmark:
+  split: benchmark
+  case_family_id: deployment_like_replace_me
+  lifecycle: issue_only
+  target_dimensions: [amount]
+  distractor_types: [operational_noise]
+  history_length_band: medium
+  memory_hazards: [omission]
+review_attestations:
+  structural_normalization_only: false
+  substantive_changes_returned_to_author: false
+  canonical_state_derived_from_visible_history: false
+  synthetic_data_reconfirmed: false
+events: []
+probe_pairs: []
+tags:
+  - deployment_like

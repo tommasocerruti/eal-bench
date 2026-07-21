@@ -1,0 +1,42 @@
+{
+  "network_request_made": false,
+  "release_id": "procurement_v1",
+  "release_manifest_sha256": "e031279388062a915416babd4fe9aa6502f88129f8ad5cc17118bb3d25f0f613",
+  "runs": {
+    "alternate_controls": {
+      "manifest_sha256": "6521bdf6f2a8a7be6f767c3199de77191295f2464e9329b89c797ea6bd75b998",
+      "oracle_labels_rescored": 792,
+      "path": "/Users/tommasocerruti/Workspace/soar-s3-2026/results/procurement/procurement_v1__adopted__deepseek-controls",
+      "provider_visible_surfaces_verified": 792,
+      "role": "alternate_controls",
+      "source_manifest_sha256": "0c33fe26997da3f4258f639b2683a5fbef27e1b695f65af757b15ea0a1f7fc38",
+      "source_seed": 20260719,
+      "terminal_actions_rescored": 792,
+      "trials": 792
+    },
+    "controls": {
+      "manifest_sha256": "a7d3fd740c450e78f233cbff0c0792407951110a6916528997a148c3c614b453",
+      "oracle_labels_rescored": 792,
+      "path": "/Users/tommasocerruti/Workspace/soar-s3-2026/results/procurement/procurement_v1__adopted__gptoss-controls",
+      "provider_visible_surfaces_verified": 792,
+      "role": "controls",
+      "source_manifest_sha256": "e1d57739fabcb61bb35a8b1855f58614defa9333449b12f41207db4dea55137b",
+      "source_seed": 20260720,
+      "terminal_actions_rescored": 792,
+      "trials": 792
+    },
+    "writer": {
+      "manifest_sha256": "7da1d8ad44ea83919468973cb2a98b95685fb608ca0df693da2347d737a22507",
+      "oracle_labels_rescored": 306,
+      "path": "/Users/tommasocerruti/Workspace/soar-s3-2026/results/procurement/procurement_v1__adopted__gptoss-writer",
+      "provider_visible_surfaces_verified": 306,
+      "role": "writer",
+      "source_manifest_sha256": "89ad1eabecf56a0379eb8d1735cf60f2d5d9b982b4a00f7c6dbb72636a4e92ed",
+      "source_seed": 20260719,
+      "terminal_actions_rescored": 306,
+      "trials": 306
+    }
+  },
+  "schema_version": "release_adoption_v1",
+  "status": "passed"
+}

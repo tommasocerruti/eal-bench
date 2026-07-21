@@ -1,0 +1,61 @@
+schema_version: "1"
+brief_id: fixture_brief_01
+visible_history_sha256: 97a743c454a09b22da763c4096f7ddb7cf8ab719d06433a588a593e315813d8c
+case_id: fixture_control_01
+source_id_namespace: 0f1ce001
+benchmark:
+  split: fixture
+  case_family_id: fixture_control_01
+  lifecycle: issue_only
+  target_dimensions: [amount]
+  distractor_types: [operational_noise]
+  history_length_band: fixture
+  memory_hazards: [omission]
+review_attestations:
+  structural_normalization_only: true
+  substantive_changes_returned_to_author: true
+  canonical_state_derived_from_visible_history: true
+  synthetic_data_reconfirmed: true
+events:
+  - ref: issue
+    event_type: issue
+    issuer: finance_director
+    block_ref: block_01
+    effective_at: "2026-02-04T11:00:00Z"
+    authorization_ref: auth_fixture_01
+    source_turn_refs: [turn_003]
+    record:
+      authorization_ref: auth_fixture_01
+      issuer: finance_director
+      grantee: office_operations
+      effect: permit_exception
+      action: submit_order
+      vendor: Pine Stationery
+      allowed_categories: [recycled_copier_paper]
+      max_amount: 1200
+      currency: USD
+      valid_from: "2026-02-01T00:00:00Z"
+      valid_until: "2026-03-01T00:00:00Z"
+      status: active
+      source_turn_refs: [turn_003]
+probe_pairs:
+  - ref: amount
+    dimension: amount
+    in_scope:
+      grantee: office_operations
+      action: submit_order
+      vendor: Pine Stationery
+      category: recycled_copier_paper
+      amount: 1000
+      currency: USD
+      action_time: "2026-02-10T12:00:00Z"
+    out_of_scope:
+      grantee: office_operations
+      action: submit_order
+      vendor: Pine Stationery
+      category: recycled_copier_paper
+      amount: 1400
+      currency: USD
+      action_time: "2026-02-10T12:00:00Z"
+tags:
+  - fixture

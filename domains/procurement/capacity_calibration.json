@@ -1,0 +1,66 @@
+{
+  "schema_version": "1",
+  "domain_id": "procurement",
+  "calibration_corpus_version": "calibration_v1",
+  "calibration_split": "calibration",
+  "reference_tokenizer": {
+    "name": "cl100k_base",
+    "package": "tiktoken",
+    "package_version": "0.13.0"
+  },
+  "implementation_version": "procurement_capacity_calibration_v1",
+  "source_hashes": {
+    "domains/procurement/data/calibration_v1.jsonl": "fd4dcb51b2ea77f2eb6288016987c3144005f37fa572fb0f09c17c1fd4cc4c6f",
+    "domains/procurement/corpus/calibration_v1/01_calibration_v1_issue_only.yaml": "e687fe5dbfdb5e2e727679cd4f74163c0b85583a8aede4bdaabd4bb58e5a589f",
+    "domains/procurement/corpus/calibration_v1/02_calibration_v1_amount_narrowing.yaml": "1e6e79d679a664a67e9da838f9e00eacc0a2e874800be2aedd24cbb3c7f40758",
+    "domains/procurement/corpus/calibration_v1/03_calibration_v1_time_narrowing.yaml": "df870a7e2860d62489a11b55f9daec835e7e95aee049e32f154e8b168566dcd1",
+    "domains/procurement/corpus/calibration_v1/04_calibration_v1_category_narrowing.yaml": "5cff001a3e02f206d04ac918a66a5b47a1ac580181cb50a14b604cb92a719ea4",
+    "domains/procurement/corpus/calibration_v1/05_calibration_v1_revoke_replace.yaml": "a839bb0e49b63fb9858f0688fa069ae36c94a9641d58d1237cf286b120df4747"
+  },
+  "representation_hashes": {
+    "domains/procurement/cases.py": "9bc4b4a99bbf6d3ebf09ce3b2f4316cef40725d5e6fec680c320f23aba02d333",
+    "domains/procurement/schemas.py": "250e3cf11a871a1162bab4652f6343b4dbaf77b83fb370609c405f22d8ed2402",
+    "domains/procurement/studies/memory.py": "9ab0f486c35f68677ac07c85ebaaa3e2bd4ef4ac08517773b1f2f6d13dcc4ecb",
+    "domains/procurement/studies/pipeline.py": "3d5a00752d1c72a00af55e78178a846aedc95f2b101b99735b3b4467de7b1ff9"
+  },
+  "cases": [
+    {
+      "case_id": "calibration_v1_issue_only",
+      "history_tokens": 7597,
+      "faithful_text_tokens": 126,
+      "faithful_typed_tokens": 122
+    },
+    {
+      "case_id": "calibration_v1_amount_narrowing",
+      "history_tokens": 7600,
+      "faithful_text_tokens": 136,
+      "faithful_typed_tokens": 132
+    },
+    {
+      "case_id": "calibration_v1_time_narrowing",
+      "history_tokens": 7588,
+      "faithful_text_tokens": 136,
+      "faithful_typed_tokens": 132
+    },
+    {
+      "case_id": "calibration_v1_category_narrowing",
+      "history_tokens": 7392,
+      "faithful_text_tokens": 132,
+      "faithful_typed_tokens": 128
+    },
+    {
+      "case_id": "calibration_v1_revoke_replace",
+      "history_tokens": 7814,
+      "faithful_text_tokens": 286,
+      "faithful_typed_tokens": 267
+    }
+  ],
+  "largest_faithful_tokens": 286,
+  "primary_multiplier": 2.0,
+  "tight_multiplier": 1.25,
+  "primary_tokens": 572,
+  "tight_tokens": 358,
+  "minimum_history_to_primary_ratio": 8,
+  "minimum_required_history_tokens": 4576,
+  "payload_sha256": "3eb44e7066b28e772c8f072a327ca8264dfef88ff44579ea4e94d9d8de419540"
+}

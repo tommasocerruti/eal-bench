@@ -1,0 +1,142 @@
+# eal-bench configuration
+#
+# THE TWO KNOBS YOU'LL TOUCH MOST:
+#   * which model  -> set `default_target:` on a task below, or select targets in a run.
+#   * batch size   -> `batch_size` under defaults (how many calls run in parallel per wave).
+#                     Or override per run: `--batch-size 40`.
+#
+# Structure: `providers` = WHERE to reach an API (base_url + the *name* of the env var
+# holding the key; secrets live in .env, never here). `model_targets` = a stable
+# provider/model route. `tasks` = WHAT role you call and its behavioral parameters.
+
+defaults:
+  log_path: logs/calls.jsonl
+  batch_size: 20          # llm.batch() runs this many calls in parallel per wave
+  max_concurrency: 20     # hard cap on calls in flight per provider/target route
+  max_retries: 3          # direct client: max task attempts incl. initial; SDK retries separate
+
+providers:
+  openai:
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+  baseten:
+    base_url: https://inference.baseten.co/v1
+    api_key_env: BASETEN_API_KEY
+  openrouter:
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+  gemini:
+    base_url: https://generativelanguage.googleapis.com/v1beta/openai/
+    api_key_env: GEMINI_API_KEY
+  anthropic:
+    # OpenAI-compatible endpoint (beta): no extended thinking / prompt caching / citations.
+    base_url: https://api.anthropic.com/v1/
+    api_key_env: ANTHROPIC_API_KEY
+
+model_targets:
+  deepseek_baseten:
+    provider: baseten
+    model: deepseek
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+  glm_baseten:
+    provider: baseten
+    model: glm
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+  glm_5_2_baseten:
+    provider: baseten
+    model: zai-org/GLM-5.2
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+  kimi_baseten:
+    provider: baseten
+    model: kimi
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+  gptoss_baseten:
+    provider: baseten
+    model: gptoss
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+  nemotron_baseten:
+    provider: baseten
+    model: nemotron
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+  gptoss_openrouter:
+    provider: openrouter
+    model: openai/gpt-oss-120b
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+  mistral_small_3_2_openrouter:
+    provider: openrouter
+    model: mistralai/mistral-small-3.2-24b-instruct
+    capabilities: [native_tools, forced_tool_choice, seed]
+    request_parameters:
+      extra_body:
+        provider:
+          order: [Mistral]
+          allow_fallbacks: false
+    max_concurrency: 20
+
+tasks:
+  # A task selects its default route by target ID. Calls can override it with
+  # `target=`, including a target on a different provider.
+
+  # The fallback task — good default for smoke tests.
+  default:
+    default_target: glm_baseten
+    params:
+      temperature: 0.7
+
+  # The agent under test in experiments/.
+  agent:
+    default_target: gptoss_baseten
+    params:
+      temperature: 1.0
+      max_tokens: 1024   # gptoss/nemotron reason before answering — keep this generous
+
+  # Authorization-memory experiment roles.
+  writer:
+    default_target: gptoss_baseten
+    params:
+      temperature: 1.0
+      max_tokens: 4096
+
+  executor:
+    default_target: gptoss_baseten
+    params:
+      temperature: 1.0
+      max_tokens: 4096
+
+  # One bounded request for empirically checking a configured target.
+  target_check:
+    default_target: gptoss_baseten
+    max_retries: 1
+    params:
+      temperature: 1.0
+      max_tokens: 1024
+
+  memory_annotator:
+    default_target: gptoss_baseten
+    params:
+      temperature: 0.0
+      max_tokens: 2048
+
+  # Post-hoc validity diagnostic. The run inherits each saved context's target;
+  # this default is used only for configuration validation. One task-level
+  # attempt plus disabled SDK retries keeps one paid request per frozen job.
+  evaluation_awareness:
+    default_target: gptoss_baseten
+    max_retries: 1
+    params:
+      temperature: 0.0
+      max_tokens: 1024
+
+  # Optional LLM-as-judge, for scoring free-text output. Keep it at temp 0.
+  judge:
+    default_target: gptoss_baseten
+    params:
+      temperature: 0.0
+      max_tokens: 512
