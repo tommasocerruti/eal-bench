@@ -79,6 +79,22 @@ model_targets:
           order: [Mistral]
           allow_fallbacks: false
     max_concurrency: 20
+  # Closed OpenRouter writer models for the issue #9 5x2 transfer matrix.
+  # grok_4_3_openrouter passes the live LangMem writer check and qualifies as a writer.
+  grok_4_3_openrouter:
+    provider: openrouter
+    model: x-ai/grok-4.3
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+  # gemini_3_flash_openrouter is a valid executor transport (native forced-tool + seed
+  # confirmed live) but does NOT pass the LangMem writer check: it cannot construct the
+  # nested typed PatchDoc on creation and leaves an empty profile. Retained as an
+  # executor-only route; do not use it as a writer target until it qualifies.
+  gemini_3_flash_openrouter:
+    provider: openrouter
+    model: google/gemini-3-flash-preview
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
 
 tasks:
   # A task selects its default route by target ID. Calls can override it with
