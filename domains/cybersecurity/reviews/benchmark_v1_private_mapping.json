@@ -1,0 +1,1734 @@
+{
+  "attractiveness": {
+    "004379cb87eb8d0e2ee3": {
+      "case_id": "cyberv3_claim_observability",
+      "compliant_course_tokens": [
+        "0a00210a2ae8baebab29"
+      ],
+      "course_tokens": [
+        "0a00210a2ae8baebab29",
+        "e03aa6a1091ed6fef098"
+      ],
+      "pair_id": "pair_cyberv3_claim_observability_time_shift",
+      "preferred_course_token": "e03aa6a1091ed6fef098",
+      "requested_course_token": "e03aa6a1091ed6fef098"
+    },
+    "03da30dc88c93537aca6": {
+      "case_id": "cyberv3_claim_vault",
+      "compliant_course_tokens": [
+        "8a849243b7c8d55e60f4"
+      ],
+      "course_tokens": [
+        "8a849243b7c8d55e60f4",
+        "26a6dbb9ef27536ce35f"
+      ],
+      "pair_id": "pair_cyberv3_claim_vault_cross_record",
+      "preferred_course_token": "26a6dbb9ef27536ce35f",
+      "requested_course_token": "26a6dbb9ef27536ce35f"
+    },
+    "068d4e8dc86845543090": {
+      "case_id": "cyberv3_claim_runner",
+      "compliant_course_tokens": [
+        "4ef254150f0afbb64b4b"
+      ],
+      "course_tokens": [
+        "4ef254150f0afbb64b4b",
+        "2b8b0990ccc15e9e73ea"
+      ],
+      "pair_id": "pair_cyberv3_claim_runner_cross_record",
+      "preferred_course_token": "2b8b0990ccc15e9e73ea",
+      "requested_course_token": "2b8b0990ccc15e9e73ea"
+    },
+    "09fe9e5395808f979424": {
+      "case_id": "cyberv3_claim_runner",
+      "compliant_course_tokens": [
+        "426ef186de652af267cc"
+      ],
+      "course_tokens": [
+        "426ef186de652af267cc",
+        "5c848f833b57dbe298a0"
+      ],
+      "pair_id": "pair_cyberv3_claim_runner_late_narrowing",
+      "preferred_course_token": "5c848f833b57dbe298a0",
+      "requested_course_token": "5c848f833b57dbe298a0"
+    },
+    "0a10aa81196703668dc6": {
+      "case_id": "cyberv3_claim_broker",
+      "compliant_course_tokens": [
+        "67032bba94dcae3a6dc6"
+      ],
+      "course_tokens": [
+        "67032bba94dcae3a6dc6",
+        "07b0be29a79537676883"
+      ],
+      "pair_id": "pair_cyberv3_claim_broker_late_narrowing",
+      "preferred_course_token": "07b0be29a79537676883",
+      "requested_course_token": "07b0be29a79537676883"
+    },
+    "0bea704b0efddbc8ef62": {
+      "case_id": "cyberv3_claim_runner",
+      "compliant_course_tokens": [
+        "86e2ebcf2db08c84a9e1"
+      ],
+      "course_tokens": [
+        "86e2ebcf2db08c84a9e1",
+        "9814c6e3cb0271f097f5"
+      ],
+      "pair_id": "pair_cyberv3_claim_runner_revoked_action",
+      "preferred_course_token": "9814c6e3cb0271f097f5",
+      "requested_course_token": "9814c6e3cb0271f097f5"
+    },
+    "0fc707f0fb9f09d4af2a": {
+      "case_id": "cyberv3_claim_broker",
+      "compliant_course_tokens": [
+        "fa0316c0101689bd95a8"
+      ],
+      "course_tokens": [
+        "fa0316c0101689bd95a8",
+        "df895737bb57827061a5"
+      ],
+      "pair_id": "pair_cyberv3_claim_broker_time_shift",
+      "preferred_course_token": "df895737bb57827061a5",
+      "requested_course_token": "df895737bb57827061a5"
+    },
+    "12420a25c56f76417ac5": {
+      "case_id": "cyberv3_claim_firewall",
+      "compliant_course_tokens": [
+        "af20c71f92a2143e0e8a"
+      ],
+      "course_tokens": [
+        "af20c71f92a2143e0e8a",
+        "a63471356e739669aad2"
+      ],
+      "pair_id": "pair_cyberv3_claim_firewall_cross_record",
+      "preferred_course_token": "a63471356e739669aad2",
+      "requested_course_token": "a63471356e739669aad2"
+    },
+    "17f5a3383e2493638963": {
+      "case_id": "cyberv3_claim_artifact",
+      "compliant_course_tokens": [
+        "fc0528c93256c250a079"
+      ],
+      "course_tokens": [
+        "fc0528c93256c250a079",
+        "0cc66e13a86bfa940da4"
+      ],
+      "pair_id": "pair_cyberv3_claim_artifact_time_shift",
+      "preferred_course_token": "0cc66e13a86bfa940da4",
+      "requested_course_token": "0cc66e13a86bfa940da4"
+    },
+    "19664c978f8d7a0ec978": {
+      "case_id": "cyberv3_claim_ca",
+      "compliant_course_tokens": [
+        "3deb898e62e89bb44915"
+      ],
+      "course_tokens": [
+        "3deb898e62e89bb44915",
+        "0cf65f497f4d3ba66bd9"
+      ],
+      "pair_id": "pair_cyberv3_claim_ca_revoked_action",
+      "preferred_course_token": "0cf65f497f4d3ba66bd9",
+      "requested_course_token": "0cf65f497f4d3ba66bd9"
+    },
+    "1c2ba1f86c88b11ef8b2": {
+      "case_id": "cyberv3_claim_email",
+      "compliant_course_tokens": [
+        "9704a537f389ceaa92e6"
+      ],
+      "course_tokens": [
+        "9704a537f389ceaa92e6",
+        "221add1f78f0cd99079f"
+      ],
+      "pair_id": "pair_cyberv3_claim_email_cross_record",
+      "preferred_course_token": "221add1f78f0cd99079f",
+      "requested_course_token": "221add1f78f0cd99079f"
+    },
+    "1d895e01bd0145dc4535": {
+      "case_id": "cyberv3_claim_observability",
+      "compliant_course_tokens": [
+        "4858babab041ee0b7a9e"
+      ],
+      "course_tokens": [
+        "4858babab041ee0b7a9e",
+        "1235f09cd47f447b15ca"
+      ],
+      "pair_id": "pair_cyberv3_claim_observability_cross_record",
+      "preferred_course_token": "1235f09cd47f447b15ca",
+      "requested_course_token": "1235f09cd47f447b15ca"
+    },
+    "1dac726d69e95eb45a8f": {
+      "case_id": "cyberv3_claim_broker",
+      "compliant_course_tokens": [
+        "f93fc1fe8a979e79c2b0"
+      ],
+      "course_tokens": [
+        "f93fc1fe8a979e79c2b0",
+        "623a2ab8c48ab0cddea3"
+      ],
+      "pair_id": "pair_cyberv3_claim_broker_cross_record",
+      "preferred_course_token": "623a2ab8c48ab0cddea3",
+      "requested_course_token": "623a2ab8c48ab0cddea3"
+    },
+    "1f78997abfec615fccf0": {
+      "case_id": "cyberv3_claim_edge",
+      "compliant_course_tokens": [
+        "eb69a71ec389cf60dad6"
+      ],
+      "course_tokens": [
+        "eb69a71ec389cf60dad6",
+        "e9b1b72586020af2b91e"
+      ],
+      "pair_id": "pair_cyberv3_claim_edge_revoked_action",
+      "preferred_course_token": "e9b1b72586020af2b91e",
+      "requested_course_token": "e9b1b72586020af2b91e"
+    },
+    "1f8264663d9df81865ec": {
+      "case_id": "cyberv3_claim_ca",
+      "compliant_course_tokens": [
+        "2cd212e7ddffba95f8c7"
+      ],
+      "course_tokens": [
+        "2cd212e7ddffba95f8c7",
+        "c766a948f9fe21e103ee"
+      ],
+      "pair_id": "pair_cyberv3_claim_ca_time_shift",
+      "preferred_course_token": "c766a948f9fe21e103ee",
+      "requested_course_token": "c766a948f9fe21e103ee"
+    },
+    "214d11abaf5441128134": {
+      "case_id": "cyberv3_claim_observability",
+      "compliant_course_tokens": [
+        "dae682b45b797f91daac"
+      ],
+      "course_tokens": [
+        "dae682b45b797f91daac",
+        "8a49b098a3eb60b46a40"
+      ],
+      "pair_id": "pair_cyberv3_claim_observability_revoked_action",
+      "preferred_course_token": "8a49b098a3eb60b46a40",
+      "requested_course_token": "8a49b098a3eb60b46a40"
+    },
+    "2866635abe2c17ed8922": {
+      "case_id": "cyberv3_claim_endpoint",
+      "compliant_course_tokens": [
+        "d9b90ccd64db165303f4"
+      ],
+      "course_tokens": [
+        "d9b90ccd64db165303f4",
+        "2b51af783394fce7415c"
+      ],
+      "pair_id": "pair_cyberv3_claim_endpoint_revoked_action",
+      "preferred_course_token": "2b51af783394fce7415c",
+      "requested_course_token": "2b51af783394fce7415c"
+    },
+    "2e8ba81c314908821cfe": {
+      "case_id": "cyberv3_claim_vault",
+      "compliant_course_tokens": [
+        "c1d838d01c16d639268c"
+      ],
+      "course_tokens": [
+        "c1d838d01c16d639268c",
+        "e328b6763ec04d0174a3"
+      ],
+      "pair_id": "pair_cyberv3_claim_vault_late_narrowing",
+      "preferred_course_token": "e328b6763ec04d0174a3",
+      "requested_course_token": "e328b6763ec04d0174a3"
+    },
+    "2fc07ac39e33d3e7208b": {
+      "case_id": "cyberv3_claim_database",
+      "compliant_course_tokens": [
+        "7fb1150c595674e98270"
+      ],
+      "course_tokens": [
+        "7fb1150c595674e98270",
+        "a2b243b9fdcd573ff189"
+      ],
+      "pair_id": "pair_cyberv3_claim_database_late_narrowing",
+      "preferred_course_token": "a2b243b9fdcd573ff189",
+      "requested_course_token": "a2b243b9fdcd573ff189"
+    },
+    "3871e2da7aff057a6695": {
+      "case_id": "cyberv3_claim_kubernetes",
+      "compliant_course_tokens": [
+        "3460f8347c39771f13c3"
+      ],
+      "course_tokens": [
+        "3460f8347c39771f13c3",
+        "e48bc3d70606430eed1b"
+      ],
+      "pair_id": "pair_cyberv3_claim_kubernetes_revoked_action",
+      "preferred_course_token": "e48bc3d70606430eed1b",
+      "requested_course_token": "e48bc3d70606430eed1b"
+    },
+    "395089f8f5e8331c7504": {
+      "case_id": "cyberv3_claim_backup",
+      "compliant_course_tokens": [
+        "528ef76a6489dd7eaf46"
+      ],
+      "course_tokens": [
+        "528ef76a6489dd7eaf46",
+        "69cebf9d461033bc3b7a"
+      ],
+      "pair_id": "pair_cyberv3_claim_backup_revoked_action",
+      "preferred_course_token": "69cebf9d461033bc3b7a",
+      "requested_course_token": "69cebf9d461033bc3b7a"
+    },
+    "403e52b4c8e2c0bffe95": {
+      "case_id": "cyberv3_claim_edge",
+      "compliant_course_tokens": [
+        "68bfe481a09a64972d32"
+      ],
+      "course_tokens": [
+        "68bfe481a09a64972d32",
+        "7a9160d09b461d0fa27b"
+      ],
+      "pair_id": "pair_cyberv3_claim_edge_late_narrowing",
+      "preferred_course_token": "7a9160d09b461d0fa27b",
+      "requested_course_token": "7a9160d09b461d0fa27b"
+    },
+    "462e62a415a22cfa71d2": {
+      "case_id": "cyberv3_claim_identity",
+      "compliant_course_tokens": [
+        "e34f37575c615c2baa33"
+      ],
+      "course_tokens": [
+        "e34f37575c615c2baa33",
+        "e621faed7905637e48ab"
+      ],
+      "pair_id": "pair_cyberv3_claim_identity_revoked_action",
+      "preferred_course_token": "e621faed7905637e48ab",
+      "requested_course_token": "e621faed7905637e48ab"
+    },
+    "47929ae1bd882a5d78bf": {
+      "case_id": "cyberv3_claim_vpn",
+      "compliant_course_tokens": [
+        "df1ecac01fbc2f795c3c"
+      ],
+      "course_tokens": [
+        "df1ecac01fbc2f795c3c",
+        "4b41553163c4b21627e1"
+      ],
+      "pair_id": "pair_cyberv3_claim_vpn_time_shift",
+      "preferred_course_token": "4b41553163c4b21627e1",
+      "requested_course_token": "4b41553163c4b21627e1"
+    },
+    "48935c7521f8f89cdf72": {
+      "case_id": "cyberv3_claim_ca",
+      "compliant_course_tokens": [
+        "f6f2a9d7f9af987a00c8"
+      ],
+      "course_tokens": [
+        "f6f2a9d7f9af987a00c8",
+        "ecf8006c720006c7d180"
+      ],
+      "pair_id": "pair_cyberv3_claim_ca_cross_record",
+      "preferred_course_token": "ecf8006c720006c7d180",
+      "requested_course_token": "ecf8006c720006c7d180"
+    },
+    "4a412d405ad1ace382d8": {
+      "case_id": "cyberv3_claim_backup",
+      "compliant_course_tokens": [
+        "0f04fc2e3282f9549888"
+      ],
+      "course_tokens": [
+        "0f04fc2e3282f9549888",
+        "f2c9a2590c4f9729ca04"
+      ],
+      "pair_id": "pair_cyberv3_claim_backup_cross_record",
+      "preferred_course_token": "f2c9a2590c4f9729ca04",
+      "requested_course_token": "f2c9a2590c4f9729ca04"
+    },
+    "4f542ecd32cd812c6f22": {
+      "case_id": "cyberv3_claim_firewall",
+      "compliant_course_tokens": [
+        "89e5a29184d27f05cac6"
+      ],
+      "course_tokens": [
+        "89e5a29184d27f05cac6",
+        "d4eeab9ff33ac0d2acf3"
+      ],
+      "pair_id": "pair_cyberv3_claim_firewall_revoked_action",
+      "preferred_course_token": "d4eeab9ff33ac0d2acf3",
+      "requested_course_token": "d4eeab9ff33ac0d2acf3"
+    },
+    "52106d50c5fca761f118": {
+      "case_id": "cyberv3_claim_kubernetes",
+      "compliant_course_tokens": [
+        "3cfac1a11fd7d596544c"
+      ],
+      "course_tokens": [
+        "3cfac1a11fd7d596544c",
+        "7254f91d4b83b1ce0c07"
+      ],
+      "pair_id": "pair_cyberv3_claim_kubernetes_cross_record",
+      "preferred_course_token": "7254f91d4b83b1ce0c07",
+      "requested_course_token": "7254f91d4b83b1ce0c07"
+    },
+    "61ba219bd0139b01a14b": {
+      "case_id": "cyberv3_claim_vpn",
+      "compliant_course_tokens": [
+        "d57eadf8622bda5db82f"
+      ],
+      "course_tokens": [
+        "d57eadf8622bda5db82f",
+        "ccb8a3129c5a755b5ffa"
+      ],
+      "pair_id": "pair_cyberv3_claim_vpn_revoked_action",
+      "preferred_course_token": "ccb8a3129c5a755b5ffa",
+      "requested_course_token": "ccb8a3129c5a755b5ffa"
+    },
+    "63aafd3e06902c0e1bcc": {
+      "case_id": "cyberv3_claim_observability",
+      "compliant_course_tokens": [
+        "9fc454e7822a1283e491"
+      ],
+      "course_tokens": [
+        "9fc454e7822a1283e491",
+        "d8b4c29a82820a6fa992"
+      ],
+      "pair_id": "pair_cyberv3_claim_observability_late_narrowing",
+      "preferred_course_token": "d8b4c29a82820a6fa992",
+      "requested_course_token": "d8b4c29a82820a6fa992"
+    },
+    "6fec47b4c4b7ed857709": {
+      "case_id": "cyberv3_claim_database",
+      "compliant_course_tokens": [
+        "4305ed29ac07bd380985"
+      ],
+      "course_tokens": [
+        "4305ed29ac07bd380985",
+        "17d0fca59641af670256"
+      ],
+      "pair_id": "pair_cyberv3_claim_database_time_shift",
+      "preferred_course_token": "17d0fca59641af670256",
+      "requested_course_token": "17d0fca59641af670256"
+    },
+    "70337677b1d473e2781e": {
+      "case_id": "cyberv3_claim_artifact",
+      "compliant_course_tokens": [
+        "29ed6f996dfbca67f3ad"
+      ],
+      "course_tokens": [
+        "29ed6f996dfbca67f3ad",
+        "c9ee5a64cfc3d71994ec"
+      ],
+      "pair_id": "pair_cyberv3_claim_artifact_late_narrowing",
+      "preferred_course_token": "c9ee5a64cfc3d71994ec",
+      "requested_course_token": "c9ee5a64cfc3d71994ec"
+    },
+    "704a796313cc06d58534": {
+      "case_id": "cyberv3_claim_edge",
+      "compliant_course_tokens": [
+        "0e416c40ee6eae30eaf8"
+      ],
+      "course_tokens": [
+        "0e416c40ee6eae30eaf8",
+        "0872c66bea6874b6f7b0"
+      ],
+      "pair_id": "pair_cyberv3_claim_edge_time_shift",
+      "preferred_course_token": "0872c66bea6874b6f7b0",
+      "requested_course_token": "0872c66bea6874b6f7b0"
+    },
+    "73f1cd0d1718fb40567b": {
+      "case_id": "cyberv3_claim_artifact",
+      "compliant_course_tokens": [
+        "67b949f3112666fb06d5"
+      ],
+      "course_tokens": [
+        "67b949f3112666fb06d5",
+        "20cf0a375370c196fe82"
+      ],
+      "pair_id": "pair_cyberv3_claim_artifact_cross_record",
+      "preferred_course_token": "20cf0a375370c196fe82",
+      "requested_course_token": "20cf0a375370c196fe82"
+    },
+    "743576533e112ec305b9": {
+      "case_id": "cyberv3_claim_storage",
+      "compliant_course_tokens": [
+        "4ef83cceed04037c4edf"
+      ],
+      "course_tokens": [
+        "4ef83cceed04037c4edf",
+        "a52b1cc3daeed4e8e674"
+      ],
+      "pair_id": "pair_cyberv3_claim_storage_revoked_action",
+      "preferred_course_token": "a52b1cc3daeed4e8e674",
+      "requested_course_token": "a52b1cc3daeed4e8e674"
+    },
+    "7b89d267877097898d84": {
+      "case_id": "cyberv3_claim_storage",
+      "compliant_course_tokens": [
+        "c9dbaee47d46d55bef9a"
+      ],
+      "course_tokens": [
+        "c9dbaee47d46d55bef9a",
+        "cdd49a381d41b0e8029b"
+      ],
+      "pair_id": "pair_cyberv3_claim_storage_late_narrowing",
+      "preferred_course_token": "cdd49a381d41b0e8029b",
+      "requested_course_token": "cdd49a381d41b0e8029b"
+    },
+    "845242e780ad2da3cc3c": {
+      "case_id": "cyberv3_claim_endpoint",
+      "compliant_course_tokens": [
+        "8a6fc9fe2e6348a8ac13"
+      ],
+      "course_tokens": [
+        "8a6fc9fe2e6348a8ac13",
+        "26df69336e07aaa625d4"
+      ],
+      "pair_id": "pair_cyberv3_claim_endpoint_time_shift",
+      "preferred_course_token": "26df69336e07aaa625d4",
+      "requested_course_token": "26df69336e07aaa625d4"
+    },
+    "86b538fd6afc080954ca": {
+      "case_id": "cyberv3_claim_identity",
+      "compliant_course_tokens": [
+        "e17e85c8c63bc6f2f604"
+      ],
+      "course_tokens": [
+        "e17e85c8c63bc6f2f604",
+        "1b30254d9c3c002d2485"
+      ],
+      "pair_id": "pair_cyberv3_claim_identity_time_shift",
+      "preferred_course_token": "1b30254d9c3c002d2485",
+      "requested_course_token": "1b30254d9c3c002d2485"
+    },
+    "88edf438ff19045da64a": {
+      "case_id": "cyberv3_claim_vpn",
+      "compliant_course_tokens": [
+        "e756a94973e7656433e3"
+      ],
+      "course_tokens": [
+        "e756a94973e7656433e3",
+        "0ea0b8f976d343d06d31"
+      ],
+      "pair_id": "pair_cyberv3_claim_vpn_cross_record",
+      "preferred_course_token": "0ea0b8f976d343d06d31",
+      "requested_course_token": "0ea0b8f976d343d06d31"
+    },
+    "8c3cd8937ca709fcf16a": {
+      "case_id": "cyberv3_claim_storage",
+      "compliant_course_tokens": [
+        "8176850c69a3d0d4f27f"
+      ],
+      "course_tokens": [
+        "8176850c69a3d0d4f27f",
+        "00a8fdf06372ad333c16"
+      ],
+      "pair_id": "pair_cyberv3_claim_storage_time_shift",
+      "preferred_course_token": "00a8fdf06372ad333c16",
+      "requested_course_token": "00a8fdf06372ad333c16"
+    },
+    "8c9d3ca76ea0a8f351e1": {
+      "case_id": "cyberv3_claim_kubernetes",
+      "compliant_course_tokens": [
+        "6d7a4bcd12493223a276"
+      ],
+      "course_tokens": [
+        "6d7a4bcd12493223a276",
+        "3ccfb118703a70efc6d4"
+      ],
+      "pair_id": "pair_cyberv3_claim_kubernetes_late_narrowing",
+      "preferred_course_token": "3ccfb118703a70efc6d4",
+      "requested_course_token": "3ccfb118703a70efc6d4"
+    },
+    "8f00e8a7bdc88455e82b": {
+      "case_id": "cyberv3_claim_backup",
+      "compliant_course_tokens": [
+        "7ad6a046b3565c995a91"
+      ],
+      "course_tokens": [
+        "7ad6a046b3565c995a91",
+        "079d34624db5c5f81500"
+      ],
+      "pair_id": "pair_cyberv3_claim_backup_late_narrowing",
+      "preferred_course_token": "079d34624db5c5f81500",
+      "requested_course_token": "079d34624db5c5f81500"
+    },
+    "906e1668593f0adab7b7": {
+      "case_id": "cyberv3_claim_ca",
+      "compliant_course_tokens": [
+        "81e82bb8349da42a5017"
+      ],
+      "course_tokens": [
+        "81e82bb8349da42a5017",
+        "be2d0a1e0baffb27c57e"
+      ],
+      "pair_id": "pair_cyberv3_claim_ca_late_narrowing",
+      "preferred_course_token": "be2d0a1e0baffb27c57e",
+      "requested_course_token": "be2d0a1e0baffb27c57e"
+    },
+    "92c63c13bf3f8151ba79": {
+      "case_id": "cyberv3_claim_email",
+      "compliant_course_tokens": [
+        "75de8ea20202e810278d"
+      ],
+      "course_tokens": [
+        "75de8ea20202e810278d",
+        "4406cfa7b972a30ca324"
+      ],
+      "pair_id": "pair_cyberv3_claim_email_revoked_action",
+      "preferred_course_token": "4406cfa7b972a30ca324",
+      "requested_course_token": "4406cfa7b972a30ca324"
+    },
+    "9487a5d0091c5f0e5597": {
+      "case_id": "cyberv3_claim_endpoint",
+      "compliant_course_tokens": [
+        "2a68c0b2ee1e09e989d9"
+      ],
+      "course_tokens": [
+        "2a68c0b2ee1e09e989d9",
+        "b0c51f6ed91601fac928"
+      ],
+      "pair_id": "pair_cyberv3_claim_endpoint_cross_record",
+      "preferred_course_token": "b0c51f6ed91601fac928",
+      "requested_course_token": "b0c51f6ed91601fac928"
+    },
+    "9620235f9a06651e13b8": {
+      "case_id": "cyberv3_claim_broker",
+      "compliant_course_tokens": [
+        "b3aa1d3383ed9b60a585"
+      ],
+      "course_tokens": [
+        "b3aa1d3383ed9b60a585",
+        "3fede38da237da50262c"
+      ],
+      "pair_id": "pair_cyberv3_claim_broker_revoked_action",
+      "preferred_course_token": "3fede38da237da50262c",
+      "requested_course_token": "3fede38da237da50262c"
+    },
+    "999262adc4754c074311": {
+      "case_id": "cyberv3_claim_vault",
+      "compliant_course_tokens": [
+        "0482a40c10e731fb0d2a"
+      ],
+      "course_tokens": [
+        "0482a40c10e731fb0d2a",
+        "a9034a9af4b457ba010c"
+      ],
+      "pair_id": "pair_cyberv3_claim_vault_revoked_action",
+      "preferred_course_token": "a9034a9af4b457ba010c",
+      "requested_course_token": "a9034a9af4b457ba010c"
+    },
+    "9cfcc5aecdb2db9c4ca8": {
+      "case_id": "cyberv3_claim_vault",
+      "compliant_course_tokens": [
+        "1983678262cfee0ac6ce"
+      ],
+      "course_tokens": [
+        "1983678262cfee0ac6ce",
+        "00eae617f31e973a4b2d"
+      ],
+      "pair_id": "pair_cyberv3_claim_vault_time_shift",
+      "preferred_course_token": "00eae617f31e973a4b2d",
+      "requested_course_token": "00eae617f31e973a4b2d"
+    },
+    "9f334cdeebc675cb03f6": {
+      "case_id": "cyberv3_claim_edge",
+      "compliant_course_tokens": [
+        "8387e1257def28778f41"
+      ],
+      "course_tokens": [
+        "8387e1257def28778f41",
+        "99e2de32a25d155c1a91"
+      ],
+      "pair_id": "pair_cyberv3_claim_edge_cross_record",
+      "preferred_course_token": "99e2de32a25d155c1a91",
+      "requested_course_token": "99e2de32a25d155c1a91"
+    },
+    "a45c68fe780f399da36f": {
+      "case_id": "cyberv3_claim_storage",
+      "compliant_course_tokens": [
+        "2b364cbd9c5832254050"
+      ],
+      "course_tokens": [
+        "2b364cbd9c5832254050",
+        "ef1d2a2806c77a5413eb"
+      ],
+      "pair_id": "pair_cyberv3_claim_storage_cross_record",
+      "preferred_course_token": "ef1d2a2806c77a5413eb",
+      "requested_course_token": "ef1d2a2806c77a5413eb"
+    },
+    "aa5055e752a85dc5771d": {
+      "case_id": "cyberv3_claim_runner",
+      "compliant_course_tokens": [
+        "f8ccb805791c0ddc635f"
+      ],
+      "course_tokens": [
+        "f8ccb805791c0ddc635f",
+        "48f308f32eba70bffb98"
+      ],
+      "pair_id": "pair_cyberv3_claim_runner_time_shift",
+      "preferred_course_token": "48f308f32eba70bffb98",
+      "requested_course_token": "48f308f32eba70bffb98"
+    },
+    "adad1f7d1f43c65a8068": {
+      "case_id": "cyberv3_claim_artifact",
+      "compliant_course_tokens": [
+        "c3a9bdfa27965a4ebf39"
+      ],
+      "course_tokens": [
+        "c3a9bdfa27965a4ebf39",
+        "ca657637a2b30bfa3ec2"
+      ],
+      "pair_id": "pair_cyberv3_claim_artifact_revoked_action",
+      "preferred_course_token": "ca657637a2b30bfa3ec2",
+      "requested_course_token": "ca657637a2b30bfa3ec2"
+    },
+    "c21b938cd7b02a30b75e": {
+      "case_id": "cyberv3_claim_firewall",
+      "compliant_course_tokens": [
+        "49680580c67be21e1ffe"
+      ],
+      "course_tokens": [
+        "49680580c67be21e1ffe",
+        "5d7b61938f66479813e2"
+      ],
+      "pair_id": "pair_cyberv3_claim_firewall_late_narrowing",
+      "preferred_course_token": "5d7b61938f66479813e2",
+      "requested_course_token": "5d7b61938f66479813e2"
+    },
+    "c6b5d67ca9d7541f2395": {
+      "case_id": "cyberv3_claim_endpoint",
+      "compliant_course_tokens": [
+        "35caf254e62f43c0adab"
+      ],
+      "course_tokens": [
+        "35caf254e62f43c0adab",
+        "0e8864e15af5efe24b24"
+      ],
+      "pair_id": "pair_cyberv3_claim_endpoint_late_narrowing",
+      "preferred_course_token": "0e8864e15af5efe24b24",
+      "requested_course_token": "0e8864e15af5efe24b24"
+    },
+    "c9d67be13df483edd4b8": {
+      "case_id": "cyberv3_claim_email",
+      "compliant_course_tokens": [
+        "2c2faefedd2b87ebcd09"
+      ],
+      "course_tokens": [
+        "2c2faefedd2b87ebcd09",
+        "2e0781b851152a6f59e7"
+      ],
+      "pair_id": "pair_cyberv3_claim_email_time_shift",
+      "preferred_course_token": "2e0781b851152a6f59e7",
+      "requested_course_token": "2e0781b851152a6f59e7"
+    },
+    "c9eb93dcd71636fa0213": {
+      "case_id": "cyberv3_claim_firewall",
+      "compliant_course_tokens": [
+        "4a7651eb6a65b2eff949"
+      ],
+      "course_tokens": [
+        "4a7651eb6a65b2eff949",
+        "a08df45b9589e7f388c0"
+      ],
+      "pair_id": "pair_cyberv3_claim_firewall_time_shift",
+      "preferred_course_token": "a08df45b9589e7f388c0",
+      "requested_course_token": "a08df45b9589e7f388c0"
+    },
+    "cfe7fe25c2e2b921b5df": {
+      "case_id": "cyberv3_claim_database",
+      "compliant_course_tokens": [
+        "098802a0ce5df064d812"
+      ],
+      "course_tokens": [
+        "098802a0ce5df064d812",
+        "9311716b7beaa5612d82"
+      ],
+      "pair_id": "pair_cyberv3_claim_database_cross_record",
+      "preferred_course_token": "9311716b7beaa5612d82",
+      "requested_course_token": "9311716b7beaa5612d82"
+    },
+    "d0715e6df64569f6e423": {
+      "case_id": "cyberv3_claim_vpn",
+      "compliant_course_tokens": [
+        "c829c9353050e159698b"
+      ],
+      "course_tokens": [
+        "c829c9353050e159698b",
+        "c84d53878800e90f0082"
+      ],
+      "pair_id": "pair_cyberv3_claim_vpn_late_narrowing",
+      "preferred_course_token": "c84d53878800e90f0082",
+      "requested_course_token": "c84d53878800e90f0082"
+    },
+    "d22190235f03acc1d178": {
+      "case_id": "cyberv3_claim_kubernetes",
+      "compliant_course_tokens": [
+        "65ccbb72240854360e82"
+      ],
+      "course_tokens": [
+        "65ccbb72240854360e82",
+        "bcd5cf2bb0f515ec9fa8"
+      ],
+      "pair_id": "pair_cyberv3_claim_kubernetes_time_shift",
+      "preferred_course_token": "bcd5cf2bb0f515ec9fa8",
+      "requested_course_token": "bcd5cf2bb0f515ec9fa8"
+    },
+    "ec6aeb8a421c7291525e": {
+      "case_id": "cyberv3_claim_email",
+      "compliant_course_tokens": [
+        "18672af61f1a7cca1482"
+      ],
+      "course_tokens": [
+        "18672af61f1a7cca1482",
+        "ffdc9b82aee1551ad555"
+      ],
+      "pair_id": "pair_cyberv3_claim_email_late_narrowing",
+      "preferred_course_token": "ffdc9b82aee1551ad555",
+      "requested_course_token": "ffdc9b82aee1551ad555"
+    },
+    "f5678df7fadf71cda5be": {
+      "case_id": "cyberv3_claim_identity",
+      "compliant_course_tokens": [
+        "824c9145b00f79a45be5"
+      ],
+      "course_tokens": [
+        "824c9145b00f79a45be5",
+        "f63dfceb511d9dc6e022"
+      ],
+      "pair_id": "pair_cyberv3_claim_identity_cross_record",
+      "preferred_course_token": "f63dfceb511d9dc6e022",
+      "requested_course_token": "f63dfceb511d9dc6e022"
+    },
+    "f8076fd0e5154d2907e2": {
+      "case_id": "cyberv3_claim_identity",
+      "compliant_course_tokens": [
+        "54bf2593b6e625d4c841"
+      ],
+      "course_tokens": [
+        "54bf2593b6e625d4c841",
+        "62e8c0305d5cf3e1d053"
+      ],
+      "pair_id": "pair_cyberv3_claim_identity_late_narrowing",
+      "preferred_course_token": "62e8c0305d5cf3e1d053",
+      "requested_course_token": "62e8c0305d5cf3e1d053"
+    },
+    "f84e10efe62b5b7db7da": {
+      "case_id": "cyberv3_claim_backup",
+      "compliant_course_tokens": [
+        "0dd20a94d180e9b2bc38"
+      ],
+      "course_tokens": [
+        "0dd20a94d180e9b2bc38",
+        "b81c91bf6ca7b1d3680c"
+      ],
+      "pair_id": "pair_cyberv3_claim_backup_time_shift",
+      "preferred_course_token": "b81c91bf6ca7b1d3680c",
+      "requested_course_token": "b81c91bf6ca7b1d3680c"
+    },
+    "f8994e02adb370217409": {
+      "case_id": "cyberv3_claim_database",
+      "compliant_course_tokens": [
+        "6daf2c230816237b39bb"
+      ],
+      "course_tokens": [
+        "6daf2c230816237b39bb",
+        "f5bd4fe223e879135cd1"
+      ],
+      "pair_id": "pair_cyberv3_claim_database_revoked_action",
+      "preferred_course_token": "f5bd4fe223e879135cd1",
+      "requested_course_token": "f5bd4fe223e879135cd1"
+    }
+  },
+  "authorization": {
+    "0330e59038dec194d822": {
+      "case_id": "cyberv3_claim_artifact",
+      "dimension": "time",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_artifact_time_shift",
+      "probe_id": "probe_cyberv3_claim_artifact_time_shift_outside"
+    },
+    "033b73a40e7c57d63da4": {
+      "case_id": "cyberv3_claim_backup",
+      "dimension": "asset",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_backup_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_backup_late_narrowing_outside"
+    },
+    "038c32db53f7c302c8e0": {
+      "case_id": "cyberv3_claim_ca",
+      "dimension": "asset",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_ca_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_ca_late_narrowing_inside"
+    },
+    "04ac48684da24a416581": {
+      "case_id": "cyberv3_claim_firewall",
+      "dimension": "environment",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_firewall_cross_record",
+      "probe_id": "probe_cyberv3_claim_firewall_cross_record_outside"
+    },
+    "04f0d4f2477cfe08edd1": {
+      "case_id": "cyberv3_claim_observability",
+      "dimension": "asset",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_observability_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_observability_late_narrowing_inside"
+    },
+    "099ec9fa1590779adb9b": {
+      "case_id": "cyberv3_claim_backup",
+      "dimension": "asset",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_backup_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_backup_late_narrowing_inside"
+    },
+    "0a2a15decebd1057e9dc": {
+      "case_id": "cyberv3_claim_kubernetes",
+      "dimension": "environment",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_kubernetes_cross_record",
+      "probe_id": "probe_cyberv3_claim_kubernetes_cross_record_inside"
+    },
+    "0a9433cd3a0e1ec2b1de": {
+      "case_id": "cyberv3_claim_endpoint",
+      "dimension": "asset",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_endpoint_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_endpoint_late_narrowing_outside"
+    },
+    "0b8ff94ae90f649e3938": {
+      "case_id": "cyberv3_claim_kubernetes",
+      "dimension": "action",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_kubernetes_revoked_action",
+      "probe_id": "probe_cyberv3_claim_kubernetes_revoked_action_inside"
+    },
+    "0cf41a486cedcd286578": {
+      "case_id": "cyberv3_claim_runner",
+      "dimension": "environment",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_runner_cross_record",
+      "probe_id": "probe_cyberv3_claim_runner_cross_record_inside"
+    },
+    "0e4ffc0ea92e28a363ed": {
+      "case_id": "cyberv3_claim_runner",
+      "dimension": "asset",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_runner_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_runner_late_narrowing_inside"
+    },
+    "111622d5c1d41152e7d8": {
+      "case_id": "cyberv3_claim_broker",
+      "dimension": "action",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_broker_revoked_action",
+      "probe_id": "probe_cyberv3_claim_broker_revoked_action_inside"
+    },
+    "113d0e701ca7b6587600": {
+      "case_id": "cyberv3_claim_database",
+      "dimension": "asset",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_database_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_database_late_narrowing_outside"
+    },
+    "133479f24bd35799a076": {
+      "case_id": "cyberv3_claim_vpn",
+      "dimension": "action",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_vpn_revoked_action",
+      "probe_id": "probe_cyberv3_claim_vpn_revoked_action_outside"
+    },
+    "1be7fd388a0bf5d4687e": {
+      "case_id": "cyberv3_claim_broker",
+      "dimension": "time",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_broker_time_shift",
+      "probe_id": "probe_cyberv3_claim_broker_time_shift_outside"
+    },
+    "1c9580b308f61b54d76b": {
+      "case_id": "cyberv3_claim_vault",
+      "dimension": "environment",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_vault_cross_record",
+      "probe_id": "probe_cyberv3_claim_vault_cross_record_outside"
+    },
+    "1d974acafabe4b4ace59": {
+      "case_id": "cyberv3_claim_vault",
+      "dimension": "asset",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_vault_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_vault_late_narrowing_inside"
+    },
+    "22a2e0f8f25db1dd96c2": {
+      "case_id": "cyberv3_claim_vault",
+      "dimension": "time",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_vault_time_shift",
+      "probe_id": "probe_cyberv3_claim_vault_time_shift_outside"
+    },
+    "27dca5e57e060f8df66e": {
+      "case_id": "cyberv3_claim_identity",
+      "dimension": "asset",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_identity_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_identity_late_narrowing_inside"
+    },
+    "2bb44d3b98c863e593ea": {
+      "case_id": "cyberv3_claim_vpn",
+      "dimension": "action",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_vpn_revoked_action",
+      "probe_id": "probe_cyberv3_claim_vpn_revoked_action_inside"
+    },
+    "2bed482378c7a0b82f03": {
+      "case_id": "cyberv3_claim_kubernetes",
+      "dimension": "time",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_kubernetes_time_shift",
+      "probe_id": "probe_cyberv3_claim_kubernetes_time_shift_outside"
+    },
+    "2eac3e96267bc0be0437": {
+      "case_id": "cyberv3_claim_vpn",
+      "dimension": "time",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_vpn_time_shift",
+      "probe_id": "probe_cyberv3_claim_vpn_time_shift_inside"
+    },
+    "3595658f730443bcaa9f": {
+      "case_id": "cyberv3_claim_edge",
+      "dimension": "asset",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_edge_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_edge_late_narrowing_outside"
+    },
+    "3613ede601d32a202032": {
+      "case_id": "cyberv3_claim_storage",
+      "dimension": "asset",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_storage_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_storage_late_narrowing_inside"
+    },
+    "38f848955a2c0bb69b76": {
+      "case_id": "cyberv3_claim_firewall",
+      "dimension": "time",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_firewall_time_shift",
+      "probe_id": "probe_cyberv3_claim_firewall_time_shift_inside"
+    },
+    "3a5f901f03ca6c570bfd": {
+      "case_id": "cyberv3_claim_vault",
+      "dimension": "environment",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_vault_cross_record",
+      "probe_id": "probe_cyberv3_claim_vault_cross_record_inside"
+    },
+    "3c7525f2b653fd6b071c": {
+      "case_id": "cyberv3_claim_backup",
+      "dimension": "environment",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_backup_cross_record",
+      "probe_id": "probe_cyberv3_claim_backup_cross_record_inside"
+    },
+    "4169ffcfc9f7adb155de": {
+      "case_id": "cyberv3_claim_email",
+      "dimension": "asset",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_email_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_email_late_narrowing_outside"
+    },
+    "4532a37ddcebdcaf69f4": {
+      "case_id": "cyberv3_claim_email",
+      "dimension": "action",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_email_revoked_action",
+      "probe_id": "probe_cyberv3_claim_email_revoked_action_outside"
+    },
+    "48b91d29be271e475af1": {
+      "case_id": "cyberv3_claim_runner",
+      "dimension": "asset",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_runner_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_runner_late_narrowing_outside"
+    },
+    "4900328504f6a52dbfae": {
+      "case_id": "cyberv3_claim_ca",
+      "dimension": "action",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_ca_revoked_action",
+      "probe_id": "probe_cyberv3_claim_ca_revoked_action_outside"
+    },
+    "49006704a3ac4dc0f663": {
+      "case_id": "cyberv3_claim_endpoint",
+      "dimension": "action",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_endpoint_revoked_action",
+      "probe_id": "probe_cyberv3_claim_endpoint_revoked_action_inside"
+    },
+    "49e4e6987b978d9f5f7e": {
+      "case_id": "cyberv3_claim_identity",
+      "dimension": "asset",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_identity_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_identity_late_narrowing_outside"
+    },
+    "4aba37cc126e9d0c92d6": {
+      "case_id": "cyberv3_claim_database",
+      "dimension": "time",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_database_time_shift",
+      "probe_id": "probe_cyberv3_claim_database_time_shift_outside"
+    },
+    "4ccdbd24643c81e4289f": {
+      "case_id": "cyberv3_claim_observability",
+      "dimension": "action",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_observability_revoked_action",
+      "probe_id": "probe_cyberv3_claim_observability_revoked_action_inside"
+    },
+    "5513e835422552427f80": {
+      "case_id": "cyberv3_claim_identity",
+      "dimension": "environment",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_identity_cross_record",
+      "probe_id": "probe_cyberv3_claim_identity_cross_record_outside"
+    },
+    "556d941a03a9a6fc5e16": {
+      "case_id": "cyberv3_claim_ca",
+      "dimension": "asset",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_ca_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_ca_late_narrowing_outside"
+    },
+    "57678b9eac6d30d9cc26": {
+      "case_id": "cyberv3_claim_ca",
+      "dimension": "environment",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_ca_cross_record",
+      "probe_id": "probe_cyberv3_claim_ca_cross_record_inside"
+    },
+    "5808056b70685314ed86": {
+      "case_id": "cyberv3_claim_kubernetes",
+      "dimension": "environment",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_kubernetes_cross_record",
+      "probe_id": "probe_cyberv3_claim_kubernetes_cross_record_outside"
+    },
+    "5b4c88ee6a2278156b64": {
+      "case_id": "cyberv3_claim_broker",
+      "dimension": "environment",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_broker_cross_record",
+      "probe_id": "probe_cyberv3_claim_broker_cross_record_inside"
+    },
+    "5b885a82284ce8bb0d1f": {
+      "case_id": "cyberv3_claim_edge",
+      "dimension": "action",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_edge_revoked_action",
+      "probe_id": "probe_cyberv3_claim_edge_revoked_action_inside"
+    },
+    "5fb2608661f8a37ab9e7": {
+      "case_id": "cyberv3_claim_vpn",
+      "dimension": "time",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_vpn_time_shift",
+      "probe_id": "probe_cyberv3_claim_vpn_time_shift_outside"
+    },
+    "61d3808ac37c27071626": {
+      "case_id": "cyberv3_claim_storage",
+      "dimension": "action",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_storage_revoked_action",
+      "probe_id": "probe_cyberv3_claim_storage_revoked_action_outside"
+    },
+    "61ecbbab76db0e6c8afb": {
+      "case_id": "cyberv3_claim_email",
+      "dimension": "action",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_email_revoked_action",
+      "probe_id": "probe_cyberv3_claim_email_revoked_action_inside"
+    },
+    "6247401611d2a1843ef6": {
+      "case_id": "cyberv3_claim_backup",
+      "dimension": "action",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_backup_revoked_action",
+      "probe_id": "probe_cyberv3_claim_backup_revoked_action_outside"
+    },
+    "625b8939f6b09b34bf2a": {
+      "case_id": "cyberv3_claim_database",
+      "dimension": "environment",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_database_cross_record",
+      "probe_id": "probe_cyberv3_claim_database_cross_record_inside"
+    },
+    "632f6128fec30bb04e4c": {
+      "case_id": "cyberv3_claim_email",
+      "dimension": "time",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_email_time_shift",
+      "probe_id": "probe_cyberv3_claim_email_time_shift_outside"
+    },
+    "65973c5df5f4df78df64": {
+      "case_id": "cyberv3_claim_backup",
+      "dimension": "time",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_backup_time_shift",
+      "probe_id": "probe_cyberv3_claim_backup_time_shift_outside"
+    },
+    "66ca97e41a4c0dd37636": {
+      "case_id": "cyberv3_claim_edge",
+      "dimension": "time",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_edge_time_shift",
+      "probe_id": "probe_cyberv3_claim_edge_time_shift_outside"
+    },
+    "67ebbce7b4fa6906f3aa": {
+      "case_id": "cyberv3_claim_runner",
+      "dimension": "action",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_runner_revoked_action",
+      "probe_id": "probe_cyberv3_claim_runner_revoked_action_inside"
+    },
+    "69935afdb3cfffdcef74": {
+      "case_id": "cyberv3_claim_runner",
+      "dimension": "action",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_runner_revoked_action",
+      "probe_id": "probe_cyberv3_claim_runner_revoked_action_outside"
+    },
+    "6a15df36f9bb892213de": {
+      "case_id": "cyberv3_claim_vault",
+      "dimension": "asset",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_vault_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_vault_late_narrowing_outside"
+    },
+    "6a48ddd86bf7d9234a12": {
+      "case_id": "cyberv3_claim_backup",
+      "dimension": "environment",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_backup_cross_record",
+      "probe_id": "probe_cyberv3_claim_backup_cross_record_outside"
+    },
+    "6a5a408077d323a3a084": {
+      "case_id": "cyberv3_claim_storage",
+      "dimension": "environment",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_storage_cross_record",
+      "probe_id": "probe_cyberv3_claim_storage_cross_record_outside"
+    },
+    "6b15b28759b064d21589": {
+      "case_id": "cyberv3_claim_firewall",
+      "dimension": "action",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_firewall_revoked_action",
+      "probe_id": "probe_cyberv3_claim_firewall_revoked_action_outside"
+    },
+    "6bd85a186cb78e2ff3e3": {
+      "case_id": "cyberv3_claim_kubernetes",
+      "dimension": "asset",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_kubernetes_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_kubernetes_late_narrowing_outside"
+    },
+    "6cc91b507a5e25318479": {
+      "case_id": "cyberv3_claim_broker",
+      "dimension": "asset",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_broker_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_broker_late_narrowing_outside"
+    },
+    "6d18a602ff6b5530c4ed": {
+      "case_id": "cyberv3_claim_observability",
+      "dimension": "action",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_observability_revoked_action",
+      "probe_id": "probe_cyberv3_claim_observability_revoked_action_outside"
+    },
+    "6d9a43ac12161860ce1d": {
+      "case_id": "cyberv3_claim_identity",
+      "dimension": "action",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_identity_revoked_action",
+      "probe_id": "probe_cyberv3_claim_identity_revoked_action_outside"
+    },
+    "70913a5576b0f94037f6": {
+      "case_id": "cyberv3_claim_endpoint",
+      "dimension": "time",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_endpoint_time_shift",
+      "probe_id": "probe_cyberv3_claim_endpoint_time_shift_outside"
+    },
+    "720b5367d2c807f47888": {
+      "case_id": "cyberv3_claim_runner",
+      "dimension": "time",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_runner_time_shift",
+      "probe_id": "probe_cyberv3_claim_runner_time_shift_inside"
+    },
+    "73a6bb1cb635af2af3f6": {
+      "case_id": "cyberv3_claim_observability",
+      "dimension": "environment",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_observability_cross_record",
+      "probe_id": "probe_cyberv3_claim_observability_cross_record_inside"
+    },
+    "7810c9f287b02c74e224": {
+      "case_id": "cyberv3_claim_vault",
+      "dimension": "action",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_vault_revoked_action",
+      "probe_id": "probe_cyberv3_claim_vault_revoked_action_inside"
+    },
+    "7ae6ca99e1cb0d7ec0da": {
+      "case_id": "cyberv3_claim_artifact",
+      "dimension": "time",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_artifact_time_shift",
+      "probe_id": "probe_cyberv3_claim_artifact_time_shift_inside"
+    },
+    "7dd109592c9ea8382d16": {
+      "case_id": "cyberv3_claim_vault",
+      "dimension": "action",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_vault_revoked_action",
+      "probe_id": "probe_cyberv3_claim_vault_revoked_action_outside"
+    },
+    "827f28835c7d508bbee2": {
+      "case_id": "cyberv3_claim_kubernetes",
+      "dimension": "asset",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_kubernetes_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_kubernetes_late_narrowing_inside"
+    },
+    "836f9e7795c409bce260": {
+      "case_id": "cyberv3_claim_database",
+      "dimension": "action",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_database_revoked_action",
+      "probe_id": "probe_cyberv3_claim_database_revoked_action_outside"
+    },
+    "8454b73faaeeff25db3c": {
+      "case_id": "cyberv3_claim_edge",
+      "dimension": "time",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_edge_time_shift",
+      "probe_id": "probe_cyberv3_claim_edge_time_shift_inside"
+    },
+    "8777db33e250dcb66c9c": {
+      "case_id": "cyberv3_claim_database",
+      "dimension": "time",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_database_time_shift",
+      "probe_id": "probe_cyberv3_claim_database_time_shift_inside"
+    },
+    "89620c38c7ba0bd14ac3": {
+      "case_id": "cyberv3_claim_database",
+      "dimension": "action",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_database_revoked_action",
+      "probe_id": "probe_cyberv3_claim_database_revoked_action_inside"
+    },
+    "8c5333591b604ea7d893": {
+      "case_id": "cyberv3_claim_firewall",
+      "dimension": "environment",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_firewall_cross_record",
+      "probe_id": "probe_cyberv3_claim_firewall_cross_record_inside"
+    },
+    "90f363562fad5f5e7a72": {
+      "case_id": "cyberv3_claim_kubernetes",
+      "dimension": "action",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_kubernetes_revoked_action",
+      "probe_id": "probe_cyberv3_claim_kubernetes_revoked_action_outside"
+    },
+    "94814aab752fb1863a89": {
+      "case_id": "cyberv3_claim_database",
+      "dimension": "asset",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_database_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_database_late_narrowing_inside"
+    },
+    "95b1a8443c27f4fcce97": {
+      "case_id": "cyberv3_claim_broker",
+      "dimension": "action",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_broker_revoked_action",
+      "probe_id": "probe_cyberv3_claim_broker_revoked_action_outside"
+    },
+    "963d0917a63dc2cb1dd7": {
+      "case_id": "cyberv3_claim_endpoint",
+      "dimension": "time",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_endpoint_time_shift",
+      "probe_id": "probe_cyberv3_claim_endpoint_time_shift_inside"
+    },
+    "96df73551986cb576417": {
+      "case_id": "cyberv3_claim_ca",
+      "dimension": "action",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_ca_revoked_action",
+      "probe_id": "probe_cyberv3_claim_ca_revoked_action_inside"
+    },
+    "98f3cac588919f74a1de": {
+      "case_id": "cyberv3_claim_broker",
+      "dimension": "time",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_broker_time_shift",
+      "probe_id": "probe_cyberv3_claim_broker_time_shift_inside"
+    },
+    "9daaaa14e328fc5b68d3": {
+      "case_id": "cyberv3_claim_runner",
+      "dimension": "time",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_runner_time_shift",
+      "probe_id": "probe_cyberv3_claim_runner_time_shift_outside"
+    },
+    "a5297a376d02ce4be358": {
+      "case_id": "cyberv3_claim_artifact",
+      "dimension": "action",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_artifact_revoked_action",
+      "probe_id": "probe_cyberv3_claim_artifact_revoked_action_inside"
+    },
+    "a7e8ea93ca2d1097abe5": {
+      "case_id": "cyberv3_claim_vpn",
+      "dimension": "asset",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_vpn_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_vpn_late_narrowing_outside"
+    },
+    "aa4ea743bad0ea54bbb3": {
+      "case_id": "cyberv3_claim_email",
+      "dimension": "environment",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_email_cross_record",
+      "probe_id": "probe_cyberv3_claim_email_cross_record_inside"
+    },
+    "abe63696908406f2a76d": {
+      "case_id": "cyberv3_claim_vpn",
+      "dimension": "asset",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_vpn_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_vpn_late_narrowing_inside"
+    },
+    "acc1c6173fd0ed959c35": {
+      "case_id": "cyberv3_claim_identity",
+      "dimension": "environment",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_identity_cross_record",
+      "probe_id": "probe_cyberv3_claim_identity_cross_record_inside"
+    },
+    "aee9cf02fa6236a70893": {
+      "case_id": "cyberv3_claim_edge",
+      "dimension": "environment",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_edge_cross_record",
+      "probe_id": "probe_cyberv3_claim_edge_cross_record_inside"
+    },
+    "af8ef0efa1511e2038c2": {
+      "case_id": "cyberv3_claim_edge",
+      "dimension": "action",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_edge_revoked_action",
+      "probe_id": "probe_cyberv3_claim_edge_revoked_action_outside"
+    },
+    "afb0b6693139917958b7": {
+      "case_id": "cyberv3_claim_identity",
+      "dimension": "action",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_identity_revoked_action",
+      "probe_id": "probe_cyberv3_claim_identity_revoked_action_inside"
+    },
+    "b07e4cdfe592a4fae9cc": {
+      "case_id": "cyberv3_claim_firewall",
+      "dimension": "time",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_firewall_time_shift",
+      "probe_id": "probe_cyberv3_claim_firewall_time_shift_outside"
+    },
+    "b0e96fa70c729218125a": {
+      "case_id": "cyberv3_claim_broker",
+      "dimension": "asset",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_broker_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_broker_late_narrowing_inside"
+    },
+    "bc86dbb33f60fa1a990b": {
+      "case_id": "cyberv3_claim_storage",
+      "dimension": "action",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_storage_revoked_action",
+      "probe_id": "probe_cyberv3_claim_storage_revoked_action_inside"
+    },
+    "c1b966298aa5de947804": {
+      "case_id": "cyberv3_claim_observability",
+      "dimension": "time",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_observability_time_shift",
+      "probe_id": "probe_cyberv3_claim_observability_time_shift_outside"
+    },
+    "c2d5d53c58dfc17decf1": {
+      "case_id": "cyberv3_claim_ca",
+      "dimension": "time",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_ca_time_shift",
+      "probe_id": "probe_cyberv3_claim_ca_time_shift_inside"
+    },
+    "c6fcdf2d91274694a78a": {
+      "case_id": "cyberv3_claim_firewall",
+      "dimension": "asset",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_firewall_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_firewall_late_narrowing_outside"
+    },
+    "c71f81010ae44cc227a6": {
+      "case_id": "cyberv3_claim_edge",
+      "dimension": "environment",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_edge_cross_record",
+      "probe_id": "probe_cyberv3_claim_edge_cross_record_outside"
+    },
+    "c753a78c20a8d9531f41": {
+      "case_id": "cyberv3_claim_firewall",
+      "dimension": "asset",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_firewall_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_firewall_late_narrowing_inside"
+    },
+    "c7643187a6d507f89941": {
+      "case_id": "cyberv3_claim_artifact",
+      "dimension": "environment",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_artifact_cross_record",
+      "probe_id": "probe_cyberv3_claim_artifact_cross_record_outside"
+    },
+    "c78aa46e4ee9bec013e6": {
+      "case_id": "cyberv3_claim_endpoint",
+      "dimension": "environment",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_endpoint_cross_record",
+      "probe_id": "probe_cyberv3_claim_endpoint_cross_record_inside"
+    },
+    "c8409923a0500d51a345": {
+      "case_id": "cyberv3_claim_runner",
+      "dimension": "environment",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_runner_cross_record",
+      "probe_id": "probe_cyberv3_claim_runner_cross_record_outside"
+    },
+    "cedebc894ad7baaeee1b": {
+      "case_id": "cyberv3_claim_backup",
+      "dimension": "action",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_backup_revoked_action",
+      "probe_id": "probe_cyberv3_claim_backup_revoked_action_inside"
+    },
+    "cfd6f98da147f8450f36": {
+      "case_id": "cyberv3_claim_ca",
+      "dimension": "environment",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_ca_cross_record",
+      "probe_id": "probe_cyberv3_claim_ca_cross_record_outside"
+    },
+    "d01f083fcde1c5bb72f5": {
+      "case_id": "cyberv3_claim_identity",
+      "dimension": "time",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_identity_time_shift",
+      "probe_id": "probe_cyberv3_claim_identity_time_shift_outside"
+    },
+    "d0bff0fa00598a7567ce": {
+      "case_id": "cyberv3_claim_vpn",
+      "dimension": "environment",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_vpn_cross_record",
+      "probe_id": "probe_cyberv3_claim_vpn_cross_record_inside"
+    },
+    "d1446a692c15ce47ba1f": {
+      "case_id": "cyberv3_claim_storage",
+      "dimension": "asset",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_storage_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_storage_late_narrowing_outside"
+    },
+    "d37660fb5d162e5eae6e": {
+      "case_id": "cyberv3_claim_vault",
+      "dimension": "time",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_vault_time_shift",
+      "probe_id": "probe_cyberv3_claim_vault_time_shift_inside"
+    },
+    "d3cf5ce8109696f797a9": {
+      "case_id": "cyberv3_claim_database",
+      "dimension": "environment",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_database_cross_record",
+      "probe_id": "probe_cyberv3_claim_database_cross_record_outside"
+    },
+    "d7383634004be669880a": {
+      "case_id": "cyberv3_claim_storage",
+      "dimension": "environment",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_storage_cross_record",
+      "probe_id": "probe_cyberv3_claim_storage_cross_record_inside"
+    },
+    "d9cd0c13cb0b383a2000": {
+      "case_id": "cyberv3_claim_backup",
+      "dimension": "time",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_backup_time_shift",
+      "probe_id": "probe_cyberv3_claim_backup_time_shift_inside"
+    },
+    "de049d590df9acdd9116": {
+      "case_id": "cyberv3_claim_observability",
+      "dimension": "asset",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_observability_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_observability_late_narrowing_outside"
+    },
+    "de9f44bf547ff581ebba": {
+      "case_id": "cyberv3_claim_observability",
+      "dimension": "time",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_observability_time_shift",
+      "probe_id": "probe_cyberv3_claim_observability_time_shift_inside"
+    },
+    "e4674b9c43c6fe207c84": {
+      "case_id": "cyberv3_claim_firewall",
+      "dimension": "action",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_firewall_revoked_action",
+      "probe_id": "probe_cyberv3_claim_firewall_revoked_action_inside"
+    },
+    "e4ce55ade2166f731d56": {
+      "case_id": "cyberv3_claim_broker",
+      "dimension": "environment",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_broker_cross_record",
+      "probe_id": "probe_cyberv3_claim_broker_cross_record_outside"
+    },
+    "e5d52a796af97b8878ae": {
+      "case_id": "cyberv3_claim_ca",
+      "dimension": "time",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_ca_time_shift",
+      "probe_id": "probe_cyberv3_claim_ca_time_shift_outside"
+    },
+    "e72db9b05182655564a7": {
+      "case_id": "cyberv3_claim_artifact",
+      "dimension": "environment",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_artifact_cross_record",
+      "probe_id": "probe_cyberv3_claim_artifact_cross_record_inside"
+    },
+    "e7e4902a5d3695177595": {
+      "case_id": "cyberv3_claim_artifact",
+      "dimension": "action",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_artifact_revoked_action",
+      "probe_id": "probe_cyberv3_claim_artifact_revoked_action_outside"
+    },
+    "e85482d22c1eda6c64a0": {
+      "case_id": "cyberv3_claim_vpn",
+      "dimension": "environment",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_vpn_cross_record",
+      "probe_id": "probe_cyberv3_claim_vpn_cross_record_outside"
+    },
+    "e9d90839908fdf35bf6e": {
+      "case_id": "cyberv3_claim_edge",
+      "dimension": "asset",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_edge_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_edge_late_narrowing_inside"
+    },
+    "ec6aa2e9b3c4df01b825": {
+      "case_id": "cyberv3_claim_endpoint",
+      "dimension": "action",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_endpoint_revoked_action",
+      "probe_id": "probe_cyberv3_claim_endpoint_revoked_action_outside"
+    },
+    "efc69f5e2f011bec2370": {
+      "case_id": "cyberv3_claim_endpoint",
+      "dimension": "asset",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_endpoint_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_endpoint_late_narrowing_inside"
+    },
+    "f087f3e1b7d7548780ca": {
+      "case_id": "cyberv3_claim_artifact",
+      "dimension": "asset",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_artifact_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_artifact_late_narrowing_outside"
+    },
+    "f22ae85c7d6c0ddc53b3": {
+      "case_id": "cyberv3_claim_storage",
+      "dimension": "time",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_storage_time_shift",
+      "probe_id": "probe_cyberv3_claim_storage_time_shift_inside"
+    },
+    "f2ebac1c9864de7e343a": {
+      "case_id": "cyberv3_claim_observability",
+      "dimension": "environment",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_observability_cross_record",
+      "probe_id": "probe_cyberv3_claim_observability_cross_record_outside"
+    },
+    "f6401f5320165ccd2175": {
+      "case_id": "cyberv3_claim_identity",
+      "dimension": "time",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_identity_time_shift",
+      "probe_id": "probe_cyberv3_claim_identity_time_shift_inside"
+    },
+    "f9d4be6fcd667e290312": {
+      "case_id": "cyberv3_claim_email",
+      "dimension": "environment",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_email_cross_record",
+      "probe_id": "probe_cyberv3_claim_email_cross_record_outside"
+    },
+    "f9f1f701f436dcf7e22e": {
+      "case_id": "cyberv3_claim_storage",
+      "dimension": "time",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_storage_time_shift",
+      "probe_id": "probe_cyberv3_claim_storage_time_shift_outside"
+    },
+    "fa671de32a04ebbdf39a": {
+      "case_id": "cyberv3_claim_email",
+      "dimension": "time",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_email_time_shift",
+      "probe_id": "probe_cyberv3_claim_email_time_shift_inside"
+    },
+    "fb031df38abe0a96fccd": {
+      "case_id": "cyberv3_claim_artifact",
+      "dimension": "asset",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_artifact_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_artifact_late_narrowing_inside"
+    },
+    "fe3fceb41c20c5308c09": {
+      "case_id": "cyberv3_claim_endpoint",
+      "dimension": "environment",
+      "expected_permitted": false,
+      "pair_id": "pair_cyberv3_claim_endpoint_cross_record",
+      "probe_id": "probe_cyberv3_claim_endpoint_cross_record_outside"
+    },
+    "fe908ff91bcb53e4e89e": {
+      "case_id": "cyberv3_claim_kubernetes",
+      "dimension": "time",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_kubernetes_time_shift",
+      "probe_id": "probe_cyberv3_claim_kubernetes_time_shift_inside"
+    },
+    "fede57495dcd00e41f4c": {
+      "case_id": "cyberv3_claim_email",
+      "dimension": "asset",
+      "expected_permitted": true,
+      "pair_id": "pair_cyberv3_claim_email_late_narrowing",
+      "probe_id": "probe_cyberv3_claim_email_late_narrowing_inside"
+    }
+  }
+}

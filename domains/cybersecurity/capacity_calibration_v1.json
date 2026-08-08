@@ -1,0 +1,1483 @@
+{
+  "schema_version": "3",
+  "domain_id": "cybersecurity",
+  "calibration_corpus": "calibration_v1",
+  "calibration_split": "development_capacity",
+  "calibration_implementation": "cybersecurity_checkpoint_capacity_v1",
+  "freeze_status": "frozen",
+  "tokenizer_name": "cl100k_base",
+  "tokenizer_version": "tiktoken_reference",
+  "typed_schema_version": "4",
+  "typed_schema_sha256": "4a593c5f34e7463a3fc6e2ab975f4330197b15f3805749c0114c9022245647c0",
+  "free_text_representation": "cybersecurity_current_permissions_v1",
+  "calibration_source_sha256": "68a9682be429b006527da06e8aa5c5c281c41f97e3012762b333c71fd26a73c3",
+  "calibration_source_files": {
+    "corpus_v3/calibration_v3.yaml": "a7760bf67856411540b499cefcf3d9cd3c253a7adb991ce87f96c05166c8890f",
+    "data/calibration_v3.json": "403f6b1fb99966a989db03d3006a5ab7b59cb6f69f112297e39d28491d3b56eb",
+    "compile_v3.py": "e10a3bd1bb75740bdbee543db560da26859ca1b6a2081bdf4e347f97b38c53c7",
+    "corpus_v3.py": "9af2797ff5c42b370229d6496711e1d885684e709a95a3f60e2b341f5357ad00",
+    "corpus_v7.py": "b113050b3abf8d9a54e67bd9cceb1a145ee525fdedf43c2493f6e73e5e2a5019",
+    "corpus_v10.py": "ace3b242cff0fa845c71ea1caf92ad3f119f4b78f2b8567a36f56ca748db7282",
+    "corpus_v11.py": "ed1affd83a2a1a0a342717ac5803b1e24eb2afbb15be17399beaea8ad1e06ed0",
+    "corpus_v12.py": "798137d734db98ce06391c0287a709df725fa56721c972b0e3d72801f750e44f",
+    "corpus_final.py": "d098df0de41510019c82d1effc0c797e62e91618560688d09a72bf0caf75e8e3"
+  },
+  "capacity_basis": "largest faithful text or typed payload at any authorization checkpoint",
+  "largest_faithful_tokens": 1323,
+  "primary_multiplier": 2.0,
+  "tight_multiplier": 1.25,
+  "primary_tokens": 2646,
+  "tight_tokens": 1654,
+  "minimum_history_ratio": 8,
+  "minimum_history_tokens": 21172,
+  "required_history_tokens": 21168,
+  "cases": [
+    {
+      "case_id": "cyberv3_cal_edge",
+      "history_tokens": 21677,
+      "largest_faithful_tokens": 1293,
+      "largest_checkpoint_block_index": 8,
+      "checkpoints": [
+        {
+          "block_index": 0,
+          "active_grant_count": 1,
+          "faithful_text_tokens": 154,
+          "faithful_typed_tokens": 170,
+          "largest_faithful_tokens": 170
+        },
+        {
+          "block_index": 1,
+          "active_grant_count": 2,
+          "faithful_text_tokens": 317,
+          "faithful_typed_tokens": 344,
+          "largest_faithful_tokens": 344
+        },
+        {
+          "block_index": 2,
+          "active_grant_count": 2,
+          "faithful_text_tokens": 322,
+          "faithful_typed_tokens": 348,
+          "largest_faithful_tokens": 348
+        },
+        {
+          "block_index": 3,
+          "active_grant_count": 3,
+          "faithful_text_tokens": 496,
+          "faithful_typed_tokens": 533,
+          "largest_faithful_tokens": 533
+        },
+        {
+          "block_index": 4,
+          "active_grant_count": 2,
+          "faithful_text_tokens": 342,
+          "faithful_typed_tokens": 369,
+          "largest_faithful_tokens": 369
+        },
+        {
+          "block_index": 5,
+          "active_grant_count": 3,
+          "faithful_text_tokens": 485,
+          "faithful_typed_tokens": 525,
+          "largest_faithful_tokens": 525
+        },
+        {
+          "block_index": 6,
+          "active_grant_count": 3,
+          "faithful_text_tokens": 483,
+          "faithful_typed_tokens": 523,
+          "largest_faithful_tokens": 523
+        },
+        {
+          "block_index": 8,
+          "active_grant_count": 8,
+          "faithful_text_tokens": 1205,
+          "faithful_typed_tokens": 1293,
+          "largest_faithful_tokens": 1293
+        },
+        {
+          "block_index": 9,
+          "active_grant_count": 8,
+          "faithful_text_tokens": 1193,
+          "faithful_typed_tokens": 1286,
+          "largest_faithful_tokens": 1286
+        }
+      ]
+    },
+    {
+      "case_id": "cyberv3_cal_identity",
+      "history_tokens": 21729,
+      "largest_faithful_tokens": 1302,
+      "largest_checkpoint_block_index": 8,
+      "checkpoints": [
+        {
+          "block_index": 0,
+          "active_grant_count": 1,
+          "faithful_text_tokens": 156,
+          "faithful_typed_tokens": 171,
+          "largest_faithful_tokens": 171
+        },
+        {
+          "block_index": 1,
+          "active_grant_count": 2,
+          "faithful_text_tokens": 322,
+          "faithful_typed_tokens": 347,
+          "largest_faithful_tokens": 347
+        },
+        {
+          "block_index": 2,
+          "active_grant_count": 3,
+          "faithful_text_tokens": 499,
+          "faithful_typed_tokens": 534,
+          "largest_faithful_tokens": 534
+        },
+        {
+          "block_index": 3,
+          "active_grant_count": 3,
+          "faithful_text_tokens": 503,
+          "faithful_typed_tokens": 538,
+          "largest_faithful_tokens": 538
+        },
+        {
+          "block_index": 4,
+          "active_grant_count": 2,
+          "faithful_text_tokens": 348,
+          "faithful_typed_tokens": 373,
+          "largest_faithful_tokens": 373
+        },
+        {
+          "block_index": 5,
+          "active_grant_count": 3,
+          "faithful_text_tokens": 491,
+          "faithful_typed_tokens": 529,
+          "largest_faithful_tokens": 529
+        },
+        {
+          "block_index": 6,
+          "active_grant_count": 3,
+          "faithful_text_tokens": 488,
+          "faithful_typed_tokens": 526,
+          "largest_faithful_tokens": 526
+        },
+        {
+          "block_index": 8,
+          "active_grant_count": 8,
+          "faithful_text_tokens": 1216,
+          "faithful_typed_tokens": 1302,
+          "largest_faithful_tokens": 1302
+        },
+        {
+          "block_index": 9,
+          "active_grant_count": 8,
+          "faithful_text_tokens": 1205,
+          "faithful_typed_tokens": 1296,
+          "largest_faithful_tokens": 1296
+        }
+      ]
+    },
+    {
+      "case_id": "cyberv3_cal_payments",
+      "history_tokens": 21256,
+      "largest_faithful_tokens": 1292,
+      "largest_checkpoint_block_index": 8,
+      "checkpoints": [
+        {
+          "block_index": 0,
+          "active_grant_count": 1,
+          "faithful_text_tokens": 152,
+          "faithful_typed_tokens": 167,
+          "largest_faithful_tokens": 167
+        },
+        {
+          "block_index": 1,
+          "active_grant_count": 2,
+          "faithful_text_tokens": 313,
+          "faithful_typed_tokens": 338,
+          "largest_faithful_tokens": 338
+        },
+        {
+          "block_index": 2,
+          "active_grant_count": 2,
+          "faithful_text_tokens": 316,
+          "faithful_typed_tokens": 341,
+          "largest_faithful_tokens": 341
+        },
+        {
+          "block_index": 3,
+          "active_grant_count": 1,
+          "faithful_text_tokens": 166,
+          "faithful_typed_tokens": 181,
+          "largest_faithful_tokens": 181
+        },
+        {
+          "block_index": 4,
+          "active_grant_count": 2,
+          "faithful_text_tokens": 307,
+          "faithful_typed_tokens": 335,
+          "largest_faithful_tokens": 335
+        },
+        {
+          "block_index": 5,
+          "active_grant_count": 3,
+          "faithful_text_tokens": 480,
+          "faithful_typed_tokens": 518,
+          "largest_faithful_tokens": 518
+        },
+        {
+          "block_index": 6,
+          "active_grant_count": 3,
+          "faithful_text_tokens": 476,
+          "faithful_typed_tokens": 514,
+          "largest_faithful_tokens": 514
+        },
+        {
+          "block_index": 8,
+          "active_grant_count": 8,
+          "faithful_text_tokens": 1206,
+          "faithful_typed_tokens": 1292,
+          "largest_faithful_tokens": 1292
+        },
+        {
+          "block_index": 9,
+          "active_grant_count": 8,
+          "faithful_text_tokens": 1195,
+          "faithful_typed_tokens": 1286,
+          "largest_faithful_tokens": 1286
+        }
+      ]
+    },
+    {
+      "case_id": "cyberv3_cal_storage",
+      "history_tokens": 21985,
+      "largest_faithful_tokens": 1323,
+      "largest_checkpoint_block_index": 8,
+      "checkpoints": [
+        {
+          "block_index": 0,
+          "active_grant_count": 1,
+          "faithful_text_tokens": 154,
+          "faithful_typed_tokens": 169,
+          "largest_faithful_tokens": 169
+        },
+        {
+          "block_index": 1,
+          "active_grant_count": 2,
+          "faithful_text_tokens": 317,
+          "faithful_typed_tokens": 342,
+          "largest_faithful_tokens": 342
+        },
+        {
+          "block_index": 2,
+          "active_grant_count": 3,
+          "faithful_text_tokens": 491,
+          "faithful_typed_tokens": 526,
+          "largest_faithful_tokens": 526
+        },
+        {
+          "block_index": 3,
+          "active_grant_count": 3,
+          "faithful_text_tokens": 497,
+          "faithful_typed_tokens": 532,
+          "largest_faithful_tokens": 532
+        },
+        {
+          "block_index": 4,
+          "active_grant_count": 3,
+          "faithful_text_tokens": 496,
+          "faithful_typed_tokens": 531,
+          "largest_faithful_tokens": 531
+        },
+        {
+          "block_index": 5,
+          "active_grant_count": 2,
+          "faithful_text_tokens": 341,
+          "faithful_typed_tokens": 366,
+          "largest_faithful_tokens": 366
+        },
+        {
+          "block_index": 6,
+          "active_grant_count": 3,
+          "faithful_text_tokens": 484,
+          "faithful_typed_tokens": 522,
+          "largest_faithful_tokens": 522
+        },
+        {
+          "block_index": 8,
+          "active_grant_count": 8,
+          "faithful_text_tokens": 1237,
+          "faithful_typed_tokens": 1323,
+          "largest_faithful_tokens": 1323
+        },
+        {
+          "block_index": 9,
+          "active_grant_count": 8,
+          "faithful_text_tokens": 1225,
+          "faithful_typed_tokens": 1316,
+          "largest_faithful_tokens": 1316
+        }
+      ]
+    }
+  ],
+  "development_compatibility": {
+    "corpus_version": "benchmark_v1",
+    "source_sha256": "889a48dd228d35edd761201f0749e32e6e29e911cf2e4ce1e20785e9276f085c",
+    "source_files": {
+      "corpus_v3/benchmark_v1_base.yaml": "3626c3aef57e53bb2718f2bd1c35e68169be150089d56ac328d8c987cba26f2c",
+      "data/benchmark_v1_base.json": "4b6cb0ee7e880edf619fe0447993cd1462e8f9d4dceed0f5ace61f90489dab62",
+      "compile_v3.py": "e10a3bd1bb75740bdbee543db560da26859ca1b6a2081bdf4e347f97b38c53c7",
+      "corpus_v3.py": "9af2797ff5c42b370229d6496711e1d885684e709a95a3f60e2b341f5357ad00",
+      "corpus_v7.py": "b113050b3abf8d9a54e67bd9cceb1a145ee525fdedf43c2493f6e73e5e2a5019",
+      "corpus_v10.py": "ace3b242cff0fa845c71ea1caf92ad3f119f4b78f2b8567a36f56ca748db7282",
+      "corpus_v11.py": "ed1affd83a2a1a0a342717ac5803b1e24eb2afbb15be17399beaea8ad1e06ed0",
+      "corpus_v12.py": "798137d734db98ce06391c0287a709df725fa56721c972b0e3d72801f750e44f",
+      "corpus_final.py": "d098df0de41510019c82d1effc0c797e62e91618560688d09a72bf0caf75e8e3"
+    },
+    "largest_faithful_tokens": 1335,
+    "all_faithful_payloads_fit_primary": true,
+    "minimum_history_tokens": 21172,
+    "required_history_tokens": 21168,
+    "cases": [
+      {
+        "case_id": "cyberv3_claim_identity",
+        "history_tokens": 21619,
+        "largest_faithful_tokens": 1319,
+        "largest_checkpoint_block_index": 8,
+        "checkpoints": [
+          {
+            "block_index": 0,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 155,
+            "faithful_typed_tokens": 171,
+            "largest_faithful_tokens": 171
+          },
+          {
+            "block_index": 1,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 320,
+            "faithful_typed_tokens": 347,
+            "largest_faithful_tokens": 347
+          },
+          {
+            "block_index": 2,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 323,
+            "faithful_typed_tokens": 349,
+            "largest_faithful_tokens": 349
+          },
+          {
+            "block_index": 3,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 498,
+            "faithful_typed_tokens": 535,
+            "largest_faithful_tokens": 535
+          },
+          {
+            "block_index": 4,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 345,
+            "faithful_typed_tokens": 372,
+            "largest_faithful_tokens": 372
+          },
+          {
+            "block_index": 5,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 487,
+            "faithful_typed_tokens": 527,
+            "largest_faithful_tokens": 527
+          },
+          {
+            "block_index": 6,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 483,
+            "faithful_typed_tokens": 523,
+            "largest_faithful_tokens": 523
+          },
+          {
+            "block_index": 8,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1231,
+            "faithful_typed_tokens": 1319,
+            "largest_faithful_tokens": 1319
+          },
+          {
+            "block_index": 9,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1219,
+            "faithful_typed_tokens": 1312,
+            "largest_faithful_tokens": 1312
+          }
+        ]
+      },
+      {
+        "case_id": "cyberv3_claim_endpoint",
+        "history_tokens": 21606,
+        "largest_faithful_tokens": 1311,
+        "largest_checkpoint_block_index": 8,
+        "checkpoints": [
+          {
+            "block_index": 0,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 156,
+            "faithful_typed_tokens": 172,
+            "largest_faithful_tokens": 172
+          },
+          {
+            "block_index": 1,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 322,
+            "faithful_typed_tokens": 349,
+            "largest_faithful_tokens": 349
+          },
+          {
+            "block_index": 2,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 325,
+            "faithful_typed_tokens": 351,
+            "largest_faithful_tokens": 351
+          },
+          {
+            "block_index": 3,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 501,
+            "faithful_typed_tokens": 538,
+            "largest_faithful_tokens": 538
+          },
+          {
+            "block_index": 4,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 347,
+            "faithful_typed_tokens": 374,
+            "largest_faithful_tokens": 374
+          },
+          {
+            "block_index": 5,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 490,
+            "faithful_typed_tokens": 530,
+            "largest_faithful_tokens": 530
+          },
+          {
+            "block_index": 6,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 486,
+            "faithful_typed_tokens": 526,
+            "largest_faithful_tokens": 526
+          },
+          {
+            "block_index": 8,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1223,
+            "faithful_typed_tokens": 1311,
+            "largest_faithful_tokens": 1311
+          },
+          {
+            "block_index": 9,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1211,
+            "faithful_typed_tokens": 1304,
+            "largest_faithful_tokens": 1304
+          }
+        ]
+      },
+      {
+        "case_id": "cyberv3_claim_vault",
+        "history_tokens": 21408,
+        "largest_faithful_tokens": 1318,
+        "largest_checkpoint_block_index": 8,
+        "checkpoints": [
+          {
+            "block_index": 0,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 153,
+            "faithful_typed_tokens": 168,
+            "largest_faithful_tokens": 168
+          },
+          {
+            "block_index": 1,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 315,
+            "faithful_typed_tokens": 340,
+            "largest_faithful_tokens": 340
+          },
+          {
+            "block_index": 2,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 318,
+            "faithful_typed_tokens": 343,
+            "largest_faithful_tokens": 343
+          },
+          {
+            "block_index": 3,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 492,
+            "faithful_typed_tokens": 528,
+            "largest_faithful_tokens": 528
+          },
+          {
+            "block_index": 4,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 341,
+            "faithful_typed_tokens": 367,
+            "largest_faithful_tokens": 367
+          },
+          {
+            "block_index": 5,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 483,
+            "faithful_typed_tokens": 523,
+            "largest_faithful_tokens": 523
+          },
+          {
+            "block_index": 6,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 479,
+            "faithful_typed_tokens": 519,
+            "largest_faithful_tokens": 519
+          },
+          {
+            "block_index": 8,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1230,
+            "faithful_typed_tokens": 1318,
+            "largest_faithful_tokens": 1318
+          },
+          {
+            "block_index": 9,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1219,
+            "faithful_typed_tokens": 1312,
+            "largest_faithful_tokens": 1312
+          }
+        ]
+      },
+      {
+        "case_id": "cyberv3_claim_kubernetes",
+        "history_tokens": 21679,
+        "largest_faithful_tokens": 1322,
+        "largest_checkpoint_block_index": 8,
+        "checkpoints": [
+          {
+            "block_index": 0,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 158,
+            "faithful_typed_tokens": 173,
+            "largest_faithful_tokens": 173
+          },
+          {
+            "block_index": 1,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 327,
+            "faithful_typed_tokens": 352,
+            "largest_faithful_tokens": 352
+          },
+          {
+            "block_index": 2,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 329,
+            "faithful_typed_tokens": 354,
+            "largest_faithful_tokens": 354
+          },
+          {
+            "block_index": 3,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 508,
+            "faithful_typed_tokens": 544,
+            "largest_faithful_tokens": 544
+          },
+          {
+            "block_index": 4,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 353,
+            "faithful_typed_tokens": 379,
+            "largest_faithful_tokens": 379
+          },
+          {
+            "block_index": 5,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 497,
+            "faithful_typed_tokens": 536,
+            "largest_faithful_tokens": 536
+          },
+          {
+            "block_index": 6,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 492,
+            "faithful_typed_tokens": 531,
+            "largest_faithful_tokens": 531
+          },
+          {
+            "block_index": 8,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1231,
+            "faithful_typed_tokens": 1322,
+            "largest_faithful_tokens": 1322
+          },
+          {
+            "block_index": 9,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1219,
+            "faithful_typed_tokens": 1316,
+            "largest_faithful_tokens": 1316
+          }
+        ]
+      },
+      {
+        "case_id": "cyberv3_claim_firewall",
+        "history_tokens": 21536,
+        "largest_faithful_tokens": 1305,
+        "largest_checkpoint_block_index": 8,
+        "checkpoints": [
+          {
+            "block_index": 0,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 154,
+            "faithful_typed_tokens": 169,
+            "largest_faithful_tokens": 169
+          },
+          {
+            "block_index": 1,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 317,
+            "faithful_typed_tokens": 342,
+            "largest_faithful_tokens": 342
+          },
+          {
+            "block_index": 2,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 491,
+            "faithful_typed_tokens": 526,
+            "largest_faithful_tokens": 526
+          },
+          {
+            "block_index": 3,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 495,
+            "faithful_typed_tokens": 530,
+            "largest_faithful_tokens": 530
+          },
+          {
+            "block_index": 4,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 342,
+            "faithful_typed_tokens": 367,
+            "largest_faithful_tokens": 367
+          },
+          {
+            "block_index": 5,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 485,
+            "faithful_typed_tokens": 523,
+            "largest_faithful_tokens": 523
+          },
+          {
+            "block_index": 6,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 482,
+            "faithful_typed_tokens": 520,
+            "largest_faithful_tokens": 520
+          },
+          {
+            "block_index": 8,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1219,
+            "faithful_typed_tokens": 1305,
+            "largest_faithful_tokens": 1305
+          },
+          {
+            "block_index": 9,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1207,
+            "faithful_typed_tokens": 1298,
+            "largest_faithful_tokens": 1298
+          }
+        ]
+      },
+      {
+        "case_id": "cyberv3_claim_storage",
+        "history_tokens": 22052,
+        "largest_faithful_tokens": 1335,
+        "largest_checkpoint_block_index": 8,
+        "checkpoints": [
+          {
+            "block_index": 0,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 154,
+            "faithful_typed_tokens": 169,
+            "largest_faithful_tokens": 169
+          },
+          {
+            "block_index": 1,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 317,
+            "faithful_typed_tokens": 342,
+            "largest_faithful_tokens": 342
+          },
+          {
+            "block_index": 2,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 491,
+            "faithful_typed_tokens": 526,
+            "largest_faithful_tokens": 526
+          },
+          {
+            "block_index": 3,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 497,
+            "faithful_typed_tokens": 532,
+            "largest_faithful_tokens": 532
+          },
+          {
+            "block_index": 4,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 342,
+            "faithful_typed_tokens": 367,
+            "largest_faithful_tokens": 367
+          },
+          {
+            "block_index": 5,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 485,
+            "faithful_typed_tokens": 523,
+            "largest_faithful_tokens": 523
+          },
+          {
+            "block_index": 6,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 484,
+            "faithful_typed_tokens": 522,
+            "largest_faithful_tokens": 522
+          },
+          {
+            "block_index": 8,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1249,
+            "faithful_typed_tokens": 1335,
+            "largest_faithful_tokens": 1335
+          },
+          {
+            "block_index": 9,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1237,
+            "faithful_typed_tokens": 1328,
+            "largest_faithful_tokens": 1328
+          }
+        ]
+      },
+      {
+        "case_id": "cyberv3_claim_database",
+        "history_tokens": 21576,
+        "largest_faithful_tokens": 1314,
+        "largest_checkpoint_block_index": 8,
+        "checkpoints": [
+          {
+            "block_index": 0,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 156,
+            "faithful_typed_tokens": 170,
+            "largest_faithful_tokens": 170
+          },
+          {
+            "block_index": 1,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 322,
+            "faithful_typed_tokens": 345,
+            "largest_faithful_tokens": 345
+          },
+          {
+            "block_index": 2,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 498,
+            "faithful_typed_tokens": 531,
+            "largest_faithful_tokens": 531
+          },
+          {
+            "block_index": 3,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 501,
+            "faithful_typed_tokens": 534,
+            "largest_faithful_tokens": 534
+          },
+          {
+            "block_index": 4,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 347,
+            "faithful_typed_tokens": 371,
+            "largest_faithful_tokens": 371
+          },
+          {
+            "block_index": 5,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 491,
+            "faithful_typed_tokens": 526,
+            "largest_faithful_tokens": 526
+          },
+          {
+            "block_index": 6,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 487,
+            "faithful_typed_tokens": 522,
+            "largest_faithful_tokens": 522
+          },
+          {
+            "block_index": 8,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1223,
+            "faithful_typed_tokens": 1314,
+            "largest_faithful_tokens": 1314
+          },
+          {
+            "block_index": 9,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1211,
+            "faithful_typed_tokens": 1308,
+            "largest_faithful_tokens": 1308
+          }
+        ]
+      },
+      {
+        "case_id": "cyberv3_claim_runner",
+        "history_tokens": 21225,
+        "largest_faithful_tokens": 1291,
+        "largest_checkpoint_block_index": 8,
+        "checkpoints": [
+          {
+            "block_index": 0,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 151,
+            "faithful_typed_tokens": 166,
+            "largest_faithful_tokens": 166
+          },
+          {
+            "block_index": 1,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 311,
+            "faithful_typed_tokens": 336,
+            "largest_faithful_tokens": 336
+          },
+          {
+            "block_index": 2,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 482,
+            "faithful_typed_tokens": 517,
+            "largest_faithful_tokens": 517
+          },
+          {
+            "block_index": 3,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 485,
+            "faithful_typed_tokens": 520,
+            "largest_faithful_tokens": 520
+          },
+          {
+            "block_index": 4,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 336,
+            "faithful_typed_tokens": 361,
+            "largest_faithful_tokens": 361
+          },
+          {
+            "block_index": 5,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 476,
+            "faithful_typed_tokens": 514,
+            "largest_faithful_tokens": 514
+          },
+          {
+            "block_index": 6,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 472,
+            "faithful_typed_tokens": 510,
+            "largest_faithful_tokens": 510
+          },
+          {
+            "block_index": 8,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1205,
+            "faithful_typed_tokens": 1291,
+            "largest_faithful_tokens": 1291
+          },
+          {
+            "block_index": 9,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1193,
+            "faithful_typed_tokens": 1284,
+            "largest_faithful_tokens": 1284
+          }
+        ]
+      },
+      {
+        "case_id": "cyberv3_claim_email",
+        "history_tokens": 21723,
+        "largest_faithful_tokens": 1311,
+        "largest_checkpoint_block_index": 8,
+        "checkpoints": [
+          {
+            "block_index": 0,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 154,
+            "faithful_typed_tokens": 168,
+            "largest_faithful_tokens": 168
+          },
+          {
+            "block_index": 1,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 317,
+            "faithful_typed_tokens": 340,
+            "largest_faithful_tokens": 340
+          },
+          {
+            "block_index": 2,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 322,
+            "faithful_typed_tokens": 345,
+            "largest_faithful_tokens": 345
+          },
+          {
+            "block_index": 3,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 168,
+            "faithful_typed_tokens": 182,
+            "largest_faithful_tokens": 182
+          },
+          {
+            "block_index": 4,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 312,
+            "faithful_typed_tokens": 337,
+            "largest_faithful_tokens": 337
+          },
+          {
+            "block_index": 5,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 486,
+            "faithful_typed_tokens": 520,
+            "largest_faithful_tokens": 520
+          },
+          {
+            "block_index": 6,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 484,
+            "faithful_typed_tokens": 518,
+            "largest_faithful_tokens": 518
+          },
+          {
+            "block_index": 8,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1225,
+            "faithful_typed_tokens": 1311,
+            "largest_faithful_tokens": 1311
+          },
+          {
+            "block_index": 9,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1213,
+            "faithful_typed_tokens": 1304,
+            "largest_faithful_tokens": 1304
+          }
+        ]
+      },
+      {
+        "case_id": "cyberv3_claim_edge",
+        "history_tokens": 21984,
+        "largest_faithful_tokens": 1320,
+        "largest_checkpoint_block_index": 8,
+        "checkpoints": [
+          {
+            "block_index": 0,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 154,
+            "faithful_typed_tokens": 169,
+            "largest_faithful_tokens": 169
+          },
+          {
+            "block_index": 1,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 317,
+            "faithful_typed_tokens": 342,
+            "largest_faithful_tokens": 342
+          },
+          {
+            "block_index": 2,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 323,
+            "faithful_typed_tokens": 348,
+            "largest_faithful_tokens": 348
+          },
+          {
+            "block_index": 3,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 168,
+            "faithful_typed_tokens": 183,
+            "largest_faithful_tokens": 183
+          },
+          {
+            "block_index": 4,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 311,
+            "faithful_typed_tokens": 339,
+            "largest_faithful_tokens": 339
+          },
+          {
+            "block_index": 5,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 486,
+            "faithful_typed_tokens": 524,
+            "largest_faithful_tokens": 524
+          },
+          {
+            "block_index": 6,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 485,
+            "faithful_typed_tokens": 523,
+            "largest_faithful_tokens": 523
+          },
+          {
+            "block_index": 8,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1234,
+            "faithful_typed_tokens": 1320,
+            "largest_faithful_tokens": 1320
+          },
+          {
+            "block_index": 9,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1223,
+            "faithful_typed_tokens": 1314,
+            "largest_faithful_tokens": 1314
+          }
+        ]
+      },
+      {
+        "case_id": "cyberv3_claim_observability",
+        "history_tokens": 21541,
+        "largest_faithful_tokens": 1301,
+        "largest_checkpoint_block_index": 8,
+        "checkpoints": [
+          {
+            "block_index": 0,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 154,
+            "faithful_typed_tokens": 169,
+            "largest_faithful_tokens": 169
+          },
+          {
+            "block_index": 1,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 317,
+            "faithful_typed_tokens": 342,
+            "largest_faithful_tokens": 342
+          },
+          {
+            "block_index": 2,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 321,
+            "faithful_typed_tokens": 346,
+            "largest_faithful_tokens": 346
+          },
+          {
+            "block_index": 3,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 168,
+            "faithful_typed_tokens": 183,
+            "largest_faithful_tokens": 183
+          },
+          {
+            "block_index": 4,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 311,
+            "faithful_typed_tokens": 340,
+            "largest_faithful_tokens": 340
+          },
+          {
+            "block_index": 5,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 485,
+            "faithful_typed_tokens": 525,
+            "largest_faithful_tokens": 525
+          },
+          {
+            "block_index": 6,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 482,
+            "faithful_typed_tokens": 522,
+            "largest_faithful_tokens": 522
+          },
+          {
+            "block_index": 8,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1213,
+            "faithful_typed_tokens": 1301,
+            "largest_faithful_tokens": 1301
+          },
+          {
+            "block_index": 9,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1201,
+            "faithful_typed_tokens": 1294,
+            "largest_faithful_tokens": 1294
+          }
+        ]
+      },
+      {
+        "case_id": "cyberv3_claim_artifact",
+        "history_tokens": 21172,
+        "largest_faithful_tokens": 1314,
+        "largest_checkpoint_block_index": 8,
+        "checkpoints": [
+          {
+            "block_index": 0,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 151,
+            "faithful_typed_tokens": 166,
+            "largest_faithful_tokens": 166
+          },
+          {
+            "block_index": 1,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 311,
+            "faithful_typed_tokens": 336,
+            "largest_faithful_tokens": 336
+          },
+          {
+            "block_index": 2,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 313,
+            "faithful_typed_tokens": 338,
+            "largest_faithful_tokens": 338
+          },
+          {
+            "block_index": 3,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 165,
+            "faithful_typed_tokens": 180,
+            "largest_faithful_tokens": 180
+          },
+          {
+            "block_index": 4,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 305,
+            "faithful_typed_tokens": 334,
+            "largest_faithful_tokens": 334
+          },
+          {
+            "block_index": 5,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 477,
+            "faithful_typed_tokens": 517,
+            "largest_faithful_tokens": 517
+          },
+          {
+            "block_index": 6,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 472,
+            "faithful_typed_tokens": 512,
+            "largest_faithful_tokens": 512
+          },
+          {
+            "block_index": 8,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1226,
+            "faithful_typed_tokens": 1314,
+            "largest_faithful_tokens": 1314
+          },
+          {
+            "block_index": 9,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1215,
+            "faithful_typed_tokens": 1308,
+            "largest_faithful_tokens": 1308
+          }
+        ]
+      },
+      {
+        "case_id": "cyberv3_claim_vpn",
+        "history_tokens": 22292,
+        "largest_faithful_tokens": 1331,
+        "largest_checkpoint_block_index": 8,
+        "checkpoints": [
+          {
+            "block_index": 0,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 157,
+            "faithful_typed_tokens": 173,
+            "largest_faithful_tokens": 173
+          },
+          {
+            "block_index": 1,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 323,
+            "faithful_typed_tokens": 350,
+            "largest_faithful_tokens": 350
+          },
+          {
+            "block_index": 2,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 500,
+            "faithful_typed_tokens": 539,
+            "largest_faithful_tokens": 539
+          },
+          {
+            "block_index": 3,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 507,
+            "faithful_typed_tokens": 545,
+            "largest_faithful_tokens": 545
+          },
+          {
+            "block_index": 4,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 507,
+            "faithful_typed_tokens": 545,
+            "largest_faithful_tokens": 545
+          },
+          {
+            "block_index": 5,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 348,
+            "faithful_typed_tokens": 376,
+            "largest_faithful_tokens": 376
+          },
+          {
+            "block_index": 6,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 494,
+            "faithful_typed_tokens": 536,
+            "largest_faithful_tokens": 536
+          },
+          {
+            "block_index": 8,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1241,
+            "faithful_typed_tokens": 1331,
+            "largest_faithful_tokens": 1331
+          },
+          {
+            "block_index": 9,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1229,
+            "faithful_typed_tokens": 1324,
+            "largest_faithful_tokens": 1324
+          }
+        ]
+      },
+      {
+        "case_id": "cyberv3_claim_broker",
+        "history_tokens": 21971,
+        "largest_faithful_tokens": 1313,
+        "largest_checkpoint_block_index": 8,
+        "checkpoints": [
+          {
+            "block_index": 0,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 155,
+            "faithful_typed_tokens": 171,
+            "largest_faithful_tokens": 171
+          },
+          {
+            "block_index": 1,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 319,
+            "faithful_typed_tokens": 346,
+            "largest_faithful_tokens": 346
+          },
+          {
+            "block_index": 2,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 494,
+            "faithful_typed_tokens": 532,
+            "largest_faithful_tokens": 532
+          },
+          {
+            "block_index": 3,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 500,
+            "faithful_typed_tokens": 537,
+            "largest_faithful_tokens": 537
+          },
+          {
+            "block_index": 4,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 499,
+            "faithful_typed_tokens": 536,
+            "largest_faithful_tokens": 536
+          },
+          {
+            "block_index": 5,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 343,
+            "faithful_typed_tokens": 370,
+            "largest_faithful_tokens": 370
+          },
+          {
+            "block_index": 6,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 487,
+            "faithful_typed_tokens": 527,
+            "largest_faithful_tokens": 527
+          },
+          {
+            "block_index": 8,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1225,
+            "faithful_typed_tokens": 1313,
+            "largest_faithful_tokens": 1313
+          },
+          {
+            "block_index": 9,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1213,
+            "faithful_typed_tokens": 1306,
+            "largest_faithful_tokens": 1306
+          }
+        ]
+      },
+      {
+        "case_id": "cyberv3_claim_backup",
+        "history_tokens": 21506,
+        "largest_faithful_tokens": 1303,
+        "largest_checkpoint_block_index": 8,
+        "checkpoints": [
+          {
+            "block_index": 0,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 153,
+            "faithful_typed_tokens": 168,
+            "largest_faithful_tokens": 168
+          },
+          {
+            "block_index": 1,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 315,
+            "faithful_typed_tokens": 340,
+            "largest_faithful_tokens": 340
+          },
+          {
+            "block_index": 2,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 488,
+            "faithful_typed_tokens": 523,
+            "largest_faithful_tokens": 523
+          },
+          {
+            "block_index": 3,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 492,
+            "faithful_typed_tokens": 527,
+            "largest_faithful_tokens": 527
+          },
+          {
+            "block_index": 4,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 489,
+            "faithful_typed_tokens": 524,
+            "largest_faithful_tokens": 524
+          },
+          {
+            "block_index": 5,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 337,
+            "faithful_typed_tokens": 362,
+            "largest_faithful_tokens": 362
+          },
+          {
+            "block_index": 6,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 479,
+            "faithful_typed_tokens": 517,
+            "largest_faithful_tokens": 517
+          },
+          {
+            "block_index": 8,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1217,
+            "faithful_typed_tokens": 1303,
+            "largest_faithful_tokens": 1303
+          },
+          {
+            "block_index": 9,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1205,
+            "faithful_typed_tokens": 1296,
+            "largest_faithful_tokens": 1296
+          }
+        ]
+      },
+      {
+        "case_id": "cyberv3_claim_ca",
+        "history_tokens": 21828,
+        "largest_faithful_tokens": 1326,
+        "largest_checkpoint_block_index": 8,
+        "checkpoints": [
+          {
+            "block_index": 0,
+            "active_grant_count": 1,
+            "faithful_text_tokens": 154,
+            "faithful_typed_tokens": 169,
+            "largest_faithful_tokens": 169
+          },
+          {
+            "block_index": 1,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 317,
+            "faithful_typed_tokens": 342,
+            "largest_faithful_tokens": 342
+          },
+          {
+            "block_index": 2,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 493,
+            "faithful_typed_tokens": 528,
+            "largest_faithful_tokens": 528
+          },
+          {
+            "block_index": 3,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 498,
+            "faithful_typed_tokens": 533,
+            "largest_faithful_tokens": 533
+          },
+          {
+            "block_index": 4,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 496,
+            "faithful_typed_tokens": 531,
+            "largest_faithful_tokens": 531
+          },
+          {
+            "block_index": 5,
+            "active_grant_count": 2,
+            "faithful_text_tokens": 342,
+            "faithful_typed_tokens": 367,
+            "largest_faithful_tokens": 367
+          },
+          {
+            "block_index": 6,
+            "active_grant_count": 3,
+            "faithful_text_tokens": 486,
+            "faithful_typed_tokens": 524,
+            "largest_faithful_tokens": 524
+          },
+          {
+            "block_index": 8,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1240,
+            "faithful_typed_tokens": 1326,
+            "largest_faithful_tokens": 1326
+          },
+          {
+            "block_index": 9,
+            "active_grant_count": 8,
+            "faithful_text_tokens": 1229,
+            "faithful_typed_tokens": 1320,
+            "largest_faithful_tokens": 1320
+          }
+        ]
+      }
+    ]
+  },
+  "serialization": {
+    "typed": "canonical_json",
+    "text": "plain_text",
+    "checkpoint_blocks": "all authorization-changing blocks",
+    "canonical_json_example_sha256": "e95725d652c1969c83e4ef60127a89191be12472b83a1afc7186f97b04dc85ef"
+  }
+}
