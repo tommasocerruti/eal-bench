@@ -1,0 +1,735 @@
+{
+  "affected_family_count": 10,
+  "artifact_schema_versions": {
+    "evidence": 3,
+    "fidelity": 2,
+    "interventions": 2,
+    "memories": 4,
+    "memory_attempts": 6,
+    "memory_states": 3,
+    "model_contexts": 1,
+    "pressure_source_jobs": 1,
+    "substantive_eligibility": 2,
+    "trials": 5,
+    "typed_memory_payload": "3",
+    "witnesses": 2
+  },
+  "batch_size": 20,
+  "candidate_cap": 20,
+  "candidate_cap_per_family": 2,
+  "capacity": {
+    "cases": [
+      {
+        "case_id": "cyberv3_claim_identity",
+        "faithful_text_tokens": 1219,
+        "faithful_typed_tokens": 1312,
+        "history_tokens": 21619
+      },
+      {
+        "case_id": "cyberv3_claim_endpoint",
+        "faithful_text_tokens": 1211,
+        "faithful_typed_tokens": 1304,
+        "history_tokens": 21606
+      },
+      {
+        "case_id": "cyberv3_claim_vault",
+        "faithful_text_tokens": 1219,
+        "faithful_typed_tokens": 1312,
+        "history_tokens": 21408
+      },
+      {
+        "case_id": "cyberv3_claim_kubernetes",
+        "faithful_text_tokens": 1219,
+        "faithful_typed_tokens": 1316,
+        "history_tokens": 21679
+      },
+      {
+        "case_id": "cyberv3_claim_firewall",
+        "faithful_text_tokens": 1207,
+        "faithful_typed_tokens": 1298,
+        "history_tokens": 21536
+      },
+      {
+        "case_id": "cyberv3_claim_storage",
+        "faithful_text_tokens": 1237,
+        "faithful_typed_tokens": 1328,
+        "history_tokens": 22052
+      },
+      {
+        "case_id": "cyberv3_claim_database",
+        "faithful_text_tokens": 1211,
+        "faithful_typed_tokens": 1308,
+        "history_tokens": 21576
+      },
+      {
+        "case_id": "cyberv3_claim_runner",
+        "faithful_text_tokens": 1193,
+        "faithful_typed_tokens": 1284,
+        "history_tokens": 21225
+      },
+      {
+        "case_id": "cyberv3_claim_email",
+        "faithful_text_tokens": 1213,
+        "faithful_typed_tokens": 1304,
+        "history_tokens": 21723
+      },
+      {
+        "case_id": "cyberv3_claim_edge",
+        "faithful_text_tokens": 1223,
+        "faithful_typed_tokens": 1314,
+        "history_tokens": 21984
+      },
+      {
+        "case_id": "cyberv3_claim_observability",
+        "faithful_text_tokens": 1201,
+        "faithful_typed_tokens": 1294,
+        "history_tokens": 21541
+      },
+      {
+        "case_id": "cyberv3_claim_artifact",
+        "faithful_text_tokens": 1215,
+        "faithful_typed_tokens": 1308,
+        "history_tokens": 21172
+      },
+      {
+        "case_id": "cyberv3_claim_vpn",
+        "faithful_text_tokens": 1229,
+        "faithful_typed_tokens": 1324,
+        "history_tokens": 22292
+      },
+      {
+        "case_id": "cyberv3_claim_broker",
+        "faithful_text_tokens": 1213,
+        "faithful_typed_tokens": 1306,
+        "history_tokens": 21971
+      },
+      {
+        "case_id": "cyberv3_claim_backup",
+        "faithful_text_tokens": 1205,
+        "faithful_typed_tokens": 1296,
+        "history_tokens": 21506
+      },
+      {
+        "case_id": "cyberv3_claim_ca",
+        "faithful_text_tokens": 1229,
+        "faithful_typed_tokens": 1320,
+        "history_tokens": 21828
+      }
+    ],
+    "largest_faithful_tokens": 1328,
+    "minimum_history_ratio": 8,
+    "primary_tokens": 2646,
+    "reference_tokenizer": "cl100k_base",
+    "tight_tokens": 1654
+  },
+  "capacity_tier": "primary",
+  "case_ids": [
+    "cyberv3_claim_identity",
+    "cyberv3_claim_endpoint",
+    "cyberv3_claim_vault",
+    "cyberv3_claim_kubernetes",
+    "cyberv3_claim_firewall",
+    "cyberv3_claim_storage",
+    "cyberv3_claim_database",
+    "cyberv3_claim_runner",
+    "cyberv3_claim_email",
+    "cyberv3_claim_edge",
+    "cyberv3_claim_observability",
+    "cyberv3_claim_artifact",
+    "cyberv3_claim_vpn",
+    "cyberv3_claim_broker",
+    "cyberv3_claim_backup",
+    "cyberv3_claim_ca"
+  ],
+  "command": "python -m experiments.run --domain cybersecurity --corpus-version benchmark_v1 --presentation-version naturalistic_v1 --study writer --writer-targets gptoss_baseten --executor-targets gptoss_baseten --estimated-cost-usd 0.90 --tag cybersecurity-v1-claim-writer",
+  "conditions": [
+    "one_shot_text",
+    "one_shot_typed",
+    "incremental_text",
+    "incremental_typed"
+  ],
+  "corpus_provenance": {
+    "corpus_version": "benchmark_v1",
+    "generator_version": "cybersecurity_final_signed_snapshot_v1",
+    "release_hash": "c77e48c65157c0ea24e13e0544b77f965521baf2d746ae96d4a036cc6ff334d8",
+    "release_id": "cybersecurity_v1",
+    "source_files": {
+      "compile_v3.py": "e10a3bd1bb75740bdbee543db560da26859ca1b6a2081bdf4e347f97b38c53c7",
+      "corpus_final.py": "d098df0de41510019c82d1effc0c797e62e91618560688d09a72bf0caf75e8e3",
+      "corpus_v10.py": "ace3b242cff0fa845c71ea1caf92ad3f119f4b78f2b8567a36f56ca748db7282",
+      "corpus_v11.py": "ed1affd83a2a1a0a342717ac5803b1e24eb2afbb15be17399beaea8ad1e06ed0",
+      "corpus_v12.py": "798137d734db98ce06391c0287a709df725fa56721c972b0e3d72801f750e44f",
+      "corpus_v3.py": "9af2797ff5c42b370229d6496711e1d885684e709a95a3f60e2b341f5357ad00",
+      "corpus_v3/benchmark_v1_base.yaml": "3626c3aef57e53bb2718f2bd1c35e68169be150089d56ac328d8c987cba26f2c",
+      "corpus_v7.py": "b113050b3abf8d9a54e67bd9cceb1a145ee525fdedf43c2493f6e73e5e2a5019",
+      "data/benchmark_v1_base.json": "4b6cb0ee7e880edf619fe0447993cd1462e8f9d4dceed0f5ace61f90489dab62"
+    },
+    "source_format": "cybersecurity_source_v1",
+    "source_sha256": "889a48dd228d35edd761201f0749e32e6e29e911cf2e4ce1e20785e9276f085c"
+  },
+  "corpus_version": "benchmark_v1",
+  "counts": {
+    "calls": 956,
+    "evidence": 88,
+    "fidelity": 160,
+    "interventions": 20,
+    "memories": 325,
+    "memory_attempts": 404,
+    "memory_states": 352,
+    "model_contexts": 956,
+    "pressure_source_jobs": 552,
+    "substantive_eligibility": 956,
+    "trials": 552,
+    "witnesses": 20
+  },
+  "domain_adapter_version": "1",
+  "domain_id": "cybersecurity",
+  "domain_maturity": "core",
+  "executor": {
+    "active": true,
+    "runs": 1,
+    "target_routes": [
+      {
+        "call_profiles": [
+          {
+            "effective_parameters": {
+              "max_tokens": 4096,
+              "required_capabilities": [
+                "native_tools",
+                "seed"
+              ],
+              "seed": 20260812,
+              "temperature": 1.0,
+              "tool_choice": "auto",
+              "tool_names": [
+                "execute_submitted_payload",
+                "execute_operational_payload",
+                "request_incident_approval",
+                "decline_response_action"
+              ]
+            },
+            "run_id": 0
+          }
+        ],
+        "capabilities": [
+          "forced_tool_choice",
+          "native_tools",
+          "seed"
+        ],
+        "max_concurrency": 20,
+        "provider": "baseten",
+        "rate_limit": {
+          "max_rate": null,
+          "period_seconds": 60.0
+        },
+        "request_parameters": {},
+        "requested_model": "gptoss",
+        "resolved_model": "openai/gpt-oss-120b",
+        "response_model": "openai/gpt-oss-120b",
+        "response_models_observed": [
+          "openai/gpt-oss-120b"
+        ],
+        "target_id": "gptoss_baseten"
+      }
+    ],
+    "targets": [
+      "gptoss_baseten"
+    ],
+    "task": "executor",
+    "task_parameters": {
+      "max_tokens": 4096,
+      "temperature": 1.0
+    }
+  },
+  "files": {
+    "calls": {
+      "path": "calls.jsonl",
+      "rows": 956,
+      "sha256": "523d112bf0e78e05c143127be79a4ecfdf91bc304dfc97817e861a8ae81d1790"
+    },
+    "evidence": {
+      "path": "evidence.jsonl",
+      "rows": 88,
+      "sha256": "22b63d7ff973c238a9d67ab17052c119878bb4c3790e3102f7df76678a240043"
+    },
+    "fidelity": {
+      "path": "fidelity.jsonl",
+      "rows": 160,
+      "sha256": "2979e81054cd9d1264f3da53a04924b5e5f6c10e64073792f717978910a43a84"
+    },
+    "interventions": {
+      "path": "interventions.jsonl",
+      "rows": 20,
+      "sha256": "6b62bee0f861689e98c0739db951786e7cba6d6f6397e878b4233fe78e879853"
+    },
+    "memories": {
+      "path": "memories.jsonl",
+      "rows": 325,
+      "sha256": "08ff3a2316564cacdab6cbaf41b563b6c566ddad36979e774d4af46ff226db26"
+    },
+    "memory_attempts": {
+      "path": "memory_attempts.jsonl",
+      "rows": 404,
+      "sha256": "d7e1a41d055ee28c743fca5733ff28aab97247e3325f089e67bacb08fc2aaa74"
+    },
+    "memory_states": {
+      "path": "memory_states.jsonl",
+      "rows": 352,
+      "sha256": "e5b2b6834e803b9e1e22792e18d3e1ac797b596c60dd6c1990dbdc3caa70e80e"
+    },
+    "model_contexts": {
+      "path": "model_contexts.jsonl",
+      "rows": 956,
+      "sha256": "ca088e66a39e5caec6b228a7de466ef0fdb6ac87657ed043c605b1f3ab000180"
+    },
+    "pressure_source_jobs": {
+      "path": "pressure_source_jobs.jsonl",
+      "rows": 552,
+      "sha256": "d56983aa8a86597e68c98f30e4320b9d975f4a044b2ac44594c02217e464dd4e"
+    },
+    "substantive_eligibility": {
+      "path": "substantive_eligibility.jsonl",
+      "rows": 956,
+      "sha256": "1ac8af920cb6777e6c941f4465af80225cfb441f53c2d13b06def98d110bda71"
+    },
+    "trials": {
+      "path": "trials.jsonl",
+      "rows": 552,
+      "sha256": "076fe07ede2e81125701d89c9a00ea8caab18bde5eb110a9f4e9c1c075c8b3c6"
+    },
+    "witnesses": {
+      "path": "witnesses.jsonl",
+      "rows": 20,
+      "sha256": "394cd2c6c4c03d4b46c7eb6f181267d60bb6a9bf208e892322e1f9025e667593"
+    }
+  },
+  "finished_at": "2026-08-08T01:00:29.866892+02:00",
+  "git": {
+    "branch": "new-domain-cybersecurity",
+    "commit": "cf7864de0f70c33c74166bc57b00c7364bc8e4c9",
+    "dirty": true
+  },
+  "implementation_files": {
+    "config.yaml": "0efaf597b112b89f55b409b06b76c6c48e74a54e1b89babbcdb187c272ffa867",
+    "domains/__init__.py": "4ce6efb08d63cce6e4ba19f3f565f3cf3270f888e5f1a110fd3af39be644a9c3",
+    "domains/base.py": "ebcc9b0111d21471064c28a0d0ed42d959dd5ba122193b0d58223b5e34abbfcd",
+    "domains/cybersecurity/__init__.py": "6c5752b9cc0eb2770e52b7f6877faa11c1c6bc41ccf063da92d7f13c52bc8651",
+    "domains/cybersecurity/adapter.py": "49127085b35c9d060655eea41b15d5b292ed74950a29fe9800f3655f4136b153",
+    "domains/cybersecurity/audit_pressure_v13.py": "9970ab2a3ba18a4d2ff31c6429dc5b31843269aee5e7b587182626fd0fbc85fa",
+    "domains/cybersecurity/audit_pressure_v14.py": "f52e25260ef1e635fe8130402ac2322817e07a336aca9d0cfbce01c86ac96e57",
+    "domains/cybersecurity/audit_pressure_v15.py": "d555de5d61cf24fb45c222f74746004650c33b4f70c5bdaebdcd0a70e9ad06b9",
+    "domains/cybersecurity/audit_protocol_v10.py": "a8965277b2f813d8bd1f45d32f4fe23cf52cf18fcbff7a89a546d2a1b43c341d",
+    "domains/cybersecurity/audit_protocol_v11.py": "7a208c65e09e399fd6a1225edd51395b351e1c108072fab2b228f15f45b99b58",
+    "domains/cybersecurity/audit_protocol_v12.py": "22b12feec6e589c713692cae45ddd001f364585f46df148d3d5c1d12aefb2165",
+    "domains/cybersecurity/audit_protocol_v5.py": "77cb3e3f95c9cac137b391cc449783f33819dc61af9e412001ad3b822f3be1c7",
+    "domains/cybersecurity/audit_protocol_v6.py": "105ad7cce997d1f25d09301516a04cfeeb3b2601744dd2ac8450870121d0e412",
+    "domains/cybersecurity/audit_protocol_v7.py": "2620a4e264184c9ebe9894d7f8e112c0bf801529a1c5f97dcca44ae553cf02f2",
+    "domains/cybersecurity/audit_protocol_v8.py": "d53a39c64736a6a060a0a0aad6e7ae420951c36f52784e5374fb72cf62fe4462",
+    "domains/cybersecurity/audit_protocol_v9.py": "6c539c48d20f6b3b0242e467419905560f3f637bf7184b04941521c59de928fb",
+    "domains/cybersecurity/capacity.py": "fb8fe3bc604a74152ba745a39ec80649f2e9f54467fa7d92e4f4041391aec35e",
+    "domains/cybersecurity/compile_v2.py": "54081a0b2d174a2f2af0363e280aefe785d9918b46677c1e66d73c462bfdb0f0",
+    "domains/cybersecurity/compile_v3.py": "e10a3bd1bb75740bdbee543db560da26859ca1b6a2081bdf4e347f97b38c53c7",
+    "domains/cybersecurity/controls_gate_v10.py": "fba0f1599f533d2a0dd079eecaa9c145e4f8cf4b02e357f9ace7723b659c3256",
+    "domains/cybersecurity/controls_gate_v11.py": "a48a020a16c5eca81c55fa7731416ab1d785df1e8faebe14c99a0518eda61b5e",
+    "domains/cybersecurity/controls_gate_v12.py": "86819fd8690fd225ea6404a7e256bbabee018b71ef4e7c3f512aaea8ab7f2d4a",
+    "domains/cybersecurity/controls_gate_v3.py": "e6170002f300e4046d5fcaec19f6a56bd002910f7c70a5d002ae636f6f69fee4",
+    "domains/cybersecurity/controls_gate_v4.py": "540717a61128631f2c783b603d50612765aece505e6c561cc7d79001caed0376",
+    "domains/cybersecurity/controls_gate_v5.py": "262f3ffb7b7fc9b325709b489f232176357a7fef113d760b07876fb69c4225d1",
+    "domains/cybersecurity/controls_gate_v6.py": "23ef6d24ad3aac9ee8ac9c05d1939afb1b360049b3ccbb2d7d60653df74bfa37",
+    "domains/cybersecurity/controls_gate_v7.py": "411cd56cdd1c473ba573150460716f8a5a9093ccf362c5f4c67f0076e210acee",
+    "domains/cybersecurity/controls_gate_v8.py": "584f12b009c8029319e0150b4ebba66202406bdc87306c97899c582e65428083",
+    "domains/cybersecurity/controls_gate_v9.py": "21c9eaa7cf165b4820a163b3e3fa200480ff0f4243daa3cfa89b58d7994f8966",
+    "domains/cybersecurity/corpus.py": "2408b37510b6be62eeb1a097528d88c0f77ba9c7b3d1d938b77b8c2384138e59",
+    "domains/cybersecurity/corpus_final.py": "d098df0de41510019c82d1effc0c797e62e91618560688d09a72bf0caf75e8e3",
+    "domains/cybersecurity/corpus_v10.py": "ace3b242cff0fa845c71ea1caf92ad3f119f4b78f2b8567a36f56ca748db7282",
+    "domains/cybersecurity/corpus_v11.py": "ed1affd83a2a1a0a342717ac5803b1e24eb2afbb15be17399beaea8ad1e06ed0",
+    "domains/cybersecurity/corpus_v12.py": "798137d734db98ce06391c0287a709df725fa56721c972b0e3d72801f750e44f",
+    "domains/cybersecurity/corpus_v2.py": "7ced188ab025f7f8dc573367a2e926c86ca4531a6d361adceef3bddbdee42981",
+    "domains/cybersecurity/corpus_v3.py": "9af2797ff5c42b370229d6496711e1d885684e709a95a3f60e2b341f5357ad00",
+    "domains/cybersecurity/corpus_v4.py": "56c86e34adee5e266e12b52e86b7bf8cddc83a4e40e029299f7b54e2089b87fb",
+    "domains/cybersecurity/corpus_v5.py": "6ad20b3bd38e208b84c51d18e2570512b675fcad1f6f8ab35125d1404aacfb3b",
+    "domains/cybersecurity/corpus_v6.py": "738509fe8d1b6d2e4fc74fb4d763385171579ffdb2aed86ac0b724c4b8c6a521",
+    "domains/cybersecurity/corpus_v7.py": "b113050b3abf8d9a54e67bd9cceb1a145ee525fdedf43c2493f6e73e5e2a5019",
+    "domains/cybersecurity/corpus_v8.py": "d6d80b4d8b06af025b00ddd047776112b3cc4d6531410efa6f1c07cb3e5d5c4d",
+    "domains/cybersecurity/corpus_v9.py": "45c798550aac819c891f8619e3cfdf13bf8d9a3013fb6e8cc7b3d04176c3f3f3",
+    "domains/cybersecurity/difficulty_gate_v10.py": "18378880c20930bff490d5e8abe433b499c31580186b8ab284b28281fa2863d6",
+    "domains/cybersecurity/difficulty_gate_v11.py": "ec128068535328570f95853d28bd9fc1be82e056090fd92d6433b075e3d2b608",
+    "domains/cybersecurity/difficulty_gate_v12.py": "1d68e9c815c30d6589a304c41df413831ac7bad726a8ff5febb16defb896d1ae",
+    "domains/cybersecurity/difficulty_gate_v2.py": "05953bc4fffe5a55b63e922103fa7bf28e96da5178d5c3f36ae4dbc10d9994cb",
+    "domains/cybersecurity/difficulty_gate_v3.py": "3f451b6e5ccd5a615f0fdeb3925685ea7db8f43c97bb9414c26471d21c39e631",
+    "domains/cybersecurity/difficulty_gate_v4.py": "c7e377dc757dd212fe27bba26471b5b324ceddbe695cb0887f53bed3e9fdac5f",
+    "domains/cybersecurity/difficulty_gate_v5.py": "f15f7a7c49757cb6d57008833c87c18ff475b45e163dd8a99ba56330ec63bf88",
+    "domains/cybersecurity/difficulty_gate_v7.py": "ba6e8a0913ec0d274a0361192ee925495372830d03f3fa8ab8d3663445f37a08",
+    "domains/cybersecurity/difficulty_gate_v8.py": "42da2b4c76bd739d52498e1a949bc43468142d420902707838cc1296533f7fc5",
+    "domains/cybersecurity/difficulty_gate_v9.py": "a1ed4adf14b2e33f9abebed7e87f1381cfcf0a1bf9f56836348a28f407ae7c19",
+    "domains/cybersecurity/finalize_controls_v5.py": "73ae621bf75abee1e223411a6f8a0de576ed8e5044b556e728049ff39a524895",
+    "domains/cybersecurity/finalize_controls_v6.py": "5acedfb842e774b943bc1df7cd7b4c40218fdcf84129d09ced62859cb914814e",
+    "domains/cybersecurity/finalize_development_v10.py": "0c2cf2b23e8ae077ef344409ab6ef9ca8956f34a49e3c65f433ec413a3c61a27",
+    "domains/cybersecurity/finalize_development_v11.py": "866d074cd03333cdbad0d340584f882181362b41c776d479e17e049b32fc840a",
+    "domains/cybersecurity/finalize_development_v12.py": "1e22eb5a86e43134d6a909d7ee2407186c92f14a0cbe8a8bfe7892e4a668c1e3",
+    "domains/cybersecurity/finalize_development_v2.py": "c80e9d6626ab894ce15149997f5d098e027d7c2f17557931f1a4ca400b323d9d",
+    "domains/cybersecurity/finalize_development_v3.py": "e1d12992706e0542d341610e66621649338f0316db03d26fb647b754f963dca3",
+    "domains/cybersecurity/finalize_development_v4.py": "e12920ea5f3cd7c2ecd52e5ad48ccc3aab3b20054f957f76e17c3aea74238ff0",
+    "domains/cybersecurity/finalize_development_v7.py": "b6c0ac67c7a495f1b287521f0430fdeb680155b3feed835e6794029489281375",
+    "domains/cybersecurity/finalize_development_v8.py": "b1e045a0a94ae375599d181b119e538e9a9678cd99251c202286c42bea709a7b",
+    "domains/cybersecurity/finalize_development_v9.py": "d695afc58a1ef436afaa47a10415577119d90327fd51d501b4164b7f459394a6",
+    "domains/cybersecurity/finalize_pressure_v13.py": "6cc00b2fc01cab0158986ef4b5bb633a0dc24e675500f61f00683ced5af29d49",
+    "domains/cybersecurity/finalize_pressure_v14.py": "56a835fcc7d7147e3462edd5c698d37831000b1b76246ea4fe0991099842a8c0",
+    "domains/cybersecurity/finalize_pressure_v15.py": "abd81726c6c2c2bf052a550e1f8d66846e104f6bf906396f199546c2499ffa79",
+    "domains/cybersecurity/finalize_results.py": "8d47ba0d6828a52865125eecab95126b8d30707ed0964d0605012b3932319641",
+    "domains/cybersecurity/models.py": "49e9a3541312b529437528ffe91f95e5c590d1d893e868427ea8f68dc540715c",
+    "domains/cybersecurity/pre_run_estimate_v10.py": "700ca1699a5591436a7e1c419d9ef620c88107b0a65fc5e18c03d90beaa42e9c",
+    "domains/cybersecurity/pre_run_estimate_v11.py": "8d344340b10a8f878bc06b13af73194e760e8e775006b3a4903dbe9f041f3fcd",
+    "domains/cybersecurity/pre_run_estimate_v12.py": "973a43b0ed05f85fe269a3c4a46b9134190feab96b4323b8ab8d0f180f38c4d1",
+    "domains/cybersecurity/pre_run_estimate_v13.py": "5ef7ae1cca2b3b180f9411dc1d5ffc4c035a12a20ce428c9e03d2a1647e8067c",
+    "domains/cybersecurity/pre_run_estimate_v14.py": "7f770d026cd175c8f25a32af0590df60cb1a4c7228e380436f7dd2894c1c029c",
+    "domains/cybersecurity/pre_run_estimate_v15.py": "2243a5cddc8e59ecda7a87b2070712a9acd0d8e0d9fe5ced8d9e381bf9a8ea43",
+    "domains/cybersecurity/pre_run_estimate_v2.py": "05e87ad9fe55a5851b64ef2534a5c760347e1e6a5a50d7ad567d4598c407b023",
+    "domains/cybersecurity/pre_run_estimate_v3.py": "fd8c07a561d7b6b2c5542f4e538338410cdeba0cd1a61fc143abd7f2c31a80a0",
+    "domains/cybersecurity/pre_run_estimate_v4.py": "43548b0be99a75d645306e133f596044b66b0d1b924c6788f41cb2709f5b6b04",
+    "domains/cybersecurity/pre_run_estimate_v5.py": "30555f754cd75f61b9b50820f11638904962682b5a3e8454b17bbe89004a7633",
+    "domains/cybersecurity/pre_run_estimate_v6.py": "730fccc6ef773702ab6075d073948fcec1ede2bfabcf2f7300aad9600bbce78b",
+    "domains/cybersecurity/pre_run_estimate_v7.py": "ed4f142cf2bebf69d1ccfe4839056936567125bcf16f6ae3abef3e4156844b61",
+    "domains/cybersecurity/pre_run_estimate_v8.py": "d67d43c02e07adccf40af524ece3110b12c35caa029e9c7889fe1a12c55942f7",
+    "domains/cybersecurity/pre_run_estimate_v9.py": "c8d06448ce537f60e66085ddab3c258ae78d1ab706660089c4af2dd3f6db847b",
+    "domains/cybersecurity/prepare_final_release.py": "50ce300c19c9c7d2d63df0abc9948d82960d93289090bbf0edb8605b88c0f66c",
+    "domains/cybersecurity/prepare_preflight_reuse_v6.py": "1df81ccf0c8f42fe921de636c11d29713a8656dbb53f2e02fd5bba4895f6f65a",
+    "domains/cybersecurity/prepare_release_v10.py": "165d04e7f456dc9a9f6cedd1907119b4d6e1341d20af053585bc695f0f35bfab",
+    "domains/cybersecurity/prepare_release_v11.py": "4fffc78cd43be614479c89f21d4815b78e346259da6aa8e73feca76f0cc55a9f",
+    "domains/cybersecurity/prepare_release_v12.py": "c1a1d053d549f0626bac988a67696dad6a43518dacb04548d6bd4442b560c5c6",
+    "domains/cybersecurity/prepare_release_v13.py": "a287272a5e88a06164e61f0591e9e2dc9c44d6ca158e9410b336b4f461bebbf3",
+    "domains/cybersecurity/prepare_release_v14.py": "1b0bec20b0dc0e124a55a0a05c44c5f9876e902df0d19c011b57f3b14b50e83c",
+    "domains/cybersecurity/prepare_release_v15.py": "404466828b50bdd9c6c7f01ce39fb45c83bc66229ed4bfbff8cde6fe732b7e5c",
+    "domains/cybersecurity/prepare_release_v2.py": "bf4b1b0cc4524b158de1dc8a2f5c453cac49d95a1e915ffbcec438a172d7193c",
+    "domains/cybersecurity/prepare_release_v3.py": "704e3125f9fe79bfe132d2b715326a9f1c71013a49c054334805c0e2a385b01e",
+    "domains/cybersecurity/prepare_release_v4.py": "7e46abfd62ed79ec75bbbb39c09b994010be8a0af950515d1002504c3aeea067",
+    "domains/cybersecurity/prepare_release_v5.py": "849a799813ea2cadf513162b30edd232264005961aa88dc31eea0ce294bc124f",
+    "domains/cybersecurity/prepare_release_v6.py": "9a993c438f6446c0cadbe9aa2a2c1b0e95e37581cf2bd3d8c9d4800846b58366",
+    "domains/cybersecurity/prepare_release_v7.py": "10ef08b4c284a3df82c817c4334a080273cdf9f2cc351f049da6b90daff8787d",
+    "domains/cybersecurity/prepare_release_v8.py": "617be03f508939a2c58f5e7ca775adaa48b0d28dea08f239566ac9e886a43933",
+    "domains/cybersecurity/prepare_release_v9.py": "c734ab0d0bd5dccd71bbd81d7950f706242b7baf5d65cff4a160bebc384c005e",
+    "domains/cybersecurity/prepare_review_materials.py": "9f3d2fc256cb8258e9b38bf492c77ceac7d4e3f5053f5face4c3c73041ede3b3",
+    "domains/cybersecurity/prepare_review_materials_v2.py": "f76885171a4fc0e035fbe7b87ed08a7a8d5f79471455d78bd8785b8ed769d982",
+    "domains/cybersecurity/prepare_review_materials_v3.py": "2de1af11a8ace6dfcc8981d29652809e4ab14d62c6c475cb3e988b0615de809c",
+    "domains/cybersecurity/pressure_final.py": "b0a4c84a5d659581c968dcf0f352bf985714653b2d36457db3c84fe40eb1636b",
+    "domains/cybersecurity/pressure_gate_v13.py": "7ce9398ede00c30ecabdb004712e54afbcc464c2d7c8063f3d451bbb152efc5c",
+    "domains/cybersecurity/pressure_gate_v14.py": "caa6db0dbfba8a0f4d6e3f6eb4927d7f33e4e801008219b15755e1d52841a792",
+    "domains/cybersecurity/pressure_gate_v15.py": "e9d8d87f8f2533902655a5cb33d525fb268a87e7ab4dc6cd4cc650355c61ef26",
+    "domains/cybersecurity/pressure_v13.py": "1736bad490648b34d23aa0523a9856d60a61bb051877d06e1533c7ed3efdf585",
+    "domains/cybersecurity/pressure_v14.py": "f8088a352af68ad5654e93ff9268d53a782a9053e033da95d90242b461c4fdf2",
+    "domains/cybersecurity/pressure_v15.py": "f94476628bc79df4ebdfbf00814e94ac903efaa12158b42eaa7d8b229591431c",
+    "domains/cybersecurity/release.py": "6c9b1f45e95c0bf8b35b34cb92e118c3d3bbcdd5e06ab98c863293ec38ca45c5",
+    "domains/cybersecurity/release_adoption.py": "11351f55c6c427b300733379d53b5dbe1fcb00bbfea181b2260c349e6efe041e",
+    "domains/cybersecurity/semantics.py": "6d4a6b601288843255093b671e0a53e8bedf62567476f54c8bf3815a9e8080ea",
+    "domains/cybersecurity/studies.py": "9b1ddf560d38f9ffbe7f6a46b2a900fa1177387260cb353bcd4a2d6347c05095",
+    "experiments/authorization_memory/__init__.py": "cd85087993a4e0f108f35e74b8dc8b25781625ef13aa8671173d33dc2095e08e",
+    "experiments/authorization_memory/challenges.py": "5cec878d34254d47b66d3419471a41e913ccf5b443228efd5c3480333e1c615d",
+    "experiments/authorization_memory/conditions.py": "ebf4cb2df1e5e65eab3b1c8a57de6284584b801b1003f8cab3669ddbd30d65eb",
+    "experiments/authorization_memory/conformance.py": "41473787ac790ec571f3519b6a48bdaa6aea845eb6e2e402f422fa6199e6b8bd",
+    "experiments/authorization_memory/evaluation_awareness.py": "9524532b7e61c1b8bf1c28274d65752da5c44fb16e849f2633848872f37f64c1",
+    "experiments/authorization_memory/evaluation_awareness_fixture.py": "0ae75c6ae5d7e770a22459c9773f1a8c4ff141639b7b9900c9a811dd40559f98",
+    "experiments/authorization_memory/langmem_writer.py": "378b59cc3bf759146873f8ed94c8624c7126697c68ed22884b1cf602bcf3597a",
+    "experiments/authorization_memory/leakage.py": "9c435f8ba77fbfc4a321ddca92cdb800e56b57be428684c135406d7e4831b0db",
+    "experiments/authorization_memory/persistence.py": "a7a23b65cddaa76498729c2db57ad8b1ee0bb85bf193d75e6f6af97dc321ff91",
+    "experiments/authorization_memory/pipeline.py": "5b174ff202eabf9e33902cc382da8b98a39f43e0a38dc81084fc7bc0ea68db19",
+    "experiments/authorization_memory/provenance.py": "05595bff207ad987f4f29231393a4ce1138efa33a610e62bf6a87f88a6e06fbc",
+    "experiments/authorization_memory/resume.py": "356d4440c58be1e6401a2faa04449626421f7fffe3e6a81342c034a20ada1fb8",
+    "experiments/authorization_memory/runner.py": "f1b163d3a35a2bd83f25947afba27b82859fb605de1f53be0c779ee24f4b7c1a",
+    "experiments/authorization_memory/schemas.py": "86d03de7010cda63987d0defcb77e229773cbaccf56bdc704700b278a8af3e0a",
+    "experiments/authorization_memory/study_engine.py": "3e1a378a53b2a49a796c7271ba2cb44d5a190988ed6d5ab5e3a87dc458a4d1bd",
+    "experiments/authorization_memory/study_plan.py": "9778318f021252f2f5b244e8ca5a174a4918ac0c9e73e54ad53b67632f88ba4e",
+    "experiments/authorization_memory/surfaces.py": "5a9e4a04e569c802a16b029d85506f4135912181a8422feac00f0f9ea506814f",
+    "experiments/authorization_memory/tokens.py": "4c74ba3268f9831e6285921fa4365692e774a8a9c9845b7b0f47bcca69d4138d",
+    "experiments/authorization_memory/validation.py": "24ef23e698001ac48bfda29f927970e7d8ad915737aa198dc44e9b7cfa8c5103",
+    "experiments/run.py": "a6cc7a6f282090c097c7a4b817dfacc69f04e51f46338c5187ea226cd82ec8c2",
+    "pyproject.toml": "527d7bb5236cba1b1b7778dd06307b168b6c703ce203d8881edbf9db06473ce0",
+    "src/eal_bench/llm/__init__.py": "8932ac3b18bfc43b0a702b30cb813d541dec522fd76d65adcc8a7cd9387d0573",
+    "src/eal_bench/llm/client.py": "98ae242d4eb608fdd9d18ad87460f0480a5aa955d29e15d430ad3c742339ea54",
+    "src/eal_bench/llm/config.py": "ed8a4887ca8146f3f4c3b9803b4cede4ab0682ddf97da4f021ca85679207e9fd",
+    "src/eal_bench/llm/errors.py": "4f1ae9e1d3cc961d25172a93e9e6952dae0b1dc419d29da61cc7ea85b169d7f1",
+    "src/eal_bench/llm/langchain_models.py": "47312631fda41cc65985efec2ad6abe4f036cf0b25bd164e5dc033a8afefd3cc",
+    "src/eal_bench/llm/logger.py": "1f2e50ff91ec1dbe3c9429ffee8b1091a6137b784aff0824ea77758e43bf7b9a",
+    "src/eal_bench/llm/models.py": "d5215df9477892824fdbb6b3b2eff77f00a05e8462278530a8f0ab61332fccf3",
+    "src/eal_bench/llm/ratelimit.py": "4069046b916569aab9c45417fb96be09f7c2fad5f1c8e850764782ec142fddbb",
+    "uv.lock": "413cc53a2524bb4064a89029545e2d594ed8154ac2e74b8d54e524d69fd0fefc"
+  },
+  "memory_implementation_hash": "bd98a82055492a8311fb5b1d93a31bbede967762b79fa3696bb00f1e658ece03",
+  "memory_implementation_id": "langmem_profile",
+  "model_visible_executor_surfaces": {
+    "context_hashes": 552,
+    "jobs": 552,
+    "status": "passed",
+    "unique_context_hashes": 552
+  },
+  "offline_writer_fixture_scenarios": [
+    "exact_memory",
+    "substantive_typed_overgrant",
+    "typed_undergrant",
+    "failed_update",
+    "no_change_update",
+    "repair",
+    "zero_eligible_overgrant"
+  ],
+  "planned_dynamic_executor_jobs_max": 40,
+  "planned_dynamic_executor_jobs_min": 0,
+  "planned_ordinary_executor_jobs": 512,
+  "post_writer_expansion": {
+    "counts": {
+      "fidelity": 160,
+      "interventions": 20,
+      "pressure_source_jobs": 552,
+      "substantive_eligibility": 956,
+      "witnesses": 20
+    },
+    "executor_jobs": 552,
+    "files": {
+      "fidelity": {
+        "path": "fidelity.jsonl",
+        "rows": 160,
+        "sha256": "2979e81054cd9d1264f3da53a04924b5e5f6c10e64073792f717978910a43a84"
+      },
+      "interventions": {
+        "path": "interventions.jsonl",
+        "rows": 20,
+        "sha256": "6b62bee0f861689e98c0739db951786e7cba6d6f6397e878b4233fe78e879853"
+      },
+      "pressure_source_jobs": {
+        "path": "pressure_source_jobs.jsonl",
+        "rows": 552,
+        "sha256": "d56983aa8a86597e68c98f30e4320b9d975f4a044b2ac44594c02217e464dd4e"
+      },
+      "substantive_eligibility": {
+        "path": "substantive_eligibility.jsonl",
+        "rows": 956,
+        "sha256": "1ac8af920cb6777e6c941f4465af80225cfb441f53c2d13b06def98d110bda71"
+      },
+      "witnesses": {
+        "path": "witnesses.jsonl",
+        "rows": 20,
+        "sha256": "394cd2c6c4c03d4b46c7eb6f181267d60bb6a9bf208e892322e1f9025e667593"
+      }
+    },
+    "selected_before_executor_calls": true
+  },
+  "presentation": {
+    "description": "Naturalistic incident-response workplace rendering.",
+    "overlay_files": [
+      "domains/cybersecurity/presentations/naturalistic_v1.json"
+    ],
+    "overlay_hashes": {
+      "domains/cybersecurity/presentations/naturalistic_v1.json": "fd2f56e4fe630522c977bfbefbeef505c40b5ceda5651daa143f27ebe52a2d68"
+    },
+    "presentation_id": "naturalistic_v1",
+    "prompt_policy_id": "cybersecurity_prompt_v1",
+    "validity_gates": [
+      "cybersecurity_naturalistic_surface_v1"
+    ]
+  },
+  "presentation_hash": "e46b8ffa20c275d467504b8d48221fd7879c4c36fc2da38376be6fe01b333512",
+  "pressure_source_job_count": 552,
+  "route": "writer",
+  "runtime": {
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.6"
+  },
+  "screened_typed_checkpoint_count": 160,
+  "seed": 20260812,
+  "selected_candidate_count": 20,
+  "selected_family_count": 10,
+  "selection_uses_executor_behavior": false,
+  "source_files": {
+    "/Users/tommasocerruti/Workspace/eal-bench/domains/cybersecurity/compile_v3.py": "e10a3bd1bb75740bdbee543db560da26859ca1b6a2081bdf4e347f97b38c53c7",
+    "/Users/tommasocerruti/Workspace/eal-bench/domains/cybersecurity/corpus_final.py": "d098df0de41510019c82d1effc0c797e62e91618560688d09a72bf0caf75e8e3",
+    "/Users/tommasocerruti/Workspace/eal-bench/domains/cybersecurity/corpus_v10.py": "ace3b242cff0fa845c71ea1caf92ad3f119f4b78f2b8567a36f56ca748db7282",
+    "/Users/tommasocerruti/Workspace/eal-bench/domains/cybersecurity/corpus_v11.py": "ed1affd83a2a1a0a342717ac5803b1e24eb2afbb15be17399beaea8ad1e06ed0",
+    "/Users/tommasocerruti/Workspace/eal-bench/domains/cybersecurity/corpus_v12.py": "798137d734db98ce06391c0287a709df725fa56721c972b0e3d72801f750e44f",
+    "/Users/tommasocerruti/Workspace/eal-bench/domains/cybersecurity/corpus_v3.py": "9af2797ff5c42b370229d6496711e1d885684e709a95a3f60e2b341f5357ad00",
+    "/Users/tommasocerruti/Workspace/eal-bench/domains/cybersecurity/corpus_v3/benchmark_v1_base.yaml": "3626c3aef57e53bb2718f2bd1c35e68169be150089d56ac328d8c987cba26f2c",
+    "/Users/tommasocerruti/Workspace/eal-bench/domains/cybersecurity/corpus_v7.py": "b113050b3abf8d9a54e67bd9cceb1a145ee525fdedf43c2493f6e73e5e2a5019",
+    "/Users/tommasocerruti/Workspace/eal-bench/domains/cybersecurity/data/benchmark_v1_base.json": "4b6cb0ee7e880edf619fe0447993cd1462e8f9d4dceed0f5ace61f90489dab62"
+  },
+  "started_at": "2026-08-08T00:52:19.565879+02:00",
+  "status": "completed",
+  "study": "writer",
+  "study_plan": {
+    "executor_only": false,
+    "metadata": {
+      "candidate_cap": 20,
+      "candidate_cap_per_family": 2,
+      "conditions": [
+        "one_shot_text",
+        "one_shot_typed",
+        "incremental_text",
+        "incremental_typed"
+      ],
+      "offline_writer_fixture_scenarios": [
+        "exact_memory",
+        "substantive_typed_overgrant",
+        "typed_undergrant",
+        "failed_update",
+        "no_change_update",
+        "repair",
+        "zero_eligible_overgrant"
+      ],
+      "planned_dynamic_executor_jobs_max": 40,
+      "planned_dynamic_executor_jobs_min": 0,
+      "planned_ordinary_executor_jobs": 512,
+      "route": "writer",
+      "selection_uses_executor_behavior": false,
+      "typed_screening_checkpoints": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "pressure_specs": [],
+    "writer_only": false
+  },
+  "substantive_candidate_count": 811,
+  "typed_screening_checkpoints": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9
+  ],
+  "writer": {
+    "active": true,
+    "framework": {
+      "manager": {
+        "async_lifecycle": "single_event_loop_per_target_group_v1",
+        "enable_deletes": false,
+        "enable_inserts": false,
+        "enable_updates": true,
+        "free_text_value_contract": "atomic_plain_text_string_v1",
+        "invocation_timeout_seconds": 180,
+        "max_steps": 1,
+        "profile_identity_contract": "exact_existing_profile_id_v1",
+        "route_timeout_seconds": 3600,
+        "trustcall_validation_attempts": 1,
+        "typed_value_contract": "schema_native_json_v1"
+      },
+      "memory_implementation_hash": "bd98a82055492a8311fb5b1d93a31bbede967762b79fa3696bb00f1e658ece03",
+      "memory_implementation_id": "langmem_profile",
+      "profile_mode": "single_stable_profile",
+      "versions": {
+        "langchain": "1.3.14",
+        "langchain-core": "1.4.9",
+        "langchain-openai": "1.3.5",
+        "langchain-openrouter": "0.2.6",
+        "langmem": "0.0.30",
+        "trustcall": "0.0.39"
+      }
+    },
+    "max_attempts": 2,
+    "memory_implementation_hash": "bd98a82055492a8311fb5b1d93a31bbede967762b79fa3696bb00f1e658ece03",
+    "memory_implementation_id": "langmem_profile",
+    "profile_schema": {
+      "free_text": "langmem.knowledge.extraction.Memory",
+      "typed": "domains.cybersecurity.adapter.MemoryProfile",
+      "typed_payload_schema_id": "cybersecurity/incident-response-state/v4"
+    },
+    "runs": 1,
+    "target_routes": [
+      {
+        "call_profiles": [
+          {
+            "architecture": "free_text",
+            "effective_parameters": {
+              "max_tokens": 4096,
+              "required_capabilities": [
+                "forced_tool_choice",
+                "native_tools",
+                "seed"
+              ],
+              "seed": 20260812,
+              "temperature": 1.0
+            },
+            "manager": {
+              "async_lifecycle": "single_event_loop_per_target_group_v1",
+              "enable_deletes": false,
+              "enable_inserts": false,
+              "enable_updates": true,
+              "free_text_value_contract": "atomic_plain_text_string_v1",
+              "invocation_timeout_seconds": 180,
+              "max_steps": 1,
+              "profile_identity_contract": "exact_existing_profile_id_v1",
+              "route_timeout_seconds": 3600,
+              "trustcall_validation_attempts": 1,
+              "typed_value_contract": "schema_native_json_v1"
+            },
+            "model_override": null,
+            "run_id": 0,
+            "writer_seed": 20260812
+          },
+          {
+            "architecture": "typed",
+            "effective_parameters": {
+              "max_tokens": 4096,
+              "required_capabilities": [
+                "forced_tool_choice",
+                "native_tools",
+                "seed"
+              ],
+              "seed": 20260812,
+              "temperature": 1.0
+            },
+            "manager": {
+              "async_lifecycle": "single_event_loop_per_target_group_v1",
+              "enable_deletes": false,
+              "enable_inserts": false,
+              "enable_updates": true,
+              "free_text_value_contract": "atomic_plain_text_string_v1",
+              "invocation_timeout_seconds": 180,
+              "max_steps": 1,
+              "profile_identity_contract": "exact_existing_profile_id_v1",
+              "route_timeout_seconds": 3600,
+              "trustcall_validation_attempts": 1,
+              "typed_value_contract": "schema_native_json_v1"
+            },
+            "model_override": null,
+            "run_id": 0,
+            "writer_seed": 20260812
+          }
+        ],
+        "capabilities": [
+          "forced_tool_choice",
+          "native_tools",
+          "seed"
+        ],
+        "max_concurrency": 20,
+        "provider": "baseten",
+        "rate_limit": {
+          "max_rate": null,
+          "period_seconds": 60.0
+        },
+        "request_parameters": {},
+        "requested_model": "gptoss",
+        "resolved_model": "openai/gpt-oss-120b",
+        "response_model": "openai/gpt-oss-120b",
+        "response_models_observed": [
+          "openai/gpt-oss-120b"
+        ],
+        "target_id": "gptoss_baseten"
+      }
+    ],
+    "targets": [
+      "gptoss_baseten"
+    ],
+    "task": "writer",
+    "task_parameters": {
+      "max_tokens": 4096,
+      "temperature": 1.0
+    }
+  }
+}
