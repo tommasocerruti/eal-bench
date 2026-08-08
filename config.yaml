@@ -51,7 +51,7 @@ model_targets:
     max_concurrency: 20
   kimi_baseten:
     provider: baseten
-    model: kimi
+    model: moonshotai/Kimi-K2.6
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
   gptoss_baseten:
@@ -62,6 +62,11 @@ model_targets:
   nemotron_baseten:
     provider: baseten
     model: nemotron
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+  nemotron_3_ultra_baseten:
+    provider: baseten
+    model: nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
   gptoss_openrouter:
@@ -79,7 +84,16 @@ model_targets:
           order: [Mistral]
           allow_fallbacks: false
     max_concurrency: 20
-
+  mistral_medium_3_openrouter:
+    provider: openrouter
+    model: mistralai/mistral-medium-3
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+  grok_4_3_openrouter:
+    provider: openrouter
+    model: x-ai/grok-4.3
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
 tasks:
   # A task selects its default route by target ID. Calls can override it with
   # `target=`, including a target on a different provider.
