@@ -13,6 +13,7 @@ from typing import Any, Literal
 
 from langmem import create_memory_manager
 from langmem.knowledge.extraction import Memory as LangMemTextProfile
+from langchain_core.callbacks import AsyncCallbackHandler
 from pydantic import BaseModel, Field
 
 from eal_bench.llm import LLM, LangChainCallLogger, create_langchain_chat_model
@@ -77,6 +78,33 @@ class TargetCheckMemory(BaseModel):
     """Minimal nested profile used only by the live LangMem target check."""
 
     records: list[TargetCheckRecord] = Field(default_factory=list)
+
+
+class _ProviderCallGuard(AsyncCallbackHandler):
+    """Prevent LangMem error recovery from issuing another provider request."""
+
+    raise_error = True
+
+    def __init__(self) -> None:
+        self._started_attempts: set[str] = set()
+
+    async def on_chat_model_start(
+        self,
+        serialized: dict[str, Any],
+        messages: list[list[Any]],
+        *,
+        metadata: dict[str, Any] | None = None,
+        **kwargs: Any,
+    ) -> None:
+        del serialized, messages, kwargs
+        attempt_id = str((metadata or {}).get("memory_attempt_id") or "")
+        if not attempt_id:
+            raise RuntimeError("target check provider call is missing an attempt ID")
+        if attempt_id in self._started_attempts:
+            raise RuntimeError(
+                f"target check blocked a repeated provider call for {attempt_id}"
+            )
+        self._started_attempts.add(attempt_id)
 
 
 def _typed_target_check_instructions(*, continuation: bool) -> str:
@@ -436,12 +464,13 @@ async def _langmem_live_check(
 ) -> dict[str, Any]:
     started = time.monotonic()
     callback = LangChainCallLogger(llm.logger)
+    provider_call_guard = _ProviderCallGuard()
     model, route, effective_params = create_langchain_chat_model(
         llm.config,
         "target_check",
         route_report["target_id"],
         seed=seed,
-        callbacks=(callback,),
+        callbacks=(provider_call_guard, callback),
         required_capabilities=REQUIRED_CAPABILITIES,
         parameter_overrides={"max_tokens": max_tokens},
     )
