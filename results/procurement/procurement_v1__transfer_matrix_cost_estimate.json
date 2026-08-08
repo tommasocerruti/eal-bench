@@ -125,7 +125,9 @@
     "proposed_cap_usd": 31.0,
     "headroom_over_expected_usd": 6.88789852467909,
     "headroom_fraction": 0.2856606521294068,
-    "approval_status": "pending",
+    "approval_status": "approved",
+    "approved_at": "2026-08-08",
+    "approver_role": "repository_owner",
     "accounting": "After each route, compute cost from provider-reported cost when available and otherwise from recorded token usage at the frozen public rates. Stop before the next route if the projected matrix total exceeds the cap."
   },
   "theoretical_exhaustion_sensitivity": {

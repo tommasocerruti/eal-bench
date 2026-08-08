@@ -10,7 +10,7 @@
   "writer_max_attempts": 2,
   "writer_runs": 1,
   "executor_runs": 1,
-  "status": "preregistered_awaiting_budget_approval",
+  "status": "approved_for_complete_matrix_execution",
   "prepared_at": "2026-08-08",
   "base_commit": "26b41166bc6c15d1d5431718ad85e64d3afbe387",
   "executors": [
@@ -106,7 +106,9 @@
     "expected_pressure_usd": 9.388541404660733,
     "expected_total_usd": 24.11210147532091,
     "proposed_operating_cap_usd": 31.0,
-    "approval_status": "pending",
+    "approval_status": "approved",
+    "approved_at": "2026-08-08",
+    "approver_role": "repository_owner",
     "stop_before_next_route_if_projected_total_exceeds_cap": true,
     "theoretical_exhaustion_ceiling_usd": 117.0
   }
