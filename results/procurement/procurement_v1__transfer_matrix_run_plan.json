@@ -1,0 +1,113 @@
+{
+  "schema_version": "procurement_writer_transfer_plan_v1",
+  "release_id": "procurement_v1",
+  "domain_id": "procurement",
+  "corpus_version": "benchmark_v1",
+  "presentation_id": "naturalistic_v1",
+  "memory_implementation_id": "langmem_profile",
+  "canonical_seed": 20260719,
+  "capacity_tier": "primary",
+  "writer_max_attempts": 2,
+  "writer_runs": 1,
+  "executor_runs": 1,
+  "status": "preregistered_awaiting_budget_approval",
+  "prepared_at": "2026-08-08",
+  "base_commit": "26b41166bc6c15d1d5431718ad85e64d3afbe387",
+  "executors": [
+    "gptoss_baseten",
+    "deepseek_baseten"
+  ],
+  "writer_order": [
+    "mistral_medium_3_openrouter",
+    "nemotron_3_ultra_baseten",
+    "grok_4_3_openrouter",
+    "kimi_baseten",
+    "glm_5_2_baseten"
+  ],
+  "writer_routes": [
+    {
+      "order": 1,
+      "writer_target": "mistral_medium_3_openrouter",
+      "tag": "procurement-v1-transfer-mistral-medium-3",
+      "documented_route_estimate_usd": 2.8
+    },
+    {
+      "order": 2,
+      "writer_target": "nemotron_3_ultra_baseten",
+      "tag": "procurement-v1-transfer-nemotron-3-ultra",
+      "documented_route_estimate_usd": 3.3
+    },
+    {
+      "order": 3,
+      "writer_target": "grok_4_3_openrouter",
+      "tag": "procurement-v1-transfer-grok-4-3",
+      "documented_route_estimate_usd": 4.9
+    },
+    {
+      "order": 4,
+      "writer_target": "kimi_baseten",
+      "tag": "procurement-v1-transfer-kimi-k2-6",
+      "documented_route_estimate_usd": 3.2
+    },
+    {
+      "order": 5,
+      "writer_target": "glm_5_2_baseten",
+      "tag": "procurement-v1-transfer-glm-5-2",
+      "documented_route_estimate_usd": 4.3
+    }
+  ],
+  "per_writer_call_plan": {
+    "writer_chains": 48,
+    "logical_writer_updates": 156,
+    "writer_calls_without_repairs": 156,
+    "writer_calls_maximum": 312,
+    "ordinary_executor_calls": 576,
+    "targeted_executor_calls_maximum": 80,
+    "writer_route_calls_range": [
+      732,
+      968
+    ],
+    "pressure_writer_calls": 0,
+    "pressure_baseline_reruns": 0,
+    "pressure_executor_calls_range": [
+      576,
+      656
+    ]
+  },
+  "matrix_call_plan": {
+    "logical_writer_updates": 780,
+    "writer_calls_without_repairs": 780,
+    "writer_calls_maximum": 1560,
+    "ordinary_baseline_executor_calls": 2880,
+    "targeted_baseline_executor_calls_maximum": 400,
+    "baseline_scheduled_calls_without_repairs": 3660,
+    "baseline_scheduled_calls_maximum": 4840,
+    "pressure_executor_calls_range": [
+      2880,
+      3280
+    ],
+    "baseline_and_pressure_scheduled_calls_maximum": 8120,
+    "transport_retries_excluded": true
+  },
+  "execution_rules": {
+    "generate_each_writer_memory_once": true,
+    "reuse_memory_across_both_executors": true,
+    "pressure_requires_exact_writer_source": true,
+    "regenerate_for_pressure": false,
+    "rerun_baseline_for_pressure": false,
+    "report_writer_executor_pairs_separately": true,
+    "replace_failed_model_after_outcomes": false,
+    "outcome_based_resampling": false,
+    "continue_to_later_writers_independent_of_earlier_behavior": true,
+    "technical_integrity_failure_may_pause_execution": true
+  },
+  "budget": {
+    "expected_baseline_usd": 14.723560070660175,
+    "expected_pressure_usd": 9.388541404660733,
+    "expected_total_usd": 24.11210147532091,
+    "proposed_operating_cap_usd": 31.0,
+    "approval_status": "pending",
+    "stop_before_next_route_if_projected_total_exceeds_cap": true,
+    "theoretical_exhaustion_ceiling_usd": 117.0
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "schema_version": "1",
+  "domain_id": "procurement",
+  "release_id": "procurement_v1",
+  "stage": "writer_executor_transfer_matrix",
+  "estimated_at": "2026-08-08",
+  "pricing": {
+    "unit": "USD per 1M tokens",
+    "accessed_at": "2026-08-08",
+    "sources": {
+      "baseten": "https://www.baseten.co/products/model-apis/",
+      "mistral_medium_3_openrouter": "https://openrouter.ai/mistralai/mistral-medium-3/api",
+      "grok_4_3_openrouter": "https://openrouter.ai/x-ai/grok-4.3/api"
+    },
+    "targets": {
+      "gptoss_baseten": {
+        "input": 0.1,
+        "output": 0.5
+      },
+      "deepseek_baseten": {
+        "input": 1.74,
+        "cached_input": 0.145,
+        "output": 3.48
+      },
+      "nemotron_3_ultra_baseten": {
+        "input": 0.6,
+        "cached_input": 0.12,
+        "output": 2.4
+      },
+      "kimi_baseten": {
+        "input": 0.95,
+        "cached_input": 0.16,
+        "output": 4.0
+      },
+      "glm_5_2_baseten": {
+        "input": 1.4,
+        "cached_input": 0.14,
+        "output": 4.4
+      },
+      "mistral_medium_3_openrouter": {
+        "input": 0.4,
+        "output": 2.0
+      },
+      "grok_4_3_openrouter": {
+        "input": 1.25,
+        "output": 2.5
+      }
+    }
+  },
+  "reference_usage": {
+    "canonical_procurement_writer_run": {
+      "physical_writer_calls": 162,
+      "writer_prompt_tokens": 548245,
+      "writer_completion_tokens": 156808,
+      "executor_calls": 306,
+      "executor_prompt_tokens": 289496,
+      "executor_completion_tokens": 111208
+    },
+    "canonical_procurement_pressure_run": {
+      "executor_calls": 306,
+      "executor_prompt_tokens": 307628,
+      "executor_completion_tokens": 123013
+    },
+    "deepseek_projection": {
+      "input_token_ratio_from_matched_procurement_controls": 1.2437825973279126,
+      "output_token_ratio_from_matched_procurement_controls": 2.6373618215428474,
+      "cached_input_fraction_from_matched_procurement_controls": 0.01530671812655059
+    },
+    "writer_target_scaling": {
+      "basis": "target-specific token ratios from each passed three-call LangMem qualification relative to the most recent complete GPT-OSS qualification",
+      "gptoss_qualification_prompt_tokens": 2871,
+      "gptoss_qualification_completion_tokens": 720,
+      "nemotron_3_ultra_baseten": {
+        "qualification_prompt_tokens": 5384,
+        "qualification_completion_tokens": 523
+      },
+      "kimi_baseten": {
+        "qualification_prompt_tokens": 3136,
+        "qualification_completion_tokens": 310
+      },
+      "glm_5_2_baseten": {
+        "qualification_prompt_tokens": 4751,
+        "qualification_completion_tokens": 463
+      },
+      "mistral_medium_3_openrouter": {
+        "qualification_prompt_tokens": 4689,
+        "qualification_completion_tokens": 315
+      },
+      "grok_4_3_openrouter": {
+        "qualification_prompt_tokens": 4567,
+        "qualification_completion_tokens": 1984
+      }
+    }
+  },
+  "expected_cost_usd": {
+    "writers": {
+      "mistral_medium_3_openrouter": 0.49537081818181816,
+      "nemotron_3_ultra_baseten": 0.8902444921212121,
+      "grok_4_3_openrouter": 2.170373482323232,
+      "kimi_baseten": 0.8389650505050504,
+      "glm_5_2_baseten": 1.713828181010101,
+      "total": 6.108782024141414
+    },
+    "baseline_executors": {
+      "gptoss_per_writer": 0.0845536,
+      "deepseek_per_writer": 1.6384020093037523,
+      "five_writer_total": 8.614778046518762
+    },
+    "pressure_executors": {
+      "gptoss_per_writer": 0.0922693,
+      "deepseek_per_writer": 1.7854389809321467,
+      "five_writer_total": 9.388541404660733
+    },
+    "baseline_total": 14.723560070660175,
+    "baseline_and_pressure_total": 24.11210147532091
+  },
+  "per_writer_expected_total_usd": {
+    "mistral_medium_3_openrouter": 4.096034708417717,
+    "nemotron_3_ultra_baseten": 4.4909083823571105,
+    "grok_4_3_openrouter": 5.771037372559132,
+    "kimi_baseten": 4.439628940740949,
+    "glm_5_2_baseten": 5.314492071246001
+  },
+  "operating_budget": {
+    "proposed_cap_usd": 31.0,
+    "headroom_over_expected_usd": 6.88789852467909,
+    "headroom_fraction": 0.2856606521294068,
+    "approval_status": "pending",
+    "accounting": "After each route, compute cost from provider-reported cost when available and otherwise from recorded token usage at the frozen public rates. Stop before the next route if the projected matrix total exceeds the cap."
+  },
+  "theoretical_exhaustion_sensitivity": {
+    "purpose": "Not the operating estimate; illustrates exposure if every permitted repair and completion exhausted a conservative token allowance.",
+    "writer_calls_per_target": 312,
+    "writer_prompt_tokens_per_call": 20000,
+    "writer_completion_tokens_per_call": 4096,
+    "executor_calls_per_target_per_arm": 328,
+    "executor_prompt_tokens_per_call": 2500,
+    "executor_completion_tokens_per_call": 4096,
+    "baseline_and_pressure_usd_rounded_up": 117.0
+  }
+}
