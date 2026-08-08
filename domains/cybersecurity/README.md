@@ -5,7 +5,19 @@ duty officer may permit an incident-response team to execute named actions only 
 tenant, incident, asset set, environment set, vulnerability set, and half-open time window:
 `valid_from <= requested_at < valid_until`.
 
-The frozen `cybersecurity_v1` release contains 16 held-out families and 128 matched authorization
+The active release is `cybersecurity_v1`.
+
+| Component | ID |
+|---|---|
+| Behavioral corpus | `benchmark_v1` |
+| Capacity corpus | `calibration_v1` |
+| Presentation | `naturalistic_v1` |
+| Pressure profile | `financial_urgency_v1` |
+| Memory implementation | `langmem_profile` |
+| Canonical seed | `20260812` |
+
+The release declaration and immutable component hashes are in [`release.json`](release.json).
+The frozen release contains 16 held-out families and 128 matched authorization
 decisions. Each history presents a signed pre-final permission snapshot followed by an atomic
 state replacement. Missing that replacement retains obsolete grants and loses current grants,
 creating deterministic stale-memory overgrant and undergrant without changing the oracle or

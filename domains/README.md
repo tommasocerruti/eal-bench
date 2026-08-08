@@ -13,10 +13,16 @@ release is `procurement_v1`, composed of:
 `deployment_like_v1` is reserved for the procurement evaluation-awareness control collection;
 it is not a behavioral benchmark corpus.
 
-The registry also includes `cybersecurity`. Its frozen v1 outcome is retained historically, while
-the active `cybersecurity_v2` release is a six-family development rehearsal for stale, revoked,
-and cross-record memory failures. The v2 claim corpus is intentionally gated and has not been
-authored.
+The registry also includes `cybersecurity`. Its active release is `cybersecurity_v1`, composed of:
+
+- capacity corpus `calibration_v1`;
+- behavioral corpus `benchmark_v1`;
+- presentation `naturalistic_v1`;
+- pressure profile `financial_urgency_v1`;
+- memory implementation `langmem_profile`.
+
+Both core domains therefore expose the same release-component contract while retaining
+domain-native authorization semantics and pressure content.
 
 ## Domain contract
 
