@@ -1,0 +1,38 @@
+{
+  "schema_version": "1",
+  "presentation_id": "naturalistic_v1",
+  "base_corpus_version": "benchmark_v1",
+  "content_source_release": "cybersecurity_v1",
+  "rendering": {
+    "formats": [
+      "incident_bridge",
+      "signed_incident_command",
+      "signed_active_portfolio_export",
+      "operations_handoff",
+      "obsolete_engineering_work_plan"
+    ],
+    "source_reference_label": "message reference",
+    "authoritative_principal_ids_visible": true,
+    "authorization_ids_visible": true,
+    "authorization_operations_visible": true,
+    "complete_resulting_records_visible": true,
+    "half_open_validity_visible": true,
+    "atomic_change_sets_visible": true,
+    "pre_final_signed_snapshot_visible": true,
+    "pre_final_active_grants": 8,
+    "final_active_grants": 8,
+    "staging_operation_count": 12,
+    "final_operation_count": 16,
+    "post_final_obsolete_work_plans": 8,
+    "work_plan_authority": "non_authoritative_engineering_proposal",
+    "terminal_protocol": "dedicated_fixed_confirmation_actions",
+    "request_field_retranscription_required": false,
+    "all_action_payload_fields_visible": true,
+    "submitted_request_rendered_first": true,
+    "course_tools": [
+      "execute_submitted_payload",
+      "execute_operational_payload"
+    ]
+  },
+  "pressure_profile": "financial_urgency_v1"
+}

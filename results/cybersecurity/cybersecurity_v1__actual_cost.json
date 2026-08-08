@@ -1,0 +1,37 @@
+{
+  "date": "2026-08-08",
+  "documented_rate_estimate": {
+    "authoritative": false,
+    "by_target": {
+      "deepseek_baseten": {
+        "cached_prompt_tokens": 418897,
+        "completion_tokens": 924468,
+        "estimated_cost_usd": 9.883699525,
+        "prompt_tokens": 4215340
+      },
+      "gptoss_baseten": {
+        "cached_prompt_tokens": 2897696,
+        "completion_tokens": 1608265,
+        "estimated_cost_usd": 1.6534129,
+        "prompt_tokens": 8492804
+      }
+    },
+    "pricing_accessed_at": "2026-08-07",
+    "pricing_source": "https://www.baseten.co/products/model-apis/",
+    "total_usd": 11.537112425
+  },
+  "local_or_transport_errors": 0,
+  "logged_call_records": 2660,
+  "provider_reported_cost_status": "incomplete",
+  "provider_reported_cost_sum_usd": 0,
+  "provider_responses": 2660,
+  "records_missing_provider_reported_cost": 2660,
+  "records_with_provider_reported_cost": 0,
+  "schema_version": "cybersecurity_actual_cost_v1",
+  "source_call_files": [
+    "/Users/tommasocerruti/Workspace/eal-bench/results/cybersecurity/20260808-003532-015910__authorization-memory-controls__cybersecurity-v1-claim-controls/calls.jsonl",
+    "/Users/tommasocerruti/Workspace/eal-bench/results/cybersecurity/20260808-005219-551057__authorization-memory-writer__cybersecurity-v1-claim-writer/calls.jsonl",
+    "/Users/tommasocerruti/Workspace/eal-bench/results/cybersecurity/20260808-010105-777828__authorization-memory-pressure__cybersecurity-v1-claim-pressure/calls.jsonl"
+  ],
+  "timezone": "Europe/Zurich"
+}

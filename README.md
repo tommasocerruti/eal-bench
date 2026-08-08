@@ -85,6 +85,11 @@ Its authorization scope includes:
 
 The repository is designed so additional domains can define their own authorization scope, events, requests, tools, and oracle without modifying the shared experiment runner or analysis infrastructure.
 
+Cybersecurity incident response is available as a frozen core candidate. It tests whether scoped
+permission to contain incidents on named customer systems drifts across assets, environments,
+actions, vulnerabilities, and response windows. Its claim release is approved and pending live
+acceptance.
+
 TODO: Add the future domains.
 
 ## Memory conditions

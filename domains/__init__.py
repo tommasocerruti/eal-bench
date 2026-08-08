@@ -17,7 +17,14 @@ def _procurement() -> AuthorizationMemoryDomain:
     return ProcurementDomain()
 
 
+def _cybersecurity() -> AuthorizationMemoryDomain:
+    from .cybersecurity import create_domain
+
+    return create_domain()
+
+
 DOMAINS: dict[str, DomainFactory] = {
+    "cybersecurity": _cybersecurity,
     "procurement": _procurement,
 }
 

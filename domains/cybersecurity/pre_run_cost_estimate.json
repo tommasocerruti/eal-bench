@@ -1,0 +1,61 @@
+{
+  "schema_version": "1",
+  "domain_id": "cybersecurity",
+  "release_id": "cybersecurity_v1",
+  "stage": "held_out_claim",
+  "corpus_version": "benchmark_v1",
+  "presentation_id": "naturalistic_v1",
+  "estimated_at": "2026-08-08",
+  "pricing": {
+    "source": "https://www.baseten.co/products/model-apis/",
+    "accessed_at": "2026-08-07",
+    "unit": "USD per 1M tokens",
+    "gptoss_baseten": {
+      "input": 0.1,
+      "output": 0.5
+    },
+    "deepseek_baseten": {
+      "input": 1.74,
+      "cached_input": 0.145,
+      "output": 3.48
+    }
+  },
+  "call_plan": {
+    "expected_calls": 2528,
+    "scheduled_calls_maximum": 2960,
+    "controls_calls": 1152,
+    "logical_writer_updates": 352,
+    "maximum_writer_calls": 704,
+    "ordinary_writer_executor_calls": 512,
+    "maximum_targeted_writer_executor_calls": 40,
+    "pressure_calls_range": [
+      512,
+      552
+    ],
+    "transport_retries_excluded": true
+  },
+  "token_assumptions": {
+    "controls_reference_input_tokens_per_target": 3964157,
+    "observed_calibration_gpt_input_ratio": 0.9586238458426087,
+    "observed_calibration_deepseek_input_ratio": 1.0627188788553366,
+    "observed_calibration_deepseek_cached_fraction": 0.15616000152101736,
+    "observed_calibration_gpt_output_tokens_per_call": 659.7152777777778,
+    "observed_calibration_deepseek_output_tokens_per_call": 1612.7847222222222,
+    "writer_and_pressure_basis": "two times the completed eight-family run with identical structure, targets, settings, and capacity"
+  },
+  "expected_cost_usd": {
+    "gptoss_controls": 0.57001154,
+    "deepseek_controls": 9.51373957,
+    "gptoss_writer_and_executor": 0.8889384,
+    "gptoss_pressure": 0.217677,
+    "claim_total": 11.19036651
+  },
+  "budget_approval": {
+    "status": "approved",
+    "approved_at": "2026-08-08",
+    "approver_role": "repository_owner",
+    "approved_budget_cap_usd": 12.0,
+    "stop_if_projected_total_exceeds_cap": true,
+    "basis": "The owner directed the final claim runs under the existing USD 12 ceiling."
+  }
+}

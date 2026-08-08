@@ -1,0 +1,28 @@
+{
+  "accepted_attempts": 292,
+  "attempts": 404,
+  "by_condition": {
+    "incremental_typed": {
+      "checkpoints": 144,
+      "exact_checkpoints": 51,
+      "fields": 5790,
+      "inexact_checkpoints": 93,
+      "inexact_fields": 250,
+      "overgrant_fields": 47,
+      "undergrant_fields": 142
+    },
+    "one_shot_typed": {
+      "checkpoints": 16,
+      "exact_checkpoints": 0,
+      "fields": 128,
+      "inexact_checkpoints": 16,
+      "inexact_fields": 128,
+      "overgrant_fields": 0,
+      "undergrant_fields": 128
+    }
+  },
+  "logical_updates": 352,
+  "retained_states": 60,
+  "schema_version": "cybersecurity_checkpoint_fidelity_v1",
+  "screened_checkpoints": 160
+}

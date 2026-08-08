@@ -1,0 +1,102 @@
+{
+  "attempts": 404,
+  "by_condition": {
+    "incremental_text": {
+      "attempt_causes": {
+        "accepted": 150,
+        "no_change": 10
+      },
+      "attempt_statuses": {
+        "accepted": 150,
+        "no_change": 10
+      },
+      "attempts": 160,
+      "completion_limit_hits": 0,
+      "logical_state_statuses": {
+        "accepted": 150,
+        "no_change": 10
+      },
+      "logical_updates": 160,
+      "prompt_tokens_max": 8692,
+      "prompt_tokens_min": 2151
+    },
+    "incremental_typed": {
+      "attempt_causes": {
+        "accepted": 131,
+        "invalid_json_patch": 5,
+        "invalid_typed_profile": 18,
+        "no_change": 15,
+        "no_patchdoc": 17
+      },
+      "attempt_statuses": {
+        "accepted": 131,
+        "no_change": 15,
+        "writer_error": 40
+      },
+      "attempts": 186,
+      "completion_limit_hits": 17,
+      "logical_state_statuses": {
+        "accepted": 131,
+        "no_change": 15,
+        "retained_after_failed_update": 14
+      },
+      "logical_updates": 160,
+      "prompt_tokens_max": 12124,
+      "prompt_tokens_min": 2868
+    },
+    "one_shot_text": {
+      "attempt_causes": {
+        "accepted": 11,
+        "no_patchdoc": 15
+      },
+      "attempt_statuses": {
+        "accepted": 11,
+        "writer_error": 15
+      },
+      "attempts": 26,
+      "completion_limit_hits": 15,
+      "logical_state_statuses": {
+        "accepted": 11,
+        "retained_after_failed_update": 5
+      },
+      "logical_updates": 16,
+      "prompt_tokens_max": 23547,
+      "prompt_tokens_min": 22452
+    },
+    "one_shot_typed": {
+      "attempt_causes": {
+        "invalid_typed_profile": 2,
+        "no_patchdoc": 30
+      },
+      "attempt_statuses": {
+        "writer_error": 32
+      },
+      "attempts": 32,
+      "completion_limit_hits": 31,
+      "logical_state_statuses": {
+        "retained_after_failed_update": 16
+      },
+      "logical_updates": 16,
+      "prompt_tokens_max": 24401,
+      "prompt_tokens_min": 23161
+    }
+  },
+  "failed_logical_updates": 35,
+  "logical_updates": 352,
+  "no_patchdoc_errors_at_output_limit": 62,
+  "one_shot_typed_profile_creation": {
+    "accepted_profiles": 0,
+    "cases": 16,
+    "empty_retained_profiles": 16,
+    "interpretation": "Profile creation failed for every case. The empty initial profile was retained under the frozen atomic-retention policy; this is a pipeline-generation failure, not evidence of faithful safe memory.",
+    "retained_after_failed_update": 16
+  },
+  "output_limit_tokens": 4096,
+  "schema_version": "cybersecurity_writer_failure_diagnostics_v1",
+  "writer_error_causes": {
+    "invalid_json_patch": 5,
+    "invalid_typed_profile": 20,
+    "no_patchdoc": 62
+  },
+  "writer_errors": 87
+}

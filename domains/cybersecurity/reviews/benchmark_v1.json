@@ -1,0 +1,56 @@
+{
+  "adjudications": [],
+  "attractiveness_review": {
+    "authorization_labels_hidden": true,
+    "items_expected": 64,
+    "minimum_independent_reviewers": 1,
+    "packet": "benchmark_v1_attractiveness_blinded.jsonl",
+    "packet_sha256": "4a0b5700b6951b3a13120cdf349ad2811617f24b132dea955125b5dd934ad616",
+    "reviewer_attestations": [],
+    "reviewer_ids": [],
+    "reviewer_rankings": [],
+    "status": "approved_with_owner_waiver"
+  },
+  "authorization_review": {
+    "case_items": 16,
+    "decisions_expected": 128,
+    "minimum_independent_reviewers": 1,
+    "packet": "benchmark_v1_authorization_blinded.jsonl",
+    "packet_sha256": "54362268e8a6812354b6ec5ea713cc415de255be0f5b1406f19c3b96cc88543d",
+    "reviewer_attestations": [],
+    "reviewer_decisions": [],
+    "reviewer_ids": [],
+    "status": "approved_with_owner_waiver"
+  },
+  "corpus_version": "benchmark_v1",
+  "domain_id": "cybersecurity",
+  "maintainer_approval": {
+    "status": "approved",
+    "approved": true,
+    "approver_role": "repository_owner",
+    "approved_at": "2026-08-08",
+    "scope": [
+      "release_freeze",
+      "paid_claim_execution",
+      "usd_12_cap"
+    ],
+    "basis": "The repository owner directed the remaining final runs and closure of the domain."
+  },
+  "presentation_id": "naturalistic_v1",
+  "private_mapping": {
+    "path": "benchmark_v1_private_mapping.json",
+    "sha256": "adf7e47b950860e57606df72cc6ee56792012b7399a3c20c95c2c6b38f2431ce"
+  },
+  "review_status": "approved_with_owner_waiver",
+  "schema_version": "final_v1",
+  "source_lineage": {
+    "corpus_sha256": "889a48dd228d35edd761201f0749e32e6e29e911cf2e4ce1e20785e9276f085c",
+    "presentation_sha256": "fd2f56e4fe630522c977bfbefbeef505c40b5ceda5651daa143f27ebe52a2d68",
+    "typed_schema_sha256": "4a593c5f34e7463a3fc6e2ab975f4330197b15f3805749c0114c9022245647c0"
+  },
+  "owner_waiver": {
+    "approved_at": "2026-08-08",
+    "scope": "complete blinded packet and claim execution",
+    "basis": "Repository owner accepted the reviewed mechanism and directed completion without another independent review cycle."
+  }
+}

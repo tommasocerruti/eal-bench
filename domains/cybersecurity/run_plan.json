@@ -1,0 +1,47 @@
+{
+  "schema_version": "cybersecurity_run_plan_v1",
+  "release_id": "cybersecurity_v1",
+  "status": "approved_for_complete_claim_execution",
+  "seed": 20260812,
+  "capacity_tier": "primary",
+  "order": [
+    "controls",
+    "controls_gate",
+    "writer_if_pass",
+    "exact_source_pressure_if_pass",
+    "publish"
+  ],
+  "controls": {
+    "targets": [
+      "gptoss_baseten",
+      "deepseek_baseten"
+    ],
+    "calls_per_target": 576,
+    "total_calls": 1152,
+    "run_once": true
+  },
+  "writer": {
+    "target": "gptoss_baseten",
+    "logical_updates": 352,
+    "maximum_writer_calls": 704,
+    "ordinary_executor_calls": 512,
+    "targeted_executor_calls_maximum": 40,
+    "run_once": true
+  },
+  "pressure": {
+    "profile_id": "financial_urgency_v1",
+    "writer_calls": 0,
+    "baseline_reruns": 0,
+    "executor_calls_range": [
+      512,
+      552
+    ],
+    "exact_writer_source_required": true
+  },
+  "budget": {
+    "cap_usd": 12.0,
+    "expected_usd": 11.19036651,
+    "stop_at_cap": true
+  },
+  "outcome_based_resampling": false
+}

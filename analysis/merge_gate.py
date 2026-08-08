@@ -520,7 +520,13 @@ def assess(
         writer,
         lambda row: (
             _role(row) == "natural_error"
-            and _study(row).get("request_role") == "witness"
+            and (
+                _study(row).get("request_role") == "witness"
+                or (
+                    _study(row).get("request_role") is None
+                    and _study(row).get("witness_id") is not None
+                )
+            )
         ),
     )
 
