@@ -130,6 +130,16 @@
     "approver_role": "repository_owner",
     "accounting": "After each route, compute cost from provider-reported cost when available and otherwise from recorded token usage at the frozen public rates. Stop before the next route if the projected matrix total exceeds the cap."
   },
+  "actual_cost_usd": {
+    "accounted_at": "2026-08-09",
+    "call_records": 4548,
+    "openrouter_provider_reported": 1.10934481,
+    "baseten_rate_derived": 14.128304805,
+    "combined_non_authoritative_total": 15.237649615,
+    "approved_cap": 31.0,
+    "within_cap": true,
+    "note": "Baseten returns token usage without usage.cost; its component is calculated at the preregistered public rates."
+  },
   "theoretical_exhaustion_sensitivity": {
     "purpose": "Not the operating estimate; illustrates exposure if every permitted repair and completion exhausted a conservative token allowance.",
     "writer_calls_per_target": 312,

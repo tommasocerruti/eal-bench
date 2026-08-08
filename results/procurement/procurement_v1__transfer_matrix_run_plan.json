@@ -10,8 +10,9 @@
   "writer_max_attempts": 2,
   "writer_runs": 1,
   "executor_runs": 1,
-  "status": "approved_for_complete_matrix_execution",
+  "status": "completed_with_two_preserved_writer_failures",
   "prepared_at": "2026-08-08",
+  "completed_at": "2026-08-09",
   "base_commit": "26b41166bc6c15d1d5431718ad85e64d3afbe387",
   "executors": [
     "gptoss_baseten",
@@ -100,6 +101,21 @@
     "outcome_based_resampling": false,
     "continue_to_later_writers_independent_of_earlier_behavior": true,
     "technical_integrity_failure_may_pause_execution": true
+  },
+  "execution_outcomes": {
+    "completed_writer_and_pressure_routes": [
+      "nemotron_3_ultra_baseten",
+      "grok_4_3_openrouter",
+      "glm_5_2_baseten"
+    ],
+    "preserved_failed_writer_routes": {
+      "mistral_medium_3_openrouter": "writer route exceeded the frozen 3600-second wall-time limit",
+      "kimi_baseten": "post-writer witness construction exceeded the frozen 32-item source-turn limit"
+    },
+    "failed_writers_rerun": false,
+    "pressure_without_complete_writer_source": false,
+    "result_report": "results/procurement/procurement_v1__transfer_matrix_results.md",
+    "result_summary": "results/procurement/procurement_v1__transfer_matrix_results.json"
   },
   "budget": {
     "expected_baseline_usd": 14.723560070660175,
