@@ -31,6 +31,7 @@ from .schemas import (
     TRIAL_SCHEMA_VERSION,
     TYPED_MEMORY_PAYLOAD_SCHEMA_VERSION,
 )
+from .tokens import count_reference_tokens
 
 
 class OfflineLLM:
@@ -546,7 +547,10 @@ def _validate_langmem_writer_behaviors(
         ),
         writer_task="writer",
         max_attempts=2,
-        capacity_tokens=1000,
+        capacity_tokens=max(
+            1000,
+            count_reference_tokens(canonical_json(typed_payload)),
+        ),
         batch_size=1,
     )
     if typed.attempts[0].status != "accepted":

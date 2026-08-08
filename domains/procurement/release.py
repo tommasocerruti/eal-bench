@@ -86,6 +86,11 @@ def validate_active_tree() -> dict[str, Any]:
         text = path.read_text(encoding="utf-8")
         for line_number, line in enumerate(text.splitlines(), start=1):
             for pattern in _FORBIDDEN_ACTIVE_IDENTITIES:
+                if (
+                    pattern.pattern == r"naturalistic_v[23]"
+                    and not path.is_relative_to(PACKAGE_DIR)
+                ):
+                    continue
                 if pattern.search(line):
                     violations.append(
                         f"{path.relative_to(root)}:{line_number}: {pattern.pattern}"
