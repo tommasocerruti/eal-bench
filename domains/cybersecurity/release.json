@@ -62,14 +62,14 @@
     "freeze_status": "frozen"
   },
   "implementation": {
-    "adapter.py": "bda41a6729b409238c7f029e3cd861ec0adc0c8e8df2a2089251a3f2fa5c6384",
+    "adapter.py": "bd8e92a86d4248a138dbf8ca5364509a039e1c62ac5e7dddab498e8f36ce8e7e",
     "capacity.py": "fb8fe3bc604a74152ba745a39ec80649f2e9f54467fa7d92e4f4041391aec35e",
     "corpus.py": "eca10de8b419d6909bd47052b0f75470ccfb5e5810d45eb5cd711d76b14960ec",
     "corpus_final.py": "d098df0de41510019c82d1effc0c797e62e91618560688d09a72bf0caf75e8e3",
     "models.py": "49e9a3541312b529437528ffe91f95e5c590d1d893e868427ea8f68dc540715c",
     "pressure_final.py": "b0a4c84a5d659581c968dcf0f352bf985714653b2d36457db3c84fe40eb1636b",
     "release.py": "1a7394f9e699fb7ad9684f26c740804352847769498874be40d21865c3b3c9b3",
-    "studies.py": "c90458e599c073b470a82a3ffe639a84948f801ba40e1a81be10f53a2e67630c"
+    "studies.py": "16d20c07d8288f7fa507344f7d656173a2a562f5a4f7a4b2d653e68321ddd653"
   },
   "review": {
     "manifest": "reviews/benchmark_v1.json",
@@ -96,7 +96,7 @@
     "outcome_based_resampling": false,
     "bundle": {
       "path": "../../results/cybersecurity/cybersecurity_v1__results_bundle.json",
-      "sha256": "df11d535e700532ea26c9872839a0370a1b38b78744ed9db5f8e410f1020b19b"
+      "sha256": "ec6dcc107ab902cbefb5789346fc31746d97f10635dd3e917ea01efd5be5472b"
     },
     "run_manifests": {
       "controls": {
@@ -127,7 +127,7 @@
       },
       "controls_summary": {
         "path": "../../results/cybersecurity/cybersecurity_v1__controls_summary.json",
-        "sha256": "df24022d758cf1b364ca1d249b35f6ca6fb892bd5962e53b6277fa102f5b2ee0"
+        "sha256": "f955d00fa6e9702a788c0deeeb48cc16cef35dcefd347cf083498fd68c96368d"
       },
       "deepseek_gate": {
         "path": "../../results/cybersecurity/cybersecurity_v1__deepseek_gate.json",
@@ -139,27 +139,35 @@
       },
       "mechanism_report": {
         "path": "../../results/cybersecurity/cybersecurity_v1__mechanism_report.json",
-        "sha256": "79b771d821c7a4664eec09effddec3ab3ce91473ea9f7764e60e7655e042994a"
+        "sha256": "d3134ec77cf756e1264556bdd29044e9adb09d3d24b13997e3356c4439fcc29a"
       },
       "natural_witness_report": {
         "path": "../../results/cybersecurity/cybersecurity_v1__natural_witness_report.json",
-        "sha256": "74b6e24b04046c8028ddaf013e39081a841b7bf04c3278240efd499a420354a1"
+        "sha256": "1c900bf5e6cb9e116c49d4ba0eff66d8198808d98404546a9fd5152335384231"
       },
       "official_threshold_report": {
         "path": "../../results/cybersecurity/cybersecurity_v1__official_threshold_report.json",
         "sha256": "d15f1f134bcc9245ef11ccc30f895ea90cc0aaa6d84dde2ed56f1951a76dba4f"
       },
+      "offline_rescore": {
+        "path": "../../results/cybersecurity/cybersecurity_v1__offline_rescore.json",
+        "sha256": "691e66c35ba36b125f028542deab77398bca4666db2bf18621273796bd0eaf4d"
+      },
       "pressure_summary": {
         "path": "../../results/cybersecurity/cybersecurity_v1__pressure_summary.json",
-        "sha256": "c0d3cbbab7ffea608d74744d560e5d2196e2f74c918e4152a3c55da75f035e96"
+        "sha256": "fcd6a4fc65aee180128e32a0171092f83d64e4a56c0b9c4534169345e93fe504"
       },
       "typed_attribution_report": {
         "path": "../../results/cybersecurity/cybersecurity_v1__typed_attribution_report.json",
         "sha256": "068483c8ba9ed7595009a5048a7500aa3869e26acd05caea3e0085c0c07354ee"
       },
+      "writer_failure_diagnostics": {
+        "path": "../../results/cybersecurity/cybersecurity_v1__writer_failure_diagnostics.json",
+        "sha256": "e745dbcb1849c3067ae8e58669c3218c78640a0a8ee76a7635994bcd2c681d6c"
+      },
       "writer_summary": {
         "path": "../../results/cybersecurity/cybersecurity_v1__writer_summary.json",
-        "sha256": "0bb4446605ca02b233287866cedf7fcae9c4ebc836d5e0d5deee177b14760a65"
+        "sha256": "8e8d41eeec32637009248078356a150712f9c108d78385894eae6d19c06940a3"
       }
     }
   }

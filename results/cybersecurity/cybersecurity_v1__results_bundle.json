@@ -32,7 +32,7 @@
     },
     "controls_summary": {
       "path": "/Users/tommasocerruti/Workspace/eal-bench/results/cybersecurity/cybersecurity_v1__controls_summary.json",
-      "sha256": "df24022d758cf1b364ca1d249b35f6ca6fb892bd5962e53b6277fa102f5b2ee0"
+      "sha256": "f955d00fa6e9702a788c0deeeb48cc16cef35dcefd347cf083498fd68c96368d"
     },
     "deepseek_gate": {
       "path": "/Users/tommasocerruti/Workspace/eal-bench/results/cybersecurity/cybersecurity_v1__deepseek_gate.json",
@@ -44,27 +44,35 @@
     },
     "mechanism_report": {
       "path": "/Users/tommasocerruti/Workspace/eal-bench/results/cybersecurity/cybersecurity_v1__mechanism_report.json",
-      "sha256": "79b771d821c7a4664eec09effddec3ab3ce91473ea9f7764e60e7655e042994a"
+      "sha256": "d3134ec77cf756e1264556bdd29044e9adb09d3d24b13997e3356c4439fcc29a"
     },
     "natural_witness_report": {
       "path": "/Users/tommasocerruti/Workspace/eal-bench/results/cybersecurity/cybersecurity_v1__natural_witness_report.json",
-      "sha256": "74b6e24b04046c8028ddaf013e39081a841b7bf04c3278240efd499a420354a1"
+      "sha256": "1c900bf5e6cb9e116c49d4ba0eff66d8198808d98404546a9fd5152335384231"
     },
     "official_threshold_report": {
       "path": "/Users/tommasocerruti/Workspace/eal-bench/results/cybersecurity/cybersecurity_v1__official_threshold_report.json",
       "sha256": "d15f1f134bcc9245ef11ccc30f895ea90cc0aaa6d84dde2ed56f1951a76dba4f"
     },
+    "offline_rescore": {
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/cybersecurity/cybersecurity_v1__offline_rescore.json",
+      "sha256": "691e66c35ba36b125f028542deab77398bca4666db2bf18621273796bd0eaf4d"
+    },
     "pressure_summary": {
       "path": "/Users/tommasocerruti/Workspace/eal-bench/results/cybersecurity/cybersecurity_v1__pressure_summary.json",
-      "sha256": "c0d3cbbab7ffea608d74744d560e5d2196e2f74c918e4152a3c55da75f035e96"
+      "sha256": "fcd6a4fc65aee180128e32a0171092f83d64e4a56c0b9c4534169345e93fe504"
     },
     "typed_attribution_report": {
       "path": "/Users/tommasocerruti/Workspace/eal-bench/results/cybersecurity/cybersecurity_v1__typed_attribution_report.json",
       "sha256": "068483c8ba9ed7595009a5048a7500aa3869e26acd05caea3e0085c0c07354ee"
     },
+    "writer_failure_diagnostics": {
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/cybersecurity/cybersecurity_v1__writer_failure_diagnostics.json",
+      "sha256": "e745dbcb1849c3067ae8e58669c3218c78640a0a8ee76a7635994bcd2c681d6c"
+    },
     "writer_summary": {
       "path": "/Users/tommasocerruti/Workspace/eal-bench/results/cybersecurity/cybersecurity_v1__writer_summary.json",
-      "sha256": "0bb4446605ca02b233287866cedf7fcae9c4ebc836d5e0d5deee177b14760a65"
+      "sha256": "8e8d41eeec32637009248078356a150712f9c108d78385894eae6d19c06940a3"
     }
   },
   "pre_run_cost_estimate": {

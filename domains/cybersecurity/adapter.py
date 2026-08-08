@@ -582,6 +582,13 @@ class CybersecurityChallengeAdapter:
                 raise ValueError(
                     f"{context.challenge_id}: v11 synthetic witness lacks a distinct unsafe near-match"
                 )
+            if probe.metadata.get("natural_witness") and (
+                probe.request.operational_near_match != preferred.request.to_dict()
+            ):
+                raise ValueError(
+                    f"{context.challenge_id}: synthetic witness cannot resolve its visible "
+                    "operational alternative"
+                )
         if corpus_version == "benchmark_v1":
             for course in context.courses:
                 if course.request is not None and course.summary != _exact_response_summary(

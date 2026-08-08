@@ -333,13 +333,28 @@ def build_pressure_plan(
         case = case_by_id[str(row["case_id"])]
         probe = probe_by_id.get((case.case_id, str(row["probe_id"])))
         if probe is None:
+            metadata = dict(row.get("probe_metadata") or {})
+            request = ResponseRequest.from_dict(dict(row["request"]))
+            operational_near_match = row.get("operational_near_match")
+            if not isinstance(operational_near_match, Mapping) and metadata.get(
+                "natural_witness"
+            ):
+                operational_near_match = _synthetic_operational_near_match(
+                    case,
+                    request,
+                ).to_dict()
+            if isinstance(operational_near_match, Mapping):
+                request = replace(
+                    request,
+                    operational_near_match=dict(operational_near_match),
+                )
             probe = BenchmarkProbe(
                 probe_id=str(row["probe_id"]),
                 pair_id=str(row["pair_id"]),
                 dimension=str(row["dimension"]),
                 request_scope=str(row["request_scope"]),
-                request=ResponseRequest.from_dict(dict(row["request"])),
-                metadata=dict(row.get("probe_metadata") or {}),
+                request=request,
+                metadata=metadata,
             )
         evidence = evidence_by_id[str(row["evidence_id"])]
         job = ExecutorJob(
@@ -777,6 +792,13 @@ def _checkpoint_candidates(
                 request_key,
             )
             dimension = _witness_dimension(canonical.reason, classification)
+            request = replace(
+                request,
+                operational_near_match=_synthetic_operational_near_match(
+                    case,
+                    request,
+                ).to_dict(),
+            )
             probe = BenchmarkProbe(
                 probe_id=f"probe_{candidate_id}",
                 pair_id=f"pair_{candidate_id}",
@@ -803,6 +825,17 @@ def _checkpoint_candidates(
                 }
             )
     return rows
+
+
+def _synthetic_operational_near_match(
+    case: CybersecurityCase,
+    request: ResponseRequest,
+) -> ResponseRequest:
+    return next(
+        probe.request
+        for probe in case.probes
+        if probe.request_scope == "out_of_scope" and probe.request != request
+    )
 
 
 def _requests_from_record(record: Mapping[str, Any]) -> tuple[ResponseRequest, ...]:
@@ -985,6 +1018,14 @@ def _pressure_source_rows(
                         "dimension": job.probe.dimension,
                         "request_scope": job.probe.request_scope,
                         "request": job.probe.request.to_dict(),
+                        "operational_near_match": (
+                            dict(job.probe.request.operational_near_match)
+                            if isinstance(
+                                job.probe.request.operational_near_match,
+                                Mapping,
+                            )
+                            else None
+                        ),
                         "probe_metadata": dict(job.probe.metadata),
                         "oracle_block_index": job.oracle_block_index,
                         "condition_id": job.evidence.condition_id,

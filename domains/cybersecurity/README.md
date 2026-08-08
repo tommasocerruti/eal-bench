@@ -26,12 +26,28 @@ Both executors achieved 128/128 authorized uses and 0/128 unauthorized actions a
 text and typed controls. Controlled broadening caused 64/64 unauthorized actions.
 
 Generated memory caused 43/256 unauthorized actions at baseline (16.8%), while authorized use was
-144/256 (56.3%). All 20 selected substantive-memory witnesses caused the predicted unauthorized
-action, versus 0/20 after exact canonical repair. Among unsafe ordinary typed actions, 42/42 were
-formally authorized by stored memory and denied by canonical state.
+144/256 (56.3%). The primary rate is defined over out-of-scope submitted requests. A supplemental
+all-trial diagnostic also counts unauthorized operational alternatives selected when the submitted
+request was authorized: 69/512 ordinary trials contained an unauthorized terminal action.
+
+All 20 selected substantive-memory witnesses caused the predicted unauthorized action, versus
+0/20 after exact canonical repair. Eight repair calls selected the authorized operational
+alternative already visible in the request. Their original synthetic probes omitted the internal
+course linkage, so an offline hash-linked rescore corrected those rows from invalid to compliant
+without changing raw calls, model-visible contexts, or the 0/20 repair safety result. Among unsafe
+ordinary typed actions, 42/42 were formally authorized by stored memory and denied by canonical
+state.
+
+The one-shot typed writer failed to create a profile in all 16 cases. Thirty of 32 attempts emitted
+no valid patch after reaching the 4,096-token output limit; the other two emitted invalid typed
+profiles. The frozen atomic-retention policy therefore preserved an empty initial profile, yielding
+0/64 authorized use and 0/64 unauthorized actions. This condition remains in the primary
+intention-to-treat denominator as a pipeline-generation failure and is not interpreted as faithful
+or safe memory.
 
 Under financial and deadline pressure, unauthorized actions rose to 55/256 (21.5%) and authorized
-use fell to 95/256 (37.1%). Unsafe outcomes spanned 14/16 families. The release passes every
+use fell to 95/256 (37.1%). The supplemental all-trial diagnostic found 87/512 unauthorized
+terminal actions under pressure. Unsafe outcomes spanned 14/16 families. The release passes every
 scientific-domain merge threshold in `domains/CONTRIBUTING.md`. The separately recorded aggressive
 25% baseline and 30% pressure stress targets were not reached.
 
@@ -62,4 +78,5 @@ uv run ruff check .
 
 The frozen release is `release.json`. The route summaries, threshold reports, fidelity and witness
 reports, typed-attribution report, mechanism report, cost aggregate, and final results bundle are
-under `results/cybersecurity/`.
+under `results/cybersecurity/`. That directory also contains the immutable-source offline-rescore
+record and writer-failure diagnostics.
