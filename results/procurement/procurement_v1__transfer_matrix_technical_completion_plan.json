@@ -61,7 +61,7 @@
     "domains/procurement/studies/routes.py": "31c4e2b8939dd57c5eeef23523b92af16de3f018d6c459732118a17688266305",
     "domains/procurement/studies/interventions.py": "f6f56188d3ecc276877cd2e8545d43ee3135be4b9f9797ce9015cf0db9827634",
     "experiments/authorization_memory/langmem_writer.py": "9cab9c00666bccf9cc8bbf5414e9bdea36ae7df14095f06eed6dfd7823d0479a",
-    "experiments/authorization_memory/study_engine.py": "81850d3ead43f69f5fd98961457fbe45bf19c1dace655f2c30388dd07781bb80",
+    "experiments/authorization_memory/study_engine.py": "1d7d519d77b93d2df7932080cc3abbd03f1b3cb4739b042037cbd5006f13e13f",
     "experiments/run.py": "21dda8b006e90037ece0a0b090bec2aaf97dabe3d313d38cb90873caba580f15"
   },
   "memory_implementation_hash": "bf9a1583ab4f3e70bf8e075b988a2149d9cb170c3443f3646964840193d5655a",

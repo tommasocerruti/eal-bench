@@ -113,6 +113,9 @@ def validate_study_plan(
     executor_calls_max = (
         planned_ordinary_jobs + dynamic_max
     ) * route_multiplier
+    if plan.executor_only and jobs and ordinary_jobs == 0:
+        executor_calls_min = executor_calls
+        executor_calls_max = executor_calls
     estimated_cost = options.get("estimated_cost_usd")
     if executor_calls_max == 0 and logical_writer_updates == 0:
         estimated_cost = 0.0
