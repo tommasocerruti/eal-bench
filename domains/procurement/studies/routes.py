@@ -1820,11 +1820,29 @@ def _validated_writer_baseline_rows(
             "writer condition"
         )
     expected_count = manifest.get("planned_ordinary_executor_jobs")
-    if expected_count is not None and len(selected) != int(expected_count):
-        raise ValueError(
-            "pressure source ordinary baseline count differs from the "
-            "writer plan"
+    if expected_count is not None:
+        expected_count = int(expected_count)
+        correction = manifest.get("manifest_correction")
+        count_is_expanded_correction = (
+            isinstance(correction, Mapping)
+            and correction.get("corrected_field")
+            == "planned_ordinary_executor_jobs"
         )
+        executor = manifest.get("executor")
+        if not isinstance(executor, Mapping):
+            raise ValueError("pressure source has no executor route manifest")
+        targets = executor.get("targets")
+        if not isinstance(targets, list) or not targets:
+            raise ValueError("pressure source has no executor targets")
+        runs = int(executor.get("runs", 1))
+        expanded_expected = expected_count * len(targets) * runs
+        if count_is_expanded_correction:
+            expanded_expected = expected_count
+        if len(selected) != expanded_expected:
+            raise ValueError(
+                "pressure source ordinary baseline count differs from the "
+                "writer plan"
+            )
     condition_counts = {
         condition: sum(
             row["condition_id"] == condition for row in selected

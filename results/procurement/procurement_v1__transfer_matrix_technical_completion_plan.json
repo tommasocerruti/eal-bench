@@ -1,6 +1,6 @@
 {
   "schema_version": "procurement_writer_transfer_technical_completion_v1",
-  "status": "ready_awaiting_budget_approval",
+  "status": "approved_ready_to_run",
   "prepared_at": "2026-08-09",
   "domain_id": "procurement",
   "release_id": "procurement_v1",
@@ -58,6 +58,7 @@
     }
   },
   "implementation_hashes": {
+    "domains/procurement/studies/routes.py": "31c4e2b8939dd57c5eeef23523b92af16de3f018d6c459732118a17688266305",
     "domains/procurement/studies/interventions.py": "f6f56188d3ecc276877cd2e8545d43ee3135be4b9f9797ce9015cf0db9827634",
     "experiments/authorization_memory/langmem_writer.py": "9cab9c00666bccf9cc8bbf5414e9bdea36ae7df14095f06eed6dfd7823d0479a",
     "experiments/authorization_memory/study_engine.py": "81850d3ead43f69f5fd98961457fbe45bf19c1dace655f2c30388dd07781bb80",
@@ -85,8 +86,17 @@
     "basis": "frozen per-writer projection from procurement_v1__transfer_matrix_cost_estimate.json"
   },
   "proposed_operating_cap_usd": 12.0,
+  "route_cost_limits_usd": {
+    "mistral_writer": 3.25,
+    "mistral_pressure": 2.5,
+    "kimi_writer": 3.5,
+    "kimi_pressure": 2.75,
+    "total": 12.0
+  },
   "approval": {
-    "status": "pending",
+    "status": "approved",
+    "approved_at": "2026-08-09",
+    "approver_role": "repository_owner",
     "scope": "both technical-completion writer routes and their exact-source pressure replays"
   },
   "offline_validation": {
