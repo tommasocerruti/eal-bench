@@ -174,9 +174,11 @@ def memory_implementation_manifest(
 
 def framework_manifest(
     domain: AuthorizationMemoryDomain,
+    *,
+    route_timeout_seconds: float | None = None,
 ) -> dict[str, Any]:
     implementation = memory_implementation_manifest(domain)
-    return {
+    manifest = {
         "memory_implementation_id": LANGMEM_IMPLEMENTATION_ID,
         "memory_implementation_hash": implementation[
             "memory_implementation_hash"
@@ -195,12 +197,22 @@ def framework_manifest(
         "manager": dict(_MANAGER_CONFIG),
         "profile_mode": "single_stable_profile",
     }
+    if (
+        route_timeout_seconds is not None
+        and route_timeout_seconds != _ROUTE_TIMEOUT_SECONDS
+    ):
+        manifest["runtime_overrides"] = {
+            "route_timeout_seconds": route_timeout_seconds,
+            "canonical_route_timeout_seconds": _ROUTE_TIMEOUT_SECONDS,
+        }
+    return manifest
 
 
-def _ensure_route_time(deadline: float) -> None:
+def _ensure_route_time(deadline: float, route_timeout_seconds: float) -> None:
     if time.monotonic() >= deadline:
         raise TimeoutError(
-            "writer route exceeded its 3600-second wall-time limit"
+            "writer route exceeded its "
+            f"{route_timeout_seconds:g}-second wall-time limit"
         )
 
 
@@ -260,6 +272,7 @@ def run_writer_chains(
     max_attempts: int,
     capacity_tokens: int,
     batch_size: int | None,
+    route_timeout_seconds: float = _ROUTE_TIMEOUT_SECONDS,
     token_counter: TokenCounter | None = None,
 ) -> WriterRunArtifacts:
     with ExitStack() as runner_stack:
@@ -271,6 +284,7 @@ def run_writer_chains(
             max_attempts=max_attempts,
             capacity_tokens=capacity_tokens,
             batch_size=batch_size,
+            route_timeout_seconds=route_timeout_seconds,
             token_counter=token_counter,
             runner_stack=runner_stack,
         )
@@ -285,11 +299,16 @@ def _run_writer_chains(
     max_attempts: int,
     capacity_tokens: int,
     batch_size: int | None,
+    route_timeout_seconds: float,
     token_counter: TokenCounter | None = None,
     runner_stack: ExitStack,
 ) -> WriterRunArtifacts:
     if max_attempts not in {1, 2}:
         raise ValueError("max_attempts must be 1 or 2")
+    if not 3600 <= route_timeout_seconds <= 21600:
+        raise ValueError(
+            "route_timeout_seconds must be between 3600 and 21600"
+        )
     if not specs:
         return WriterRunArtifacts((), (), (), (), ())
     for spec in specs:
@@ -301,7 +320,7 @@ def _run_writer_chains(
     states: list[MemoryState] = []
     final_evidence: list[FrozenEvidence] = []
     model_contexts: list[ModelContext] = []
-    route_deadline = time.monotonic() + _ROUTE_TIMEOUT_SECONDS
+    route_deadline = time.monotonic() + route_timeout_seconds
     grouped: dict[
         tuple[str, MemoryArchitecture, int, str | None],
         list[WriterChainSpec],
@@ -355,7 +374,10 @@ def _run_writer_chains(
             resolved_model=route.resolved_model,
             effective_parameters=dict(parameters),
         )
-        framework = framework_manifest(domain)
+        framework = framework_manifest(
+            domain,
+            route_timeout_seconds=route_timeout_seconds,
+        )
         concurrency = route.max_concurrency
         if batch_size is not None:
             concurrency = min(concurrency, batch_size)
@@ -389,7 +411,7 @@ def _run_writer_chains(
         group_runner = runner_stack.enter_context(asyncio.Runner())
         max_updates = max(len(chain.spec.updates) for chain in active)
         for update_position in range(max_updates):
-            _ensure_route_time(route_deadline)
+            _ensure_route_time(route_deadline, route_timeout_seconds)
             wave = [
                 chain
                 for chain in active
@@ -423,7 +445,7 @@ def _run_writer_chains(
                     route_deadline=route_deadline,
                 )
             )
-            _ensure_route_time(route_deadline)
+            _ensure_route_time(route_deadline, route_timeout_seconds)
             retry: list[tuple[_ActiveChain, WriterUpdateSpec, MemoryAttempt]] = []
             for chain, update, invocation in zip(
                 wave, update_specs, invocations
@@ -506,7 +528,7 @@ def _run_writer_chains(
                         route_deadline=route_deadline,
                     )
                 )
-                _ensure_route_time(route_deadline)
+                _ensure_route_time(route_deadline, route_timeout_seconds)
                 for (chain, update, first), invocation in zip(
                     retry, retry_invocations
                 ):

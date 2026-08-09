@@ -111,6 +111,15 @@ def _parser() -> argparse.ArgumentParser:
         default=2,
     )
     parser.add_argument(
+        "--writer-route-timeout-seconds",
+        type=int,
+        default=3600,
+        help=(
+            "writer-route wall-time limit; values above the canonical "
+            "3600-second default are recorded as runtime overrides"
+        ),
+    )
+    parser.add_argument(
         "--capacity-tier",
         choices=("primary", "tight"),
         default="primary",
@@ -413,6 +422,14 @@ def _route_options(
     domain: Any,
     profile: Any,
 ) -> dict[str, Any]:
+    provided = set(getattr(args, "_provided_flags", ()))
+    if (
+        profile.study_id != "writer"
+        and "--writer-route-timeout-seconds" in provided
+    ):
+        raise ValueError(
+            "--writer-route-timeout-seconds applies only to the writer study"
+        )
     pressure_source = _pressure_source_manifest(args, profile)
     corpus_version = args.corpus_version or (
         str(pressure_source.get("corpus_version") or "")
@@ -464,7 +481,6 @@ def _route_options(
             _default_target(args.executor_task),
         )
     elif profile.study_id == "pressure":
-        provided = set(getattr(args, "_provided_flags", ()))
         forbidden = sorted(
             provided
             & {
@@ -474,6 +490,7 @@ def _route_options(
                 "--writer-task",
                 "--writer-runs",
                 "--writer-max-attempts",
+                "--writer-route-timeout-seconds",
                 "--writer-architecture",
                 "--writer-strategy",
             }
@@ -628,6 +645,10 @@ def main(argv: list[str] | None = None) -> None:
         raise ValueError("--batch-size must be positive")
     if args.writer_runs < 1 or args.executor_runs < 1:
         raise ValueError("writer and executor runs must be positive")
+    if not 3600 <= args.writer_route_timeout_seconds <= 21600:
+        raise ValueError(
+            "--writer-route-timeout-seconds must be between 3600 and 21600"
+        )
     if args.seed is not None and args.seed < 0:
         raise ValueError("--seed must be non-negative")
     if args.expected_missing_calls is not None and args.expected_missing_calls < 1:

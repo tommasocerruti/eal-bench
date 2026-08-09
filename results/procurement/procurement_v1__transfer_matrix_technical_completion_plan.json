@@ -1,0 +1,98 @@
+{
+  "schema_version": "procurement_writer_transfer_technical_completion_v1",
+  "status": "ready_awaiting_budget_approval",
+  "prepared_at": "2026-08-09",
+  "domain_id": "procurement",
+  "release_id": "procurement_v1",
+  "corpus_version": "benchmark_v1",
+  "presentation_id": "naturalistic_v1",
+  "canonical_seed": 20260719,
+  "capacity_tier": "primary",
+  "writer_max_attempts": 2,
+  "writer_runs": 1,
+  "executor_runs": 1,
+  "executors": [
+    "gptoss_baseten",
+    "deepseek_baseten"
+  ],
+  "purpose": "Complete the two transfer-matrix cells that ended before executor trials because of technical infrastructure failures.",
+  "preserved_first_attempts": {
+    "mistral_medium_3_openrouter": {
+      "run": "results/procurement/20260808-235223-419094__authorization-memory-writer__procurement-v1-transfer-mistral-medium-3",
+      "manifest_sha256": "970a73b769d86f289a55e8222dadc1439ea882a02891d57b6d5de4b7751bc0a3",
+      "outcome": "failed at the 3600-second writer-route wall-time limit before executor trials"
+    },
+    "kimi_baseten": {
+      "run": "results/procurement/20260809-010820-751599__authorization-memory-writer__procurement-v1-transfer-kimi-k2-6",
+      "manifest_sha256": "89ced16018531ba6af49a7937187806b9373f63a26f160768bbe5ce939f48e65",
+      "outcome": "writer generation completed, then post-writer processing rejected an active-schema-valid profile before executor trials"
+    }
+  },
+  "technical_fixes": {
+    "mistral_medium_3_openrouter": {
+      "writer_route_timeout_seconds": 10800,
+      "canonical_writer_route_timeout_seconds": 3600,
+      "invocation_timeout_seconds": 180,
+      "changed": "only the explicit route wall-time limit",
+      "unchanged": [
+        "writer prompts",
+        "memory schema",
+        "two-attempt retention policy",
+        "per-invocation timeout",
+        "target concurrency",
+        "seed",
+        "capacity"
+      ]
+    },
+    "kimi_baseten": {
+      "changed": "deterministic interventions now validate against the same active typed schema used by the writer pipeline",
+      "unchanged": [
+        "writer prompts",
+        "memory schema",
+        "writer output",
+        "candidate selection",
+        "executor jobs",
+        "seed",
+        "capacity"
+      ]
+    }
+  },
+  "implementation_hashes": {
+    "domains/procurement/studies/interventions.py": "f6f56188d3ecc276877cd2e8545d43ee3135be4b9f9797ce9015cf0db9827634",
+    "experiments/authorization_memory/langmem_writer.py": "9cab9c00666bccf9cc8bbf5414e9bdea36ae7df14095f06eed6dfd7823d0479a",
+    "experiments/authorization_memory/study_engine.py": "81850d3ead43f69f5fd98961457fbe45bf19c1dace655f2c30388dd07781bb80",
+    "experiments/run.py": "21dda8b006e90037ece0a0b090bec2aaf97dabe3d313d38cb90873caba580f15"
+  },
+  "memory_implementation_hash": "bf9a1583ab4f3e70bf8e075b988a2149d9cb170c3443f3646964840193d5655a",
+  "run_order": [
+    "mistral_medium_3_openrouter",
+    "kimi_baseten"
+  ],
+  "execution_rules": {
+    "run_each_completion_writer_once": true,
+    "reuse_each_completed_memory_set_across_both_executors": true,
+    "pressure_requires_the_exact_new_writer_source": true,
+    "pressure_regenerates_writer_memory": false,
+    "pressure_reruns_baseline": false,
+    "retain_and_report_original_failures": true,
+    "label_new_runs_as_technical_completion": true,
+    "outcome_based_removal_or_resampling": false
+  },
+  "expected_cost_usd": {
+    "mistral_medium_3_openrouter": 4.096034708417717,
+    "kimi_baseten": 4.439628940740949,
+    "total": 8.535663649158667,
+    "basis": "frozen per-writer projection from procurement_v1__transfer_matrix_cost_estimate.json"
+  },
+  "proposed_operating_cap_usd": 12.0,
+  "approval": {
+    "status": "pending",
+    "scope": "both technical-completion writer routes and their exact-source pressure replays"
+  },
+  "offline_validation": {
+    "mistral_exact_writer_plan": "passed",
+    "kimi_exact_writer_plan": "passed",
+    "kimi_40_source_id_regression": "passed",
+    "paid_calls_made": 0
+  }
+}

@@ -11,6 +11,7 @@ from domains.procurement.schemas import (
     AuthorizationCase,
     CanonicalAuthorizationRecord,
     MatchedProbePair,
+    ProcurementAuthorizationMemoryProfile,
     Transaction,
 )
 from domains.procurement.cases import current_ledger
@@ -667,7 +668,10 @@ def apply_intervention(
             field=field,
         )
 
-    result_state = validate_typed_payload(result_state, seen_source_ids=None)
+    ProcurementAuthorizationMemoryProfile.model_validate(
+        result_state.to_dict(),
+        strict=True,
+    )
 
     changed_fields = _changed_fields(source_state, result_state)
     if kind is not InterventionKind.SEMANTIC_SHAM and not changed_fields:

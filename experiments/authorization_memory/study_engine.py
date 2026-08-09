@@ -75,6 +75,9 @@ def validate_study_plan(
         len(chain.updates) for chain in plan.writer_chains
     )
     writer_max_attempts = int(options.get("writer_max_attempts", 2))
+    writer_route_timeout_seconds = int(
+        options.get("writer_route_timeout_seconds", 3600)
+    )
     executor_runs = int(options.get("executor_runs", 1))
     executor_targets = _targets(options.get("executor_targets"))
     ordinary_jobs = sum(
@@ -141,6 +144,10 @@ def validate_study_plan(
         "artifact_paths": dict(plan.artifact_paths),
         "plan_metadata": dict(plan.metadata),
         "call_plan": {
+            "writer_route_timeout_seconds": writer_route_timeout_seconds,
+            "writer_route_timeout_override": (
+                writer_route_timeout_seconds != 3600
+            ),
             "writer_logical_updates": logical_writer_updates,
             "writer_calls_without_repairs": logical_writer_updates,
             "writer_calls_maximum": (
@@ -247,6 +254,9 @@ def run_study_plan(
     writer_targets = _targets(options.get("writer_targets"))
     executor_targets = _targets(options.get("executor_targets"))
     writer_max_attempts = int(options.get("writer_max_attempts", 2))
+    writer_route_timeout_seconds = int(
+        options.get("writer_route_timeout_seconds", 3600)
+    )
     executor_runs = int(options.get("executor_runs", 1))
     capacity_tier = str(options.get("capacity_tier") or "primary")
     batch_size = options.get("batch_size")
@@ -321,6 +331,7 @@ def run_study_plan(
                 max_attempts=writer_max_attempts,
                 capacity_tokens=capacity_tokens,
                 batch_size=batch_size,
+                route_timeout_seconds=writer_route_timeout_seconds,
             )
             memories.extend(generated.memories)
             attempts.extend(generated.attempts)
@@ -591,7 +602,13 @@ def _manifest(
         **dict(plan.artifact_schemas),
     }
     writer_active = bool(plan.writer_chains)
-    implementation = framework_manifest(domain)
+    writer_route_timeout_seconds = int(
+        options.get("writer_route_timeout_seconds", 3600)
+    )
+    implementation = framework_manifest(
+        domain,
+        route_timeout_seconds=writer_route_timeout_seconds,
+    )
     memory_implementation_id = LANGMEM_IMPLEMENTATION_ID
     memory_implementation_hash = implementation[
         "memory_implementation_hash"
@@ -668,6 +685,8 @@ def _manifest(
                 {chain.run_id for chain in plan.writer_chains}
             ),
             "max_attempts": int(options.get("writer_max_attempts", 2)),
+            "route_timeout_seconds": writer_route_timeout_seconds,
+            "route_timeout_override": writer_route_timeout_seconds != 3600,
         },
         "executor": {
             "active": not plan.writer_only,
