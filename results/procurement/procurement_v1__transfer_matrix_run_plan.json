@@ -10,7 +10,7 @@
   "writer_max_attempts": 2,
   "writer_runs": 1,
   "executor_runs": 1,
-  "status": "completed_with_two_preserved_writer_failures",
+  "status": "completed_with_two_preserved_first_attempt_failures_and_separate_technical_completion",
   "prepared_at": "2026-08-08",
   "completed_at": "2026-08-09",
   "base_commit": "26b41166bc6c15d1d5431718ad85e64d3afbe387",
@@ -112,7 +112,17 @@
       "mistral_medium_3_openrouter": "writer route exceeded the frozen 3600-second wall-time limit",
       "kimi_baseten": "post-writer witness construction exceeded the frozen 32-item source-turn limit"
     },
-    "failed_writers_rerun": false,
+    "technical_completion": {
+      "plan": "results/procurement/procurement_v1__transfer_matrix_technical_completion_plan.json",
+      "status": "completed",
+      "completed_writer_and_pressure_routes": [
+        "mistral_medium_3_openrouter",
+        "kimi_baseten"
+      ],
+      "mistral_interpretation": "completed under the recorded route-timeout override, but 208 of 267 writer transports timed out; exclude from pooled mechanism claims",
+      "kimi_interpretation": "completed cleanly after deterministic post-writer validation was aligned with the active typed schema"
+    },
+    "original_failed_route_directories_modified_or_resumed": false,
     "pressure_without_complete_writer_source": false,
     "result_report": "results/procurement/procurement_v1__transfer_matrix_results.md",
     "result_summary": "results/procurement/procurement_v1__transfer_matrix_results.json"

@@ -1,6 +1,6 @@
 {
   "schema_version": "procurement_writer_transfer_technical_completion_v1",
-  "status": "approved_ready_to_run",
+  "status": "completed",
   "prepared_at": "2026-08-09",
   "domain_id": "procurement",
   "release_id": "procurement_v1",
@@ -103,6 +103,38 @@
     "mistral_exact_writer_plan": "passed",
     "kimi_exact_writer_plan": "passed",
     "kimi_40_source_id_regression": "passed",
-    "paid_calls_made": 0
+    "mistral_exact_pressure_source": "passed",
+    "kimi_exact_pressure_source": "passed",
+    "all_domains": "passed",
+    "paid_calls_made": 2803
+  },
+  "execution_outcomes": {
+    "completed_at": "2026-08-09",
+    "mistral_medium_3_openrouter": {
+      "writer_run": "results/procurement/20260809-100722-253674__authorization-memory-writer__procurement-v1-transfer-mistral-medium-3-technical-completion",
+      "pressure_run": "results/procurement/20260809-112552-795070__authorization-memory-pressure__procurement-v1-transfer-mistral-medium-3-technical-completion-pressure",
+      "writer_calls": 267,
+      "writer_transport_errors": 208,
+      "baseline_executor_calls": 576,
+      "pressure_executor_calls": 576,
+      "interpretation": "route completed, but writer transport reliability was insufficient for pooled memory-mechanism analysis"
+    },
+    "kimi_baseten": {
+      "writer_run": "results/procurement/20260809-112937-803837__authorization-memory-writer__procurement-v1-transfer-kimi-k2-6-technical-completion",
+      "pressure_run": "results/procurement/20260809-113632-753066__authorization-memory-pressure__procurement-v1-transfer-kimi-k2-6-technical-completion-pressure",
+      "writer_calls": 168,
+      "writer_transport_errors": 0,
+      "baseline_executor_calls": 608,
+      "pressure_executor_calls": 608,
+      "interpretation": "clean technical completion after post-writer validation fix"
+    }
+  },
+  "actual_cost_usd": {
+    "call_records": 2803,
+    "openrouter_provider_reported": 0.05443672,
+    "baseten_rate_derived": 7.37040667,
+    "combined_non_authoritative_total": 7.42484339,
+    "approved_cap": 12.0,
+    "within_cap": true
   }
 }
