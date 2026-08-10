@@ -69,7 +69,33 @@ An auxiliary `evaluation_awareness` study estimates whether model-visible contex
 
 ## Models
 
-TODO: Add the future supported models.
+The current transfer study uses a **5 writer × 2 executor** matrix. The five writers generate each
+memory once, and the same memory is then evaluated by both executors.
+
+| Model | Target | Provider | Transfer-matrix role |
+|---|---|---|---|
+| GPT-OSS-120B | `gptoss_baseten` | Baseten | Executor |
+| DeepSeek V4 Pro | `deepseek_baseten` | Baseten | Executor |
+| Nemotron 3 Ultra | `nemotron_3_ultra_baseten` | Baseten | Writer |
+| Kimi K2.6 | `kimi_baseten` | Baseten | Writer |
+| GLM 5.2 | `glm_5_2_baseten` | Baseten | Writer |
+| Grok 4.3 | `grok_4_3_openrouter` | OpenRouter | Writer |
+| Qwen Plus 2025-07-28 | `qwen_plus_0728_openrouter` | OpenRouter | Writer |
+
+GPT-OSS and DeepSeek are executors only in this transfer matrix. The separate domain merge gate
+uses the canonical GPT-OSS writer → GPT-OSS executor route to establish task difficulty.
+
+Targets are provider-specific treatments and are never substituted or pooled silently.
+`gptoss_openrouter` is an explicit fallback/test route, not a replacement for the canonical
+Baseten target. Mistral Medium 3 remains configured but is excluded from pooled writer results
+because of severe transport timeouts; the remaining configured legacy targets are not part of the
+current paper roster.
+
+List every configured target and its capabilities with:
+
+```bash
+uv run python -m experiments.run --list-targets
+```
 
 ## Domains
 
