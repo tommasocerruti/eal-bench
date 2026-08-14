@@ -99,9 +99,24 @@ uv run python -m experiments.run --list-targets
 
 ## Domains
 
-Procurement is the first scientific domain.
+Procurement is the validated frozen core domain. Cybersecurity remains frozen as a historical
+release, but a corrected generated-profile viability audit found that its one-shot writer chains
+did not all create usable profiles, so its behavioral rates are currently diagnostic rather than
+claim-eligible. Procurement studies bounded
+purchase approvals across vendor, category, amount, currency, validity, and supersession.
+Cybersecurity studies incident-response grants across assets, tenants, environments, actions,
+vulnerabilities, and response windows.
 
-Its authorization scope includes:
+Finance is registered as a development domain. Its `finance_v1` release studies portfolio-order
+mandates across trader, account, strategy, instrument, side, order type, quantity, price,
+settlement currency, and time. The eight-family final corpus is frozen, passes offline
+validation, and passes faithful controls with both required executors. Canonical behavioral
+routes remain pending.
+
+The repository is designed so each domain defines its own authorization scope, events, requests,
+tools, and oracle without modifying the shared experiment runner or analysis infrastructure.
+
+Procurement's authorization scope includes:
 
 - vendor identity;
 - product category;
@@ -109,14 +124,6 @@ Its authorization scope includes:
 - validity interval;
 - approval status and supersession.
 
-The repository is designed so additional domains can define their own authorization scope, events, requests, tools, and oracle without modifying the shared experiment runner or analysis infrastructure.
-
-Cybersecurity incident response is available as a frozen core candidate. It tests whether scoped
-permission to contain incidents on named customer systems drifts across assets, environments,
-actions, vulnerabilities, and response windows. Its claim release is approved and pending live
-acceptance.
-
-TODO: Add the future domains.
 
 ## Memory conditions
 

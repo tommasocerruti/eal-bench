@@ -1,0 +1,904 @@
+{
+  "schema_version": "1",
+  "domain_id": "finance",
+  "calibration_corpus": "calibration_v1",
+  "calibration_split": "development_capacity",
+  "calibration_implementation": "finance_checkpoint_capacity_v1",
+  "freeze_status": "frozen",
+  "tokenizer_name": "cl100k_base",
+  "tokenizer_version": "tiktoken_reference",
+  "typed_schema_version": "5",
+  "typed_schema_sha256": "a141c26ecbda7c88c4b3f054ca89c4439af6237862721844a50f21afac02e9b8",
+  "free_text_representation": "finance_current_mandates_v1",
+  "calibration_source_sha256": "57549dcd4ee1e4d2fd25eaa8486788f8af295c29b500226cb7f0bae773f3497c",
+  "calibration_source_files": {
+    "data/calibration_v1.json": "281a98bad8c55145b05d0a0e634a6c55a8c50dbb8653704e5a1530db77e369ef",
+    "compile_corpus.py": "2fc1e880819925f7803df7e8a441571ccc3356b0b3ca9803401c55586ad98393",
+    "corpus.py": "2615d7d81c38a195f4539e67eb85c6b9e505cebec22e205802f8e8016c9f4671"
+  },
+  "capacity_basis": "largest faithful text or typed payload at any authorization checkpoint",
+  "largest_faithful_tokens": 2930,
+  "primary_multiplier": 2.0,
+  "tight_multiplier": 1.25,
+  "primary_tokens": 5860,
+  "tight_tokens": 3663,
+  "minimum_history_ratio": 8,
+  "minimum_history_tokens": 72506,
+  "required_history_tokens": 46880,
+  "cases": [
+    {
+      "case_id": "fin_cal_municipal_cash",
+      "history_tokens": 72837,
+      "largest_faithful_tokens": 2862,
+      "largest_checkpoint_block_index": 8,
+      "checkpoints": [
+        {
+          "block_index": 0,
+          "active_mandate_count": 1,
+          "faithful_text_tokens": 180,
+          "faithful_typed_tokens": 193,
+          "largest_faithful_tokens": 193
+        },
+        {
+          "block_index": 1,
+          "active_mandate_count": 2,
+          "faithful_text_tokens": 356,
+          "faithful_typed_tokens": 376,
+          "largest_faithful_tokens": 376
+        },
+        {
+          "block_index": 2,
+          "active_mandate_count": 3,
+          "faithful_text_tokens": 546,
+          "faithful_typed_tokens": 573,
+          "largest_faithful_tokens": 573
+        },
+        {
+          "block_index": 3,
+          "active_mandate_count": 3,
+          "faithful_text_tokens": 547,
+          "faithful_typed_tokens": 574,
+          "largest_faithful_tokens": 574
+        },
+        {
+          "block_index": 4,
+          "active_mandate_count": 2,
+          "faithful_text_tokens": 370,
+          "faithful_typed_tokens": 390,
+          "largest_faithful_tokens": 390
+        },
+        {
+          "block_index": 5,
+          "active_mandate_count": 3,
+          "faithful_text_tokens": 540,
+          "faithful_typed_tokens": 570,
+          "largest_faithful_tokens": 570
+        },
+        {
+          "block_index": 6,
+          "active_mandate_count": 3,
+          "faithful_text_tokens": 541,
+          "faithful_typed_tokens": 572,
+          "largest_faithful_tokens": 572
+        },
+        {
+          "block_index": 8,
+          "active_mandate_count": 16,
+          "faithful_text_tokens": 2712,
+          "faithful_typed_tokens": 2862,
+          "largest_faithful_tokens": 2862
+        },
+        {
+          "block_index": 9,
+          "active_mandate_count": 2,
+          "faithful_text_tokens": 357,
+          "faithful_typed_tokens": 387,
+          "largest_faithful_tokens": 387
+        }
+      ]
+    },
+    {
+      "case_id": "fin_cal_nordic_equity",
+      "history_tokens": 72775,
+      "largest_faithful_tokens": 2866,
+      "largest_checkpoint_block_index": 8,
+      "checkpoints": [
+        {
+          "block_index": 0,
+          "active_mandate_count": 1,
+          "faithful_text_tokens": 179,
+          "faithful_typed_tokens": 193,
+          "largest_faithful_tokens": 193
+        },
+        {
+          "block_index": 1,
+          "active_mandate_count": 2,
+          "faithful_text_tokens": 354,
+          "faithful_typed_tokens": 376,
+          "largest_faithful_tokens": 376
+        },
+        {
+          "block_index": 2,
+          "active_mandate_count": 2,
+          "faithful_text_tokens": 358,
+          "faithful_typed_tokens": 380,
+          "largest_faithful_tokens": 380
+        },
+        {
+          "block_index": 3,
+          "active_mandate_count": 3,
+          "faithful_text_tokens": 546,
+          "faithful_typed_tokens": 576,
+          "largest_faithful_tokens": 576
+        },
+        {
+          "block_index": 4,
+          "active_mandate_count": 2,
+          "faithful_text_tokens": 367,
+          "faithful_typed_tokens": 389,
+          "largest_faithful_tokens": 389
+        },
+        {
+          "block_index": 5,
+          "active_mandate_count": 3,
+          "faithful_text_tokens": 537,
+          "faithful_typed_tokens": 569,
+          "largest_faithful_tokens": 569
+        },
+        {
+          "block_index": 6,
+          "active_mandate_count": 3,
+          "faithful_text_tokens": 540,
+          "faithful_typed_tokens": 572,
+          "largest_faithful_tokens": 572
+        },
+        {
+          "block_index": 8,
+          "active_mandate_count": 16,
+          "faithful_text_tokens": 2716,
+          "faithful_typed_tokens": 2866,
+          "largest_faithful_tokens": 2866
+        },
+        {
+          "block_index": 9,
+          "active_mandate_count": 2,
+          "faithful_text_tokens": 357,
+          "faithful_typed_tokens": 387,
+          "largest_faithful_tokens": 387
+        }
+      ]
+    },
+    {
+      "case_id": "fin_cal_pension_duration",
+      "history_tokens": 73347,
+      "largest_faithful_tokens": 2910,
+      "largest_checkpoint_block_index": 8,
+      "checkpoints": [
+        {
+          "block_index": 0,
+          "active_mandate_count": 1,
+          "faithful_text_tokens": 184,
+          "faithful_typed_tokens": 198,
+          "largest_faithful_tokens": 198
+        },
+        {
+          "block_index": 1,
+          "active_mandate_count": 2,
+          "faithful_text_tokens": 364,
+          "faithful_typed_tokens": 386,
+          "largest_faithful_tokens": 386
+        },
+        {
+          "block_index": 2,
+          "active_mandate_count": 2,
+          "faithful_text_tokens": 366,
+          "faithful_typed_tokens": 388,
+          "largest_faithful_tokens": 388
+        },
+        {
+          "block_index": 3,
+          "active_mandate_count": 1,
+          "faithful_text_tokens": 184,
+          "faithful_typed_tokens": 198,
+          "largest_faithful_tokens": 198
+        },
+        {
+          "block_index": 4,
+          "active_mandate_count": 2,
+          "faithful_text_tokens": 359,
+          "faithful_typed_tokens": 383,
+          "largest_faithful_tokens": 383
+        },
+        {
+          "block_index": 5,
+          "active_mandate_count": 3,
+          "faithful_text_tokens": 554,
+          "faithful_typed_tokens": 586,
+          "largest_faithful_tokens": 586
+        },
+        {
+          "block_index": 6,
+          "active_mandate_count": 3,
+          "faithful_text_tokens": 557,
+          "faithful_typed_tokens": 589,
+          "largest_faithful_tokens": 589
+        },
+        {
+          "block_index": 8,
+          "active_mandate_count": 16,
+          "faithful_text_tokens": 2760,
+          "faithful_typed_tokens": 2910,
+          "largest_faithful_tokens": 2910
+        },
+        {
+          "block_index": 9,
+          "active_mandate_count": 2,
+          "faithful_text_tokens": 363,
+          "faithful_typed_tokens": 393,
+          "largest_faithful_tokens": 393
+        }
+      ]
+    },
+    {
+      "case_id": "fin_cal_asia_currency",
+      "history_tokens": 73706,
+      "largest_faithful_tokens": 2930,
+      "largest_checkpoint_block_index": 8,
+      "checkpoints": [
+        {
+          "block_index": 0,
+          "active_mandate_count": 1,
+          "faithful_text_tokens": 179,
+          "faithful_typed_tokens": 194,
+          "largest_faithful_tokens": 194
+        },
+        {
+          "block_index": 1,
+          "active_mandate_count": 2,
+          "faithful_text_tokens": 354,
+          "faithful_typed_tokens": 378,
+          "largest_faithful_tokens": 378
+        },
+        {
+          "block_index": 2,
+          "active_mandate_count": 3,
+          "faithful_text_tokens": 545,
+          "faithful_typed_tokens": 578,
+          "largest_faithful_tokens": 578
+        },
+        {
+          "block_index": 3,
+          "active_mandate_count": 3,
+          "faithful_text_tokens": 546,
+          "faithful_typed_tokens": 579,
+          "largest_faithful_tokens": 579
+        },
+        {
+          "block_index": 4,
+          "active_mandate_count": 3,
+          "faithful_text_tokens": 551,
+          "faithful_typed_tokens": 584,
+          "largest_faithful_tokens": 584
+        },
+        {
+          "block_index": 5,
+          "active_mandate_count": 2,
+          "faithful_text_tokens": 375,
+          "faithful_typed_tokens": 399,
+          "largest_faithful_tokens": 399
+        },
+        {
+          "block_index": 6,
+          "active_mandate_count": 3,
+          "faithful_text_tokens": 547,
+          "faithful_typed_tokens": 582,
+          "largest_faithful_tokens": 582
+        },
+        {
+          "block_index": 8,
+          "active_mandate_count": 16,
+          "faithful_text_tokens": 2764,
+          "faithful_typed_tokens": 2930,
+          "largest_faithful_tokens": 2930
+        },
+        {
+          "block_index": 9,
+          "active_mandate_count": 2,
+          "faithful_text_tokens": 365,
+          "faithful_typed_tokens": 397,
+          "largest_faithful_tokens": 397
+        }
+      ]
+    }
+  ],
+  "compatibility": {
+    "benchmark_v1": {
+      "source_sha256": "d73afe1331f5a6aee2b5ebed81c7ec3403490c5402a6f8f05956db77934ed927",
+      "source_files": {
+        "data/benchmark_v1.json": "afdb6aa90633a64f78b6c1c94f29b9d9add4cd437a27ccaac43cc287c0b2c878",
+        "compile_corpus.py": "2fc1e880819925f7803df7e8a441571ccc3356b0b3ca9803401c55586ad98393",
+        "corpus.py": "2615d7d81c38a195f4539e67eb85c6b9e505cebec22e205802f8e8016c9f4671"
+      },
+      "largest_faithful_tokens": 3006,
+      "all_faithful_payloads_fit_primary": true,
+      "minimum_history_tokens": 72506,
+      "required_history_tokens": 46880,
+      "cases": [
+        {
+          "case_id": "fin_bench_municipal_cash",
+          "history_tokens": 73008,
+          "largest_faithful_tokens": 2878,
+          "largest_checkpoint_block_index": 8,
+          "checkpoints": [
+            {
+              "block_index": 0,
+              "active_mandate_count": 1,
+              "faithful_text_tokens": 179,
+              "faithful_typed_tokens": 192,
+              "largest_faithful_tokens": 192
+            },
+            {
+              "block_index": 1,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 354,
+              "faithful_typed_tokens": 374,
+              "largest_faithful_tokens": 374
+            },
+            {
+              "block_index": 2,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 543,
+              "faithful_typed_tokens": 570,
+              "largest_faithful_tokens": 570
+            },
+            {
+              "block_index": 3,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 544,
+              "faithful_typed_tokens": 571,
+              "largest_faithful_tokens": 571
+            },
+            {
+              "block_index": 4,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 368,
+              "faithful_typed_tokens": 388,
+              "largest_faithful_tokens": 388
+            },
+            {
+              "block_index": 5,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 536,
+              "faithful_typed_tokens": 566,
+              "largest_faithful_tokens": 566
+            },
+            {
+              "block_index": 6,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 537,
+              "faithful_typed_tokens": 568,
+              "largest_faithful_tokens": 568
+            },
+            {
+              "block_index": 8,
+              "active_mandate_count": 16,
+              "faithful_text_tokens": 2728,
+              "faithful_typed_tokens": 2878,
+              "largest_faithful_tokens": 2878
+            },
+            {
+              "block_index": 9,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 361,
+              "faithful_typed_tokens": 391,
+              "largest_faithful_tokens": 391
+            }
+          ]
+        },
+        {
+          "case_id": "fin_bench_nordic_equity",
+          "history_tokens": 72506,
+          "largest_faithful_tokens": 2850,
+          "largest_checkpoint_block_index": 8,
+          "checkpoints": [
+            {
+              "block_index": 0,
+              "active_mandate_count": 1,
+              "faithful_text_tokens": 178,
+              "faithful_typed_tokens": 192,
+              "largest_faithful_tokens": 192
+            },
+            {
+              "block_index": 1,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 352,
+              "faithful_typed_tokens": 374,
+              "largest_faithful_tokens": 374
+            },
+            {
+              "block_index": 2,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 355,
+              "faithful_typed_tokens": 377,
+              "largest_faithful_tokens": 377
+            },
+            {
+              "block_index": 3,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 542,
+              "faithful_typed_tokens": 572,
+              "largest_faithful_tokens": 572
+            },
+            {
+              "block_index": 4,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 365,
+              "faithful_typed_tokens": 387,
+              "largest_faithful_tokens": 387
+            },
+            {
+              "block_index": 5,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 534,
+              "faithful_typed_tokens": 566,
+              "largest_faithful_tokens": 566
+            },
+            {
+              "block_index": 6,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 536,
+              "faithful_typed_tokens": 568,
+              "largest_faithful_tokens": 568
+            },
+            {
+              "block_index": 8,
+              "active_mandate_count": 16,
+              "faithful_text_tokens": 2700,
+              "faithful_typed_tokens": 2850,
+              "largest_faithful_tokens": 2850
+            },
+            {
+              "block_index": 9,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 355,
+              "faithful_typed_tokens": 385,
+              "largest_faithful_tokens": 385
+            }
+          ]
+        },
+        {
+          "case_id": "fin_bench_pension_duration",
+          "history_tokens": 74009,
+          "largest_faithful_tokens": 2958,
+          "largest_checkpoint_block_index": 8,
+          "checkpoints": [
+            {
+              "block_index": 0,
+              "active_mandate_count": 1,
+              "faithful_text_tokens": 186,
+              "faithful_typed_tokens": 200,
+              "largest_faithful_tokens": 200
+            },
+            {
+              "block_index": 1,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 368,
+              "faithful_typed_tokens": 390,
+              "largest_faithful_tokens": 390
+            },
+            {
+              "block_index": 2,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 371,
+              "faithful_typed_tokens": 393,
+              "largest_faithful_tokens": 393
+            },
+            {
+              "block_index": 3,
+              "active_mandate_count": 1,
+              "faithful_text_tokens": 186,
+              "faithful_typed_tokens": 200,
+              "largest_faithful_tokens": 200
+            },
+            {
+              "block_index": 4,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 364,
+              "faithful_typed_tokens": 388,
+              "largest_faithful_tokens": 388
+            },
+            {
+              "block_index": 5,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 561,
+              "faithful_typed_tokens": 593,
+              "largest_faithful_tokens": 593
+            },
+            {
+              "block_index": 6,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 565,
+              "faithful_typed_tokens": 597,
+              "largest_faithful_tokens": 597
+            },
+            {
+              "block_index": 8,
+              "active_mandate_count": 16,
+              "faithful_text_tokens": 2808,
+              "faithful_typed_tokens": 2958,
+              "largest_faithful_tokens": 2958
+            },
+            {
+              "block_index": 9,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 373,
+              "faithful_typed_tokens": 403,
+              "largest_faithful_tokens": 403
+            }
+          ]
+        },
+        {
+          "case_id": "fin_bench_asia_currency",
+          "history_tokens": 74010,
+          "largest_faithful_tokens": 2946,
+          "largest_checkpoint_block_index": 8,
+          "checkpoints": [
+            {
+              "block_index": 0,
+              "active_mandate_count": 1,
+              "faithful_text_tokens": 181,
+              "faithful_typed_tokens": 196,
+              "largest_faithful_tokens": 196
+            },
+            {
+              "block_index": 1,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 358,
+              "faithful_typed_tokens": 382,
+              "largest_faithful_tokens": 382
+            },
+            {
+              "block_index": 2,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 551,
+              "faithful_typed_tokens": 584,
+              "largest_faithful_tokens": 584
+            },
+            {
+              "block_index": 3,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 553,
+              "faithful_typed_tokens": 586,
+              "largest_faithful_tokens": 586
+            },
+            {
+              "block_index": 4,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 559,
+              "faithful_typed_tokens": 592,
+              "largest_faithful_tokens": 592
+            },
+            {
+              "block_index": 5,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 380,
+              "faithful_typed_tokens": 404,
+              "largest_faithful_tokens": 404
+            },
+            {
+              "block_index": 6,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 555,
+              "faithful_typed_tokens": 590,
+              "largest_faithful_tokens": 590
+            },
+            {
+              "block_index": 8,
+              "active_mandate_count": 16,
+              "faithful_text_tokens": 2780,
+              "faithful_typed_tokens": 2946,
+              "largest_faithful_tokens": 2946
+            },
+            {
+              "block_index": 9,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 367,
+              "faithful_typed_tokens": 399,
+              "largest_faithful_tokens": 399
+            }
+          ]
+        },
+        {
+          "case_id": "fin_bench_minimum_variance",
+          "history_tokens": 73955,
+          "largest_faithful_tokens": 2942,
+          "largest_checkpoint_block_index": 8,
+          "checkpoints": [
+            {
+              "block_index": 0,
+              "active_mandate_count": 1,
+              "faithful_text_tokens": 186,
+              "faithful_typed_tokens": 200,
+              "largest_faithful_tokens": 200
+            },
+            {
+              "block_index": 1,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 368,
+              "faithful_typed_tokens": 390,
+              "largest_faithful_tokens": 390
+            },
+            {
+              "block_index": 2,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 374,
+              "faithful_typed_tokens": 396,
+              "largest_faithful_tokens": 396
+            },
+            {
+              "block_index": 3,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 569,
+              "faithful_typed_tokens": 599,
+              "largest_faithful_tokens": 599
+            },
+            {
+              "block_index": 4,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 381,
+              "faithful_typed_tokens": 403,
+              "largest_faithful_tokens": 403
+            },
+            {
+              "block_index": 5,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 561,
+              "faithful_typed_tokens": 593,
+              "largest_faithful_tokens": 593
+            },
+            {
+              "block_index": 6,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 567,
+              "faithful_typed_tokens": 599,
+              "largest_faithful_tokens": 599
+            },
+            {
+              "block_index": 8,
+              "active_mandate_count": 16,
+              "faithful_text_tokens": 2792,
+              "faithful_typed_tokens": 2942,
+              "largest_faithful_tokens": 2942
+            },
+            {
+              "block_index": 9,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 369,
+              "faithful_typed_tokens": 399,
+              "largest_faithful_tokens": 399
+            }
+          ]
+        },
+        {
+          "case_id": "fin_bench_debt_cap",
+          "history_tokens": 73102,
+          "largest_faithful_tokens": 2858,
+          "largest_checkpoint_block_index": 8,
+          "checkpoints": [
+            {
+              "block_index": 0,
+              "active_mandate_count": 1,
+              "faithful_text_tokens": 180,
+              "faithful_typed_tokens": 194,
+              "largest_faithful_tokens": 194
+            },
+            {
+              "block_index": 1,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 356,
+              "faithful_typed_tokens": 378,
+              "largest_faithful_tokens": 378
+            },
+            {
+              "block_index": 2,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 546,
+              "faithful_typed_tokens": 576,
+              "largest_faithful_tokens": 576
+            },
+            {
+              "block_index": 3,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 549,
+              "faithful_typed_tokens": 579,
+              "largest_faithful_tokens": 579
+            },
+            {
+              "block_index": 4,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 552,
+              "faithful_typed_tokens": 582,
+              "largest_faithful_tokens": 582
+            },
+            {
+              "block_index": 5,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 373,
+              "faithful_typed_tokens": 395,
+              "largest_faithful_tokens": 395
+            },
+            {
+              "block_index": 6,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 546,
+              "faithful_typed_tokens": 578,
+              "largest_faithful_tokens": 578
+            },
+            {
+              "block_index": 8,
+              "active_mandate_count": 16,
+              "faithful_text_tokens": 2708,
+              "faithful_typed_tokens": 2858,
+              "largest_faithful_tokens": 2858
+            },
+            {
+              "block_index": 9,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 353,
+              "faithful_typed_tokens": 383,
+              "largest_faithful_tokens": 383
+            }
+          ]
+        },
+        {
+          "case_id": "fin_bench_euro_duration",
+          "history_tokens": 74759,
+          "largest_faithful_tokens": 3006,
+          "largest_checkpoint_block_index": 8,
+          "checkpoints": [
+            {
+              "block_index": 0,
+              "active_mandate_count": 1,
+              "faithful_text_tokens": 191,
+              "faithful_typed_tokens": 205,
+              "largest_faithful_tokens": 205
+            },
+            {
+              "block_index": 1,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 378,
+              "faithful_typed_tokens": 400,
+              "largest_faithful_tokens": 400
+            },
+            {
+              "block_index": 2,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 383,
+              "faithful_typed_tokens": 405,
+              "largest_faithful_tokens": 405
+            },
+            {
+              "block_index": 3,
+              "active_mandate_count": 1,
+              "faithful_text_tokens": 191,
+              "faithful_typed_tokens": 205,
+              "largest_faithful_tokens": 205
+            },
+            {
+              "block_index": 4,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 376,
+              "faithful_typed_tokens": 400,
+              "largest_faithful_tokens": 400
+            },
+            {
+              "block_index": 5,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 578,
+              "faithful_typed_tokens": 610,
+              "largest_faithful_tokens": 610
+            },
+            {
+              "block_index": 6,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 584,
+              "faithful_typed_tokens": 616,
+              "largest_faithful_tokens": 616
+            },
+            {
+              "block_index": 8,
+              "active_mandate_count": 16,
+              "faithful_text_tokens": 2856,
+              "faithful_typed_tokens": 3006,
+              "largest_faithful_tokens": 3006
+            },
+            {
+              "block_index": 9,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 379,
+              "faithful_typed_tokens": 409,
+              "largest_faithful_tokens": 409
+            }
+          ]
+        },
+        {
+          "case_id": "fin_bench_manager_handoff",
+          "history_tokens": 73569,
+          "largest_faithful_tokens": 2926,
+          "largest_checkpoint_block_index": 8,
+          "checkpoints": [
+            {
+              "block_index": 0,
+              "active_mandate_count": 1,
+              "faithful_text_tokens": 182,
+              "faithful_typed_tokens": 196,
+              "largest_faithful_tokens": 196
+            },
+            {
+              "block_index": 1,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 360,
+              "faithful_typed_tokens": 382,
+              "largest_faithful_tokens": 382
+            },
+            {
+              "block_index": 2,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 365,
+              "faithful_typed_tokens": 387,
+              "largest_faithful_tokens": 387
+            },
+            {
+              "block_index": 3,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 559,
+              "faithful_typed_tokens": 589,
+              "largest_faithful_tokens": 589
+            },
+            {
+              "block_index": 4,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 376,
+              "faithful_typed_tokens": 398,
+              "largest_faithful_tokens": 398
+            },
+            {
+              "block_index": 5,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 549,
+              "faithful_typed_tokens": 581,
+              "largest_faithful_tokens": 581
+            },
+            {
+              "block_index": 6,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 552,
+              "faithful_typed_tokens": 584,
+              "largest_faithful_tokens": 584
+            },
+            {
+              "block_index": 8,
+              "active_mandate_count": 16,
+              "faithful_text_tokens": 2776,
+              "faithful_typed_tokens": 2926,
+              "largest_faithful_tokens": 2926
+            },
+            {
+              "block_index": 9,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 367,
+              "faithful_typed_tokens": 397,
+              "largest_faithful_tokens": 397
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "serialization": {
+    "typed": "canonical_json",
+    "text": "plain_text",
+    "checkpoint_blocks": "all authorization-changing blocks",
+    "canonical_json_example_sha256": "85535ba3f1589ba864fa074a3dc0a060ffc87bc223f2c16d7fe55912e4c28e6a"
+  }
+}

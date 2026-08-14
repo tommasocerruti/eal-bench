@@ -94,6 +94,11 @@ model_targets:
     model: x-ai/grok-4.3
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
+  qwen_plus_0728_openrouter:
+    provider: openrouter
+    model: qwen/qwen-plus-2025-07-28
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
 tasks:
   # A task selects its default route by target ID. Calls can override it with
   # `target=`, including a target on a different provider.

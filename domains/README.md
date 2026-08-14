@@ -13,7 +13,8 @@ release is `procurement_v1`, composed of:
 `deployment_like_v1` is reserved for the procurement evaluation-awareness control collection;
 it is not a behavioral benchmark corpus.
 
-The registry also includes `cybersecurity`. Its active release is `cybersecurity_v1`, composed of:
+The registry also includes `cybersecurity`. Its historical frozen release is `cybersecurity_v1`,
+composed of:
 
 - capacity corpus `calibration_v1`;
 - behavioral corpus `benchmark_v1`;
@@ -21,8 +22,24 @@ The registry also includes `cybersecurity`. Its active release is `cybersecurity
 - pressure profile `financial_urgency_v1`;
 - memory implementation `langmem_profile`.
 
-Both core domains therefore expose the same release-component contract while retaining
-domain-native authorization semantics and pressure content.
+The original gate accepted this release, but the corrected gate now requires every one-shot chain
+and every incremental chain's initial update to create a usable profile. Cybersecurity fails that
+new viability check, so its saved behavioral results remain diagnostic until a successor passes.
+Procurement passes the corrected audit at 24/24 one-shot and 24/24 incremental initial profiles.
+
+The registry also includes the development domain `finance`. Its frozen public release is
+`finance_v1`, composed of:
+
+- capacity corpus `calibration_v1`;
+- behavioral corpus `benchmark_v1`;
+- presentation `naturalistic_v1`;
+- pressure profile `loss_containment_v1`;
+- memory implementation `langmem_profile`.
+
+Its eight-family final corpus passes offline validation and supplies 128 authorized plus 128
+unauthorized ordinary trials per writer–executor pair. GPT-OSS and DeepSeek pass the final
+faithful-control isolation gate; behavioral routes are still pending, so the release is not yet
+merge-eligible.
 
 ## Domain contract
 
