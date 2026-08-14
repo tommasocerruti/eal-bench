@@ -1,4 +1,4 @@
-"""Summarize one canonical controls, writer, or pressure run."""
+"""Summarize one canonical behavioral or source-linked witness run."""
 
 from __future__ import annotations
 
@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from .common import load_jsonl
+from .writer_viability import summarize_writer_viability
 
 
 def summarize(run_dir: Path) -> dict[str, Any]:
@@ -18,15 +19,17 @@ def summarize(run_dir: Path) -> dict[str, Any]:
     if manifest.get("status") != "completed":
         raise ValueError("route analysis requires a completed run")
     route = str(manifest.get("study"))
-    if route not in {"controls", "writer", "pressure"}:
+    if route not in {"controls", "writer", "pressure", "witness_replay"}:
         raise ValueError(f"unsupported canonical route: {route!r}")
     trials = _artifact(path, manifest, "trials")
     if route == "controls":
         summary = _controls(trials)
     elif route == "writer":
         summary = _writer(path, manifest, trials)
-    else:
+    elif route == "pressure":
         summary = _pressure(path, manifest, trials)
+    else:
+        summary = _witness_replay(path, manifest, trials)
     return {
         "route": route,
         "run": str(path),
@@ -106,16 +109,23 @@ def _writer(
             }
         )
     selected = [
-        row for row in eligibility if row.get("selected_for_executor") is True
+        row
+        for row in eligibility
+        if row.get("selected_for_executor") is True
+        or row.get("selected") is True
     ]
     witness_trials = [
         row
         for row in trials
-        if _study(row).get("request_role") == "witness"
-        and _study(row).get("evidence_role")
-        in {"natural_error", "exact_repair"}
+        if _study(row).get("evidence_role")
+        in {"natural_error", "exact_repair", "natural_exact_repair"}
+        and (
+            _study(row).get("request_role") == "witness"
+            or _study(row).get("witness_id") is not None
+        )
     ]
     return {
+        "writer_profile_viability": summarize_writer_viability(path, manifest),
         "memory_errors_by_architecture_and_strategy": memory_errors,
         "ordinary_baseline": _rates(
             [
@@ -151,7 +161,10 @@ def _writer(
                 [
                     row
                     for row in witness_trials
-                    if _study(row).get("evidence_role") == role
+                    if _normalized_witness_role(
+                        _study(row).get("evidence_role")
+                    )
+                    == role
                 ]
             )
             for role in ("natural_error", "exact_repair")
@@ -165,7 +178,12 @@ def _pressure(
     pressured: list[dict[str, Any]],
 ) -> dict[str, Any]:
     pairs = _artifact(path, manifest, "pressure_pairs")
-    source_path = Path(str(manifest["source_writer_run"]))
+    source_value = manifest.get("source_writer_run") or manifest.get(
+        "source_run"
+    )
+    if source_value is None:
+        raise ValueError("pressure manifest does not identify its source run")
+    source_path = Path(str(source_value))
     source_manifest = json.loads(
         (source_path / "manifest.json").read_text(encoding="utf-8")
     )
@@ -200,7 +218,9 @@ def _pressure(
         if family == "writer_factorial":
             factorial.append(row)
         elif family == "natural_error_repair":
-            targeted[str(pair["evidence_role"])].append(row)
+            targeted[
+                _normalized_witness_role(pair["evidence_role"])
+            ].append(row)
         else:
             raise ValueError(f"unknown pressure analysis family {family!r}")
     factorial_by_condition: dict[
@@ -254,6 +274,49 @@ def _pressure(
         },
         "effects": effects,
         "memory_error_x_pressure_interaction": interaction,
+    }
+
+
+def _witness_replay(
+    path: Path,
+    manifest: Mapping[str, Any],
+    trials: list[dict[str, Any]],
+) -> dict[str, Any]:
+    fidelity = _artifact(path, manifest, "fidelity")
+    eligibility = _artifact(path, manifest, "substantive_eligibility")
+    witnesses = _artifact(path, manifest, "witnesses")
+    selected = [row for row in eligibility if row.get("selected") is True]
+    natural = [
+        row for row in trials if _study(row).get("evidence_role") == "natural_error"
+    ]
+    repairs = [
+        row
+        for row in trials
+        if _study(row).get("evidence_role") == "natural_exact_repair"
+    ]
+    return {
+        "source_run": manifest.get("source_run"),
+        "writer_calls": 0,
+        "ordinary_executor_reruns": 0,
+        "substantive_overgrant_exposure": {
+            "screened_typed_states": len(fidelity),
+            "eligible": sum(row.get("eligible") is True for row in eligibility),
+            "selected": len(selected),
+            "selected_families": len({row["family"] for row in selected}),
+            "selected_classifications": sorted(
+                {str(row["classification"]) for row in selected}
+            ),
+        },
+        "witness_count": len(witnesses),
+        "witness_behavior": {
+            "natural_error": _rates(natural),
+            "exact_repair": _rates(repairs),
+            "paired_contrast": _matched_role_contrast(
+                trials,
+                "natural_error",
+                "natural_exact_repair",
+            ),
+        },
     }
 
 
@@ -374,10 +437,14 @@ def _matched_role_contrast(
 
 def _comparison_key(row: Mapping[str, Any]) -> tuple[Any, ...]:
     study = _study(row)
+    core = _core(row)
     executor = row.get("executor", {})
+    comparison_id = study.get("comparison_id")
+    if comparison_id is None:
+        comparison_id = (core.get("pair_id"), row.get("probe_id"))
     return (
         row.get("case_id"),
-        study.get("comparison_id"),
+        comparison_id,
         study.get("request_role"),
         (
             executor.get("target_id")
@@ -411,6 +478,11 @@ def _study(row: Mapping[str, Any]) -> Mapping[str, Any]:
 def _mean(values: Iterable[Any]) -> float | None:
     selected = [float(value) for value in values]
     return sum(selected) / len(selected) if selected else None
+
+
+def _normalized_witness_role(value: Any) -> str:
+    role = str(value)
+    return "exact_repair" if role == "natural_exact_repair" else role
 
 
 def main() -> None:
