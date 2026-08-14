@@ -32,6 +32,7 @@ from experiments.authorization_memory.leakage import (
 )
 from experiments.authorization_memory.persistence import content_hash, file_hash
 from experiments.authorization_memory.resume import (
+    prepare_provider_error_resume,
     resume_executor_only_study_plan,
     validate_executor_only_resume,
 )
@@ -132,6 +133,11 @@ def _parser() -> argparse.ArgumentParser:
         "--resume-run",
         default="",
         help="continue the missing calls of an interrupted executor-only run",
+    )
+    parser.add_argument(
+        "--retry-provider-errors",
+        action="store_true",
+        help="derive a continuation that retries only provider-error calls",
     )
     parser.add_argument(
         "--expected-missing-calls",
@@ -309,6 +315,8 @@ def _validate(args: argparse.Namespace) -> None:
         elif profile.builder is not None:
             plan = profile.build_jobs(domain, cases, options)
             result = validate_study_plan(domain, cases, plan, options)
+            if args.retry_provider_errors:
+                raise ValueError("--retry-provider-errors is a live continuation operation")
             if args.resume_run:
                 result["resume"] = validate_executor_only_resume(
                     domain,
@@ -527,6 +535,17 @@ def _run(args: argparse.Namespace) -> Path:
         )
     plan = profile.build_jobs(domain, cases, options)
     validation = validate_study_plan(domain, cases, plan, options)
+    if args.retry_provider_errors and not args.resume_run:
+        raise ValueError("--retry-provider-errors requires --resume-run")
+    if args.retry_provider_errors:
+        continuation = prepare_provider_error_resume(
+            domain,
+            cases,
+            plan,
+            options,
+            config=load_config(),
+        )
+        options = {**options, "resume_run": str(continuation)}
     if args.resume_run:
         resume_validation = validate_executor_only_resume(
             domain,

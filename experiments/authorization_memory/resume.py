@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, replace
 from datetime import datetime
@@ -65,6 +66,139 @@ class ResumeValidation:
             "implementation_drift": list(self.implementation_drift),
             "source_drift": list(self.source_drift),
         }
+
+
+def prepare_provider_error_resume(
+    domain: AuthorizationMemoryDomain,
+    cases: Sequence[Any],
+    plan: StudyPlan,
+    options: Mapping[str, Any],
+    *,
+    config: Any,
+) -> Path:
+    """Create an immutable continuation containing only unfinished provider calls."""
+    source = Path(str(options.get("resume_run") or "")).expanduser().resolve()
+    manifest_path = source / "manifest.json"
+    calls_path = source / "calls.jsonl"
+    trials_path = source / "trials.jsonl"
+    if not all(path.is_file() for path in (manifest_path, calls_path, trials_path)):
+        raise ValueError("provider-error retry requires a completed executor run")
+    manifest = _read_json_object(manifest_path, "provider-error source manifest")
+    if manifest.get("status") != "completed":
+        raise ValueError("provider-error retry requires a completed source run")
+    if not plan.executor_only or plan.writer_chains or plan.finalizer is not None:
+        raise ValueError("provider-error retry supports executor-only plans")
+
+    presentation = domain.get_presentation(
+        str(options.get("presentation_version") or "") or None
+    )
+    executor_targets = _targets(options.get("executor_targets"))
+    executor_runs = int(options.get("executor_runs", 1))
+    seed = int(options.get("seed", 0))
+    jobs = plan.validate(domain, cases, options)
+    planned = _planned_calls(
+        domain,
+        jobs,
+        study_id=plan.study_id,
+        executor_task=str(options.get("executor_task") or "executor"),
+        executor_targets=executor_targets,
+        executor_runs=executor_runs,
+        seed=seed,
+        presentation=presentation,
+        config=config,
+        pressure_specs=plan.pressure_specs,
+    )
+    _require_equal(manifest.get("domain_id"), domain.domain_id, "domain")
+    _require_equal(manifest.get("study"), plan.study_id, "study")
+    _require_equal(
+        manifest.get("corpus_version"), options.get("corpus_version"), "corpus version"
+    )
+    _require_equal(
+        manifest.get("case_ids"),
+        [domain.corpus.case_id(case) for case in cases],
+        "case IDs",
+    )
+    _require_equal(
+        manifest.get("presentation_hash"),
+        content_hash(presentation.to_dict()),
+        "presentation hash",
+    )
+    _require_equal(manifest.get("seed"), seed, "seed")
+    executor_manifest = manifest.get("executor")
+    if not isinstance(executor_manifest, Mapping):
+        raise ValueError("provider-error source has no executor object")
+    _require_equal(
+        executor_manifest.get("targets"), list(executor_targets), "executor targets"
+    )
+    _require_equal(executor_manifest.get("runs"), executor_runs, "executor runs")
+
+    tools = list(model_visible_tools(domain, presentation))
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    source_calls = _read_jsonl_objects(calls_path, "provider-error source calls")
+    for row in source_calls:
+        call_id = row.get("call_id")
+        if not isinstance(call_id, str) or call_id not in planned:
+            raise ValueError("provider-error source contains an unplanned call")
+        _validate_saved_call(row, planned[call_id], tools=tools)
+        grouped.setdefault(call_id, []).append(row)
+    if set(grouped) != set(planned):
+        raise ValueError("provider-error source call IDs differ from the frozen plan")
+
+    completed: list[dict[str, Any]] = []
+    failed_call_ids: list[str] = []
+    for call_id in planned:
+        successes = [row for row in grouped[call_id] if row.get("error") is None]
+        if len(successes) > 1:
+            raise ValueError("provider-error source repeats a successful logical call")
+        if successes:
+            completed.append(successes[0])
+        else:
+            failed_call_ids.append(call_id)
+    if not failed_call_ids:
+        raise ValueError("provider-error source has no failed logical calls")
+
+    source_trials = _read_jsonl_objects(trials_path, "provider-error source trials")
+    failed_trial_call_ids = {
+        str(row.get("metadata", {}).get("core", {}).get("call_id"))
+        for row in source_trials
+        if row.get("provider_error") is not None
+    }
+    if failed_trial_call_ids != set(failed_call_ids):
+        raise ValueError("provider-error trials do not match failed call-log entries")
+
+    destination = source.with_name(source.name + "__provider-error-continuation")
+    if destination.exists():
+        raise ValueError(f"provider-error continuation already exists: {destination}")
+    destination.mkdir(parents=False)
+    source_calls_copy = destination / "source_calls.jsonl"
+    shutil.copy2(calls_path, source_calls_copy)
+    write_jsonl(destination / "calls.jsonl", completed)
+    derived = dict(manifest)
+    derived.update(
+        {
+            "status": "failed",
+            "finished_at": None,
+            "batch_size": int(options.get("batch_size") or manifest["batch_size"]),
+            "error": "technical continuation prepared for provider failures",
+            "files": {},
+            "counts": {"calls": len(completed)},
+            "technical_continuation": {
+                "schema_version": "provider_error_continuation_v1",
+                "source_run": str(source),
+                "source_manifest_sha256": file_hash(manifest_path),
+                "source_calls_sha256": file_hash(source_calls_copy),
+                "source_trials_sha256": file_hash(trials_path),
+                "source_call_records": len(source_calls),
+                "retained_successful_calls": len(completed),
+                "provider_error_calls_to_retry": len(failed_call_ids),
+                "failed_call_ids_sha256": content_hash(failed_call_ids),
+                "successful_outcomes_rerun": 0,
+                "network_request_made": False,
+            },
+        }
+    )
+    write_json(destination / "manifest.json", derived)
+    return destination
 
 
 def validate_executor_only_resume(

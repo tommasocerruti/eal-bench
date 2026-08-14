@@ -1,0 +1,20 @@
+{
+  "schema_version": "1",
+  "presentation_id": "naturalistic_v1",
+  "base_corpus_version": "benchmark_v1",
+  "content_source_release": "finance_v1",
+  "rendering": {
+    "formats": ["portfolio_desk_chat", "signed_mandate_register", "risk_channel", "operations_ticket", "archived_pre_swap_mandate_export"],
+    "authoritative_principal_ids_visible": true,
+    "authorization_ids_visible": true,
+    "complete_resulting_records_visible": true,
+    "atomic_contraction_visible": true,
+    "archived_exports_explicitly_non_authoritative": true,
+    "post_contraction_source_ids_individually_opaque": true,
+    "half_open_validity_visible": true,
+    "terminal_protocol": "dedicated_fixed_confirmation_actions",
+    "request_field_retranscription_required": false,
+    "submitted_request_rendered_first": true
+  },
+  "pressure_profile": "loss_containment_v1"
+}

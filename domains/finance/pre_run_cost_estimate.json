@@ -1,0 +1,32 @@
+{
+  "schema_version": "1",
+  "domain_id": "finance",
+  "release_id": "finance_v1",
+  "stage": "final_controls",
+  "corpus_version": "benchmark_v1",
+  "presentation_id": "naturalistic_v1",
+  "estimated_at": "2026-08-15",
+  "pricing": {
+    "unit": "USD per 1M tokens",
+    "gptoss_baseten": {"input": 0.1, "output": 0.5},
+    "deepseek_baseten": {"input": 1.74, "cached_input": 0.145, "output": 3.48}
+  },
+  "call_plan": {
+    "calls_per_executor": 288,
+    "total_calls": 576,
+    "transport_retries_excluded": true
+  },
+  "estimated_cost_usd": {
+    "cache_aware_expected": 7.3,
+    "conservative_no_cache": 11.1,
+    "requested_cap": 12.0
+  },
+  "budget_approval": {
+    "status": "approved",
+    "approved_at": "2026-08-15",
+    "approver_role": "repository_owner",
+    "approved_additional_usd": 10.0,
+    "approved_route_cap_usd": 12.0,
+    "cumulative_incremental_cap_usd": 27.75
+  }
+}

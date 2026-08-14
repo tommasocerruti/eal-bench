@@ -1,0 +1,70 @@
+{
+  "schema_version": "finance_run_plan_v1",
+  "release_id": "finance_v1",
+  "status": "final_controls_completed_pending_behavioral_routes",
+  "seed": 20260814,
+  "capacity_tier": "primary",
+  "order": [
+    "offline_validation",
+    "gptoss_and_deepseek_final_controls",
+    "isolation_gate",
+    "finance_only_pull_request",
+    "five_by_two_writer_routes_after_separate_approval",
+    "exact_source_pressure_after_each_complete_writer_route",
+    "combined_pairwise_results_and_cost_report"
+  ],
+  "final_controls": {
+    "targets": ["gptoss_baseten", "deepseek_baseten"],
+    "calls_per_target": 288,
+    "total_calls": 576,
+    "run_once": true,
+    "status": "passed_2026_08_15",
+    "gptoss_gate": "passed",
+    "deepseek_gate": "passed_after_provider_error_continuation",
+    "successful_behavioral_outcomes_rerun": 0
+  },
+  "writer_matrix": {
+    "writer_targets": [
+      "nemotron_3_ultra_baseten",
+      "grok_4_3_openrouter",
+      "kimi_baseten",
+      "glm_5_2_baseten",
+      "qwen_plus_0728_openrouter"
+    ],
+    "executor_targets": ["gptoss_baseten", "deepseek_baseten"],
+    "writer_routes": 5,
+    "logical_writer_updates_total": 1360,
+    "maximum_writer_calls_total": 2720,
+    "ordinary_executor_calls_total": 2560,
+    "targeted_executor_calls_maximum_total": 320,
+    "run_each_writer_once": true,
+    "reuse_each_memory_set_with_both_executors": true,
+    "status": "not_authorized"
+  },
+  "pressure": {
+    "profile_id": "loss_containment_v1",
+    "source_writer_routes": 5,
+    "writer_calls": 0,
+    "baseline_reruns": 0,
+    "ordinary_executor_calls_total": 2560,
+    "targeted_executor_calls_maximum_total": 320,
+    "exact_writer_source_required": true,
+    "status": "not_authorized"
+  },
+  "call_plan": {
+    "controls_calls": 576,
+    "matrix_expected_calls": 6480,
+    "matrix_scheduled_calls_maximum": 8480,
+    "transport_retries_excluded": true
+  },
+  "budget": {
+    "controls_status": "approved_2026_08_15",
+    "approved_additional_usd": 10.0,
+    "cumulative_incremental_cap_usd": 27.75,
+    "controls_cache_aware_cost_usd": 5.70031875,
+    "controls_conservative_no_cache_usd": 11.06990858,
+    "matrix_status": "separate_approval_required_after_merge_gate",
+    "stop_at_approved_cap": true
+  },
+  "outcome_based_resampling": false
+}

@@ -1,0 +1,102 @@
+{
+  "schema_version": "final_v1",
+  "release_id": "finance_v1",
+  "domain_id": "finance",
+  "maturity": "core",
+  "freeze_status": "claim_frozen",
+  "canonical_seed": 20260814,
+  "capacity": {
+    "corpus_version": "calibration_v1",
+    "artifact": "capacity_calibration.json",
+    "sha256": "392d61b5004f4ab7b70faa4c3443bd4b6f4d661c0ec9b701196fc49cfe677c24",
+    "primary_tokens": 5860,
+    "policy": "2x_largest_faithful_payload_at_any_checkpoint",
+    "freeze_status": "frozen"
+  },
+  "claim_corpus": {
+    "corpus_version": "benchmark_v1",
+    "sha256": "d73afe1331f5a6aee2b5ebed81c7ec3403490c5402a6f8f05956db77934ed927",
+    "case_count": 8,
+    "family_count": 8,
+    "ordinary_authorized_trials_per_pair": 128,
+    "ordinary_unauthorized_trials_per_pair": 128,
+    "status": "frozen_controls_passed_pending_behavioral_routes",
+    "paid_execution_authorized": false
+  },
+  "presentation": {
+    "presentation_id": "naturalistic_v1",
+    "source": "presentations/naturalistic_v1.json",
+    "sha256": "a9e4076d420c2c1ef474232900b080e8e48ddf12f18ca12ff5a0c35c6958c925",
+    "freeze_status": "frozen"
+  },
+  "pressure_profile": {
+    "profile_id": "loss_containment_v1",
+    "source": "pressure_profiles/loss_containment_v1.json",
+    "sha256": "e6d67d940ba250c06560650dccc32b4e5b8e127945a8c9d1e818176c8b692a04",
+    "authority_invariant": true,
+    "freeze_status": "frozen"
+  },
+  "memory": {
+    "implementation_id": "langmem_profile",
+    "implementation_sha256": "e19c96fdcf904476b6e469775566b05d288232cc2e0143b5167f4656d4f33bdb",
+    "typed_schema_version": "5",
+    "typed_schema_sha256": "a141c26ecbda7c88c4b3f054ca89c4439af6237862721844a50f21afac02e9b8",
+    "typed_representation": "flat_scalar_authorization_records",
+    "bounded_attempts": 2,
+    "invalid_update_policy": "atomic_retention"
+  },
+  "analysis_plan": {
+    "source": "analysis_plan.json",
+    "sha256": "38f9363bc50ed0b85139a9acd5e851e0c9a68bd78a5c0fd92b08bfd6cc1f3824",
+    "freeze_status": "frozen"
+  },
+  "run_plan": {
+    "source": "run_plan.json",
+    "sha256": "753fb2c84ef31fa10d6396439b8180b7e9b4467da9006217626b098262e04441",
+    "route_authorizations": {
+      "controls": false,
+      "writer": false,
+      "pressure": false,
+      "witness_replay": false
+    },
+    "pricing_estimate": {
+      "status": "approved",
+      "artifact": "pre_run_cost_estimate.json",
+      "sha256": "ca7a106724e32e5c6f2d230a281b90932b4d13a76e3d4749bf99daec18874661",
+      "requested_controls_cap_usd": 12.0
+    }
+  },
+  "review": {
+    "status": "approved_with_owner_waiver",
+    "scope": "development-derived eight-family final surface",
+    "independent_blinded_review": false
+  },
+  "results": {
+    "status": "final_controls_passed_behavioral_routes_not_run",
+    "source_cleanup_equivalence": {
+      "path": "../../results/finance/finance_v1__source_cleanup_equivalence.json",
+      "sha256": "90a4a5e8ff5adeae037c08adfdd26d9a95e5a12e003fb6ebc025d8826e4945e7",
+      "status": "byte_identical_model_surfaces"
+    },
+    "controls": {
+      "gptoss": {
+        "run": "20260815-003309-878027__authorization-memory-controls__finance-v1-final-gptoss-controls",
+        "manifest_sha256": "e50105d4a248944035a20b0af8a03f5d704c712357acb211d05bc04332c7872b",
+        "gate": "../../results/finance/finance_v1__gptoss_gate.json",
+        "gate_sha256": "f886afd653932bdb8f88f8967570283efaa57bbbcad4fffd2ddc7a9c6aec8abf"
+      },
+      "deepseek": {
+        "run": "20260815-003522-056262__authorization-memory-controls__finance-v1-final-deepseek-controls__provider-error-continuation",
+        "manifest_sha256": "98b1d39607668466694831642f0b3fa15ba3dceeaec46586fedfe251dc9b2d7b",
+        "gate": "../../results/finance/finance_v1__deepseek_gate.json",
+        "gate_sha256": "f4d2b9942ccd9609d3569232e99d3d1a2ddaf2c2775170aa30f70a9c9d309cbd"
+      },
+      "cost": {
+        "path": "../../results/finance/finance_v1__controls_cost.json",
+        "sha256": "eae5e8a0edb85d30019ada69e37858792ac6f6c454b9d99f3c50611af565570f"
+      }
+    },
+    "eligible_to_merge": false,
+    "outcome_based_resampling": false
+  }
+}

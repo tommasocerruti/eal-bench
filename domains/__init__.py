@@ -23,7 +23,14 @@ def _cybersecurity() -> AuthorizationMemoryDomain:
     return create_domain()
 
 
+def _finance() -> AuthorizationMemoryDomain:
+    from .finance import create_domain
+
+    return create_domain()
+
+
 DOMAINS: dict[str, DomainFactory] = {
+    "finance": _finance,
     "cybersecurity": _cybersecurity,
     "procurement": _procurement,
 }

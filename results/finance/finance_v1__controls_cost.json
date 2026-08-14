@@ -1,0 +1,39 @@
+{
+  "schema_version": "provider_cost_aggregate_v1",
+  "release_id": "finance_v1",
+  "scope": "final eight-family controls",
+  "currency": "USD",
+  "logical_calls": 576,
+  "network_attempt_records": 754,
+  "successful_calls": 576,
+  "provider_error_attempts": 178,
+  "provider_error_logical_calls_continued": 30,
+  "successful_behavioral_outcomes_rerun": 0,
+  "provider_reported_cost": 0.0,
+  "records_with_provider_cost": 0,
+  "records_missing_provider_cost": 754,
+  "rate_derived": {
+    "gptoss_baseten": 0.5781401,
+    "deepseek_baseten_cache_aware": 5.12217865,
+    "total_cache_aware": 5.70031875,
+    "total_conservative_no_cache": 11.06990858
+  },
+  "usage": {
+    "gptoss_baseten": {
+      "prompt_tokens": 5055316,
+      "cached_prompt_tokens": 2454176,
+      "completion_tokens": 145217
+    },
+    "deepseek_baseten": {
+      "prompt_tokens": 5352200,
+      "cached_prompt_tokens": 3366514,
+      "completion_tokens": 338776
+    }
+  },
+  "lineage": {
+    "gptoss_run": "20260815-003309-878027__authorization-memory-controls__finance-v1-final-gptoss-controls",
+    "deepseek_source_run": "20260815-003522-056262__authorization-memory-controls__finance-v1-final-deepseek-controls",
+    "deepseek_continuation_run": "20260815-003522-056262__authorization-memory-controls__finance-v1-final-deepseek-controls__provider-error-continuation"
+  },
+  "status": "complete"
+}
