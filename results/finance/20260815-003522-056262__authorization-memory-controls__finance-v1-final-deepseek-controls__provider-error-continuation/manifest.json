@@ -1,0 +1,455 @@
+{
+  "artifact_schema_versions": {
+    "evidence": 3,
+    "interventions": 1,
+    "memories": 4,
+    "memory_attempts": 6,
+    "memory_states": 3,
+    "model_contexts": 1,
+    "trials": 5,
+    "typed_memory_payload": "3"
+  },
+  "batch_size": 5,
+  "capacity": {
+    "cases": [
+      {
+        "case_id": "fin_dev_round15_v15_municipal_cash",
+        "faithful_text_tokens": 361,
+        "faithful_typed_tokens": 385,
+        "history_tokens": 73008
+      },
+      {
+        "case_id": "fin_dev_round15_v15_nordic_equity",
+        "faithful_text_tokens": 355,
+        "faithful_typed_tokens": 379,
+        "history_tokens": 72506
+      },
+      {
+        "case_id": "fin_dev_round15_v15_pension_duration",
+        "faithful_text_tokens": 373,
+        "faithful_typed_tokens": 397,
+        "history_tokens": 74009
+      },
+      {
+        "case_id": "fin_dev_round15_v15_asia_currency",
+        "faithful_text_tokens": 367,
+        "faithful_typed_tokens": 393,
+        "history_tokens": 74010
+      },
+      {
+        "case_id": "fin_bench_v15_minimum_variance",
+        "faithful_text_tokens": 369,
+        "faithful_typed_tokens": 393,
+        "history_tokens": 73955
+      },
+      {
+        "case_id": "fin_bench_v15_debt_cap",
+        "faithful_text_tokens": 353,
+        "faithful_typed_tokens": 377,
+        "history_tokens": 73102
+      },
+      {
+        "case_id": "fin_bench_v15_euro_duration",
+        "faithful_text_tokens": 379,
+        "faithful_typed_tokens": 403,
+        "history_tokens": 74759
+      },
+      {
+        "case_id": "fin_bench_v15_manager_handoff",
+        "faithful_text_tokens": 367,
+        "faithful_typed_tokens": 391,
+        "history_tokens": 73569
+      }
+    ],
+    "largest_faithful_tokens": 403,
+    "minimum_history_ratio": 8,
+    "primary_tokens": 5860,
+    "reference_tokenizer": "cl100k_base",
+    "tight_tokens": 3663
+  },
+  "capacity_tier": "primary",
+  "case_ids": [
+    "fin_dev_round15_v15_municipal_cash",
+    "fin_dev_round15_v15_nordic_equity",
+    "fin_dev_round15_v15_pension_duration",
+    "fin_dev_round15_v15_asia_currency",
+    "fin_bench_v15_minimum_variance",
+    "fin_bench_v15_debt_cap",
+    "fin_bench_v15_euro_duration",
+    "fin_bench_v15_manager_handoff"
+  ],
+  "command": "python -m experiments.run --domain finance --corpus-version benchmark_v1 --presentation-version naturalistic_v1 --study controls --executor-targets deepseek_baseten --batch-size 20 --estimated-cost-usd 10.50 --seed 20260814 --tag finance-v1-final-deepseek-controls",
+  "controlled_selection_uses_executor_behavior": false,
+  "corpus_provenance": {
+    "case_count": 8,
+    "challenge": {
+      "freeze_status": "frozen",
+      "maturity": "development",
+      "presentation": "naturalistic_v1",
+      "pressure_profile": "loss_containment_v1"
+    },
+    "corpus_version": "benchmark_v1",
+    "freeze_status": "frozen",
+    "generator_version": "finance_final_v1",
+    "release": {
+      "freeze_status": "frozen",
+      "maturity": "development",
+      "release_id": "finance_v1"
+    },
+    "release_id": "finance_v1",
+    "source_files": {
+      "case_specs_v10.py": "f45bd6e1c0644db424253e1e1c66ec0c274febcd0d6a5d18377bbeeff512bfe6",
+      "case_specs_v12.py": "668517de070fbe0b28bbf8cf4d284ac273ec0f2d78b730f26045398efdcb101b",
+      "case_specs_v13.py": "dba8474cf024e60e004b22d7d201b715d6922079048fea86558f33b95baf93d2",
+      "case_specs_v14.py": "97696b65c7cb06a1c7ab79b05b2dfecb628384d794c99118a114bede419903e1",
+      "case_specs_v15.py": "13baa2855ca676d7dcc6691eb2c41eb19644e6610f77af6424605992148bba7b",
+      "case_specs_v2.py": "a3b43a34dbba5e5a2097e2541cfc45e67105b34ca07bfaebc130d55619f3a25f",
+      "compile_v10.py": "88f767ef405532d9c4129695793aa1248c471327cbe577d5aad5c58a92814d98",
+      "compile_v13.py": "49c6c7219268a36630431544cda7fd5b9ef9129aa7cffbec128fa57c9f8b0802",
+      "compile_v14.py": "e5a77d6f17c24d1df3c4a02b53680b247dc56900c9e4b9ced2f81d658ef8d6ee",
+      "compile_v15.py": "39cf6a6090c8af7e2004bd7c128c0d2cca84d7922a0cdcb2be87e30e82ed4152",
+      "corpus.py": "5190a94db61df4b2f6f1d1d76ae7af32960111a9c584ef89da5b0a034d04b30f",
+      "corpus_final.py": "867db012821fe6481fd9d17da7f17e793dd821ab13c3e1b03d61b51ef3054d61",
+      "corpus_v10.py": "8776f4189b35397de7553855328ac0034062fc099015cfd62f41640afeafbea0",
+      "corpus_v13.py": "d03fc4ccc6b829c66df3b8b439c2623a5d3b37e7f42dc466bf7947f6723e0978",
+      "corpus_v14.py": "797bd3b697737142b4449081d15da9bbff01120eb23e0772a13541e667789cec",
+      "corpus_v15.py": "491e620acddc18d3ea5ce7822be17db2eff2b6c6434ce6d913c190b300e6ec09",
+      "corpus_v2.py": "633e6a8b16150b953b1463f53fbecf044caaa3b78ce82fcc64a5653a8e532bac",
+      "corpus_v4.py": "fa1168c25a8e3f0b35015a6d868b54a12634f248715288f8a809a74b95ae5d75",
+      "data/benchmark_v15.json": "b83f525c771bdf14939b10a40742e293076a38bef30114ff53122fc9bbbc6a2f",
+      "data/development_v10.json": "3ab39ee04a664847a4d569a222def9e2c134bc076f5051a83528d9c5cb688321",
+      "data/development_v13.json": "414705fc0394d023b3678451d41fa0b6511df82d9030655a51bb328f7b0d1e57",
+      "data/development_v14.json": "4204b3dc7db5475392e85d0e22232b9a714651c8a1418172591d350e27dfbef3",
+      "data/development_v15.json": "cf9f3059a845bdf41bffd3530b63df7e173dad431d7a807e7b0c21df60b26510"
+    },
+    "source_format": "finance_source_v15",
+    "source_sha256": "22b360dff00b0738337b64903fce5cc9a85d1bdd1445865c343409c820df0f88"
+  },
+  "corpus_version": "benchmark_v1",
+  "counts": {
+    "calls": 288,
+    "evidence": 120,
+    "interventions": 32,
+    "memories": 112,
+    "model_contexts": 288,
+    "trials": 288
+  },
+  "domain_adapter_version": "1",
+  "domain_id": "finance",
+  "domain_maturity": "core",
+  "error": "technical continuation prepared for provider failures",
+  "evidence_roles": [
+    "full_history",
+    "faithful_text",
+    "faithful_typed",
+    "controlled_broadening",
+    "exact_repair",
+    "semantic_sham"
+  ],
+  "executor": {
+    "active": true,
+    "runs": 1,
+    "target_routes": [
+      {
+        "call_profiles": [
+          {
+            "effective_parameters": {
+              "max_tokens": 4096,
+              "required_capabilities": [
+                "native_tools",
+                "seed"
+              ],
+              "seed": 20260814,
+              "temperature": 1.0,
+              "tool_choice": "auto",
+              "tool_names": [
+                "place_submitted_order",
+                "place_operational_order",
+                "request_mandate_review",
+                "decline_order"
+              ]
+            },
+            "run_id": 0
+          }
+        ],
+        "capabilities": [
+          "forced_tool_choice",
+          "native_tools",
+          "seed"
+        ],
+        "max_concurrency": 20,
+        "provider": "baseten",
+        "rate_limit": {
+          "max_rate": null,
+          "period_seconds": 60.0
+        },
+        "request_parameters": {},
+        "requested_model": "deepseek",
+        "resolved_model": "deepseek-ai/DeepSeek-V4-Pro",
+        "response_model": "deepseek-ai/DeepSeek-V4-Pro",
+        "response_models_observed": [
+          "deepseek-ai/DeepSeek-V4-Pro"
+        ],
+        "target_id": "deepseek_baseten"
+      }
+    ],
+    "targets": [
+      "deepseek_baseten"
+    ],
+    "task": "executor",
+    "task_parameters": {
+      "max_tokens": 4096,
+      "temperature": 1.0
+    }
+  },
+  "files": {
+    "calls": {
+      "path": "calls.jsonl",
+      "rows": 288,
+      "sha256": "561a179f5922ee216ae598110b06af521d93040d0619b6bd795ffb29c7663399"
+    },
+    "evidence": {
+      "path": "evidence.jsonl",
+      "rows": 120,
+      "sha256": "22f581c05baffa3a3495097d383e914e7205bbb6cfc78b769b980ccd4a05bffe"
+    },
+    "interventions": {
+      "path": "interventions.jsonl",
+      "rows": 32,
+      "sha256": "5c11d0ead706375d62db8c0df6ca459170b8d4188be23492b93f0df9677d5f6a"
+    },
+    "memories": {
+      "path": "memories.jsonl",
+      "rows": 112,
+      "sha256": "d72ba3550a69e51e5922ff5b980d385a762953ff7a0722e90b9dce026da72e03"
+    },
+    "model_contexts": {
+      "path": "model_contexts.jsonl",
+      "rows": 288,
+      "sha256": "96e20a31c6f039426f70fa68c3b9311e35f66017aa5101519b06b7f136b2563d"
+    },
+    "trials": {
+      "path": "trials.jsonl",
+      "rows": 288,
+      "sha256": "4b3aaedf563a71dc44baf8e62fcd76edda2f1c94fedcafabe684639d214aa8b5"
+    }
+  },
+  "finished_at": "2026-08-15T00:48:23.388155+02:00",
+  "git": {
+    "branch": "feat/finance-domain",
+    "commit": "88f717261b9c484ef1488c06de0311ff873e7c07",
+    "dirty": true
+  },
+  "implementation_files": {
+    "config.yaml": "6b9d258a575eac3f5465731ab36d36714cbf134579bf33b297d78f14a10e6d16",
+    "domains/__init__.py": "13c24d8783d5cb8d7067bbb16aed8bee31a20f5d3ee6c881042eedbdde4f68e7",
+    "domains/base.py": "ebcc9b0111d21471064c28a0d0ed42d959dd5ba122193b0d58223b5e34abbfcd",
+    "domains/finance/__init__.py": "6c5752b9cc0eb2770e52b7f6877faa11c1c6bc41ccf063da92d7f13c52bc8651",
+    "domains/finance/adapter.py": "99259d20525c329c1311eb3663f90c9803a7eea260776f8995bf13785ecfe371",
+    "domains/finance/capacity.py": "db166772a080e512c9b01ad28ed47e8986de9f9e30f11634a430be38d5fd73b6",
+    "domains/finance/case_specs.py": "244b974b2f612d1d4ec44ffb1e1142ee3572e466d0c7a57a149b97b422014e3f",
+    "domains/finance/case_specs_v10.py": "f45bd6e1c0644db424253e1e1c66ec0c274febcd0d6a5d18377bbeeff512bfe6",
+    "domains/finance/case_specs_v12.py": "668517de070fbe0b28bbf8cf4d284ac273ec0f2d78b730f26045398efdcb101b",
+    "domains/finance/case_specs_v13.py": "dba8474cf024e60e004b22d7d201b715d6922079048fea86558f33b95baf93d2",
+    "domains/finance/case_specs_v14.py": "97696b65c7cb06a1c7ab79b05b2dfecb628384d794c99118a114bede419903e1",
+    "domains/finance/case_specs_v15.py": "13baa2855ca676d7dcc6691eb2c41eb19644e6610f77af6424605992148bba7b",
+    "domains/finance/case_specs_v2.py": "a3b43a34dbba5e5a2097e2541cfc45e67105b34ca07bfaebc130d55619f3a25f",
+    "domains/finance/case_specs_v3.py": "43412ae2de98442b4f5bd9368de8dc688b6759b1b01427806d5ccedfef711614",
+    "domains/finance/case_specs_v4.py": "36df4cd570a9a63743409a33517531f919f808619fd9e7b6558b7d7ca521d1d0",
+    "domains/finance/case_specs_v5.py": "362aafb4478cbcffd6c391df7e5b0e9c8e919b9862a0bc63c6f4b24c2cd8577c",
+    "domains/finance/case_specs_v6.py": "fbaadf3fbff9211f6e6d53a42f52680e1ff11a461710466f19f5fe4e387cece7",
+    "domains/finance/case_specs_v7.py": "f245eb9a91ec30bfaa7aff153af3815e082f4e5a4811fe05b0934d66dc9567fd",
+    "domains/finance/case_specs_v8.py": "eaba248ccc8556d42dc1efa4be9097dbe42d37b032fd0afae69cc05e34e0e9ab",
+    "domains/finance/case_specs_v9.py": "7e32153be5d9d4ee55ddcb5db0d713f168a909e37d66c4911b5674276a38464a",
+    "domains/finance/compile_corpus.py": "a172887ffc56963009ee324fe14e7a5563ba660d92daeab252ab2dc561911f26",
+    "domains/finance/compile_v10.py": "88f767ef405532d9c4129695793aa1248c471327cbe577d5aad5c58a92814d98",
+    "domains/finance/compile_v12.py": "44e3acaedc2851c4fb6d963692ef20734e43b7f7ccaf63e69473b903d34eda1d",
+    "domains/finance/compile_v13.py": "49c6c7219268a36630431544cda7fd5b9ef9129aa7cffbec128fa57c9f8b0802",
+    "domains/finance/compile_v14.py": "e5a77d6f17c24d1df3c4a02b53680b247dc56900c9e4b9ced2f81d658ef8d6ee",
+    "domains/finance/compile_v15.py": "39cf6a6090c8af7e2004bd7c128c0d2cca84d7922a0cdcb2be87e30e82ed4152",
+    "domains/finance/compile_v2.py": "806c76699e67aa583c7854f7ee69b489cf07099ad33513d21115d104cb468619",
+    "domains/finance/compile_v3.py": "724e11ccb0af08a68a38f115213f161f420db882c83678a422472972f0398032",
+    "domains/finance/compile_v4.py": "e15fc122286b89be8fb53139e08e10d21aa5a03c02645042bf59165baabd0082",
+    "domains/finance/compile_v5.py": "26155d7d1d8b5249a74447cfd0d5c7927b9303dfe403f724b593b7fdf2adf484",
+    "domains/finance/compile_v6.py": "1bf9e9b1855eb4f673fbc03171b5784a15efadd859c68cd8a053056734b6ac9d",
+    "domains/finance/compile_v7.py": "fb9623ba46a0699b0c914d0aec670c63a23dc280de549cc8f0dff013ecbbf452",
+    "domains/finance/compile_v8.py": "5ae2b4c1d47639904e6d3eb7889e658ffd6497cb042e0e8fbdc6d2f043340711",
+    "domains/finance/compile_v9.py": "878bc56194e4e7013c81245fa44f02e05503d058f6afdabf5e56fd77db5360ba",
+    "domains/finance/corpus.py": "5190a94db61df4b2f6f1d1d76ae7af32960111a9c584ef89da5b0a034d04b30f",
+    "domains/finance/corpus_final.py": "867db012821fe6481fd9d17da7f17e793dd821ab13c3e1b03d61b51ef3054d61",
+    "domains/finance/corpus_v10.py": "8776f4189b35397de7553855328ac0034062fc099015cfd62f41640afeafbea0",
+    "domains/finance/corpus_v11.py": "5e2b468f0da0822b45831490580d03b78c0fa8962a19d34085f6fbdec0c04ce6",
+    "domains/finance/corpus_v12.py": "12ab023db76517ba95106ffa2fe71ac217b9972703df7f1d0b69c590a8e9b27a",
+    "domains/finance/corpus_v13.py": "d03fc4ccc6b829c66df3b8b439c2623a5d3b37e7f42dc466bf7947f6723e0978",
+    "domains/finance/corpus_v14.py": "797bd3b697737142b4449081d15da9bbff01120eb23e0772a13541e667789cec",
+    "domains/finance/corpus_v15.py": "491e620acddc18d3ea5ce7822be17db2eff2b6c6434ce6d913c190b300e6ec09",
+    "domains/finance/corpus_v2.py": "633e6a8b16150b953b1463f53fbecf044caaa3b78ce82fcc64a5653a8e532bac",
+    "domains/finance/corpus_v3.py": "ed0ccc1a828d38a391c480eea8bb16a08f81fee03a0c12aae5442a98ec50621d",
+    "domains/finance/corpus_v4.py": "fa1168c25a8e3f0b35015a6d868b54a12634f248715288f8a809a74b95ae5d75",
+    "domains/finance/corpus_v5.py": "ff7ec72ddc3bb0635c40e706d129618eda74f845d854c0367c938f4daf4d01e3",
+    "domains/finance/corpus_v6.py": "14d4d1b8b8c6eaf174dd0d656b672e76ba0a0c3c33f4d27f7e6aec19f889022e",
+    "domains/finance/corpus_v7.py": "6a2c4c0228946391228f7a9fb77607469cd12f0d4ae970df6706a9340db51273",
+    "domains/finance/corpus_v8.py": "c5eb83dd2503da9d666b6d0097633309e60bf058a916b2c616452f9819856203",
+    "domains/finance/corpus_v9.py": "048a80b6e8ce19bb8f1f274189706e06b7ce9d4ca1341395b9b51070d9e2c9b1",
+    "domains/finance/models.py": "a8defd0c02985269c9479bd6293625afa85ff69df1085ba1b2f6a6d769d8ae9b",
+    "domains/finance/pressure.py": "5a45de0d6ff02b06fdec2832296476454c6bcc41cb00fbaa98901b90bc8fa7f6",
+    "domains/finance/release.py": "13030e176674381ee435db0dff04ab779224e2248a9e43786b50b58cdd0cee54",
+    "domains/finance/semantics.py": "6624c535e886a9945418d799b9e006f42fb58ac5eecb1f81bd224c8d32d2e97b",
+    "domains/finance/studies.py": "e71d5ea59ddc5e74b18411fc307b1bfcb84c65efe95d549b5982aa5b148ed825",
+    "experiments/authorization_memory/__init__.py": "cd85087993a4e0f108f35e74b8dc8b25781625ef13aa8671173d33dc2095e08e",
+    "experiments/authorization_memory/challenges.py": "5cec878d34254d47b66d3419471a41e913ccf5b443228efd5c3480333e1c615d",
+    "experiments/authorization_memory/conditions.py": "ebf4cb2df1e5e65eab3b1c8a57de6284584b801b1003f8cab3669ddbd30d65eb",
+    "experiments/authorization_memory/conformance.py": "41473787ac790ec571f3519b6a48bdaa6aea845eb6e2e402f422fa6199e6b8bd",
+    "experiments/authorization_memory/evaluation_awareness.py": "9524532b7e61c1b8bf1c28274d65752da5c44fb16e849f2633848872f37f64c1",
+    "experiments/authorization_memory/evaluation_awareness_fixture.py": "0ae75c6ae5d7e770a22459c9773f1a8c4ff141639b7b9900c9a811dd40559f98",
+    "experiments/authorization_memory/langmem_writer.py": "378b59cc3bf759146873f8ed94c8624c7126697c68ed22884b1cf602bcf3597a",
+    "experiments/authorization_memory/leakage.py": "9c435f8ba77fbfc4a321ddca92cdb800e56b57be428684c135406d7e4831b0db",
+    "experiments/authorization_memory/persistence.py": "a7a23b65cddaa76498729c2db57ad8b1ee0bb85bf193d75e6f6af97dc321ff91",
+    "experiments/authorization_memory/pipeline.py": "5b174ff202eabf9e33902cc382da8b98a39f43e0a38dc81084fc7bc0ea68db19",
+    "experiments/authorization_memory/provenance.py": "05595bff207ad987f4f29231393a4ce1138efa33a610e62bf6a87f88a6e06fbc",
+    "experiments/authorization_memory/resume.py": "356d4440c58be1e6401a2faa04449626421f7fffe3e6a81342c034a20ada1fb8",
+    "experiments/authorization_memory/runner.py": "f1b163d3a35a2bd83f25947afba27b82859fb605de1f53be0c779ee24f4b7c1a",
+    "experiments/authorization_memory/schemas.py": "86d03de7010cda63987d0defcb77e229773cbaccf56bdc704700b278a8af3e0a",
+    "experiments/authorization_memory/study_engine.py": "3e1a378a53b2a49a796c7271ba2cb44d5a190988ed6d5ab5e3a87dc458a4d1bd",
+    "experiments/authorization_memory/study_plan.py": "9778318f021252f2f5b244e8ca5a174a4918ac0c9e73e54ad53b67632f88ba4e",
+    "experiments/authorization_memory/surfaces.py": "5a9e4a04e569c802a16b029d85506f4135912181a8422feac00f0f9ea506814f",
+    "experiments/authorization_memory/tokens.py": "4c74ba3268f9831e6285921fa4365692e774a8a9c9845b7b0f47bcca69d4138d",
+    "experiments/authorization_memory/validation.py": "24ef23e698001ac48bfda29f927970e7d8ad915737aa198dc44e9b7cfa8c5103",
+    "experiments/run.py": "a6cc7a6f282090c097c7a4b817dfacc69f04e51f46338c5187ea226cd82ec8c2",
+    "pyproject.toml": "527d7bb5236cba1b1b7778dd06307b168b6c703ce203d8881edbf9db06473ce0",
+    "src/eal_bench/llm/__init__.py": "8932ac3b18bfc43b0a702b30cb813d541dec522fd76d65adcc8a7cd9387d0573",
+    "src/eal_bench/llm/client.py": "98ae242d4eb608fdd9d18ad87460f0480a5aa955d29e15d430ad3c742339ea54",
+    "src/eal_bench/llm/config.py": "ed8a4887ca8146f3f4c3b9803b4cede4ab0682ddf97da4f021ca85679207e9fd",
+    "src/eal_bench/llm/errors.py": "4f1ae9e1d3cc961d25172a93e9e6952dae0b1dc419d29da61cc7ea85b169d7f1",
+    "src/eal_bench/llm/langchain_models.py": "47312631fda41cc65985efec2ad6abe4f036cf0b25bd164e5dc033a8afefd3cc",
+    "src/eal_bench/llm/logger.py": "1f2e50ff91ec1dbe3c9429ffee8b1091a6137b784aff0824ea77758e43bf7b9a",
+    "src/eal_bench/llm/models.py": "d5215df9477892824fdbb6b3b2eff77f00a05e8462278530a8f0ab61332fccf3",
+    "src/eal_bench/llm/ratelimit.py": "4069046b916569aab9c45417fb96be09f7c2fad5f1c8e850764782ec142fddbb",
+    "uv.lock": "413cc53a2524bb4064a89029545e2d594ed8154ac2e74b8d54e524d69fd0fefc"
+  },
+  "memory_implementation_hash": "e19c96fdcf904476b6e469775566b05d288232cc2e0143b5167f4656d4f33bdb",
+  "memory_implementation_id": "langmem_profile",
+  "model_visible_executor_surfaces": {
+    "context_hashes": 288,
+    "jobs": 288,
+    "status": "passed",
+    "unique_context_hashes": 224
+  },
+  "presentation": {
+    "description": "Naturalistic portfolio desk and signed-mandate rendering.",
+    "overlay_files": [
+      "domains/finance/presentations/naturalistic_v1.json"
+    ],
+    "overlay_hashes": {
+      "domains/finance/presentations/naturalistic_v1.json": "a9e4076d420c2c1ef474232900b080e8e48ddf12f18ca12ff5a0c35c6958c925"
+    },
+    "presentation_id": "naturalistic_v1",
+    "prompt_policy_id": "finance_prompt_v1",
+    "validity_gates": [
+      "finance_naturalistic_surface_v1"
+    ]
+  },
+  "presentation_hash": "e97b39f43048589146cacfdafecb2e1f9d9ba4ce98f8b17b9b26f5e0d7f3b6b1",
+  "resume": {
+    "all_saved_requests_match": true,
+    "completed_after_resume": 288,
+    "completed_at": "2026-08-15T00:48:23.388155+02:00",
+    "completed_executor_calls": 258,
+    "implementation_drift": [
+      "experiments/authorization_memory/resume.py",
+      "experiments/run.py"
+    ],
+    "manifest_status": "failed",
+    "missing_executor_calls": 30,
+    "new_executor_calls": 30,
+    "planned_executor_calls": 288,
+    "resume_command": "python -m experiments.run --domain finance --corpus-version benchmark_v1 --presentation-version naturalistic_v1 --study controls --executor-targets deepseek_baseten --batch-size 5 --estimated-cost-usd 1.50 --seed 20260814 --resume-run results/finance/20260815-003522-056262__authorization-memory-controls__finance-v1-final-deepseek-controls --retry-provider-errors --expected-missing-calls 30 --tag finance-v1-final-deepseek-controls-continuation",
+    "resumed_at": "2026-08-15T00:47:12.259929+02:00",
+    "run_dir": "/private/tmp/eal-bench-finance/results/finance/20260815-003522-056262__authorization-memory-controls__finance-v1-final-deepseek-controls__provider-error-continuation",
+    "source_drift": [],
+    "status": "passed",
+    "total_cost_ceiling_usd": 1.5
+  },
+  "route": "controls",
+  "runtime": {
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.6"
+  },
+  "seed": 20260814,
+  "source_files": {
+    "/private/tmp/eal-bench-finance/domains/finance/case_specs_v10.py": "f45bd6e1c0644db424253e1e1c66ec0c274febcd0d6a5d18377bbeeff512bfe6",
+    "/private/tmp/eal-bench-finance/domains/finance/case_specs_v12.py": "668517de070fbe0b28bbf8cf4d284ac273ec0f2d78b730f26045398efdcb101b",
+    "/private/tmp/eal-bench-finance/domains/finance/case_specs_v13.py": "dba8474cf024e60e004b22d7d201b715d6922079048fea86558f33b95baf93d2",
+    "/private/tmp/eal-bench-finance/domains/finance/case_specs_v14.py": "97696b65c7cb06a1c7ab79b05b2dfecb628384d794c99118a114bede419903e1",
+    "/private/tmp/eal-bench-finance/domains/finance/case_specs_v15.py": "13baa2855ca676d7dcc6691eb2c41eb19644e6610f77af6424605992148bba7b",
+    "/private/tmp/eal-bench-finance/domains/finance/case_specs_v2.py": "a3b43a34dbba5e5a2097e2541cfc45e67105b34ca07bfaebc130d55619f3a25f",
+    "/private/tmp/eal-bench-finance/domains/finance/compile_v10.py": "88f767ef405532d9c4129695793aa1248c471327cbe577d5aad5c58a92814d98",
+    "/private/tmp/eal-bench-finance/domains/finance/compile_v13.py": "49c6c7219268a36630431544cda7fd5b9ef9129aa7cffbec128fa57c9f8b0802",
+    "/private/tmp/eal-bench-finance/domains/finance/compile_v14.py": "e5a77d6f17c24d1df3c4a02b53680b247dc56900c9e4b9ced2f81d658ef8d6ee",
+    "/private/tmp/eal-bench-finance/domains/finance/compile_v15.py": "39cf6a6090c8af7e2004bd7c128c0d2cca84d7922a0cdcb2be87e30e82ed4152",
+    "/private/tmp/eal-bench-finance/domains/finance/corpus.py": "5190a94db61df4b2f6f1d1d76ae7af32960111a9c584ef89da5b0a034d04b30f",
+    "/private/tmp/eal-bench-finance/domains/finance/corpus_final.py": "867db012821fe6481fd9d17da7f17e793dd821ab13c3e1b03d61b51ef3054d61",
+    "/private/tmp/eal-bench-finance/domains/finance/corpus_v10.py": "8776f4189b35397de7553855328ac0034062fc099015cfd62f41640afeafbea0",
+    "/private/tmp/eal-bench-finance/domains/finance/corpus_v13.py": "d03fc4ccc6b829c66df3b8b439c2623a5d3b37e7f42dc466bf7947f6723e0978",
+    "/private/tmp/eal-bench-finance/domains/finance/corpus_v14.py": "797bd3b697737142b4449081d15da9bbff01120eb23e0772a13541e667789cec",
+    "/private/tmp/eal-bench-finance/domains/finance/corpus_v15.py": "491e620acddc18d3ea5ce7822be17db2eff2b6c6434ce6d913c190b300e6ec09",
+    "/private/tmp/eal-bench-finance/domains/finance/corpus_v2.py": "633e6a8b16150b953b1463f53fbecf044caaa3b78ce82fcc64a5653a8e532bac",
+    "/private/tmp/eal-bench-finance/domains/finance/corpus_v4.py": "fa1168c25a8e3f0b35015a6d868b54a12634f248715288f8a809a74b95ae5d75",
+    "/private/tmp/eal-bench-finance/domains/finance/data/benchmark_v15.json": "b83f525c771bdf14939b10a40742e293076a38bef30114ff53122fc9bbbc6a2f",
+    "/private/tmp/eal-bench-finance/domains/finance/data/development_v10.json": "3ab39ee04a664847a4d569a222def9e2c134bc076f5051a83528d9c5cb688321",
+    "/private/tmp/eal-bench-finance/domains/finance/data/development_v13.json": "414705fc0394d023b3678451d41fa0b6511df82d9030655a51bb328f7b0d1e57",
+    "/private/tmp/eal-bench-finance/domains/finance/data/development_v14.json": "4204b3dc7db5475392e85d0e22232b9a714651c8a1418172591d350e27dfbef3",
+    "/private/tmp/eal-bench-finance/domains/finance/data/development_v15.json": "cf9f3059a845bdf41bffd3530b63df7e173dad431d7a807e7b0c21df60b26510"
+  },
+  "started_at": "2026-08-15T00:35:22.068128+02:00",
+  "status": "completed",
+  "study": "controls",
+  "study_plan": {
+    "executor_only": true,
+    "metadata": {
+      "controlled_selection_uses_executor_behavior": false,
+      "evidence_roles": [
+        "full_history",
+        "faithful_text",
+        "faithful_typed",
+        "controlled_broadening",
+        "exact_repair",
+        "semantic_sham"
+      ],
+      "route": "controls",
+      "writer_calls": 0
+    },
+    "pressure_specs": [],
+    "writer_only": false
+  },
+  "technical_continuation": {
+    "failed_call_ids_sha256": "241962de6df433a82076b57ae1529f51eae93422260e673391261d0db8fe9c29",
+    "network_request_made": false,
+    "provider_error_calls_to_retry": 30,
+    "retained_successful_calls": 258,
+    "schema_version": "provider_error_continuation_v1",
+    "source_call_records": 436,
+    "source_calls_sha256": "d5bf2bc9d0137c62a4d7e3895bc7d6465ffce987f15ea218ebb95487e8112c10",
+    "source_manifest_sha256": "aab2f8301b955402bab164f0e05f1c2fb5676dcad1cd705fb1ac195ce3309f90",
+    "source_run": "/private/tmp/eal-bench-finance/results/finance/20260815-003522-056262__authorization-memory-controls__finance-v1-final-deepseek-controls",
+    "source_trials_sha256": "d810ead8e460ef6142eea8d95f62548ad6213c714ed2ed3be118692d86f7fea5",
+    "successful_outcomes_rerun": 0
+  },
+  "writer": {
+    "active": false,
+    "framework": null,
+    "max_attempts": 2,
+    "memory_implementation_hash": "e19c96fdcf904476b6e469775566b05d288232cc2e0143b5167f4656d4f33bdb",
+    "memory_implementation_id": "langmem_profile",
+    "profile_schema": null,
+    "runs": 0,
+    "target_routes": [],
+    "targets": [],
+    "task": "writer",
+    "task_parameters": {
+      "max_tokens": 4096,
+      "temperature": 1.0
+    }
+  },
+  "writer_calls": 0
+}
