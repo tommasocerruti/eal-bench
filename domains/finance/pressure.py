@@ -4,6 +4,7 @@ from .models import FinanceCase
 
 
 PROFILE_ID = "loss_containment_v1"
+V2_PROFILE_ID = "loss_containment_v2"
 PRESSURE_ID = "market_opportunity"
 
 
@@ -16,6 +17,10 @@ def profile_id(case: FinanceCase) -> str:
 
 
 def profile_id_for_corpus(corpus_version: str) -> str:
-    if corpus_version not in {"calibration_v1", "benchmark_v1"}:
-        raise ValueError(f"unsupported Finance pressure corpus: {corpus_version!r}")
-    return PROFILE_ID
+    if corpus_version in {"calibration_v1", "benchmark_v1"}:
+        return PROFILE_ID
+    from .corpus_v2 import available_versions
+
+    if corpus_version in available_versions():
+        return V2_PROFILE_ID
+    raise ValueError(f"unsupported Finance pressure corpus: {corpus_version!r}")

@@ -60,6 +60,12 @@ _CONDITIONS = (
 _PRESENTATION_BY_CORPUS = {
     "calibration_v1": "naturalistic_v1",
     "benchmark_v1": "naturalistic_v1",
+    "difficulty_dev_v2_compact": "naturalistic_v2",
+    "difficulty_dev_v2_equal_cardinality": "naturalistic_v2",
+    "difficulty_dev_v2_distributed": "naturalistic_v2",
+    "difficulty_dev_v2": "naturalistic_v2",
+    "difficulty_dev_v2_runner_up": "naturalistic_v2",
+    "benchmark_v2": "naturalistic_v2",
 }
 _CHECKPOINT_BLOCKS = frozenset({0, 1, 2, 3, 4, 5, 6, 8, 9})
 _WITNESS_CLASS_ORDER = {
@@ -1560,11 +1566,12 @@ def _validate_route(options: Mapping[str, Any], route: str) -> None:
         raise ValueError(f"{route} requires a registered development corpus")
     if str(options.get("presentation_version") or "") != expected:
         raise ValueError(f"{route} with {corpus_version} requires presentation {expected}")
-    if corpus_version == "benchmark_v1" and not bool(
+    if corpus_version in {"benchmark_v1", "benchmark_v2"} and not bool(
         options.get("validate_only")
     ):
+        release_name = "release.json" if corpus_version == "benchmark_v1" else "release_v2.json"
         release = json.loads(
-            (Path(__file__).parent / "release.json").read_text(encoding="utf-8")
+            (Path(__file__).parent / release_name).read_text(encoding="utf-8")
         )
         freeze_status = release.get("freeze_status")
         review_ready = release.get("review", {}).get("status") in {
@@ -1604,11 +1611,6 @@ def _checkpoint_blocks(case: FinanceCase) -> frozenset[int]:
 
 
 def _pressure_profile_id(corpus_version: str) -> str:
-    if corpus_version not in {
-        "calibration_v1",
-        "benchmark_v1",
-    }:
-        raise ValueError(f"unsupported pressure corpus: {corpus_version!r}")
     return pressure.profile_id_for_corpus(corpus_version)
 
 

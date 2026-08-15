@@ -1,4 +1,4 @@
-"""Frozen Finance v1 corpus and deterministic authorization replay."""
+"""Frozen Finance corpora and deterministic authorization replay."""
 
 from __future__ import annotations
 
@@ -23,7 +23,16 @@ from .models import (
 
 PACKAGE_DIR = Path(__file__).parent
 DATA_DIR = PACKAGE_DIR / "data"
-VERSIONS = ("calibration_v1", "benchmark_v1")
+V1_VERSIONS = ("calibration_v1", "benchmark_v1")
+
+
+def _versions() -> tuple[str, ...]:
+    from .corpus_v2 import available_versions
+
+    return (*V1_VERSIONS, *available_versions())
+
+
+VERSIONS = _versions()
 AUTHORIZATION_CHANGING_BLOCKS = (0, 1, 2, 3, 4, 5, 6, 8, 9)
 TYPED_SCREENING_BLOCKS = (*AUTHORIZATION_CHANGING_BLOCKS, 10, 11, 12, 13, 14, 15)
 ARCHIVE_BLOCKS = (10, 11, 12, 13, 14, 15)
@@ -44,10 +53,13 @@ _FIELD_BY_MECHANISM = {
 
 
 def load_cases(version: str) -> tuple[FinanceCase, ...]:
-    if version not in VERSIONS:
+    if version not in _versions():
         raise ValueError(f"unsupported Finance corpus: {version!r}")
     payload = json.loads((DATA_DIR / f"{version}.json").read_text(encoding="utf-8"))
-    if payload.get("schema_version") != "finance_case_corpus_v1":
+    expected_schema = (
+        "finance_case_corpus_v1" if version in V1_VERSIONS else "finance_case_corpus_v2"
+    )
+    if payload.get("schema_version") != expected_schema:
         raise ValueError(f"{version}: frozen source has the wrong schema")
     if payload.get("corpus_version") != version:
         raise ValueError(f"{version}: frozen source has the wrong corpus identity")
@@ -58,8 +70,12 @@ def load_cases(version: str) -> tuple[FinanceCase, ...]:
 
 
 def source_files(version: str) -> tuple[Path, ...]:
-    if version not in VERSIONS:
+    if version not in _versions():
         raise ValueError(f"unsupported Finance corpus: {version!r}")
+    if version not in V1_VERSIONS:
+        from .corpus_v2 import source_files as v2_source_files
+
+        return v2_source_files(version)
     return (
         DATA_DIR / f"{version}.json",
         PACKAGE_DIR / "compile_corpus.py",
@@ -68,6 +84,10 @@ def source_files(version: str) -> tuple[Path, ...]:
 
 
 def corpus_provenance(version: str) -> Mapping[str, Any]:
+    if version not in V1_VERSIONS:
+        from .corpus_v2 import provenance
+
+        return provenance(version, len(load_cases(version)))
     from experiments.authorization_memory.persistence import content_hash, file_hash
 
     paths = source_files(version)
@@ -192,7 +212,12 @@ def source_turn_ids(
 
 def validate_case(case: FinanceCase) -> None:
     version = str(case.metadata.get("corpus_version", ""))
-    if version not in VERSIONS:
+    if version not in V1_VERSIONS:
+        from .corpus_v2 import validate_case as validate_v2_case
+
+        validate_v2_case(case)
+        return
+    if version not in V1_VERSIONS:
         raise ValueError(f"{case.case_id}: frozen corpus identity differs")
     expected_prefix = "fin_cal_" if version == "calibration_v1" else "fin_bench_"
     expected_split = "calibration" if version == "calibration_v1" else "benchmark"

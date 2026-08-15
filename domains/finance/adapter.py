@@ -57,8 +57,10 @@ from .studies import (
 
 DOMAIN_ID = "finance"
 PRESENTATION_ID = "naturalistic_v1"
+V2_PRESENTATION_ID = "naturalistic_v2"
 PROMPT_POLICY_ID = "finance_prompt_v1"
 PRESENTATION_PATH = Path(__file__).parent / "presentations" / "naturalistic_v1.json"
+V2_PRESENTATION_PATH = Path(__file__).parent / "presentations" / "naturalistic_v2.json"
 _ProfileString = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
 _StringList = Annotated[list[_ProfileString], Field(min_length=1, max_length=8)]
 
@@ -633,14 +635,26 @@ def _surface_validator(content: str, allowed_policy: str | None) -> str | None:
     return f"evaluation cue {match.group(0)!r}" if match else None
 
 
-def _presentation() -> PresentationProfile:
+def _presentation(
+    presentation_id: str = PRESENTATION_ID,
+) -> PresentationProfile:
+    if presentation_id == PRESENTATION_ID:
+        path = PRESENTATION_PATH
+        description = "Naturalistic portfolio desk and signed-mandate rendering."
+        gate = "finance_naturalistic_surface_v1"
+    elif presentation_id == V2_PRESENTATION_ID:
+        path = V2_PRESENTATION_PATH
+        description = "Naturalistic portfolio lifecycle and signed-transaction rendering."
+        gate = "finance_naturalistic_surface_v2"
+    else:
+        raise ValueError(f"unknown Finance presentation: {presentation_id}")
     return PresentationProfile(
-        presentation_id=PRESENTATION_ID,
-        description="Naturalistic portfolio desk and signed-mandate rendering.",
+        presentation_id=presentation_id,
+        description=description,
         prompt_policy_id=PROMPT_POLICY_ID,
-        overlay_files=(PRESENTATION_PATH,),
-        overlay_hashes={str(PRESENTATION_PATH): file_hash(PRESENTATION_PATH)},
-        validity_gates=("finance_naturalistic_surface_v1",),
+        overlay_files=(path,),
+        overlay_hashes={str(path): file_hash(path)},
+        validity_gates=(gate,),
     )
 
 
@@ -669,6 +683,7 @@ def _prompt_policy() -> PromptPolicy:
 
 def create_domain() -> AuthorizationMemoryDomain:
     presentation = _presentation()
+    v2_presentation = _presentation(V2_PRESENTATION_ID)
     return AuthorizationMemoryDomain(
         domain_id=DOMAIN_ID,
         adapter_version="1",
@@ -697,14 +712,20 @@ def create_domain() -> AuthorizationMemoryDomain:
             "pressure": StudyProfile("pressure", "Market pressure on the exact frozen writer baseline.", validator=validate_pressure_options, builder=build_pressure_plan),
             "witness_replay": StudyProfile("witness_replay", "Exact-source replay of deterministic natural-memory witnesses and repairs.", validator=validate_witness_replay_options, builder=build_witness_replay_plan),
         },
-        presentations={PRESENTATION_ID: presentation},
+        presentations={
+            PRESENTATION_ID: presentation,
+            V2_PRESENTATION_ID: v2_presentation,
+        },
         default_presentation_id=PRESENTATION_ID,
         prompt_policies={PROMPT_POLICY_ID: _prompt_policy()},
         surface_validation=SurfaceValidationSpec(
             hidden_identifiers=_hidden_identifiers,
             private_request_fields=("request_scope", "probe_id", "pair_id"),
             forbidden_field_names=("request_scope", "probe_id", "pair_id", "case_id"),
-            instruction_validators={"finance_naturalistic_surface_v1": _surface_validator},
+            instruction_validators={
+                "finance_naturalistic_surface_v1": _surface_validator,
+                "finance_naturalistic_surface_v2": _surface_validator,
+            },
             prompt_policy_validators={PROMPT_POLICY_ID: (_surface_validator,)},
         ),
         conformance=DomainConformanceSpec(
@@ -733,9 +754,10 @@ def _capacity_policy() -> Any:
 
 
 def _capacity_check(domain: AuthorizationMemoryDomain, cases: Sequence[Any], options: Mapping[str, Any]) -> Mapping[str, Any]:
-    del cases, options
     from .capacity import validate_capacity_calibration
-    return validate_capacity_calibration(domain)
+
+    presentation = domain.get_presentation(str(options["presentation_version"]))
+    return validate_capacity_calibration(domain, cases, presentation)
 
 
 def _compiled_source_check(domain: AuthorizationMemoryDomain, cases: Sequence[Any], options: Mapping[str, Any]) -> Mapping[str, Any]:
@@ -751,7 +773,7 @@ def _pressure_fixture_check(domain: AuthorizationMemoryDomain, cases: Sequence[A
 
 
 def _release_check(domain: AuthorizationMemoryDomain, cases: Sequence[Any], options: Mapping[str, Any]) -> Mapping[str, Any]:
-    del cases, options
+    del cases
     from .release import validate_release
 
-    return validate_release(domain)
+    return validate_release(domain, str(options["corpus_version"]))
