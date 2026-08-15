@@ -68,20 +68,20 @@
     "freeze_status": "frozen"
   },
   "run_plan": {
-    "source": "v2_successor_run_plan.json",
-    "sha256": "a2f258d44093a4c49c914c6eb4a9db745b753b4415463f6e45f36d324520630e",
+    "source": "v2_successor_matrix_run_plan.json",
+    "sha256": "7ce5e8d7b8f38f47e7fb94a75bce498d6f6e2f379d8075509f65c2ab860ea602",
     "freeze_status": "frozen",
     "route_authorizations": {
       "controls": true,
-      "writer": false,
-      "pressure": false,
+      "writer": true,
+      "pressure": true,
       "witness_replay": false
     },
     "pricing_estimate": {
-      "artifact": "v2_successor_pre_run_cost_estimate.json",
-      "sha256": "a1adadb0a268ed931cfe3c40ace479f7823901a7e701330791487f1a27bd8289",
+      "artifact": "v2_successor_matrix_estimate.json",
+      "sha256": "3ed1ee02a3de095a149790f9a3bb05027e654f7ef4e25e8f9be62b603f2cbbda",
       "status": "approved",
-      "approved_cap_usd": 30.0
+      "approved_cap_usd": 50.0
     }
   },
   "review": {
@@ -90,7 +90,7 @@
     "independent_blinded_review": "not_collected_for_successor"
   },
   "results": {
-    "status": "controls_passed_matrix_approval_pending",
+    "status": "controls_passed_matrix_authorized",
     "outcome_based_resampling": false,
     "artifacts": {
       "controls_report": {
@@ -99,7 +99,7 @@
       },
       "matrix_estimate": {
         "path": "v2_successor_matrix_estimate.json",
-        "sha256": "3247237d76441997b293f249ad6942900822145249792edb286649d944dbe00d"
+        "sha256": "3ed1ee02a3de095a149790f9a3bb05027e654f7ef4e25e8f9be62b603f2cbbda"
       }
     }
   }

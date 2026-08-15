@@ -20,12 +20,22 @@ def build_release(domain: Any) -> dict[str, Any]:
     cases = domain.corpus.load_cases(CORPUS_VERSION)
     provenance = domain.corpus.provenance(CORPUS_VERSION)
     implementation = memory_implementation_manifest(domain)
-    run_plan_path = PACKAGE_DIR / "v2_successor_run_plan.json"
+    matrix_estimate_path = PACKAGE_DIR / "v2_successor_matrix_estimate.json"
+    matrix_estimate = (
+        json.loads(matrix_estimate_path.read_text(encoding="utf-8"))
+        if matrix_estimate_path.is_file()
+        else {}
+    )
+    matrix_authorized = matrix_estimate.get("status") == "approved"
+    run_plan_path = PACKAGE_DIR / (
+        "v2_successor_matrix_run_plan.json"
+        if matrix_authorized
+        else "v2_successor_run_plan.json"
+    )
     run_plan = json.loads(run_plan_path.read_text(encoding="utf-8"))
     pricing_path = PACKAGE_DIR / run_plan["pricing_estimate"]["artifact"]
     results_root = PACKAGE_DIR.parents[1] / "results" / "finance"
     controls_report_path = results_root / "finance_v2_successor__controls_report.json"
-    matrix_estimate_path = PACKAGE_DIR / "v2_successor_matrix_estimate.json"
     result_artifacts = {}
     if controls_report_path.is_file():
         result_artifacts["controls_report"] = {
@@ -109,7 +119,7 @@ def build_release(domain: Any) -> dict[str, Any]:
             "freeze_status": "frozen",
         },
         "run_plan": {
-            "source": "v2_successor_run_plan.json",
+            "source": run_plan_path.name,
             "sha256": file_hash(run_plan_path),
             "freeze_status": "frozen",
             "route_authorizations": run_plan["route_authorizations"],
@@ -117,7 +127,9 @@ def build_release(domain: Any) -> dict[str, Any]:
                 "artifact": pricing_path.name,
                 "sha256": file_hash(pricing_path),
                 "status": "approved",
-                "approved_cap_usd": 30.0,
+                "approved_cap_usd": float(
+                    run_plan["pricing_estimate"]["approved_cap_usd"]
+                ),
             },
         },
         "review": {
@@ -127,7 +139,9 @@ def build_release(domain: Any) -> dict[str, Any]:
         },
         "results": {
             "status": (
-                "controls_passed_matrix_approval_pending"
+                "controls_passed_matrix_authorized"
+                if controls_report_path.is_file() and matrix_authorized
+                else "controls_passed_matrix_approval_pending"
                 if controls_report_path.is_file()
                 else "controls_pending"
             ),
