@@ -1,0 +1,46 @@
+{
+  "pooled": {
+    "matched_memory_request_pairs": 1280,
+    "action_outcome_matches": 1259,
+    "action_outcome_agreement_rate": 0.98359375,
+    "exact_decision_matches": 700,
+    "exact_decision_agreement_rate": 0.546875
+  },
+  "by_writer": {
+    "nemotron_3_ultra_baseten": {
+      "matched_memory_request_pairs": 256,
+      "action_outcome_matches": 255,
+      "action_outcome_agreement_rate": 0.99609375,
+      "exact_decision_matches": 152,
+      "exact_decision_agreement_rate": 0.59375
+    },
+    "kimi_baseten": {
+      "matched_memory_request_pairs": 256,
+      "action_outcome_matches": 253,
+      "action_outcome_agreement_rate": 0.98828125,
+      "exact_decision_matches": 142,
+      "exact_decision_agreement_rate": 0.5546875
+    },
+    "glm_5_2_baseten": {
+      "matched_memory_request_pairs": 256,
+      "action_outcome_matches": 256,
+      "action_outcome_agreement_rate": 1.0,
+      "exact_decision_matches": 149,
+      "exact_decision_agreement_rate": 0.58203125
+    },
+    "grok_4_3_openrouter": {
+      "matched_memory_request_pairs": 256,
+      "action_outcome_matches": 252,
+      "action_outcome_agreement_rate": 0.984375,
+      "exact_decision_matches": 128,
+      "exact_decision_agreement_rate": 0.5
+    },
+    "qwen_plus_0728_openrouter": {
+      "matched_memory_request_pairs": 256,
+      "action_outcome_matches": 243,
+      "action_outcome_agreement_rate": 0.94921875,
+      "exact_decision_matches": 129,
+      "exact_decision_agreement_rate": 0.50390625
+    }
+  }
+}

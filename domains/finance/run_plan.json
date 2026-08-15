@@ -1,70 +1,55 @@
 {
   "schema_version": "finance_run_plan_v1",
   "release_id": "finance_v1",
-  "status": "final_controls_completed_pending_behavioral_routes",
-  "seed": 20260814,
+  "status": "matrix_completed",
+  "corpus_version": "benchmark_v1",
+  "presentation_version": "naturalistic_v1",
+  "pressure_profile": "loss_containment_v1",
   "capacity_tier": "primary",
-  "order": [
-    "offline_validation",
-    "gptoss_and_deepseek_final_controls",
-    "isolation_gate",
-    "finance_only_pull_request",
-    "five_by_two_writer_routes_after_separate_approval",
-    "exact_source_pressure_after_each_complete_writer_route",
-    "combined_pairwise_results_and_cost_report"
+  "capacity_tokens": 5860,
+  "seed": 20260816,
+  "batch_size": 10,
+  "writer_targets_in_order": [
+    "nemotron_3_ultra_baseten",
+    "kimi_baseten",
+    "glm_5_2_baseten",
+    "grok_4_3_openrouter",
+    "qwen_plus_0728_openrouter"
   ],
-  "final_controls": {
-    "targets": ["gptoss_baseten", "deepseek_baseten"],
-    "calls_per_target": 288,
-    "total_calls": 576,
-    "run_once": true,
-    "status": "passed_2026_08_15",
-    "gptoss_gate": "passed",
-    "deepseek_gate": "passed_after_provider_error_continuation",
-    "successful_behavioral_outcomes_rerun": 0
+  "executor_targets": [
+    "gptoss_baseten",
+    "deepseek_baseten"
+  ],
+  "per_writer": {
+    "logical_writer_updates": 176,
+    "writer_calls_without_repairs": 176,
+    "writer_calls_scheduled_maximum": 352,
+    "baseline_executor_calls_minimum": 512,
+    "baseline_executor_calls_maximum": 576,
+    "pressure_executor_calls_minimum": 512,
+    "pressure_executor_calls_maximum": 576,
+    "generate_memory_once": true,
+    "reuse_memory_with_both_executors": true,
+    "pressure_reuses_exact_writer_source": true
   },
-  "writer_matrix": {
-    "writer_targets": [
-      "nemotron_3_ultra_baseten",
-      "grok_4_3_openrouter",
-      "kimi_baseten",
-      "glm_5_2_baseten",
-      "qwen_plus_0728_openrouter"
-    ],
-    "executor_targets": ["gptoss_baseten", "deepseek_baseten"],
-    "writer_routes": 5,
-    "logical_writer_updates_total": 1360,
-    "maximum_writer_calls_total": 2720,
-    "ordinary_executor_calls_total": 2560,
-    "targeted_executor_calls_maximum_total": 320,
-    "run_each_writer_once": true,
-    "reuse_each_memory_set_with_both_executors": true,
-    "status": "not_authorized"
+  "order": [
+    "run_one_writer_with_both_executors",
+    "validate_completed_writer_artifacts",
+        "run_pressure_from_exact_writer_source",
+    "validate_pressure_lineage",
+    "record_cost_before_next_writer"
+  ],
+  "route_authorizations": {
+    "controls": true,
+    "writer": true,
+    "pressure": true,
+    "witness_replay": false
   },
-  "pressure": {
-    "profile_id": "loss_containment_v1",
-    "source_writer_routes": 5,
-    "writer_calls": 0,
-    "baseline_reruns": 0,
-    "ordinary_executor_calls_total": 2560,
-    "targeted_executor_calls_maximum_total": 320,
-    "exact_writer_source_required": true,
-    "status": "not_authorized"
+  "pricing_estimate": {
+    "artifact": "pre_run_cost_estimate.json",
+    "status": "approved",
+    "approved_cap_usd": 50.0
   },
-  "call_plan": {
-    "controls_calls": 576,
-    "matrix_expected_calls": 6480,
-    "matrix_scheduled_calls_maximum": 8480,
-    "transport_retries_excluded": true
-  },
-  "budget": {
-    "controls_status": "approved_2026_08_15",
-    "approved_additional_usd": 10.0,
-    "cumulative_incremental_cap_usd": 27.75,
-    "controls_cache_aware_cost_usd": 5.70031875,
-    "controls_conservative_no_cache_usd": 11.06990858,
-    "matrix_status": "separate_approval_required_after_merge_gate",
-    "stop_at_approved_cap": true
-  },
+  "provider_failure_policy": "retain failures and use only hash-linked missing-call continuation",
   "outcome_based_resampling": false
 }

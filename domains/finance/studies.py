@@ -28,6 +28,7 @@ from experiments.authorization_memory.pipeline import (
     _create_artifact,
     _evidence_from_artifact,
     _freeze_evidence,
+    _study_job_messages,
     calibrate_capacity,
     planned_study_job_identity,
 )
@@ -98,6 +99,12 @@ def validate_pressure_options(options: Mapping[str, Any]) -> None:
     _validate_route(options, "pressure")
     if not str(options.get("source_run") or "").strip():
         raise ValueError("pressure requires --source-run from a completed writer route")
+    corpus_version = str(options.get("corpus_version") or "")
+    pressure_id = str(options.get("pressure_variant") or pressure.PRESSURE_ID)
+    if pressure_id not in pressure.available_pressure_ids(corpus_version):
+        raise ValueError(
+            f"Finance pressure variant {pressure_id!r} is not registered for {corpus_version!r}"
+        )
 
 
 def validate_witness_replay_options(options: Mapping[str, Any]) -> None:
@@ -330,7 +337,7 @@ def build_pressure_plan(
         options["executor_targets"] = tuple(source["targets"])
         options["executor_runs"] = int(source["manifest"]["executor"]["runs"])
         options["executor_task"] = str(source["manifest"]["executor"]["task"])
-    pressure_id = pressure.PRESSURE_ID
+    pressure_id = str(options.get("pressure_variant") or pressure.PRESSURE_ID)
     evidence_by_id = source["evidence"]
     case_by_id = {case.case_id: case for case in cases}
     probe_by_id = {
@@ -340,34 +347,13 @@ def build_pressure_plan(
     pairs = []
     for row in source["rows"]:
         case = case_by_id[str(row["case_id"])]
-        probe = probe_by_id.get((case.case_id, str(row["probe_id"])))
-        if probe is None:
-            metadata = dict(row.get("probe_metadata") or {})
-            request = TradeRequest.from_dict(dict(row["request"]))
-            operational_near_match = row.get("operational_near_match")
-            if not isinstance(operational_near_match, Mapping) and metadata.get(
-                "natural_witness"
-            ):
-                operational_near_match = _synthetic_operational_near_match(
-                    case,
-                    request,
-                ).to_dict()
-            if isinstance(operational_near_match, Mapping):
-                request = replace(
-                    request,
-                    operational_near_match=dict(operational_near_match),
-                )
-            probe = BenchmarkProbe(
-                probe_id=str(row["probe_id"]),
-                pair_id=str(row["pair_id"]),
-                dimension=str(row["dimension"]),
-                request_scope=str(row["request_scope"]),
-                request=request,
-                metadata=metadata,
-            )
+        probe = _source_probe(case, row, probe_by_id)
         evidence = evidence_by_id[str(row["evidence_id"])]
+        job_id_parts = ["pressure", str(row["baseline_trial_id"])]
+        if pressure_id != pressure.PRESSURE_ID:
+            job_id_parts.append(pressure_id)
         job = ExecutorJob(
-            job_id=_stable_id("job", "pressure", str(row["baseline_trial_id"])),
+            job_id=_stable_id("job", *job_id_parts),
             case=case,
             probe=probe,
             evidence=evidence,
@@ -422,8 +408,8 @@ def build_pressure_plan(
                 placement="challenge",
                 text="",
                 metadata={
-                    "pressure_profile": _pressure_profile_id(
-                        str(options["corpus_version"])
+                    "pressure_profile": pressure.profile_id_for_variant(
+                        str(options["corpus_version"]), pressure_id
                     )
                 },
                 challenge_pressure_id=pressure_id,
@@ -436,8 +422,13 @@ def build_pressure_plan(
         },
         metadata={
             "route": "pressure",
+            "pressure_variant": pressure_id,
+            "pressure_profile": pressure.profile_id_for_variant(
+                str(options["corpus_version"]), pressure_id
+            ),
             "source_run": str(source_path),
             "source_writer_run_hash": file_hash(source_path / "manifest.json"),
+            "source_presentation_lineage": source["presentation_lineage"],
             "writer_calls": 0,
             "repeated_baseline_calls": 0,
         },
@@ -1209,7 +1200,9 @@ def _load_pressure_source(
     if manifest.get("corpus_version") != options["corpus_version"]:
         raise ValueError("pressure source corpus differs")
     presentation = domain.get_presentation(str(options["presentation_version"]))
-    if manifest.get("presentation_hash") != content_hash(presentation.to_dict()):
+    current_presentation_hash = content_hash(presentation.to_dict())
+    presentation_matches = manifest.get("presentation_hash") == current_presentation_hash
+    if not presentation_matches:
         raise ValueError("pressure source presentation differs")
     if manifest.get("case_ids") != [case.case_id for case in cases]:
         raise ValueError("pressure source case selection differs")
@@ -1236,6 +1229,10 @@ def _load_pressure_source(
     calls = {str(row.get("call_id")): row for row in loaded["calls"] if row.get("call_id")}
     evidence = {row["evidence_id"]: _evidence_from_row(row) for row in loaded["evidence"]}
     memories = {row["memory_id"]: _memory_from_row(row) for row in loaded["memories"]}
+    case_by_id = {case.case_id: case for case in cases}
+    probe_by_id = {
+        (case.case_id, probe.probe_id): probe for case in cases for probe in case.probes
+    }
     for row in loaded["pressure_source_jobs"]:
         trial_id = str(row["baseline_trial_id"])
         call_id = str(row["baseline_call_id"])
@@ -1248,6 +1245,23 @@ def _load_pressure_source(
             memory = memories.get(item.memory_id)
             if memory is None or memory.content_hash != item.content_hash:
                 raise ValueError(f"{row['pressure_source_job_id']}: memory linkage is invalid")
+    presentation_lineage = {
+        "source_presentation_hash": manifest.get("presentation_hash"),
+        "current_presentation_hash": current_presentation_hash,
+        "exact_hash_match": presentation_matches,
+        "provider_visible_baseline_revalidated": False,
+    }
+    if not presentation_matches:
+        _validate_provider_visible_pressure_source(
+            domain,
+            loaded["pressure_source_jobs"],
+            contexts,
+            evidence,
+            case_by_id,
+            probe_by_id,
+            presentation,
+        )
+        presentation_lineage["provider_visible_baseline_revalidated"] = True
     targets = tuple(str(value) for value in manifest["executor"]["targets"])
     return {
         "manifest": manifest,
@@ -1255,7 +1269,89 @@ def _load_pressure_source(
         "evidence": evidence,
         "memories": memories,
         "targets": targets,
+        "presentation_lineage": presentation_lineage,
     }
+
+
+def _validate_provider_visible_pressure_source(
+    domain: Any,
+    rows: Sequence[Mapping[str, Any]],
+    contexts: Mapping[str, Mapping[str, Any]],
+    evidence: Mapping[str, FrozenEvidence],
+    case_by_id: Mapping[str, FinanceCase],
+    probe_by_id: Mapping[tuple[str, str], BenchmarkProbe],
+    presentation: Any,
+) -> None:
+    tools = list(domain.tools())
+    for row in rows:
+        case = case_by_id[str(row["case_id"])]
+        probe = _source_probe(case, row, probe_by_id)
+        item = evidence[str(row["evidence_id"])]
+        prepared = prepare_challenge(domain, case, probe, pressure_id="baseline")
+        if prepared is None:
+            raise ValueError(f"{row['pressure_source_job_id']}: baseline challenge is absent")
+        if (
+            prepared.rendered_sha256 != row["baseline_challenge_hash"]
+            or prepared.choice_set_sha256 != row["choice_set_hash"]
+        ):
+            raise ValueError(
+                f"{row['pressure_source_job_id']}: provider-visible baseline challenge changed"
+            )
+        job = ExecutorJob(
+            job_id=str(row["baseline_job_id"]),
+            case=case,
+            probe=probe,
+            evidence=item,
+            oracle_block_index=row.get("oracle_block_index"),
+        )
+        messages = _study_job_messages(
+            domain,
+            job,
+            presentation=presentation,
+            pressure=None,
+        )
+        context = contexts[str(row["baseline_trial_id"])]
+        if (
+            context.get("messages") != messages
+            or context.get("tools") != tools
+            or context.get("tool_choice") != "auto"
+        ):
+            raise ValueError(
+                f"{row['pressure_source_job_id']}: provider-visible baseline context changed"
+            )
+
+
+def _source_probe(
+    case: FinanceCase,
+    row: Mapping[str, Any],
+    probe_by_id: Mapping[tuple[str, str], BenchmarkProbe],
+) -> BenchmarkProbe:
+    probe = probe_by_id.get((case.case_id, str(row["probe_id"])))
+    if probe is not None:
+        return probe
+    metadata = dict(row.get("probe_metadata") or {})
+    request = TradeRequest.from_dict(dict(row["request"]))
+    operational_near_match = row.get("operational_near_match")
+    if not isinstance(operational_near_match, Mapping) and metadata.get(
+        "natural_witness"
+    ):
+        operational_near_match = _synthetic_operational_near_match(
+            case,
+            request,
+        ).to_dict()
+    if isinstance(operational_near_match, Mapping):
+        request = replace(
+            request,
+            operational_near_match=dict(operational_near_match),
+        )
+    return BenchmarkProbe(
+        probe_id=str(row["probe_id"]),
+        pair_id=str(row["pair_id"]),
+        dimension=str(row["dimension"]),
+        request_scope=str(row["request_scope"]),
+        request=request,
+        metadata=metadata,
+    )
 
 
 def _load_writer_source(
@@ -1560,9 +1656,7 @@ def _validate_route(options: Mapping[str, Any], route: str) -> None:
         raise ValueError(f"{route} requires a registered development corpus")
     if str(options.get("presentation_version") or "") != expected:
         raise ValueError(f"{route} with {corpus_version} requires presentation {expected}")
-    if corpus_version == "benchmark_v1" and not bool(
-        options.get("validate_only")
-    ):
+    if corpus_version == "benchmark_v1" and not bool(options.get("validate_only")):
         release = json.loads(
             (Path(__file__).parent / "release.json").read_text(encoding="utf-8")
         )
@@ -1604,11 +1698,6 @@ def _checkpoint_blocks(case: FinanceCase) -> frozenset[int]:
 
 
 def _pressure_profile_id(corpus_version: str) -> str:
-    if corpus_version not in {
-        "calibration_v1",
-        "benchmark_v1",
-    }:
-        raise ValueError(f"unsupported pressure corpus: {corpus_version!r}")
     return pressure.profile_id_for_corpus(corpus_version)
 
 

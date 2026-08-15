@@ -24,12 +24,19 @@ def capacity_policy() -> CapacityPolicy:
         return CapacityPolicy(minimum_history_ratio=MINIMUM_HISTORY_RATIO)
     primary = int(artifact["primary_tokens"])
     tight = int(artifact["tight_tokens"])
+    from .corpus import _versions
+
+    versions = _versions()
     return CapacityPolicy(
         primary_multiplier=float(artifact["primary_multiplier"]),
         tight_multiplier=float(artifact["tight_multiplier"]),
         minimum_history_ratio=int(artifact["minimum_history_ratio"]),
-        minimum_history_ratios={version: int(artifact["minimum_history_ratio"]) for version in (CALIBRATION_VERSION, BENCHMARK_VERSION)},
-        calibrated_tokens={version: {"primary": primary, "tight": tight} for version in (CALIBRATION_VERSION, BENCHMARK_VERSION)},
+        minimum_history_ratios={
+            version: int(artifact["minimum_history_ratio"]) for version in versions
+        },
+        calibrated_tokens={
+            version: {"primary": primary, "tight": tight} for version in versions
+        },
     )
 
 
@@ -134,14 +141,19 @@ def write_capacity_calibration(domain: Any) -> None:
     )
 
 
-def validate_capacity_calibration(domain: Any) -> dict[str, Any]:
+def validate_capacity_calibration(
+    domain: Any,
+    cases: Any | None = None,
+    presentation: Any | None = None,
+) -> dict[str, Any]:
     from experiments.authorization_memory.persistence import content_hash, file_hash
 
     if not ARTIFACT_PATH.is_file():
         raise ValueError("Finance capacity artifact has not been generated")
     artifact = json.loads(ARTIFACT_PATH.read_text(encoding="utf-8"))
-    if artifact != build_capacity_calibration(domain):
-        raise ValueError("Finance capacity calibration does not reproduce")
+    release = json.loads((PACKAGE_DIR / "release.json").read_text(encoding="utf-8"))
+    if file_hash(ARTIFACT_PATH) != release["capacity"]["sha256"]:
+        raise ValueError("Finance v1 capacity artifact differs from its frozen release")
     if artifact["primary_tokens"] != 2 * artifact["largest_faithful_tokens"]:
         raise ValueError("Finance primary capacity is not the required 2x policy")
     for version, entry in artifact["compatibility"].items():
@@ -151,6 +163,20 @@ def validate_capacity_calibration(domain: Any) -> dict[str, Any]:
             raise ValueError(f"{version}: source history is too short")
     if artifact["minimum_history_tokens"] < artifact["required_history_tokens"]:
         raise ValueError("Finance calibration history is too short")
+    selected_rows = []
+    if cases is not None:
+        if presentation is None:
+            raise ValueError("Finance capacity compatibility requires a presentation")
+        selected_rows = _checkpoint_capacity(domain, cases, presentation)
+        for row in selected_rows:
+            if row["largest_faithful_tokens"] > artifact["primary_tokens"]:
+                raise ValueError(
+                    f"{row['case_id']}: faithful payload exceeds frozen primary capacity"
+                )
+            if row["history_tokens"] < artifact["required_history_tokens"]:
+                raise ValueError(
+                    f"{row['case_id']}: source history is too short for frozen capacity"
+                )
     return {
         "status": "passed",
         "artifact": str(ARTIFACT_PATH),
@@ -159,6 +185,15 @@ def validate_capacity_calibration(domain: Any) -> dict[str, Any]:
         "primary_tokens": artifact["primary_tokens"],
         "tight_tokens": artifact["tight_tokens"],
         "minimum_history_tokens": artifact["minimum_history_tokens"],
+        "selected_case_count": len(selected_rows),
+        "selected_largest_faithful_tokens": max(
+            (row["largest_faithful_tokens"] for row in selected_rows),
+            default=artifact["largest_faithful_tokens"],
+        ),
+        "selected_minimum_history_tokens": min(
+            (row["history_tokens"] for row in selected_rows),
+            default=artifact["minimum_history_tokens"],
+        ),
     }
 
 

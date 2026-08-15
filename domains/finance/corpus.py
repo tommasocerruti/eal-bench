@@ -1,4 +1,4 @@
-"""Frozen Finance v1 corpus and deterministic authorization replay."""
+"""Frozen Finance corpora and deterministic authorization replay."""
 
 from __future__ import annotations
 
@@ -24,6 +24,11 @@ from .models import (
 PACKAGE_DIR = Path(__file__).parent
 DATA_DIR = PACKAGE_DIR / "data"
 VERSIONS = ("calibration_v1", "benchmark_v1")
+_TECHNICAL_BENCHMARK_VERSION = "benchmark_v2"
+
+
+def _versions() -> tuple[str, ...]:
+    return VERSIONS
 AUTHORIZATION_CHANGING_BLOCKS = (0, 1, 2, 3, 4, 5, 6, 8, 9)
 TYPED_SCREENING_BLOCKS = (*AUTHORIZATION_CHANGING_BLOCKS, 10, 11, 12, 13, 14, 15)
 ARCHIVE_BLOCKS = (10, 11, 12, 13, 14, 15)
@@ -46,12 +51,31 @@ _FIELD_BY_MECHANISM = {
 def load_cases(version: str) -> tuple[FinanceCase, ...]:
     if version not in VERSIONS:
         raise ValueError(f"unsupported Finance corpus: {version!r}")
-    payload = json.loads((DATA_DIR / f"{version}.json").read_text(encoding="utf-8"))
-    if payload.get("schema_version") != "finance_case_corpus_v1":
+    source_version = _TECHNICAL_BENCHMARK_VERSION if version == "benchmark_v1" else version
+    payload = json.loads((DATA_DIR / f"{source_version}.json").read_text(encoding="utf-8"))
+    expected_schema = "finance_case_corpus_v2" if version == "benchmark_v1" else "finance_case_corpus_v1"
+    if payload.get("schema_version") != expected_schema:
         raise ValueError(f"{version}: frozen source has the wrong schema")
-    if payload.get("corpus_version") != version:
+    if payload.get("corpus_version") != source_version:
         raise ValueError(f"{version}: frozen source has the wrong corpus identity")
     cases = tuple(_case_from_dict(item) for item in payload.get("cases", ()))
+    if version == "benchmark_v1":
+        from .corpus_v2 import validate_case as validate_technical_case
+
+        for case in cases:
+            validate_technical_case(case)
+        cases = tuple(
+            replace(
+                case,
+                metadata={
+                    **case.metadata,
+                    "corpus_version": "benchmark_v1",
+                    "content_source_release": "finance_v1",
+                    "split": "held_out_claim",
+                },
+            )
+            for case in cases
+        )
     for case in cases:
         validate_case(case)
     return cases
@@ -60,6 +84,10 @@ def load_cases(version: str) -> tuple[FinanceCase, ...]:
 def source_files(version: str) -> tuple[Path, ...]:
     if version not in VERSIONS:
         raise ValueError(f"unsupported Finance corpus: {version!r}")
+    if version == "benchmark_v1":
+        from .corpus_v2 import source_files as v2_source_files
+
+        return v2_source_files(_TECHNICAL_BENCHMARK_VERSION)
     return (
         DATA_DIR / f"{version}.json",
         PACKAGE_DIR / "compile_corpus.py",
@@ -74,10 +102,10 @@ def corpus_provenance(version: str) -> Mapping[str, Any]:
     hashes = {str(path.relative_to(PACKAGE_DIR)): file_hash(path) for path in paths}
     return {
         "corpus_version": version,
-        "source_format": "finance_case_corpus_v1",
+        "source_format": "finance_public_release_v1",
         "source_sha256": content_hash(hashes),
         "source_files": hashes,
-        "generator_version": "finance_frozen_v1",
+        "generator_version": "finance_equal_cardinality_v1",
         "case_count": len(load_cases(version)),
         "freeze_status": "frozen",
         "release_id": "finance_v1",
@@ -192,7 +220,25 @@ def source_turn_ids(
 
 def validate_case(case: FinanceCase) -> None:
     version = str(case.metadata.get("corpus_version", ""))
-    if version not in VERSIONS:
+    if version == "benchmark_v1":
+        from .corpus_v2 import validate_case as validate_v2_case
+
+        technical = replace(
+            case,
+            metadata={
+                **case.metadata,
+                "corpus_version": _TECHNICAL_BENCHMARK_VERSION,
+                "content_source_release": "finance_v2",
+                "split": "benchmark",
+            },
+        )
+        validate_v2_case(technical)
+        if case.metadata.get("content_source_release") != "finance_v1":
+            raise ValueError(f"{case.case_id}: public release identity differs")
+        if case.metadata.get("split") != "held_out_claim":
+            raise ValueError(f"{case.case_id}: public claim split differs")
+        return
+    if version != "calibration_v1":
         raise ValueError(f"{case.case_id}: frozen corpus identity differs")
     expected_prefix = "fin_cal_" if version == "calibration_v1" else "fin_bench_"
     expected_split = "calibration" if version == "calibration_v1" else "benchmark"

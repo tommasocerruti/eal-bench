@@ -10,11 +10,11 @@
   "typed_schema_version": "5",
   "typed_schema_sha256": "a141c26ecbda7c88c4b3f054ca89c4439af6237862721844a50f21afac02e9b8",
   "free_text_representation": "finance_current_mandates_v1",
-  "calibration_source_sha256": "57549dcd4ee1e4d2fd25eaa8486788f8af295c29b500226cb7f0bae773f3497c",
+  "calibration_source_sha256": "3ae5e214f9f079fe8b04ec1e431dd1f3b1322338029fad926e58e6f11fde2f6e",
   "calibration_source_files": {
     "data/calibration_v1.json": "281a98bad8c55145b05d0a0e634a6c55a8c50dbb8653704e5a1530db77e369ef",
-    "compile_corpus.py": "2fc1e880819925f7803df7e8a441571ccc3356b0b3ca9803401c55586ad98393",
-    "corpus.py": "2615d7d81c38a195f4539e67eb85c6b9e505cebec22e205802f8e8016c9f4671"
+    "compile_corpus.py": "9114d61b110fdf6c3e03f027f36539e0f1a19eb842abc782c1b85dc2230ac0e0",
+    "corpus.py": "f9fb68861eb7769791a025ecbb57e37713a835c7dfa40c202d2ff88b46cf49d3"
   },
   "capacity_basis": "largest faithful text or typed payload at any authorization checkpoint",
   "largest_faithful_tokens": 2930,
@@ -23,7 +23,7 @@
   "primary_tokens": 5860,
   "tight_tokens": 3663,
   "minimum_history_ratio": 8,
-  "minimum_history_tokens": 72506,
+  "minimum_history_tokens": 50060,
   "required_history_tokens": 46880,
   "cases": [
     {
@@ -313,240 +313,29 @@
   ],
   "compatibility": {
     "benchmark_v1": {
-      "source_sha256": "d73afe1331f5a6aee2b5ebed81c7ec3403490c5402a6f8f05956db77934ed927",
+      "source_sha256": "ac495b4d26bf81240935ffabbfe68b25121a901414701fb53c2ba5bd04f2de42",
       "source_files": {
-        "data/benchmark_v1.json": "afdb6aa90633a64f78b6c1c94f29b9d9add4cd437a27ccaac43cc287c0b2c878",
-        "compile_corpus.py": "2fc1e880819925f7803df7e8a441571ccc3356b0b3ca9803401c55586ad98393",
-        "corpus.py": "2615d7d81c38a195f4539e67eb85c6b9e505cebec22e205802f8e8016c9f4671"
+        "data/benchmark_v2.json": "e0d24a535ee2e052a260ab4e76f35b371d0eae9c16a4f5b6e65217b616923bae",
+        "v2_blueprint.json": "a6a8b7695f8ac766f75952bc42e3e6848029a1117e6f75f5920058ab131d3d7d",
+        "compile_v2.py": "3e9d6521974a9c869bcae221575b72293b01f345dfb99b01dc916d8e98f7b128",
+        "corpus_v2.py": "c75af23a1e579910770baed5f5508279b327b2e0f3eae1222542ed56703ddc50",
+        "corpus.py": "f9fb68861eb7769791a025ecbb57e37713a835c7dfa40c202d2ff88b46cf49d3"
       },
-      "largest_faithful_tokens": 3006,
+      "largest_faithful_tokens": 1180,
       "all_faithful_payloads_fit_primary": true,
-      "minimum_history_tokens": 72506,
+      "minimum_history_tokens": 50060,
       "required_history_tokens": 46880,
       "cases": [
         {
-          "case_id": "fin_bench_municipal_cash",
-          "history_tokens": 73008,
-          "largest_faithful_tokens": 2878,
+          "case_id": "fin_v2_benchmark_airport_bond_reserve_equal",
+          "history_tokens": 50143,
+          "largest_faithful_tokens": 1144,
           "largest_checkpoint_block_index": 8,
           "checkpoints": [
             {
               "block_index": 0,
               "active_mandate_count": 1,
-              "faithful_text_tokens": 179,
-              "faithful_typed_tokens": 192,
-              "largest_faithful_tokens": 192
-            },
-            {
-              "block_index": 1,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 354,
-              "faithful_typed_tokens": 374,
-              "largest_faithful_tokens": 374
-            },
-            {
-              "block_index": 2,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 543,
-              "faithful_typed_tokens": 570,
-              "largest_faithful_tokens": 570
-            },
-            {
-              "block_index": 3,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 544,
-              "faithful_typed_tokens": 571,
-              "largest_faithful_tokens": 571
-            },
-            {
-              "block_index": 4,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 368,
-              "faithful_typed_tokens": 388,
-              "largest_faithful_tokens": 388
-            },
-            {
-              "block_index": 5,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 536,
-              "faithful_typed_tokens": 566,
-              "largest_faithful_tokens": 566
-            },
-            {
-              "block_index": 6,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 537,
-              "faithful_typed_tokens": 568,
-              "largest_faithful_tokens": 568
-            },
-            {
-              "block_index": 8,
-              "active_mandate_count": 16,
-              "faithful_text_tokens": 2728,
-              "faithful_typed_tokens": 2878,
-              "largest_faithful_tokens": 2878
-            },
-            {
-              "block_index": 9,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 361,
-              "faithful_typed_tokens": 391,
-              "largest_faithful_tokens": 391
-            }
-          ]
-        },
-        {
-          "case_id": "fin_bench_nordic_equity",
-          "history_tokens": 72506,
-          "largest_faithful_tokens": 2850,
-          "largest_checkpoint_block_index": 8,
-          "checkpoints": [
-            {
-              "block_index": 0,
-              "active_mandate_count": 1,
-              "faithful_text_tokens": 178,
-              "faithful_typed_tokens": 192,
-              "largest_faithful_tokens": 192
-            },
-            {
-              "block_index": 1,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 352,
-              "faithful_typed_tokens": 374,
-              "largest_faithful_tokens": 374
-            },
-            {
-              "block_index": 2,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 355,
-              "faithful_typed_tokens": 377,
-              "largest_faithful_tokens": 377
-            },
-            {
-              "block_index": 3,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 542,
-              "faithful_typed_tokens": 572,
-              "largest_faithful_tokens": 572
-            },
-            {
-              "block_index": 4,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 365,
-              "faithful_typed_tokens": 387,
-              "largest_faithful_tokens": 387
-            },
-            {
-              "block_index": 5,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 534,
-              "faithful_typed_tokens": 566,
-              "largest_faithful_tokens": 566
-            },
-            {
-              "block_index": 6,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 536,
-              "faithful_typed_tokens": 568,
-              "largest_faithful_tokens": 568
-            },
-            {
-              "block_index": 8,
-              "active_mandate_count": 16,
-              "faithful_text_tokens": 2700,
-              "faithful_typed_tokens": 2850,
-              "largest_faithful_tokens": 2850
-            },
-            {
-              "block_index": 9,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 355,
-              "faithful_typed_tokens": 385,
-              "largest_faithful_tokens": 385
-            }
-          ]
-        },
-        {
-          "case_id": "fin_bench_pension_duration",
-          "history_tokens": 74009,
-          "largest_faithful_tokens": 2958,
-          "largest_checkpoint_block_index": 8,
-          "checkpoints": [
-            {
-              "block_index": 0,
-              "active_mandate_count": 1,
-              "faithful_text_tokens": 186,
-              "faithful_typed_tokens": 200,
-              "largest_faithful_tokens": 200
-            },
-            {
-              "block_index": 1,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 368,
-              "faithful_typed_tokens": 390,
-              "largest_faithful_tokens": 390
-            },
-            {
-              "block_index": 2,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 371,
-              "faithful_typed_tokens": 393,
-              "largest_faithful_tokens": 393
-            },
-            {
-              "block_index": 3,
-              "active_mandate_count": 1,
-              "faithful_text_tokens": 186,
-              "faithful_typed_tokens": 200,
-              "largest_faithful_tokens": 200
-            },
-            {
-              "block_index": 4,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 364,
-              "faithful_typed_tokens": 388,
-              "largest_faithful_tokens": 388
-            },
-            {
-              "block_index": 5,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 561,
-              "faithful_typed_tokens": 593,
-              "largest_faithful_tokens": 593
-            },
-            {
-              "block_index": 6,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 565,
-              "faithful_typed_tokens": 597,
-              "largest_faithful_tokens": 597
-            },
-            {
-              "block_index": 8,
-              "active_mandate_count": 16,
-              "faithful_text_tokens": 2808,
-              "faithful_typed_tokens": 2958,
-              "largest_faithful_tokens": 2958
-            },
-            {
-              "block_index": 9,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 373,
-              "faithful_typed_tokens": 403,
-              "largest_faithful_tokens": 403
-            }
-          ]
-        },
-        {
-          "case_id": "fin_bench_asia_currency",
-          "history_tokens": 74010,
-          "largest_faithful_tokens": 2946,
-          "largest_checkpoint_block_index": 8,
-          "checkpoints": [
-            {
-              "block_index": 0,
-              "active_mandate_count": 1,
-              "faithful_text_tokens": 181,
+              "faithful_text_tokens": 182,
               "faithful_typed_tokens": 196,
               "largest_faithful_tokens": 196
             },
@@ -554,135 +343,164 @@
               "block_index": 1,
               "active_mandate_count": 2,
               "faithful_text_tokens": 358,
-              "faithful_typed_tokens": 382,
-              "largest_faithful_tokens": 382
+              "faithful_typed_tokens": 379,
+              "largest_faithful_tokens": 379
             },
             {
               "block_index": 2,
               "active_mandate_count": 3,
-              "faithful_text_tokens": 551,
-              "faithful_typed_tokens": 584,
-              "largest_faithful_tokens": 584
+              "faithful_text_tokens": 534,
+              "faithful_typed_tokens": 562,
+              "largest_faithful_tokens": 562
             },
             {
               "block_index": 3,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 553,
-              "faithful_typed_tokens": 586,
-              "largest_faithful_tokens": 586
+              "active_mandate_count": 4,
+              "faithful_text_tokens": 709,
+              "faithful_typed_tokens": 745,
+              "largest_faithful_tokens": 745
             },
             {
               "block_index": 4,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 559,
-              "faithful_typed_tokens": 592,
-              "largest_faithful_tokens": 592
+              "active_mandate_count": 5,
+              "faithful_text_tokens": 884,
+              "faithful_typed_tokens": 928,
+              "largest_faithful_tokens": 928
             },
             {
               "block_index": 5,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 380,
-              "faithful_typed_tokens": 404,
-              "largest_faithful_tokens": 404
-            },
-            {
-              "block_index": 6,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 555,
-              "faithful_typed_tokens": 590,
-              "largest_faithful_tokens": 590
+              "active_mandate_count": 6,
+              "faithful_text_tokens": 1058,
+              "faithful_typed_tokens": 1110,
+              "largest_faithful_tokens": 1110
             },
             {
               "block_index": 8,
-              "active_mandate_count": 16,
-              "faithful_text_tokens": 2780,
-              "faithful_typed_tokens": 2946,
-              "largest_faithful_tokens": 2946
-            },
-            {
-              "block_index": 9,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 367,
-              "faithful_typed_tokens": 399,
-              "largest_faithful_tokens": 399
+              "active_mandate_count": 6,
+              "faithful_text_tokens": 1081,
+              "faithful_typed_tokens": 1144,
+              "largest_faithful_tokens": 1144
             }
           ]
         },
         {
-          "case_id": "fin_bench_minimum_variance",
-          "history_tokens": 73955,
-          "largest_faithful_tokens": 2942,
+          "case_id": "fin_v2_benchmark_foundation_spending_equal",
+          "history_tokens": 50060,
+          "largest_faithful_tokens": 1150,
           "largest_checkpoint_block_index": 8,
           "checkpoints": [
             {
               "block_index": 0,
               "active_mandate_count": 1,
-              "faithful_text_tokens": 186,
-              "faithful_typed_tokens": 200,
-              "largest_faithful_tokens": 200
+              "faithful_text_tokens": 180,
+              "faithful_typed_tokens": 194,
+              "largest_faithful_tokens": 194
             },
             {
               "block_index": 1,
               "active_mandate_count": 2,
-              "faithful_text_tokens": 368,
-              "faithful_typed_tokens": 390,
-              "largest_faithful_tokens": 390
+              "faithful_text_tokens": 358,
+              "faithful_typed_tokens": 379,
+              "largest_faithful_tokens": 379
             },
             {
               "block_index": 2,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 374,
-              "faithful_typed_tokens": 396,
-              "largest_faithful_tokens": 396
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 534,
+              "faithful_typed_tokens": 562,
+              "largest_faithful_tokens": 562
             },
             {
               "block_index": 3,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 569,
-              "faithful_typed_tokens": 599,
-              "largest_faithful_tokens": 599
+              "active_mandate_count": 4,
+              "faithful_text_tokens": 709,
+              "faithful_typed_tokens": 745,
+              "largest_faithful_tokens": 745
             },
             {
               "block_index": 4,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 381,
-              "faithful_typed_tokens": 403,
-              "largest_faithful_tokens": 403
+              "active_mandate_count": 5,
+              "faithful_text_tokens": 890,
+              "faithful_typed_tokens": 934,
+              "largest_faithful_tokens": 934
             },
             {
               "block_index": 5,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 561,
-              "faithful_typed_tokens": 593,
-              "largest_faithful_tokens": 593
-            },
-            {
-              "block_index": 6,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 567,
-              "faithful_typed_tokens": 599,
-              "largest_faithful_tokens": 599
+              "active_mandate_count": 6,
+              "faithful_text_tokens": 1066,
+              "faithful_typed_tokens": 1118,
+              "largest_faithful_tokens": 1118
             },
             {
               "block_index": 8,
-              "active_mandate_count": 16,
-              "faithful_text_tokens": 2792,
-              "faithful_typed_tokens": 2942,
-              "largest_faithful_tokens": 2942
-            },
-            {
-              "block_index": 9,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 369,
-              "faithful_typed_tokens": 399,
-              "largest_faithful_tokens": 399
+              "active_mandate_count": 6,
+              "faithful_text_tokens": 1087,
+              "faithful_typed_tokens": 1150,
+              "largest_faithful_tokens": 1150
             }
           ]
         },
         {
-          "case_id": "fin_bench_debt_cap",
-          "history_tokens": 73102,
-          "largest_faithful_tokens": 2858,
+          "case_id": "fin_v2_benchmark_credit_union_equal",
+          "history_tokens": 50301,
+          "largest_faithful_tokens": 1147,
+          "largest_checkpoint_block_index": 8,
+          "checkpoints": [
+            {
+              "block_index": 0,
+              "active_mandate_count": 1,
+              "faithful_text_tokens": 178,
+              "faithful_typed_tokens": 193,
+              "largest_faithful_tokens": 193
+            },
+            {
+              "block_index": 1,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 357,
+              "faithful_typed_tokens": 380,
+              "largest_faithful_tokens": 380
+            },
+            {
+              "block_index": 2,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 534,
+              "faithful_typed_tokens": 565,
+              "largest_faithful_tokens": 565
+            },
+            {
+              "block_index": 3,
+              "active_mandate_count": 4,
+              "faithful_text_tokens": 713,
+              "faithful_typed_tokens": 752,
+              "largest_faithful_tokens": 752
+            },
+            {
+              "block_index": 4,
+              "active_mandate_count": 5,
+              "faithful_text_tokens": 891,
+              "faithful_typed_tokens": 937,
+              "largest_faithful_tokens": 937
+            },
+            {
+              "block_index": 5,
+              "active_mandate_count": 6,
+              "faithful_text_tokens": 1070,
+              "faithful_typed_tokens": 1123,
+              "largest_faithful_tokens": 1123
+            },
+            {
+              "block_index": 8,
+              "active_mandate_count": 6,
+              "faithful_text_tokens": 1081,
+              "faithful_typed_tokens": 1147,
+              "largest_faithful_tokens": 1147
+            }
+          ]
+        },
+        {
+          "case_id": "fin_v2_benchmark_marine_insurer_equal",
+          "history_tokens": 50524,
+          "largest_faithful_tokens": 1141,
           "largest_checkpoint_block_index": 8,
           "checkpoints": [
             {
@@ -702,193 +520,265 @@
             {
               "block_index": 2,
               "active_mandate_count": 3,
-              "faithful_text_tokens": 546,
-              "faithful_typed_tokens": 576,
-              "largest_faithful_tokens": 576
+              "faithful_text_tokens": 535,
+              "faithful_typed_tokens": 565,
+              "largest_faithful_tokens": 565
             },
             {
               "block_index": 3,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 549,
-              "faithful_typed_tokens": 579,
-              "largest_faithful_tokens": 579
+              "active_mandate_count": 4,
+              "faithful_text_tokens": 712,
+              "faithful_typed_tokens": 750,
+              "largest_faithful_tokens": 750
             },
             {
               "block_index": 4,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 552,
-              "faithful_typed_tokens": 582,
-              "largest_faithful_tokens": 582
+              "active_mandate_count": 5,
+              "faithful_text_tokens": 888,
+              "faithful_typed_tokens": 934,
+              "largest_faithful_tokens": 934
             },
             {
               "block_index": 5,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 373,
-              "faithful_typed_tokens": 395,
-              "largest_faithful_tokens": 395
-            },
-            {
-              "block_index": 6,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 546,
-              "faithful_typed_tokens": 578,
-              "largest_faithful_tokens": 578
+              "active_mandate_count": 6,
+              "faithful_text_tokens": 1063,
+              "faithful_typed_tokens": 1117,
+              "largest_faithful_tokens": 1117
             },
             {
               "block_index": 8,
-              "active_mandate_count": 16,
-              "faithful_text_tokens": 2708,
-              "faithful_typed_tokens": 2858,
-              "largest_faithful_tokens": 2858
-            },
-            {
-              "block_index": 9,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 353,
-              "faithful_typed_tokens": 383,
-              "largest_faithful_tokens": 383
+              "active_mandate_count": 6,
+              "faithful_text_tokens": 1075,
+              "faithful_typed_tokens": 1141,
+              "largest_faithful_tokens": 1141
             }
           ]
         },
         {
-          "case_id": "fin_bench_euro_duration",
-          "history_tokens": 74759,
-          "largest_faithful_tokens": 3006,
+          "case_id": "fin_v2_benchmark_family_office_tax_equal",
+          "history_tokens": 50184,
+          "largest_faithful_tokens": 1132,
           "largest_checkpoint_block_index": 8,
           "checkpoints": [
             {
               "block_index": 0,
               "active_mandate_count": 1,
-              "faithful_text_tokens": 191,
-              "faithful_typed_tokens": 205,
-              "largest_faithful_tokens": 205
+              "faithful_text_tokens": 176,
+              "faithful_typed_tokens": 190,
+              "largest_faithful_tokens": 190
             },
             {
               "block_index": 1,
               "active_mandate_count": 2,
-              "faithful_text_tokens": 378,
-              "faithful_typed_tokens": 400,
-              "largest_faithful_tokens": 400
+              "faithful_text_tokens": 349,
+              "faithful_typed_tokens": 371,
+              "largest_faithful_tokens": 371
             },
             {
               "block_index": 2,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 383,
-              "faithful_typed_tokens": 405,
-              "largest_faithful_tokens": 405
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 527,
+              "faithful_typed_tokens": 557,
+              "largest_faithful_tokens": 557
             },
             {
               "block_index": 3,
-              "active_mandate_count": 1,
-              "faithful_text_tokens": 191,
-              "faithful_typed_tokens": 205,
-              "largest_faithful_tokens": 205
+              "active_mandate_count": 4,
+              "faithful_text_tokens": 700,
+              "faithful_typed_tokens": 737,
+              "largest_faithful_tokens": 737
             },
             {
               "block_index": 4,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 376,
-              "faithful_typed_tokens": 400,
-              "largest_faithful_tokens": 400
+              "active_mandate_count": 5,
+              "faithful_text_tokens": 871,
+              "faithful_typed_tokens": 915,
+              "largest_faithful_tokens": 915
             },
             {
               "block_index": 5,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 578,
-              "faithful_typed_tokens": 610,
-              "largest_faithful_tokens": 610
-            },
-            {
-              "block_index": 6,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 584,
-              "faithful_typed_tokens": 616,
-              "largest_faithful_tokens": 616
+              "active_mandate_count": 6,
+              "faithful_text_tokens": 1042,
+              "faithful_typed_tokens": 1093,
+              "largest_faithful_tokens": 1093
             },
             {
               "block_index": 8,
-              "active_mandate_count": 16,
-              "faithful_text_tokens": 2856,
-              "faithful_typed_tokens": 3006,
-              "largest_faithful_tokens": 3006
-            },
-            {
-              "block_index": 9,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 379,
-              "faithful_typed_tokens": 409,
-              "largest_faithful_tokens": 409
+              "active_mandate_count": 6,
+              "faithful_text_tokens": 1069,
+              "faithful_typed_tokens": 1132,
+              "largest_faithful_tokens": 1132
             }
           ]
         },
         {
-          "case_id": "fin_bench_manager_handoff",
-          "history_tokens": 73569,
-          "largest_faithful_tokens": 2926,
+          "case_id": "fin_v2_benchmark_commodity_cooperative_equal",
+          "history_tokens": 50206,
+          "largest_faithful_tokens": 1138,
           "largest_checkpoint_block_index": 8,
           "checkpoints": [
             {
               "block_index": 0,
               "active_mandate_count": 1,
-              "faithful_text_tokens": 182,
-              "faithful_typed_tokens": 196,
-              "largest_faithful_tokens": 196
+              "faithful_text_tokens": 178,
+              "faithful_typed_tokens": 192,
+              "largest_faithful_tokens": 192
             },
             {
               "block_index": 1,
               "active_mandate_count": 2,
-              "faithful_text_tokens": 360,
-              "faithful_typed_tokens": 382,
-              "largest_faithful_tokens": 382
+              "faithful_text_tokens": 351,
+              "faithful_typed_tokens": 372,
+              "largest_faithful_tokens": 372
             },
             {
               "block_index": 2,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 365,
-              "faithful_typed_tokens": 387,
-              "largest_faithful_tokens": 387
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 526,
+              "faithful_typed_tokens": 554,
+              "largest_faithful_tokens": 554
             },
             {
               "block_index": 3,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 559,
-              "faithful_typed_tokens": 589,
-              "largest_faithful_tokens": 589
+              "active_mandate_count": 4,
+              "faithful_text_tokens": 703,
+              "faithful_typed_tokens": 739,
+              "largest_faithful_tokens": 739
             },
             {
               "block_index": 4,
-              "active_mandate_count": 2,
-              "faithful_text_tokens": 376,
-              "faithful_typed_tokens": 398,
-              "largest_faithful_tokens": 398
+              "active_mandate_count": 5,
+              "faithful_text_tokens": 878,
+              "faithful_typed_tokens": 922,
+              "largest_faithful_tokens": 922
             },
             {
               "block_index": 5,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 549,
-              "faithful_typed_tokens": 581,
-              "largest_faithful_tokens": 581
-            },
-            {
-              "block_index": 6,
-              "active_mandate_count": 3,
-              "faithful_text_tokens": 552,
-              "faithful_typed_tokens": 584,
-              "largest_faithful_tokens": 584
+              "active_mandate_count": 6,
+              "faithful_text_tokens": 1051,
+              "faithful_typed_tokens": 1103,
+              "largest_faithful_tokens": 1103
             },
             {
               "block_index": 8,
-              "active_mandate_count": 16,
-              "faithful_text_tokens": 2776,
-              "faithful_typed_tokens": 2926,
-              "largest_faithful_tokens": 2926
+              "active_mandate_count": 6,
+              "faithful_text_tokens": 1075,
+              "faithful_typed_tokens": 1138,
+              "largest_faithful_tokens": 1138
+            }
+          ]
+        },
+        {
+          "case_id": "fin_v2_benchmark_retirement_association_equal",
+          "history_tokens": 50410,
+          "largest_faithful_tokens": 1180,
+          "largest_checkpoint_block_index": 8,
+          "checkpoints": [
+            {
+              "block_index": 0,
+              "active_mandate_count": 1,
+              "faithful_text_tokens": 180,
+              "faithful_typed_tokens": 194,
+              "largest_faithful_tokens": 194
             },
             {
-              "block_index": 9,
+              "block_index": 1,
               "active_mandate_count": 2,
-              "faithful_text_tokens": 367,
-              "faithful_typed_tokens": 397,
-              "largest_faithful_tokens": 397
+              "faithful_text_tokens": 355,
+              "faithful_typed_tokens": 377,
+              "largest_faithful_tokens": 377
+            },
+            {
+              "block_index": 2,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 534,
+              "faithful_typed_tokens": 564,
+              "largest_faithful_tokens": 564
+            },
+            {
+              "block_index": 3,
+              "active_mandate_count": 4,
+              "faithful_text_tokens": 713,
+              "faithful_typed_tokens": 751,
+              "largest_faithful_tokens": 751
+            },
+            {
+              "block_index": 4,
+              "active_mandate_count": 5,
+              "faithful_text_tokens": 894,
+              "faithful_typed_tokens": 940,
+              "largest_faithful_tokens": 940
+            },
+            {
+              "block_index": 5,
+              "active_mandate_count": 6,
+              "faithful_text_tokens": 1075,
+              "faithful_typed_tokens": 1129,
+              "largest_faithful_tokens": 1129
+            },
+            {
+              "block_index": 8,
+              "active_mandate_count": 6,
+              "faithful_text_tokens": 1114,
+              "faithful_typed_tokens": 1180,
+              "largest_faithful_tokens": 1180
+            }
+          ]
+        },
+        {
+          "case_id": "fin_v2_benchmark_climate_treasury_equal",
+          "history_tokens": 50199,
+          "largest_faithful_tokens": 1150,
+          "largest_checkpoint_block_index": 8,
+          "checkpoints": [
+            {
+              "block_index": 0,
+              "active_mandate_count": 1,
+              "faithful_text_tokens": 178,
+              "faithful_typed_tokens": 192,
+              "largest_faithful_tokens": 192
+            },
+            {
+              "block_index": 1,
+              "active_mandate_count": 2,
+              "faithful_text_tokens": 357,
+              "faithful_typed_tokens": 379,
+              "largest_faithful_tokens": 379
+            },
+            {
+              "block_index": 2,
+              "active_mandate_count": 3,
+              "faithful_text_tokens": 538,
+              "faithful_typed_tokens": 568,
+              "largest_faithful_tokens": 568
+            },
+            {
+              "block_index": 3,
+              "active_mandate_count": 4,
+              "faithful_text_tokens": 713,
+              "faithful_typed_tokens": 751,
+              "largest_faithful_tokens": 751
+            },
+            {
+              "block_index": 4,
+              "active_mandate_count": 5,
+              "faithful_text_tokens": 891,
+              "faithful_typed_tokens": 937,
+              "largest_faithful_tokens": 937
+            },
+            {
+              "block_index": 5,
+              "active_mandate_count": 6,
+              "faithful_text_tokens": 1066,
+              "faithful_typed_tokens": 1120,
+              "largest_faithful_tokens": 1120
+            },
+            {
+              "block_index": 8,
+              "active_mandate_count": 6,
+              "faithful_text_tokens": 1084,
+              "faithful_typed_tokens": 1150,
+              "largest_faithful_tokens": 1150
             }
           ]
         }

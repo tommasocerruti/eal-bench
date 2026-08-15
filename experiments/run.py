@@ -130,6 +130,11 @@ def _parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--source-run", default="")
     parser.add_argument(
+        "--pressure-variant",
+        default="",
+        help="domain-registered pressure variant; defaults to the release profile",
+    )
+    parser.add_argument(
         "--resume-run",
         default="",
         help="continue the missing calls of an interrupted executor-only run",
