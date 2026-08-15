@@ -1,0 +1,343 @@
+{
+  "approved_matrix_cap_usd": 50.0,
+  "matrix_cost_usd": 37.28941403499999,
+  "remaining_under_matrix_cap_usd": 12.710585965000007,
+  "within_matrix_cap": true,
+  "controls_cost_usd": 4.301000415,
+  "successor_total_including_controls_usd": 41.59041444999999,
+  "routes": [
+    {
+      "writer_target": "nemotron_3_ultra_baseten",
+      "route": "writer",
+      "final_call_records": 792,
+      "provider_network_attempts": 1082,
+      "provider_reported_cost_usd": 0.0,
+      "rate_derived_cost_usd": 4.8697416,
+      "combined_cost_usd": 4.8697416,
+      "by_target": {
+        "deepseek_baseten": {
+          "call_records": 333,
+          "prompt_tokens": 706210,
+          "cached_tokens": 9104,
+          "completion_tokens": 306476,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 2.2808210000000004
+        },
+        "gptoss_baseten": {
+          "call_records": 260,
+          "prompt_tokens": 606802,
+          "cached_tokens": 281472,
+          "completion_tokens": 116604,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 0.11898219999999995
+        },
+        "nemotron_3_ultra_baseten": {
+          "call_records": 199,
+          "prompt_tokens": 2743104,
+          "cached_tokens": 0,
+          "completion_tokens": 343365,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 2.4699383999999998
+        }
+      }
+    },
+    {
+      "writer_target": "nemotron_3_ultra_baseten",
+      "route": "pressure",
+      "final_call_records": 520,
+      "provider_network_attempts": 520,
+      "provider_reported_cost_usd": 0.0,
+      "rate_derived_cost_usd": 2.769572044999999,
+      "combined_cost_usd": 2.769572044999999,
+      "by_target": {
+        "deepseek_baseten": {
+          "call_records": 260,
+          "prompt_tokens": 779006,
+          "cached_tokens": 45885,
+          "completion_tokens": 387031,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 2.629151744999999
+        },
+        "gptoss_baseten": {
+          "call_records": 260,
+          "prompt_tokens": 677258,
+          "cached_tokens": 539936,
+          "completion_tokens": 145389,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 0.14042030000000008
+        }
+      }
+    },
+    {
+      "writer_target": "kimi_baseten",
+      "route": "writer",
+      "final_call_records": 690,
+      "provider_network_attempts": 690,
+      "provider_reported_cost_usd": 0.0,
+      "rate_derived_cost_usd": 4.731494774999999,
+      "combined_cost_usd": 4.731494774999999,
+      "by_target": {
+        "deepseek_baseten": {
+          "call_records": 256,
+          "prompt_tokens": 612740,
+          "cached_tokens": 13831,
+          "completion_tokens": 278064,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 2.0117698749999993
+        },
+        "gptoss_baseten": {
+          "call_records": 256,
+          "prompt_tokens": 520556,
+          "cached_tokens": 312000,
+          "completion_tokens": 107611,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 0.10586110000000006
+        },
+        "kimi_baseten": {
+          "call_records": 178,
+          "prompt_tokens": 2000724,
+          "cached_tokens": 163520,
+          "completion_tokens": 178294,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 2.6138637999999994
+        }
+      }
+    },
+    {
+      "writer_target": "kimi_baseten",
+      "route": "pressure",
+      "final_call_records": 512,
+      "provider_network_attempts": 512,
+      "provider_reported_cost_usd": 0.0,
+      "rate_derived_cost_usd": 2.53927272,
+      "combined_cost_usd": 2.53927272,
+      "by_target": {
+        "deepseek_baseten": {
+          "call_records": 256,
+          "prompt_tokens": 684420,
+          "cached_tokens": 59008,
+          "completion_tokens": 376976,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 2.40864952
+        },
+        "gptoss_baseten": {
+          "call_records": 256,
+          "prompt_tokens": 589932,
+          "cached_tokens": 484032,
+          "completion_tokens": 143260,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 0.13062320000000005
+        }
+      }
+    },
+    {
+      "writer_target": "glm_5_2_baseten",
+      "route": "writer",
+      "final_call_records": 758,
+      "provider_network_attempts": 955,
+      "provider_reported_cost_usd": 0.0,
+      "rate_derived_cost_usd": 6.738432770000001,
+      "combined_cost_usd": 6.738432770000001,
+      "by_target": {
+        "deepseek_baseten": {
+          "call_records": 305,
+          "prompt_tokens": 737008,
+          "cached_tokens": 11222,
+          "completion_tokens": 287483,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 2.26493567
+        },
+        "glm_5_2_baseten": {
+          "call_records": 189,
+          "prompt_tokens": 2216816,
+          "cached_tokens": 369344,
+          "completion_tokens": 283684,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 4.351752000000001
+        },
+        "gptoss_baseten": {
+          "call_records": 264,
+          "prompt_tokens": 634556,
+          "cached_tokens": 354752,
+          "completion_tokens": 116579,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 0.1217451
+        }
+      }
+    },
+    {
+      "writer_target": "glm_5_2_baseten",
+      "route": "pressure",
+      "final_call_records": 528,
+      "provider_network_attempts": 861,
+      "provider_reported_cost_usd": 0.0,
+      "rate_derived_cost_usd": 2.8043977749999995,
+      "combined_cost_usd": 2.8043977749999995,
+      "by_target": {
+        "deepseek_baseten": {
+          "call_records": 264,
+          "prompt_tokens": 810920,
+          "cached_tokens": 5123,
+          "completion_tokens": 362002,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 2.6625965749999994
+        },
+        "gptoss_baseten": {
+          "call_records": 264,
+          "prompt_tokens": 706092,
+          "cached_tokens": 592224,
+          "completion_tokens": 142384,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 0.14180120000000002
+        }
+      }
+    },
+    {
+      "writer_target": "grok_4_3_openrouter",
+      "route": "writer",
+      "final_call_records": 690,
+      "provider_network_attempts": 697,
+      "provider_reported_cost_usd": 2.990392450000001,
+      "rate_derived_cost_usd": 1.9276076099999986,
+      "combined_cost_usd": 4.91800006,
+      "by_target": {
+        "deepseek_baseten": {
+          "call_records": 256,
+          "prompt_tokens": 512124,
+          "cached_tokens": 6986,
+          "completion_tokens": 272679,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 1.8288760099999986
+        },
+        "gptoss_baseten": {
+          "call_records": 258,
+          "prompt_tokens": 423436,
+          "cached_tokens": 311328,
+          "completion_tokens": 112776,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 0.09873159999999997
+        },
+        "grok_4_3_openrouter": {
+          "call_records": 176,
+          "prompt_tokens": 2021427,
+          "cached_tokens": 35456,
+          "completion_tokens": 200335,
+          "provider_reported_cost_usd": 2.990392450000001,
+          "rate_derived_cost_usd": 0.0
+        }
+      }
+    },
+    {
+      "writer_target": "grok_4_3_openrouter",
+      "route": "pressure",
+      "final_call_records": 512,
+      "provider_network_attempts": 513,
+      "provider_reported_cost_usd": 0.0,
+      "rate_derived_cost_usd": 2.36214086,
+      "combined_cost_usd": 2.36214086,
+      "by_target": {
+        "deepseek_baseten": {
+          "call_records": 256,
+          "prompt_tokens": 583804,
+          "cached_tokens": 33660,
+          "completion_tokens": 367705,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 2.2417446599999997
+        },
+        "gptoss_baseten": {
+          "call_records": 256,
+          "prompt_tokens": 492812,
+          "cached_tokens": 408992,
+          "completion_tokens": 142230,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 0.12039620000000006
+        }
+      }
+    },
+    {
+      "writer_target": "qwen_plus_0728_openrouter",
+      "route": "writer",
+      "final_call_records": 717,
+      "provider_network_attempts": 736,
+      "provider_reported_cost_usd": 0.7011825600000001,
+      "rate_derived_cost_usd": 2.2123497649999995,
+      "combined_cost_usd": 2.9135323249999994,
+      "by_target": {
+        "deepseek_baseten": {
+          "call_records": 270,
+          "prompt_tokens": 616100,
+          "cached_tokens": 4729,
+          "completion_tokens": 297059,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 2.0982365649999997
+        },
+        "gptoss_baseten": {
+          "call_records": 268,
+          "prompt_tokens": 519752,
+          "cached_tokens": 310624,
+          "completion_tokens": 124276,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 0.11411319999999994
+        },
+        "qwen_plus_0728_openrouter": {
+          "call_records": 179,
+          "prompt_tokens": 2239902,
+          "cached_tokens": 0,
+          "completion_tokens": 152318,
+          "provider_reported_cost_usd": 0.7011825600000001,
+          "rate_derived_cost_usd": 0.0
+        }
+      }
+    },
+    {
+      "writer_target": "qwen_plus_0728_openrouter",
+      "route": "pressure",
+      "final_call_records": 537,
+      "provider_network_attempts": 569,
+      "provider_reported_cost_usd": 0.0,
+      "rate_derived_cost_usd": 2.642829104999999,
+      "combined_cost_usd": 2.642829104999999,
+      "by_target": {
+        "deepseek_baseten": {
+          "call_records": 269,
+          "prompt_tokens": 691144,
+          "cached_tokens": 11517,
+          "completion_tokens": 381412,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 2.5115347049999985
+        },
+        "gptoss_baseten": {
+          "call_records": 268,
+          "prompt_tokens": 592384,
+          "cached_tokens": 462144,
+          "completion_tokens": 144112,
+          "provider_reported_cost_usd": 0.0,
+          "rate_derived_cost_usd": 0.13129440000000003
+        }
+      }
+    }
+  ],
+  "pricing_usd_per_million_tokens": {
+    "gptoss_baseten": {
+      "input": 0.1,
+      "output": 0.5
+    },
+    "deepseek_baseten": {
+      "input": 1.74,
+      "cached_input": 0.145,
+      "output": 3.48
+    },
+    "nemotron_3_ultra_baseten": {
+      "input": 0.6,
+      "output": 2.4
+    },
+    "kimi_baseten": {
+      "input": 0.95,
+      "output": 4.0
+    },
+    "glm_5_2_baseten": {
+      "input": 1.4,
+      "output": 4.4
+    }
+  }
+}

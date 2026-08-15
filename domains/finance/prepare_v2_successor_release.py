@@ -28,14 +28,17 @@ def build_release(domain: Any) -> dict[str, Any]:
     )
     matrix_authorized = matrix_estimate.get("status") == "approved"
     run_plan_path = PACKAGE_DIR / (
-        "v2_successor_matrix_run_plan.json"
-        if matrix_authorized
-        else "v2_successor_run_plan.json"
+        "v2_successor_matrix_run_plan.json" if matrix_authorized else "v2_successor_run_plan.json"
     )
     run_plan = json.loads(run_plan_path.read_text(encoding="utf-8"))
     pricing_path = PACKAGE_DIR / run_plan["pricing_estimate"]["artifact"]
     results_root = PACKAGE_DIR.parents[1] / "results" / "finance"
     controls_report_path = results_root / "finance_v2_successor__controls_report.json"
+    matrix_report_path = results_root / "finance_v2_successor__matrix_report.json"
+    matrix_complete = False
+    if matrix_report_path.is_file():
+        matrix_report = json.loads(matrix_report_path.read_text(encoding="utf-8"))
+        matrix_complete = matrix_report.get("status") == "completed"
     result_artifacts = {}
     if controls_report_path.is_file():
         result_artifacts["controls_report"] = {
@@ -46,6 +49,32 @@ def build_release(domain: Any) -> dict[str, Any]:
         result_artifacts["matrix_estimate"] = {
             "path": "v2_successor_matrix_estimate.json",
             "sha256": file_hash(matrix_estimate_path),
+        }
+    for name in (
+        "matrix_run_index",
+        "matrix_report",
+        "matrix_results.md",
+        "actual_cost",
+        "provider_failures",
+        "route_summaries",
+        "transfer_agreement",
+        "condition_results",
+        "witness_repair_report",
+    ):
+        filename = f"finance_v2_successor__{name}"
+        if "." not in name:
+            filename += ".json"
+        artifact_path = results_root / filename
+        if artifact_path.is_file():
+            result_artifacts[name.replace(".md", "")] = {
+                "path": f"../../results/finance/{filename}",
+                "sha256": file_hash(artifact_path),
+            }
+    analysis_implementation = PACKAGE_DIR / "analyze_v2_successor_matrix.py"
+    if analysis_implementation.is_file():
+        result_artifacts["matrix_analysis_implementation"] = {
+            "path": "analyze_v2_successor_matrix.py",
+            "sha256": file_hash(analysis_implementation),
         }
     return {
         "schema_version": "finance_v2_frontier_successor_release_v1",
@@ -127,9 +156,7 @@ def build_release(domain: Any) -> dict[str, Any]:
                 "artifact": pricing_path.name,
                 "sha256": file_hash(pricing_path),
                 "status": "approved",
-                "approved_cap_usd": float(
-                    run_plan["pricing_estimate"]["approved_cap_usd"]
-                ),
+                "approved_cap_usd": float(run_plan["pricing_estimate"]["approved_cap_usd"]),
             },
         },
         "review": {
@@ -139,7 +166,9 @@ def build_release(domain: Any) -> dict[str, Any]:
         },
         "results": {
             "status": (
-                "controls_passed_matrix_authorized"
+                "matrix_completed"
+                if matrix_complete
+                else "controls_passed_matrix_authorized"
                 if controls_report_path.is_file() and matrix_authorized
                 else "controls_passed_matrix_approval_pending"
                 if controls_report_path.is_file()

@@ -90,7 +90,7 @@
     "independent_blinded_review": "not_collected_for_successor"
   },
   "results": {
-    "status": "controls_passed_matrix_authorized",
+    "status": "matrix_completed",
     "outcome_based_resampling": false,
     "artifacts": {
       "controls_report": {
@@ -100,6 +100,46 @@
       "matrix_estimate": {
         "path": "v2_successor_matrix_estimate.json",
         "sha256": "3ed1ee02a3de095a149790f9a3bb05027e654f7ef4e25e8f9be62b603f2cbbda"
+      },
+      "matrix_run_index": {
+        "path": "../../results/finance/finance_v2_successor__matrix_run_index.json",
+        "sha256": "1484654aef99240fd8cf9d5b4f1da664c1a0a6646f00fcff0aa47d6a35f01200"
+      },
+      "matrix_report": {
+        "path": "../../results/finance/finance_v2_successor__matrix_report.json",
+        "sha256": "664a735b30c68af230f8975384f81b0e156ebff8a605e952bdeef2cc881a8808"
+      },
+      "matrix_results": {
+        "path": "../../results/finance/finance_v2_successor__matrix_results.md",
+        "sha256": "b3a8dfa0cf24d3ea0002de7ebd3a709317f909c24082bd6cc824121a0e0db465"
+      },
+      "actual_cost": {
+        "path": "../../results/finance/finance_v2_successor__actual_cost.json",
+        "sha256": "f079c9dbb0f80a71d89ec32d376531a31ef4cb633decc0e5560018792df7579c"
+      },
+      "provider_failures": {
+        "path": "../../results/finance/finance_v2_successor__provider_failures.json",
+        "sha256": "e621daa93f7ca719c564c231c0168d33bd6296a507d8790d9cb59da289a9099c"
+      },
+      "route_summaries": {
+        "path": "../../results/finance/finance_v2_successor__route_summaries.json",
+        "sha256": "6764724d68d5f3507f6f0cb5002d700b9ece0493b367bb89f136f07d06b1bf77"
+      },
+      "transfer_agreement": {
+        "path": "../../results/finance/finance_v2_successor__transfer_agreement.json",
+        "sha256": "31fcbdfe98c433f1b1d1fee316b95a4effdbf653d531b05fdf992bfcdd25b7ea"
+      },
+      "condition_results": {
+        "path": "../../results/finance/finance_v2_successor__condition_results.json",
+        "sha256": "7c64778353797a3df06c24b594ce929e4df13ba28b866d4ab052b379a26fb399"
+      },
+      "witness_repair_report": {
+        "path": "../../results/finance/finance_v2_successor__witness_repair_report.json",
+        "sha256": "c249b9eb2faeccfb2cc77d63a619d098488c4e7b5b294963d7c3312eb78844b9"
+      },
+      "matrix_analysis_implementation": {
+        "path": "analyze_v2_successor_matrix.py",
+        "sha256": "a6e4f9572c9e870fec3632df5e96a9abe77588d9170d3860fd9ec65c7cbe6f23"
       }
     }
   }

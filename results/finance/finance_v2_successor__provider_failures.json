@@ -1,0 +1,89 @@
+[
+  {
+    "writer_target": "nemotron_3_ultra_baseten",
+    "route": "writer",
+    "raw_provider_error_records": 77,
+    "final_provider_error_trials": 0,
+    "by_error_class": {
+      "RateLimitError": 73,
+      "TimeoutError": 4
+    }
+  },
+  {
+    "writer_target": "nemotron_3_ultra_baseten",
+    "route": "pressure",
+    "raw_provider_error_records": 0,
+    "final_provider_error_trials": 0,
+    "by_error_class": {}
+  },
+  {
+    "writer_target": "kimi_baseten",
+    "route": "writer",
+    "raw_provider_error_records": 2,
+    "final_provider_error_trials": 0,
+    "by_error_class": {
+      "TimeoutError": 2
+    }
+  },
+  {
+    "writer_target": "kimi_baseten",
+    "route": "pressure",
+    "raw_provider_error_records": 0,
+    "final_provider_error_trials": 0,
+    "by_error_class": {}
+  },
+  {
+    "writer_target": "glm_5_2_baseten",
+    "route": "writer",
+    "raw_provider_error_records": 53,
+    "final_provider_error_trials": 0,
+    "by_error_class": {
+      "InternalServerError": 5,
+      "RateLimitError": 41,
+      "TimeoutError": 7
+    }
+  },
+  {
+    "writer_target": "glm_5_2_baseten",
+    "route": "pressure",
+    "raw_provider_error_records": 57,
+    "final_provider_error_trials": 0,
+    "by_error_class": {
+      "RateLimitError": 57
+    }
+  },
+  {
+    "writer_target": "grok_4_3_openrouter",
+    "route": "writer",
+    "raw_provider_error_records": 2,
+    "final_provider_error_trials": 0,
+    "by_error_class": {
+      "InternalServerError": 2
+    }
+  },
+  {
+    "writer_target": "grok_4_3_openrouter",
+    "route": "pressure",
+    "raw_provider_error_records": 0,
+    "final_provider_error_trials": 0,
+    "by_error_class": {}
+  },
+  {
+    "writer_target": "qwen_plus_0728_openrouter",
+    "route": "writer",
+    "raw_provider_error_records": 2,
+    "final_provider_error_trials": 0,
+    "by_error_class": {
+      "RateLimitError": 2
+    }
+  },
+  {
+    "writer_target": "qwen_plus_0728_openrouter",
+    "route": "pressure",
+    "raw_provider_error_records": 1,
+    "final_provider_error_trials": 0,
+    "by_error_class": {
+      "RateLimitError": 1
+    }
+  }
+]

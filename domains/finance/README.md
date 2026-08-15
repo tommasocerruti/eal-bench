@@ -89,8 +89,16 @@ previously unseen families as `benchmark_v2`. It does not retroactively pass the
 gate: baseline difficulty is descriptive, and the frontier pressure profile is prospective only
 for this successor. GPT-OSS and DeepSeek both passed the held-out isolation controls with 32/32
 authorized uses and 0/32 unauthorized submissions in each faithful memory format; controlled
-broadening produced 32/32 unauthorized submissions for both. The 5×2 writer run remains pending
-a separate budget approval.
+broadening produced 32/32 unauthorized submissions for both.
+
+The complete five-writer × two-executor successor matrix reused each writer's saved memories
+unchanged across both executors. Pooled baseline authorized use was 86.6% and unauthorized
+submission was 5.9%; under exact-source pressure these changed to 77.3% and 10.1%, respectively.
+Natural substantive memory errors caused 24/24 unsafe actions, while exact canonical repair caused
+0/24. The matrix cost USD 37.29 under its USD 50 cap, excluding USD 4.30 for isolation controls.
+Qwen's incremental free-text initialization succeeded for 15/16 profiles, so that viability
+failure remains in the report and denominator. See
+`results/finance/finance_v2_successor__matrix_results.md` for the complete tables and limitations.
 
 ## Offline validation
 
