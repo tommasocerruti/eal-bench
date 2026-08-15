@@ -303,23 +303,34 @@ def validate_executor_only_resume(
         pressure_specs=plan.pressure_specs,
     )
     tools = list(model_visible_tools(domain, presentation))
-    completed: list[str] = []
-    seen: set[str] = set()
+    grouped: dict[str, list[dict[str, Any]]] = {}
     for row in calls:
         call_id = row.get("call_id")
         if not isinstance(call_id, str) or not call_id:
             raise ValueError("resume call log contains a missing call ID")
-        if call_id in seen:
-            raise ValueError(f"duplicate resume call ID: {call_id}")
-        seen.add(call_id)
         expected = planned.get(call_id)
         if expected is None:
             raise ValueError(f"saved call is outside the frozen plan: {call_id}")
         _validate_saved_call(row, expected, tools=tools)
-        completed.append(call_id)
-    missing = tuple(call_id for call_id in planned if call_id not in seen)
+        grouped.setdefault(call_id, []).append(row)
+    completed: list[str] = []
+    for call_id, rows in grouped.items():
+        successes = [row for row in rows if row.get("error") is None]
+        if len(successes) > 1:
+            raise ValueError(f"resume repeats a successful logical call: {call_id}")
+        if successes:
+            completed.append(call_id)
+    missing = tuple(call_id for call_id in planned if call_id not in completed)
     if not missing and require_missing:
-        raise ValueError("resume run has no missing executor calls")
+        recoverable_finalization = (
+            manifest.get("status") == "failed"
+            and isinstance(manifest.get("technical_continuation"), Mapping)
+            and str(manifest.get("error") or "").startswith(
+                "ValueError: duplicate resume call ID:"
+            )
+        )
+        if not recoverable_finalization:
+            raise ValueError("resume run has no missing executor calls")
 
     expected_missing = options.get("expected_missing_calls")
     if expected_missing is not None and int(expected_missing) != len(missing):
