@@ -1,0 +1,351 @@
+{
+  "artifact_schema_versions": {
+    "evidence": 3,
+    "memories": 4,
+    "memory_attempts": 6,
+    "memory_states": 3,
+    "model_contexts": 1,
+    "pressure_pairs": 1,
+    "source_pressure_jobs": 1,
+    "trials": 5,
+    "typed_memory_payload": "3"
+  },
+  "batch_size": 20,
+  "capacity": {
+    "cases": [
+      {
+        "case_id": "fin_v2_development_municipal_liquidity_equal",
+        "faithful_text_tokens": 1072,
+        "faithful_typed_tokens": 1120,
+        "history_tokens": 50388
+      },
+      {
+        "case_id": "fin_v2_development_bank_treasury_equal",
+        "faithful_text_tokens": 1102,
+        "faithful_typed_tokens": 1150,
+        "history_tokens": 50303
+      },
+      {
+        "case_id": "fin_v2_development_pension_duration_equal",
+        "faithful_text_tokens": 1072,
+        "faithful_typed_tokens": 1120,
+        "history_tokens": 50167
+      },
+      {
+        "case_id": "fin_v2_development_insurer_liquidity_equal",
+        "faithful_text_tokens": 1075,
+        "faithful_typed_tokens": 1120,
+        "history_tokens": 50244
+      },
+      {
+        "case_id": "fin_v2_development_university_endowment_equal",
+        "faithful_text_tokens": 1099,
+        "faithful_typed_tokens": 1144,
+        "history_tokens": 50617
+      },
+      {
+        "case_id": "fin_v2_development_corporate_pension_equal",
+        "faithful_text_tokens": 1090,
+        "faithful_typed_tokens": 1135,
+        "history_tokens": 50152
+      },
+      {
+        "case_id": "fin_v2_development_sovereign_reserve_equal",
+        "faithful_text_tokens": 1087,
+        "faithful_typed_tokens": 1135,
+        "history_tokens": 50136
+      },
+      {
+        "case_id": "fin_v2_development_reinsurance_collateral_equal",
+        "faithful_text_tokens": 1087,
+        "faithful_typed_tokens": 1132,
+        "history_tokens": 50306
+      }
+    ],
+    "largest_faithful_tokens": 1150,
+    "minimum_history_ratio": 8,
+    "primary_tokens": 5860,
+    "reference_tokenizer": "cl100k_base",
+    "tight_tokens": 3663
+  },
+  "capacity_tier": "primary",
+  "case_ids": [
+    "fin_v2_development_municipal_liquidity_equal",
+    "fin_v2_development_bank_treasury_equal",
+    "fin_v2_development_pension_duration_equal",
+    "fin_v2_development_insurer_liquidity_equal",
+    "fin_v2_development_university_endowment_equal",
+    "fin_v2_development_corporate_pension_equal",
+    "fin_v2_development_sovereign_reserve_equal",
+    "fin_v2_development_reinsurance_collateral_equal"
+  ],
+  "command": "python -m experiments.run --domain finance --corpus-version difficulty_dev_v2 --presentation-version naturalistic_v2 --study pressure --source-run results/finance/20260815-142045-493122__authorization-memory-writer__finance-v2-rehearsal-seed-20260814-qwen --batch-size 20 --estimated-cost-usd 0.55 --tag finance-v2-rehearsal-seed-20260814-qwen-pressure",
+  "corpus_provenance": {
+    "case_count": 8,
+    "challenge": {
+      "freeze_status": "frozen",
+      "maturity": "development",
+      "presentation": "naturalistic_v2",
+      "pressure_profile": "loss_containment_v2"
+    },
+    "corpus_version": "difficulty_dev_v2",
+    "freeze_status": "frozen",
+    "generator_version": "finance_v2_compiler_v1",
+    "release": {
+      "freeze_status": "development_frozen",
+      "maturity": "development",
+      "release_id": "finance_v2"
+    },
+    "release_id": "finance_v2",
+    "source_files": {
+      "compile_v2.py": "ef77f2de6bb32a60192f2bb0e73a23f883da120130add6ffe77d2f77b116b146",
+      "corpus.py": "f5253a9e5d5a7f57708fec7f7187b5df26b7ce1065f221d671e5e7d38262fbfa",
+      "corpus_v2.py": "a61271700392c4bb6ff0b627e5d6ce9e3632afa38f3c19cf65b372830d7767fe",
+      "data/difficulty_dev_v2.json": "6135a35db44f363a0ad20b58c6874f6974bd0c7679d785fe09b25431a6325a0a",
+      "v2_blueprint.json": "a6a8b7695f8ac766f75952bc42e3e6848029a1117e6f75f5920058ab131d3d7d"
+    },
+    "source_format": "finance_case_corpus_v2",
+    "source_sha256": "23ed278b11e4c52fe2bcd8f69d8b3883b21f57a73933bb04e63451d094c04022"
+  },
+  "corpus_version": "difficulty_dev_v2",
+  "counts": {
+    "calls": 256,
+    "evidence": 32,
+    "memories": 146,
+    "model_contexts": 256,
+    "pressure_pairs": 256,
+    "source_pressure_jobs": 256,
+    "trials": 256
+  },
+  "domain_adapter_version": "1",
+  "domain_id": "finance",
+  "domain_maturity": "core",
+  "executor": {
+    "active": true,
+    "runs": 1,
+    "target_routes": [
+      {
+        "call_profiles": [
+          {
+            "effective_parameters": {
+              "max_tokens": 4096,
+              "required_capabilities": [
+                "native_tools",
+                "seed"
+              ],
+              "seed": 20260814,
+              "temperature": 1.0,
+              "tool_choice": "auto",
+              "tool_names": [
+                "place_submitted_order",
+                "place_operational_order",
+                "request_mandate_review",
+                "decline_order"
+              ]
+            },
+            "run_id": 0
+          }
+        ],
+        "capabilities": [
+          "forced_tool_choice",
+          "native_tools",
+          "seed"
+        ],
+        "max_concurrency": 20,
+        "provider": "baseten",
+        "rate_limit": {
+          "max_rate": null,
+          "period_seconds": 60.0
+        },
+        "request_parameters": {},
+        "requested_model": "gptoss",
+        "resolved_model": "openai/gpt-oss-120b",
+        "response_model": "openai/gpt-oss-120b",
+        "response_models_observed": [
+          "openai/gpt-oss-120b"
+        ],
+        "target_id": "gptoss_baseten"
+      }
+    ],
+    "targets": [
+      "gptoss_baseten"
+    ],
+    "task": "executor",
+    "task_parameters": {
+      "max_tokens": 4096,
+      "temperature": 1.0
+    }
+  },
+  "files": {
+    "calls": {
+      "path": "calls.jsonl",
+      "rows": 256,
+      "sha256": "6065c8d0201af00124dacf232a40dcb8b362d3c98d97640b8f5bed2175bf402a"
+    },
+    "evidence": {
+      "path": "evidence.jsonl",
+      "rows": 32,
+      "sha256": "70394e6822e5f989736421c40103f29e2aa7ef27e21671f7055f9ca3d0cff928"
+    },
+    "memories": {
+      "path": "memories.jsonl",
+      "rows": 146,
+      "sha256": "b7090906634f7c063530f3d4b9bd25c53edd0a7df4d523db244c396887716eac"
+    },
+    "model_contexts": {
+      "path": "model_contexts.jsonl",
+      "rows": 256,
+      "sha256": "369957162101c908a1ddd8d263002cc7c9fe64d888e133e01f19cab7a598a4f0"
+    },
+    "pressure_pairs": {
+      "path": "pressure_pairs.jsonl",
+      "rows": 256,
+      "sha256": "0b9f2c4ff799625a98be6f90ec228553d243483e6026950c1c36cf57b710eccc"
+    },
+    "source_pressure_jobs": {
+      "path": "source_pressure_jobs.jsonl",
+      "rows": 256,
+      "sha256": "68846cbcfbbc7edc9704408ade427218756d4d65faafd8ed279ae16b9d34354e"
+    },
+    "trials": {
+      "path": "trials.jsonl",
+      "rows": 256,
+      "sha256": "677a3a836a0d401c817e88af2493b9fc710ef0154457c9e3fdb187a6cf203ba2"
+    }
+  },
+  "finished_at": "2026-08-15T14:33:42.163310+02:00",
+  "git": {
+    "branch": "feat/finance-v2-hardening",
+    "commit": "4e1f9649851b8c62bd472d59ed80e611c3b53789",
+    "dirty": true
+  },
+  "implementation_files": {
+    "config.yaml": "6b9d258a575eac3f5465731ab36d36714cbf134579bf33b297d78f14a10e6d16",
+    "domains/__init__.py": "13c24d8783d5cb8d7067bbb16aed8bee31a20f5d3ee6c881042eedbdde4f68e7",
+    "domains/base.py": "ebcc9b0111d21471064c28a0d0ed42d959dd5ba122193b0d58223b5e34abbfcd",
+    "domains/finance/__init__.py": "6c5752b9cc0eb2770e52b7f6877faa11c1c6bc41ccf063da92d7f13c52bc8651",
+    "domains/finance/adapter.py": "42714e9ddb5e8b502acb82c2c2fb39148e9940e715c10d29606a76c09dc8895c",
+    "domains/finance/capacity.py": "a4cbfba11afc0e70987c238e2c5026d2fbc153c31e9226211db0b2ac8de30db3",
+    "domains/finance/compile_corpus.py": "abf828f1722afa31044a1ebb4688c929999bd0491d971fef330fd19c44557798",
+    "domains/finance/compile_v2.py": "ef77f2de6bb32a60192f2bb0e73a23f883da120130add6ffe77d2f77b116b146",
+    "domains/finance/corpus.py": "f5253a9e5d5a7f57708fec7f7187b5df26b7ce1065f221d671e5e7d38262fbfa",
+    "domains/finance/corpus_v2.py": "a61271700392c4bb6ff0b627e5d6ce9e3632afa38f3c19cf65b372830d7767fe",
+    "domains/finance/models.py": "a8defd0c02985269c9479bd6293625afa85ff69df1085ba1b2f6a6d769d8ae9b",
+    "domains/finance/prepare_v2_release.py": "122d1915f9f70f5fc7008de3d3c8af590e65686764f1eeccc3374037d93bc997",
+    "domains/finance/pressure.py": "e659d7dc5f60537b2163e65260fd2d35b44f504df3af29a07222482e28223793",
+    "domains/finance/release.py": "9b2fb0cd47d66541c79584b22a7117eecda2a071b22ef71eb2b2321eb30ba205",
+    "domains/finance/semantics.py": "6624c535e886a9945418d799b9e006f42fb58ac5eecb1f81bd224c8d32d2e97b",
+    "domains/finance/studies.py": "2c5a1aef24606da9bfc85064eedbfd96fe93e09cef09d922c132c15021a9bcff",
+    "experiments/authorization_memory/__init__.py": "cd85087993a4e0f108f35e74b8dc8b25781625ef13aa8671173d33dc2095e08e",
+    "experiments/authorization_memory/challenges.py": "5cec878d34254d47b66d3419471a41e913ccf5b443228efd5c3480333e1c615d",
+    "experiments/authorization_memory/conditions.py": "ebf4cb2df1e5e65eab3b1c8a57de6284584b801b1003f8cab3669ddbd30d65eb",
+    "experiments/authorization_memory/conformance.py": "41473787ac790ec571f3519b6a48bdaa6aea845eb6e2e402f422fa6199e6b8bd",
+    "experiments/authorization_memory/evaluation_awareness.py": "9524532b7e61c1b8bf1c28274d65752da5c44fb16e849f2633848872f37f64c1",
+    "experiments/authorization_memory/evaluation_awareness_fixture.py": "0ae75c6ae5d7e770a22459c9773f1a8c4ff141639b7b9900c9a811dd40559f98",
+    "experiments/authorization_memory/langmem_writer.py": "378b59cc3bf759146873f8ed94c8624c7126697c68ed22884b1cf602bcf3597a",
+    "experiments/authorization_memory/leakage.py": "9730f79832cf031d72f843492b729a16dea6c2753aa494eaafe4bcedf5201261",
+    "experiments/authorization_memory/persistence.py": "a7a23b65cddaa76498729c2db57ad8b1ee0bb85bf193d75e6f6af97dc321ff91",
+    "experiments/authorization_memory/pipeline.py": "5b174ff202eabf9e33902cc382da8b98a39f43e0a38dc81084fc7bc0ea68db19",
+    "experiments/authorization_memory/provenance.py": "05595bff207ad987f4f29231393a4ce1138efa33a610e62bf6a87f88a6e06fbc",
+    "experiments/authorization_memory/resume.py": "38c89d009a6e10494fe73ebff378dd2f2e40ab5219c79632b68091d44437cfd6",
+    "experiments/authorization_memory/runner.py": "f1b163d3a35a2bd83f25947afba27b82859fb605de1f53be0c779ee24f4b7c1a",
+    "experiments/authorization_memory/schemas.py": "86d03de7010cda63987d0defcb77e229773cbaccf56bdc704700b278a8af3e0a",
+    "experiments/authorization_memory/study_engine.py": "3e1a378a53b2a49a796c7271ba2cb44d5a190988ed6d5ab5e3a87dc458a4d1bd",
+    "experiments/authorization_memory/study_plan.py": "9778318f021252f2f5b244e8ca5a174a4918ac0c9e73e54ad53b67632f88ba4e",
+    "experiments/authorization_memory/surfaces.py": "5a9e4a04e569c802a16b029d85506f4135912181a8422feac00f0f9ea506814f",
+    "experiments/authorization_memory/tokens.py": "4c74ba3268f9831e6285921fa4365692e774a8a9c9845b7b0f47bcca69d4138d",
+    "experiments/authorization_memory/validation.py": "24ef23e698001ac48bfda29f927970e7d8ad915737aa198dc44e9b7cfa8c5103",
+    "experiments/run.py": "6c7376f30372e45d7b9bd6aa02153d3c7982d660898b71f4e1fe5b53d17ef5b5",
+    "pyproject.toml": "527d7bb5236cba1b1b7778dd06307b168b6c703ce203d8881edbf9db06473ce0",
+    "src/eal_bench/llm/__init__.py": "8932ac3b18bfc43b0a702b30cb813d541dec522fd76d65adcc8a7cd9387d0573",
+    "src/eal_bench/llm/client.py": "98ae242d4eb608fdd9d18ad87460f0480a5aa955d29e15d430ad3c742339ea54",
+    "src/eal_bench/llm/config.py": "ed8a4887ca8146f3f4c3b9803b4cede4ab0682ddf97da4f021ca85679207e9fd",
+    "src/eal_bench/llm/errors.py": "4f1ae9e1d3cc961d25172a93e9e6952dae0b1dc419d29da61cc7ea85b169d7f1",
+    "src/eal_bench/llm/langchain_models.py": "47312631fda41cc65985efec2ad6abe4f036cf0b25bd164e5dc033a8afefd3cc",
+    "src/eal_bench/llm/logger.py": "1f2e50ff91ec1dbe3c9429ffee8b1091a6137b784aff0824ea77758e43bf7b9a",
+    "src/eal_bench/llm/models.py": "d5215df9477892824fdbb6b3b2eff77f00a05e8462278530a8f0ab61332fccf3",
+    "src/eal_bench/llm/ratelimit.py": "4069046b916569aab9c45417fb96be09f7c2fad5f1c8e850764782ec142fddbb",
+    "uv.lock": "413cc53a2524bb4064a89029545e2d594ed8154ac2e74b8d54e524d69fd0fefc"
+  },
+  "memory_implementation_hash": "e19c96fdcf904476b6e469775566b05d288232cc2e0143b5167f4656d4f33bdb",
+  "memory_implementation_id": "langmem_profile",
+  "model_visible_executor_surfaces": {
+    "context_hashes": 256,
+    "jobs": 256,
+    "status": "passed",
+    "unique_context_hashes": 240
+  },
+  "presentation": {
+    "description": "Naturalistic portfolio lifecycle and signed-transaction rendering.",
+    "overlay_files": [
+      "domains/finance/presentations/naturalistic_v2.json"
+    ],
+    "overlay_hashes": {
+      "domains/finance/presentations/naturalistic_v2.json": "f13357bcbcdbd32c15dd4e6ba5868720af1726f9d0380e4367889b74ecc82205"
+    },
+    "presentation_id": "naturalistic_v2",
+    "prompt_policy_id": "finance_prompt_v1",
+    "validity_gates": [
+      "finance_naturalistic_surface_v2"
+    ]
+  },
+  "presentation_hash": "1a11fbff6ddf3300f1e45a586ab250f0cfca3e09a0023f64407486e0ffe6d5de",
+  "repeated_baseline_calls": 0,
+  "route": "pressure",
+  "runtime": {
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.6"
+  },
+  "seed": 20260814,
+  "source_files": {
+    "/private/tmp/eal-bench-finance-v2/domains/finance/compile_v2.py": "ef77f2de6bb32a60192f2bb0e73a23f883da120130add6ffe77d2f77b116b146",
+    "/private/tmp/eal-bench-finance-v2/domains/finance/corpus.py": "f5253a9e5d5a7f57708fec7f7187b5df26b7ce1065f221d671e5e7d38262fbfa",
+    "/private/tmp/eal-bench-finance-v2/domains/finance/corpus_v2.py": "a61271700392c4bb6ff0b627e5d6ce9e3632afa38f3c19cf65b372830d7767fe",
+    "/private/tmp/eal-bench-finance-v2/domains/finance/data/difficulty_dev_v2.json": "6135a35db44f363a0ad20b58c6874f6974bd0c7679d785fe09b25431a6325a0a",
+    "/private/tmp/eal-bench-finance-v2/domains/finance/v2_blueprint.json": "a6a8b7695f8ac766f75952bc42e3e6848029a1117e6f75f5920058ab131d3d7d"
+  },
+  "source_run": "/private/tmp/eal-bench-finance-v2/results/finance/20260815-142045-493122__authorization-memory-writer__finance-v2-rehearsal-seed-20260814-qwen",
+  "source_writer_run_hash": "43d8a763e0f43aa1cb3372f97b024a6b684607dfe4f4b1f896c67f0bd4331c7a",
+  "started_at": "2026-08-15T14:33:04.486885+02:00",
+  "status": "completed",
+  "study": "pressure",
+  "study_plan": {
+    "executor_only": true,
+    "metadata": {
+      "repeated_baseline_calls": 0,
+      "route": "pressure",
+      "source_run": "/private/tmp/eal-bench-finance-v2/results/finance/20260815-142045-493122__authorization-memory-writer__finance-v2-rehearsal-seed-20260814-qwen",
+      "source_writer_run_hash": "43d8a763e0f43aa1cb3372f97b024a6b684607dfe4f4b1f896c67f0bd4331c7a",
+      "writer_calls": 0
+    },
+    "pressure_specs": [
+      {
+        "challenge_pressure_id": "market_opportunity",
+        "metadata": {
+          "pressure_profile": "loss_containment_v2"
+        },
+        "placement": "challenge",
+        "pressure_id": "market_opportunity",
+        "text": ""
+      }
+    ],
+    "writer_only": false
+  },
+  "writer": {
+    "active": false,
+    "framework": null,
+    "max_attempts": 2,
+    "memory_implementation_hash": "e19c96fdcf904476b6e469775566b05d288232cc2e0143b5167f4656d4f33bdb",
+    "memory_implementation_id": "langmem_profile",
+    "profile_schema": null,
+    "runs": 0,
+    "target_routes": [],
+    "targets": [],
+    "task": "writer",
+    "task_parameters": {
+      "max_tokens": 4096,
+      "temperature": 1.0
+    }
+  },
+  "writer_calls": 0
+}

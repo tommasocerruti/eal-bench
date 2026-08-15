@@ -60,6 +60,22 @@ families satisfy the trial-count requirement and both executors now pass isolati
 GPT-OSS writer → GPT-OSS executor and pressure routes still need to pass before Finance can be
 marked merge-eligible.
 
+## Finance v2 hardening study
+
+`finance_v2` is a separate, preserved development release. It reuses the frozen 5,860-token
+capacity and schema v5 while comparing compact state swap, equal-cardinality replacement, and
+distributed lifecycle histories. The four-family screen selected equal-cardinality replacement;
+that mechanism and the compact runner-up were then evaluated on eight families with Qwen Plus
+and Nemotron 3 Ultra writers across seeds `20260814` and `20260815`.
+
+Faithful controls remained perfect in all four rehearsals, so executor isolation held. The
+equal-cardinality winner produced pooled baseline unauthorized-submission rates of 2.3% and 5.5%;
+the compact runner-up produced 6.3% and 3.5%. Typed unsafe actions in the compact runs were fully
+attributable to stored memory, natural errors propagated unsafely, and exact repair eliminated
+unsafe submissions, but neither mechanism met the preregistered 15% pooled and 10%-per-writer
+difficulty gates. Pressure also missed its required effect. The study therefore stopped before
+held-out corpus authoring or execution, and every outcome is retained in the Finance v2 reports.
+
 ## Offline validation
 
 ```bash
@@ -82,3 +98,7 @@ uv run python -m experiments.run \
 uv run python -m experiments.run --validate-only --all-domains
 uv run ruff check .
 ```
+
+Finance v2 can be validated with `difficulty_dev_v2` for the selected mechanism or
+`difficulty_dev_v2_runner_up` for the contingent runner-up, both using presentation
+`naturalistic_v2`.

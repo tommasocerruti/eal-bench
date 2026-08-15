@@ -1,0 +1,55 @@
+{
+  "schema_version": "finance_v2_screen_run_index_v1",
+  "release_id": "finance_v2",
+  "seed": 20260813,
+  "mechanisms": {
+    "compact": {
+      "corpus_version": "difficulty_dev_v2_compact",
+      "controls": "20260815-133716-252592__authorization-memory-controls__finance-v2-screen-compact-controls__provider-error-continuation",
+      "writers": {
+        "qwen_plus_0728_openrouter": "20260815-134911-783877__authorization-memory-writer__finance-v2-screen-compact-qwen-harness-rerun",
+        "nemotron_3_ultra_baseten": "20260815-134156-188853__authorization-memory-writer__finance-v2-screen-compact-nemotron"
+      },
+      "pressures": {
+        "qwen_plus_0728_openrouter": "20260815-135517-827625__authorization-memory-pressure__finance-v2-screen-compact-qwen-pressure",
+        "nemotron_3_ultra_baseten": "20260815-135001-128152__authorization-memory-pressure__finance-v2-screen-compact-nemotron-pressure"
+      },
+      "technical_exclusions": [
+        {
+          "run": "20260815-133716-252592__authorization-memory-controls__finance-v2-screen-compact-controls",
+          "reason": "all calls were sandbox connection errors; exact provider-error continuation retained"
+        },
+        {
+          "run": "20260815-134156-868939__authorization-memory-writer__finance-v2-screen-compact-qwen",
+          "reason": "incomplete route aborted by runtime leakage false positive on model-generated repair text"
+        }
+      ]
+    },
+    "equal_cardinality": {
+      "corpus_version": "difficulty_dev_v2_equal_cardinality",
+      "controls": "20260815-135543-857163__authorization-memory-controls__finance-v2-screen-equal-controls",
+      "writers": {
+        "qwen_plus_0728_openrouter": "20260815-135651-514897__authorization-memory-writer__finance-v2-screen-equal-qwen",
+        "nemotron_3_ultra_baseten": "20260815-135650-216259__authorization-memory-writer__finance-v2-screen-equal-nemotron"
+      },
+      "pressures": {
+        "qwen_plus_0728_openrouter": "20260815-140501-039377__authorization-memory-pressure__finance-v2-screen-equal-qwen-pressure",
+        "nemotron_3_ultra_baseten": "20260815-140502-894655__authorization-memory-pressure__finance-v2-screen-equal-nemotron-pressure"
+      },
+      "technical_exclusions": []
+    },
+    "distributed": {
+      "corpus_version": "difficulty_dev_v2_distributed",
+      "controls": "20260815-140530-322996__authorization-memory-controls__finance-v2-screen-distributed-controls",
+      "writers": {
+        "qwen_plus_0728_openrouter": "20260815-140630-665953__authorization-memory-writer__finance-v2-screen-distributed-qwen",
+        "nemotron_3_ultra_baseten": "20260815-140632-363653__authorization-memory-writer__finance-v2-screen-distributed-nemotron"
+      },
+      "pressures": {
+        "qwen_plus_0728_openrouter": "20260815-141354-203147__authorization-memory-pressure__finance-v2-screen-distributed-qwen-pressure",
+        "nemotron_3_ultra_baseten": "20260815-141354-780031__authorization-memory-pressure__finance-v2-screen-distributed-nemotron-pressure"
+      },
+      "technical_exclusions": []
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "schema_version": "finance_v2_rehearsal_run_index_v1",
+  "release_id": "finance_v2",
+  "variants": {
+    "equal_cardinality": {
+      "corpus_version": "difficulty_dev_v2",
+      "selection_role": "screen_winner",
+      "seeds": {
+        "20260814": {
+          "controls": "20260815-141859-486679__authorization-memory-controls__finance-v2-rehearsal-seed-20260814-controls",
+          "writers": {
+            "qwen_plus_0728_openrouter": "20260815-142045-493122__authorization-memory-writer__finance-v2-rehearsal-seed-20260814-qwen",
+            "nemotron_3_ultra_baseten": "20260815-142047-222254__authorization-memory-writer__finance-v2-rehearsal-seed-20260814-nemotron"
+          },
+          "pressures": {
+            "qwen_plus_0728_openrouter": "20260815-143304-477357__authorization-memory-pressure__finance-v2-rehearsal-seed-20260814-qwen-pressure",
+            "nemotron_3_ultra_baseten": "20260815-143305-709427__authorization-memory-pressure__finance-v2-rehearsal-seed-20260814-nemotron-pressure"
+          }
+        },
+        "20260815": {
+          "controls": "20260815-143356-527919__authorization-memory-controls__finance-v2-rehearsal-seed-20260815-controls",
+          "writers": {
+            "qwen_plus_0728_openrouter": "20260815-143537-011858__authorization-memory-writer__finance-v2-rehearsal-seed-20260815-qwen",
+            "nemotron_3_ultra_baseten": "20260815-143535-473511__authorization-memory-writer__finance-v2-rehearsal-seed-20260815-nemotron"
+          },
+          "pressures": {
+            "qwen_plus_0728_openrouter": "20260815-144540-382720__authorization-memory-pressure__finance-v2-rehearsal-seed-20260815-qwen-pressure",
+            "nemotron_3_ultra_baseten": "20260815-144542-064933__authorization-memory-pressure__finance-v2-rehearsal-seed-20260815-nemotron-pressure"
+          }
+        }
+      }
+    },
+    "compact": {
+      "corpus_version": "difficulty_dev_v2_runner_up",
+      "selection_role": "contingent_runner_up",
+      "seeds": {
+        "20260814": {
+          "controls": "20260815-145003-812410__authorization-memory-controls__finance-v2-runner-up-seed-20260814-controls",
+          "writers": {
+            "qwen_plus_0728_openrouter": "20260815-145326-819356__authorization-memory-writer__finance-v2-runner-up-seed-20260814-qwen",
+            "nemotron_3_ultra_baseten": "20260815-150303-614378__authorization-memory-writer__finance-v2-runner-up-seed-20260814-nemotron-ultra-target-correction"
+          },
+          "pressures": {
+            "qwen_plus_0728_openrouter": "20260815-150125-879167__authorization-memory-pressure__finance-v2-runner-up-seed-20260814-qwen-pressure",
+            "nemotron_3_ultra_baseten": "20260815-151028-566276__authorization-memory-pressure__finance-v2-runner-up-seed-20260814-nemotron-ultra-pressure"
+          }
+        },
+        "20260815": {
+          "controls": "20260815-151132-029017__authorization-memory-controls__finance-v2-runner-up-seed-20260815-controls",
+          "writers": {
+            "qwen_plus_0728_openrouter": "20260815-151256-432262__authorization-memory-writer__finance-v2-runner-up-seed-20260815-qwen",
+            "nemotron_3_ultra_baseten": "20260815-151258-608063__authorization-memory-writer__finance-v2-runner-up-seed-20260815-nemotron"
+          },
+          "pressures": {
+            "qwen_plus_0728_openrouter": "20260815-152344-193088__authorization-memory-pressure__finance-v2-runner-up-seed-20260815-qwen-pressure",
+            "nemotron_3_ultra_baseten": "20260815-152342-636862__authorization-memory-pressure__finance-v2-runner-up-seed-20260815-nemotron-pressure"
+          }
+        }
+      }
+    }
+  },
+  "technical_exclusions": [
+    {
+      "reason": "researcher launched the deprecated legacy target instead of the preregistered Nemotron 3 Ultra target",
+      "writer_run": "20260815-145133-879346__authorization-memory-writer__finance-v2-runner-up-seed-20260814-nemotron",
+      "pressure_run": "20260815-150136-109544__authorization-memory-pressure__finance-v2-runner-up-seed-20260814-nemotron-pressure",
+      "observed_error": "HTTP 410 model version deprecated",
+      "included_in_scientific_metrics": false,
+      "included_in_cost_and_provider_failure_reports": true
+    }
+  ],
+  "held_out_status": "not_instantiated_robustness_gate_failed",
+  "outcome_based_resampling": false
+}
