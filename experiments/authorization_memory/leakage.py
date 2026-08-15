@@ -216,9 +216,16 @@ def validate_model_context_leakage(
         tools, (list, tuple)
     ):
         raise TypeError("model context messages/tools must be sequences")
+    application_messages = tuple(
+        {
+            **message,
+            "content": _without_rejected_model_arguments(message.get("content")),
+        }
+        for message in messages
+    )
     surface = json.dumps(
         {
-            "messages": list(messages),
+            "messages": list(application_messages),
             "tools": list(tools),
             "tool_choice": tool_choice,
         },
@@ -280,6 +287,18 @@ def validate_model_context_leakage(
         raise ValueError(
             "runtime model-context leakage validation failed:\n" + details
         )
+
+
+def _without_rejected_model_arguments(content: Any) -> Any:
+    if not isinstance(content, str):
+        return content
+    return re.sub(
+        r"\nThe exact rejected PatchDoc arguments were:\n.*?"
+        r"\nMake the smallest schema-valid correction\.",
+        "\nMake the smallest schema-valid correction.",
+        content,
+        flags=re.DOTALL,
+    )
 
 
 def _system_instruction_segments(content: str) -> tuple[str, ...]:
