@@ -8,12 +8,75 @@ from typing import Any
 PACKAGE_DIR = Path(__file__).parent
 V1_RELEASE_PATH = PACKAGE_DIR / "release.json"
 V2_RELEASE_PATH = PACKAGE_DIR / "release_v2.json"
+V2_SUCCESSOR_RELEASE_PATH = PACKAGE_DIR / "release_v2_successor.json"
 
 
 def validate_release(domain: Any, corpus_version: str = "benchmark_v1") -> dict[str, Any]:
     if corpus_version.endswith("_v1"):
         return _validate_v1_release(domain)
+    if corpus_version == "benchmark_v2":
+        return _validate_v2_successor_release(domain)
     return _validate_v2_release(domain, corpus_version)
+
+
+def _validate_v2_successor_release(domain: Any) -> dict[str, Any]:
+    from experiments.authorization_memory.langmem_writer import memory_implementation_manifest
+    from experiments.authorization_memory.persistence import content_hash, file_hash
+
+    if not V2_SUCCESSOR_RELEASE_PATH.is_file():
+        raise ValueError("Finance v2 successor release has not been frozen")
+    release = json.loads(V2_SUCCESSOR_RELEASE_PATH.read_text(encoding="utf-8"))
+    if release.get("release_id") != "finance_v2_frontier_successor_v1":
+        raise ValueError("Finance v2 successor release identity differs")
+    if release.get("freeze_status") != "claim_frozen":
+        raise ValueError("Finance v2 successor release is not claim-frozen")
+    corpus = release["claim_corpus"]
+    cases = domain.corpus.load_cases("benchmark_v2")
+    provenance = domain.corpus.provenance("benchmark_v2")
+    if corpus.get("corpus_version") != "benchmark_v2":
+        raise ValueError("Finance v2 successor corpus identity differs")
+    if corpus.get("sha256") != provenance["source_sha256"]:
+        raise ValueError("Finance v2 successor corpus hash differs")
+    if corpus.get("case_count") != len(cases):
+        raise ValueError("Finance v2 successor case count differs")
+
+    prior = release["relationship_to_prior_release"]
+    if file_hash(PACKAGE_DIR / prior["manifest"]) != prior["manifest_sha256"]:
+        raise ValueError("Finance v2 historical release manifest differs")
+    expected_files = {
+        "capacity": ("artifact", "sha256"),
+        "blueprint": ("source", "sha256"),
+        "presentation": ("source", "sha256"),
+        "pressure_profile": ("source", "sha256"),
+        "analysis_plan": ("source", "sha256"),
+    }
+    for section, (path_key, hash_key) in expected_files.items():
+        entry = release[section]
+        if file_hash(PACKAGE_DIR / entry[path_key]) != entry[hash_key]:
+            raise ValueError(f"Finance v2 successor {section} hash differs")
+    run_plan = release["run_plan"]
+    if file_hash(PACKAGE_DIR / run_plan["source"]) != run_plan["sha256"]:
+        raise ValueError("Finance v2 successor run-plan hash differs")
+    pricing = run_plan["pricing_estimate"]
+    if file_hash(PACKAGE_DIR / pricing["artifact"]) != pricing["sha256"]:
+        raise ValueError("Finance v2 successor pricing estimate differs")
+    implementation = memory_implementation_manifest(domain)
+    if release["memory"]["implementation_sha256"] != implementation["memory_implementation_hash"]:
+        raise ValueError("Finance v2 successor memory implementation differs")
+    if release["memory"]["typed_schema_sha256"] != content_hash(domain.memory.typed_schema()):
+        raise ValueError("Finance v2 successor typed schema differs")
+    for name, artifact in release.get("results", {}).get("artifacts", {}).items():
+        if file_hash(PACKAGE_DIR / artifact["path"]) != artifact["sha256"]:
+            raise ValueError(f"Finance v2 successor {name} result hash differs")
+    return {
+        "status": "passed",
+        "release_id": release["release_id"],
+        "freeze_status": release["freeze_status"],
+        "corpus_version": "benchmark_v2",
+        "case_count": len(cases),
+        "paid_execution_authorized": run_plan["route_authorizations"]["controls"],
+        "approved_cap_usd": pricing["approved_cap_usd"],
+    }
 
 
 def _validate_v1_release(domain: Any) -> dict[str, Any]:

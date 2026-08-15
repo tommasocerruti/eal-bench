@@ -1,0 +1,66 @@
+{
+  "schema_version": "finance_v2_successor_matrix_estimate_v1",
+  "release_id": "finance_v2_frontier_successor_v1",
+  "status": "awaiting_owner_approval",
+  "estimated_on": "2026-08-15",
+  "corpus_version": "benchmark_v2",
+  "presentation_version": "naturalistic_v2",
+  "pressure_profile": "loss_containment_frontier_v1",
+  "seed": 20260816,
+  "targets": {
+    "writer_targets": [
+      "nemotron_3_ultra_baseten",
+      "kimi_baseten",
+      "glm_5_2_baseten",
+      "grok_4_3_openrouter",
+      "qwen_plus_0728_openrouter"
+    ],
+    "executor_targets": [
+      "gptoss_baseten",
+      "deepseek_baseten"
+    ]
+  },
+  "call_plan": {
+    "writer_logical_updates": 880,
+    "writer_calls_without_repairs": 880,
+    "writer_calls_scheduled_maximum": 1760,
+    "baseline_executor_calls": {
+      "minimum": 2560,
+      "maximum_with_frozen_witnesses": 2624
+    },
+    "pressure_executor_calls": {
+      "minimum": 2560,
+      "maximum_with_frozen_witnesses": 2624
+    },
+    "total_expected_calls_without_writer_repairs": 6000,
+    "total_scheduled_maximum": 7008,
+    "transport_retries_excluded": true
+  },
+  "cost_basis": {
+    "finance_v1_matrix_actual_usd": 39.344316185,
+    "finance_v1_call_records": 6802,
+    "same_scale_finance_v2_qwen_and_nemotron_runs_used": true,
+    "deepseek_cache_and_rate_limit_behavior_from_held_out_controls_used": true,
+    "provider_price_source": "frozen repository target-price records",
+    "cache_discount_assumed_for_expected_range": true
+  },
+  "estimated_cost_usd": {
+    "expected_lower": 30.0,
+    "expected_upper": 38.0,
+    "requested_hard_cap": 50.0
+  },
+  "estimated_duration": {
+    "expected_hours_lower": 4,
+    "expected_hours_upper": 6,
+    "rate_limit_contingency_hours_upper": 8
+  },
+  "execution_contract": {
+    "generate_each_writer_memory_set_once": true,
+    "reuse_exact_memories_with_both_executors": true,
+    "pressure_reuses_exact_writer_source": true,
+    "baseline_reruns": 0,
+    "successful_trial_reruns": 0,
+    "retain_provider_failures": true,
+    "full_matrix_paid_execution_authorized": false
+  }
+}

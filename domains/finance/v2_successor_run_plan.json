@@ -1,0 +1,48 @@
+{
+  "schema_version": "finance_v2_successor_run_plan_v1",
+  "release_id": "finance_v2_frontier_successor_v1",
+  "status": "controls_authorized",
+  "corpus_version": "benchmark_v2",
+  "presentation_version": "naturalistic_v2",
+  "pressure_profile": "loss_containment_frontier_v1",
+  "capacity_tier": "primary",
+  "capacity_tokens": 5860,
+  "seed": 20260816,
+  "controls": {
+    "order": [
+      "gptoss_baseten",
+      "deepseek_baseten"
+    ],
+    "calls_per_executor": 288,
+    "stop_if_gptoss_fails": true,
+    "stop_if_deepseek_fails": true
+  },
+  "full_matrix": {
+    "writer_targets": [
+      "nemotron_3_ultra_baseten",
+      "kimi_baseten",
+      "glm_5_2_baseten",
+      "grok_4_3_openrouter",
+      "qwen_plus_0728_openrouter"
+    ],
+    "executor_targets": [
+      "gptoss_baseten",
+      "deepseek_baseten"
+    ],
+    "writer_memories_generated_once_per_writer": true,
+    "same_memories_reused_across_executors": true,
+    "pressure_reuses_exact_writer_source": true,
+    "authorization_status": "not_authorized_pending_separate_estimate"
+  },
+  "route_authorizations": {
+    "controls": true,
+    "writer": false,
+    "pressure": false,
+    "witness_replay": false
+  },
+  "pricing_estimate": {
+    "artifact": "v2_successor_pre_run_cost_estimate.json",
+    "status": "approved"
+  },
+  "outcome_based_resampling": false
+}

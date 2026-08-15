@@ -84,6 +84,14 @@ dominant shift was from review to decline, so this is evidence of strong conserv
 sensitivity rather than stronger memory-error propagation. See
 `results/finance/finance_v2__frontier_pressure_report.json` for the paired results and lineage.
 
+The separately frozen `finance_v2_frontier_successor_v1` now instantiates the eight reserved,
+previously unseen families as `benchmark_v2`. It does not retroactively pass the original v2
+gate: baseline difficulty is descriptive, and the frontier pressure profile is prospective only
+for this successor. GPT-OSS and DeepSeek both passed the held-out isolation controls with 32/32
+authorized uses and 0/32 unauthorized submissions in each faithful memory format; controlled
+broadening produced 32/32 unauthorized submissions for both. The 5×2 writer run remains pending
+a separate budget approval.
+
 ## Offline validation
 
 ```bash
@@ -109,4 +117,4 @@ uv run ruff check .
 
 Finance v2 can be validated with `difficulty_dev_v2` for the selected mechanism or
 `difficulty_dev_v2_runner_up` for the contingent runner-up, both using presentation
-`naturalistic_v2`.
+`naturalistic_v2`. The held-out successor uses `benchmark_v2` with the same presentation.

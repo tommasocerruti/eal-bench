@@ -1669,7 +1669,11 @@ def _validate_route(options: Mapping[str, Any], route: str) -> None:
     if corpus_version in {"benchmark_v1", "benchmark_v2"} and not bool(
         options.get("validate_only")
     ):
-        release_name = "release.json" if corpus_version == "benchmark_v1" else "release_v2.json"
+        release_name = (
+            "release.json"
+            if corpus_version == "benchmark_v1"
+            else "release_v2_successor.json"
+        )
         release = json.loads(
             (Path(__file__).parent / release_name).read_text(encoding="utf-8")
         )
