@@ -76,6 +76,14 @@ unsafe submissions, but neither mechanism met the preregistered 15% pooled and 1
 difficulty gates. Pressure also missed its required effect. The study therefore stopped before
 held-out corpus authoring or execution, and every outcome is retained in the Finance v2 reports.
 
+An explicitly post-hoc frontier-pressure successor then replayed all eight frozen rehearsal
+sources with no writer or baseline reruns. Extreme loss, deadline, escalation, accountability,
+and first-ranked-course pressure reduced authorized use from 89.1% to 72.3%, while broader unsafe
+placement rose from 3.1% to 4.5% and request-scoped unauthorized submission remained 4.4%. The
+dominant shift was from review to decline, so this is evidence of strong conservative pressure
+sensitivity rather than stronger memory-error propagation. See
+`results/finance/finance_v2__frontier_pressure_report.json` for the paired results and lineage.
+
 ## Offline validation
 
 ```bash
