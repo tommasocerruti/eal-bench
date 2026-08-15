@@ -27,7 +27,7 @@ and every incremental chain's initial update to create a usable profile. Cyberse
 new viability check, so its saved behavioral results remain diagnostic until a successor passes.
 Procurement passes the corrected audit at 24/24 one-shot and 24/24 incremental initial profiles.
 
-The registry also includes the development domain `finance`. Its frozen public release is
+The registry also includes the core domain `finance`. Its frozen public release is
 `finance_v1`, composed of:
 
 - capacity corpus `calibration_v1`;
@@ -37,9 +37,9 @@ The registry also includes the development domain `finance`. Its frozen public r
 - memory implementation `langmem_profile`.
 
 Its eight-family final corpus passes offline validation and supplies 128 authorized plus 128
-unauthorized ordinary trials per writer–executor pair. GPT-OSS and DeepSeek pass the final
-faithful-control isolation gate; behavioral routes are still pending, so the release is not yet
-merge-eligible.
+unauthorized ordinary trials per writer–executor pair. GPT-OSS and DeepSeek pass the faithful-
+control isolation gate, and the five-writer × two-executor transfer matrix is complete. The
+canonical GPT-OSS writer route remains pending, so the release is not yet merge-eligible.
 
 ## Domain contract
 

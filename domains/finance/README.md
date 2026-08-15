@@ -1,104 +1,53 @@
 # Finance domain
 
-The Finance domain studies authorization-memory failures in portfolio-order execution. A
-portfolio mandate officer may delegate trading authority only for a named trader, account,
-strategy, instrument set, side, order type, quantity ceiling, price interval, settlement
-currency, and half-open time window.
+Finance studies authorization-memory failures in portfolio-order execution. A portfolio mandate
+officer may permit trades only for a named account, strategy, instrument set, side, order type,
+quantity ceiling, price interval, settlement currency, and half-open time window.
 
-The public release is `finance_v1`, composed of:
+The active release is `finance_v1`.
 
-- capacity corpus `calibration_v1`;
-- behavioral corpus `benchmark_v1`;
-- presentation `naturalistic_v1`;
-- pressure profile `loss_containment_v1`;
-- memory implementation `langmem_profile`.
+| Component | ID |
+|---|---|
+| Behavioral corpus | `benchmark_v1` |
+| Capacity corpus | `calibration_v1` |
+| Presentation | `naturalistic_v1` |
+| Pressure profile | `loss_containment_v1` |
+| Memory implementation | `langmem_profile` |
+| Canonical seed | `20260816` |
 
-## Design
-
-Each case builds a sixteen-record active mandate book and then applies one signed atomic
-transaction that revokes all sixteen records and issues two current grants. Six later desk
-blocks reproduce the obsolete book as explicitly archived, superseded, non-authoritative
-exports. The authorization rule remains complete and unambiguous; difficulty comes from updating
-memory after a large state contraction and rejecting highly salient stale records.
-
-Four matched request pairs test a removed instrument, a side retained only by a revoked mandate,
-a cross-record order-type combination, and an exact time shift. Each pair differs in one
-serialized request field. The final state authorizes every inside request and denies every
-outside request, while the stale pre-contraction state reverses those decisions.
-
-Capacity is twice the largest faithful text or typed payload at any authorization-changing
-checkpoint. The pressure treatment adds concrete loss, deadline, and execution urgency without
-changing authority. Every executor choice uses a distinct native terminal tool, so scoring never
-depends on free-text interpretation.
+The release declaration and immutable hashes are in [`release.json`](release.json). The corpus has
+eight held-out families and four matched request pairs per family. Each final signed transaction
+replaces six obsolete mandates with six current mandates. Every outside request is covered by one
+complete pre-final mandate and denied by the final state; its inside match differs in exactly one
+serialized request field and has the opposite authorization result.
 
 ## Routes
 
-- `controls`: faithful text and typed evidence, full history, controlled broadening, exact
-  repair, and semantic shams.
-- `writer`: the complete free-text/typed × one-shot/incremental LangMem factorial, typed
-  checkpoint screening, natural witnesses, and exact repairs.
-- `pressure`: exact replay of a frozen writer source, with no writer calls or baseline reruns.
+- `controls`: faithful free-text and typed evidence, full history, controlled broadening, exact
+  repair, and semantic sham conditions with GPT-OSS and DeepSeek executors.
+- `writer`: the full free-text/typed × one-shot/incremental LangMem factorial.
+- `pressure`: exact replay of every frozen writer baseline under `loss_containment_v1`, with no
+  writer calls or baseline reruns.
 
-## Development evidence
+## Results
 
-The final eight-family surface passed faithful controls with both required executors. GPT-OSS
-and DeepSeek each achieved 64/64 authorized uses and 0/64 unauthorized actions across faithful
-text and typed memory; controlled broadening produced 32/32 unauthorized actions for each. The
-DeepSeek run encountered 30 exhausted rate-limited calls; a hash-linked continuation retained all
-258 successful outcomes and retried only those failures, with no successful outcome rerun.
+Both executors passed isolation: faithful text and typed memory each produced 32/32 authorized
+uses and 0/32 unauthorized submissions, while controlled broadening produced 32/32 unauthorized
+submissions.
 
-In the completed Nemotron-to-GPT-OSS route, all 16 initial profiles were created. Generated
-memory produced 14/64 unauthorized submissions (21.9%) and 56/64 authorized uses. Eight selected
-natural errors across four families caused 8/8 unsafe actions, versus 0/8 after exact repair.
-Exact-source pressure retained 14/64 unauthorized submissions, reduced authorized use to 45/64,
-and increased unsafe action across all ordinary trials from 19/128 to 28/128.
+Across five writers and both executors, baseline authorized use was 86.6% and unauthorized
+submission was 5.9%. Under pressure these changed to 77.3% and 10.1%. Natural substantive memory
+errors caused 24/24 unsafe actions, while exact canonical repair caused 0/24. Fixed-memory action
+outcomes agreed across executors on 98.4% of matched requests.
 
-These are development results, not a completed merge-gate result. The final `benchmark_v1`
-combines those four development-derived families with four reserved families, providing 128
-ordinary authorized and 128 ordinary unauthorized trials per writer–executor pair. The added
-families satisfy the trial-count requirement and both executors now pass isolation. The canonical
-GPT-OSS writer → GPT-OSS executor and pressure routes still need to pass before Finance can be
-marked merge-eligible.
+Qwen's incremental free-text initialization succeeded for 7/8 families, so its failed initial
+profile remains in the intention-to-treat results. The complete transfer matrix cost USD 37.29
+under its USD 50 cap; isolation controls cost USD 4.30 separately. Full tables are in
+[`results/finance/finance_v1__matrix_results.md`](../../results/finance/finance_v1__matrix_results.md).
 
-## Finance v2 hardening study
-
-`finance_v2` is a separate, preserved development release. It reuses the frozen 5,860-token
-capacity and schema v5 while comparing compact state swap, equal-cardinality replacement, and
-distributed lifecycle histories. The four-family screen selected equal-cardinality replacement;
-that mechanism and the compact runner-up were then evaluated on eight families with Qwen Plus
-and Nemotron 3 Ultra writers across seeds `20260814` and `20260815`.
-
-Faithful controls remained perfect in all four rehearsals, so executor isolation held. The
-equal-cardinality winner produced pooled baseline unauthorized-submission rates of 2.3% and 5.5%;
-the compact runner-up produced 6.3% and 3.5%. Typed unsafe actions in the compact runs were fully
-attributable to stored memory, natural errors propagated unsafely, and exact repair eliminated
-unsafe submissions, but neither mechanism met the preregistered 15% pooled and 10%-per-writer
-difficulty gates. Pressure also missed its required effect. The study therefore stopped before
-held-out corpus authoring or execution, and every outcome is retained in the Finance v2 reports.
-
-An explicitly post-hoc frontier-pressure successor then replayed all eight frozen rehearsal
-sources with no writer or baseline reruns. Extreme loss, deadline, escalation, accountability,
-and first-ranked-course pressure reduced authorized use from 89.1% to 72.3%, while broader unsafe
-placement rose from 3.1% to 4.5% and request-scoped unauthorized submission remained 4.4%. The
-dominant shift was from review to decline, so this is evidence of strong conservative pressure
-sensitivity rather than stronger memory-error propagation. See
-`results/finance/finance_v2__frontier_pressure_report.json` for the paired results and lineage.
-
-The separately frozen `finance_v2_frontier_successor_v1` now instantiates the eight reserved,
-previously unseen families as `benchmark_v2`. It does not retroactively pass the original v2
-gate: baseline difficulty is descriptive, and the frontier pressure profile is prospective only
-for this successor. GPT-OSS and DeepSeek both passed the held-out isolation controls with 32/32
-authorized uses and 0/32 unauthorized submissions in each faithful memory format; controlled
-broadening produced 32/32 unauthorized submissions for both.
-
-The complete five-writer × two-executor successor matrix reused each writer's saved memories
-unchanged across both executors. Pooled baseline authorized use was 86.6% and unauthorized
-submission was 5.9%; under exact-source pressure these changed to 77.3% and 10.1%, respectively.
-Natural substantive memory errors caused 24/24 unsafe actions, while exact canonical repair caused
-0/24. The matrix cost USD 37.29 under its USD 50 cap, excluding USD 4.30 for isolation controls.
-Qwen's incremental free-text initialization succeeded for 15/16 profiles, so that viability
-failure remains in the report and denominator. See
-`results/finance/finance_v2_successor__matrix_results.md` for the complete tables and limitations.
+The transfer matrix is complete, but it does not replace the repository's canonical scientific
+merge gate. Finance remains ineligible to merge as a claim-complete scientific domain until a
+GPT-OSS writer → GPT-OSS executor writer route and its linked pressure route pass on this release.
 
 ## Offline validation
 
@@ -115,14 +64,12 @@ uv run python -m experiments.run \
   --corpus-version benchmark_v1 \
   --presentation-version naturalistic_v1 \
   --study writer \
-  --writer-targets nemotron_3_ultra_baseten \
-  --executor-targets gptoss_baseten,deepseek_baseten \
   --validate-only
 
 uv run python -m experiments.run --validate-only --all-domains
 uv run ruff check .
 ```
 
-Finance v2 can be validated with `difficulty_dev_v2` for the selected mechanism or
-`difficulty_dev_v2_runner_up` for the contingent runner-up, both using presentation
-`naturalistic_v2`. The held-out successor uses `benchmark_v2` with the same presentation.
+The public package exposes only the two v1 corpus identities. Immutable paid-run manifests retain
+their original technical execution identifiers; the byte-identical model-surface mapping is
+recorded in `results/finance/finance_v1__release_equivalence.json`.

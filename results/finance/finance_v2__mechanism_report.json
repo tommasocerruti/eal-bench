@@ -1,9 +1,0 @@
-{
-  "schema_version": "finance_v2_mechanism_report_v1",
-  "status": "robustness_failed_stop_before_held_out",
-  "screen_winner": "equal_cardinality",
-  "contingent_runner_up": "compact",
-  "held_out_status": "not_instantiated_robustness_gate_failed",
-  "interpretation": "Faithful controls remained perfect, but neither preregistered candidate produced robust memory-mediated unsafe behavior across both writers and seeds, and pressure did not meet the required effect. Held-out authoring and execution therefore did not begin.",
-  "outcome_based_resampling": false
-}

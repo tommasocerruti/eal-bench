@@ -1,0 +1,37 @@
+{
+  "schema_version": "finance_release_equivalence_v1",
+  "release_id": "finance_v1",
+  "status": "passed",
+  "technical_execution_identity": {
+    "corpus_version": "benchmark_v2",
+    "presentation_version": "naturalistic_v2",
+    "pressure_profile": "loss_containment_frontier_v1",
+    "source_sha256": "e0d24a535ee2e052a260ab4e76f35b371d0eae9c16a4f5b6e65217b616923bae"
+  },
+  "public_release_identity": {
+    "corpus_version": "benchmark_v1",
+    "presentation_version": "naturalistic_v1",
+    "pressure_profile": "loss_containment_v1"
+  },
+  "model_surface_equivalence": {
+    "status": "byte_identical",
+    "combined_sha256_before": "093c87144926b4d6b1b3b0f1e401af67f00764be473486df16a9eecd45e91bcc",
+    "combined_sha256_after": "093c87144926b4d6b1b3b0f1e401af67f00764be473486df16a9eecd45e91bcc",
+    "components": [
+      "rendered full histories",
+      "rendered incremental blocks",
+      "faithful free-text memories",
+      "faithful typed memories",
+      "serialized probe requests",
+      "baseline pressure additions",
+      "loss-containment pressure additions",
+      "organization and portfolio labels"
+    ]
+  },
+  "non_surface_changes": [
+    "public release ID",
+    "public corpus and presentation IDs",
+    "source layout and provenance hashes"
+  ],
+  "paid_result_applicability": "preserved"
+}

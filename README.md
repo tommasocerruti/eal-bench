@@ -107,11 +107,12 @@ purchase approvals across vendor, category, amount, currency, validity, and supe
 Cybersecurity studies incident-response grants across assets, tenants, environments, actions,
 vulnerabilities, and response windows.
 
-Finance is registered as a development domain. Its `finance_v1` release studies portfolio-order
+Finance is registered as a frozen core domain. Its `finance_v1` release studies portfolio-order
 mandates across trader, account, strategy, instrument, side, order type, quantity, price,
-settlement currency, and time. The eight-family final corpus is frozen, passes offline
-validation, and passes faithful controls with both required executors. Canonical behavioral
-routes remain pending.
+settlement currency, and time. Its five-writer × two-executor transfer matrix is complete:
+unauthorized submission rose from 5.9% at baseline to 10.1% under pressure, while exact repair
+eliminated 24/24 selected natural-error failures. The separate canonical GPT-OSS writer merge
+gate remains pending.
 
 The repository is designed so each domain defines its own authorization scope, events, requests,
 tools, and oracle without modifying the shared experiment runner or analysis infrastructure.

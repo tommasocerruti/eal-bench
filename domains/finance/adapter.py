@@ -57,10 +57,8 @@ from .studies import (
 
 DOMAIN_ID = "finance"
 PRESENTATION_ID = "naturalistic_v1"
-V2_PRESENTATION_ID = "naturalistic_v2"
 PROMPT_POLICY_ID = "finance_prompt_v1"
 PRESENTATION_PATH = Path(__file__).parent / "presentations" / "naturalistic_v1.json"
-V2_PRESENTATION_PATH = Path(__file__).parent / "presentations" / "naturalistic_v2.json"
 _ProfileString = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
 _StringList = Annotated[list[_ProfileString], Field(min_length=1, max_length=8)]
 
@@ -559,22 +557,25 @@ class FinanceChallengeAdapter:
             request=None,
         ))
         pressure_variants = [
-            PressureVariant("baseline", pressure.profile_id(case), "baseline", "", "obtain best execution", case.operational_stakes, case.alternative_disadvantage),
-            PressureVariant(pressure.PRESSURE_ID, pressure.profile_id(case), "strong", pressure.addition(case), "capture the immediate market opportunity", case.operational_stakes, case.alternative_disadvantage),
+            PressureVariant(
+                "baseline",
+                pressure.PROFILE_ID,
+                "baseline",
+                "",
+                "obtain best execution",
+                case.operational_stakes,
+                case.alternative_disadvantage,
+            ),
+            PressureVariant(
+                pressure.PRESSURE_ID,
+                pressure.PROFILE_ID,
+                "frontier",
+                pressure.addition(case),
+                "execute the operationally first-ranked loss-containment course",
+                case.operational_stakes,
+                case.alternative_disadvantage,
+            ),
         ]
-        corpus_version = str(case.metadata.get("corpus_version", ""))
-        if pressure.FRONTIER_PRESSURE_ID in pressure.available_pressure_ids(corpus_version):
-            pressure_variants.append(
-                PressureVariant(
-                    pressure.FRONTIER_PRESSURE_ID,
-                    pressure.FRONTIER_PROFILE_ID,
-                    "frontier",
-                    pressure.frontier_addition(case),
-                    "execute the operationally first-ranked loss-containment course",
-                    case.operational_stakes,
-                    case.alternative_disadvantage,
-                )
-            )
         return ChallengeContext(
             challenge_id=f"challenge_{case.case_id}_{probe.probe_id}",
             operational_context=(
@@ -606,13 +607,12 @@ class FinanceChallengeAdapter:
                 re.IGNORECASE,
             ):
                 raise ValueError(f"{context.challenge_id}: pressure changes the authority frame")
-        if pressure.FRONTIER_PRESSURE_ID in variants:
-            frontier = variants[pressure.FRONTIER_PRESSURE_ID]
-            if (
-                frontier.profile_id != pressure.FRONTIER_PROFILE_ID
-                or "operationally first-ranked course" not in frontier.addition.lower()
-            ):
-                raise ValueError(f"{context.challenge_id}: malformed frontier pressure")
+        pressured = variants[pressure.PRESSURE_ID]
+        if (
+            pressured.profile_id != pressure.PROFILE_ID
+            or "operationally first-ranked course" not in pressured.addition.lower()
+        ):
+            raise ValueError(f"{context.challenge_id}: malformed Finance pressure")
         preferred = next(course for course in context.courses if course.course_id == context.preferred_course_id)
         if preferred.operational_rank != 1 or not preferred.feasible:
             raise ValueError(f"{context.challenge_id}: preferred course is not feasible and first")
@@ -666,23 +666,15 @@ def _surface_validator(content: str, allowed_policy: str | None) -> str | None:
 def _presentation(
     presentation_id: str = PRESENTATION_ID,
 ) -> PresentationProfile:
-    if presentation_id == PRESENTATION_ID:
-        path = PRESENTATION_PATH
-        description = "Naturalistic portfolio desk and signed-mandate rendering."
-        gate = "finance_naturalistic_surface_v1"
-    elif presentation_id == V2_PRESENTATION_ID:
-        path = V2_PRESENTATION_PATH
-        description = "Naturalistic portfolio lifecycle and signed-transaction rendering."
-        gate = "finance_naturalistic_surface_v2"
-    else:
+    if presentation_id != PRESENTATION_ID:
         raise ValueError(f"unknown Finance presentation: {presentation_id}")
     return PresentationProfile(
         presentation_id=presentation_id,
-        description=description,
+        description="Naturalistic portfolio lifecycle and signed-transaction rendering.",
         prompt_policy_id=PROMPT_POLICY_ID,
-        overlay_files=(path,),
-        overlay_hashes={str(path): file_hash(path)},
-        validity_gates=(gate,),
+        overlay_files=(PRESENTATION_PATH,),
+        overlay_hashes={str(PRESENTATION_PATH): file_hash(PRESENTATION_PATH)},
+        validity_gates=("finance_naturalistic_surface_v1",),
     )
 
 
@@ -711,12 +703,11 @@ def _prompt_policy() -> PromptPolicy:
 
 def create_domain() -> AuthorizationMemoryDomain:
     presentation = _presentation()
-    v2_presentation = _presentation(V2_PRESENTATION_ID)
     return AuthorizationMemoryDomain(
         domain_id=DOMAIN_ID,
         adapter_version="1",
         maturity="core",
-        canonical_seed=20260814,
+        canonical_seed=20260816,
         corpus=StandardCorpusAdapter(StandardCorpusSpec(
             versions=corpus.VERSIONS,
             default_version="benchmark_v1",
@@ -742,7 +733,6 @@ def create_domain() -> AuthorizationMemoryDomain:
         },
         presentations={
             PRESENTATION_ID: presentation,
-            V2_PRESENTATION_ID: v2_presentation,
         },
         default_presentation_id=PRESENTATION_ID,
         prompt_policies={PROMPT_POLICY_ID: _prompt_policy()},
@@ -752,7 +742,6 @@ def create_domain() -> AuthorizationMemoryDomain:
             forbidden_field_names=("request_scope", "probe_id", "pair_id", "case_id"),
             instruction_validators={
                 "finance_naturalistic_surface_v1": _surface_validator,
-                "finance_naturalistic_surface_v2": _surface_validator,
             },
             prompt_policy_validators={PROMPT_POLICY_ID: (_surface_validator,)},
         ),

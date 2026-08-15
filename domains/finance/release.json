@@ -4,35 +4,45 @@
   "domain_id": "finance",
   "maturity": "core",
   "freeze_status": "claim_frozen",
-  "canonical_seed": 20260814,
+  "canonical_seed": 20260816,
   "capacity": {
     "corpus_version": "calibration_v1",
     "artifact": "capacity_calibration.json",
-    "sha256": "392d61b5004f4ab7b70faa4c3443bd4b6f4d661c0ec9b701196fc49cfe677c24",
+    "sha256": "35d52cdde46a031abe4a4d785a866824acbbae169d053ebdbb42cc6ab557745f",
     "primary_tokens": 5860,
-    "policy": "2x_largest_faithful_payload_at_any_checkpoint",
+    "primary_policy": "2x_largest_faithful_payload_at_any_checkpoint",
     "freeze_status": "frozen"
   },
   "claim_corpus": {
     "corpus_version": "benchmark_v1",
-    "sha256": "d73afe1331f5a6aee2b5ebed81c7ec3403490c5402a6f8f05956db77934ed927",
+    "status": "completed",
+    "source_files": {
+      "data/benchmark_v2.json": "e0d24a535ee2e052a260ab4e76f35b371d0eae9c16a4f5b6e65217b616923bae",
+      "v2_blueprint.json": "a6a8b7695f8ac766f75952bc42e3e6848029a1117e6f75f5920058ab131d3d7d",
+      "compile_v2.py": "3e9d6521974a9c869bcae221575b72293b01f345dfb99b01dc916d8e98f7b128",
+      "corpus_v2.py": "c75af23a1e579910770baed5f5508279b327b2e0f3eae1222542ed56703ddc50",
+      "corpus.py": "f9fb68861eb7769791a025ecbb57e37713a835c7dfa40c202d2ff88b46cf49d3"
+    },
+    "sha256": "ac495b4d26bf81240935ffabbfe68b25121a901414701fb53c2ba5bd04f2de42",
     "case_count": 8,
     "family_count": 8,
-    "ordinary_authorized_trials_per_pair": 128,
-    "ordinary_unauthorized_trials_per_pair": 128,
-    "status": "frozen_controls_passed_pending_behavioral_routes",
-    "paid_execution_authorized": false
+    "authorization_decisions": 64,
+    "attractiveness_rankings": 32,
+    "ordinary_authorized_trials_per_writer_executor_pair": 128,
+    "ordinary_unauthorized_trials_per_writer_executor_pair": 128,
+    "freeze_status": "frozen",
+    "paid_execution_authorized": true
   },
   "presentation": {
     "presentation_id": "naturalistic_v1",
     "source": "presentations/naturalistic_v1.json",
-    "sha256": "a9e4076d420c2c1ef474232900b080e8e48ddf12f18ca12ff5a0c35c6958c925",
+    "sha256": "7da8754a8cae5d0bd757b0d668e50d4b96dd61379504b6065435ba095691655f",
     "freeze_status": "frozen"
   },
   "pressure_profile": {
     "profile_id": "loss_containment_v1",
     "source": "pressure_profiles/loss_containment_v1.json",
-    "sha256": "e6d67d940ba250c06560650dccc32b4e5b8e127945a8c9d1e818176c8b692a04",
+    "sha256": "85080adbca8a1ed5a7133d905b5197b7556d805aceaf71e1fe3576c783159306",
     "authority_invariant": true,
     "freeze_status": "frozen"
   },
@@ -41,62 +51,160 @@
     "implementation_sha256": "e19c96fdcf904476b6e469775566b05d288232cc2e0143b5167f4656d4f33bdb",
     "typed_schema_version": "5",
     "typed_schema_sha256": "a141c26ecbda7c88c4b3f054ca89c4439af6237862721844a50f21afac02e9b8",
-    "typed_representation": "flat_scalar_authorization_records",
     "bounded_attempts": 2,
-    "invalid_update_policy": "atomic_retention"
+    "invalid_update_policy": "atomic_retention",
+    "target_specific_handling": false
   },
   "analysis_plan": {
     "source": "analysis_plan.json",
-    "sha256": "38f9363bc50ed0b85139a9acd5e851e0c9a68bd78a5c0fd92b08bfd6cc1f3824",
+    "sha256": "7450e88cae7fde50c62e7ef5d1c99666a1151c281bef8c18e86d10036c20793d",
     "freeze_status": "frozen"
   },
-  "run_plan": {
-    "source": "run_plan.json",
-    "sha256": "753fb2c84ef31fa10d6396439b8180b7e9b4467da9006217626b098262e04441",
-    "route_authorizations": {
-      "controls": false,
-      "writer": false,
-      "pressure": false,
-      "witness_replay": false
-    },
-    "pricing_estimate": {
-      "status": "approved",
-      "artifact": "pre_run_cost_estimate.json",
-      "sha256": "ca7a106724e32e5c6f2d230a281b90932b4d13a76e3d4749bf99daec18874661",
-      "requested_controls_cap_usd": 12.0
-    }
+  "implementation": {
+    "adapter.py": "114f95dfd2537b9c80d26b3ce57d5a6551d923450199d61d91d68ca883cb1377",
+    "capacity.py": "a4cbfba11afc0e70987c238e2c5026d2fbc153c31e9226211db0b2ac8de30db3",
+    "compile_corpus.py": "9114d61b110fdf6c3e03f027f36539e0f1a19eb842abc782c1b85dc2230ac0e0",
+    "compile_v2.py": "3e9d6521974a9c869bcae221575b72293b01f345dfb99b01dc916d8e98f7b128",
+    "corpus.py": "f9fb68861eb7769791a025ecbb57e37713a835c7dfa40c202d2ff88b46cf49d3",
+    "corpus_v2.py": "c75af23a1e579910770baed5f5508279b327b2e0f3eae1222542ed56703ddc50",
+    "finalize_results.py": "0a89880f981bedbaee5c6efc528618417d56a14eaee7ea08754c1b77d3b0edbc",
+    "models.py": "a8defd0c02985269c9479bd6293625afa85ff69df1085ba1b2f6a6d769d8ae9b",
+    "pressure.py": "89d6e5d9bb1b8106bb715178e2963f3d89291ee2f7aca556d05ea01b78ad7718",
+    "release.py": "99f616cc8958540f7f0e73c4f318a5545d8dada4ab5d84bd71cf8688bf71c004",
+    "semantics.py": "6624c535e886a9945418d799b9e006f42fb58ac5eecb1f81bd224c8d32d2e97b",
+    "studies.py": "9b431f6194349d1f7113ffafeb701cf254b02b3893538582deede39875da0ea8"
   },
   "review": {
     "status": "approved_with_owner_waiver",
-    "scope": "development-derived eight-family final surface",
-    "independent_blinded_review": false
+    "approved_on": "2026-08-15",
+    "independent_blinded_review": "not_collected"
+  },
+  "run_plan": {
+    "source": "run_plan.json",
+    "sha256": "db5c9ee6b9e415831ddbbd84fd16d93a5b5df0558c213e35a56a235bdf6c0509",
+    "status": "matrix_completed",
+    "freeze_status": "frozen",
+    "route_authorizations": {
+      "controls": true,
+      "writer": true,
+      "pressure": true,
+      "witness_replay": false
+    },
+    "pricing_estimate": {
+      "artifact": "pre_run_cost_estimate.json",
+      "sha256": "d82693185bf067b8284ab01f8c6f6c1d9bf4862bbd8bb172b18f3a89ba57aea2",
+      "status": "approved_and_completed",
+      "approved_cap_usd": 50.0
+    }
   },
   "results": {
-    "status": "final_controls_passed_behavioral_routes_not_run",
-    "source_cleanup_equivalence": {
-      "path": "../../results/finance/finance_v1__source_cleanup_equivalence.json",
-      "sha256": "90a4a5e8ff5adeae037c08adfdd26d9a95e5a12e003fb6ebc025d8826e4945e7",
-      "status": "byte_identical_model_surfaces"
-    },
-    "controls": {
-      "gptoss": {
-        "run": "20260815-003309-878027__authorization-memory-controls__finance-v1-final-gptoss-controls",
-        "manifest_sha256": "e50105d4a248944035a20b0af8a03f5d704c712357acb211d05bc04332c7872b",
-        "gate": "../../results/finance/finance_v1__gptoss_gate.json",
-        "gate_sha256": "f886afd653932bdb8f88f8967570283efaa57bbbcad4fffd2ddc7a9c6aec8abf"
+    "status": "completed_transfer_matrix_canonical_gate_pending",
+    "eligible_to_merge": false,
+    "outcome_based_resampling": false,
+    "technical_execution_identifiers_retained": true,
+    "reports": {
+      "controls_report": {
+        "path": "../../results/finance/finance_v1__controls_report.json",
+        "sha256": "e6c12d705fbfea5a9fc70e4f77a4eabbcb126bddcbdcaa6462eb9825272379b0"
       },
-      "deepseek": {
-        "run": "20260815-003522-056262__authorization-memory-controls__finance-v1-final-deepseek-controls__provider-error-continuation",
-        "manifest_sha256": "98b1d39607668466694831642f0b3fa15ba3dceeaec46586fedfe251dc9b2d7b",
-        "gate": "../../results/finance/finance_v1__deepseek_gate.json",
-        "gate_sha256": "f4d2b9942ccd9609d3569232e99d3d1a2ddaf2c2775170aa30f70a9c9d309cbd"
+      "matrix_run_index": {
+        "path": "../../results/finance/finance_v1__matrix_run_index.json",
+        "sha256": "dcaa836a151d168b9c25fe5e691ad04d1201292a9c66031b8beaeeb3b7e098c5"
       },
-      "cost": {
-        "path": "../../results/finance/finance_v1__controls_cost.json",
-        "sha256": "eae5e8a0edb85d30019ada69e37858792ac6f6c454b9d99f3c50611af565570f"
+      "matrix_report": {
+        "path": "../../results/finance/finance_v1__matrix_report.json",
+        "sha256": "18e4b1cd4c7857113327300516722d26ce6486d08e8beb0b691ca2ab5168d3e7"
+      },
+      "matrix_results": {
+        "path": "../../results/finance/finance_v1__matrix_results.md",
+        "sha256": "9271c5687822605265ea610f3c013e0b07bf0235fc476e30dedbda11b147f7a4"
+      },
+      "actual_cost": {
+        "path": "../../results/finance/finance_v1__actual_cost.json",
+        "sha256": "f079c9dbb0f80a71d89ec32d376531a31ef4cb633decc0e5560018792df7579c"
+      },
+      "provider_failures": {
+        "path": "../../results/finance/finance_v1__provider_failures.json",
+        "sha256": "e621daa93f7ca719c564c231c0168d33bd6296a507d8790d9cb59da289a9099c"
+      },
+      "route_summaries": {
+        "path": "../../results/finance/finance_v1__route_summaries.json",
+        "sha256": "6764724d68d5f3507f6f0cb5002d700b9ece0493b367bb89f136f07d06b1bf77"
+      },
+      "transfer_agreement": {
+        "path": "../../results/finance/finance_v1__transfer_agreement.json",
+        "sha256": "31fcbdfe98c433f1b1d1fee316b95a4effdbf653d531b05fdf992bfcdd25b7ea"
+      },
+      "condition_results": {
+        "path": "../../results/finance/finance_v1__condition_results.json",
+        "sha256": "7c64778353797a3df06c24b594ce929e4df13ba28b866d4ab052b379a26fb399"
+      },
+      "witness_repair_report": {
+        "path": "../../results/finance/finance_v1__witness_repair_report.json",
+        "sha256": "c249b9eb2faeccfb2cc77d63a619d098488c4e7b5b294963d7c3312eb78844b9"
+      },
+      "release_equivalence": {
+        "path": "../../results/finance/finance_v1__release_equivalence.json",
+        "sha256": "0c02f0dc73dbf0bb13a7dc1c3d8ed9ce3b0d046b456edfea8f9f45b123605e61"
       }
     },
-    "eligible_to_merge": false,
-    "outcome_based_resampling": false
+    "run_manifests": {
+      "controls_gptoss": {
+        "path": "../../results/finance/20260815-172424-453093__authorization-memory-controls__finance-v2-successor-gptoss-controls/manifest.json",
+        "sha256": "8f9686a47de2fc0cbce2212c2395e90d43a0265117f3d1a308c27efe1415f336"
+      },
+      "controls_deepseek_initial": {
+        "path": "../../results/finance/20260815-172618-581879__authorization-memory-controls__finance-v2-successor-deepseek-controls/manifest.json",
+        "sha256": "03033cf556c28f7d4370c14733124a5cdb04d361c89e87e4dc33f929e59e7bcb"
+      },
+      "controls_deepseek_final": {
+        "path": "../../results/finance/20260815-172618-581879__authorization-memory-controls__finance-v2-successor-deepseek-controls__provider-error-continuation/manifest.json",
+        "sha256": "0cabc45b321c5827227640eba26acb2bdb8fafe2b924825d3826036966c6fdc7"
+      },
+      "nemotron_3_ultra_writer": {
+        "path": "../../results/finance/20260815-174850-711620__authorization-memory-writer__finance-v2-successor-nemotron/manifest.json",
+        "sha256": "6f49d0b3942b7ad0ac80910e89fb8de0c85d96ac430949c9370f2fdc0eaf2f5d"
+      },
+      "nemotron_3_ultra_pressure": {
+        "path": "../../results/finance/20260815-191940-918300__authorization-memory-pressure__finance-v2-successor-nemotron-frontier-pressure/manifest.json",
+        "sha256": "cad3ca79a7654bf2097e08ca86a764c4e1119c0c8e7b6ee5bcecbd73d319647f"
+      },
+      "kimi_writer": {
+        "path": "../../results/finance/20260815-192919-833092__authorization-memory-writer__finance-v2-successor-kimi/manifest.json",
+        "sha256": "30c95ca141eaac0bff752b1ba43fc29e578ac6d3566dbff2fb589099302c2ae3"
+      },
+      "kimi_pressure": {
+        "path": "../../results/finance/20260815-194045-794894__authorization-memory-pressure__finance-v2-successor-kimi-frontier-pressure/manifest.json",
+        "sha256": "918fb75500db3055f3d11c6d97dbd968a1725c3885f565645c226fa8275bbc23"
+      },
+      "glm_5_2_writer": {
+        "path": "../../results/finance/20260815-194955-192414__authorization-memory-writer__finance-v2-successor-glm/manifest.json",
+        "sha256": "9b736f31d636880a35a6f96421110c7e2dce22401eeae3b8e93f0e68470ec84c"
+      },
+      "glm_5_2_pressure": {
+        "path": "../../results/finance/20260815-202138-609252__authorization-memory-pressure__finance-v2-successor-glm-frontier-pressure__provider-error-continuation/manifest.json",
+        "sha256": "be66cc936ce41decefd0ff045d05ca6a8a02e951a0286efad68ac72ab029f508"
+      },
+      "glm_5_2_pressure_initial": {
+        "path": "../../results/finance/20260815-202138-609252__authorization-memory-pressure__finance-v2-successor-glm-frontier-pressure/manifest.json",
+        "sha256": "76d137ff85b94a54a77d8e1a42cafea9502e979eb076b383b444c1cd307a8f6b"
+      },
+      "grok_4_3_writer": {
+        "path": "../../results/finance/20260815-203518-137522__authorization-memory-writer__finance-v2-successor-grok/manifest.json",
+        "sha256": "4d1e5c59d28a048a0ded5c83e1355e4c16ec68aa18bf220cb9f28aed63c1995d"
+      },
+      "grok_4_3_pressure": {
+        "path": "../../results/finance/20260815-204615-028398__authorization-memory-pressure__finance-v2-successor-grok-frontier-pressure/manifest.json",
+        "sha256": "10a71882a96f87df796dbdceab18dcbafe95f1ab80ce0ad755680a4b192896ea"
+      },
+      "qwen_plus_0728_writer": {
+        "path": "../../results/finance/20260815-205452-499536__authorization-memory-writer__finance-v2-successor-qwen/manifest.json",
+        "sha256": "5c7ed2919b70330d3643317dbfcf70ae07a02091c1e797b275675802d6024231"
+      },
+      "qwen_plus_0728_pressure": {
+        "path": "../../results/finance/20260815-210912-156815__authorization-memory-pressure__finance-v2-successor-qwen-frontier-pressure/manifest.json",
+        "sha256": "f0cb027c859d0f62b1c36a3968cf9830b0cccb8ae2f909b37df84844e9531223"
+      }
+    }
   }
 }
