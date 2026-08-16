@@ -1,0 +1,118 @@
+{
+  "schema_version": "cybersecurity_writer_transfer_plan_v1",
+  "domain_id": "cybersecurity",
+  "release_id": "cybersecurity_v1",
+  "corpus_version": "benchmark_v1",
+  "presentation_id": "naturalistic_v1",
+  "pressure_profile": "financial_urgency_v1",
+  "status": "completed",
+  "planned_at": "2026-08-09",
+  "frozen_inputs": {
+    "release_sha256": "a6de16240f71c24bcc999cd4e06dbc9d12608c2087b38b64b1935296463aa6a6",
+    "corpus_source_sha256": "4b6cb0ee7e880edf619fe0447993cd1462e8f9d4dceed0f5ace61f90489dab62",
+    "presentation_sha256": "fd2f56e4fe630522c977bfbefbeef505c40b5ceda5651daa143f27ebe52a2d68",
+    "pressure_profile_sha256": "144c33f3ecd5b8d9f4e0c2f81cbef9833fa93539bdfec0e74c1b38732ab0a0ac",
+    "memory_implementation_id": "langmem_profile",
+    "memory_implementation_sha256": "bd98a82055492a8311fb5b1d93a31bbede967762b79fa3696bb00f1e658ece03",
+    "typed_schema_version": "4",
+    "configuration_sha256": "6b9d258a575eac3f5465731ab36d36714cbf134579bf33b297d78f14a10e6d16"
+  },
+  "design": {
+    "writer_targets_in_order": [
+      "nemotron_3_ultra_baseten",
+      "grok_4_3_openrouter",
+      "kimi_baseten",
+      "glm_5_2_baseten",
+      "qwen_plus_0728_openrouter"
+    ],
+    "executor_targets": [
+      "gptoss_baseten",
+      "deepseek_baseten"
+    ],
+    "excluded_targets": {
+      "mistral_medium_3_openrouter": "Preserved procurement full-load transport failure: 208/267 completion-run writer transports timed out.",
+      "gemini_3_flash_openrouter": "Failed shared typed-profile creation qualification.",
+      "gemini_3_5_flash_lite_openrouter": "Failed shared typed-profile creation qualification."
+    },
+    "seed": 20260812,
+    "temperature": 1.0,
+    "writer_runs": 1,
+    "executor_runs": 1,
+    "writer_max_attempts": 2,
+    "capacity_tier": "primary",
+    "conditions": [
+      "one_shot_text",
+      "one_shot_typed",
+      "incremental_text",
+      "incremental_typed"
+    ],
+    "candidate_cap_per_writer": 20,
+    "candidate_cap_per_family": 2,
+    "selection_uses_executor_behavior": false
+  },
+  "execution": {
+    "controls": "Reuse the completed frozen GPT-OSS and DeepSeek isolation controls; make no new control calls.",
+    "writer_routes": "Run each writer as a separate route so each receives its own deterministic witness cap. Generate memories once and evaluate those exact memories with both executors.",
+    "pressure_routes": "After each complete writer route, validate and replay pressure from that exact source. Make zero writer calls and zero baseline reruns.",
+    "run_order": "Complete writer and exact-source pressure for each target before moving to the next target, in the frozen writer order.",
+    "resampling": "No outcome-based reruns, removals, replacements, or pooled target substitution.",
+    "technical_failures": "Preserve provider and route failures in the denominator and artifact record. Stop before the next writer if the remaining approved budget is insufficient.",
+    "writer_command_template": "python -m experiments.run --domain cybersecurity --corpus-version benchmark_v1 --presentation-version naturalistic_v1 --study writer --writer-targets {writer_target} --executor-targets gptoss_baseten,deepseek_baseten --writer-runs 1 --executor-runs 1 --writer-max-attempts 2 --capacity-tier primary --seed 20260812 --estimated-cost-usd {writer_and_baseline_estimate} --tag cybersecurity-v1-transfer-{writer_label}",
+    "pressure_command_template": "python -m experiments.run --domain cybersecurity --corpus-version benchmark_v1 --presentation-version naturalistic_v1 --study pressure --source-run {exact_writer_run} --estimated-cost-usd {pressure_estimate} --tag cybersecurity-v1-transfer-{writer_label}-pressure"
+  },
+  "call_plan": {
+    "per_writer": {
+      "logical_writer_updates": 352,
+      "writer_calls_without_repairs": 352,
+      "writer_calls_maximum": 704,
+      "baseline_executor_calls_range": [1024, 1104],
+      "pressure_executor_calls_range": [1024, 1104],
+      "scheduled_calls_maximum": 2912
+    },
+    "matrix": {
+      "logical_writer_updates": 1760,
+      "projected_writer_calls_from_procurement_and_cybersecurity_usage": 2231,
+      "writer_calls_maximum": 3520,
+      "baseline_executor_calls_range": [5120, 5520],
+      "pressure_executor_calls_range": [5120, 5520],
+      "projected_calls_with_full_targeted_cap": 13271,
+      "scheduled_calls_maximum": 14560,
+      "transport_retries_excluded": true
+    }
+  },
+  "analysis": {
+    "primary_reporting": "Report every writer-executor pair separately by condition and arm.",
+    "pooled_reporting": "Pool only the five frozen reliable writer targets and retain writer-level sensitivity results.",
+    "mechanism": "Report deterministic natural-error versus exact-repair trials, affected families, and memory-error mechanisms.",
+    "transfer": "Pair executor decisions on the same memory and request; report marginal rates and paired agreement.",
+    "pressure": "Pair baseline and exact-source pressure trials; separate unauthorized action from authorized use.",
+    "cross_domain": "Compare percentages and family-level intervals with procurement; do not equate raw counts across domains."
+  },
+  "offline_validation": {
+    "all_five_individual_writer_plans": "passed",
+    "combined_target_plan": "passed",
+    "network_requests_made": false
+  },
+  "budget": {
+    "estimate_artifact": "results/cybersecurity/cybersecurity_v1__transfer_matrix_cost_estimate.json",
+    "expected_usd": 66.47922839233323,
+    "proposed_cap_usd": 85.0,
+    "approval_status": "approved",
+    "approved_at": "2026-08-09",
+    "approver_role": "repository_owner",
+    "actual_usd": 64.48903963999994,
+    "completion_status": "completed_under_cap"
+  },
+  "completed_execution": {
+    "completed_at": "2026-08-09",
+    "writer_routes": 5,
+    "pressure_routes": 5,
+    "total_calls": 12341,
+    "writer_call_errors": 4,
+    "executor_call_errors": 0,
+    "all_manifests_completed": true,
+    "all_pressure_source_job_hashes_match": true,
+    "results": "results/cybersecurity/cybersecurity_v1__transfer_matrix_results.json",
+    "results_summary": "results/cybersecurity/cybersecurity_v1__transfer_matrix_results.md"
+  }
+}

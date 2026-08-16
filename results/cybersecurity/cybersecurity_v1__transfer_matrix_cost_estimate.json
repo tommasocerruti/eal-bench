@@ -1,0 +1,147 @@
+{
+  "schema_version": "cybersecurity_writer_transfer_cost_v1",
+  "domain_id": "cybersecurity",
+  "release_id": "cybersecurity_v1",
+  "stage": "writer_executor_transfer_matrix",
+  "estimated_at": "2026-08-09",
+  "pricing": {
+    "unit": "USD per 1M tokens",
+    "accessed_at": "2026-08-09",
+    "sources": {
+      "baseten": "https://www.baseten.co/products/model-apis/",
+      "grok_4_3_openrouter": "https://openrouter.ai/api/v1/models",
+      "qwen_plus_0728_openrouter": "https://openrouter.ai/api/v1/models"
+    },
+    "targets": {
+      "gptoss_baseten": {"input": 0.10, "output": 0.50},
+      "deepseek_baseten": {"input": 1.74, "cached_input": 0.145, "output": 3.48},
+      "nemotron_3_ultra_baseten": {"input": 0.60, "cached_input": 0.12, "output": 2.40},
+      "grok_4_3_openrouter": {"input": 1.25, "cached_input": 0.20, "output": 2.50},
+      "kimi_baseten": {"input": 0.95, "cached_input": 0.16, "output": 4.00},
+      "glm_5_2_baseten": {"input": 1.40, "cached_input": 0.14, "output": 4.40},
+      "qwen_plus_0728_openrouter": {"input": 0.26, "output": 0.78}
+    },
+    "long_context_overrides": {
+      "grok_4_3_openrouter": "The published 200k-token per-request override does not apply to these projected requests.",
+      "qwen_plus_0728_openrouter": "The published 256k-token per-request override does not apply to these projected requests."
+    }
+  },
+  "call_plan": {
+    "logical_writer_updates": 1760,
+    "projected_physical_writer_calls": 2231,
+    "maximum_writer_calls": 3520,
+    "baseline_executor_calls_range": [5120, 5520],
+    "pressure_executor_calls_range": [5120, 5520],
+    "projected_total_calls_with_full_targeted_cap": 13271,
+    "scheduled_calls_maximum": 14560,
+    "controls_calls": 0,
+    "transport_retries_excluded": true
+  },
+  "estimation_method": {
+    "writer_usage": "Scale each writer's completed procurement prompt and completion usage by the observed cybersecurity-to-procurement GPT-OSS writer factors.",
+    "writer_prompt_factor": 5.224852027834271,
+    "writer_completion_factor": 5.16018953114637,
+    "projected_writer_calls_by_target": {
+      "nemotron_3_ultra_baseten": 459,
+      "grok_4_3_openrouter": 392,
+      "kimi_baseten": 419,
+      "glm_5_2_baseten": 504,
+      "qwen_plus_0728_openrouter": 457
+    },
+    "executor_usage": "Scale each writer-executor route's observed procurement per-call usage to 552 cybersecurity calls per executor and arm, using observed cybersecurity-to-procurement GPT-OSS domain factors.",
+    "baseline_prompt_factor": 1.6611305209894016,
+    "baseline_completion_factor": 0.8974405188241072,
+    "pressure_prompt_factor": 1.729186147187371,
+    "pressure_completion_factor": 1.0949150301894568,
+    "targeted_trials": "The central estimate uses the full 20-witness cap: 512 ordinary plus 40 natural-error and repair calls per executor and arm.",
+    "cache_policy": "The central estimate carries forward recorded target-specific cache fractions. The cap sensitivity bills every cached token at the ordinary input rate.",
+    "controls": "The completed frozen cybersecurity controls are reused and excluded from this budget."
+  },
+  "expected_cost_usd": {
+    "by_writer": {
+      "nemotron_3_ultra_baseten": {
+        "writer": 4.557036737781662,
+        "baseline_gptoss": 0.18074327759926562,
+        "baseline_deepseek": 3.7146957638300977,
+        "pressure_gptoss": 0.22061862897372111,
+        "pressure_deepseek": 4.558035516043709,
+        "total": 13.231129924228455
+      },
+      "grok_4_3_openrouter": {
+        "writer": 5.6297252094925865,
+        "baseline_gptoss": 0.16496766752089567,
+        "baseline_deepseek": 3.44880435466092,
+        "pressure_gptoss": 0.20497743933091028,
+        "pressure_deepseek": 4.136782243704034,
+        "total": 13.585256914709348
+      },
+      "kimi_baseten": {
+        "writer": 4.338906012362752,
+        "baseline_gptoss": 0.17788051755381346,
+        "baseline_deepseek": 3.677998530338859,
+        "pressure_gptoss": 0.21877744285893952,
+        "pressure_deepseek": 4.216934893162066,
+        "total": 12.630497396276432
+      },
+      "glm_5_2_baseten": {
+        "writer": 8.170668065391796,
+        "baseline_gptoss": 0.18753748668238165,
+        "baseline_deepseek": 3.838292024614828,
+        "pressure_gptoss": 0.22855682417471918,
+        "pressure_deepseek": 4.550944118707887,
+        "total": 16.97599851957161
+      },
+      "qwen_plus_0728_openrouter": {
+        "writer": 1.7624838967758933,
+        "baseline_gptoss": 0.1825874848135303,
+        "baseline_deepseek": 3.7334884203787717,
+        "pressure_gptoss": 0.2173667392862033,
+        "pressure_deepseek": 4.160419096292977,
+        "total": 10.056345637547377
+      }
+    },
+    "writers_total": 24.458819921804693,
+    "baseline_gptoss_total": 0.8937164341698868,
+    "baseline_deepseek_total": 18.413279093823476,
+    "pressure_gptoss_total": 1.0902970746244933,
+    "pressure_deepseek_total": 21.62311586791067,
+    "writer_and_baseline_total": 43.765815449798055,
+    "pressure_total": 22.713412942535165,
+    "matrix_total": 66.47922839233323
+  },
+  "budget_sensitivity": {
+    "all_cache_billed_as_ordinary_input_usd": 69.96684630534746,
+    "all_cache_ordinary_plus_20_percent_usage_headroom_usd": 83.96021556641695,
+    "proposed_cap_usd": 85.0,
+    "headroom_over_expected_usd": 18.52077160766677,
+    "headroom_fraction": 0.2785948787849531
+  },
+  "operating_budget": {
+    "writer_and_baseline_proposed_cap_usd": 56.0,
+    "pressure_proposed_cap_usd": 29.0,
+    "total_proposed_cap_usd": 85.0,
+    "approval_status": "approved",
+    "approved_at": "2026-08-09",
+    "approver_role": "repository_owner",
+    "accounting": "After every route, use provider-reported cost when present and otherwise price recorded token usage at the frozen rates. Do not start the next route if the remaining cap cannot cover its updated projection."
+  },
+  "actual_cost_usd": {
+    "status": "completed_under_cap",
+    "completed_at": "2026-08-09",
+    "calls": 12341,
+    "calls_with_provider_errors": 4,
+    "openrouter_provider_reported": 5.13137587,
+    "baseten_rate_derived": 59.357663769999945,
+    "matrix_total": 64.48903963999994,
+    "difference_from_expected": -1.990188752333286,
+    "headroom_remaining": 20.51096036000006,
+    "by_writer": {
+      "nemotron_3_ultra_baseten": 12.648189839999995,
+      "grok_4_3_openrouter": 12.708377209999975,
+      "kimi_baseten": 12.845079830000014,
+      "glm_5_2_baseten": 15.148080699999975,
+      "qwen_plus_0728_openrouter": 11.139312060000023
+    },
+    "method": "Use provider-reported OpenRouter usage.cost and price recorded Baseten token usage at the frozen target-specific rates."
+  }
+}
