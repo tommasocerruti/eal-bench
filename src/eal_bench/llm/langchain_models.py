@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import time
 from collections.abc import Iterable, Mapping, Sequence
 from datetime import datetime, timezone
@@ -36,6 +37,20 @@ _SENSITIVE_KEYS = {
     "http_client",
     "openai_api_key",
 }
+
+
+def _is_permanent_provider_error(error: BaseException) -> bool:
+    name = type(error).__name__.lower()
+    return any(
+        marker in name
+        for marker in (
+            "badrequest",
+            "forbidden",
+            "paymentrequired",
+            "permissiondenied",
+            "unauthorized",
+        )
+    )
 
 
 def _utcnow_iso() -> str:
@@ -366,6 +381,8 @@ class LangChainCallLogger(AsyncCallbackHandler):
         self._pending: dict[str, dict[str, Any]] = {}
         self._records: dict[str, dict[str, Any]] = {}
         self._attempt_run_ids: dict[str, list[str]] = {}
+        self._permanent_error_events: dict[str, asyncio.Event] = {}
+        self._permanent_errors: dict[str, BaseException] = {}
 
     @property
     def records_by_run_id(self) -> dict[str, dict[str, Any]]:
@@ -389,6 +406,19 @@ class LangChainCallLogger(AsyncCallbackHandler):
             ],
             "errors": [record.get("error") for record in records],
         }
+
+    async def wait_for_permanent_error(
+        self, memory_attempt_id: str
+    ) -> BaseException:
+        event = self._permanent_error_events.setdefault(
+            memory_attempt_id, asyncio.Event()
+        )
+        await event.wait()
+        return self._permanent_errors[memory_attempt_id]
+
+    def clear_permanent_error_watch(self, memory_attempt_id: str) -> None:
+        self._permanent_error_events.pop(memory_attempt_id, None)
+        self._permanent_errors.pop(memory_attempt_id, None)
 
     async def finalize_attempt_error(
         self,
@@ -606,3 +636,13 @@ class LangChainCallLogger(AsyncCallbackHandler):
         }
         self._records[run_key] = record
         await self.logger.log(record)
+        memory_attempt_id = metadata.get("memory_attempt_id")
+        if (
+            memory_attempt_id is not None
+            and _is_permanent_provider_error(error)
+        ):
+            attempt_key = str(memory_attempt_id)
+            self._permanent_errors[attempt_key] = error
+            self._permanent_error_events.setdefault(
+                attempt_key, asyncio.Event()
+            ).set()

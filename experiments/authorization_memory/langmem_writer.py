@@ -135,6 +135,10 @@ class _Invocation:
     error: Exception | None
 
 
+class _PermanentProviderRouteError(RuntimeError):
+    pass
+
+
 def memory_implementation_manifest(
     domain: AuthorizationMemoryDomain,
 ) -> dict[str, Any]:
@@ -222,11 +226,44 @@ async def _bounded_manager_invoke(
     *,
     config: Mapping[str, Any],
     timeout_seconds: float,
+    permanent_error_waiter: Any = None,
 ) -> Any:
-    return await asyncio.wait_for(
-        manager.ainvoke(payload, config=config),
-        timeout=timeout_seconds,
-    )
+    if permanent_error_waiter is None:
+        return await asyncio.wait_for(
+            manager.ainvoke(payload, config=config),
+            timeout=timeout_seconds,
+        )
+
+    async def invoke_or_abort() -> Any:
+        manager_task = asyncio.create_task(
+            manager.ainvoke(payload, config=config)
+        )
+        error_task = asyncio.create_task(permanent_error_waiter())
+        try:
+            done, _ = await asyncio.wait(
+                (manager_task, error_task),
+                return_when=asyncio.FIRST_COMPLETED,
+            )
+            if manager_task in done:
+                return await manager_task
+            provider_error = await error_task
+            manager_task.cancel()
+            await asyncio.gather(manager_task, return_exceptions=True)
+            raise _PermanentProviderRouteError(
+                "permanent provider error aborted LangMem invocation: "
+                f"{type(provider_error).__name__}: {provider_error}"
+            ) from provider_error
+        finally:
+            for task in (manager_task, error_task):
+                if not task.done():
+                    task.cancel()
+            await asyncio.gather(
+                manager_task,
+                error_task,
+                return_exceptions=True,
+            )
+
+    return await asyncio.wait_for(invoke_or_abort(), timeout=timeout_seconds)
 
 
 def validate_writer_timeout_guard() -> dict[str, Any]:
@@ -708,16 +745,22 @@ async def _invoke_wave(
                     raise TimeoutError(
                         "writer route exceeded its wall-time limit"
                     )
-                result = await _bounded_manager_invoke(
-                    manager,
-                    {
-                        "messages": list(update.messages),
-                        "existing": existing,
-                        "max_steps": 1,
-                    },
-                    config=config,
-                    timeout_seconds=remaining,
-                )
+                try:
+                    result = await _bounded_manager_invoke(
+                        manager,
+                        {
+                            "messages": list(update.messages),
+                            "existing": existing,
+                            "max_steps": 1,
+                        },
+                        config=config,
+                        timeout_seconds=remaining,
+                        permanent_error_waiter=lambda: (
+                            callback.wait_for_permanent_error(attempt_id)
+                        ),
+                    )
+                finally:
+                    callback.clear_permanent_error_watch(attempt_id)
             observation = callback.observation(attempt_id)
             raw_arguments = _raw_underlying_tool_call(callback, observation)
             if len(result) != 1:
@@ -748,6 +791,8 @@ async def _invoke_wave(
                 run_ids=tuple(observation["run_ids"]),
                 error=None,
             )
+        except _PermanentProviderRouteError:
+            raise
         except Exception as exc:
             if isinstance(exc, TimeoutError):
                 await callback.finalize_attempt_error(

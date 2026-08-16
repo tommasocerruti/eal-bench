@@ -32,6 +32,17 @@ _SCORING_KEY_PATTERN = re.compile(
     re.IGNORECASE,
 )
 _TREATMENT_SUFFIX_PATTERN = re.compile(r"(?:_in|_out)(?:\b|_scope\b)", re.IGNORECASE)
+
+
+def _redact_model_managed_memory(content: str) -> str:
+    return re.sub(
+        r"<existing>.*?</existing>",
+        "<existing>[model-managed memory redacted]</existing>",
+        content,
+        flags=re.DOTALL,
+    )
+
+
 def validate_model_visible_leakage(
     domain: AuthorizationMemoryDomain,
     cases: Sequence[Any],
@@ -216,16 +227,18 @@ def validate_model_context_leakage(
         tools, (list, tuple)
     ):
         raise TypeError("model context messages/tools must be sequences")
-    application_messages = tuple(
-        {
-            **message,
-            "content": _without_rejected_model_arguments(message.get("content")),
-        }
-        for message in messages
-    )
+    controlled_messages = []
+    for message in messages:
+        controlled = dict(message)
+        content = controlled.get("content")
+        if isinstance(content, str):
+            controlled["content"] = _redact_model_managed_memory(
+                _without_rejected_model_arguments(content)
+            )
+        controlled_messages.append(controlled)
     surface = json.dumps(
         {
-            "messages": list(application_messages),
+            "messages": controlled_messages,
             "tools": list(tools),
             "tool_choice": tool_choice,
         },
@@ -239,7 +252,7 @@ def validate_model_context_leakage(
         presentation = None
     if presentation is not None:
         policy = domain.corpus.case_metadata(case).get("policy")
-        for index, message in enumerate(messages):
+        for index, message in enumerate(controlled_messages):
             if message.get("role") != "system":
                 continue
             content = message.get("content")
