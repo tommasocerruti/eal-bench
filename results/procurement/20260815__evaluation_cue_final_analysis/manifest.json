@@ -1,0 +1,454 @@
+{
+  "artifacts": {
+    "behavior_contrasts": {
+      "path": "behavior_contrasts.csv",
+      "rows": 1350,
+      "sha256": "079896f4dca229e428b2833a704b5d6988d960b7115b35329c584d0b91623b90"
+    },
+    "behavior_rates": {
+      "path": "behavior_rates.csv",
+      "rows": 2025,
+      "sha256": "ed2b55c2a4468f9decfaa9cad62442f9b88b222b3890363a28414774dcaa7628"
+    },
+    "cost_summary": {
+      "path": "cost_summary.csv",
+      "rows": 23,
+      "sha256": "1a1089accb16a9a786effbcd138ea69adab66d1b931cf01191942582d4d85fc1"
+    },
+    "figure_pdf": {
+      "path": "evaluation_cue_effects.pdf",
+      "sha256": "b94b01139239abf0081aa381d813cade656cadc38cc41b495634215afae1c83c"
+    },
+    "figure_png": {
+      "path": "evaluation_cue_effects.png",
+      "sha256": "4244c0b9a98c1b28ea04d2d310c3e5984a40960f462e3c19a0136c347abaf289"
+    },
+    "pairing_validation": {
+      "path": "pairing_validation.csv",
+      "rows": 36721,
+      "sha256": "f7c7826c6742b14d336450d2cdd36388bdbdc875e46678dc8b4e6be97098200c"
+    },
+    "report": {
+      "path": "report.md",
+      "sha256": "c87a04a679726c36db07e4fd62393e324d5d075b8aee5b090c6e538cfc87feb7"
+    },
+    "summary": {
+      "path": "summary.json",
+      "sha256": "19071b94f42b4e35dc4bc9b84a7f53f3b11f7f38d0b1d688f2f8a3056ca7b373"
+    },
+    "typed_fidelity_contrasts": {
+      "path": "typed_fidelity_contrasts.csv",
+      "rows": 150,
+      "sha256": "4da978eeea398102a1d5c355eed1470d90eb4655118faa2cc5360523485adbe0"
+    },
+    "typed_fidelity_fields": {
+      "path": "typed_fidelity_fields.csv",
+      "rows": 17228,
+      "sha256": "a02dbb64e0c8dac115ec7617da5854b3dd3d96c33c1c7138459748a0c3d14c78"
+    },
+    "typed_fidelity_rates": {
+      "path": "typed_fidelity_rates.csv",
+      "rows": 225,
+      "sha256": "55d05b9bd0275b5eb39a33188d72ec161f9508d0224f0bfad4ba4cbfbc37eb0a"
+    },
+    "update_mechanisms": {
+      "path": "update_mechanisms.csv",
+      "rows": 90,
+      "sha256": "ef9056011d30b97140068a8cf8d69937511c95f1c75317de59142a05fa1447fe"
+    },
+    "update_status_rates": {
+      "path": "update_status_rates.csv",
+      "rows": 259,
+      "sha256": "a7a785b2dbd504905b41a4f5b1184c2785e7af770c81a3ce21f1390db81c5e4a"
+    }
+  },
+  "domain_id": "procurement",
+  "schema_version": "procurement_evaluation_cue_analysis_v1",
+  "source_runs": [
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "b89b037775aad55e87fb14ce0fb4683061aecc445a7d41bf7bd075c88b9d4315",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-164854-329990__authorization-memory-evaluation_cue__e1-writer-s20260816-l0-nemotron",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "fd02c21a9aafd1e5185f6faa5e3711c7c27032c296493329882a2949b8df33d2",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-164855-051740__authorization-memory-evaluation_cue__e1-writer-s20260816-l0-grok",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "eb9f59d6846f7a608ab8a56765c903296351630a13c1c8039e5edb0c74896ce2",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-165331-040710__authorization-memory-evaluation_cue__e1-writer-s20260816-l0-glm",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "ec06d32b912e42a7f1c7779afdfe41ad30124b8acc15d2e9d3099419d2956c34",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-165331-276150__authorization-memory-evaluation_cue__e1-writer-s20260816-l0-qwen",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "9659581f2e40de0eb8fe5baa36c05de2c355048df32eb7f8cdcdff93702aecfd",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-170233-674649__authorization-memory-evaluation_cue__e1-writer-s20260816-l0-kimi",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "4c27e6da1afca42afb46246c733a4d657179b1e0c768e53cbd56a48bbab1108c",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-173910-838641__authorization-memory-evaluation_cue__e1-writer-s20260817-l0-nemotron",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "cbeed795369f4708c2b076dea9966d34f831544efe3e69082f01752ad9687a0b",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-173911-433355__authorization-memory-evaluation_cue__e1-writer-s20260817-l0-grok",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "815e4cc89224f1085c7bfa20ed6c55deaaf5a0ff44b0de0a3547a73426e104a2",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-174428-254422__authorization-memory-evaluation_cue__e1-writer-s20260817-l0-glm",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "3bdd9ee5555e776c25acd423981488c32649d4436cef21829fcb4adadc2c15f9",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-175814-718214__authorization-memory-evaluation_cue__e1-writer-s20260817-l0-qwen-technical-replacement",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "276412304394cae0e9c60e190ef0ef1fb67758bf10e50be0b75fbfa940f1ae21",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-180706-991157__authorization-memory-evaluation_cue__e1-writer-s20260817-l0-kimi",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "c914a8aa7215a2b390a03c957de921a9231f38849e492b65963ef6b18f324efa",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-200211-938628__authorization-memory-evaluation_cue__e1-writer-s20260818-l0-nemotron",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "c81da55f3ed496579363525fe964c530baf16d293468f6b84e135538f49481e1",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-200213-340154__authorization-memory-evaluation_cue__e1-writer-s20260818-l0-grok",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "a058de837b3b330e49842c3387eb93c43241b102681da6875103d4d140352564",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-200718-369465__authorization-memory-evaluation_cue__e1-writer-s20260818-l0-glm",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "962fde181c14d9762c7ead685ac225b415c18bfcfc92843cd2593c6dd1e3b604",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-200722-458656__authorization-memory-evaluation_cue__e1-writer-s20260818-l0-qwen",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "d56f3fbf59099e8e5af037c73b7c979c204d7cf8048e664249dc0ce507b4400e",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-201603-544220__authorization-memory-evaluation_cue__e1-writer-s20260818-l0-kimi",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "2137ad2ffad1c676c47001550f6335da8b73c5ee9efcfef1c020834ee5e07de4",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-170651-209603__authorization-memory-evaluation_cue__e1-writer-s20260816-l1-grok",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "779246e9463e354453e245cbdeca7a2da5a97d3b9471b3dcf65de86f12e68506",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-170653-036190__authorization-memory-evaluation_cue__e1-writer-s20260816-l1-nemotron",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "92db12c9cdc4505c48a9b448fdc64079b4629774e870be652d3d41709092db86",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-171133-879168__authorization-memory-evaluation_cue__e1-writer-s20260816-l1-qwen",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "3a78eb0a96f42b7735773ea970d9909479b65b508f23d56196d1cc0e2d97040a",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-171134-873474__authorization-memory-evaluation_cue__e1-writer-s20260816-l1-glm",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "9a5d505435d429ab965b79aeb20f0c238e2c40087faf3aac7e94fe43d1981a88",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-171938-478348__authorization-memory-evaluation_cue__e1-writer-s20260816-l1-kimi",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "88d99676e105c875aed09fb684f39d80a6d831be0e9002419f0b689078c33654",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-191915-744008__authorization-memory-evaluation_cue__e1-writer-s20260817-l1-grok",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "dafeb06ec91df197c33f70a7cf20ae3c976122072f54fe6f3d6fd09651a732bc",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-191915-745002__authorization-memory-evaluation_cue__e1-writer-s20260817-l1-nemotron",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "3b9dd4461b8a4b826e4c75563e543b512c280d8d26468268c3a29fb48690772f",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-192438-860841__authorization-memory-evaluation_cue__e1-writer-s20260817-l1-glm",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "7f614bfa18d8218ba707c0f81d82e284e1b336932e844546b0864469fb3e0cd5",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-192439-288320__authorization-memory-evaluation_cue__e1-writer-s20260817-l1-qwen",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "964fd0d7a4cfcb054bce587839cd281a83fe7f162ee0660cbf304f6045fe4c44",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-193351-891141__authorization-memory-evaluation_cue__e1-writer-s20260817-l1-kimi",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "d08b4d135d5a9e2ea2f13e60926227880a43bcc1a8b6d5ef13b3db21f09a406d",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-201918-564381__authorization-memory-evaluation_cue__e1-writer-s20260818-l1-grok",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "f0603e6887360f573b8ffa0dd2f27a05cb07b16ed4deb600e1d327ad69c306dd",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-201920-760558__authorization-memory-evaluation_cue__e1-writer-s20260818-l1-nemotron",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "3cb09cf3e05e0689624a835218aaca51a043b6ce59d8d19c6e237bf989a2f029",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-202703-550247__authorization-memory-evaluation_cue__e1-writer-s20260818-l1-glm",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "a610b7408ee131cd5284ed81ac1943a726185debab47675502daa9ec97cc6ea5",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-202705-025409__authorization-memory-evaluation_cue__e1-writer-s20260818-l1-qwen",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "d303c0abd3d1ab2ff9d54decc3153c8f995d8e870ae1dd361e12ad24b01525cc",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-203548-497675__authorization-memory-evaluation_cue__e1-writer-s20260818-l1-kimi",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "12e3a82cda42bf17aa066082d808802073db93f48da3231c224985c218cc806d",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-172222-954358__authorization-memory-evaluation_cue__e1-writer-s20260816-l2-nemotron",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "dba8724b3e842b0c491c416c5853d99d54f85217b154d264b18ba6cf4461de80",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-172225-201783__authorization-memory-evaluation_cue__e1-writer-s20260816-l2-grok",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "b917fdf7b109b4526664bacba742084650917807fdc443fe4944c01064bee7e1",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-172742-775763__authorization-memory-evaluation_cue__e1-writer-s20260816-l2-glm",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "02e5499bf19ffc8cc57a5904e22d51c35403892978faaab7ea34bffea502ce86",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-172744-238532__authorization-memory-evaluation_cue__e1-writer-s20260816-l2-qwen",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "94e8656d4b8cf7f16d27b17625536e5bdb1e18e2a44d3051fe23f40cb60a4128",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-173501-978054__authorization-memory-evaluation_cue__e1-writer-s20260816-l2-kimi",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "7a52593beee56af5d347f204bc49448311dfdc91c71d371ed73d900824098344",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-193713-488633__authorization-memory-evaluation_cue__e1-writer-s20260817-l2-grok",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "d3b13d97ba7794b12f4a9a4c9f6d91bde1b3638621916304fad5209d340d6c49",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-193714-216600__authorization-memory-evaluation_cue__e1-writer-s20260817-l2-nemotron",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "57fbe2f35399b783225aa67e3f9cf7d971bd363af47e4e85e9945d6d3de3d8cf",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-194415-844289__authorization-memory-evaluation_cue__e1-writer-s20260817-l2-qwen",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "213286adb285bedf62cebe3d4da64199b5e897d330886234c5674d2f807ea8d4",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-194415-989636__authorization-memory-evaluation_cue__e1-writer-s20260817-l2-glm",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "7d9d363dbe86001c797b293df89b6735ffe2a336b3532447f7ac87566d3af4ff",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-195207-397260__authorization-memory-evaluation_cue__e1-writer-s20260817-l2-kimi",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "482fe150deb15db3450c624f39bbefbb3912055ed82f63639c4e9204fc0eea46",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-203818-187457__authorization-memory-evaluation_cue__e1-writer-s20260818-l2-nemotron",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "063990a1296cc4bcf0abbe302e16004c18c85a867ad878d7ad3033354f98efed",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-203818-470723__authorization-memory-evaluation_cue__e1-writer-s20260818-l2-grok",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "2dbde9d6cf2cf8e44e3193739c9fff9b7421fa949d6ee1e54a1c5d578d9992bd",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-204247-349098__authorization-memory-evaluation_cue__e1-writer-s20260818-l2-qwen",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "193bea8d5f8955646f3f81a0459a78d5d9b21f4e52c033ee3967b75469f8d0ca",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-204247-836595__authorization-memory-evaluation_cue__e1-writer-s20260818-l2-glm",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "bcbf38d4b0ae0140b9f8551684fb53ca2d90d55d4b41709302086893b7ccc0df",
+      "ordinary_trials": 288,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-205038-063437__authorization-memory-evaluation_cue__e1-writer-s20260818-l2-kimi",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "b15586d04dfd5d255c42e76aafac41251282b15e8e499c47102347398289ab43",
+      "ordinary_trials": 2880,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-161042-251154__authorization-memory-evaluation_cue__e1-full-executor-l0-linkage",
+      "stage": "executor"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "b221a1f79a8c0edd6b9ced4a6454f94061d82ee008198116644a5dbf2c46cee4",
+      "ordinary_trials": 2880,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-161100-030104__authorization-memory-evaluation_cue__e1-full-executor-l1",
+      "stage": "executor"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "15dededf84270b189fdec73a272eea4b3618414cca15805e2f6ae24621168cfe",
+      "ordinary_trials": 2880,
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-163009-231674__authorization-memory-evaluation_cue__e1-full-executor-l2",
+      "stage": "executor"
+    }
+  ],
+  "study": "evaluation_cue_analysis"
+}
