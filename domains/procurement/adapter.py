@@ -74,6 +74,10 @@ from .studies.capacity_ablation import (
     validate_writer_visible_options as validate_capacity_visible_writer_options,
     validate_writer_visible_replay_options as validate_capacity_visible_replay_options,
 )
+from .studies.evaluation_cue import (
+    build_plan as build_evaluation_cue_plan,
+    validate_options as validate_evaluation_cue_options,
+)
 from .studies.routes import (
     build_controls_plan,
     build_pressure_plan,
@@ -885,6 +889,12 @@ _STUDIES = {
             "Nested trajectory-level selected best-of-k writer scaling.",
             validator=validate_writer_ttc_options,
             builder=build_writer_ttc_plan,
+        ),
+        StudyProfile(
+            "evaluation_cue",
+            "Randomized explicit evaluation cues for writers and executors.",
+            validator=validate_evaluation_cue_options,
+            builder=build_evaluation_cue_plan,
         ),
         StudyProfile(
             CAPACITY_WRITER_STUDY_ID,

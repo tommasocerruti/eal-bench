@@ -1139,6 +1139,7 @@ def _study_job_model_context(
         presentation=presentation,
         presentation_hash=presentation_hash,
         challenge_metadata=challenge_metadata,
+        registered_instruction_prefix=job.registered_instruction_prefix,
     )
     return replace(
         context,
@@ -1235,6 +1236,7 @@ def _executor_model_context(
     presentation: PresentationProfile,
     presentation_hash: str,
     challenge_metadata: Mapping[str, Any] | None = None,
+    registered_instruction_prefix: str | None = None,
 ) -> ModelContext:
     normalized_messages = tuple(dict(message) for message in messages)
     normalized_tools = tuple(dict(tool) for tool in tools)
@@ -1302,7 +1304,12 @@ def _executor_model_context(
             ),
         },
     )
-    validate_model_context_leakage(domain, case, context)
+    validate_model_context_leakage(
+        domain,
+        case,
+        context,
+        registered_instruction_prefix=registered_instruction_prefix,
+    )
     return context
 
 
