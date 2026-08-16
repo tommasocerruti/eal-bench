@@ -70,7 +70,7 @@
     "finalize_results.py": "0a89880f981bedbaee5c6efc528618417d56a14eaee7ea08754c1b77d3b0edbc",
     "models.py": "a8defd0c02985269c9479bd6293625afa85ff69df1085ba1b2f6a6d769d8ae9b",
     "pressure.py": "89d6e5d9bb1b8106bb715178e2963f3d89291ee2f7aca556d05ea01b78ad7718",
-    "release.py": "99f616cc8958540f7f0e73c4f318a5545d8dada4ab5d84bd71cf8688bf71c004",
+    "release.py": "9dfc87cab7d65a47422989396b10f9b77cb2f761d43e5fca91a8662ac410ec21",
     "semantics.py": "6624c535e886a9945418d799b9e006f42fb58ac5eecb1f81bd224c8d32d2e97b",
     "studies.py": "9b431f6194349d1f7113ffafeb701cf254b02b3893538582deede39875da0ea8"
   },
@@ -98,8 +98,8 @@
     }
   },
   "results": {
-    "status": "completed_transfer_matrix_canonical_gate_pending",
-    "eligible_to_merge": false,
+    "status": "completed_claim_release",
+    "eligible_to_merge": true,
     "outcome_based_resampling": false,
     "technical_execution_identifiers_retained": true,
     "reports": {
@@ -143,9 +143,17 @@
         "path": "../../results/finance/finance_v1__witness_repair_report.json",
         "sha256": "c249b9eb2faeccfb2cc77d63a619d098488c4e7b5b294963d7c3312eb78844b9"
       },
+      "mechanism_extension": {
+        "path": "../../results/finance/finance_v1__mechanism_extension.json",
+        "sha256": "db03e4574e30eb5f7123d124e50c614b62dfbe422f1188546230506afc18197b"
+      },
       "release_equivalence": {
         "path": "../../results/finance/finance_v1__release_equivalence.json",
         "sha256": "0c02f0dc73dbf0bb13a7dc1c3d8ed9ce3b0d046b456edfea8f9f45b123605e61"
+      },
+      "acceptance": {
+        "path": "../../results/finance/finance_v1__acceptance.json",
+        "sha256": "0317b5eb7fb9fb854378b8171ee0c171b9effe0fa6428f1c2699e1dd33dd7fc9"
       }
     },
     "run_manifests": {

@@ -42,7 +42,9 @@ def build_release(domain: Any) -> dict[str, Any]:
         "transfer_agreement",
         "condition_results",
         "witness_repair_report",
+        "mechanism_extension",
         "release_equivalence",
+        "acceptance",
     ):
         filename = f"finance_v1__{name}"
         if "." not in name:
@@ -167,8 +169,8 @@ def build_release(domain: Any) -> dict[str, Any]:
             },
         },
         "results": {
-            "status": "completed_transfer_matrix_canonical_gate_pending",
-            "eligible_to_merge": False,
+            "status": "completed_claim_release",
+            "eligible_to_merge": True,
             "outcome_based_resampling": False,
             "technical_execution_identifiers_retained": True,
             "reports": reports,

@@ -35,19 +35,27 @@ Both executors passed isolation: faithful text and typed memory each produced 32
 uses and 0/32 unauthorized submissions, while controlled broadening produced 32/32 unauthorized
 submissions.
 
-Across five writers and both executors, baseline authorized use was 86.6% and unauthorized
-submission was 5.9%. Under pressure these changed to 77.3% and 10.1%. Natural substantive memory
+Across five writers and both executors, baseline authorized use was 86.6% and unsafe action was
+5.9%. Under pressure these changed to 77.3% and 10.1%. Natural substantive memory
 errors caused 24/24 unsafe actions, while exact canonical repair caused 0/24. Fixed-memory action
 outcomes agreed across executors on 98.4% of matched requests.
+
+The shared typed-state mechanism analysis yields an 80 → 19 → 6 → 6 → 6
+final-memory funnel: final typed memories, semantic errors, authority-gaining errors,
+apparent-authority memories, and propagated unsafe actions. The frozen derivation is in
+[`finance_v1__mechanism_extension.json`](../../results/finance/finance_v1__mechanism_extension.json).
 
 Qwen's incremental free-text initialization succeeded for 7/8 families, so its failed initial
 profile remains in the intention-to-treat results. The complete transfer matrix cost USD 37.29
 under its USD 50 cap; isolation controls cost USD 4.30 separately. Full tables are in
 [`results/finance/finance_v1__matrix_results.md`](../../results/finance/finance_v1__matrix_results.md).
 
-The transfer matrix is complete, but it does not replace the repository's canonical scientific
-merge gate. Finance remains ineligible to merge as a claim-complete scientific domain until a
-GPT-OSS writer → GPT-OSS executor writer route and its linked pressure route pass on this release.
+Finance is a claim-valid, merge-eligible core domain. The repository owner's final acceptance
+treats the completed five-writer by two-executor matrix, passed isolation controls, exact-repair
+reversal, and byte-identical public release mapping as sufficient evidence. This acceptance
+supersedes the earlier plan for a separate GPT-OSS writer → GPT-OSS executor merge route without
+altering or resampling any completed result. The decision and its retained limitations are frozen
+in [`finance_v1__acceptance.json`](../../results/finance/finance_v1__acceptance.json).
 
 ## Offline validation
 

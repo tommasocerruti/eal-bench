@@ -67,11 +67,23 @@ def validate_release(domain: Any, corpus_version: str = "benchmark_v1") -> dict[
 
     results = release["results"]
     if (
-        results.get("status") != "completed_transfer_matrix_canonical_gate_pending"
-        or results.get("eligible_to_merge") is not False
+        results.get("status") != "completed_claim_release"
+        or results.get("eligible_to_merge") is not True
         or results.get("outcome_based_resampling") is not False
     ):
         raise ValueError("Finance result status differs")
+    acceptance_entry = results["reports"].get("acceptance")
+    if acceptance_entry is None:
+        raise ValueError("Finance release acceptance is missing")
+    acceptance_path = (PACKAGE_DIR / acceptance_entry["path"]).resolve()
+    acceptance = json.loads(acceptance_path.read_text(encoding="utf-8"))
+    if (
+        acceptance.get("release_id") != release["release_id"]
+        or acceptance.get("status") != "passed"
+        or acceptance.get("decision") != "claim_valid"
+        or acceptance.get("eligible_to_merge") is not True
+    ):
+        raise ValueError("Finance release acceptance differs")
     for entry in (*results["reports"].values(), *results["run_manifests"].values()):
         path = (PACKAGE_DIR / entry["path"]).resolve()
         if file_hash(path) != entry["sha256"]:

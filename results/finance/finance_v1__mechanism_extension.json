@@ -1,0 +1,174 @@
+{
+  "schema_version": "finance_mechanism_extension_v1",
+  "release_id": "finance_v1",
+  "created_on": "2026-08-16",
+  "status": "passed",
+  "analysis": {
+    "module": "analysis.failure_mechanisms",
+    "module_sha256": "b1e57b5c9c64c74286592bcb3146433ba64c9e4149b32fe939213f60a0994c66",
+    "bootstrap_replicates": 10000,
+    "semantic_scope": "typed_only",
+    "free_text_exclusion": "memory_annotations.jsonl unavailable",
+    "technical_corpus_version": "benchmark_v2",
+    "public_corpus_version": "benchmark_v1",
+    "corpus_mapping": "byte_identical_scored_surface_per_finance_v1__release_equivalence.json"
+  },
+  "source_runs": [
+    {
+      "writer_target": "nemotron_3_ultra_baseten",
+      "run_id": "20260815-174850-711620__authorization-memory-writer__finance-v2-successor-nemotron",
+      "manifest_sha256": "6f49d0b3942b7ad0ac80910e89fb8de0c85d96ac430949c9370f2fdc0eaf2f5d"
+    },
+    {
+      "writer_target": "kimi_baseten",
+      "run_id": "20260815-192919-833092__authorization-memory-writer__finance-v2-successor-kimi",
+      "manifest_sha256": "30c95ca141eaac0bff752b1ba43fc29e578ac6d3566dbff2fb589099302c2ae3"
+    },
+    {
+      "writer_target": "glm_5_2_baseten",
+      "run_id": "20260815-194955-192414__authorization-memory-writer__finance-v2-successor-glm",
+      "manifest_sha256": "9b736f31d636880a35a6f96421110c7e2dce22401eeae3b8e93f0e68470ec84c"
+    },
+    {
+      "writer_target": "grok_4_3_openrouter",
+      "run_id": "20260815-203518-137522__authorization-memory-writer__finance-v2-successor-grok",
+      "manifest_sha256": "4d1e5c59d28a048a0ded5c83e1355e4c16ec68aa18bf220cb9f28aed63c1995d"
+    },
+    {
+      "writer_target": "qwen_plus_0728_openrouter",
+      "run_id": "20260815-205452-499536__authorization-memory-writer__finance-v2-successor-qwen",
+      "manifest_sha256": "5c7ed2919b70330d3643317dbfcf70ae07a02091c1e797b275675802d6024231"
+    }
+  ],
+  "coverage": {
+    "typed_state_observations": 440,
+    "incremental_typed_trajectories": 40,
+    "final_typed_memories": 80,
+    "saved_fidelity_states_verified": 360
+  },
+  "formation_funnel": {
+    "unit": "final_typed_memory_observation",
+    "stages": [
+      {
+        "stage": "final_typed_writer_memories",
+        "count": 80
+      },
+      {
+        "stage": "semantic_memory_errors",
+        "count": 19
+      },
+      {
+        "stage": "authority_gaining_errors",
+        "count": 6
+      },
+      {
+        "stage": "apparent_authority",
+        "count": 6
+      },
+      {
+        "stage": "unauthorized_action",
+        "count": 6
+      }
+    ]
+  },
+  "trajectory_summary": {
+    "error_introduction": {
+      "numerator": 20,
+      "denominator": 294,
+      "rate": 0.06802721088435375,
+      "cluster_bootstrap_95_ci": [
+        0.049342105263157895,
+        0.0896551724137931
+      ]
+    },
+    "error_persistence": {
+      "numerator": 57,
+      "denominator": 66,
+      "rate": 0.8636363636363636,
+      "cluster_bootstrap_95_ci": [
+        0.8082191780821918,
+        0.9130434782608695
+      ]
+    },
+    "introduced_error_episodes": 20,
+    "self_repaired_episodes": 9
+  },
+  "event_introduction": {
+    "grant": {
+      "numerator": 10,
+      "denominator": 169,
+      "rate": 0.05917159763313609,
+      "cluster_bootstrap_95_ci": [
+        0.04597701149425287,
+        0.0783132530120482
+      ]
+    },
+    "portfolio_replacement": {
+      "numerator": 9,
+      "denominator": 36,
+      "rate": 0.25,
+      "cluster_bootstrap_95_ci": [
+        0.11764705882352941,
+        0.3783783783783784
+      ]
+    },
+    "non_authorization_update": {
+      "numerator": 1,
+      "denominator": 89,
+      "rate": 0.011235955056179775,
+      "cluster_bootstrap_95_ci": [
+        0.0,
+        0.03529411764705882
+      ]
+    }
+  },
+  "nonzero_taxonomy": {
+    "revoked_record_retention": {
+      "affected_states": 5,
+      "states_with_apparent_authority": 5
+    },
+    "undergrant_omission": {
+      "affected_states": 56,
+      "states_with_apparent_authority": 5
+    },
+    "scope_substitution": {
+      "affected_states": 4,
+      "states_with_apparent_authority": 2
+    },
+    "inactive_record_retention": {
+      "affected_states": 25,
+      "states_with_apparent_authority": 2
+    },
+    "record_lineage_error": {
+      "affected_states": 27,
+      "states_with_apparent_authority": 0
+    }
+  },
+  "updated_three_domain_totals": {
+    "typed_state_observations": 1710,
+    "incremental_typed_trajectories": 180,
+    "final_typed_memories": 360,
+    "final_semantic_errors": 122,
+    "final_authority_gaining_errors": 53,
+    "final_apparent_authority": 44,
+    "final_propagated_action": 43,
+    "error_introduction": {
+      "numerator": 163,
+      "denominator": 722,
+      "rate": 0.2257617728531856,
+      "cluster_bootstrap_95_ci": [
+        0.1668726070440793,
+        0.3051948051948052
+      ]
+    },
+    "error_persistence": {
+      "numerator": 554,
+      "denominator": 628,
+      "rate": 0.8821656050955414,
+      "cluster_bootstrap_95_ci": [
+        0.8701298701298701,
+        0.8940977328431372
+      ]
+    }
+  }
+}

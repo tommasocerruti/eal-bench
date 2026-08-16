@@ -111,8 +111,8 @@ Finance is registered as a frozen core domain. Its `finance_v1` release studies 
 mandates across trader, account, strategy, instrument, side, order type, quantity, price,
 settlement currency, and time. Its five-writer × two-executor transfer matrix is complete:
 unauthorized submission rose from 5.9% at baseline to 10.1% under pressure, while exact repair
-eliminated 24/24 selected natural-error failures. The separate canonical GPT-OSS writer merge
-gate remains pending.
+eliminated 24/24 selected natural-error failures. The completed matrix, passed isolation controls,
+and release-equivalence audit are accepted as a claim-valid, merge-eligible Finance release.
 
 The repository is designed so each domain defines its own authorization scope, events, requests,
 tools, and oracle without modifying the shared experiment runner or analysis infrastructure.
