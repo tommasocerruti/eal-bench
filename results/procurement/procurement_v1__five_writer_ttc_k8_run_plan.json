@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "status": "approved_frozen",
+  "approved_at": "2026-08-15",
+  "domain_id": "procurement",
+  "corpus_version": "benchmark_v1",
+  "presentation_id": "naturalistic_v1",
+  "question": "Does extending nested writer-side TTC from k=4 to k=8 further improve authorization memory and downstream behavior, and can either self-review or DeepSeek recover the better candidates?",
+  "candidate_pool_contract": "C1 subset C2 subset C4 subset C8; generate only candidate indices 4, 5, 6, and 7",
+  "writer_targets": [
+    "qwen_plus_0728_openrouter",
+    "nemotron_3_ultra_baseten",
+    "grok_4_3_openrouter",
+    "kimi_baseten",
+    "glm_5_2_baseten"
+  ],
+  "executor_target": "gptoss_baseten",
+  "independent_reviewer_target": "deepseek_baseten",
+  "reviewer_max_tokens": 1536,
+  "reviewer_temperature": 0.0,
+  "writer_temperature": 1.0,
+  "executor_temperature": 1.0,
+  "approved_budget": {
+    "currency": "USD",
+    "hard_cap": 35.0,
+    "central_projection": 26.54,
+    "conservative_stage_projection": 32.95,
+    "stop_policy": "account the five self-reviewed k=8 runs before independent review; stop before any stage whose projected cumulative spend exceeds the hard cap"
+  },
+  "expected_new_calls": {
+    "writer_logical_updates": 3120,
+    "writer_and_self_review_executor_calls_without_repairs": 4800,
+    "deepseek_reviewer_calls": 240,
+    "gptoss_deepseek_selection_calls": 1440,
+    "gptoss_typed_oracle_additional_maximum": 720,
+    "scheduled_calls_without_writer_repairs": 7200,
+    "estimated_call_records_from_observed_writer_attempts": 7658,
+    "scheduled_calls_with_all_writer_repairs_maximum": 10320,
+    "transport_retries_excluded": true
+  },
+  "projected_cost_usd": {
+    "new_writer_candidates": {
+      "qwen_plus_0728_openrouter": 1.4217,
+      "nemotron_3_ultra_baseten": 3.2634,
+      "grok_4_3_openrouter": 4.2541,
+      "kimi_baseten": 3.2450,
+      "glm_5_2_baseten": 6.4144,
+      "total": 18.5986
+    },
+    "writer_self_review": 2.34,
+    "gptoss_self_selection": 0.41,
+    "deepseek_independent_review": 4.60,
+    "gptoss_deepseek_selection": 0.41,
+    "typed_oracle_behavior": 0.18,
+    "central_total": 26.54
+  },
+  "per_self_reviewed_run_estimate_usd": {
+    "qwen_plus_0728_openrouter": 2.2,
+    "nemotron_3_ultra_baseten": 4.6,
+    "grok_4_3_openrouter": 6.0,
+    "kimi_baseten": 4.6,
+    "glm_5_2_baseten": 8.8
+  },
+  "oracle_policy": {
+    "typed_candidate_objective": "minimum deterministic canonical full-field-error count",
+    "tie_break": "lowest frozen candidate index",
+    "free_text_oracle_regret": "undefined",
+    "executor_outcomes_are_not_used_for_selection": true
+  },
+  "sources": [
+    {
+      "writer_target": "qwen_plus_0728_openrouter",
+      "path": "results/procurement/20260814-190327-016820__authorization-memory-writer_ttc__procurement-v1-qwen-ttc-k4",
+      "manifest_sha256": "58edcfd6e565e9f3b7cefbbdbc678ae9c80c66fbc61d14405fb4d95036b3baff"
+    },
+    {
+      "writer_target": "nemotron_3_ultra_baseten",
+      "path": "results/procurement/20260814-203219-882959__authorization-memory-writer_ttc__procurement-v1-nemotron-ttc-k4-4writer",
+      "manifest_sha256": "35a40603467def91df9de5673e64de526556cf77f2debda67793281fe1feeb1d"
+    },
+    {
+      "writer_target": "grok_4_3_openrouter",
+      "path": "results/procurement/20260814-221345-180977__authorization-memory-writer_ttc__procurement-v1-grok-ttc-k4-4writer-clean",
+      "manifest_sha256": "64804bf2d9cc6db8dd8213a9ad4a625befa8dff4927f6875c786ed48c4ee3c7c"
+    },
+    {
+      "writer_target": "kimi_baseten",
+      "path": "results/procurement/20260814-204604-422546__authorization-memory-writer_ttc__procurement-v1-kimi-ttc-k4-4writer",
+      "manifest_sha256": "1dcaae943d3b3575ecb1911be646f4a10bc1a8c15720ed77ee4a718b62bd3609"
+    },
+    {
+      "writer_target": "glm_5_2_baseten",
+      "path": "results/procurement/20260814-211630-403934__authorization-memory-writer_ttc__procurement-v1-glm-ttc-k4-4writer",
+      "manifest_sha256": "12bd77759edd040e8c9ab895795d38765637ac2b02b91c1951aa50328e274ba8"
+    }
+  ]
+}

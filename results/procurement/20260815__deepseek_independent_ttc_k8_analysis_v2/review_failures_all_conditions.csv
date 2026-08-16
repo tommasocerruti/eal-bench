@@ -1,0 +1,7 @@
+k,method,reviewed_pools,review_failures,review_failure_rate
+2,self_review,240,14,0.058333333333333334
+2,deepseek_review,240,4,0.016666666666666666
+4,self_review,240,54,0.225
+4,deepseek_review,240,63,0.2625
+8,self_review,240,6,0.025
+8,deepseek_review,240,8,0.03333333333333333

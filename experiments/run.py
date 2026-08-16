@@ -92,6 +92,12 @@ def _parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--writer-task", default="writer")
     parser.add_argument("--executor-task", default="executor")
+    parser.add_argument("--reviewer-task", default="memory_selector")
+    parser.add_argument(
+        "--reviewer-target",
+        default="",
+        help="independent selector target for writer_ttc review-only reuse",
+    )
     parser.add_argument(
         "--writer-targets",
         default="",
@@ -103,6 +109,19 @@ def _parser() -> argparse.ArgumentParser:
         help="comma-separated provider-aware model target IDs",
     )
     parser.add_argument("--writer-runs", type=int, default=1)
+    parser.add_argument(
+        "--ttc-review-only",
+        action="store_true",
+        help="reuse a completed writer_ttc pool without generating candidates",
+    )
+    parser.add_argument(
+        "--ttc-oracle-only",
+        action="store_true",
+        help=(
+            "reuse a completed writer_ttc pool and execute the deterministic "
+            "typed oracle-best candidates without writer or reviewer calls"
+        ),
+    )
     parser.add_argument("--executor-runs", type=int, default=1)
     parser.add_argument(
         "--writer-max-attempts",
@@ -423,10 +442,26 @@ def _route_options(
     profile: Any,
 ) -> dict[str, Any]:
     provided = set(getattr(args, "_provided_flags", ()))
+    if profile.study_id != "writer_ttc":
+        forbidden_ttc = sorted(
+            provided
+            & {
+                "--reviewer-task",
+                "--reviewer-target",
+                "--ttc-review-only",
+                "--ttc-oracle-only",
+            }
+        )
+        if forbidden_ttc:
+            raise ValueError(
+                "TTC review options require --study writer_ttc: "
+                + ", ".join(forbidden_ttc)
+            )
     if (
         profile.study_id
         not in {
             "writer",
+            "writer_ttc",
             "capacity_nonbinding_writer",
             "capacity_writer_visible_nonbinding",
         }
@@ -478,13 +513,23 @@ def _route_options(
         options["executor_targets"] = _csv(args.executor_targets) or (
             _default_target(args.executor_task),
         )
-    elif profile.study_id == "writer":
+    elif profile.study_id in {"writer", "writer_ttc"}:
         options["writer_targets"] = _csv(args.writer_targets) or (
             _default_target(args.writer_task),
         )
         options["executor_targets"] = _csv(args.executor_targets) or (
             _default_target(args.executor_task),
         )
+        if profile.study_id == "writer_ttc":
+            options["reviewer_target"] = (
+                args.reviewer_target or options["writer_targets"][0]
+            )
+            options["reviewer_seed"] = (
+                int(options["seed"]) + 10_000 + int(args.writer_runs)
+            )
+            options["reviewer_max_tokens"] = (
+                1536 if int(args.writer_runs) == 8 else 768
+            )
     elif profile.study_id in {
         "capacity_nonbinding_writer",
         "capacity_writer_visible_nonbinding",

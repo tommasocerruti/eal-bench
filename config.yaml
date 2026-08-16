@@ -143,6 +143,15 @@ tasks:
       temperature: 0.0
       max_tokens: 2048
 
+  # Writer-side best-of-k trajectory selection. The target is overridden to
+  # match the candidate writer; one deterministic review chooses, never merges.
+  memory_selector:
+    default_target: gptoss_baseten
+    max_retries: 1
+    params:
+      temperature: 0.0
+      max_tokens: 768
+
   # Post-hoc validity diagnostic. The run inherits each saved context's target;
   # this default is used only for configuration validation. One task-level
   # attempt plus disabled SDK retries keeps one paid request per frozen job.

@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "status": "approved_frozen",
+  "approved_at": "2026-08-14",
+  "domain_id": "procurement",
+  "corpus_version": "benchmark_v1",
+  "presentation_id": "naturalistic_v1",
+  "method": "trajectory_level_selected_best_of_k",
+  "candidate_pool_contract": "C1 subset C2 subset C4",
+  "aggregation": "one complete trajectory selected without rewriting or merging",
+  "executor_target": "gptoss_baseten",
+  "writer_temperature": 1.0,
+  "reviewer_temperature": 0.0,
+  "executor_temperature": 1.0,
+  "base_writer_seed": 20260719,
+  "candidate_seeds": {
+    "0": 20260719,
+    "1": 20260720,
+    "2": 20260721,
+    "3": 20260722
+  },
+  "budget": {
+    "currency": "USD",
+    "hard_cap": 23.0,
+    "expected_total": 17.8467071126094,
+    "accounting": "provider-reported cost where present; otherwise recorded tokens at the frozen 2026-08-08 rates",
+    "stop_policy": "account after each writer and stop before the next writer if projected total exceeds the hard cap"
+  },
+  "writers": [
+    {
+      "writer_target": "nemotron_3_ultra_baseten",
+      "source_k1_run": "results/procurement/20260809-005257-869522__authorization-memory-writer__procurement-v1-transfer-nemotron-3-ultra",
+      "source_k1_manifest_sha256": "27887bef43b5503b58e34189c7895026060699e3884d3ef60c35d5ae47b069cf",
+      "expected_k2_usd": 1.207619257669232,
+      "expected_k4_usd": 2.231199316856815,
+      "expected_total_usd": 3.438818574526047
+    },
+    {
+      "writer_target": "kimi_baseten",
+      "source_k1_run": "results/procurement/20260809-112937-803837__authorization-memory-writer__procurement-v1-transfer-kimi-k2-6-technical-completion",
+      "source_k1_manifest_sha256": "cef1110b350e4a3a741452689560899427cb7210ea5998d705ff123110e5b3fc",
+      "expected_k2_usd": 1.3199382093810885,
+      "expected_k4_usd": 2.321301387147702,
+      "expected_total_usd": 3.6412395965287905
+    },
+    {
+      "writer_target": "grok_4_3_openrouter",
+      "source_k1_run": "results/procurement/20260809-010130-962971__authorization-memory-writer__procurement-v1-transfer-grok-4-3",
+      "source_k1_manifest_sha256": "d361aadafe52ee431207bb047ef8533acc4e9b55ca2d1f7190006b271edabd95",
+      "expected_k2_usd": 1.6031379313328407,
+      "expected_k4_usd": 2.829513077484625,
+      "expected_total_usd": 4.432651008817466
+    },
+    {
+      "writer_target": "glm_5_2_baseten",
+      "source_k1_run": "results/procurement/20260809-011450-878789__authorization-memory-writer__procurement-v1-transfer-glm-5-2",
+      "source_k1_manifest_sha256": "6f110d72fb35a352e99e674337d72a0d65e309b99f373b1443e71297794292bf",
+      "expected_k2_usd": 2.2373052431377345,
+      "expected_k4_usd": 4.096692689599363,
+      "expected_total_usd": 6.333997932737098
+    }
+  ],
+  "oracle_policy": {
+    "reviewer_has_canonical_oracle": false,
+    "typed_selection_regret": "deterministic canonical-state fidelity",
+    "free_text_selection_regret": "undefined",
+    "executor_outcomes_are_not_used_as_a_selection_oracle": true
+  }
+}

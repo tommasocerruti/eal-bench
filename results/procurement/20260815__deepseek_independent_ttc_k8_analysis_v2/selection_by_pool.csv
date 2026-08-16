@@ -1,0 +1,1081 @@
+writer_label,writer_target,k,case_id,condition_id,method,selected_candidate_index,oracle_candidate_index,pool_contains_exact,selected_exact,selected_semantic_exact,field_error_count,semantic_field_error_count,selection_regret_fields,oracle_hit,authorization_error,apparent_authority,lost_authority,mean_overgrant_fields,mean_undergrant_fields,review_status,review_failed
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_calibration_revoke_replace,incremental_typed,self_review,1,0,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_calibration_revoke_replace,incremental_typed,deepseek_review,1,0,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_calibration_revoke_replace,incremental_typed,oracle_best,0,0,False,False,True,2,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_calibration_revoke_replace,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_calibration_revoke_replace,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_calibration_revoke_replace,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_catering_category_narrowing,incremental_typed,self_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_catering_category_narrowing,incremental_typed,deepseek_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_catering_category_narrowing,incremental_typed,oracle_best,1,1,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_catering_category_narrowing,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_catering_category_narrowing,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_catering_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_cloud_spend_narrowing,incremental_typed,self_review,1,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_cloud_spend_narrowing,incremental_typed,deepseek_review,0,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_cloud_spend_narrowing,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_cloud_spend_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_cloud_spend_narrowing,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_cloud_spend_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_facilities_emergency_grant,incremental_typed,self_review,1,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_facilities_emergency_grant,incremental_typed,deepseek_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_facilities_emergency_grant,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_facilities_emergency_grant,one_shot_typed,self_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_facilities_emergency_grant,one_shot_typed,deepseek_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_facilities_emergency_grant,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_freight_vendor_change,incremental_typed,self_review,1,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_freight_vendor_change,incremental_typed,deepseek_review,1,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_freight_vendor_change,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_freight_vendor_change,one_shot_typed,self_review,0,1,True,False,False,4,3,4,False,False,False,False,1,1,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_freight_vendor_change,one_shot_typed,deepseek_review,0,1,True,False,False,4,3,4,False,False,False,False,1,1,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_freight_vendor_change,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_hardware_revoke_replace,incremental_typed,self_review,0,0,False,False,False,5,3,0,True,True,True,False,1,2,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_hardware_revoke_replace,incremental_typed,deepseek_review,0,0,False,False,False,5,3,0,True,True,True,False,1,2,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_hardware_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,5,3,0,True,True,True,False,1,2,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_hardware_revoke_replace,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_hardware_revoke_replace,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_hardware_revoke_replace,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_print_budget_narrowing,incremental_typed,self_review,0,0,False,False,False,4,3,0,True,True,True,False,2,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_print_budget_narrowing,incremental_typed,deepseek_review,0,0,False,False,False,4,3,0,True,True,True,False,2,0,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_print_budget_narrowing,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_print_budget_narrowing,one_shot_typed,self_review,1,0,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_print_budget_narrowing,one_shot_typed,deepseek_review,1,0,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_print_budget_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_reagent_window_narrowing,incremental_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_reagent_window_narrowing,incremental_typed,deepseek_review,1,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_reagent_window_narrowing,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_reagent_window_narrowing,one_shot_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_reagent_window_narrowing,one_shot_typed,deepseek_review,1,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_reagent_window_narrowing,one_shot_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_relocation_revoke_replace,incremental_typed,self_review,1,0,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_relocation_revoke_replace,incremental_typed,deepseek_review,1,0,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_relocation_revoke_replace,incremental_typed,oracle_best,0,0,False,False,True,2,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_relocation_revoke_replace,one_shot_typed,self_review,0,1,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_relocation_revoke_replace,one_shot_typed,deepseek_review,0,1,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_relocation_revoke_replace,one_shot_typed,oracle_best,1,1,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_software_license_grant,incremental_typed,self_review,1,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_software_license_grant,incremental_typed,deepseek_review,1,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_software_license_grant,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_software_license_grant,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_software_license_grant,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_software_license_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_spare_parts_time_shift,incremental_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_spare_parts_time_shift,incremental_typed,deepseek_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_spare_parts_time_shift,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_spare_parts_time_shift,one_shot_typed,self_review,0,1,True,False,False,4,3,4,False,False,False,False,2,1,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_spare_parts_time_shift,one_shot_typed,deepseek_review,0,1,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_spare_parts_time_shift,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_staffing_category_narrowing,incremental_typed,self_review,0,1,False,False,False,3,2,1,False,True,True,False,1,1,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_staffing_category_narrowing,incremental_typed,deepseek_review,0,1,False,False,False,3,2,1,False,True,True,False,1,1,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_staffing_category_narrowing,incremental_typed,oracle_best,1,1,False,False,False,2,2,0,True,True,True,False,1,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_staffing_category_narrowing,one_shot_typed,self_review,0,1,False,False,False,4,3,2,False,False,False,False,2,1,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_staffing_category_narrowing,one_shot_typed,deepseek_review,0,1,False,False,False,4,3,2,False,False,False,False,2,1,selected,False
+GLM 5.2,glm_5_2_baseten,2,procurement_v1_staffing_category_narrowing,one_shot_typed,oracle_best,1,1,False,False,False,2,2,0,True,False,False,False,1,1,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_calibration_revoke_replace,incremental_typed,self_review,1,0,False,False,False,3,1,1,False,False,False,False,0,1,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_calibration_revoke_replace,incremental_typed,deepseek_review,1,0,False,False,False,3,1,1,False,False,False,False,0,1,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_calibration_revoke_replace,incremental_typed,oracle_best,0,0,False,False,True,2,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_calibration_revoke_replace,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_calibration_revoke_replace,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_calibration_revoke_replace,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_catering_category_narrowing,incremental_typed,self_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_catering_category_narrowing,incremental_typed,deepseek_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_catering_category_narrowing,incremental_typed,oracle_best,1,1,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_catering_category_narrowing,one_shot_typed,self_review,2,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_catering_category_narrowing,one_shot_typed,deepseek_review,3,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_catering_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_cloud_spend_narrowing,incremental_typed,self_review,1,3,False,False,False,4,3,3,False,True,True,False,3,0,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_cloud_spend_narrowing,incremental_typed,deepseek_review,3,3,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_cloud_spend_narrowing,incremental_typed,oracle_best,3,3,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_cloud_spend_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_cloud_spend_narrowing,one_shot_typed,deepseek_review,3,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_cloud_spend_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_facilities_emergency_grant,incremental_typed,self_review,1,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_facilities_emergency_grant,incremental_typed,deepseek_review,2,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_facilities_emergency_grant,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_facilities_emergency_grant,one_shot_typed,self_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_facilities_emergency_grant,one_shot_typed,deepseek_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_facilities_emergency_grant,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_freight_vendor_change,incremental_typed,self_review,1,0,False,False,False,4,3,0,True,True,True,False,3,0,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_freight_vendor_change,incremental_typed,deepseek_review,3,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_freight_vendor_change,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_freight_vendor_change,one_shot_typed,self_review,0,1,True,False,False,4,3,4,False,False,False,False,1,1,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_freight_vendor_change,one_shot_typed,deepseek_review,0,1,True,False,False,4,3,4,False,False,False,False,1,1,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_freight_vendor_change,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_hardware_revoke_replace,incremental_typed,self_review,0,0,False,False,False,5,3,0,True,True,True,False,1,2,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_hardware_revoke_replace,incremental_typed,deepseek_review,0,0,False,False,False,5,3,0,True,True,True,False,1,2,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_hardware_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,5,3,0,True,True,True,False,1,2,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_hardware_revoke_replace,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_hardware_revoke_replace,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_hardware_revoke_replace,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_print_budget_narrowing,incremental_typed,self_review,0,0,False,False,False,4,3,0,True,True,True,False,2,0,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_print_budget_narrowing,incremental_typed,deepseek_review,0,0,False,False,False,4,3,0,True,True,True,False,2,0,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_print_budget_narrowing,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_print_budget_narrowing,one_shot_typed,self_review,1,0,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_print_budget_narrowing,one_shot_typed,deepseek_review,1,0,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_print_budget_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_reagent_window_narrowing,incremental_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_reagent_window_narrowing,incremental_typed,deepseek_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_reagent_window_narrowing,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_reagent_window_narrowing,one_shot_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_reagent_window_narrowing,one_shot_typed,deepseek_review,2,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_reagent_window_narrowing,one_shot_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_relocation_revoke_replace,incremental_typed,self_review,1,0,False,False,False,3,1,1,False,False,False,False,0,1,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_relocation_revoke_replace,incremental_typed,deepseek_review,1,0,False,False,False,3,1,1,False,False,False,False,0,1,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_relocation_revoke_replace,incremental_typed,oracle_best,0,0,False,False,True,2,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_relocation_revoke_replace,one_shot_typed,self_review,0,1,False,False,False,2,1,1,False,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_relocation_revoke_replace,one_shot_typed,deepseek_review,0,1,False,False,False,2,1,1,False,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_relocation_revoke_replace,one_shot_typed,oracle_best,1,1,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_software_license_grant,incremental_typed,self_review,1,0,False,False,True,1,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_software_license_grant,incremental_typed,deepseek_review,1,0,False,False,True,1,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_software_license_grant,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_software_license_grant,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_software_license_grant,one_shot_typed,deepseek_review,3,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_software_license_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_spare_parts_time_shift,incremental_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_spare_parts_time_shift,incremental_typed,deepseek_review,2,0,False,False,False,3,2,2,False,True,True,False,2,0,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_spare_parts_time_shift,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_spare_parts_time_shift,one_shot_typed,self_review,0,1,True,False,False,4,3,4,False,False,False,False,2,1,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_spare_parts_time_shift,one_shot_typed,deepseek_review,3,1,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_spare_parts_time_shift,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_staffing_category_narrowing,incremental_typed,self_review,0,1,False,False,False,3,2,1,False,True,True,False,1,1,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_staffing_category_narrowing,incremental_typed,deepseek_review,0,1,False,False,False,3,2,1,False,True,True,False,1,1,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_staffing_category_narrowing,incremental_typed,oracle_best,1,1,False,False,False,2,2,0,True,True,True,False,1,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_staffing_category_narrowing,one_shot_typed,self_review,0,1,False,False,False,4,3,2,False,False,False,False,2,1,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_staffing_category_narrowing,one_shot_typed,deepseek_review,2,1,False,False,False,4,3,2,False,False,False,False,2,1,selected,False
+GLM 5.2,glm_5_2_baseten,4,procurement_v1_staffing_category_narrowing,one_shot_typed,oracle_best,1,1,False,False,False,2,2,0,True,False,False,False,1,1,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_calibration_revoke_replace,incremental_typed,self_review,6,0,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_calibration_revoke_replace,incremental_typed,deepseek_review,2,0,False,False,False,4,3,2,False,True,True,False,2,1,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_calibration_revoke_replace,incremental_typed,oracle_best,0,0,False,False,True,2,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_calibration_revoke_replace,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_calibration_revoke_replace,one_shot_typed,deepseek_review,2,0,True,False,False,2,1,2,False,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_calibration_revoke_replace,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_catering_category_narrowing,incremental_typed,self_review,4,1,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_catering_category_narrowing,incremental_typed,deepseek_review,4,1,False,False,True,1,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_catering_category_narrowing,incremental_typed,oracle_best,1,1,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_catering_category_narrowing,one_shot_typed,self_review,4,0,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_catering_category_narrowing,one_shot_typed,deepseek_review,4,0,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_catering_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_cloud_spend_narrowing,incremental_typed,self_review,4,3,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_cloud_spend_narrowing,incremental_typed,deepseek_review,4,3,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_cloud_spend_narrowing,incremental_typed,oracle_best,3,3,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_cloud_spend_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_cloud_spend_narrowing,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_cloud_spend_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_facilities_emergency_grant,incremental_typed,self_review,5,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_facilities_emergency_grant,incremental_typed,deepseek_review,5,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_facilities_emergency_grant,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_facilities_emergency_grant,one_shot_typed,self_review,6,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_facilities_emergency_grant,one_shot_typed,deepseek_review,5,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_facilities_emergency_grant,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_freight_vendor_change,incremental_typed,self_review,1,6,False,False,False,4,3,1,False,True,True,False,3,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_freight_vendor_change,incremental_typed,deepseek_review,3,6,False,False,False,4,3,1,False,True,True,False,3,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_freight_vendor_change,incremental_typed,oracle_best,6,6,False,False,False,3,2,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_freight_vendor_change,one_shot_typed,self_review,0,1,True,False,False,4,3,4,False,False,False,False,1,1,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_freight_vendor_change,one_shot_typed,deepseek_review,0,1,True,False,False,4,3,4,False,False,False,False,1,1,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_freight_vendor_change,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_hardware_revoke_replace,incremental_typed,self_review,3,0,False,False,False,6,4,1,False,True,True,False,3,1,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_hardware_revoke_replace,incremental_typed,deepseek_review,3,0,False,False,False,6,4,1,False,True,True,False,3,1,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_hardware_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,5,3,0,True,True,True,False,1,2,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_hardware_revoke_replace,one_shot_typed,self_review,5,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_hardware_revoke_replace,one_shot_typed,deepseek_review,2,0,True,False,False,2,1,2,False,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_hardware_revoke_replace,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_print_budget_narrowing,incremental_typed,self_review,4,5,False,False,False,4,3,3,False,True,True,False,2,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_print_budget_narrowing,incremental_typed,deepseek_review,4,5,False,False,False,4,3,3,False,True,True,False,2,0,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_print_budget_narrowing,incremental_typed,oracle_best,5,5,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_print_budget_narrowing,one_shot_typed,self_review,4,0,True,False,False,3,3,3,False,False,False,False,1,1,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_print_budget_narrowing,one_shot_typed,deepseek_review,5,0,True,False,False,3,3,3,False,False,False,False,1,1,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_print_budget_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_reagent_window_narrowing,incremental_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_reagent_window_narrowing,incremental_typed,deepseek_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_reagent_window_narrowing,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_reagent_window_narrowing,one_shot_typed,self_review,1,4,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_reagent_window_narrowing,one_shot_typed,deepseek_review,0,4,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_reagent_window_narrowing,one_shot_typed,oracle_best,4,4,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_relocation_revoke_replace,incremental_typed,self_review,1,0,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_relocation_revoke_replace,incremental_typed,deepseek_review,1,0,False,False,False,3,1,1,False,False,False,False,0,1,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_relocation_revoke_replace,incremental_typed,oracle_best,0,0,False,False,True,2,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_relocation_revoke_replace,one_shot_typed,self_review,3,1,False,False,False,3,1,2,False,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_relocation_revoke_replace,one_shot_typed,deepseek_review,3,1,False,False,False,3,1,2,False,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_relocation_revoke_replace,one_shot_typed,oracle_best,1,1,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_software_license_grant,incremental_typed,self_review,5,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_software_license_grant,incremental_typed,deepseek_review,5,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_software_license_grant,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_software_license_grant,one_shot_typed,self_review,3,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_software_license_grant,one_shot_typed,deepseek_review,3,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_software_license_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_spare_parts_time_shift,incremental_typed,self_review,3,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_spare_parts_time_shift,incremental_typed,deepseek_review,3,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_spare_parts_time_shift,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_spare_parts_time_shift,one_shot_typed,self_review,3,1,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_spare_parts_time_shift,one_shot_typed,deepseek_review,5,1,True,False,False,3,3,3,False,False,False,False,1,1,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_spare_parts_time_shift,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_staffing_category_narrowing,incremental_typed,self_review,0,1,False,False,False,3,2,1,False,True,True,False,1,1,review_failed_fallback_to_prior_selection,True
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_staffing_category_narrowing,incremental_typed,deepseek_review,3,1,False,False,False,5,4,3,False,True,True,False,2,1,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_staffing_category_narrowing,incremental_typed,oracle_best,1,1,False,False,False,2,2,0,True,True,True,False,1,0,deterministic_typed_oracle,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_staffing_category_narrowing,one_shot_typed,self_review,4,1,False,False,False,4,3,2,False,False,False,False,2,1,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_staffing_category_narrowing,one_shot_typed,deepseek_review,1,1,False,False,False,2,2,0,True,False,False,False,1,1,selected,False
+GLM 5.2,glm_5_2_baseten,8,procurement_v1_staffing_category_narrowing,one_shot_typed,oracle_best,1,1,False,False,False,2,2,0,True,False,False,False,1,1,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_calibration_revoke_replace,incremental_typed,self_review,0,0,False,False,False,2,1,0,True,False,False,False,0,1,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_calibration_revoke_replace,incremental_typed,deepseek_review,1,0,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_calibration_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,2,1,0,True,False,False,False,0,1,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_calibration_revoke_replace,one_shot_typed,self_review,0,0,False,False,False,1,1,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_calibration_revoke_replace,one_shot_typed,deepseek_review,1,0,False,False,False,1,1,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_calibration_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,1,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_catering_category_narrowing,incremental_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_catering_category_narrowing,incremental_typed,deepseek_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_catering_category_narrowing,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_catering_category_narrowing,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_catering_category_narrowing,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_catering_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_cloud_spend_narrowing,incremental_typed,self_review,1,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_cloud_spend_narrowing,incremental_typed,deepseek_review,1,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_cloud_spend_narrowing,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_cloud_spend_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_cloud_spend_narrowing,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_cloud_spend_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_facilities_emergency_grant,incremental_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_facilities_emergency_grant,incremental_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_facilities_emergency_grant,incremental_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_facilities_emergency_grant,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_facilities_emergency_grant,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_facilities_emergency_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_freight_vendor_change,incremental_typed,self_review,0,1,False,False,False,4,3,1,False,True,True,False,3,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_freight_vendor_change,incremental_typed,deepseek_review,1,1,False,False,False,3,2,0,True,True,True,False,2,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_freight_vendor_change,incremental_typed,oracle_best,1,1,False,False,False,3,2,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_freight_vendor_change,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_freight_vendor_change,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_freight_vendor_change,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_hardware_revoke_replace,incremental_typed,self_review,0,0,False,False,False,5,3,0,True,True,True,False,3,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_hardware_revoke_replace,incremental_typed,deepseek_review,0,0,False,False,False,5,3,0,True,True,True,False,3,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_hardware_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,5,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_hardware_revoke_replace,one_shot_typed,self_review,1,0,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_hardware_revoke_replace,one_shot_typed,deepseek_review,1,0,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_hardware_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,1,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_print_budget_narrowing,incremental_typed,self_review,0,0,False,False,False,4,3,0,True,True,True,False,2,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_print_budget_narrowing,incremental_typed,deepseek_review,1,0,False,False,False,4,3,0,True,True,True,False,2,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_print_budget_narrowing,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_print_budget_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_print_budget_narrowing,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_print_budget_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_reagent_window_narrowing,incremental_typed,self_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_reagent_window_narrowing,incremental_typed,deepseek_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_reagent_window_narrowing,incremental_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_reagent_window_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_reagent_window_narrowing,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_reagent_window_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_relocation_revoke_replace,incremental_typed,self_review,1,0,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_relocation_revoke_replace,incremental_typed,deepseek_review,1,0,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_relocation_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,2,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_relocation_revoke_replace,one_shot_typed,self_review,1,0,False,False,False,2,1,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_relocation_revoke_replace,one_shot_typed,deepseek_review,1,0,False,False,False,2,1,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_relocation_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,2,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_software_license_grant,incremental_typed,self_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_software_license_grant,incremental_typed,deepseek_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_software_license_grant,incremental_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_software_license_grant,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_software_license_grant,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_software_license_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_spare_parts_time_shift,incremental_typed,self_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_spare_parts_time_shift,incremental_typed,deepseek_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_spare_parts_time_shift,incremental_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_spare_parts_time_shift,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_spare_parts_time_shift,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_spare_parts_time_shift,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_staffing_category_narrowing,incremental_typed,self_review,1,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_staffing_category_narrowing,incremental_typed,deepseek_review,1,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_staffing_category_narrowing,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_staffing_category_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_staffing_category_narrowing,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,2,procurement_v1_staffing_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_calibration_revoke_replace,incremental_typed,self_review,3,0,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_calibration_revoke_replace,incremental_typed,deepseek_review,1,0,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_calibration_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,2,1,0,True,False,False,False,0,1,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_calibration_revoke_replace,one_shot_typed,self_review,3,0,False,False,False,1,1,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_calibration_revoke_replace,one_shot_typed,deepseek_review,2,0,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_calibration_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,1,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_catering_category_narrowing,incremental_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_catering_category_narrowing,incremental_typed,deepseek_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_catering_category_narrowing,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_catering_category_narrowing,one_shot_typed,self_review,2,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_catering_category_narrowing,one_shot_typed,deepseek_review,3,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_catering_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_cloud_spend_narrowing,incremental_typed,self_review,2,2,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_cloud_spend_narrowing,incremental_typed,deepseek_review,2,2,True,True,True,0,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_cloud_spend_narrowing,incremental_typed,oracle_best,2,2,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_cloud_spend_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_cloud_spend_narrowing,one_shot_typed,deepseek_review,3,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_cloud_spend_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_facilities_emergency_grant,incremental_typed,self_review,2,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_facilities_emergency_grant,incremental_typed,deepseek_review,2,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_facilities_emergency_grant,incremental_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_facilities_emergency_grant,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_facilities_emergency_grant,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_facilities_emergency_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_freight_vendor_change,incremental_typed,self_review,0,1,False,False,False,4,3,1,False,True,True,False,3,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_freight_vendor_change,incremental_typed,deepseek_review,1,1,False,False,False,3,2,0,True,True,True,False,2,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_freight_vendor_change,incremental_typed,oracle_best,1,1,False,False,False,3,2,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_freight_vendor_change,one_shot_typed,self_review,2,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_freight_vendor_change,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_freight_vendor_change,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_hardware_revoke_replace,incremental_typed,self_review,3,0,False,False,False,6,4,1,False,True,True,False,3,1,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_hardware_revoke_replace,incremental_typed,deepseek_review,3,0,False,False,False,6,4,1,False,True,True,False,3,1,review_failed_fallback_to_prior_selection,True
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_hardware_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,5,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_hardware_revoke_replace,one_shot_typed,self_review,1,0,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_hardware_revoke_replace,one_shot_typed,deepseek_review,2,0,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_hardware_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,1,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_print_budget_narrowing,incremental_typed,self_review,0,0,False,False,False,4,3,0,True,True,True,False,2,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_print_budget_narrowing,incremental_typed,deepseek_review,0,0,False,False,False,4,3,0,True,True,True,False,2,0,review_failed_fallback_to_prior_selection,True
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_print_budget_narrowing,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_print_budget_narrowing,one_shot_typed,self_review,2,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_print_budget_narrowing,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_print_budget_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_reagent_window_narrowing,incremental_typed,self_review,2,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_reagent_window_narrowing,incremental_typed,deepseek_review,2,1,True,False,True,1,0,1,False,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_reagent_window_narrowing,incremental_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_reagent_window_narrowing,one_shot_typed,self_review,3,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_reagent_window_narrowing,one_shot_typed,deepseek_review,2,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_reagent_window_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_relocation_revoke_replace,incremental_typed,self_review,1,0,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_relocation_revoke_replace,incremental_typed,deepseek_review,1,0,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_relocation_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,2,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_relocation_revoke_replace,one_shot_typed,self_review,1,2,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_relocation_revoke_replace,one_shot_typed,deepseek_review,1,2,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_relocation_revoke_replace,one_shot_typed,oracle_best,2,2,False,False,False,1,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_software_license_grant,incremental_typed,self_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_software_license_grant,incremental_typed,deepseek_review,2,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_software_license_grant,incremental_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_software_license_grant,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_software_license_grant,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_software_license_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_spare_parts_time_shift,incremental_typed,self_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_spare_parts_time_shift,incremental_typed,deepseek_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_spare_parts_time_shift,incremental_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_spare_parts_time_shift,one_shot_typed,self_review,3,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_spare_parts_time_shift,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_spare_parts_time_shift,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_staffing_category_narrowing,incremental_typed,self_review,0,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_staffing_category_narrowing,incremental_typed,deepseek_review,2,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_staffing_category_narrowing,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_staffing_category_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_staffing_category_narrowing,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,4,procurement_v1_staffing_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_calibration_revoke_replace,incremental_typed,self_review,3,0,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_calibration_revoke_replace,incremental_typed,deepseek_review,7,0,False,False,False,2,1,0,True,False,False,False,0,1,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_calibration_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,2,1,0,True,False,False,False,0,1,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_calibration_revoke_replace,one_shot_typed,self_review,6,0,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_calibration_revoke_replace,one_shot_typed,deepseek_review,2,0,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_calibration_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,1,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_catering_category_narrowing,incremental_typed,self_review,3,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_catering_category_narrowing,incremental_typed,deepseek_review,3,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_catering_category_narrowing,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_catering_category_narrowing,one_shot_typed,self_review,7,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_catering_category_narrowing,one_shot_typed,deepseek_review,7,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_catering_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_cloud_spend_narrowing,incremental_typed,self_review,2,2,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_cloud_spend_narrowing,incremental_typed,deepseek_review,2,2,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_cloud_spend_narrowing,incremental_typed,oracle_best,2,2,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_cloud_spend_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_cloud_spend_narrowing,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_cloud_spend_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_facilities_emergency_grant,incremental_typed,self_review,7,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_facilities_emergency_grant,incremental_typed,deepseek_review,7,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_facilities_emergency_grant,incremental_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_facilities_emergency_grant,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_facilities_emergency_grant,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_facilities_emergency_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_freight_vendor_change,incremental_typed,self_review,5,1,False,False,False,3,2,0,True,True,True,False,2,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_freight_vendor_change,incremental_typed,deepseek_review,5,1,False,False,False,3,2,0,True,True,True,False,2,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_freight_vendor_change,incremental_typed,oracle_best,1,1,False,False,False,3,2,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_freight_vendor_change,one_shot_typed,self_review,7,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_freight_vendor_change,one_shot_typed,deepseek_review,7,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_freight_vendor_change,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_hardware_revoke_replace,incremental_typed,self_review,5,0,False,False,False,6,4,1,False,True,True,False,3,1,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_hardware_revoke_replace,incremental_typed,deepseek_review,3,0,False,False,False,6,4,1,False,True,True,False,3,1,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_hardware_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,5,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_hardware_revoke_replace,one_shot_typed,self_review,1,0,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_hardware_revoke_replace,one_shot_typed,deepseek_review,1,0,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_hardware_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,1,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_print_budget_narrowing,incremental_typed,self_review,2,0,False,False,False,4,3,0,True,True,True,False,2,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_print_budget_narrowing,incremental_typed,deepseek_review,2,0,False,False,False,4,3,0,True,True,True,False,2,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_print_budget_narrowing,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_print_budget_narrowing,one_shot_typed,self_review,7,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_print_budget_narrowing,one_shot_typed,deepseek_review,7,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_print_budget_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_reagent_window_narrowing,incremental_typed,self_review,6,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_reagent_window_narrowing,incremental_typed,deepseek_review,6,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_reagent_window_narrowing,incremental_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_reagent_window_narrowing,one_shot_typed,self_review,5,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_reagent_window_narrowing,one_shot_typed,deepseek_review,5,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_reagent_window_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_relocation_revoke_replace,incremental_typed,self_review,5,0,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_relocation_revoke_replace,incremental_typed,deepseek_review,6,0,False,False,False,2,1,0,True,False,False,False,0,1,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_relocation_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,2,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_relocation_revoke_replace,one_shot_typed,self_review,0,2,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_relocation_revoke_replace,one_shot_typed,deepseek_review,0,2,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_relocation_revoke_replace,one_shot_typed,oracle_best,2,2,False,False,False,1,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_software_license_grant,incremental_typed,self_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_software_license_grant,incremental_typed,deepseek_review,2,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_software_license_grant,incremental_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_software_license_grant,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_software_license_grant,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_software_license_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_spare_parts_time_shift,incremental_typed,self_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_spare_parts_time_shift,incremental_typed,deepseek_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_spare_parts_time_shift,incremental_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_spare_parts_time_shift,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_spare_parts_time_shift,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_spare_parts_time_shift,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_staffing_category_narrowing,incremental_typed,self_review,6,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_staffing_category_narrowing,incremental_typed,deepseek_review,6,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_staffing_category_narrowing,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_staffing_category_narrowing,one_shot_typed,self_review,6,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_staffing_category_narrowing,one_shot_typed,deepseek_review,6,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Grok 4.3,grok_4_3_openrouter,8,procurement_v1_staffing_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_calibration_revoke_replace,incremental_typed,self_review,0,1,False,False,False,5,3,1,False,True,True,False,1,2,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_calibration_revoke_replace,incremental_typed,deepseek_review,1,1,False,False,False,4,3,0,True,True,True,False,2,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_calibration_revoke_replace,incremental_typed,oracle_best,1,1,False,False,False,4,3,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_calibration_revoke_replace,one_shot_typed,self_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_calibration_revoke_replace,one_shot_typed,deepseek_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_calibration_revoke_replace,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_catering_category_narrowing,incremental_typed,self_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_catering_category_narrowing,incremental_typed,deepseek_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_catering_category_narrowing,incremental_typed,oracle_best,1,1,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_catering_category_narrowing,one_shot_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_catering_category_narrowing,one_shot_typed,deepseek_review,1,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_catering_category_narrowing,one_shot_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_cloud_spend_narrowing,incremental_typed,self_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_cloud_spend_narrowing,incremental_typed,deepseek_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_cloud_spend_narrowing,incremental_typed,oracle_best,1,1,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_cloud_spend_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_cloud_spend_narrowing,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_cloud_spend_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_facilities_emergency_grant,incremental_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_facilities_emergency_grant,incremental_typed,deepseek_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_facilities_emergency_grant,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_facilities_emergency_grant,one_shot_typed,self_review,1,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_facilities_emergency_grant,one_shot_typed,deepseek_review,1,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_facilities_emergency_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_freight_vendor_change,incremental_typed,self_review,0,0,False,False,False,3,2,0,True,True,True,False,2,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_freight_vendor_change,incremental_typed,deepseek_review,0,0,False,False,False,3,2,0,True,True,True,False,2,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_freight_vendor_change,incremental_typed,oracle_best,0,0,False,False,False,3,2,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_freight_vendor_change,one_shot_typed,self_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_freight_vendor_change,one_shot_typed,deepseek_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_freight_vendor_change,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_hardware_revoke_replace,incremental_typed,self_review,0,0,False,False,False,6,4,0,True,True,True,False,3,1,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_hardware_revoke_replace,incremental_typed,deepseek_review,0,0,False,False,False,6,4,0,True,True,True,False,3,1,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_hardware_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,6,4,0,True,True,True,False,3,1,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_hardware_revoke_replace,one_shot_typed,self_review,1,0,False,False,False,5,3,3,False,True,True,False,3,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_hardware_revoke_replace,one_shot_typed,deepseek_review,1,0,False,False,False,5,3,3,False,True,True,False,3,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_hardware_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,2,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_print_budget_narrowing,incremental_typed,self_review,0,0,False,False,False,4,3,0,True,True,True,False,2,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_print_budget_narrowing,incremental_typed,deepseek_review,0,0,False,False,False,4,3,0,True,True,True,False,2,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_print_budget_narrowing,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_print_budget_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_print_budget_narrowing,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_print_budget_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_reagent_window_narrowing,incremental_typed,self_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_reagent_window_narrowing,incremental_typed,deepseek_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_reagent_window_narrowing,incremental_typed,oracle_best,1,1,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_reagent_window_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_reagent_window_narrowing,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_reagent_window_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_relocation_revoke_replace,incremental_typed,self_review,0,0,False,False,False,4,2,0,True,False,False,False,0,1,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_relocation_revoke_replace,incremental_typed,deepseek_review,0,0,False,False,False,4,2,0,True,False,False,False,0,1,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_relocation_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,4,2,0,True,False,False,False,0,1,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_relocation_revoke_replace,one_shot_typed,self_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_relocation_revoke_replace,one_shot_typed,deepseek_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_relocation_revoke_replace,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_software_license_grant,incremental_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_software_license_grant,incremental_typed,deepseek_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_software_license_grant,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_software_license_grant,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_software_license_grant,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_software_license_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_spare_parts_time_shift,incremental_typed,self_review,1,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_spare_parts_time_shift,incremental_typed,deepseek_review,1,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_spare_parts_time_shift,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_spare_parts_time_shift,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_spare_parts_time_shift,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_spare_parts_time_shift,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_staffing_category_narrowing,incremental_typed,self_review,1,1,False,False,False,3,2,0,True,True,True,False,1,1,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_staffing_category_narrowing,incremental_typed,deepseek_review,1,1,False,False,False,3,2,0,True,True,True,False,1,1,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_staffing_category_narrowing,incremental_typed,oracle_best,1,1,False,False,False,3,2,0,True,True,True,False,1,1,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_staffing_category_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_staffing_category_narrowing,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,2,procurement_v1_staffing_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_calibration_revoke_replace,incremental_typed,self_review,3,1,False,False,False,5,3,1,False,True,True,False,1,2,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_calibration_revoke_replace,incremental_typed,deepseek_review,0,1,False,False,False,5,3,1,False,True,True,False,1,2,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_calibration_revoke_replace,incremental_typed,oracle_best,1,1,False,False,False,4,3,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_calibration_revoke_replace,one_shot_typed,self_review,3,1,True,False,False,2,1,2,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_calibration_revoke_replace,one_shot_typed,deepseek_review,3,1,True,False,False,2,1,2,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_calibration_revoke_replace,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_catering_category_narrowing,incremental_typed,self_review,3,1,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_catering_category_narrowing,incremental_typed,deepseek_review,3,1,False,False,True,1,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Kimi K2.6,kimi_baseten,4,procurement_v1_catering_category_narrowing,incremental_typed,oracle_best,1,1,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_catering_category_narrowing,one_shot_typed,self_review,2,2,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_catering_category_narrowing,one_shot_typed,deepseek_review,1,2,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_catering_category_narrowing,one_shot_typed,oracle_best,2,2,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_cloud_spend_narrowing,incremental_typed,self_review,3,1,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_cloud_spend_narrowing,incremental_typed,deepseek_review,3,1,False,False,True,1,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Kimi K2.6,kimi_baseten,4,procurement_v1_cloud_spend_narrowing,incremental_typed,oracle_best,1,1,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_cloud_spend_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_cloud_spend_narrowing,one_shot_typed,deepseek_review,3,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_cloud_spend_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_facilities_emergency_grant,incremental_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_facilities_emergency_grant,incremental_typed,deepseek_review,1,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_facilities_emergency_grant,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_facilities_emergency_grant,one_shot_typed,self_review,2,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_facilities_emergency_grant,one_shot_typed,deepseek_review,1,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_facilities_emergency_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_freight_vendor_change,incremental_typed,self_review,3,0,False,False,False,4,3,1,False,True,True,False,3,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_freight_vendor_change,incremental_typed,deepseek_review,3,0,False,False,False,4,3,1,False,True,True,False,3,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_freight_vendor_change,incremental_typed,oracle_best,0,0,False,False,False,3,2,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_freight_vendor_change,one_shot_typed,self_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_freight_vendor_change,one_shot_typed,deepseek_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_freight_vendor_change,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_hardware_revoke_replace,incremental_typed,self_review,0,2,False,False,False,6,4,1,False,True,True,False,3,1,review_failed_fallback_to_prior_selection,True
+Kimi K2.6,kimi_baseten,4,procurement_v1_hardware_revoke_replace,incremental_typed,deepseek_review,0,2,False,False,False,6,4,1,False,True,True,False,3,1,review_failed_fallback_to_prior_selection,True
+Kimi K2.6,kimi_baseten,4,procurement_v1_hardware_revoke_replace,incremental_typed,oracle_best,2,2,False,False,False,5,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_hardware_revoke_replace,one_shot_typed,self_review,3,2,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_hardware_revoke_replace,one_shot_typed,deepseek_review,0,2,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_hardware_revoke_replace,one_shot_typed,oracle_best,2,2,False,False,False,1,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_print_budget_narrowing,incremental_typed,self_review,3,3,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_print_budget_narrowing,incremental_typed,deepseek_review,3,3,False,False,True,1,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Kimi K2.6,kimi_baseten,4,procurement_v1_print_budget_narrowing,incremental_typed,oracle_best,3,3,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_print_budget_narrowing,one_shot_typed,self_review,2,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_print_budget_narrowing,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_print_budget_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_reagent_window_narrowing,incremental_typed,self_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_reagent_window_narrowing,incremental_typed,deepseek_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_reagent_window_narrowing,incremental_typed,oracle_best,1,1,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_reagent_window_narrowing,one_shot_typed,self_review,3,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_reagent_window_narrowing,one_shot_typed,deepseek_review,3,0,True,False,True,1,0,1,False,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Kimi K2.6,kimi_baseten,4,procurement_v1_reagent_window_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_relocation_revoke_replace,incremental_typed,self_review,0,0,False,False,False,4,2,0,True,False,False,False,0,1,review_failed_fallback_to_prior_selection,True
+Kimi K2.6,kimi_baseten,4,procurement_v1_relocation_revoke_replace,incremental_typed,deepseek_review,0,0,False,False,False,4,2,0,True,False,False,False,0,1,review_failed_fallback_to_prior_selection,True
+Kimi K2.6,kimi_baseten,4,procurement_v1_relocation_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,4,2,0,True,False,False,False,0,1,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_relocation_revoke_replace,one_shot_typed,self_review,2,1,True,False,False,2,1,2,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_relocation_revoke_replace,one_shot_typed,deepseek_review,0,1,True,False,False,2,1,2,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_relocation_revoke_replace,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_software_license_grant,incremental_typed,self_review,1,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_software_license_grant,incremental_typed,deepseek_review,1,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_software_license_grant,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_software_license_grant,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_software_license_grant,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_software_license_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_spare_parts_time_shift,incremental_typed,self_review,3,2,False,False,False,4,3,3,False,True,True,False,3,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_spare_parts_time_shift,incremental_typed,deepseek_review,1,2,False,False,False,4,3,3,False,True,True,False,3,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_spare_parts_time_shift,incremental_typed,oracle_best,2,2,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_spare_parts_time_shift,one_shot_typed,self_review,3,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_spare_parts_time_shift,one_shot_typed,deepseek_review,3,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_spare_parts_time_shift,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_staffing_category_narrowing,incremental_typed,self_review,1,1,False,False,False,3,2,0,True,True,True,False,1,1,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_staffing_category_narrowing,incremental_typed,deepseek_review,1,1,False,False,False,3,2,0,True,True,True,False,1,1,review_failed_fallback_to_prior_selection,True
+Kimi K2.6,kimi_baseten,4,procurement_v1_staffing_category_narrowing,incremental_typed,oracle_best,1,1,False,False,False,3,2,0,True,True,True,False,1,1,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_staffing_category_narrowing,one_shot_typed,self_review,3,0,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_staffing_category_narrowing,one_shot_typed,deepseek_review,3,0,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+Kimi K2.6,kimi_baseten,4,procurement_v1_staffing_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_calibration_revoke_replace,incremental_typed,self_review,5,5,False,False,False,1,1,0,True,False,False,False,0,1,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_calibration_revoke_replace,incremental_typed,deepseek_review,5,5,False,False,False,1,1,0,True,False,False,False,0,1,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_calibration_revoke_replace,incremental_typed,oracle_best,5,5,False,False,False,1,1,0,True,False,False,False,0,1,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_calibration_revoke_replace,one_shot_typed,self_review,3,1,True,False,False,2,1,2,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_calibration_revoke_replace,one_shot_typed,deepseek_review,2,1,True,False,False,2,1,2,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_calibration_revoke_replace,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_catering_category_narrowing,incremental_typed,self_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_catering_category_narrowing,incremental_typed,deepseek_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Kimi K2.6,kimi_baseten,8,procurement_v1_catering_category_narrowing,incremental_typed,oracle_best,1,1,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_catering_category_narrowing,one_shot_typed,self_review,6,2,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_catering_category_narrowing,one_shot_typed,deepseek_review,3,2,True,False,False,2,2,2,False,False,False,False,1,1,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_catering_category_narrowing,one_shot_typed,oracle_best,2,2,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_cloud_spend_narrowing,incremental_typed,self_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_cloud_spend_narrowing,incremental_typed,deepseek_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Kimi K2.6,kimi_baseten,8,procurement_v1_cloud_spend_narrowing,incremental_typed,oracle_best,1,1,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_cloud_spend_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_cloud_spend_narrowing,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_cloud_spend_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_facilities_emergency_grant,incremental_typed,self_review,6,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_facilities_emergency_grant,incremental_typed,deepseek_review,6,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_facilities_emergency_grant,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_facilities_emergency_grant,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_facilities_emergency_grant,one_shot_typed,deepseek_review,1,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_facilities_emergency_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_freight_vendor_change,incremental_typed,self_review,4,0,False,False,False,4,3,1,False,True,True,False,3,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_freight_vendor_change,incremental_typed,deepseek_review,4,0,False,False,False,4,3,1,False,True,True,False,3,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_freight_vendor_change,incremental_typed,oracle_best,0,0,False,False,False,3,2,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_freight_vendor_change,one_shot_typed,self_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_freight_vendor_change,one_shot_typed,deepseek_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_freight_vendor_change,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_hardware_revoke_replace,incremental_typed,self_review,5,2,False,False,False,6,4,1,False,True,True,False,3,1,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_hardware_revoke_replace,incremental_typed,deepseek_review,0,2,False,False,False,6,4,1,False,True,True,False,3,1,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_hardware_revoke_replace,incremental_typed,oracle_best,2,2,False,False,False,5,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_hardware_revoke_replace,one_shot_typed,self_review,0,6,True,False,False,2,1,2,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_hardware_revoke_replace,one_shot_typed,deepseek_review,5,6,True,False,False,2,1,2,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_hardware_revoke_replace,one_shot_typed,oracle_best,6,6,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_print_budget_narrowing,incremental_typed,self_review,7,3,False,False,False,4,3,3,False,True,True,False,2,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_print_budget_narrowing,incremental_typed,deepseek_review,6,3,False,False,False,4,3,3,False,True,True,False,1,1,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_print_budget_narrowing,incremental_typed,oracle_best,3,3,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_print_budget_narrowing,one_shot_typed,self_review,7,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_print_budget_narrowing,one_shot_typed,deepseek_review,7,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_print_budget_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_reagent_window_narrowing,incremental_typed,self_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_reagent_window_narrowing,incremental_typed,deepseek_review,3,1,False,False,False,4,3,3,False,False,False,False,1,1,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_reagent_window_narrowing,incremental_typed,oracle_best,1,1,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_reagent_window_narrowing,one_shot_typed,self_review,2,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_reagent_window_narrowing,one_shot_typed,deepseek_review,2,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_reagent_window_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_relocation_revoke_replace,incremental_typed,self_review,3,5,False,False,False,5,3,2,False,False,False,False,0,1,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_relocation_revoke_replace,incremental_typed,deepseek_review,3,5,False,False,False,5,3,2,False,False,False,False,0,1,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_relocation_revoke_replace,incremental_typed,oracle_best,5,5,False,False,False,3,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_relocation_revoke_replace,one_shot_typed,self_review,3,1,True,False,False,2,1,2,False,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_relocation_revoke_replace,one_shot_typed,deepseek_review,4,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_relocation_revoke_replace,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_software_license_grant,incremental_typed,self_review,6,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_software_license_grant,incremental_typed,deepseek_review,2,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_software_license_grant,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_software_license_grant,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_software_license_grant,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_software_license_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_spare_parts_time_shift,incremental_typed,self_review,6,2,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_spare_parts_time_shift,incremental_typed,deepseek_review,6,2,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_spare_parts_time_shift,incremental_typed,oracle_best,2,2,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_spare_parts_time_shift,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_spare_parts_time_shift,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_spare_parts_time_shift,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_staffing_category_narrowing,incremental_typed,self_review,1,1,False,False,False,3,2,0,True,True,True,False,1,1,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_staffing_category_narrowing,incremental_typed,deepseek_review,1,1,False,False,False,3,2,0,True,True,True,False,1,1,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_staffing_category_narrowing,incremental_typed,oracle_best,1,1,False,False,False,3,2,0,True,True,True,False,1,1,deterministic_typed_oracle,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_staffing_category_narrowing,one_shot_typed,self_review,3,0,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_staffing_category_narrowing,one_shot_typed,deepseek_review,3,0,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+Kimi K2.6,kimi_baseten,8,procurement_v1_staffing_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_calibration_revoke_replace,incremental_typed,self_review,0,0,False,False,False,4,2,0,True,True,True,False,2,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_calibration_revoke_replace,incremental_typed,deepseek_review,0,0,False,False,False,4,2,0,True,True,True,False,2,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_calibration_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,4,2,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_calibration_revoke_replace,one_shot_typed,self_review,1,0,False,False,False,2,1,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_calibration_revoke_replace,one_shot_typed,deepseek_review,0,0,False,False,False,2,1,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_calibration_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,2,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_catering_category_narrowing,incremental_typed,self_review,0,1,True,False,False,2,1,2,False,False,False,False,1,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_catering_category_narrowing,incremental_typed,deepseek_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_catering_category_narrowing,incremental_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_catering_category_narrowing,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_catering_category_narrowing,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_catering_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_cloud_spend_narrowing,incremental_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_cloud_spend_narrowing,incremental_typed,deepseek_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_cloud_spend_narrowing,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_cloud_spend_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_cloud_spend_narrowing,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_cloud_spend_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_facilities_emergency_grant,incremental_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_facilities_emergency_grant,incremental_typed,deepseek_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_facilities_emergency_grant,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_facilities_emergency_grant,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_facilities_emergency_grant,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_facilities_emergency_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_freight_vendor_change,incremental_typed,self_review,0,0,False,False,False,3,2,0,True,True,True,False,2,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_freight_vendor_change,incremental_typed,deepseek_review,0,0,False,False,False,3,2,0,True,True,True,False,2,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_freight_vendor_change,incremental_typed,oracle_best,0,0,False,False,False,3,2,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_freight_vendor_change,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_freight_vendor_change,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_freight_vendor_change,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_hardware_revoke_replace,incremental_typed,self_review,0,0,False,False,False,6,4,0,True,True,True,False,3,1,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_hardware_revoke_replace,incremental_typed,deepseek_review,1,0,False,False,False,6,4,0,True,True,True,False,3,1,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_hardware_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,6,4,0,True,True,True,False,3,1,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_hardware_revoke_replace,one_shot_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_hardware_revoke_replace,one_shot_typed,deepseek_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_hardware_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_print_budget_narrowing,incremental_typed,self_review,1,0,False,False,False,4,3,0,True,True,True,False,2,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_print_budget_narrowing,incremental_typed,deepseek_review,1,0,False,False,False,4,3,0,True,True,True,False,2,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_print_budget_narrowing,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_print_budget_narrowing,one_shot_typed,self_review,0,1,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_print_budget_narrowing,one_shot_typed,deepseek_review,0,1,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_print_budget_narrowing,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_reagent_window_narrowing,incremental_typed,self_review,1,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_reagent_window_narrowing,incremental_typed,deepseek_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_reagent_window_narrowing,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_reagent_window_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_reagent_window_narrowing,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_reagent_window_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_relocation_revoke_replace,incremental_typed,self_review,0,1,False,False,False,7,5,5,False,False,False,False,0,2,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_relocation_revoke_replace,incremental_typed,deepseek_review,0,1,False,False,False,7,5,5,False,False,False,False,0,2,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_relocation_revoke_replace,incremental_typed,oracle_best,1,1,False,False,True,2,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_relocation_revoke_replace,one_shot_typed,self_review,1,0,False,False,False,2,1,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_relocation_revoke_replace,one_shot_typed,deepseek_review,0,0,False,False,False,2,1,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_relocation_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,2,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_software_license_grant,incremental_typed,self_review,1,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_software_license_grant,incremental_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_software_license_grant,incremental_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_software_license_grant,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_software_license_grant,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_software_license_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_spare_parts_time_shift,incremental_typed,self_review,0,0,False,False,False,1,1,0,True,True,True,False,1,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_spare_parts_time_shift,incremental_typed,deepseek_review,0,0,False,False,False,1,1,0,True,True,True,False,1,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_spare_parts_time_shift,incremental_typed,oracle_best,0,0,False,False,False,1,1,0,True,True,True,False,1,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_spare_parts_time_shift,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_spare_parts_time_shift,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_spare_parts_time_shift,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_staffing_category_narrowing,incremental_typed,self_review,0,0,False,False,False,4,3,0,True,True,True,False,3,0,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_staffing_category_narrowing,incremental_typed,deepseek_review,1,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_staffing_category_narrowing,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_staffing_category_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_staffing_category_narrowing,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,2,procurement_v1_staffing_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_calibration_revoke_replace,incremental_typed,self_review,0,3,False,False,False,4,2,2,False,True,True,False,2,0,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_calibration_revoke_replace,incremental_typed,deepseek_review,0,3,False,False,False,4,2,2,False,True,True,False,2,0,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_calibration_revoke_replace,incremental_typed,oracle_best,3,3,False,False,True,2,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_calibration_revoke_replace,one_shot_typed,self_review,2,0,False,False,False,2,1,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_calibration_revoke_replace,one_shot_typed,deepseek_review,1,0,False,False,False,2,1,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_calibration_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,2,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_catering_category_narrowing,incremental_typed,self_review,0,1,True,False,False,2,1,2,False,False,False,False,1,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_catering_category_narrowing,incremental_typed,deepseek_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_catering_category_narrowing,incremental_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_catering_category_narrowing,one_shot_typed,self_review,2,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_catering_category_narrowing,one_shot_typed,deepseek_review,3,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_catering_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_cloud_spend_narrowing,incremental_typed,self_review,0,2,True,False,True,1,0,1,False,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_cloud_spend_narrowing,incremental_typed,deepseek_review,0,2,True,False,True,1,0,1,False,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_cloud_spend_narrowing,incremental_typed,oracle_best,2,2,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_cloud_spend_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_cloud_spend_narrowing,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_cloud_spend_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_facilities_emergency_grant,incremental_typed,self_review,0,3,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_facilities_emergency_grant,incremental_typed,deepseek_review,0,3,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_facilities_emergency_grant,incremental_typed,oracle_best,3,3,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_facilities_emergency_grant,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_facilities_emergency_grant,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_facilities_emergency_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_freight_vendor_change,incremental_typed,self_review,0,0,False,False,False,3,2,0,True,True,True,False,2,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_freight_vendor_change,incremental_typed,deepseek_review,0,0,False,False,False,3,2,0,True,True,True,False,2,0,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_freight_vendor_change,incremental_typed,oracle_best,0,0,False,False,False,3,2,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_freight_vendor_change,one_shot_typed,self_review,2,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_freight_vendor_change,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_freight_vendor_change,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_hardware_revoke_replace,incremental_typed,self_review,0,2,False,False,False,6,4,1,False,True,True,False,3,1,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_hardware_revoke_replace,incremental_typed,deepseek_review,0,2,False,False,False,6,4,1,False,True,True,False,3,1,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_hardware_revoke_replace,incremental_typed,oracle_best,2,2,False,False,False,5,4,0,True,True,True,False,3,1,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_hardware_revoke_replace,one_shot_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_hardware_revoke_replace,one_shot_typed,deepseek_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_hardware_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_print_budget_narrowing,incremental_typed,self_review,1,0,False,False,False,4,3,0,True,True,True,False,2,0,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_print_budget_narrowing,incremental_typed,deepseek_review,1,0,False,False,False,4,3,0,True,True,True,False,2,0,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_print_budget_narrowing,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_print_budget_narrowing,one_shot_typed,self_review,0,1,True,False,False,4,3,4,False,False,False,False,2,1,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_print_budget_narrowing,one_shot_typed,deepseek_review,0,1,True,False,False,4,3,4,False,False,False,False,2,1,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_print_budget_narrowing,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_reagent_window_narrowing,incremental_typed,self_review,1,0,False,False,True,1,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_reagent_window_narrowing,incremental_typed,deepseek_review,3,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_reagent_window_narrowing,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_reagent_window_narrowing,one_shot_typed,self_review,3,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_reagent_window_narrowing,one_shot_typed,deepseek_review,3,0,True,True,True,0,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_reagent_window_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_relocation_revoke_replace,incremental_typed,self_review,0,1,False,False,False,7,5,5,False,False,False,False,0,2,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_relocation_revoke_replace,incremental_typed,deepseek_review,0,1,False,False,False,7,5,5,False,False,False,False,0,2,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_relocation_revoke_replace,incremental_typed,oracle_best,1,1,False,False,True,2,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_relocation_revoke_replace,one_shot_typed,self_review,1,0,False,False,False,2,1,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_relocation_revoke_replace,one_shot_typed,deepseek_review,1,0,False,False,False,2,1,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_relocation_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,2,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_software_license_grant,incremental_typed,self_review,1,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_software_license_grant,incremental_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_software_license_grant,incremental_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_software_license_grant,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_software_license_grant,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_software_license_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_spare_parts_time_shift,incremental_typed,self_review,0,0,False,False,False,1,1,0,True,True,True,False,1,0,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_spare_parts_time_shift,incremental_typed,deepseek_review,0,0,False,False,False,1,1,0,True,True,True,False,1,0,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_spare_parts_time_shift,incremental_typed,oracle_best,0,0,False,False,False,1,1,0,True,True,True,False,1,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_spare_parts_time_shift,one_shot_typed,self_review,3,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_spare_parts_time_shift,one_shot_typed,deepseek_review,3,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_spare_parts_time_shift,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_staffing_category_narrowing,incremental_typed,self_review,2,0,False,False,False,4,3,0,True,False,False,False,2,1,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_staffing_category_narrowing,incremental_typed,deepseek_review,2,0,False,False,False,4,3,0,True,False,False,False,2,1,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_staffing_category_narrowing,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_staffing_category_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_staffing_category_narrowing,one_shot_typed,deepseek_review,3,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,4,procurement_v1_staffing_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_calibration_revoke_replace,incremental_typed,self_review,6,3,False,False,True,2,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_calibration_revoke_replace,incremental_typed,deepseek_review,6,3,False,False,True,2,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_calibration_revoke_replace,incremental_typed,oracle_best,3,3,False,False,True,2,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_calibration_revoke_replace,one_shot_typed,self_review,6,0,False,False,False,3,2,1,False,False,False,False,0,1,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_calibration_revoke_replace,one_shot_typed,deepseek_review,2,0,False,False,False,2,1,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_calibration_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,2,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_catering_category_narrowing,incremental_typed,self_review,6,1,True,False,False,2,1,2,False,False,False,False,1,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_catering_category_narrowing,incremental_typed,deepseek_review,5,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_catering_category_narrowing,incremental_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_catering_category_narrowing,one_shot_typed,self_review,7,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_catering_category_narrowing,one_shot_typed,deepseek_review,7,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_catering_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_cloud_spend_narrowing,incremental_typed,self_review,3,2,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_cloud_spend_narrowing,incremental_typed,deepseek_review,2,2,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_cloud_spend_narrowing,incremental_typed,oracle_best,2,2,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_cloud_spend_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_cloud_spend_narrowing,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_cloud_spend_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_facilities_emergency_grant,incremental_typed,self_review,0,3,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_facilities_emergency_grant,incremental_typed,deepseek_review,2,3,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_facilities_emergency_grant,incremental_typed,oracle_best,3,3,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_facilities_emergency_grant,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_facilities_emergency_grant,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_facilities_emergency_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_freight_vendor_change,incremental_typed,self_review,7,0,False,False,False,3,2,0,True,True,True,False,2,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_freight_vendor_change,incremental_typed,deepseek_review,5,0,False,False,False,3,2,0,True,True,True,False,2,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_freight_vendor_change,incremental_typed,oracle_best,0,0,False,False,False,3,2,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_freight_vendor_change,one_shot_typed,self_review,7,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_freight_vendor_change,one_shot_typed,deepseek_review,7,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_freight_vendor_change,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_hardware_revoke_replace,incremental_typed,self_review,2,2,False,False,False,5,4,0,True,True,True,False,3,1,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_hardware_revoke_replace,incremental_typed,deepseek_review,2,2,False,False,False,5,4,0,True,True,True,False,3,1,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_hardware_revoke_replace,incremental_typed,oracle_best,2,2,False,False,False,5,4,0,True,True,True,False,3,1,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_hardware_revoke_replace,one_shot_typed,self_review,2,0,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_hardware_revoke_replace,one_shot_typed,deepseek_review,2,0,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_hardware_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_print_budget_narrowing,incremental_typed,self_review,3,7,True,False,False,4,3,4,False,True,True,False,2,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_print_budget_narrowing,incremental_typed,deepseek_review,7,7,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_print_budget_narrowing,incremental_typed,oracle_best,7,7,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_print_budget_narrowing,one_shot_typed,self_review,7,1,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_print_budget_narrowing,one_shot_typed,deepseek_review,7,1,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_print_budget_narrowing,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_reagent_window_narrowing,incremental_typed,self_review,0,5,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_reagent_window_narrowing,incremental_typed,deepseek_review,4,5,True,False,False,3,2,3,False,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_reagent_window_narrowing,incremental_typed,oracle_best,5,5,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_reagent_window_narrowing,one_shot_typed,self_review,5,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_reagent_window_narrowing,one_shot_typed,deepseek_review,5,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_reagent_window_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_relocation_revoke_replace,incremental_typed,self_review,6,1,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_relocation_revoke_replace,incremental_typed,deepseek_review,3,1,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_relocation_revoke_replace,incremental_typed,oracle_best,1,1,False,False,True,2,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_relocation_revoke_replace,one_shot_typed,self_review,3,5,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_relocation_revoke_replace,one_shot_typed,deepseek_review,7,5,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_relocation_revoke_replace,one_shot_typed,oracle_best,5,5,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_software_license_grant,incremental_typed,self_review,1,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_software_license_grant,incremental_typed,deepseek_review,2,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_software_license_grant,incremental_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_software_license_grant,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_software_license_grant,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_software_license_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_spare_parts_time_shift,incremental_typed,self_review,0,5,True,False,False,1,1,1,False,True,True,False,1,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_spare_parts_time_shift,incremental_typed,deepseek_review,2,5,True,False,False,3,2,3,False,True,True,False,2,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_spare_parts_time_shift,incremental_typed,oracle_best,5,5,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_spare_parts_time_shift,one_shot_typed,self_review,7,0,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_spare_parts_time_shift,one_shot_typed,deepseek_review,5,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_spare_parts_time_shift,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_staffing_category_narrowing,incremental_typed,self_review,6,5,False,False,False,4,3,3,False,True,True,False,1,1,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_staffing_category_narrowing,incremental_typed,deepseek_review,6,5,False,False,False,4,3,3,False,True,True,False,1,1,review_failed_fallback_to_prior_selection,True
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_staffing_category_narrowing,incremental_typed,oracle_best,5,5,False,False,False,1,1,0,True,True,True,False,1,0,deterministic_typed_oracle,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_staffing_category_narrowing,one_shot_typed,self_review,7,0,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_staffing_category_narrowing,one_shot_typed,deepseek_review,7,0,True,False,False,4,3,4,False,False,False,False,2,1,selected,False
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,8,procurement_v1_staffing_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_calibration_revoke_replace,incremental_typed,self_review,0,0,False,False,False,5,3,0,True,True,True,False,3,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_calibration_revoke_replace,incremental_typed,deepseek_review,0,0,False,False,False,5,3,0,True,True,True,False,3,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_calibration_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,5,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_calibration_revoke_replace,one_shot_typed,self_review,0,0,False,False,False,2,1,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_calibration_revoke_replace,one_shot_typed,deepseek_review,0,0,False,False,False,2,1,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_calibration_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,2,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_catering_category_narrowing,incremental_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_catering_category_narrowing,incremental_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_catering_category_narrowing,incremental_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_catering_category_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_catering_category_narrowing,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_catering_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_cloud_spend_narrowing,incremental_typed,self_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_cloud_spend_narrowing,incremental_typed,deepseek_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_cloud_spend_narrowing,incremental_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_cloud_spend_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_cloud_spend_narrowing,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_cloud_spend_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_facilities_emergency_grant,incremental_typed,self_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_facilities_emergency_grant,incremental_typed,deepseek_review,1,1,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_facilities_emergency_grant,incremental_typed,oracle_best,1,1,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_facilities_emergency_grant,one_shot_typed,self_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_facilities_emergency_grant,one_shot_typed,deepseek_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_facilities_emergency_grant,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_freight_vendor_change,incremental_typed,self_review,0,0,False,False,False,3,2,0,True,True,True,False,2,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_freight_vendor_change,incremental_typed,deepseek_review,0,0,False,False,False,3,2,0,True,True,True,False,2,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_freight_vendor_change,incremental_typed,oracle_best,0,0,False,False,False,3,2,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_freight_vendor_change,one_shot_typed,self_review,1,0,False,False,False,2,1,0,True,True,True,False,1,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_freight_vendor_change,one_shot_typed,deepseek_review,0,0,False,False,False,2,1,0,True,True,True,False,1,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_freight_vendor_change,one_shot_typed,oracle_best,0,0,False,False,False,2,1,0,True,True,True,False,1,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_hardware_revoke_replace,incremental_typed,self_review,0,1,False,False,False,5,3,1,False,True,True,False,3,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_hardware_revoke_replace,incremental_typed,deepseek_review,0,1,False,False,False,5,3,1,False,True,True,False,3,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_hardware_revoke_replace,incremental_typed,oracle_best,1,1,False,False,False,4,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_hardware_revoke_replace,one_shot_typed,self_review,1,0,False,False,False,3,2,2,False,False,False,False,0,1,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_hardware_revoke_replace,one_shot_typed,deepseek_review,1,0,False,False,False,3,2,2,False,False,False,False,0,1,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_hardware_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,1,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_print_budget_narrowing,incremental_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_print_budget_narrowing,incremental_typed,deepseek_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_print_budget_narrowing,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_print_budget_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_print_budget_narrowing,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_print_budget_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_reagent_window_narrowing,incremental_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_reagent_window_narrowing,incremental_typed,deepseek_review,1,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_reagent_window_narrowing,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_reagent_window_narrowing,one_shot_typed,self_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_reagent_window_narrowing,one_shot_typed,deepseek_review,1,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_reagent_window_narrowing,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_relocation_revoke_replace,incremental_typed,self_review,1,0,False,False,False,3,1,0,True,False,False,False,0,1,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_relocation_revoke_replace,incremental_typed,deepseek_review,0,0,False,False,False,3,1,0,True,False,False,False,0,1,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_relocation_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,3,1,0,True,False,False,False,0,1,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_relocation_revoke_replace,one_shot_typed,self_review,0,0,False,False,False,2,1,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_relocation_revoke_replace,one_shot_typed,deepseek_review,1,0,False,False,False,2,1,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_relocation_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,2,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_software_license_grant,incremental_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_software_license_grant,incremental_typed,deepseek_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_software_license_grant,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_software_license_grant,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_software_license_grant,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_software_license_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_spare_parts_time_shift,incremental_typed,self_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_spare_parts_time_shift,incremental_typed,deepseek_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_spare_parts_time_shift,incremental_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_spare_parts_time_shift,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_spare_parts_time_shift,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_spare_parts_time_shift,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_staffing_category_narrowing,incremental_typed,self_review,1,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_staffing_category_narrowing,incremental_typed,deepseek_review,1,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_staffing_category_narrowing,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_staffing_category_narrowing,one_shot_typed,self_review,0,1,False,False,False,3,2,2,False,True,True,False,2,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_staffing_category_narrowing,one_shot_typed,deepseek_review,0,1,False,False,False,3,2,2,False,True,True,False,2,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,2,procurement_v1_staffing_category_narrowing,one_shot_typed,oracle_best,1,1,False,False,False,1,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_calibration_revoke_replace,incremental_typed,self_review,3,3,False,False,False,3,1,0,True,False,False,False,1,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_calibration_revoke_replace,incremental_typed,deepseek_review,3,3,False,False,False,3,1,0,True,False,False,False,1,0,review_failed_fallback_to_prior_selection,True
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_calibration_revoke_replace,incremental_typed,oracle_best,3,3,False,False,False,3,1,0,True,False,False,False,1,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_calibration_revoke_replace,one_shot_typed,self_review,2,0,False,False,False,2,1,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_calibration_revoke_replace,one_shot_typed,deepseek_review,0,0,False,False,False,2,1,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_calibration_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,2,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_catering_category_narrowing,incremental_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_catering_category_narrowing,incremental_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_catering_category_narrowing,incremental_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_catering_category_narrowing,one_shot_typed,self_review,2,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_catering_category_narrowing,one_shot_typed,deepseek_review,3,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_catering_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_cloud_spend_narrowing,incremental_typed,self_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_cloud_spend_narrowing,incremental_typed,deepseek_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_cloud_spend_narrowing,incremental_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_cloud_spend_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_cloud_spend_narrowing,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_cloud_spend_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_facilities_emergency_grant,incremental_typed,self_review,3,2,True,False,False,4,3,4,False,True,False,True,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_facilities_emergency_grant,incremental_typed,deepseek_review,2,2,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_facilities_emergency_grant,incremental_typed,oracle_best,2,2,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_facilities_emergency_grant,one_shot_typed,self_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_facilities_emergency_grant,one_shot_typed,deepseek_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_facilities_emergency_grant,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_freight_vendor_change,incremental_typed,self_review,0,0,False,False,False,3,2,0,True,True,True,False,2,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_freight_vendor_change,incremental_typed,deepseek_review,0,0,False,False,False,3,2,0,True,True,True,False,2,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_freight_vendor_change,incremental_typed,oracle_best,0,0,False,False,False,3,2,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_freight_vendor_change,one_shot_typed,self_review,3,0,False,False,False,3,2,1,False,True,True,False,2,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_freight_vendor_change,one_shot_typed,deepseek_review,3,0,False,False,False,3,2,1,False,True,True,False,2,0,review_failed_fallback_to_prior_selection,True
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_freight_vendor_change,one_shot_typed,oracle_best,0,0,False,False,False,2,1,0,True,True,True,False,1,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_hardware_revoke_replace,incremental_typed,self_review,0,1,False,False,False,5,3,1,False,True,True,False,3,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_hardware_revoke_replace,incremental_typed,deepseek_review,0,1,False,False,False,5,3,1,False,True,True,False,3,0,review_failed_fallback_to_prior_selection,True
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_hardware_revoke_replace,incremental_typed,oracle_best,1,1,False,False,False,4,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_hardware_revoke_replace,one_shot_typed,self_review,1,0,False,False,False,3,2,2,False,False,False,False,0,1,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_hardware_revoke_replace,one_shot_typed,deepseek_review,1,0,False,False,False,3,2,2,False,False,False,False,0,1,review_failed_fallback_to_prior_selection,True
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_hardware_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,1,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_print_budget_narrowing,incremental_typed,self_review,1,3,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_print_budget_narrowing,incremental_typed,deepseek_review,1,3,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_print_budget_narrowing,incremental_typed,oracle_best,3,3,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_print_budget_narrowing,one_shot_typed,self_review,2,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_print_budget_narrowing,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_print_budget_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_reagent_window_narrowing,incremental_typed,self_review,0,2,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_reagent_window_narrowing,incremental_typed,deepseek_review,1,2,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_reagent_window_narrowing,incremental_typed,oracle_best,2,2,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_reagent_window_narrowing,one_shot_typed,self_review,3,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_reagent_window_narrowing,one_shot_typed,deepseek_review,2,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_reagent_window_narrowing,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_relocation_revoke_replace,incremental_typed,self_review,0,0,False,False,False,3,1,0,True,False,False,False,0,1,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_relocation_revoke_replace,incremental_typed,deepseek_review,0,0,False,False,False,3,1,0,True,False,False,False,0,1,review_failed_fallback_to_prior_selection,True
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_relocation_revoke_replace,incremental_typed,oracle_best,0,0,False,False,False,3,1,0,True,False,False,False,0,1,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_relocation_revoke_replace,one_shot_typed,self_review,1,3,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_relocation_revoke_replace,one_shot_typed,deepseek_review,1,3,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_relocation_revoke_replace,one_shot_typed,oracle_best,3,3,False,False,False,1,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_software_license_grant,incremental_typed,self_review,1,0,False,False,False,2,1,1,False,False,False,False,1,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_software_license_grant,incremental_typed,deepseek_review,1,0,False,False,False,2,1,1,False,False,False,False,1,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_software_license_grant,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_software_license_grant,one_shot_typed,self_review,2,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_software_license_grant,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_software_license_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_spare_parts_time_shift,incremental_typed,self_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_spare_parts_time_shift,incremental_typed,deepseek_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_spare_parts_time_shift,incremental_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_spare_parts_time_shift,one_shot_typed,self_review,3,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_spare_parts_time_shift,one_shot_typed,deepseek_review,3,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_spare_parts_time_shift,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_staffing_category_narrowing,incremental_typed,self_review,1,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_staffing_category_narrowing,incremental_typed,deepseek_review,2,0,False,False,False,7,6,3,False,True,False,True,2,2,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_staffing_category_narrowing,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_staffing_category_narrowing,one_shot_typed,self_review,0,2,True,False,False,3,2,3,False,True,True,False,2,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_staffing_category_narrowing,one_shot_typed,deepseek_review,2,2,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,4,procurement_v1_staffing_category_narrowing,one_shot_typed,oracle_best,2,2,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_calibration_revoke_replace,incremental_typed,self_review,5,4,False,False,True,2,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_calibration_revoke_replace,incremental_typed,deepseek_review,4,4,False,False,True,2,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_calibration_revoke_replace,incremental_typed,oracle_best,4,4,False,False,True,2,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_calibration_revoke_replace,one_shot_typed,self_review,7,4,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_calibration_revoke_replace,one_shot_typed,deepseek_review,2,4,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_calibration_revoke_replace,one_shot_typed,oracle_best,4,4,False,False,False,1,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_catering_category_narrowing,incremental_typed,self_review,1,0,True,False,False,2,1,2,False,False,False,False,1,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_catering_category_narrowing,incremental_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_catering_category_narrowing,incremental_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_catering_category_narrowing,one_shot_typed,self_review,7,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_catering_category_narrowing,one_shot_typed,deepseek_review,7,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_catering_category_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_cloud_spend_narrowing,incremental_typed,self_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_cloud_spend_narrowing,incremental_typed,deepseek_review,0,1,True,False,True,1,0,1,False,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_cloud_spend_narrowing,incremental_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_cloud_spend_narrowing,one_shot_typed,self_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,review_failed_fallback_to_prior_selection,True
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_cloud_spend_narrowing,one_shot_typed,deepseek_review,1,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_cloud_spend_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_facilities_emergency_grant,incremental_typed,self_review,4,2,True,False,False,3,2,3,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_facilities_emergency_grant,incremental_typed,deepseek_review,3,2,True,False,False,4,3,4,False,True,False,True,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_facilities_emergency_grant,incremental_typed,oracle_best,2,2,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_facilities_emergency_grant,one_shot_typed,self_review,6,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_facilities_emergency_grant,one_shot_typed,deepseek_review,6,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_facilities_emergency_grant,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_freight_vendor_change,incremental_typed,self_review,0,0,False,False,False,3,2,0,True,True,True,False,2,0,review_failed_fallback_to_prior_selection,True
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_freight_vendor_change,incremental_typed,deepseek_review,3,0,False,False,False,3,2,0,True,True,True,False,2,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_freight_vendor_change,incremental_typed,oracle_best,0,0,False,False,False,3,2,0,True,True,True,False,2,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_freight_vendor_change,one_shot_typed,self_review,6,0,False,False,False,3,2,1,False,True,True,False,2,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_freight_vendor_change,one_shot_typed,deepseek_review,2,0,False,False,False,5,4,3,False,True,False,True,1,2,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_freight_vendor_change,one_shot_typed,oracle_best,0,0,False,False,False,2,1,0,True,True,True,False,1,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_hardware_revoke_replace,incremental_typed,self_review,4,1,False,False,False,5,4,1,False,True,True,False,3,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_hardware_revoke_replace,incremental_typed,deepseek_review,2,1,False,False,False,6,4,2,False,True,True,False,3,1,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_hardware_revoke_replace,incremental_typed,oracle_best,1,1,False,False,False,4,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_hardware_revoke_replace,one_shot_typed,self_review,5,0,False,False,False,3,2,2,False,False,False,False,0,1,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_hardware_revoke_replace,one_shot_typed,deepseek_review,6,0,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_hardware_revoke_replace,one_shot_typed,oracle_best,0,0,False,False,False,1,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_print_budget_narrowing,incremental_typed,self_review,4,3,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_print_budget_narrowing,incremental_typed,deepseek_review,4,3,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_print_budget_narrowing,incremental_typed,oracle_best,3,3,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_print_budget_narrowing,one_shot_typed,self_review,6,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_print_budget_narrowing,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_print_budget_narrowing,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_reagent_window_narrowing,incremental_typed,self_review,7,2,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_reagent_window_narrowing,incremental_typed,deepseek_review,1,2,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_reagent_window_narrowing,incremental_typed,oracle_best,2,2,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_reagent_window_narrowing,one_shot_typed,self_review,5,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_reagent_window_narrowing,one_shot_typed,deepseek_review,4,1,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_reagent_window_narrowing,one_shot_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_relocation_revoke_replace,incremental_typed,self_review,2,5,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_relocation_revoke_replace,incremental_typed,deepseek_review,2,5,False,False,False,3,1,1,False,False,False,False,0,1,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_relocation_revoke_replace,incremental_typed,oracle_best,5,5,False,False,True,2,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_relocation_revoke_replace,one_shot_typed,self_review,0,3,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_relocation_revoke_replace,one_shot_typed,deepseek_review,0,3,False,False,False,2,1,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_relocation_revoke_replace,one_shot_typed,oracle_best,3,3,False,False,False,1,1,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_software_license_grant,incremental_typed,self_review,0,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_software_license_grant,incremental_typed,deepseek_review,6,0,False,False,True,1,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_software_license_grant,incremental_typed,oracle_best,0,0,False,False,True,1,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_software_license_grant,one_shot_typed,self_review,2,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_software_license_grant,one_shot_typed,deepseek_review,2,0,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_software_license_grant,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_spare_parts_time_shift,incremental_typed,self_review,4,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_spare_parts_time_shift,incremental_typed,deepseek_review,2,1,True,False,True,1,0,1,False,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_spare_parts_time_shift,incremental_typed,oracle_best,1,1,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_spare_parts_time_shift,one_shot_typed,self_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_spare_parts_time_shift,one_shot_typed,deepseek_review,0,0,True,True,True,0,0,0,True,False,False,False,0,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_spare_parts_time_shift,one_shot_typed,oracle_best,0,0,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_staffing_category_narrowing,incremental_typed,self_review,1,0,False,False,False,4,3,0,True,True,True,False,3,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_staffing_category_narrowing,incremental_typed,deepseek_review,2,0,False,False,False,7,6,3,False,True,False,True,2,2,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_staffing_category_narrowing,incremental_typed,oracle_best,0,0,False,False,False,4,3,0,True,True,True,False,3,0,deterministic_typed_oracle,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_staffing_category_narrowing,one_shot_typed,self_review,0,2,True,False,False,3,2,3,False,True,True,False,2,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_staffing_category_narrowing,one_shot_typed,deepseek_review,0,2,True,False,False,3,2,3,False,True,True,False,2,0,selected,False
+Qwen Plus,qwen_plus_0728_openrouter,8,procurement_v1_staffing_category_narrowing,one_shot_typed,oracle_best,2,2,True,True,True,0,0,0,True,False,False,False,0,0,deterministic_typed_oracle,False

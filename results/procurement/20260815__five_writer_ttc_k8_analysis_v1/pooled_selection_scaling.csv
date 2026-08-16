@@ -1,0 +1,5 @@
+k,writers,typed_pools,pool_contains_full_fidelity_exact_rate,reviewer_selected_full_fidelity_exact_rate,reviewer_full_fidelity_oracle_hit_rate,oracle_best_mean_field_errors,selected_mean_field_errors,mean_full_fidelity_selection_regret,reviewer_attempted_pools,reviewer_successful_pools,reviewer_failure_rate,reviewer_successful_typed_pools,reviewer_typed_failure_rate,free_text_oracle_regret
+1,5,120,0.31666666666666665,0.31666666666666665,1.0,1.775,1.775,0.0,0,0,,0,,undefined
+2,5,120,0.44166666666666665,0.35,0.7916666666666666,1.3333333333333333,1.725,0.39166666666666666,240,226,0.058333333333333334,116,0.03333333333333333,undefined
+4,5,120,0.5083333333333333,0.31666666666666665,0.6,1.0916666666666666,1.775,0.6833333333333333,240,186,0.225,94,0.21666666666666667,undefined
+8,5,120,0.55,0.26666666666666666,0.475,0.9,1.8,0.9,240,234,0.025,117,0.025,undefined

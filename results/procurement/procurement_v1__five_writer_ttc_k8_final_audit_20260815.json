@@ -1,0 +1,117 @@
+{
+  "schema_version": "procurement_writer_ttc_k8_final_audit_v1",
+  "status": "completed",
+  "completed_at": "2026-08-15",
+  "domain_id": "procurement",
+  "corpus_version": "benchmark_v1",
+  "presentation_id": "naturalistic_v1",
+  "method": "nested_trajectory_level_selected_best_of_k",
+  "levels": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "new_candidate_indices": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "candidate_pool_contract": "nested_c1_subset_c2_subset_c4_subset_c8",
+  "aggregation": "select_one_complete_trajectory_no_rewrite_no_merge",
+  "executor_target": "gptoss_baseten",
+  "independent_reviewer_target": "deepseek_baseten",
+  "approved_budget": {
+    "currency": "USD",
+    "hard_cap": 35.0,
+    "plan": "results/procurement/procurement_v1__five_writer_ttc_k8_run_plan.json",
+    "plan_sha256": "93d9fe4087322dde5bc9f21d2fc81f5987468d81137f08763fc3980ee888bd67"
+  },
+  "self_review_sources": [
+    {
+      "writer_target": "qwen_plus_0728_openrouter",
+      "run": "results/procurement/20260815-005811-696483__authorization-memory-writer_ttc__procurement-v1-qwen-k8",
+      "manifest_sha256": "c0d4d64079d69cc22585ed6342ebea41b341d884fbfa5beafbb96dd4b7e948e5"
+    },
+    {
+      "writer_target": "nemotron_3_ultra_baseten",
+      "run": "results/procurement/20260815-011743-149741__authorization-memory-writer_ttc__procurement-v1-nemotron-k8-clean",
+      "manifest_sha256": "7cf041d738cff93208d2f8d6a4e2484a3738e3b96a7ccc18ddce66af98827592"
+    },
+    {
+      "writer_target": "grok_4_3_openrouter",
+      "run": "results/procurement/20260815-010444-213269__authorization-memory-writer_ttc__procurement-v1-grok-k8",
+      "manifest_sha256": "f36d7a37b42dc86925763f7e42c09fda14663da52562de7183bc46ee222dbe46"
+    },
+    {
+      "writer_target": "kimi_baseten",
+      "run": "results/procurement/20260815-010352-842515__authorization-memory-writer_ttc__procurement-v1-kimi-k8",
+      "manifest_sha256": "285cfaf6bd2b818e6994f5db9e4fae4d9636ff81e788c73fe04790ceb3f37b50"
+    },
+    {
+      "writer_target": "glm_5_2_baseten",
+      "run": "results/procurement/20260815-011212-080591__authorization-memory-writer_ttc__procurement-v1-glm-k8",
+      "manifest_sha256": "ccd3d82770aeb2c63cae3cb393840ce720e55fa528f77c771fec451c0fca2b9a"
+    }
+  ],
+  "analysis": {
+    "five_writer_scaling": "results/procurement/20260815__five_writer_ttc_k8_analysis_v1",
+    "five_writer_scaling_manifest_sha256": "2f1c8f10e48d165c38e14c525d00b2c97da19eae43455e5528af2ba2f83dbbf1",
+    "independent_review": "results/procurement/20260815__deepseek_independent_ttc_k8_analysis_v2",
+    "independent_review_manifest_sha256": "7bea4cf2c25cab633cc6d9b8e3e56bf09e315d5c53ab335aad844e4439e1108c",
+    "model_calls": 0,
+    "free_text_oracle_regret": "undefined",
+    "executor_outcomes_used_as_oracle": false
+  },
+  "accounting": {
+    "clean_k8_self_review_call_records": 5303,
+    "clean_k8_self_review_error_records": 14,
+    "clean_k8_self_review_cost_usd": 21.6965361,
+    "clean_k8_independent_and_oracle_call_records": 2275,
+    "clean_k8_independent_and_oracle_error_records": 9,
+    "clean_k8_independent_and_oracle_cost_usd": 4.87338145,
+    "clean_k8_call_records": 7578,
+    "clean_k8_error_records": 23,
+    "clean_k8_cost_usd": 26.56991755,
+    "provider_reported_cost_usd": 6.36221877,
+    "rate_derived_clean_cost_usd": 20.20769878,
+    "excluded_technical_call_records": 242,
+    "excluded_technical_cost_usd": 1.20058476,
+    "spend_including_excluded_technical_attempt_usd": 27.77050231,
+    "remaining_under_cap_usd": 7.22949769,
+    "pricing_basis": "provider-reported cost where present; otherwise saved token usage at frozen 2026-08-08 rates"
+  },
+  "excluded_technical_attempts": [
+    {
+      "run": "results/procurement/20260815-010343-108012__authorization-memory-writer_ttc__procurement-v1-nemotron-k8",
+      "manifest_sha256": "896d038eb1fe2a3069b2a999e8a5a3c26eb5b416421999cde32a7a33d2e4ba43",
+      "calls_sha256": "1a088453a3a772db65d1a02d73a640b60041cdf0e820c142e58641025a16f796",
+      "call_records": 242,
+      "cost_usd": 1.20058476,
+      "reason": "runtime leakage-guard false positive on model-generated rejected PatchDoc arguments embedded in the standard repair prompt",
+      "scientific_status": "excluded_technical_attempt"
+    }
+  ],
+  "review_protocol": {
+    "self_review_max_output_tokens": 1536,
+    "independent_review_max_output_tokens": 1536,
+    "reviewer_temperature": 0.0,
+    "reviewer_uses_hidden_oracle": false,
+    "invalid_review_fallback": "retain_source_self_selection",
+    "note": "The k=8 selector ceiling was raised from the k=2/k=4 value of 768 to reduce truncation on the longer eight-candidate prompt; failure rates across levels therefore are not a pure pool-size comparison. Selection fidelity and successful-review sensitivity remain directly reported."
+  },
+  "validation": {
+    "nested_candidate_lineage": "passed",
+    "identical_self_deepseek_oracle_candidate_pools": "passed",
+    "identical_blinded_self_and_deepseek_reviewer_surfaces": "passed",
+    "complete_candidate_pools_per_writer": 384,
+    "complete_self_selection_decisions_per_writer": 48,
+    "complete_independent_selection_decisions_per_writer": 48,
+    "complete_selected_executor_trials_per_writer_and_method": 288,
+    "analysis_source_and_output_hashes": "passed",
+    "ruff": "passed",
+    "all_domain_offline_validation": "passed",
+    "frozen_artifacts_modified": false
+  }
+}

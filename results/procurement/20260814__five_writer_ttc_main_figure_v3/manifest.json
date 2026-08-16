@@ -1,0 +1,119 @@
+{
+  "analysis_module": "analysis.plot_writer_ttc_figure",
+  "created_at": "2026-08-15",
+  "discrepancies": [],
+  "files": {
+    "CAPTION.md": {
+      "bytes": 1470,
+      "sha256": "14c9c9c4a8a99bd5c432de2cb8eb481e07a942f351bf9bdc62eb84f5b756542e"
+    },
+    "README.md": {
+      "bytes": 4476,
+      "sha256": "f06689f83f701a7200873ed2b9a644dad8fdb97bac55135de3d11dc86b53000f"
+    },
+    "plot_data.csv": {
+      "bytes": 7362,
+      "sha256": "c57ee608bc906506663bb4cd5f07a0d2ebaf796db76cae3e85c859eda1d6dcab"
+    },
+    "procurement_writer_ttc_five_writer.pdf": {
+      "bytes": 47462,
+      "sha256": "d992b2f3dc54532a073ebeecc2a3f3f5890f05b6856c4843c70703d8d124a639"
+    },
+    "procurement_writer_ttc_five_writer.png": {
+      "bytes": 370440,
+      "sha256": "cce728ed4118fd320bedf97f0efd7912c5851c70749484cac9bf320a92971323"
+    },
+    "verification.json": {
+      "bytes": 8748,
+      "sha256": "b1c0931c1930ec72d15c49015ad154a1131fd4a8e1aa87900955b79203dfef09"
+    }
+  },
+  "model_calls": 0,
+  "schema_version": "procurement_writer_ttc_figure_v4",
+  "sources": [
+    {
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__five_writer_ttc_k8_analysis_v1/manifest.json",
+      "sha256": "2f1c8f10e48d165c38e14c525d00b2c97da19eae43455e5528af2ba2f83dbbf1"
+    },
+    {
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__deepseek_independent_ttc_k8_analysis_v2/manifest.json",
+      "sha256": "7bea4cf2c25cab633cc6d9b8e3e56bf09e315d5c53ab335aad844e4439e1108c"
+    },
+    {
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__five_writer_ttc_k8_analysis_v1/REPORT.md",
+      "sha256": "f208b5e3c8692ecbb44ce9d875976c2a485dcc6ccd34d130bf06006259e257fe"
+    },
+    {
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__five_writer_ttc_k8_analysis_v1/summary.json",
+      "sha256": "adc1b9981d2d616834316a5812276841f3bd5d39ce23d9f4ad7dea98456cd3f5"
+    },
+    {
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/procurement_v1__five_writer_ttc_k8_final_audit_20260815.json",
+      "sha256": "c10c9de5971f5fc2e60dc910322971ff501bf54bb14ed58fa9b735901bbcc670"
+    },
+    {
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__five_writer_ttc_k8_analysis_v1/pooled_behavior_by_condition.csv",
+      "sha256": "7faaf1ddcf3b7a66a53b36b68e80e4c153df54007b8aa21de48558faaa667526"
+    },
+    {
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__five_writer_ttc_k8_analysis_v1/pooled_selection_scaling.csv",
+      "sha256": "43e50b907d72a6043ad8db0fae400e111754af807fb2630b39f7977a6fabcfaa"
+    },
+    {
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__five_writer_ttc_k8_analysis_v1/pooled_incremental_mechanisms.csv",
+      "sha256": "15a42ddc2a025bae8c6f96de1fc3f4f07aaca7c28a41c182c0dcd10c5859658f"
+    },
+    {
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__five_writer_ttc_k8_analysis_v1/pooled_typed_fidelity_by_condition.csv",
+      "sha256": "e6b09bd74a5629f0e80427529022956f5257977543a46eb27d7aa566ae36c663"
+    },
+    {
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__five_writer_ttc_k8_analysis_v1/behavior_by_writer_condition.csv",
+      "sha256": "c9e35ea1ba19f902338f3045835567e522f6c83a3ad4ede7c7fde67f62c4bad4"
+    },
+    {
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__five_writer_ttc_k8_analysis_v1/selection_by_writer.csv",
+      "sha256": "12e08dfa2e9eb32bd8115b4378efc4c2619e40745740211247d5345defdf7c43"
+    },
+    {
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__five_writer_ttc_k8_analysis_v1/incremental_mechanisms_by_writer.csv",
+      "sha256": "78a6ba460eb3268e057501f2530be60d696c51ff8111ddfa9a8a5f06955dae72"
+    },
+    {
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__deepseek_independent_ttc_k8_analysis_v2/REPORT.md",
+      "sha256": "661181c27f6d5f7ff3cd3154ee2f4d408455efb1bc949ab8f78d04ff6f890e67"
+    },
+    {
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__deepseek_independent_ttc_k8_analysis_v2/summary.json",
+      "sha256": "ce240d5519d6c59a71420c4e2016bab930a31808a2868db9a77df84333acce03"
+    },
+    {
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__deepseek_independent_ttc_k8_analysis_v2/selection_pooled.csv",
+      "sha256": "35b4e39ccea6a3aba409dab95a7362e3ffc4dc19408879149719d1062aa390a5"
+    },
+    {
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__deepseek_independent_ttc_k8_analysis_v2/selection_by_writer_condition.csv",
+      "sha256": "ac16f8dbe9f6fcc68007e1968be96b6711a614b83041b2f80a5dd3dc122cc6a4"
+    }
+  ],
+  "status": "completed",
+  "uncertainty": {
+    "confidence_level": 0.95,
+    "method": "paired_writer_cluster_bootstrap_percentile",
+    "paired_across_k": true,
+    "resamples": 10000,
+    "seed": 20260814,
+    "writer_clusters": 5
+  },
+  "verification_status": "passed",
+  "x_axis": {
+    "base": 2,
+    "labeled_ticks": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "scale": "log"
+  }
+}

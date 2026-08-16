@@ -84,6 +84,10 @@ from .studies.routes import (
     validate_pressure_options,
     validate_writer_options,
 )
+from .studies.writer_ttc import (
+    build_writer_ttc_plan,
+    validate_writer_ttc_options,
+)
 from .surface import prompt_policies, surface_validation
 from .tools import ALL_TOOLS
 
@@ -875,6 +879,12 @@ _STUDIES = {
             "LangMem generation, fidelity screening, and baseline execution.",
             validator=validate_writer_options,
             builder=build_writer_plan,
+        ),
+        StudyProfile(
+            "writer_ttc",
+            "Nested trajectory-level selected best-of-k writer scaling.",
+            validator=validate_writer_ttc_options,
+            builder=build_writer_ttc_plan,
         ),
         StudyProfile(
             CAPACITY_WRITER_STUDY_ID,

@@ -1,0 +1,60 @@
+{
+  "analysis_module": "analysis.writer_ttc",
+  "created_at": "2026-08-15",
+  "files": {
+    "REPORT.md": {
+      "sha256": "4a8797a4b5f6e09f8e4b7b9d63384915e991ce96077d4108ed32cf6f059ecb10"
+    },
+    "behavior_by_condition.csv": {
+      "sha256": "df8e1dc399fa9f38d22f3c3382346d92a28e290979b5c94b0354607231e4ac54"
+    },
+    "candidate_diversity_summary.csv": {
+      "sha256": "dc3ff2def375b303d32209e7e603aa22ce929a6ce8d01d6c88b4bbb56fd20ce4"
+    },
+    "cost_by_stage.csv": {
+      "sha256": "9187e78338b6fce5575ec919250b1c25d9b9336f09993d5ced8fc5e4301cc4ba"
+    },
+    "incremental_mechanisms.csv": {
+      "sha256": "606cb439b710dc765758347f8e027ae1d811ad51e435402af4fa9d9195516e35"
+    },
+    "nested_pool_validation.csv": {
+      "sha256": "5e87d705dbdd49d2c68c220adac21e5f8777665b5ff6b543ea3f4113f773c8f0"
+    },
+    "selection_scaling.csv": {
+      "sha256": "a5125a6ead8b152589399497d77014656c477d3ec6939731dfb3e1767534d130"
+    },
+    "summary.json": {
+      "sha256": "50615ac366564fff34f0b3845a0e4d7c21e0423f6b78b3ebe868408766288bbe"
+    },
+    "typed_fidelity_by_condition.csv": {
+      "sha256": "613aa40cf84d5350b2c59922b19a98a6c89771ed74d32c02f7ea42bf563073db"
+    },
+    "typed_memory_observations.csv": {
+      "sha256": "99bffee267614da397e4be3347e3f5c7863ecc5e1c1288187584414c110eddee"
+    }
+  },
+  "model_calls": 0,
+  "schema_version": "procurement_writer_ttc_v3",
+  "sources": [
+    {
+      "k": 1,
+      "manifest_sha256": "6f110d72fb35a352e99e674337d72a0d65e309b99f373b1443e71297794292bf",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-011450-878789__authorization-memory-writer__procurement-v1-transfer-glm-5-2"
+    },
+    {
+      "k": 2,
+      "manifest_sha256": "cdb42d5e88e143a1bca6f02982b300b21f42f5a297ba9ff843d656bc799afbea",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-210831-239580__authorization-memory-writer_ttc__procurement-v1-glm-ttc-k2-4writer-retry"
+    },
+    {
+      "k": 4,
+      "manifest_sha256": "12bd77759edd040e8c9ab895795d38765637ac2b02b91c1951aa50328e274ba8",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-211630-403934__authorization-memory-writer_ttc__procurement-v1-glm-ttc-k4-4writer"
+    },
+    {
+      "k": 8,
+      "manifest_sha256": "ccd3d82770aeb2c63cae3cb393840ce720e55fa528f77c771fec451c0fca2b9a",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-011212-080591__authorization-memory-writer_ttc__procurement-v1-glm-k8"
+    }
+  ]
+}

@@ -194,12 +194,23 @@ class StudyExpansion:
     jobs: tuple[ExecutorJob, ...] = ()
     additional_memories: tuple[MemoryArtifact, ...] = ()
     additional_evidence: tuple[FrozenEvidence, ...] = ()
+    additional_contexts: tuple[Any, ...] = ()
     artifact_rows: Mapping[str, Sequence[Any]] = field(default_factory=dict)
     manifest_metadata: Mapping[str, Any] = field(default_factory=dict)
 
 
 PostWriterBuilder = Callable[
     [
+        AuthorizationMemoryDomain,
+        Sequence[Any],
+        WriterRunBundle,
+        Mapping[str, Any],
+    ],
+    StudyExpansion,
+]
+PostWriterReviewer = Callable[
+    [
+        Any,
         AuthorizationMemoryDomain,
         Sequence[Any],
         WriterRunBundle,
@@ -235,6 +246,7 @@ class StudyPlan:
     artifact_paths: Mapping[str, str] = field(default_factory=dict)
     persist_empty_artifacts: tuple[str, ...] = ()
     post_writer_builder: PostWriterBuilder | None = None
+    post_writer_reviewer: PostWriterReviewer | None = None
     finalizer: PlanFinalizer | None = None
     file_aliases: Mapping[str, str] = field(default_factory=dict)
     metadata: Mapping[str, Any] = field(default_factory=dict)
@@ -300,9 +312,23 @@ class StudyPlan:
                 "empty artifact persistence requires declared schemas: "
                 + ", ".join(unknown_empty)
             )
-        if self.post_writer_builder is not None and not self.writer_chains:
+        if (
+            self.post_writer_builder is not None
+            or self.post_writer_reviewer is not None
+        ) and not self.writer_chains and not (
+            self.metadata.get("post_writer_source_only")
+            and self.source_evidence
+            and self.validation_writer_bundles
+        ):
             raise ValueError(
-                "post-writer builders require at least one writer chain"
+                "post-writer stages require writer chains or a frozen source-only pool"
+            )
+        if (
+            self.post_writer_reviewer is not None
+            and self.post_writer_builder is None
+        ):
+            raise ValueError(
+                "live post-writer reviewers require an offline builder"
             )
 
     def validate(

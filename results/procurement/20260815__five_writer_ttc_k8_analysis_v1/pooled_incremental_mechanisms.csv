@@ -1,0 +1,5 @@
+k,writers,selected_trajectories,error_introductions,correct_origin_transitions,error_introduction_rate,error_persistences,incorrect_origin_transitions,error_persistence_rate,self_repairs,self_repair_rate,final_error_rate,trajectory_contract
+1,5,60,37,243,0.1522633744855967,27,27,1.0,0,0.0,0.6333333333333333,selected_whole_trajectory_no_splicing
+2,5,60,34,248,0.13709677419354838,22,22,1.0,0,0.0,0.5666666666666667,selected_whole_trajectory_no_splicing
+4,5,60,33,236,0.13983050847457626,34,34,1.0,0,0.0,0.5666666666666667,selected_whole_trajectory_no_splicing
+8,5,60,30,236,0.1271186440677966,34,34,1.0,0,0.0,0.5166666666666667,selected_whole_trajectory_no_splicing

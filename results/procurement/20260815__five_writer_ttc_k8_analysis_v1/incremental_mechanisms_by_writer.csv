@@ -1,0 +1,21 @@
+writer_label,writer_target,condition_id,correct_origin_transitions,error_introduction_rate,error_introductions,error_persistence_rate,error_persistences,final_error_rate,incorrect_origin_transitions,initial_error_rate,k,selected_trajectories,self_repair_rate,state_observations,trajectory_contract
+Qwen Plus,qwen_plus_0728_openrouter,incremental_typed,47,0.10638297872340426,5,1.0,7,0.5,7,0.08333333333333333,1,12,0.0,66,selected_whole_trajectory_no_splicing
+Qwen Plus,qwen_plus_0728_openrouter,incremental_typed,52,0.09615384615384616,5,1.0,2,0.4166666666666667,2,0.0,2,12,0.0,66,selected_whole_trajectory_no_splicing
+Qwen Plus,qwen_plus_0728_openrouter,incremental_typed,45,0.13333333333333333,6,1.0,9,0.5833333333333334,9,0.08333333333333333,4,12,0.0,66,selected_whole_trajectory_no_splicing
+Qwen Plus,qwen_plus_0728_openrouter,incremental_typed,45,0.1111111111111111,5,1.0,9,0.5,9,0.08333333333333333,8,12,0.0,66,selected_whole_trajectory_no_splicing
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,incremental_typed,49,0.16326530612244897,8,1.0,5,0.6666666666666666,5,0.0,1,12,0.0,66,selected_whole_trajectory_no_splicing
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,incremental_typed,49,0.16326530612244897,8,1.0,5,0.6666666666666666,5,0.0,2,12,0.0,66,selected_whole_trajectory_no_splicing
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,incremental_typed,47,0.1702127659574468,8,1.0,7,0.6666666666666666,7,0.0,4,12,0.0,66,selected_whole_trajectory_no_splicing
+Nemotron 3 Ultra,nemotron_3_ultra_baseten,incremental_typed,47,0.14893617021276595,7,1.0,7,0.5833333333333334,7,0.0,8,12,0.0,66,selected_whole_trajectory_no_splicing
+Grok 4.3,grok_4_3_openrouter,incremental_typed,49,0.16326530612244897,8,1.0,5,0.6666666666666666,5,0.0,1,12,0.0,66,selected_whole_trajectory_no_splicing
+Grok 4.3,grok_4_3_openrouter,incremental_typed,50,0.14,7,1.0,4,0.5833333333333334,4,0.0,2,12,0.0,66,selected_whole_trajectory_no_splicing
+Grok 4.3,grok_4_3_openrouter,incremental_typed,48,0.125,6,1.0,6,0.5,6,0.0,4,12,0.0,66,selected_whole_trajectory_no_splicing
+Grok 4.3,grok_4_3_openrouter,incremental_typed,48,0.125,6,1.0,6,0.5,6,0.0,8,12,0.0,66,selected_whole_trajectory_no_splicing
+Kimi K2.6,kimi_baseten,incremental_typed,46,0.21739130434782608,10,1.0,8,0.8333333333333334,8,0.0,1,12,0.0,66,selected_whole_trajectory_no_splicing
+Kimi K2.6,kimi_baseten,incremental_typed,49,0.14285714285714285,7,1.0,5,0.5833333333333334,5,0.0,2,12,0.0,66,selected_whole_trajectory_no_splicing
+Kimi K2.6,kimi_baseten,incremental_typed,48,0.125,6,1.0,6,0.5,6,0.0,4,12,0.0,66,selected_whole_trajectory_no_splicing
+Kimi K2.6,kimi_baseten,incremental_typed,48,0.125,6,1.0,6,0.5,6,0.0,8,12,0.0,66,selected_whole_trajectory_no_splicing
+GLM 5.2,glm_5_2_baseten,incremental_typed,52,0.11538461538461539,6,1.0,2,0.5,2,0.0,1,12,0.0,66,selected_whole_trajectory_no_splicing
+GLM 5.2,glm_5_2_baseten,incremental_typed,48,0.14583333333333334,7,1.0,6,0.5833333333333334,6,0.0,2,12,0.0,66,selected_whole_trajectory_no_splicing
+GLM 5.2,glm_5_2_baseten,incremental_typed,48,0.14583333333333334,7,1.0,6,0.5833333333333334,6,0.0,4,12,0.0,66,selected_whole_trajectory_no_splicing
+GLM 5.2,glm_5_2_baseten,incremental_typed,48,0.125,6,1.0,6,0.5,6,0.0,8,12,0.0,66,selected_whole_trajectory_no_splicing
