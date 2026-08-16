@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import asyncio
+import re
 import time
+import uuid
 from collections.abc import Mapping, Sequence
 from contextlib import ExitStack
-from dataclasses import dataclass, replace
+from dataclasses import dataclass, field, replace
 from importlib.metadata import PackageNotFoundError, version
 from typing import Any
 
@@ -105,6 +107,10 @@ class WriterChainSpec:
     model_override: str | None = None
     chain_instance_id: str = "default"
     presentation_hash: str | None = None
+    instruction_prefix: str | None = None
+    artifact_instance_id: str = "default"
+    deterministic_session_ids: bool = False
+    metadata: Mapping[str, Any] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -463,11 +469,7 @@ def _run_writer_chains(
             first_ids = [
                 _stable_id(
                     "attempt",
-                    _stable_id(
-                        "update",
-                        chain.chain_id,
-                        str(update.block_index),
-                    ),
+                    _logical_update_id(chain, update),
                     "1",
                 )
                 for chain, update in zip(wave, update_specs)
@@ -690,6 +692,12 @@ async def _invoke_wave(
             if chain.spec.architecture is MemoryArchitecture.FREE_TEXT
             else domain.memory.typed_profile_model
         )
+        attempt_index = 2 if repair_detail is not None else 1
+        session_id = (
+            _deterministic_session_id(chain, update, attempt_index)
+            if chain.spec.deterministic_session_ids
+            else None
+        )
         manager = create_memory_manager(
             model,
             schemas=[schema],
@@ -703,6 +711,8 @@ async def _invoke_wave(
             enable_updates=True,
             enable_deletes=False,
         )
+        if session_id is not None:
+            _install_deterministic_session_id(manager, session_id)
         existing = [
             (
                 chain.profile_id,
@@ -725,6 +735,12 @@ async def _invoke_wave(
                 "input_kind": update.input_kind,
                 "presentation_id": chain.spec.presentation_id,
                 "presentation_hash": chain.spec.presentation_hash,
+                **(
+                    {"deterministic_session_id": session_id}
+                    if session_id is not None
+                    else {}
+                ),
+                **dict(chain.spec.metadata),
             },
             "configurable": {"max_attempts": 1},
         }
@@ -861,11 +877,7 @@ def _process_invocation(
     enforce_capacity: bool,
     token_counter: TokenCounter | None,
 ) -> tuple[MemoryArtifact | None, MemoryAttempt]:
-    logical_id = _stable_id(
-        "update",
-        chain.chain_id,
-        str(update.block_index),
-    )
+    logical_id = _logical_update_id(chain, update)
     attempt_id = _stable_id("attempt", logical_id, str(attempt_index))
     writer = replace(chain.writer, response_model=invocation.response_model)
     status = "accepted"
@@ -1182,6 +1194,7 @@ def _manager_instructions(
         repair_detail=repair_detail,
         presentation_id=chain.spec.presentation_id,
         profile_id=chain.profile_id,
+        instruction_prefix=chain.spec.instruction_prefix,
     )
 
 
@@ -1209,13 +1222,23 @@ def manager_instructions(
     repair_detail: str | None,
     presentation_id: str,
     profile_id: str,
+    instruction_prefix: str | None = None,
 ) -> str:
     """Build benchmark-owned LangMem instructions for one logical update."""
 
     presentation = domain.get_presentation(presentation_id)
     policy = domain.get_prompt_policy(presentation)
     fixed_context = policy.context_builder(case)
+    if instruction_prefix is not None and (
+        not instruction_prefix.strip()
+        or instruction_prefix != instruction_prefix.strip()
+        or "\n" in instruction_prefix
+    ):
+        raise ValueError(
+            "writer instruction prefix must be one non-empty trimmed paragraph"
+        )
     parts = [
+        *((instruction_prefix,) if instruction_prefix is not None else ()),
         "Maintain exactly one persistent profile containing current authorization state.",
         "Update the existing profile from the supplied information; do not create another profile.",
         profile_identity_instruction(profile_id),
@@ -1406,9 +1429,26 @@ def _writer_model_contexts(
                 "architecture": chain.spec.architecture.value,
                 "response_model": record.get("response_model"),
                 "error": record.get("error"),
+                **(
+                    {
+                        "deterministic_session_id": _deterministic_session_id(
+                            chain,
+                            update,
+                            attempt.attempt_index,
+                        )
+                    }
+                    if chain.spec.deterministic_session_ids
+                    else {}
+                ),
+                **dict(chain.spec.metadata),
             },
         )
-        validate_model_context_leakage(domain, chain.spec.case, context)
+        validate_model_context_leakage(
+            domain,
+            chain.spec.case,
+            context,
+            registered_instruction_prefix=chain.spec.instruction_prefix,
+        )
         contexts.append(context)
     return contexts
 
@@ -1604,6 +1644,67 @@ def _stable_id(prefix: str, *parts: str) -> str:
 
     payload = "\0".join(parts).encode("utf-8")
     return f"{prefix}_{hashlib.sha256(payload).hexdigest()[:24]}"
+
+
+def _logical_update_id(
+    chain: _ActiveChain,
+    update: WriterUpdateSpec,
+) -> str:
+    parts = [chain.chain_id, str(update.block_index)]
+    if chain.spec.artifact_instance_id != "default":
+        parts.append(chain.spec.artifact_instance_id)
+    return _stable_id("update", *parts)
+
+
+def _deterministic_session_id(
+    chain: _ActiveChain,
+    update: WriterUpdateSpec,
+    attempt_index: int,
+) -> str:
+    attempt_kind = "initial" if attempt_index == 1 else "repair"
+    identity = "\0".join(
+        (
+            chain.chain_id,
+            str(update.block_index),
+            attempt_kind,
+            str(attempt_index),
+        )
+    )
+    return str(uuid.uuid5(uuid.NAMESPACE_OID, identity))
+
+
+def _install_deterministic_session_id(manager: Any, session_id: str) -> None:
+    prepare_messages = manager._prepare_messages
+
+    def prepare_with_stable_session(
+        messages: list[Any],
+        max_steps: int = 1,
+    ) -> list[dict[str, Any]]:
+        prepared = prepare_messages(messages, max_steps)
+        if len(prepared) != 2 or not isinstance(prepared[1], Mapping):
+            raise ValueError("LangMem prepared an unexpected message surface")
+        content = prepared[1].get("content")
+        if not isinstance(content, str):
+            raise ValueError("LangMem prepared instructions without text content")
+        opening = re.findall(r"<session_([^>]+)>", content)
+        closing = re.findall(r"</session_([^>]+)>", content)
+        if len(opening) != 1 or closing != opening:
+            raise ValueError("LangMem prepared an unexpected session envelope")
+        random_id = opening[0]
+        stable_content = content.replace(
+            f"<session_{random_id}>",
+            f"<session_{session_id}>",
+            1,
+        ).replace(
+            f"</session_{random_id}>",
+            f"</session_{session_id}>",
+            1,
+        )
+        normalized = [dict(message) for message in prepared]
+        normalized[1]["content"] = stable_content
+        return normalized
+
+    manager._prepare_messages = prepare_with_stable_session
 
 
 def _require_unique(values: Sequence[str] | Any, label: str) -> None:

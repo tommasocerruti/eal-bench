@@ -1,0 +1,53 @@
+{
+  "schema_version": "procurement_evaluation_cue_openrouter_credit_incident_v1",
+  "status": "blocked_external_openrouter_credits",
+  "date": "2026-08-15",
+  "affected_run": {
+    "path": "results/procurement/20260815-174428-825053__authorization-memory-evaluation_cue__e1-writer-s20260817-l0-qwen",
+    "manifest_sha256": "4384c7211576ff612e5adf846672a67cdeb9b9df1c79fc5c93a76b46fbb715dd",
+    "calls_sha256": "682b695e66f6ffde4f39fffc49d2f8c3e173dcec408cefb395ff9640dcb43824",
+    "manifest_status": "running",
+    "writer_target": "qwen_plus_0728_openrouter",
+    "writer_seed": 20260817,
+    "cue_level": "l0",
+    "scheduled_calls_maximum": 600,
+    "call_records": 6137,
+    "unique_call_ids": 280,
+    "successful_billed_calls": 36,
+    "successful_billed_cost_usd": 0.06804902,
+    "payment_required_records": 6100,
+    "other_transport_error_records": 1,
+    "zero_usage_error_records": 6101,
+    "scientific_artifacts_written": false
+  },
+  "diagnosis": "OpenRouter returned PaymentRequiredResponseError: Insufficient credits. The LangChain permanent-error classifier did not yet recognize PaymentRequired, so provider and manager retry layers produced a zero-usage retry storm.",
+  "response": {
+    "new_launches_stopped": true,
+    "affected_process_interrupted": true,
+    "independent_glm_process_allowed_to_complete": true,
+    "partial_run_disposition": "invalid_technical_partial_exclude_from_analysis",
+    "completed_seed_20260817_runs_preserved": [
+      "e1-writer-s20260817-l0-nemotron",
+      "e1-writer-s20260817-l0-grok",
+      "e1-writer-s20260817-l0-glm"
+    ]
+  },
+  "correction": {
+    "implementation_freeze": "results/procurement/procurement_v1__evaluation_cue_implementation_freeze_v3.json",
+    "payment_required_is_permanent": true,
+    "offline_validation": "passed",
+    "scientific_prompt_or_treatment_change": false
+  },
+  "resumption": {
+    "required_external_change": "Add OpenRouter credits for the configured credential.",
+    "first_action": "Run an offline target check and then a bounded paid Qwen route check.",
+    "replacement_policy": "Exclude the incomplete partial directory and run one complete technical replacement of the identical Qwen L0 seed-20260817 arm. Do not rerun the completed Nemotron, Grok, or GLM arms.",
+    "outcome_selection_used": false
+  },
+  "budget": {
+    "e1_spent_usd": 35.99986314,
+    "remaining_under_hard_cap_usd": 44.00013686,
+    "hard_cap_usd": 80.0,
+    "budget_blocked": false
+  }
+}

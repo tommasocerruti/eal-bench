@@ -1,0 +1,53 @@
+{
+  "schema_version": "procurement_evaluation_cue_implementation_freeze_v2",
+  "status": "corrected_offline_gate_passed",
+  "frozen_at": "2026-08-15",
+  "network_request_made_for_correction": false,
+  "git_head": "b9b3bfd3c68a1fad8536815d851105e02dcc92e9",
+  "git_worktree_dirty": true,
+  "supersedes": {
+    "path": "results/procurement/procurement_v1__evaluation_cue_implementation_freeze.json",
+    "sha256": "1a3125af37adc8889b9207b5503d9f9d9fb435b08e5c112efbe8932d2f347fb1",
+    "reason": "The first paid prompt audit found random LangMem session-envelope UUIDs across cue arms. The E1-only runtime now replaces them with cue-independent deterministic UUID5 values before requests are sent."
+  },
+  "implementation_diff_sha256": "d8186f8120c26ff8caa77635fa4bbafff6ea22b6bf91c490869e2128d4b9bcb8",
+  "implementation_diff_bytes": 33882,
+  "implementation_files": {
+    "analysis/evaluation_cue.py": "10104925b3b44de2bf84ce275b8739df1833cbe8291d4b394336c65a53374ee1",
+    "domains/procurement/adapter.py": "d667cd4a9b10256a21fc428374f6dd0e8d0898aa1b7ec91d7d418b8bf873ddc1",
+    "domains/procurement/studies/evaluation_cue.py": "5c5a29dd38b3e82fc370aba857568da9662d826009e4c6554e7da485eb7a57db",
+    "experiments/authorization_memory/langmem_writer.py": "1dde21592cd3792561b142b7e614ec401279916277dfd545f5c4631f52a16880",
+    "experiments/authorization_memory/leakage.py": "c81971f5cad505e8dca780300df7726e1cee4424b43eb4479e7083c30144b13b",
+    "experiments/authorization_memory/pipeline.py": "ab3ddf8ac8dce8341386454610d8949cb5f1606990db7d51b7ce07c2ed603dca",
+    "experiments/authorization_memory/study_engine.py": "6fdd95b1d9eeb3ec97b5943699d95e8603e896d0d5b143c1a8c73f55f71ee7c6",
+    "experiments/authorization_memory/study_plan.py": "96fe799ffa638fdac43481d68b16eaf8bac99ebdbb3ab81c645ff1879131845c",
+    "experiments/run.py": "3978091d8eec9ee421b85358e9fed14a78cca95c754ac35c86d28c1149f80ee6"
+  },
+  "preregistered_artifacts": {
+    "results/procurement/procurement_v1__evaluation_cue_cost_estimate.json": "677418474f10e15af6d98dbb2fea9a62283af1cc1a3afa77d5e608daf4cf7221",
+    "results/procurement/procurement_v1__evaluation_cue_run_plan.json": "8787d14260beb37558ced6992f7a1a736382b39abbf44a45bd3cc4ee74610d05"
+  },
+  "correction_contract": {
+    "scope": "evaluation_cue_writer_only",
+    "session_id_derivation": "uuid5(cue_independent_chain_id, block_index, logical_attempt_kind, logical_attempt_index)",
+    "cue_excluded_from_profile_and_session_identity": true,
+    "cue_retained_in_attempt_and_context_identity": true,
+    "ordinary_non_e1_session_behavior_unchanged": true,
+    "initial_and_one_shot_base_messages_must_match_exactly": true,
+    "incremental_differences_permitted_only_within_existing_memory": true
+  },
+  "offline_gates": {
+    "all_domain_validation": "passed",
+    "ruff": "passed",
+    "python_compile": "passed",
+    "git_diff_check": "passed",
+    "canonical_one_case_validate_only_l0_l1_l2": "passed",
+    "four_condition_fake_runtime_triplets": "passed",
+    "shared_prompt_pair_identities": 12,
+    "shared_cue_independent_profiles": 4,
+    "deterministic_session_ids_equal_across_triplets": true,
+    "exogenous_surface_hashes_equal_across_triplets": true,
+    "attempt_ids_disjoint_across_cue_arms": true,
+    "pre_correction_canary_rejected_by_analysis": true
+  }
+}

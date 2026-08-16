@@ -78,6 +78,7 @@ class ExecutorJob:
     executor_target_id: str | None = None
     executor_run_id: int | None = None
     executor_seed: int | None = None
+    registered_instruction_prefix: str | None = None
     metadata: Mapping[str, Any] = field(default_factory=dict)
 
     def validate(self, domain: AuthorizationMemoryDomain) -> None:
@@ -107,6 +108,22 @@ class ExecutorJob:
             ):
                 raise ValueError(
                     f"{self.job_id}: explicit messages must use chat role/content objects"
+                )
+        if self.registered_instruction_prefix is not None:
+            prefix = self.registered_instruction_prefix
+            if (
+                self.messages is None
+                or not prefix.strip()
+                or prefix != prefix.strip()
+                or "\n" in prefix
+                or self.messages[0].get("role") != "system"
+                or not str(self.messages[0].get("content") or "").startswith(
+                    prefix + "\n\n"
+                )
+            ):
+                raise ValueError(
+                    f"{self.job_id}: registered instruction prefix must be the "
+                    "exact first system-message paragraph"
                 )
         if self.challenge_metadata is not None and not isinstance(
             self.challenge_metadata,

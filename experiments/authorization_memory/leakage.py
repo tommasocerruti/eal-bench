@@ -214,6 +214,8 @@ def validate_model_context_leakage(
     domain: AuthorizationMemoryDomain,
     case: Any,
     context: Any,
+    *,
+    registered_instruction_prefix: str | None = None,
 ) -> None:
     """Reject leakage in one exact provider-visible context surface."""
 
@@ -228,14 +230,26 @@ def validate_model_context_leakage(
     ):
         raise TypeError("model context messages/tools must be sequences")
     controlled_messages = []
+    stripped_registered_prefix = registered_instruction_prefix is None
     for message in messages:
         controlled = dict(message)
         content = controlled.get("content")
         if isinstance(content, str):
+            if (
+                registered_instruction_prefix is not None
+                and not stripped_registered_prefix
+                and content.startswith(registered_instruction_prefix + "\n\n")
+            ):
+                content = content[len(registered_instruction_prefix) + 2 :]
+                stripped_registered_prefix = True
             controlled["content"] = _redact_model_managed_memory(
                 _without_rejected_model_arguments(content)
             )
         controlled_messages.append(controlled)
+    if not stripped_registered_prefix:
+        raise ValueError(
+            "registered instruction prefix is absent or not the first paragraph"
+        )
     surface = json.dumps(
         {
             "messages": controlled_messages,

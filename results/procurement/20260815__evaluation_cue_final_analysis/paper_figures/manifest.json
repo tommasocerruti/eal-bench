@@ -1,0 +1,75 @@
+{
+  "analysis_manifest_sha256": "c088bd2392c4260dd76b49c60ef5d23d3df646c3c853ff3593e3ead5b22f2850",
+  "artifacts": {
+    "captions": {
+      "bytes": 2028,
+      "path": "CAPTIONS.md",
+      "sha256": "fe4558392f560430b3543825d9448146fa2c5d546d3d8b9ff8e3fdfad3285ae5"
+    },
+    "executor_behavior_pdf": {
+      "bytes": 73130,
+      "path": "evaluation_cue_appendix_executor_behavior.pdf",
+      "sha256": "5e65c2e7b075d998cce0ebef5f392266a4bf688c01be1c8b168c59d166b6c61a"
+    },
+    "executor_behavior_png": {
+      "bytes": 344006,
+      "path": "evaluation_cue_appendix_executor_behavior.png",
+      "sha256": "459591033330f039f8e0cf334272c2c95c86510cc3afcd574de68ad4f3dcc603"
+    },
+    "main_data": {
+      "bytes": 10335,
+      "path": "main_summary_data.csv",
+      "sha256": "29a086fa3c612f26cd1bf7042d45304e62e0532db6d34d05bfb09c13dd031f5c"
+    },
+    "main_pdf": {
+      "bytes": 72437,
+      "path": "evaluation_cue_main_summary.pdf",
+      "sha256": "22adee0b82bf0085c8ce373c46f9b42f0c2db383ea27a28aa4473d0a8392ee72"
+    },
+    "main_png": {
+      "bytes": 386718,
+      "path": "evaluation_cue_main_summary.png",
+      "sha256": "0692de4a36036d5d4b8a118cb3f2c666e740ff368efac353411b615065e1c775"
+    },
+    "writer_behavior_pdf": {
+      "bytes": 65927,
+      "path": "evaluation_cue_appendix_writer_behavior.pdf",
+      "sha256": "6dcc83db2a47d5fe46d474a605df687cff28841d336f2ea37a23229acfc38de6"
+    },
+    "writer_behavior_png": {
+      "bytes": 188037,
+      "path": "evaluation_cue_appendix_writer_behavior.png",
+      "sha256": "2bf2a914cfbbe5b4f7855dd6933ec046d3713a975be072a0775c4a37207473c4"
+    },
+    "writer_fidelity_pdf": {
+      "bytes": 64178,
+      "path": "evaluation_cue_appendix_writer_fidelity.pdf",
+      "sha256": "0643ae47d6c4211f525c081f04ceef043eeb9141d7020032321889d954f4df10"
+    },
+    "writer_fidelity_png": {
+      "bytes": 163290,
+      "path": "evaluation_cue_appendix_writer_fidelity.png",
+      "sha256": "d67548f4347ac576b0abfc9e766ac7731ca3b4e4e15f1fb56b907a41f2a4d8dc"
+    }
+  },
+  "interpretation": {
+    "multiplicity_adjusted": false,
+    "positive_direction": "improvement",
+    "summary": "unweighted mean, median, interquartile range, and full range across tested targets",
+    "summary_is_inferential": false,
+    "target_intervals": "95% paired case-cluster percentile bootstrap"
+  },
+  "schema_version": "procurement_evaluation_cue_paper_figures_v1",
+  "source_artifacts": {
+    "behavior_contrasts": {
+      "path": "behavior_contrasts.csv",
+      "rows": 1350,
+      "sha256": "079896f4dca229e428b2833a704b5d6988d960b7115b35329c584d0b91623b90"
+    },
+    "typed_fidelity_contrasts": {
+      "path": "typed_fidelity_contrasts.csv",
+      "rows": 150,
+      "sha256": "4da978eeea398102a1d5c355eed1470d90eb4655118faa2cc5360523485adbe0"
+    }
+  }
+}

@@ -156,7 +156,25 @@ def _parser() -> argparse.ArgumentParser:
         default=None,
         help="random seed; defaults to the selected domain release seed",
     )
-    parser.add_argument("--source-run", default="")
+    parser.add_argument(
+        "--source-run",
+        action="append",
+        default=[],
+        help=(
+            "source run directory; repeat only for studies that explicitly "
+            "support multiple frozen sources"
+        ),
+    )
+    parser.add_argument(
+        "--intervention-stage",
+        choices=("writer", "executor"),
+        default="",
+    )
+    parser.add_argument(
+        "--cue-level",
+        choices=("l0", "l1", "l2"),
+        default="",
+    )
     parser.add_argument(
         "--pressure-variant",
         default="",
@@ -457,11 +475,30 @@ def _route_options(
                 "TTC review options require --study writer_ttc: "
                 + ", ".join(forbidden_ttc)
             )
+    source_runs = tuple(
+        str(value).strip()
+        for value in (args.source_run or ())
+        if str(value).strip()
+    )
+    if profile.study_id != "evaluation_cue" and len(source_runs) > 1:
+        raise ValueError(
+            "repeatable --source-run is supported only by --study evaluation_cue"
+        )
+    if profile.study_id != "evaluation_cue":
+        forbidden_cue = sorted(
+            provided & {"--intervention-stage", "--cue-level"}
+        )
+        if forbidden_cue:
+            raise ValueError(
+                "evaluation-cue options require --study evaluation_cue: "
+                + ", ".join(forbidden_cue)
+            )
     if (
         profile.study_id
         not in {
             "writer",
             "writer_ttc",
+            "evaluation_cue",
             "capacity_nonbinding_writer",
             "capacity_writer_visible_nonbinding",
         }
@@ -478,6 +515,8 @@ def _route_options(
     ) or domain.corpus.default_version
     options = {
         **vars(args),
+        "source_run": source_runs[0] if source_runs else "",
+        "source_runs": source_runs,
         "corpus_version": corpus_version,
         "seed": args.seed if args.seed is not None else domain.canonical_seed,
         "command": "python -m experiments.run " + " ".join(sys.argv[1:]),
@@ -544,6 +583,20 @@ def _route_options(
         options["executor_targets"] = _csv(args.executor_targets) or (
             "gptoss_baseten",
         )
+    elif profile.study_id == "evaluation_cue":
+        if args.intervention_stage == "writer":
+            options["writer_targets"] = _csv(args.writer_targets) or (
+                _default_target(args.writer_task),
+            )
+            options["executor_targets"] = _csv(args.executor_targets) or (
+                _default_target(args.executor_task),
+            )
+        else:
+            options["writer_targets"] = ()
+            options["executor_targets"] = _csv(args.executor_targets) or (
+                "gptoss_baseten",
+                "deepseek_baseten",
+            )
     elif profile.study_id == "pressure":
         forbidden = sorted(
             provided
@@ -582,7 +635,10 @@ def _pressure_source_manifest(
 ) -> dict[str, Any] | None:
     if profile.study_id != "pressure":
         return None
-    source_value = str(args.source_run or "").strip()
+    source_values = tuple(args.source_run or ())
+    if len(source_values) > 1:
+        raise ValueError("pressure accepts exactly one --source-run")
+    source_value = str(source_values[0] if source_values else "").strip()
     if not source_value:
         return None
     manifest_path = Path(source_value).expanduser().resolve() / "manifest.json"
