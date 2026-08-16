@@ -1,0 +1,63 @@
+{
+  "analysis_module": "analysis.writer_ttc_multi",
+  "created_at": "2026-08-15",
+  "files": {
+    "REPORT.md": {
+      "sha256": "f208b5e3c8692ecbb44ce9d875976c2a485dcc6ccd34d130bf06006259e257fe"
+    },
+    "behavior_by_writer_condition.csv": {
+      "sha256": "c9e35ea1ba19f902338f3045835567e522f6c83a3ad4ede7c7fde67f62c4bad4"
+    },
+    "incremental_mechanisms_by_writer.csv": {
+      "sha256": "78a6ba460eb3268e057501f2530be60d696c51ff8111ddfa9a8a5f06955dae72"
+    },
+    "pooled_behavior_by_condition.csv": {
+      "sha256": "7faaf1ddcf3b7a66a53b36b68e80e4c153df54007b8aa21de48558faaa667526"
+    },
+    "pooled_incremental_mechanisms.csv": {
+      "sha256": "15a42ddc2a025bae8c6f96de1fc3f4f07aaca7c28a41c182c0dcd10c5859658f"
+    },
+    "pooled_selection_scaling.csv": {
+      "sha256": "43e50b907d72a6043ad8db0fae400e111754af807fb2630b39f7977a6fabcfaa"
+    },
+    "pooled_typed_fidelity_by_condition.csv": {
+      "sha256": "e6b09bd74a5629f0e80427529022956f5257977543a46eb27d7aa566ae36c663"
+    },
+    "selection_by_writer.csv": {
+      "sha256": "12e08dfa2e9eb32bd8115b4378efc4c2619e40745740211247d5345defdf7c43"
+    },
+    "summary.json": {
+      "sha256": "adc1b9981d2d616834316a5812276841f3bd5d39ce23d9f4ad7dea98456cd3f5"
+    },
+    "typed_fidelity_by_writer_condition.csv": {
+      "sha256": "0da1ff1ca9d7b4e1bc76d1be5ea636260dec09ae7ed872984a163af316b4199a"
+    },
+    "writer_scaling.csv": {
+      "sha256": "72f35ebe341bc859f2e7bea42bfaa9c477e6f416f18941264cf156e9de69ed65"
+    }
+  },
+  "model_calls": 0,
+  "schema_version": "procurement_writer_ttc_multi_v2",
+  "sources": [
+    {
+      "manifest_sha256": "26591692ab3737131d019c2338457bc3ce437490a9953a3589cb43b445b64d03",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__qwen_writer_ttc_k8_analysis"
+    },
+    {
+      "manifest_sha256": "827097e5e43e20f9915fc19e616c3b11a606b3bd3a2d12abc00b22b887988617",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__nemotron_writer_ttc_k8_analysis"
+    },
+    {
+      "manifest_sha256": "213ff6c43df583dbd526190520d6a973cb76a90003565544e8aa866111025b13",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__grok_writer_ttc_k8_analysis"
+    },
+    {
+      "manifest_sha256": "4e0d07123af4e5b2ea2b93fa1b52019fdd5e3067d96a68ac6cee621d6cc15454",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__kimi_writer_ttc_k8_analysis"
+    },
+    {
+      "manifest_sha256": "ee96edc31f1fcd22c870ed7c855bd2a4630bac4ca58caf159ea7ed0734e57551",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815__glm_writer_ttc_k8_analysis"
+    }
+  ]
+}

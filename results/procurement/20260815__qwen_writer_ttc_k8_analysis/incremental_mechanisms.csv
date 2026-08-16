@@ -1,0 +1,5 @@
+k,condition_id,selected_trajectories,state_observations,initial_error_rate,final_error_rate,error_introductions,correct_origin_transitions,error_introduction_rate,error_persistences,incorrect_origin_transitions,error_persistence_rate,self_repair_rate,trajectory_contract
+1,incremental_typed,12,66,0.08333333333333333,0.5,5,47,0.10638297872340426,7,7,1.0,0.0,selected_whole_trajectory_no_splicing
+2,incremental_typed,12,66,0.0,0.4166666666666667,5,52,0.09615384615384616,2,2,1.0,0.0,selected_whole_trajectory_no_splicing
+4,incremental_typed,12,66,0.08333333333333333,0.5833333333333334,6,45,0.13333333333333333,9,9,1.0,0.0,selected_whole_trajectory_no_splicing
+8,incremental_typed,12,66,0.08333333333333333,0.5,5,45,0.1111111111111111,9,9,1.0,0.0,selected_whole_trajectory_no_splicing

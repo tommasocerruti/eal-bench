@@ -1,0 +1,37 @@
+panel,metric,k,value,unit,numerator,denominator,visual_role,source_file,source_field,ci_lower_95,ci_upper_95,uncertainty_method,bootstrap_resamples,bootstrap_seed,writer_clusters
+A,Authorized use,1,0.9416666666666667,proportion,678,720,line,pooled_behavior_by_condition.csv,authorized_use_rate,0.9305555555555556,0.9527777777777777,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+A,Targeted unauthorized submission,1,0.13194444444444445,proportion,95,720,line,pooled_behavior_by_condition.csv,targeted_unauthorized_submission_rate,0.10694444444444444,0.15,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+B,Oracle-best exact-memory availability,1,0.31666666666666665,proportion,38,120,line,pooled_selection_scaling.csv,pool_contains_full_fidelity_exact_rate,0.25833333333333336,0.375,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+B,Writer self-review,1,0.31666666666666665,proportion,38,120,line,pooled_selection_scaling.csv,reviewer_selected_full_fidelity_exact_rate,0.25833333333333336,0.375,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+B,DeepSeek independent review,1,0.31666666666666665,proportion,38,120,line,pooled_selection_scaling.csv,reviewer_selected_full_fidelity_exact_rate,0.25833333333333336,0.375,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+C,Error introduction,1,0.1522633744855967,proportion,37,243,line,pooled_incremental_mechanisms.csv,error_introduction_rate,0.11983471074380166,0.18410041841004185,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+C,Final-state error,1,0.6333333333333333,proportion,38,60,line,pooled_incremental_mechanisms.csv,final_error_rate,0.5333333333333333,0.7333333333333333,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+C,Error persistence,1,1.0,proportion,27,27,annotation,pooled_incremental_mechanisms.csv,error_persistence_rate,,,,,,
+C,Self-repair,1,0.0,proportion,0,27,annotation,pooled_incremental_mechanisms.csv,self_repair_rate,,,,,,
+A,Authorized use,2,0.9541666666666667,proportion,687,720,line,pooled_behavior_by_condition.csv,authorized_use_rate,0.9277777777777778,0.9777777777777777,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+A,Targeted unauthorized submission,2,0.10833333333333334,proportion,78,720,line,pooled_behavior_by_condition.csv,targeted_unauthorized_submission_rate,0.09444444444444444,0.12222222222222222,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+B,Oracle-best exact-memory availability,2,0.44166666666666665,proportion,53,120,line,pooled_selection_scaling.csv,pool_contains_full_fidelity_exact_rate,0.4,0.49166666666666664,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+B,Writer self-review,2,0.35,proportion,42,120,line,pooled_selection_scaling.csv,reviewer_selected_full_fidelity_exact_rate,0.2833333333333333,0.43333333333333335,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+B,DeepSeek independent review,2,0.35833333333333334,proportion,43,120,line,selection_pooled.csv,selected_exact_rate,0.2833333333333333,0.43333333333333335,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+C,Error introduction,2,0.13709677419354838,proportion,34,248,line,pooled_incremental_mechanisms.csv,error_introduction_rate,0.1141732283464567,0.15447154471544716,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+C,Final-state error,2,0.5666666666666667,proportion,34,60,line,pooled_incremental_mechanisms.csv,final_error_rate,0.48333333333333334,0.6333333333333333,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+C,Error persistence,2,1.0,proportion,22,22,annotation,pooled_incremental_mechanisms.csv,error_persistence_rate,,,,,,
+C,Self-repair,2,0.0,proportion,0,22,annotation,pooled_incremental_mechanisms.csv,self_repair_rate,,,,,,
+A,Authorized use,4,0.9652777777777778,proportion,695,720,line,pooled_behavior_by_condition.csv,authorized_use_rate,0.9361111111111111,0.9875,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+A,Targeted unauthorized submission,4,0.09166666666666666,proportion,66,720,line,pooled_behavior_by_condition.csv,targeted_unauthorized_submission_rate,0.08055555555555556,0.10416666666666667,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+B,Oracle-best exact-memory availability,4,0.5083333333333333,proportion,61,120,line,pooled_selection_scaling.csv,pool_contains_full_fidelity_exact_rate,0.43333333333333335,0.575,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+B,Writer self-review,4,0.31666666666666665,proportion,38,120,line,pooled_selection_scaling.csv,reviewer_selected_full_fidelity_exact_rate,0.25833333333333336,0.4083333333333333,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+B,DeepSeek independent review,4,0.3333333333333333,proportion,40,120,line,selection_pooled.csv,selected_exact_rate,0.24166666666666667,0.425,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+C,Error introduction,4,0.13983050847457626,proportion,33,236,line,pooled_incremental_mechanisms.csv,error_introduction_rate,0.12658227848101267,0.15611814345991562,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+C,Final-state error,4,0.5666666666666667,proportion,34,60,line,pooled_incremental_mechanisms.csv,final_error_rate,0.5166666666666667,0.6166666666666667,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+C,Error persistence,4,1.0,proportion,34,34,annotation,pooled_incremental_mechanisms.csv,error_persistence_rate,,,,,,
+C,Self-repair,4,0.0,proportion,0,34,annotation,pooled_incremental_mechanisms.csv,self_repair_rate,,,,,,
+A,Authorized use,8,0.9583333333333334,proportion,690,720,line,pooled_behavior_by_condition.csv,authorized_use_rate,0.9319444444444445,0.9833333333333333,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+A,Targeted unauthorized submission,8,0.08611111111111111,proportion,62,720,line,pooled_behavior_by_condition.csv,targeted_unauthorized_submission_rate,0.07083333333333333,0.10416666666666667,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+B,Oracle-best exact-memory availability,8,0.55,proportion,66,120,line,pooled_selection_scaling.csv,pool_contains_full_fidelity_exact_rate,0.4666666666666667,0.6166666666666667,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+B,Writer self-review,8,0.26666666666666666,proportion,32,120,line,pooled_selection_scaling.csv,reviewer_selected_full_fidelity_exact_rate,0.16666666666666666,0.38333333333333336,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+B,DeepSeek independent review,8,0.3,proportion,36,120,line,selection_pooled.csv,selected_exact_rate,0.16666666666666666,0.43333333333333335,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+C,Error introduction,8,0.1271186440677966,proportion,30,236,line,pooled_incremental_mechanisms.csv,error_introduction_rate,0.11688311688311688,0.13924050632911392,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+C,Final-state error,8,0.5166666666666667,proportion,31,60,line,pooled_incremental_mechanisms.csv,final_error_rate,0.5,0.55,paired_writer_cluster_bootstrap_percentile,10000,20260814,5
+C,Error persistence,8,1.0,proportion,34,34,annotation,pooled_incremental_mechanisms.csv,error_persistence_rate,,,,,,
+C,Self-repair,8,0.0,proportion,0,34,annotation,pooled_incremental_mechanisms.csv,self_repair_rate,,,,,,

@@ -1,0 +1,11 @@
+k,task,calls,successful_calls,error_calls,provider_reported_cost_usd,rate_derived_cost_usd,unpriced_calls_missing_usage
+1,reused,0,0,0,0.0,0.0,0
+2,writer,185,185,0,0.0,0.86417424,0
+2,memory_selector,48,48,0,0.0,0.29484779999999994,0
+2,executor,288,288,0,0.0,0.0815259,0
+4,writer,354,354,0,0.0,1.6317224399999986,0
+4,memory_selector,48,48,0,0.0,0.3358865999999998,0
+4,executor,288,288,0,0.0,0.08028769999999999,0
+8,writer,743,743,0,0.0,3.5850488400000002,0
+8,memory_selector,48,48,0,0.0,0.428631,0
+8,executor,288,288,0,0.0,0.08371280000000002,0

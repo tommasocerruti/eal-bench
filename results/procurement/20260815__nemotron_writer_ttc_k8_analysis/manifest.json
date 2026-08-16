@@ -1,0 +1,60 @@
+{
+  "analysis_module": "analysis.writer_ttc",
+  "created_at": "2026-08-15",
+  "files": {
+    "REPORT.md": {
+      "sha256": "0a54ce5697ec6e7cb97985890bc55a920b067bf80bc15222ec6fff482d799cbb"
+    },
+    "behavior_by_condition.csv": {
+      "sha256": "6845bb7d9c34649b482caa75e144cb8ebbe2b162b99c460b5d8cef53728038e7"
+    },
+    "candidate_diversity_summary.csv": {
+      "sha256": "642727fa72a7cf4e5bfcdf4c5c00b46e223b14d6990d6364791bdf0d1a7be10a"
+    },
+    "cost_by_stage.csv": {
+      "sha256": "7bb620387206fd2e8923b9ba4c54d1bc0e81eed25f86d78ff17cffd2339ecfd7"
+    },
+    "incremental_mechanisms.csv": {
+      "sha256": "5c1439faa5da3a85f1479d7c0609bf9d1f91cbb545f474f29a47b4f06c50a056"
+    },
+    "nested_pool_validation.csv": {
+      "sha256": "5e87d705dbdd49d2c68c220adac21e5f8777665b5ff6b543ea3f4113f773c8f0"
+    },
+    "selection_scaling.csv": {
+      "sha256": "145f12e172f167581093e1fa1c55bcf25c0357df44e72d11862c083f39b9e76f"
+    },
+    "summary.json": {
+      "sha256": "bfa6ce68d027c8ea69b52c60f4529b0c194cbecbb94bbea9c932fdc9a77f77c8"
+    },
+    "typed_fidelity_by_condition.csv": {
+      "sha256": "13b142f48bc4ac1030180bf5aabad78f79f8bf1af0c2f25fd46a4a556e96d868"
+    },
+    "typed_memory_observations.csv": {
+      "sha256": "789e5fa0df21288777031518c80933354dd5c33a8a147dc5672379ad882d5efb"
+    }
+  },
+  "model_calls": 0,
+  "schema_version": "procurement_writer_ttc_v3",
+  "sources": [
+    {
+      "k": 1,
+      "manifest_sha256": "27887bef43b5503b58e34189c7895026060699e3884d3ef60c35d5ae47b069cf",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-005257-869522__authorization-memory-writer__procurement-v1-transfer-nemotron-3-ultra"
+    },
+    {
+      "k": 2,
+      "manifest_sha256": "e8bbc44ee98cd713405c74fabbfef3c16a733d369af326898c9dbd535a8fa867",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-202606-735967__authorization-memory-writer_ttc__procurement-v1-nemotron-ttc-k2-4writer"
+    },
+    {
+      "k": 4,
+      "manifest_sha256": "35a40603467def91df9de5673e64de526556cf77f2debda67793281fe1feeb1d",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-203219-882959__authorization-memory-writer_ttc__procurement-v1-nemotron-ttc-k4-4writer"
+    },
+    {
+      "k": 8,
+      "manifest_sha256": "7cf041d738cff93208d2f8d6a4e2484a3738e3b96a7ccc18ddce66af98827592",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-011743-149741__authorization-memory-writer_ttc__procurement-v1-nemotron-k8-clean"
+    }
+  ]
+}

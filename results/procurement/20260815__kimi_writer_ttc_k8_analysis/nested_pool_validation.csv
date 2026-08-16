@@ -1,0 +1,4 @@
+lower_k,upper_k,inherited_candidates_verified,status
+1,2,48,exact_match
+2,4,96,exact_match
+4,8,192,exact_match

@@ -1,0 +1,5 @@
+k,candidate_pairs,exact_duplicate_pairs,distinct_pair_rate,new_candidate_selections,reviewed_pools
+1,0,0,,,0
+2,48,11,0.7708333333333334,22,48
+4,288,70,0.7569444444444444,23,48
+8,1344,346,0.7425595238095238,23,48

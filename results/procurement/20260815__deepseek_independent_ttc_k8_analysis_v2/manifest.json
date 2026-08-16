@@ -1,0 +1,234 @@
+{
+  "analysis_module": "analysis.writer_ttc_independent_review",
+  "created_at": "2026-08-15",
+  "excluded_technical_runs": [],
+  "files": {
+    "REPORT.md": {
+      "sha256": "661181c27f6d5f7ff3cd3154ee2f4d408455efb1bc949ab8f78d04ff6f890e67"
+    },
+    "behavior_by_writer_condition.csv": {
+      "sha256": "e63bf0da3f37022e5501e7e06553e392a0ce5e46b4861bd7326ff7a521a4d156"
+    },
+    "behavior_pooled.csv": {
+      "sha256": "61a9a81cbac5aa4e0c816c580a52977e3bc2759ea37249eb0033a723fc69fe8f"
+    },
+    "costs.csv": {
+      "sha256": "834c30023bc5b437b082697249b8d8057771983bb3316198a248f23c6c75aa46"
+    },
+    "excluded_technical_runs.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "review_agreement.csv": {
+      "sha256": "6398a115ca249ccf6fdd1d3da8bad55a07fef02dea7c2090d1684700e4b95a63"
+    },
+    "review_failures_all_conditions.csv": {
+      "sha256": "b2b45a71c4fa7876485802bba1fe20f1372fa177f0898c3387f6b85520d590b3"
+    },
+    "selection_by_pool.csv": {
+      "sha256": "db9a5b606fe22710645f9ab34845f1edc2fbfa66cf6d3f651106c279b4a31b43"
+    },
+    "selection_by_writer_condition.csv": {
+      "sha256": "ac16f8dbe9f6fcc68007e1968be96b6711a614b83041b2f80a5dd3dc122cc6a4"
+    },
+    "selection_pooled.csv": {
+      "sha256": "35b4e39ccea6a3aba409dab95a7362e3ffc4dc19408879149719d1062aa390a5"
+    },
+    "selection_valid_review_sensitivity.csv": {
+      "sha256": "dfba169a1d9d1f3a9cbb8263eb42485d505687ebb5cc945a1151ecf10ad1c164"
+    },
+    "source_audit.csv": {
+      "sha256": "cdb22ab93c49c39ba98e1df155657e43aa333425eecbcc42b2775a26e818cdab"
+    },
+    "summary.json": {
+      "sha256": "ce240d5519d6c59a71420c4e2016bab930a31808a2868db9a77df84333acce03"
+    }
+  },
+  "model_calls": 0,
+  "plan": {
+    "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/procurement_v1__deepseek_independent_ttc_review_run_plan.json",
+    "sha256": "a9002c590eda207b37d48f539312daf680007de5481e56b152c85b4f766b8d25"
+  },
+  "schema_version": "procurement_writer_ttc_independent_review_v2",
+  "sources": [
+    {
+      "candidate_hashes_verified": 96,
+      "independent_manifest_sha256": "2b4e2894c6fc36599f8b0e24e30ba1491f83648e58d8be32130366c495847c31",
+      "independent_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-234050-707546__authorization-memory-writer_ttc__procurement-v1-glm-k2-deepseek-independent-review",
+      "k": 2,
+      "oracle_manifest_sha256": "4a32fa43ce6234d6cd5e1dc4b319930a58cc359aa4c04cdef2b60bdd15f1e309",
+      "oracle_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-002202-512822__authorization-memory-writer_ttc__procurement-v1-glm-k2-typed-oracle-replay-network",
+      "reviewer_surface_hashes_verified": 48,
+      "source_manifest_sha256": "cdb42d5e88e143a1bca6f02982b300b21f42f5a297ba9ff843d656bc799afbea",
+      "source_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-210831-239580__authorization-memory-writer_ttc__procurement-v1-glm-ttc-k2-4writer-retry",
+      "writer_target": "glm_5_2_baseten"
+    },
+    {
+      "candidate_hashes_verified": 192,
+      "independent_manifest_sha256": "58c76eb5f5383bc92cb125f079049c0661a95abef3c48874aee35473ba26925e",
+      "independent_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-234750-797595__authorization-memory-writer_ttc__procurement-v1-glm-k4-deepseek-independent-review",
+      "k": 4,
+      "oracle_manifest_sha256": "018162bad2189d7209fd4d2dcf4979f3d5ae73c941ae723da2177380b32ab3c2",
+      "oracle_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-002238-718692__authorization-memory-writer_ttc__procurement-v1-glm-k4-typed-oracle-replay-network",
+      "reviewer_surface_hashes_verified": 48,
+      "source_manifest_sha256": "12bd77759edd040e8c9ab895795d38765637ac2b02b91c1951aa50328e274ba8",
+      "source_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-211630-403934__authorization-memory-writer_ttc__procurement-v1-glm-ttc-k4-4writer",
+      "writer_target": "glm_5_2_baseten"
+    },
+    {
+      "candidate_hashes_verified": 384,
+      "independent_manifest_sha256": "065c7d8a2d65b4877e6349313d3a5d25ba038c178b2363bdd84701a981bcce23",
+      "independent_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-014053-627975__authorization-memory-writer_ttc__procurement-v1-glm-k8-deepseek-independent-review",
+      "k": 8,
+      "oracle_manifest_sha256": "5feeb5b2596551161f75288ecccd0f25462466b7fb1e5aff74ce5c951ba52660",
+      "oracle_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-014441-810405__authorization-memory-writer_ttc__procurement-v1-glm-k8-typed-oracle-replay-network",
+      "reviewer_surface_hashes_verified": 48,
+      "source_manifest_sha256": "ccd3d82770aeb2c63cae3cb393840ce720e55fa528f77c771fec451c0fca2b9a",
+      "source_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-011212-080591__authorization-memory-writer_ttc__procurement-v1-glm-k8",
+      "writer_target": "glm_5_2_baseten"
+    },
+    {
+      "candidate_hashes_verified": 96,
+      "independent_manifest_sha256": "26d3aa02fb1d8c66fa8b568aceb3a9d3343e0295fc1baa70bc1d12d38c235b1b",
+      "independent_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-233727-637907__authorization-memory-writer_ttc__procurement-v1-grok-k2-deepseek-independent-review",
+      "k": 2,
+      "oracle_manifest_sha256": "f0e712fec66d8fff7606d5e35dfee0e79df7489c1f9ddec4aceaec4453d86069",
+      "oracle_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-002033-074376__authorization-memory-writer_ttc__procurement-v1-grok-k2-typed-oracle-replay-network",
+      "reviewer_surface_hashes_verified": 48,
+      "source_manifest_sha256": "118c396525c8c74f5eb9eb637fd500eaad987b93fc18fdd95f1ff4750482ecd9",
+      "source_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-205214-448388__authorization-memory-writer_ttc__procurement-v1-grok-ttc-k2-4writer",
+      "writer_target": "grok_4_3_openrouter"
+    },
+    {
+      "candidate_hashes_verified": 192,
+      "independent_manifest_sha256": "fbfb37502b25aa6db537c2bee8da69d8baba1477976f1a7f5829097445f2608c",
+      "independent_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-234532-148331__authorization-memory-writer_ttc__procurement-v1-grok-k4-deepseek-independent-review",
+      "k": 4,
+      "oracle_manifest_sha256": "a8601edfed6eabd96b5f8a9531752a569cf80b3d7a7cc07a35bc7b3149de6e27",
+      "oracle_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-002120-563500__authorization-memory-writer_ttc__procurement-v1-grok-k4-typed-oracle-replay-network",
+      "reviewer_surface_hashes_verified": 48,
+      "source_manifest_sha256": "64804bf2d9cc6db8dd8213a9ad4a625befa8dff4927f6875c786ed48c4ee3c7c",
+      "source_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-221345-180977__authorization-memory-writer_ttc__procurement-v1-grok-ttc-k4-4writer-clean",
+      "writer_target": "grok_4_3_openrouter"
+    },
+    {
+      "candidate_hashes_verified": 384,
+      "independent_manifest_sha256": "0cd695d824c83a9823a4f17a30710789a3fd2bde736afa07e3db5d592bec369e",
+      "independent_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-013816-250409__authorization-memory-writer_ttc__procurement-v1-grok-k8-deepseek-independent-review",
+      "k": 8,
+      "oracle_manifest_sha256": "d06084e73cbaf6dbea5df3dd11c0069385ad8fabb35d4c41f452af6a6493fb72",
+      "oracle_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-014348-304105__authorization-memory-writer_ttc__procurement-v1-grok-k8-typed-oracle-replay-network",
+      "reviewer_surface_hashes_verified": 48,
+      "source_manifest_sha256": "f36d7a37b42dc86925763f7e42c09fda14663da52562de7183bc46ee222dbe46",
+      "source_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-010444-213269__authorization-memory-writer_ttc__procurement-v1-grok-k8",
+      "writer_target": "grok_4_3_openrouter"
+    },
+    {
+      "candidate_hashes_verified": 96,
+      "independent_manifest_sha256": "dd66fda315f083e24474002a7b085dde6f7591db261e14891fc3e12e63f04580",
+      "independent_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-233831-375645__authorization-memory-writer_ttc__procurement-v1-kimi-k2-deepseek-independent-review",
+      "k": 2,
+      "oracle_manifest_sha256": "5149897ddb98ba429718cfc21ce565d8eecb74944b03ba4d0baf88ce3e02e5c2",
+      "oracle_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-002121-835593__authorization-memory-writer_ttc__procurement-v1-kimi-k2-typed-oracle-replay-network",
+      "reviewer_surface_hashes_verified": 48,
+      "source_manifest_sha256": "6fa16f94ad3dd3648d067ca6f52df9564d48e1480325d30b946c34446acc88d3",
+      "source_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-204231-099365__authorization-memory-writer_ttc__procurement-v1-kimi-ttc-k2-4writer",
+      "writer_target": "kimi_baseten"
+    },
+    {
+      "candidate_hashes_verified": 192,
+      "independent_manifest_sha256": "42c7e7a58cab9d07a7072876e32af30881603e59da094d78ec5ca890018b3552",
+      "independent_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-234643-441037__authorization-memory-writer_ttc__procurement-v1-kimi-k4-deepseek-independent-review",
+      "k": 4,
+      "oracle_manifest_sha256": "7200b724b6a1c290e8b25234b11cf071839beff45add3134bc77881d76cf4572",
+      "oracle_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-002203-630427__authorization-memory-writer_ttc__procurement-v1-kimi-k4-typed-oracle-replay-network",
+      "reviewer_surface_hashes_verified": 48,
+      "source_manifest_sha256": "1dcaae943d3b3575ecb1911be646f4a10bc1a8c15720ed77ee4a718b62bd3609",
+      "source_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-204604-422546__authorization-memory-writer_ttc__procurement-v1-kimi-ttc-k4-4writer",
+      "writer_target": "kimi_baseten"
+    },
+    {
+      "candidate_hashes_verified": 384,
+      "independent_manifest_sha256": "158be6642086922f160f89c87c20cbbeaca597f8146ceb3a357216902f0e83d7",
+      "independent_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-013701-233023__authorization-memory-writer_ttc__procurement-v1-kimi-k8-deepseek-independent-review",
+      "k": 8,
+      "oracle_manifest_sha256": "810e25ebe2a540d5e5e8514b8798d3875a2345fbfda009576ef755ef94b5f2f4",
+      "oracle_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-014315-986282__authorization-memory-writer_ttc__procurement-v1-kimi-k8-typed-oracle-replay-network",
+      "reviewer_surface_hashes_verified": 48,
+      "source_manifest_sha256": "285cfaf6bd2b818e6994f5db9e4fae4d9636ff81e788c73fe04790ceb3f37b50",
+      "source_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-010352-842515__authorization-memory-writer_ttc__procurement-v1-kimi-k8",
+      "writer_target": "kimi_baseten"
+    },
+    {
+      "candidate_hashes_verified": 96,
+      "independent_manifest_sha256": "933debefecc5d043f9d7e804f9610356b4a2c22dafd1f8fd98b9a42b4c3369d8",
+      "independent_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-233620-661229__authorization-memory-writer_ttc__procurement-v1-nemotron-k2-deepseek-independent-review",
+      "k": 2,
+      "oracle_manifest_sha256": "f44ab5e34965a9f72eb3c03e6f3161a90f1c442142e423dc7a04d20e957c3656",
+      "oracle_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-001833-933574__authorization-memory-writer_ttc__procurement-v1-nemotron-k2-typed-oracle-replay-network",
+      "reviewer_surface_hashes_verified": 48,
+      "source_manifest_sha256": "e8bbc44ee98cd713405c74fabbfef3c16a733d369af326898c9dbd535a8fa867",
+      "source_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-202606-735967__authorization-memory-writer_ttc__procurement-v1-nemotron-ttc-k2-4writer",
+      "writer_target": "nemotron_3_ultra_baseten"
+    },
+    {
+      "candidate_hashes_verified": 192,
+      "independent_manifest_sha256": "2792da5233d79945a445439901ad4086e97da1bbe69f04bc37e5bedb2d5c6b7c",
+      "independent_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-234419-804034__authorization-memory-writer_ttc__procurement-v1-nemotron-k4-deepseek-independent-review",
+      "k": 4,
+      "oracle_manifest_sha256": "b3041e28cc1a7f3172a1f251a7d837cf2d640da3a984e5ff8be205b675544a87",
+      "oracle_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-002034-927751__authorization-memory-writer_ttc__procurement-v1-nemotron-k4-typed-oracle-replay-network",
+      "reviewer_surface_hashes_verified": 48,
+      "source_manifest_sha256": "35a40603467def91df9de5673e64de526556cf77f2debda67793281fe1feeb1d",
+      "source_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-203219-882959__authorization-memory-writer_ttc__procurement-v1-nemotron-ttc-k4-4writer",
+      "writer_target": "nemotron_3_ultra_baseten"
+    },
+    {
+      "candidate_hashes_verified": 384,
+      "independent_manifest_sha256": "0c5bb70b92922714c3958f1a99f3dfc9b61a3d5a31c1361d54f1bcb0aa01592d",
+      "independent_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-013929-414167__authorization-memory-writer_ttc__procurement-v1-nemotron-k8-deepseek-independent-review",
+      "k": 8,
+      "oracle_manifest_sha256": "533688255b97b6dd742a26695e46377dff5b31783dd2fd551c3215be7ad2ff77",
+      "oracle_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-014400-435405__authorization-memory-writer_ttc__procurement-v1-nemotron-k8-typed-oracle-replay-network",
+      "reviewer_surface_hashes_verified": 48,
+      "source_manifest_sha256": "7cf041d738cff93208d2f8d6a4e2484a3738e3b96a7ccc18ddce66af98827592",
+      "source_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-011743-149741__authorization-memory-writer_ttc__procurement-v1-nemotron-k8-clean",
+      "writer_target": "nemotron_3_ultra_baseten"
+    },
+    {
+      "candidate_hashes_verified": 96,
+      "independent_manifest_sha256": "d8fbc0f9843f897d222361d5b27bcac0b208830f441a9f13a71486d066e2b8d1",
+      "independent_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-233458-347229__authorization-memory-writer_ttc__procurement-v1-qwen-k2-deepseek-independent-review",
+      "k": 2,
+      "oracle_manifest_sha256": "501ca4ac009369c4b7392d0b74e9e6e35873f002fefe7b39fef3e9217967f20e",
+      "oracle_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-001758-731890__authorization-memory-writer_ttc__procurement-v1-qwen-k2-typed-oracle-replay-network",
+      "reviewer_surface_hashes_verified": 48,
+      "source_manifest_sha256": "6709ce8fbe1ef70d7ce9b8bf70a6c9fc31abef1a8c36a5e2cf0c0a61759f371d",
+      "source_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-185501-912396__authorization-memory-writer_ttc__procurement-v1-qwen-ttc-k2-network",
+      "writer_target": "qwen_plus_0728_openrouter"
+    },
+    {
+      "candidate_hashes_verified": 192,
+      "independent_manifest_sha256": "74250b46c2040684cfcbd9680bc3cf955d39477a4d239297a7bac9d949870c2f",
+      "independent_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-234301-813477__authorization-memory-writer_ttc__procurement-v1-qwen-k4-deepseek-independent-review",
+      "k": 4,
+      "oracle_manifest_sha256": "5e2f5e9150051bf3118636fdb4f485226ba77bcf3f389c4e976410087637a437",
+      "oracle_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-001831-629470__authorization-memory-writer_ttc__procurement-v1-qwen-k4-typed-oracle-replay-network",
+      "reviewer_surface_hashes_verified": 48,
+      "source_manifest_sha256": "58edcfd6e565e9f3b7cefbbdbc678ae9c80c66fbc61d14405fb4d95036b3baff",
+      "source_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260814-190327-016820__authorization-memory-writer_ttc__procurement-v1-qwen-ttc-k4",
+      "writer_target": "qwen_plus_0728_openrouter"
+    },
+    {
+      "candidate_hashes_verified": 384,
+      "independent_manifest_sha256": "1d6864e3aa778ae762191cfe65cc8afe4bd272f6dac13057b6831a80b3f85230",
+      "independent_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-013535-064282__authorization-memory-writer_ttc__procurement-v1-qwen-k8-deepseek-independent-review",
+      "k": 8,
+      "oracle_manifest_sha256": "8638658bb11b909a0f87f4468ea0d328538cd9de3f7a6597dee1a8cb7d14e18e",
+      "oracle_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-014305-629538__authorization-memory-writer_ttc__procurement-v1-qwen-k8-typed-oracle-replay-network",
+      "reviewer_surface_hashes_verified": 48,
+      "source_manifest_sha256": "c0d4d64079d69cc22585ed6342ebea41b341d884fbfa5beafbb96dd4b7e948e5",
+      "source_run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260815-005811-696483__authorization-memory-writer_ttc__procurement-v1-qwen-k8",
+      "writer_target": "qwen_plus_0728_openrouter"
+    }
+  ]
+}
