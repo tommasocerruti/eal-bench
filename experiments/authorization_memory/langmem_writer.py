@@ -272,6 +272,7 @@ def run_writer_chains(
     max_attempts: int,
     capacity_tokens: int,
     batch_size: int | None,
+    enforce_capacity: bool = True,
     route_timeout_seconds: float = _ROUTE_TIMEOUT_SECONDS,
     token_counter: TokenCounter | None = None,
 ) -> WriterRunArtifacts:
@@ -284,6 +285,7 @@ def run_writer_chains(
             max_attempts=max_attempts,
             capacity_tokens=capacity_tokens,
             batch_size=batch_size,
+            enforce_capacity=enforce_capacity,
             route_timeout_seconds=route_timeout_seconds,
             token_counter=token_counter,
             runner_stack=runner_stack,
@@ -299,6 +301,7 @@ def _run_writer_chains(
     max_attempts: int,
     capacity_tokens: int,
     batch_size: int | None,
+    enforce_capacity: bool,
     route_timeout_seconds: float,
     token_counter: TokenCounter | None = None,
     runner_stack: ExitStack,
@@ -458,6 +461,7 @@ def _run_writer_chains(
                     attempt_index=1,
                     repair_of_attempt_id=None,
                     capacity_tokens=capacity_tokens,
+                    enforce_capacity=enforce_capacity,
                     token_counter=token_counter,
                 )
                 attempts.append(attempt)
@@ -482,6 +486,7 @@ def _run_writer_chains(
                             source_attempt_id=attempt.attempt_id,
                             framework_run_ids=attempt.framework_run_ids,
                             capacity_tokens=capacity_tokens,
+                            enforce_capacity=enforce_capacity,
                             token_counter=token_counter,
                         )
                         memories.append(chain.current)
@@ -540,6 +545,7 @@ def _run_writer_chains(
                         attempt_index=2,
                         repair_of_attempt_id=first.attempt_id,
                         capacity_tokens=capacity_tokens,
+                        enforce_capacity=enforce_capacity,
                         token_counter=token_counter,
                     )
                     attempts.append(attempt)
@@ -559,6 +565,7 @@ def _run_writer_chains(
                             source_attempt_id=attempt.attempt_id,
                             framework_run_ids=attempt.framework_run_ids,
                             capacity_tokens=capacity_tokens,
+                            enforce_capacity=enforce_capacity,
                             token_counter=token_counter,
                         )
                         memories.append(chain.current)
@@ -599,6 +606,7 @@ def _run_writer_chains(
                     update.block_index,
                     _empty_payload(domain, architecture),
                     capacity_tokens=capacity_tokens,
+                    enforce_capacity=enforce_capacity,
                     token_counter=token_counter,
                 )
                 memories.append(chain.current)
@@ -805,6 +813,7 @@ def _process_invocation(
     attempt_index: int,
     repair_of_attempt_id: str | None,
     capacity_tokens: int,
+    enforce_capacity: bool,
     token_counter: TokenCounter | None,
 ) -> tuple[MemoryArtifact | None, MemoryAttempt]:
     logical_id = _stable_id(
@@ -832,6 +841,7 @@ def _process_invocation(
                 update,
                 candidate,
                 capacity_tokens=capacity_tokens,
+                enforce_capacity=enforce_capacity,
                 token_counter=token_counter,
             )
             prior_payload = (
@@ -850,6 +860,7 @@ def _process_invocation(
                     source_attempt_id=attempt_id,
                     framework_run_ids=invocation.run_ids,
                     capacity_tokens=capacity_tokens,
+                    enforce_capacity=enforce_capacity,
                     token_counter=token_counter,
                 )
             if not changed:
@@ -921,6 +932,7 @@ def _validate_payload(
     payload: str | Mapping[str, Any],
     *,
     capacity_tokens: int,
+    enforce_capacity: bool,
     token_counter: TokenCounter | None,
 ) -> str | dict[str, Any]:
     if chain.spec.architecture is MemoryArchitecture.FREE_TEXT:
@@ -948,7 +960,7 @@ def _validate_payload(
         validated if isinstance(validated, str) else canonical_json(validated)
     )
     tokens = count_reference_tokens(serialized, token_counter)
-    if tokens > capacity_tokens:
+    if enforce_capacity and tokens > capacity_tokens:
         raise ValueError(
             f"candidate uses {tokens} reference tokens; capacity is {capacity_tokens}"
         )
@@ -965,12 +977,13 @@ def _artifact(
     source_attempt_id: str | None = None,
     framework_run_ids: tuple[str, ...] = (),
     capacity_tokens: int,
+    enforce_capacity: bool = True,
     token_counter: TokenCounter | None,
 ) -> MemoryArtifact:
     effective_writer = writer or chain.writer
     serialized = payload if isinstance(payload, str) else canonical_json(payload)
     tokens = count_reference_tokens(serialized, token_counter)
-    if tokens > capacity_tokens:
+    if enforce_capacity and tokens > capacity_tokens:
         raise ValueError(
             f"candidate uses {tokens} reference tokens; capacity is {capacity_tokens}"
         )

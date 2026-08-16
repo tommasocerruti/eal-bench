@@ -60,6 +60,20 @@ from .schemas import (
     Transaction,
 )
 from .semantics import PROCUREMENT_SEMANTICS
+from .studies.capacity_ablation import (
+    REPLAY_STUDY_ID as CAPACITY_REPLAY_STUDY_ID,
+    WRITER_STUDY_ID as CAPACITY_WRITER_STUDY_ID,
+    WRITER_VISIBLE_REPLAY_STUDY_ID as CAPACITY_VISIBLE_REPLAY_STUDY_ID,
+    WRITER_VISIBLE_WRITER_STUDY_ID as CAPACITY_VISIBLE_WRITER_STUDY_ID,
+    build_replay_plan as build_capacity_replay_plan,
+    build_writer_plan as build_capacity_writer_plan,
+    build_writer_visible_plan as build_capacity_visible_writer_plan,
+    build_writer_visible_replay_plan as build_capacity_visible_replay_plan,
+    validate_replay_options as validate_capacity_replay_options,
+    validate_writer_options as validate_capacity_writer_options,
+    validate_writer_visible_options as validate_capacity_visible_writer_options,
+    validate_writer_visible_replay_options as validate_capacity_visible_replay_options,
+)
 from .studies.routes import (
     build_controls_plan,
     build_pressure_plan,
@@ -861,6 +875,30 @@ _STUDIES = {
             "LangMem generation, fidelity screening, and baseline execution.",
             validator=validate_writer_options,
             builder=build_writer_plan,
+        ),
+        StudyProfile(
+            CAPACITY_WRITER_STUDY_ID,
+            "Typed-incremental writer trajectories with nonbinding artifact capacity.",
+            validator=validate_capacity_writer_options,
+            builder=build_capacity_writer_plan,
+        ),
+        StudyProfile(
+            CAPACITY_REPLAY_STUDY_ID,
+            "Primary-executor replay of frozen nonbinding-capacity memories.",
+            validator=validate_capacity_replay_options,
+            builder=build_capacity_replay_plan,
+        ),
+        StudyProfile(
+            CAPACITY_VISIBLE_WRITER_STUDY_ID,
+            "Typed-incremental writers with a high visible, unenforced capacity.",
+            validator=validate_capacity_visible_writer_options,
+            builder=build_capacity_visible_writer_plan,
+        ),
+        StudyProfile(
+            CAPACITY_VISIBLE_REPLAY_STUDY_ID,
+            "Primary-executor replay of high-visible-capacity memories.",
+            validator=validate_capacity_visible_replay_options,
+            builder=build_capacity_visible_replay_plan,
         ),
         StudyProfile(
             "pressure",

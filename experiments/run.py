@@ -424,11 +424,16 @@ def _route_options(
 ) -> dict[str, Any]:
     provided = set(getattr(args, "_provided_flags", ()))
     if (
-        profile.study_id != "writer"
+        profile.study_id
+        not in {
+            "writer",
+            "capacity_nonbinding_writer",
+            "capacity_writer_visible_nonbinding",
+        }
         and "--writer-route-timeout-seconds" in provided
     ):
         raise ValueError(
-            "--writer-route-timeout-seconds applies only to the writer study"
+            "--writer-route-timeout-seconds applies only to writer studies"
         )
     pressure_source = _pressure_source_manifest(args, profile)
     corpus_version = args.corpus_version or (
@@ -479,6 +484,20 @@ def _route_options(
         )
         options["executor_targets"] = _csv(args.executor_targets) or (
             _default_target(args.executor_task),
+        )
+    elif profile.study_id in {
+        "capacity_nonbinding_writer",
+        "capacity_writer_visible_nonbinding",
+    }:
+        options["writer_targets"] = _csv(args.writer_targets)
+        options["executor_targets"] = ()
+    elif profile.study_id in {
+        "capacity_nonbinding_replay",
+        "capacity_writer_visible_nonbinding_replay",
+    }:
+        options["writer_targets"] = ()
+        options["executor_targets"] = _csv(args.executor_targets) or (
+            "gptoss_baseten",
         )
     elif profile.study_id == "pressure":
         forbidden = sorted(

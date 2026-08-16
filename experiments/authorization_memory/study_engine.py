@@ -75,6 +75,26 @@ def validate_study_plan(
         len(chain.updates) for chain in plan.writer_chains
     )
     writer_max_attempts = int(options.get("writer_max_attempts", 2))
+    capacity_enforced = plan.metadata.get("capacity_enforced", True)
+    if not isinstance(capacity_enforced, bool):
+        raise ValueError("capacity_enforced plan metadata must be boolean")
+    calibrated_capacity_tokens = calibrate_capacity(
+        domain,
+        cases,
+        corpus_version=str(options["corpus_version"]),
+        presentation=presentation,
+    ).tokens_for(str(options.get("capacity_tier") or "primary"))
+    writer_visible_capacity_tokens = plan.metadata.get(
+        "writer_visible_capacity_tokens", calibrated_capacity_tokens
+    )
+    if (
+        isinstance(writer_visible_capacity_tokens, bool)
+        or not isinstance(writer_visible_capacity_tokens, int)
+        or writer_visible_capacity_tokens <= 0
+    ):
+        raise ValueError(
+            "writer_visible_capacity_tokens plan metadata must be a positive integer"
+        )
     writer_route_timeout_seconds = int(
         options.get("writer_route_timeout_seconds", 3600)
     )
@@ -147,6 +167,9 @@ def validate_study_plan(
         "artifact_paths": dict(plan.artifact_paths),
         "plan_metadata": dict(plan.metadata),
         "call_plan": {
+            "capacity_enforced": capacity_enforced,
+            "calibrated_capacity_tokens": calibrated_capacity_tokens,
+            "writer_visible_capacity_tokens": writer_visible_capacity_tokens,
             "writer_route_timeout_seconds": writer_route_timeout_seconds,
             "writer_route_timeout_override": (
                 writer_route_timeout_seconds != 3600
@@ -271,6 +294,20 @@ def run_study_plan(
         presentation=presentation,
     )
     capacity_tokens = calibration.tokens_for(capacity_tier)
+    capacity_enforced = plan.metadata.get("capacity_enforced", True)
+    if not isinstance(capacity_enforced, bool):
+        raise ValueError("capacity_enforced plan metadata must be boolean")
+    writer_visible_capacity_tokens = plan.metadata.get(
+        "writer_visible_capacity_tokens", capacity_tokens
+    )
+    if (
+        isinstance(writer_visible_capacity_tokens, bool)
+        or not isinstance(writer_visible_capacity_tokens, int)
+        or writer_visible_capacity_tokens <= 0
+    ):
+        raise ValueError(
+            "writer_visible_capacity_tokens plan metadata must be a positive integer"
+        )
     if plan.writer_chains and not writer_targets:
         raise ValueError("writer-backed study plans require writer targets")
     if not plan.writer_only and not executor_targets:
@@ -332,8 +369,9 @@ def run_study_plan(
                 plan.writer_chains,
                 writer_task=writer_task,
                 max_attempts=writer_max_attempts,
-                capacity_tokens=capacity_tokens,
+                capacity_tokens=writer_visible_capacity_tokens,
                 batch_size=batch_size,
+                enforce_capacity=capacity_enforced,
                 route_timeout_seconds=writer_route_timeout_seconds,
             )
             memories.extend(generated.memories)
