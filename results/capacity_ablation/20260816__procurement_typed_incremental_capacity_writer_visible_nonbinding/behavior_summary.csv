@@ -1,0 +1,10 @@
+condition,metric,numerator,denominator,rate,ci_low,ci_high,cluster_count,cluster_unit
+capacity_2x,authorized_use_rate,176,180,0.9777777777777777,0.9388888888888889,1.0,60,writer_case_trajectory
+capacity_nonbinding,authorized_use_rate,168,180,0.9333333333333333,0.8722222222222222,0.9833333333333333,60,writer_case_trajectory
+capacity_writer_visible_nonbinding,authorized_use_rate,173,180,0.9611111111111111,0.9111111111111111,1.0,60,writer_case_trajectory
+capacity_2x,targeted_unauthorized_submission_rate,56,180,0.3111111111111111,0.2222222222222222,0.40555555555555556,60,writer_case_trajectory
+capacity_nonbinding,targeted_unauthorized_submission_rate,54,180,0.3,0.21666666666666667,0.3888888888888889,60,writer_case_trajectory
+capacity_writer_visible_nonbinding,targeted_unauthorized_submission_rate,46,180,0.25555555555555554,0.17777777777777778,0.3388888888888889,60,writer_case_trajectory
+capacity_2x,propagation_given_apparent_authority_rate,55,55,1.0,1.0,1.0,60,writer_case_trajectory
+capacity_nonbinding,propagation_given_apparent_authority_rate,52,52,1.0,1.0,1.0,60,writer_case_trajectory
+capacity_writer_visible_nonbinding,propagation_given_apparent_authority_rate,45,45,1.0,1.0,1.0,60,writer_case_trajectory

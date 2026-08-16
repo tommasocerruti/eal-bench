@@ -1,0 +1,200 @@
+{
+  "bootstrap_replicates": 10000,
+  "cluster_unit": "writer_case_trajectory",
+  "deterministic_validation": [
+    {
+      "canonical_ledger_and_oracle": "domains.procurement adapters",
+      "condition": "capacity_2x",
+      "run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-005257-869522__authorization-memory-writer__procurement-v1-transfer-nemotron-3-ultra",
+      "saved_fidelity_states_verified": 54,
+      "states_recomputed": 66,
+      "writer_target": "nemotron_3_ultra_baseten"
+    },
+    {
+      "canonical_ledger_and_oracle": "domains.procurement adapters",
+      "condition": "capacity_2x",
+      "run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-010130-962971__authorization-memory-writer__procurement-v1-transfer-grok-4-3",
+      "saved_fidelity_states_verified": 54,
+      "states_recomputed": 66,
+      "writer_target": "grok_4_3_openrouter"
+    },
+    {
+      "canonical_ledger_and_oracle": "domains.procurement adapters",
+      "condition": "capacity_2x",
+      "run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-112937-803837__authorization-memory-writer__procurement-v1-transfer-kimi-k2-6-technical-completion",
+      "saved_fidelity_states_verified": 54,
+      "states_recomputed": 66,
+      "writer_target": "kimi_baseten"
+    },
+    {
+      "canonical_ledger_and_oracle": "domains.procurement adapters",
+      "condition": "capacity_2x",
+      "run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-011450-878789__authorization-memory-writer__procurement-v1-transfer-glm-5-2",
+      "saved_fidelity_states_verified": 54,
+      "states_recomputed": 66,
+      "writer_target": "glm_5_2_baseten"
+    },
+    {
+      "canonical_ledger_and_oracle": "domains.procurement adapters",
+      "condition": "capacity_2x",
+      "run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-124843-399194__authorization-memory-writer__procurement-v1-transfer-qwen-plus-0728",
+      "saved_fidelity_states_verified": 55,
+      "states_recomputed": 66,
+      "writer_target": "qwen_plus_0728_openrouter"
+    },
+    {
+      "canonical_ledger_and_oracle": "domains.procurement adapters",
+      "condition": "capacity_nonbinding",
+      "run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260816-132209-847941__authorization-memory-capacity_nonbinding_writer__procurement-typed-incremental-capacity-nonbinding",
+      "saved_fidelity_states_verified": null,
+      "states_recomputed": 330,
+      "writer_target": null
+    }
+  ],
+  "executor_audit": {
+    "completed_trials": 360,
+    "context_comparison": "exact after replacing only the treatment-dependent persistent-memory block",
+    "eventually_successful_retried_calls": 74,
+    "first_attempt_context_pairs_checked": 360,
+    "logical_executor_calls": 360,
+    "maximum_network_attempts_per_logical_call": 3,
+    "network_call_records": 445,
+    "network_records_missing_cost": 445,
+    "provider_reported_cost_usd": 0,
+    "result": "passed",
+    "retried_logical_calls": 74,
+    "terminal_provider_errors": 0,
+    "transient_error_attempts": 85,
+    "transient_error_types": {
+      "RateLimitError: Error code: 429 - {'error': 'Rate limit exceeded'}": 85
+    }
+  },
+  "experiment_id": "procurement_typed_incremental_capacity_nonbinding",
+  "files": {
+    "REPORT.md": {
+      "rows": null,
+      "sha256": "07d7a21334b721db69e0b172aecf238b96419416898246451c956ca50b45d577"
+    },
+    "behavior_paired_effects.csv": {
+      "rows": 3,
+      "sha256": "40a827dbc41db8ba9d72e01810bfe110f9b895a1746e05961947ac8aa0f3cf1c"
+    },
+    "behavior_summary.csv": {
+      "rows": 6,
+      "sha256": "8110223e7d152fe0c88fcd9595ad43e384c24f954e310c9a6cdb006ebf7e0c95"
+    },
+    "capacity_failures.csv": {
+      "rows": 2,
+      "sha256": "2feea23f67344b50673ed04e731f24d3b3ae68ec78d5e7c0f20250a31d0778b4"
+    },
+    "deterministic_validation.csv": {
+      "rows": 6,
+      "sha256": "8b9cca2d981f3e10e7b2dc10d85a71334e56fb7a11180c2ef20c28d48c51d026"
+    },
+    "error_episodes.csv": {
+      "rows": 76,
+      "sha256": "a8e78d079fe49558d08e2bc596d1cca48d6d7417ca826cfcdc974a87c7804e93"
+    },
+    "memory_attempts.csv": {
+      "rows": 672,
+      "sha256": "cc761908d9a29dee70f60f4fe090d8f069444872fea57fbb4fa24f8a57ed1c11"
+    },
+    "metric_summary.csv": {
+      "rows": 16,
+      "sha256": "871ccaec166895fa86c60c523cbf9606feb2355aeaa430e35598332420b90e4c"
+    },
+    "paired_effects.csv": {
+      "rows": 8,
+      "sha256": "e4b2121c2d8dbc021615fa3ca07c8eae670b52516788a1018c79a9663e45a2ff"
+    },
+    "replay_audit.csv": {
+      "rows": 1,
+      "sha256": "0b71f02c7301356a5c3da93a75742d10b558c557d9bf7b748d1e67e6bada91e6"
+    },
+    "request_formation.csv": {
+      "rows": 3960,
+      "sha256": "ab5e10a10d8b81e660fac07c1b36a9bedc2ca1ed1e7f6e2d7350e7e891577b8e"
+    },
+    "semantic_errors.csv": {
+      "rows": 529,
+      "sha256": "d9f34cbc0d13685508220fc9e845bac50bbbfc689e1613602adb9ae01175171f"
+    },
+    "size_summary.csv": {
+      "rows": 24,
+      "sha256": "43893eb6b112158789c6c62303973b4539e0e003deb20a8f1d1a512dd14889f9"
+    },
+    "state_observations.csv": {
+      "rows": 660,
+      "sha256": "892467bc925c16606d608c3d36d1163204b6c631484c97f6180601afd8ea91ac"
+    },
+    "taxonomy_summary.csv": {
+      "rows": 28,
+      "sha256": "53da11b6f086cd3e8fd7a581e24b92e62b6668d59697de991c866c0f84e49ce4"
+    },
+    "trajectory_transitions.csv": {
+      "rows": 540,
+      "sha256": "210932b0f2ed00f554fcdfdc7a91af19c29b93a1d8c1ef66e8e13e02956bd1ec"
+    },
+    "writer_behavior.csv": {
+      "rows": 10,
+      "sha256": "a79baab11e22130b8d1b147ea4b103896eeba518d7bfcb857afbc1634ebabb2a"
+    },
+    "writer_summary.csv": {
+      "rows": 10,
+      "sha256": "3620a21111fb15436941319b23051292af24e43ad4ea8efbabb2743294deaebb"
+    }
+  },
+  "primary_executor": "gptoss_baseten",
+  "primary_seed": 20260719,
+  "prompt_audit": {
+    "all_writer_contexts": 335,
+    "capacity_instruction_mentions": 335,
+    "first_attempt_pairs_checked": 330,
+    "normalization": "opaque profile/session IDs normalized; treatment-dependent existing profile payload excluded from system-template comparison",
+    "result": "exact_normalized_match",
+    "treatment_words_found": []
+  },
+  "schema_version": "eal_procurement_capacity_ablation_analysis_v1",
+  "sources": [
+    {
+      "condition": "capacity_2x",
+      "manifest_sha256": "27887bef43b5503b58e34189c7895026060699e3884d3ef60c35d5ae47b069cf",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-005257-869522__authorization-memory-writer__procurement-v1-transfer-nemotron-3-ultra",
+      "writer_target": "nemotron_3_ultra_baseten"
+    },
+    {
+      "condition": "capacity_2x",
+      "manifest_sha256": "d361aadafe52ee431207bb047ef8533acc4e9b55ca2d1f7190006b271edabd95",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-010130-962971__authorization-memory-writer__procurement-v1-transfer-grok-4-3",
+      "writer_target": "grok_4_3_openrouter"
+    },
+    {
+      "condition": "capacity_2x",
+      "manifest_sha256": "cef1110b350e4a3a741452689560899427cb7210ea5998d705ff123110e5b3fc",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-112937-803837__authorization-memory-writer__procurement-v1-transfer-kimi-k2-6-technical-completion",
+      "writer_target": "kimi_baseten"
+    },
+    {
+      "condition": "capacity_2x",
+      "manifest_sha256": "6f110d72fb35a352e99e674337d72a0d65e309b99f373b1443e71297794292bf",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-011450-878789__authorization-memory-writer__procurement-v1-transfer-glm-5-2",
+      "writer_target": "glm_5_2_baseten"
+    },
+    {
+      "condition": "capacity_2x",
+      "manifest_sha256": "fb9f85a60de65e2eebffa46077723327a864ab7e8621ba23cb01fd5aa61c2377",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-124843-399194__authorization-memory-writer__procurement-v1-transfer-qwen-plus-0728",
+      "writer_target": "qwen_plus_0728_openrouter"
+    },
+    {
+      "condition": "capacity_nonbinding",
+      "manifest_sha256": "b75d5274d796ef51d74e098aa22670a2c0039f06f71d6d5917dd4f9dc17b0caf",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260816-132209-847941__authorization-memory-capacity_nonbinding_writer__procurement-typed-incremental-capacity-nonbinding"
+    },
+    {
+      "condition": "capacity_nonbinding_replay",
+      "manifest_sha256": "4977f318b04140ff976f43e255fbec646128e9a1e04fc0cef61fb6b86081b200",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260816-134349-730098__authorization-memory-capacity_nonbinding_replay__procurement-typed-incremental-capacity-nonbinding-gptoss-replay"
+    }
+  ]
+}

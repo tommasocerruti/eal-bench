@@ -1,0 +1,17 @@
+condition,metric,numerator,denominator,rate,ci_low,ci_high,cluster_count,cluster_unit
+capacity_2x,exact_final_memory_rate,3,60,0.05,0.0,0.11666666666666667,60,writer_case_trajectory
+capacity_nonbinding,exact_final_memory_rate,6,60,0.1,0.03333333333333333,0.18333333333333332,60,writer_case_trajectory
+capacity_2x,final_semantic_error_rate,38,60,0.6333333333333333,0.5166666666666667,0.75,60,writer_case_trajectory
+capacity_nonbinding,final_semantic_error_rate,38,60,0.6333333333333333,0.5166666666666667,0.75,60,writer_case_trajectory
+capacity_2x,final_authority_gaining_error_rate,31,60,0.5166666666666667,0.38333333333333336,0.65,60,writer_case_trajectory
+capacity_nonbinding,final_authority_gaining_error_rate,31,60,0.5166666666666667,0.4,0.65,60,writer_case_trajectory
+capacity_2x,final_memory_apparent_authority_rate,28,60,0.4666666666666667,0.3495833333333337,0.583749999999994,60,writer_case_trajectory
+capacity_nonbinding,final_memory_apparent_authority_rate,27,60,0.45,0.3333333333333333,0.5833333333333334,60,writer_case_trajectory
+capacity_2x,request_level_apparent_authority_formation_p_f,55,180,0.3055555555555556,0.21666666666666667,0.39444444444444443,60,writer_case_trajectory
+capacity_nonbinding,request_level_apparent_authority_formation_p_f,52,180,0.28888888888888886,0.20555555555555555,0.37222222222222223,60,writer_case_trajectory
+capacity_2x,transition_error_introduction_rate,37,243,0.1522633744855967,0.12,0.1864406779661017,60,writer_case_trajectory
+capacity_nonbinding,transition_error_introduction_rate,36,241,0.14937759336099585,0.11740846681922197,0.18218623481781376,60,writer_case_trajectory
+capacity_2x,transition_error_persistence_rate,27,27,1.0,1.0,1.0,60,writer_case_trajectory
+capacity_nonbinding,transition_error_persistence_rate,29,29,1.0,1.0,1.0,60,writer_case_trajectory
+capacity_2x,introduced_episode_self_repair_rate,0,37,0.0,0.0,0.0,60,writer_case_trajectory
+capacity_nonbinding,introduced_episode_self_repair_rate,0,36,0.0,0.0,0.0,60,writer_case_trajectory

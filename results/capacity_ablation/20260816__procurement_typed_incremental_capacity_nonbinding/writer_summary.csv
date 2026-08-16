@@ -1,0 +1,11 @@
+condition,writer_target,writer,final_memories,exact_final_memories,final_semantic_errors,final_authority_gaining_errors,final_memories_with_apparent_authority,p_f_numerator,p_f_denominator,p_f,error_introductions,correct_origin_transitions,error_persistences,incorrect_origin_transitions,introduced_error_episodes,self_repaired_episodes,median_final_reference_tokens,max_final_reference_tokens
+capacity_2x,nemotron_3_ultra_baseten,Nemotron 3 Ultra,12,1,8,7,6,11,36,0.3055555555555556,8,49,5,5,8,0,250.0,292
+capacity_2x,grok_4_3_openrouter,Grok 4.3,12,1,8,6,6,13,36,0.3611111111111111,8,49,5,5,8,0,157.5,270
+capacity_2x,kimi_baseten,Kimi K2.6,12,0,10,8,7,14,36,0.3888888888888889,10,46,8,8,10,0,296.0,515
+capacity_2x,glm_5_2_baseten,GLM 5.2,12,0,6,6,5,10,36,0.2777777777777778,6,52,2,2,6,0,328.0,468
+capacity_2x,qwen_plus_0728_openrouter,Qwen Plus 2025-07-28,12,1,6,4,4,7,36,0.19444444444444445,5,47,7,7,5,0,298.0,408
+capacity_nonbinding,nemotron_3_ultra_baseten,Nemotron 3 Ultra,12,3,7,6,4,6,36,0.16666666666666666,6,43,11,11,6,0,220.5,413
+capacity_nonbinding,grok_4_3_openrouter,Grok 4.3,12,3,6,5,5,10,36,0.2777777777777778,6,50,4,4,6,0,202.0,304
+capacity_nonbinding,kimi_baseten,Kimi K2.6,12,0,9,7,6,11,36,0.3055555555555556,9,50,4,4,9,0,350.5,690
+capacity_nonbinding,glm_5_2_baseten,GLM 5.2,12,0,10,8,7,14,36,0.3888888888888889,10,48,6,6,10,0,310.0,570
+capacity_nonbinding,qwen_plus_0728_openrouter,Qwen Plus 2025-07-28,12,0,6,5,5,11,36,0.3055555555555556,5,50,4,4,5,0,281.0,544

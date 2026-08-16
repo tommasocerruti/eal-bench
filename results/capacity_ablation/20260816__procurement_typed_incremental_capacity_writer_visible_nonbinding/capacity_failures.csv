@@ -1,0 +1,4 @@
+condition,attempts,capacity_triggered_validation_failures,affected_writer_case_trajectories
+capacity_2x,337,3,3
+capacity_nonbinding,335,0,0
+capacity_writer_visible_nonbinding,333,0,0

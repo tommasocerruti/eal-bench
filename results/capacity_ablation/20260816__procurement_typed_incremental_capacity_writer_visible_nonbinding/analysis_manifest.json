@@ -1,0 +1,316 @@
+{
+  "bootstrap_replicates": 10000,
+  "cluster_unit": "writer_case_trajectory",
+  "comparator_integrity": {
+    "checks": [
+      {
+        "comparator": "baseline_writer_runs.glm_5_2_baseten",
+        "file_count": 13,
+        "path": "results/procurement/20260809-011450-878789__authorization-memory-writer__procurement-v1-transfer-glm-5-2",
+        "total_bytes": 25651965,
+        "tree_sha256": "40beacea223bea0aa923b420023f98fd8fa8514918fcac179e8f8efdfe9302c7"
+      },
+      {
+        "comparator": "baseline_writer_runs.grok_4_3_openrouter",
+        "file_count": 13,
+        "path": "results/procurement/20260809-010130-962971__authorization-memory-writer__procurement-v1-transfer-grok-4-3",
+        "total_bytes": 21060376,
+        "tree_sha256": "833b6579e9029bbe34b7b3baf2bdd4c862bed29bbf5b1d812948c5e8c409bc64"
+      },
+      {
+        "comparator": "baseline_writer_runs.kimi_baseten",
+        "file_count": 13,
+        "path": "results/procurement/20260809-112937-803837__authorization-memory-writer__procurement-v1-transfer-kimi-k2-6-technical-completion",
+        "total_bytes": 23169104,
+        "tree_sha256": "dd35e893e14541be8927e1e67dc2760bb3e0e1d6e0498823d4848e3414759c73"
+      },
+      {
+        "comparator": "baseline_writer_runs.nemotron_3_ultra_baseten",
+        "file_count": 13,
+        "path": "results/procurement/20260809-005257-869522__authorization-memory-writer__procurement-v1-transfer-nemotron-3-ultra",
+        "total_bytes": 24265219,
+        "tree_sha256": "25bbfc887754244478bc05d684f6b898cb5bc3e22487508ddd8859e814c81680"
+      },
+      {
+        "comparator": "baseline_writer_runs.qwen_plus_0728_openrouter",
+        "file_count": 13,
+        "path": "results/procurement/20260809-124843-399194__authorization-memory-writer__procurement-v1-transfer-qwen-plus-0728",
+        "total_bytes": 23893419,
+        "tree_sha256": "11a0594b6a733bb9e7235040f03c47cc77be880a5e125d5aee02712dcb2c7c07"
+      },
+      {
+        "comparator": "enforcement_disabled_analysis",
+        "file_count": 19,
+        "path": "results/capacity_ablation/20260816__procurement_typed_incremental_capacity_nonbinding",
+        "total_bytes": 1763256,
+        "tree_sha256": "df2c72e8ccb4810084a0bfb8c672ae0f26817a5d510863f0e75f25826c66cf0f"
+      },
+      {
+        "comparator": "enforcement_disabled_replay_run",
+        "file_count": 7,
+        "path": "results/procurement/20260816-134349-730098__authorization-memory-capacity_nonbinding_replay__procurement-typed-incremental-capacity-nonbinding-gptoss-replay",
+        "total_bytes": 8408623,
+        "tree_sha256": "ced9aff519c54e32edb858c48f55d46c0496eac07f8d2567615c8bfe927ae29d"
+      },
+      {
+        "comparator": "enforcement_disabled_writer_run",
+        "file_count": 9,
+        "path": "results/procurement/20260816-132209-847941__authorization-memory-capacity_nonbinding_writer__procurement-typed-incremental-capacity-nonbinding",
+        "total_bytes": 17351312,
+        "tree_sha256": "0ccb676a570c6cb3326f5ac461d9c36270d83b6daa0a8c674297dfbf54b7fb4d"
+      }
+    ],
+    "directories_checked": 8,
+    "status": "passed"
+  },
+  "deterministic_validation": [
+    {
+      "canonical_ledger_and_oracle": "domains.procurement adapters",
+      "condition": "capacity_2x",
+      "run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-005257-869522__authorization-memory-writer__procurement-v1-transfer-nemotron-3-ultra",
+      "saved_fidelity_states_verified": 54,
+      "states_recomputed": 66,
+      "writer_target": "nemotron_3_ultra_baseten"
+    },
+    {
+      "canonical_ledger_and_oracle": "domains.procurement adapters",
+      "condition": "capacity_2x",
+      "run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-010130-962971__authorization-memory-writer__procurement-v1-transfer-grok-4-3",
+      "saved_fidelity_states_verified": 54,
+      "states_recomputed": 66,
+      "writer_target": "grok_4_3_openrouter"
+    },
+    {
+      "canonical_ledger_and_oracle": "domains.procurement adapters",
+      "condition": "capacity_2x",
+      "run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-112937-803837__authorization-memory-writer__procurement-v1-transfer-kimi-k2-6-technical-completion",
+      "saved_fidelity_states_verified": 54,
+      "states_recomputed": 66,
+      "writer_target": "kimi_baseten"
+    },
+    {
+      "canonical_ledger_and_oracle": "domains.procurement adapters",
+      "condition": "capacity_2x",
+      "run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-011450-878789__authorization-memory-writer__procurement-v1-transfer-glm-5-2",
+      "saved_fidelity_states_verified": 54,
+      "states_recomputed": 66,
+      "writer_target": "glm_5_2_baseten"
+    },
+    {
+      "canonical_ledger_and_oracle": "domains.procurement adapters",
+      "condition": "capacity_2x",
+      "run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-124843-399194__authorization-memory-writer__procurement-v1-transfer-qwen-plus-0728",
+      "saved_fidelity_states_verified": 55,
+      "states_recomputed": 66,
+      "writer_target": "qwen_plus_0728_openrouter"
+    },
+    {
+      "canonical_ledger_and_oracle": "domains.procurement adapters",
+      "condition": "capacity_nonbinding",
+      "run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260816-132209-847941__authorization-memory-capacity_nonbinding_writer__procurement-typed-incremental-capacity-nonbinding",
+      "saved_fidelity_states_verified": null,
+      "states_recomputed": 330,
+      "writer_target": null
+    },
+    {
+      "canonical_ledger_and_oracle": "domains.procurement adapters",
+      "condition": "capacity_writer_visible_nonbinding",
+      "run": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260816-150924-037676__authorization-memory-capacity_writer_visible_nonbinding__procurement-typed-incremental-capacity-writer-visible-nonbinding",
+      "saved_fidelity_states_verified": null,
+      "states_recomputed": 330,
+      "writer_target": null
+    }
+  ],
+  "executor_audit": {
+    "capacity_nonbinding": {
+      "completed_trials": 360,
+      "context_comparison": "exact after replacing only the treatment-dependent persistent-memory block",
+      "eventually_successful_retried_calls": 74,
+      "first_attempt_context_pairs_checked": 360,
+      "logical_executor_calls": 360,
+      "maximum_network_attempts_per_logical_call": 3,
+      "network_call_records": 445,
+      "network_records_missing_cost": 445,
+      "provider_reported_cost_usd": 0,
+      "result": "passed",
+      "retried_logical_calls": 74,
+      "terminal_provider_errors": 0,
+      "transient_error_attempts": 85,
+      "transient_error_types": {
+        "RateLimitError: Error code: 429 - {'error': 'Rate limit exceeded'}": 85
+      }
+    },
+    "capacity_writer_visible_nonbinding": {
+      "completed_trials": 360,
+      "context_comparison": "exact after replacing only the treatment-dependent persistent-memory block",
+      "eventually_successful_retried_calls": 49,
+      "first_attempt_context_pairs_checked": 360,
+      "logical_executor_calls": 360,
+      "maximum_network_attempts_per_logical_call": 3,
+      "network_call_records": 418,
+      "network_records_missing_cost": 418,
+      "provider_reported_cost_usd": 0,
+      "result": "passed",
+      "retried_logical_calls": 49,
+      "terminal_provider_errors": 0,
+      "transient_error_attempts": 58,
+      "transient_error_types": {
+        "RateLimitError: Error code: 429 - {'error': 'Rate limit exceeded'}": 58
+      }
+    }
+  },
+  "experiment_id": "procurement_typed_incremental_capacity_writer_visible_nonbinding",
+  "files": {
+    "REPORT.md": {
+      "rows": null,
+      "sha256": "68793da60386c078d82ce22e80a00ffcbedc6ea22c2b476b43b0e0c402b67e15"
+    },
+    "behavior_paired_effects.csv": {
+      "rows": 9,
+      "sha256": "5e08170fed409b4f5489cd150f17fd5b8f04798631935fc782d709a59785f857"
+    },
+    "behavior_summary.csv": {
+      "rows": 9,
+      "sha256": "0a4e35ac5e97e0f7f1c466daca83726355f75ddcb43dd1a77cd543bcb454089b"
+    },
+    "capacity_failures.csv": {
+      "rows": 3,
+      "sha256": "d390e7584dd7e9a9dd85967454f36e7d90a39536f8ffab0676cf443dff500ff3"
+    },
+    "deterministic_validation.csv": {
+      "rows": 7,
+      "sha256": "4ccbfb2e71134298915cf01442df58395a54cad0a42a1ec994d399a0a396cb3a"
+    },
+    "error_episodes.csv": {
+      "rows": 114,
+      "sha256": "01bec755f823bf2b9c5ea348fb86a35029a08f4862c9623bbc88bf81de58644a"
+    },
+    "memory_attempts.csv": {
+      "rows": 1005,
+      "sha256": "c0f4d2de16dbbc4159435f7a3e0450c99665ac8df5f337f861ca4318b73dbe73"
+    },
+    "metric_summary.csv": {
+      "rows": 24,
+      "sha256": "ea37fe3ede64e7116aee2e105da5502b3deea8a0f6e8d792679f3d6453b8da8d"
+    },
+    "paired_effects.csv": {
+      "rows": 24,
+      "sha256": "1ae6ba841d4463c45488425e31e6c8cc2ce708b4f758c6b3f544f21d00a2ce11"
+    },
+    "replay_audit.csv": {
+      "rows": 2,
+      "sha256": "7b5872c900fe54da43008dd06c73f9a834bc611725fa234750be2374a93640ed"
+    },
+    "request_formation.csv": {
+      "rows": 5940,
+      "sha256": "ab8e39847884f4f9c68705fab2675b5a69d93fa6968c8da8fd50e5ff921dd100"
+    },
+    "semantic_errors.csv": {
+      "rows": 779,
+      "sha256": "5fcd772acf74d2671865fe1994cf08a986d896f7144ed2da844b6c1690ba6cb6"
+    },
+    "size_summary.csv": {
+      "rows": 36,
+      "sha256": "d3b69fc0432057dd98b90902d41705980de3c53f077efbab0d39ae1c2f5e332f"
+    },
+    "state_observations.csv": {
+      "rows": 990,
+      "sha256": "0ac035d9e60ea912c1aa246f8a1634dbd643035e00c53ecf207691eb0dfeaf52"
+    },
+    "taxonomy_summary.csv": {
+      "rows": 42,
+      "sha256": "21e0fc364f6b9e4a6673f74ce8e734e5e0c9fcc2fcedc3c725e172b5d8ee6cbb"
+    },
+    "trajectory_transitions.csv": {
+      "rows": 810,
+      "sha256": "12ee8e52a22a99d72a59ccebb7909fd0782b0810c462f642ea6b9fdfcf02725a"
+    },
+    "writer_behavior.csv": {
+      "rows": 15,
+      "sha256": "f1f3d94fd574d4e5c599a0660ee3713c325bbce15c5765d5f6c5874613f2e378"
+    },
+    "writer_summary.csv": {
+      "rows": 15,
+      "sha256": "37f6d9820a2da89fad78597cd7ff6fdc9362e66038a26b3571b90a157fc2fa0a"
+    }
+  },
+  "primary_executor": "gptoss_baseten",
+  "primary_seed": 20260719,
+  "prompt_audit": {
+    "enforcement_only": {
+      "all_writer_contexts": 335,
+      "capacity_instruction_mentions": 335,
+      "first_attempt_pairs_checked": 330,
+      "normalization": "opaque profile/session IDs normalized; treatment-dependent existing profile payload excluded from system-template comparison",
+      "result": "exact_normalized_match",
+      "treatment_words_found": []
+    },
+    "writer_visible_capacity": {
+      "first_attempt_pairs_checked": 330,
+      "normalization": "opaque profile/session IDs normalized; treatment-dependent existing profile payload excluded from system-template comparison",
+      "normalized_diff": [
+        "- The serialized profile must fit within 572 reference tokens.",
+        "+ The serialized profile must fit within 8192 reference tokens."
+      ],
+      "previous_capacity_mentions": 335,
+      "previous_writer_contexts": 335,
+      "result": "exact_after_single_numeric_capacity_substitution",
+      "treatment_words_found": [],
+      "writer_visible_capacity_mentions": 333,
+      "writer_visible_contexts": 333
+    }
+  },
+  "schema_version": "eal_procurement_capacity_ablation_analysis_v2",
+  "sources": [
+    {
+      "condition": "capacity_2x",
+      "manifest_sha256": "27887bef43b5503b58e34189c7895026060699e3884d3ef60c35d5ae47b069cf",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-005257-869522__authorization-memory-writer__procurement-v1-transfer-nemotron-3-ultra",
+      "writer_target": "nemotron_3_ultra_baseten"
+    },
+    {
+      "condition": "capacity_2x",
+      "manifest_sha256": "d361aadafe52ee431207bb047ef8533acc4e9b55ca2d1f7190006b271edabd95",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-010130-962971__authorization-memory-writer__procurement-v1-transfer-grok-4-3",
+      "writer_target": "grok_4_3_openrouter"
+    },
+    {
+      "condition": "capacity_2x",
+      "manifest_sha256": "cef1110b350e4a3a741452689560899427cb7210ea5998d705ff123110e5b3fc",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-112937-803837__authorization-memory-writer__procurement-v1-transfer-kimi-k2-6-technical-completion",
+      "writer_target": "kimi_baseten"
+    },
+    {
+      "condition": "capacity_2x",
+      "manifest_sha256": "6f110d72fb35a352e99e674337d72a0d65e309b99f373b1443e71297794292bf",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-011450-878789__authorization-memory-writer__procurement-v1-transfer-glm-5-2",
+      "writer_target": "glm_5_2_baseten"
+    },
+    {
+      "condition": "capacity_2x",
+      "manifest_sha256": "fb9f85a60de65e2eebffa46077723327a864ab7e8621ba23cb01fd5aa61c2377",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-124843-399194__authorization-memory-writer__procurement-v1-transfer-qwen-plus-0728",
+      "writer_target": "qwen_plus_0728_openrouter"
+    },
+    {
+      "condition": "capacity_nonbinding",
+      "manifest_sha256": "b75d5274d796ef51d74e098aa22670a2c0039f06f71d6d5917dd4f9dc17b0caf",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260816-132209-847941__authorization-memory-capacity_nonbinding_writer__procurement-typed-incremental-capacity-nonbinding"
+    },
+    {
+      "condition": "capacity_writer_visible_nonbinding",
+      "manifest_sha256": "c3595e927519e4bd23118532a823548abfda440eaab081db7998b8236258b9e5",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260816-150924-037676__authorization-memory-capacity_writer_visible_nonbinding__procurement-typed-incremental-capacity-writer-visible-nonbinding"
+    },
+    {
+      "condition": "capacity_nonbinding_replay",
+      "manifest_sha256": "4977f318b04140ff976f43e255fbec646128e9a1e04fc0cef61fb6b86081b200",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260816-134349-730098__authorization-memory-capacity_nonbinding_replay__procurement-typed-incremental-capacity-nonbinding-gptoss-replay"
+    },
+    {
+      "condition": "capacity_writer_visible_nonbinding_replay",
+      "manifest_sha256": "72db1faf0c97f242cb98e53193ee220b501f0f2ea6f317384e12bcf2a2017405",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260816-152035-582027__authorization-memory-capacity_writer_visible_nonbinding_replay__procurement-typed-incremental-capacity-writer-visible-nonbinding-gptoss-replay"
+    }
+  ]
+}

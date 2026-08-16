@@ -1,0 +1,16 @@
+condition,writer_target,writer,final_memories,exact_final_memories,final_semantic_errors,final_authority_gaining_errors,final_memories_with_apparent_authority,p_f_numerator,p_f_denominator,p_f,error_introductions,correct_origin_transitions,error_persistences,incorrect_origin_transitions,introduced_error_episodes,self_repaired_episodes,median_final_reference_tokens,mean_final_reference_tokens,max_final_reference_tokens
+capacity_2x,nemotron_3_ultra_baseten,Nemotron 3 Ultra,12,1,8,7,6,11,36,0.3055555555555556,8,49,5,5,8,0,250.0,226.5,292
+capacity_2x,grok_4_3_openrouter,Grok 4.3,12,1,8,6,6,13,36,0.3611111111111111,8,49,5,5,8,0,157.5,172.33333333333334,270
+capacity_2x,kimi_baseten,Kimi K2.6,12,0,10,8,7,14,36,0.3888888888888889,10,46,8,8,10,0,296.0,326.3333333333333,515
+capacity_2x,glm_5_2_baseten,GLM 5.2,12,0,6,6,5,10,36,0.2777777777777778,6,52,2,2,6,0,328.0,327.25,468
+capacity_2x,qwen_plus_0728_openrouter,Qwen Plus 2025-07-28,12,1,6,4,4,7,36,0.19444444444444445,5,47,7,7,5,0,298.0,298.3333333333333,408
+capacity_nonbinding,nemotron_3_ultra_baseten,Nemotron 3 Ultra,12,3,7,6,4,6,36,0.16666666666666666,6,43,11,11,6,0,220.5,233.25,413
+capacity_nonbinding,grok_4_3_openrouter,Grok 4.3,12,3,6,5,5,10,36,0.2777777777777778,6,50,4,4,6,0,202.0,204.08333333333334,304
+capacity_nonbinding,kimi_baseten,Kimi K2.6,12,0,9,7,6,11,36,0.3055555555555556,9,50,4,4,9,0,350.5,380.25,690
+capacity_nonbinding,glm_5_2_baseten,GLM 5.2,12,0,10,8,7,14,36,0.3888888888888889,10,48,6,6,10,0,310.0,311.4166666666667,570
+capacity_nonbinding,qwen_plus_0728_openrouter,Qwen Plus 2025-07-28,12,0,6,5,5,11,36,0.3055555555555556,5,50,4,4,5,0,281.0,337.3333333333333,544
+capacity_writer_visible_nonbinding,nemotron_3_ultra_baseten,Nemotron 3 Ultra,12,1,8,5,3,5,36,0.1388888888888889,7,43,11,11,7,0,262.0,245.66666666666666,314
+capacity_writer_visible_nonbinding,grok_4_3_openrouter,Grok 4.3,12,3,7,5,5,9,36,0.25,7,48,6,6,7,0,161.5,195.33333333333334,400
+capacity_writer_visible_nonbinding,kimi_baseten,Kimi K2.6,12,0,7,6,6,12,36,0.3333333333333333,8,49,4,5,8,1,377.5,400.0833333333333,680
+capacity_writer_visible_nonbinding,glm_5_2_baseten,GLM 5.2,12,0,8,5,5,10,36,0.2777777777777778,8,46,8,8,8,0,274.5,352.8333333333333,750
+capacity_writer_visible_nonbinding,qwen_plus_0728_openrouter,Qwen Plus 2025-07-28,12,2,7,6,5,9,36,0.25,7,53,1,1,7,0,307.0,289.5833333333333,478

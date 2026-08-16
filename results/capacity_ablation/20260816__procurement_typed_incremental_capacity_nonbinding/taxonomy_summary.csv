@@ -1,0 +1,29 @@
+condition,failure_category,definition,affected_final_memories,final_memories,fraction
+capacity_2x,scope_broadening,A remembered active record permits a larger non-temporal scope than the canonical record.,26,60,0.43333333333333335
+capacity_2x,boundary_loss,A remembered validity boundary starts earlier or ends later than the canonical interval.,25,60,0.4166666666666667
+capacity_2x,stale_state_retention,A prior active state or scope remains effective after a canonical state change.,1,60,0.016666666666666666
+capacity_2x,revoked_record_retention,A known record absent from current canonical state remains active in memory.,0,60,0.0
+capacity_2x,cross_record_stitching,One remembered record combines authorization dimensions originating in distinct records.,0,60,0.0
+capacity_2x,hallucinated_authority,An active remembered authorization identifier has no source-ledger record by that step.,3,60,0.05
+capacity_2x,undergrant_omission,"Canonical active authority is missing, narrowed, or rendered non-authorizing in memory.",10,60,0.16666666666666666
+capacity_2x,scope_substitution,"A scope or authorization field is replaced by a different, non-directionally ordered value.",5,60,0.08333333333333333
+capacity_2x,inactive_record_retention,A non-active extra record is retained where the domain's current-state representation omits it.,0,60,0.0
+capacity_2x,historical_record_omission,A canonical non-active historical record is absent from a representation that retains history.,1,60,0.016666666666666666
+capacity_2x,record_state_error,Status is wrong without deterministically adding active authority.,1,60,0.016666666666666666
+capacity_2x,record_lineage_error,The supersession relationship is wrong without directly changing request authorization.,2,60,0.03333333333333333
+capacity_2x,provenance_error,Supporting source-turn identifiers are incomplete or contradictory.,0,60,0.0
+capacity_2x,structural_error,Another deterministic canonical-to-memory mismatch.,0,60,0.0
+capacity_nonbinding,scope_broadening,A remembered active record permits a larger non-temporal scope than the canonical record.,27,60,0.45
+capacity_nonbinding,boundary_loss,A remembered validity boundary starts earlier or ends later than the canonical interval.,24,60,0.4
+capacity_nonbinding,stale_state_retention,A prior active state or scope remains effective after a canonical state change.,2,60,0.03333333333333333
+capacity_nonbinding,revoked_record_retention,A known record absent from current canonical state remains active in memory.,0,60,0.0
+capacity_nonbinding,cross_record_stitching,One remembered record combines authorization dimensions originating in distinct records.,0,60,0.0
+capacity_nonbinding,hallucinated_authority,An active remembered authorization identifier has no source-ledger record by that step.,2,60,0.03333333333333333
+capacity_nonbinding,undergrant_omission,"Canonical active authority is missing, narrowed, or rendered non-authorizing in memory.",14,60,0.23333333333333334
+capacity_nonbinding,scope_substitution,"A scope or authorization field is replaced by a different, non-directionally ordered value.",3,60,0.05
+capacity_nonbinding,inactive_record_retention,A non-active extra record is retained where the domain's current-state representation omits it.,1,60,0.016666666666666666
+capacity_nonbinding,historical_record_omission,A canonical non-active historical record is absent from a representation that retains history.,0,60,0.0
+capacity_nonbinding,record_state_error,Status is wrong without deterministically adding active authority.,1,60,0.016666666666666666
+capacity_nonbinding,record_lineage_error,The supersession relationship is wrong without directly changing request authorization.,2,60,0.03333333333333333
+capacity_nonbinding,provenance_error,Supporting source-turn identifiers are incomplete or contradictory.,0,60,0.0
+capacity_nonbinding,structural_error,Another deterministic canonical-to-memory mismatch.,0,60,0.0

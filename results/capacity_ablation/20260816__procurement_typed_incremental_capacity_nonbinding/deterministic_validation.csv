@@ -1,0 +1,7 @@
+condition,writer_target,run,states_recomputed,saved_fidelity_states_verified,canonical_ledger_and_oracle
+capacity_2x,nemotron_3_ultra_baseten,/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-005257-869522__authorization-memory-writer__procurement-v1-transfer-nemotron-3-ultra,66,54,domains.procurement adapters
+capacity_2x,grok_4_3_openrouter,/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-010130-962971__authorization-memory-writer__procurement-v1-transfer-grok-4-3,66,54,domains.procurement adapters
+capacity_2x,kimi_baseten,/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-112937-803837__authorization-memory-writer__procurement-v1-transfer-kimi-k2-6-technical-completion,66,54,domains.procurement adapters
+capacity_2x,glm_5_2_baseten,/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-011450-878789__authorization-memory-writer__procurement-v1-transfer-glm-5-2,66,54,domains.procurement adapters
+capacity_2x,qwen_plus_0728_openrouter,/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-124843-399194__authorization-memory-writer__procurement-v1-transfer-qwen-plus-0728,66,55,domains.procurement adapters
+capacity_nonbinding,,/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260816-132209-847941__authorization-memory-capacity_nonbinding_writer__procurement-typed-incremental-capacity-nonbinding,330,,domains.procurement adapters
