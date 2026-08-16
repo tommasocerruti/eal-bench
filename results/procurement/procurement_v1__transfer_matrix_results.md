@@ -13,6 +13,10 @@ for different technical reasons, and those outcomes remain preserved. A separate
 approved technical-completion pass then populated their missing writer–executor cells without
 changing the frozen prompts, memory treatment, capacity, seed, attempts, or executor design.
 
+Qwen Plus July 2025 was subsequently qualified and run as a separately labeled supplemental
+extension after Mistral's preserved full-load failure. It is not relabeled as part of the original
+five-writer attempt; pooled results are reported both with and without it.
+
 ## Route outcomes
 
 | Writer | First attempt | Technical completion | Interpretation |
@@ -22,6 +26,7 @@ changing the frozen prompts, memory treatment, capacity, seed, attempts, or exec
 | Grok 4.3 | Writer and pressure completed. | Not needed. | Complete, error-free behavioral route. |
 | Kimi K2.6 | Memory generation completed, then incompatible post-processing rejected a valid profile before executor trials. | Writer and pressure completed with no provider errors. | Clean behavioral route after aligning deterministic validation with the active typed schema. |
 | GLM 5.2 | Writer and pressure completed. | Not needed. | Complete, error-free behavioral route. |
+| Qwen Plus July 2025 | Supplemental writer and pressure completed. | Not needed. | Complete, error-free behavioral extension after the shared qualification and bounded soak. |
 
 The technical-completion pass did not remove, overwrite, or relabel either first outcome. Mistral's
 route-level deadline was raised to 10,800 seconds while its 180-second per-call timeout and bounded
@@ -43,8 +48,10 @@ Rates use 144 authorized and 144 unauthorized ordinary requests for every writer
 | Kimi K2.6 | GPT-OSS-120B | 134/144 (93.1%) | 20/144 (13.9%) | 79/144 (54.9%) | 20/144 (13.9%) |
 | GLM 5.2 | DeepSeek V4 Pro | 140/144 (97.2%) | 20/144 (13.9%) | 120/144 (83.3%) | 21/144 (14.6%) |
 | GLM 5.2 | GPT-OSS-120B | 136/144 (94.4%) | 19/144 (13.2%) | 78/144 (54.2%) | 19/144 (13.2%) |
+| Qwen Plus July 2025 | DeepSeek V4 Pro | 140/144 (97.2%) | 21/144 (14.6%) | 112/144 (77.8%) | 21/144 (14.6%) |
+| Qwen Plus July 2025 | GPT-OSS-120B | 137/144 (95.1%) | 22/144 (15.3%) | 73/144 (50.7%) | 23/144 (16.0%) |
 
-For the four operationally reliable writers, the two executors transfer similarly on unsafe-action
+For the five operationally reliable writers, the two executors transfer similarly on unsafe-action
 rates for the same memories. Under pressure, GPT-OSS becomes substantially more conservative than
 DeepSeek on authorized requests.
 
@@ -57,12 +64,18 @@ DeepSeek on authorized requests.
 | Grok 4.3 | 275/288 (95.5%) | 45/288 (15.6%) | 194/288 (67.4%) | 44/288 (15.3%) |
 | Kimi K2.6 | 268/288 (93.1%) | 39/288 (13.5%) | 197/288 (68.4%) | 40/288 (13.9%) |
 | GLM 5.2 | 276/288 (95.8%) | 39/288 (13.5%) | 198/288 (68.8%) | 40/288 (13.9%) |
+| Qwen Plus July 2025 | 277/288 (96.2%) | 43/288 (14.9%) | 185/288 (64.2%) | 44/288 (15.3%) |
 
 Across Nemotron, Grok, Kimi, and GLM, baseline authorized use was 1,090/1,152 (94.6%) and
 unauthorized action was 146/1,152 (12.7%). Under pressure, authorized use fell to 790/1,152
 (68.6%), while unauthorized action was nearly unchanged at 147/1,152 (12.8%). Mistral is excluded
 from this pooled comparison because its writer transport failures caused widespread missing or
 retained profiles rather than a clean generated-memory treatment.
+
+Including the supplemental Qwen extension, the five reliable writers produced baseline authorized
+use of 1,367/1,440 (94.9%) and unauthorized action of 189/1,440 (13.1%). Under pressure,
+authorized use fell to 975/1,440 (67.7%), while unauthorized action remained nearly unchanged at
+191/1,440 (13.3%).
 
 For the four reliable writers, every ordinary baseline unauthorized action occurred in an
 incremental memory condition. Both one-shot conditions were 0% unsafe. The incremental unsafe
@@ -74,17 +87,23 @@ rates, pooled across executors, were:
 | Grok 4.3 | 18/72 (25.0%) | 27/72 (37.5%) |
 | Kimi K2.6 | 12/72 (16.7%) | 27/72 (37.5%) |
 | GLM 5.2 | 19/72 (26.4%) | 20/72 (27.8%) |
+| Qwen Plus July 2025 | 25/72 (34.7%) | 14/72 (19.4%) |
 
-Deterministically selected substantive typed-memory errors produced unauthorized action in 54/54
-executor trials across the four reliable writers, versus 0/54 after exact canonical repair.
-Pressure preserved the same 54/54 versus 0/54 contrast. This is the clearest mechanism evidence:
-changing only the stored authorization state reverses the unsafe action while holding the request,
-executor route, and presentation fixed.
+Qwen also produced 4/72 unauthorized actions in one-shot typed memory, all from two final profiles
+that retained an obsolete time or amount boundary. The other four reliable writers had no unsafe
+one-shot trials.
 
-Pressure chiefly reduced authorized use rather than increasing unauthorized action. For the four
-reliable writers, the pooled unauthorized-action rate changed by only 0.1 percentage points, while
-authorized use fell by 26.0 points. Mistral differs: pressure increased unauthorized action from
-22.9% to 30.9%, but that result is entangled with severe writer transport failure and should not be
+Deterministically selected substantive typed-memory errors produced unauthorized action in 66/68
+executor trials across all five reliable writers, versus 0/68 after exact canonical repair. The
+original four-writer subset remains 54/54 versus 0/54, and Qwen contributes 12/14 versus 0/14.
+Pressure preserved these contrasts. This is the clearest mechanism evidence: changing only the
+stored authorization state reverses the unsafe action while holding the request, executor route,
+and presentation fixed.
+
+Pressure chiefly reduced authorized use rather than increasing unauthorized action. Across all
+five reliable writers, the pooled unauthorized-action rate changed by only 0.14 percentage points,
+while authorized use fell by 27.2 points. Mistral differs: pressure increased unauthorized action
+from 22.9% to 30.9%, but that result is entangled with severe writer transport failure and should not be
 used as clean evidence about memory-error susceptibility.
 
 ## Manifest correction for pressure replay
@@ -104,3 +123,10 @@ OpenRouter reported USD 0.05443672 for successful Mistral calls, and recorded Ba
 gives USD 7.37040667 at the frozen rates. The combined 7,351 records are estimated at USD
 22.66249301. The completion pass stayed below its USD 12 cap, and the original pass stayed below
 its USD 31 cap.
+
+The supplemental Qwen writer and pressure routes added 1,391 call records and cost an estimated
+USD 3.93645851: OpenRouter reported USD 0.33886554 for Qwen, and recorded Baseten usage gives USD
+3.59759297 at the documented rates. This stayed below the approved USD 5.50 cap. All transfer
+routes together contain 8,742 call records with a combined reported-plus-rate-derived estimate of
+USD 26.59895151; qualification and non-claim soak calls are accounted for separately in the daily
+cost record.

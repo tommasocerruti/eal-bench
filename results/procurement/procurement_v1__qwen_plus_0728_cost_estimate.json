@@ -1,0 +1,88 @@
+{
+  "schema_version": "1",
+  "domain_id": "procurement",
+  "release_id": "procurement_v1",
+  "stage": "qwen_plus_0728_writer_transfer",
+  "estimated_at": "2026-08-09",
+  "pricing": {
+    "unit": "USD per 1M tokens",
+    "sources": {
+      "baseten": "https://www.baseten.co/products/model-apis/",
+      "qwen_plus_0728_openrouter": "https://openrouter.ai/qwen/qwen-plus-2025-07-28"
+    },
+    "targets": {
+      "qwen_plus_0728_openrouter": {
+        "input": 0.26,
+        "output": 0.78
+      },
+      "gptoss_baseten": {
+        "input": 0.10,
+        "output": 0.50
+      },
+      "deepseek_baseten": {
+        "input": 1.74,
+        "cached_input": 0.145,
+        "output": 3.48
+      }
+    }
+  },
+  "qualification_basis": {
+    "target": "qwen_plus_0728_openrouter",
+    "status": "passed",
+    "typed_creation": "passed",
+    "typed_continuity": "passed",
+    "free_text": "passed",
+    "nonclaim_soak": {
+      "logical_writer_updates": 12,
+      "physical_writer_calls": 13,
+      "provider_errors": 0,
+      "timeouts": 0,
+      "prompt_tokens": 52813,
+      "completion_tokens": 6743,
+      "provider_reported_cost_usd": 0.01899092
+    }
+  },
+  "call_plan": {
+    "writer_logical_updates": 156,
+    "writer_calls_expected_without_repairs": 156,
+    "writer_calls_maximum": 312,
+    "baseline_executor_calls_range": [576, 656],
+    "pressure_executor_calls_range": [576, 656],
+    "pressure_writer_calls": 0
+  },
+  "expected_cost_usd": {
+    "qwen_writer": 0.30,
+    "baseline_gptoss": 0.0845536,
+    "baseline_deepseek": 1.6384020093037523,
+    "pressure_gptoss": 0.0922693,
+    "pressure_deepseek": 1.7854389809321467,
+    "total": 3.900663890235899
+  },
+  "high_call_projection_usd": 4.30,
+  "operating_budget": {
+    "writer_and_baseline_cap_usd": 3.00,
+    "pressure_cap_usd": 2.50,
+    "total_cap_usd": 5.50,
+    "approval_status": "approved",
+    "approved_at": "2026-08-09",
+    "approver_role": "repository_owner",
+    "accounting": "Use provider-reported OpenRouter cost and recorded Baseten token usage at the documented public rates. Stop before pressure if the completed writer route makes the total cap infeasible."
+  },
+  "execution": {
+    "status": "completed_under_cap",
+    "writer_run": "results/procurement/20260809-124843-399194__authorization-memory-writer__procurement-v1-transfer-qwen-plus-0728",
+    "pressure_run": "results/procurement/20260809-125937-392009__authorization-memory-pressure__procurement-v1-transfer-qwen-plus-0728-pressure",
+    "writer_calls": 183,
+    "baseline_executor_calls": 604,
+    "pressure_executor_calls": 604,
+    "provider_failures": 0,
+    "writer_and_baseline_cost_usd": 2.123903895,
+    "pressure_cost_usd": 1.81255461,
+    "total_cost_usd": 3.936458505,
+    "remaining_budget_usd": 1.563541495,
+    "accounting": {
+      "qwen_provider_reported_usd": 0.33886554,
+      "baseten_rate_derived_usd": 3.597592965
+    }
+  }
+}
