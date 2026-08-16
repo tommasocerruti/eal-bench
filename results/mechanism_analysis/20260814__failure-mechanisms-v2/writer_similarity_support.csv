@@ -1,0 +1,11 @@
+authority_gain_instances,authority_loss_instances,domain,domain_case_families,erroneous_states,incremental_trajectories,nonzero_failure_categories,semantic_error_instances,typed_state_observations,writer
+14,7,procurement,12,16,12,7,30,78,Nemotron 3 Ultra
+12,5,procurement,12,16,12,6,23,78,Grok 4.3
+19,10,procurement,12,21,12,7,34,78,Kimi K2.6
+14,8,procurement,12,12,12,6,25,78,GLM 5.2
+13,3,procurement,12,19,12,7,24,78,Qwen Plus 2025-07-28
+10,51,cybersecurity,16,92,16,5,201,176,Nemotron 3 Ultra
+7,158,cybersecurity,16,118,16,6,292,176,Grok 4.3
+8,105,cybersecurity,16,105,16,5,218,176,Kimi K2.6
+2,115,cybersecurity,16,121,16,4,442,176,GLM 5.2
+82,206,cybersecurity,16,145,16,8,571,176,Qwen Plus 2025-07-28

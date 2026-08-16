@@ -1,0 +1,4 @@
+domain,exact_repair_action_mismatches,exact_repair_any_unauthorized_actions,exact_repair_executor_replays,exact_repair_targeted_submissions,natural_any_unauthorized_actions,natural_executor_replays,natural_targeted_submissions,scope
+,11,1,128,0,126,128,126,pooled
+procurement,0,0,68,0,66,68,66,domain
+cybersecurity,11,1,60,0,60,60,60,domain

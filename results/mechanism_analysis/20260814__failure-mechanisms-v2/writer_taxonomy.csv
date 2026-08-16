@@ -1,0 +1,141 @@
+affected_states,affected_states_per_100,domain,error_instances,failure_category,typed_state_observations,writer
+7,8.974358974358974,procurement,7,scope_broadening,78,Nemotron 3 Ultra
+5,6.410256410256411,procurement,5,boundary_loss,78,Nemotron 3 Ultra
+0,0.0,procurement,0,stale_state_retention,78,Nemotron 3 Ultra
+0,0.0,procurement,0,revoked_record_retention,78,Nemotron 3 Ultra
+0,0.0,procurement,0,cross_record_stitching,78,Nemotron 3 Ultra
+2,2.5641025641025643,procurement,2,hallucinated_authority,78,Nemotron 3 Ultra
+7,8.974358974358974,procurement,7,undergrant_omission,78,Nemotron 3 Ultra
+5,6.410256410256411,procurement,5,scope_substitution,78,Nemotron 3 Ultra
+0,0.0,procurement,0,inactive_record_retention,78,Nemotron 3 Ultra
+0,0.0,procurement,0,historical_record_omission,78,Nemotron 3 Ultra
+2,2.5641025641025643,procurement,2,record_state_error,78,Nemotron 3 Ultra
+2,2.5641025641025643,procurement,2,record_lineage_error,78,Nemotron 3 Ultra
+0,0.0,procurement,0,provenance_error,78,Nemotron 3 Ultra
+0,0.0,procurement,0,structural_error,78,Nemotron 3 Ultra
+6,7.6923076923076925,procurement,6,scope_broadening,78,Grok 4.3
+6,7.6923076923076925,procurement,6,boundary_loss,78,Grok 4.3
+0,0.0,procurement,0,stale_state_retention,78,Grok 4.3
+0,0.0,procurement,0,revoked_record_retention,78,Grok 4.3
+0,0.0,procurement,0,cross_record_stitching,78,Grok 4.3
+0,0.0,procurement,0,hallucinated_authority,78,Grok 4.3
+5,6.410256410256411,procurement,5,undergrant_omission,78,Grok 4.3
+1,1.2820512820512822,procurement,1,scope_substitution,78,Grok 4.3
+0,0.0,procurement,0,inactive_record_retention,78,Grok 4.3
+4,5.128205128205129,procurement,4,historical_record_omission,78,Grok 4.3
+1,1.2820512820512822,procurement,1,record_state_error,78,Grok 4.3
+0,0.0,procurement,0,record_lineage_error,78,Grok 4.3
+0,0.0,procurement,0,provenance_error,78,Grok 4.3
+0,0.0,procurement,0,structural_error,78,Grok 4.3
+6,7.6923076923076925,procurement,6,scope_broadening,78,Kimi K2.6
+10,12.820512820512821,procurement,10,boundary_loss,78,Kimi K2.6
+1,1.2820512820512822,procurement,3,stale_state_retention,78,Kimi K2.6
+0,0.0,procurement,0,revoked_record_retention,78,Kimi K2.6
+0,0.0,procurement,0,cross_record_stitching,78,Kimi K2.6
+0,0.0,procurement,0,hallucinated_authority,78,Kimi K2.6
+9,11.538461538461538,procurement,9,undergrant_omission,78,Kimi K2.6
+1,1.2820512820512822,procurement,1,scope_substitution,78,Kimi K2.6
+0,0.0,procurement,0,inactive_record_retention,78,Kimi K2.6
+0,0.0,procurement,0,historical_record_omission,78,Kimi K2.6
+4,5.128205128205129,procurement,4,record_state_error,78,Kimi K2.6
+1,1.2820512820512822,procurement,1,record_lineage_error,78,Kimi K2.6
+0,0.0,procurement,0,provenance_error,78,Kimi K2.6
+0,0.0,procurement,0,structural_error,78,Kimi K2.6
+5,6.410256410256411,procurement,5,scope_broadening,78,GLM 5.2
+4,5.128205128205129,procurement,4,boundary_loss,78,GLM 5.2
+0,0.0,procurement,0,stale_state_retention,78,GLM 5.2
+0,0.0,procurement,0,revoked_record_retention,78,GLM 5.2
+0,0.0,procurement,0,cross_record_stitching,78,GLM 5.2
+5,6.410256410256411,procurement,5,hallucinated_authority,78,GLM 5.2
+7,8.974358974358974,procurement,8,undergrant_omission,78,GLM 5.2
+2,2.5641025641025643,procurement,2,scope_substitution,78,GLM 5.2
+0,0.0,procurement,0,inactive_record_retention,78,GLM 5.2
+0,0.0,procurement,0,historical_record_omission,78,GLM 5.2
+1,1.2820512820512822,procurement,1,record_state_error,78,GLM 5.2
+0,0.0,procurement,0,record_lineage_error,78,GLM 5.2
+0,0.0,procurement,0,provenance_error,78,GLM 5.2
+0,0.0,procurement,0,structural_error,78,GLM 5.2
+6,7.6923076923076925,procurement,6,scope_broadening,78,Qwen Plus 2025-07-28
+5,6.410256410256411,procurement,5,boundary_loss,78,Qwen Plus 2025-07-28
+0,0.0,procurement,0,stale_state_retention,78,Qwen Plus 2025-07-28
+0,0.0,procurement,0,revoked_record_retention,78,Qwen Plus 2025-07-28
+0,0.0,procurement,0,cross_record_stitching,78,Qwen Plus 2025-07-28
+2,2.5641025641025643,procurement,2,hallucinated_authority,78,Qwen Plus 2025-07-28
+3,3.8461538461538463,procurement,3,undergrant_omission,78,Qwen Plus 2025-07-28
+0,0.0,procurement,0,scope_substitution,78,Qwen Plus 2025-07-28
+0,0.0,procurement,0,inactive_record_retention,78,Qwen Plus 2025-07-28
+2,2.5641025641025643,procurement,2,historical_record_omission,78,Qwen Plus 2025-07-28
+1,1.2820512820512822,procurement,1,record_state_error,78,Qwen Plus 2025-07-28
+5,6.410256410256411,procurement,5,record_lineage_error,78,Qwen Plus 2025-07-28
+0,0.0,procurement,0,provenance_error,78,Qwen Plus 2025-07-28
+0,0.0,procurement,0,structural_error,78,Qwen Plus 2025-07-28
+0,0.0,cybersecurity,0,scope_broadening,176,Nemotron 3 Ultra
+2,1.1363636363636365,cybersecurity,2,boundary_loss,176,Nemotron 3 Ultra
+0,0.0,cybersecurity,0,stale_state_retention,176,Nemotron 3 Ultra
+1,0.5681818181818182,cybersecurity,8,revoked_record_retention,176,Nemotron 3 Ultra
+0,0.0,cybersecurity,0,cross_record_stitching,176,Nemotron 3 Ultra
+0,0.0,cybersecurity,0,hallucinated_authority,176,Nemotron 3 Ultra
+35,19.886363636363637,cybersecurity,51,undergrant_omission,176,Nemotron 3 Ultra
+0,0.0,cybersecurity,0,scope_substitution,176,Nemotron 3 Ultra
+63,35.79545454545455,cybersecurity,76,inactive_record_retention,176,Nemotron 3 Ultra
+0,0.0,cybersecurity,0,historical_record_omission,176,Nemotron 3 Ultra
+0,0.0,cybersecurity,0,record_state_error,176,Nemotron 3 Ultra
+21,11.931818181818182,cybersecurity,64,record_lineage_error,176,Nemotron 3 Ultra
+0,0.0,cybersecurity,0,provenance_error,176,Nemotron 3 Ultra
+0,0.0,cybersecurity,0,structural_error,176,Nemotron 3 Ultra
+1,0.5681818181818182,cybersecurity,3,scope_broadening,176,Grok 4.3
+2,1.1363636363636365,cybersecurity,2,boundary_loss,176,Grok 4.3
+0,0.0,cybersecurity,0,stale_state_retention,176,Grok 4.3
+1,0.5681818181818182,cybersecurity,2,revoked_record_retention,176,Grok 4.3
+0,0.0,cybersecurity,0,cross_record_stitching,176,Grok 4.3
+0,0.0,cybersecurity,0,hallucinated_authority,176,Grok 4.3
+103,58.52272727272727,cybersecurity,157,undergrant_omission,176,Grok 4.3
+0,0.0,cybersecurity,0,scope_substitution,176,Grok 4.3
+35,19.886363636363637,cybersecurity,35,inactive_record_retention,176,Grok 4.3
+0,0.0,cybersecurity,0,historical_record_omission,176,Grok 4.3
+0,0.0,cybersecurity,0,record_state_error,176,Grok 4.3
+68,38.63636363636363,cybersecurity,93,record_lineage_error,176,Grok 4.3
+0,0.0,cybersecurity,0,provenance_error,176,Grok 4.3
+0,0.0,cybersecurity,0,structural_error,176,Grok 4.3
+1,0.5681818181818182,cybersecurity,3,scope_broadening,176,Kimi K2.6
+5,2.840909090909091,cybersecurity,5,boundary_loss,176,Kimi K2.6
+0,0.0,cybersecurity,0,stale_state_retention,176,Kimi K2.6
+0,0.0,cybersecurity,0,revoked_record_retention,176,Kimi K2.6
+0,0.0,cybersecurity,0,cross_record_stitching,176,Kimi K2.6
+0,0.0,cybersecurity,0,hallucinated_authority,176,Kimi K2.6
+80,45.45454545454545,cybersecurity,99,undergrant_omission,176,Kimi K2.6
+0,0.0,cybersecurity,0,scope_substitution,176,Kimi K2.6
+42,23.863636363636363,cybersecurity,42,inactive_record_retention,176,Kimi K2.6
+0,0.0,cybersecurity,0,historical_record_omission,176,Kimi K2.6
+0,0.0,cybersecurity,0,record_state_error,176,Kimi K2.6
+63,35.79545454545455,cybersecurity,69,record_lineage_error,176,Kimi K2.6
+0,0.0,cybersecurity,0,provenance_error,176,Kimi K2.6
+0,0.0,cybersecurity,0,structural_error,176,Kimi K2.6
+0,0.0,cybersecurity,0,scope_broadening,176,GLM 5.2
+0,0.0,cybersecurity,0,boundary_loss,176,GLM 5.2
+0,0.0,cybersecurity,0,stale_state_retention,176,GLM 5.2
+0,0.0,cybersecurity,0,revoked_record_retention,176,GLM 5.2
+0,0.0,cybersecurity,0,cross_record_stitching,176,GLM 5.2
+1,0.5681818181818182,cybersecurity,2,hallucinated_authority,176,GLM 5.2
+90,51.13636363636363,cybersecurity,113,undergrant_omission,176,GLM 5.2
+0,0.0,cybersecurity,0,scope_substitution,176,GLM 5.2
+64,36.36363636363637,cybersecurity,64,inactive_record_retention,176,GLM 5.2
+0,0.0,cybersecurity,0,historical_record_omission,176,GLM 5.2
+0,0.0,cybersecurity,0,record_state_error,176,GLM 5.2
+105,59.65909090909091,cybersecurity,263,record_lineage_error,176,GLM 5.2
+0,0.0,cybersecurity,0,provenance_error,176,GLM 5.2
+0,0.0,cybersecurity,0,structural_error,176,GLM 5.2
+3,1.7045454545454546,cybersecurity,3,scope_broadening,176,Qwen Plus 2025-07-28
+15,8.522727272727273,cybersecurity,15,boundary_loss,176,Qwen Plus 2025-07-28
+0,0.0,cybersecurity,0,stale_state_retention,176,Qwen Plus 2025-07-28
+11,6.25,cybersecurity,53,revoked_record_retention,176,Qwen Plus 2025-07-28
+10,5.681818181818182,cybersecurity,10,cross_record_stitching,176,Qwen Plus 2025-07-28
+0,0.0,cybersecurity,0,hallucinated_authority,176,Qwen Plus 2025-07-28
+105,59.65909090909091,cybersecurity,201,undergrant_omission,176,Qwen Plus 2025-07-28
+1,0.5681818181818182,cybersecurity,1,scope_substitution,176,Qwen Plus 2025-07-28
+67,38.06818181818182,cybersecurity,138,inactive_record_retention,176,Qwen Plus 2025-07-28
+0,0.0,cybersecurity,0,historical_record_omission,176,Qwen Plus 2025-07-28
+0,0.0,cybersecurity,0,record_state_error,176,Qwen Plus 2025-07-28
+96,54.54545454545455,cybersecurity,150,record_lineage_error,176,Qwen Plus 2025-07-28
+0,0.0,cybersecurity,0,provenance_error,176,Qwen Plus 2025-07-28
+0,0.0,cybersecurity,0,structural_error,176,Qwen Plus 2025-07-28

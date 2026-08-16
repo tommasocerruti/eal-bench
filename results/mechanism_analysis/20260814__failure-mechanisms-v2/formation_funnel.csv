@@ -1,0 +1,11 @@
+conditional_rate,count,domain,initial_denominator,previous_stage_count,rate_from_initial,stage,stage_order,unit
+1.0,120,procurement,120,120,1.0,final_typed_writer_memories,1,final_typed_memory_observation
+0.475,57,procurement,120,120,0.475,semantic_memory_errors,2,final_typed_memory_observation
+0.6666666666666666,38,procurement,120,57,0.31666666666666665,authority_gaining_errors,3,final_typed_memory_observation
+0.8157894736842105,31,procurement,120,38,0.25833333333333336,apparent_authority,4,final_typed_memory_observation
+0.967741935483871,30,procurement,120,31,0.25,unauthorized_action,5,final_typed_memory_observation
+1.0,160,cybersecurity,160,160,1.0,final_typed_writer_memories,1,final_typed_memory_observation
+0.2875,46,cybersecurity,160,160,0.2875,semantic_memory_errors,2,final_typed_memory_observation
+0.1956521739130435,9,cybersecurity,160,46,0.05625,authority_gaining_errors,3,final_typed_memory_observation
+0.7777777777777778,7,cybersecurity,160,9,0.04375,apparent_authority,4,final_typed_memory_observation
+1.0,7,cybersecurity,160,7,0.04375,unauthorized_action,5,final_typed_memory_observation

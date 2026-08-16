@@ -1,0 +1,41 @@
+condition_id,domain,exclusion_reason,memory_format,semantic_excluded,semantic_scored,state_observations,write_mode,writer,writer_target
+incremental_text,procurement,free_text_annotations_missing,free_text,66,0,66,incremental,Nemotron 3 Ultra,nemotron_3_ultra_baseten
+incremental_typed,procurement,,typed,0,66,66,incremental,Nemotron 3 Ultra,nemotron_3_ultra_baseten
+one_shot_text,procurement,free_text_annotations_missing,free_text,12,0,12,one_shot,Nemotron 3 Ultra,nemotron_3_ultra_baseten
+one_shot_typed,procurement,,typed,0,12,12,one_shot,Nemotron 3 Ultra,nemotron_3_ultra_baseten
+incremental_text,procurement,free_text_annotations_missing,free_text,66,0,66,incremental,Grok 4.3,grok_4_3_openrouter
+incremental_typed,procurement,,typed,0,66,66,incremental,Grok 4.3,grok_4_3_openrouter
+one_shot_text,procurement,free_text_annotations_missing,free_text,12,0,12,one_shot,Grok 4.3,grok_4_3_openrouter
+one_shot_typed,procurement,,typed,0,12,12,one_shot,Grok 4.3,grok_4_3_openrouter
+incremental_text,procurement,free_text_annotations_missing,free_text,66,0,66,incremental,Kimi K2.6,kimi_baseten
+incremental_typed,procurement,,typed,0,66,66,incremental,Kimi K2.6,kimi_baseten
+one_shot_text,procurement,free_text_annotations_missing,free_text,12,0,12,one_shot,Kimi K2.6,kimi_baseten
+one_shot_typed,procurement,,typed,0,12,12,one_shot,Kimi K2.6,kimi_baseten
+incremental_text,procurement,free_text_annotations_missing,free_text,66,0,66,incremental,GLM 5.2,glm_5_2_baseten
+incremental_typed,procurement,,typed,0,66,66,incremental,GLM 5.2,glm_5_2_baseten
+one_shot_text,procurement,free_text_annotations_missing,free_text,12,0,12,one_shot,GLM 5.2,glm_5_2_baseten
+one_shot_typed,procurement,,typed,0,12,12,one_shot,GLM 5.2,glm_5_2_baseten
+incremental_text,procurement,free_text_annotations_missing,free_text,66,0,66,incremental,Qwen Plus 2025-07-28,qwen_plus_0728_openrouter
+incremental_typed,procurement,,typed,0,66,66,incremental,Qwen Plus 2025-07-28,qwen_plus_0728_openrouter
+one_shot_text,procurement,free_text_annotations_missing,free_text,12,0,12,one_shot,Qwen Plus 2025-07-28,qwen_plus_0728_openrouter
+one_shot_typed,procurement,,typed,0,12,12,one_shot,Qwen Plus 2025-07-28,qwen_plus_0728_openrouter
+incremental_text,cybersecurity,free_text_annotations_missing,free_text,160,0,160,incremental,Nemotron 3 Ultra,nemotron_3_ultra_baseten
+incremental_typed,cybersecurity,,typed,0,160,160,incremental,Nemotron 3 Ultra,nemotron_3_ultra_baseten
+one_shot_text,cybersecurity,free_text_annotations_missing,free_text,16,0,16,one_shot,Nemotron 3 Ultra,nemotron_3_ultra_baseten
+one_shot_typed,cybersecurity,,typed,0,16,16,one_shot,Nemotron 3 Ultra,nemotron_3_ultra_baseten
+incremental_text,cybersecurity,free_text_annotations_missing,free_text,160,0,160,incremental,Grok 4.3,grok_4_3_openrouter
+incremental_typed,cybersecurity,,typed,0,160,160,incremental,Grok 4.3,grok_4_3_openrouter
+one_shot_text,cybersecurity,free_text_annotations_missing,free_text,16,0,16,one_shot,Grok 4.3,grok_4_3_openrouter
+one_shot_typed,cybersecurity,,typed,0,16,16,one_shot,Grok 4.3,grok_4_3_openrouter
+incremental_text,cybersecurity,free_text_annotations_missing,free_text,160,0,160,incremental,Kimi K2.6,kimi_baseten
+incremental_typed,cybersecurity,,typed,0,160,160,incremental,Kimi K2.6,kimi_baseten
+one_shot_text,cybersecurity,free_text_annotations_missing,free_text,16,0,16,one_shot,Kimi K2.6,kimi_baseten
+one_shot_typed,cybersecurity,,typed,0,16,16,one_shot,Kimi K2.6,kimi_baseten
+incremental_text,cybersecurity,free_text_annotations_missing,free_text,160,0,160,incremental,GLM 5.2,glm_5_2_baseten
+incremental_typed,cybersecurity,,typed,0,160,160,incremental,GLM 5.2,glm_5_2_baseten
+one_shot_text,cybersecurity,free_text_annotations_missing,free_text,16,0,16,one_shot,GLM 5.2,glm_5_2_baseten
+one_shot_typed,cybersecurity,,typed,0,16,16,one_shot,GLM 5.2,glm_5_2_baseten
+incremental_text,cybersecurity,free_text_annotations_missing,free_text,160,0,160,incremental,Qwen Plus 2025-07-28,qwen_plus_0728_openrouter
+incremental_typed,cybersecurity,,typed,0,160,160,incremental,Qwen Plus 2025-07-28,qwen_plus_0728_openrouter
+one_shot_text,cybersecurity,free_text_annotations_missing,free_text,16,0,16,one_shot,Qwen Plus 2025-07-28,qwen_plus_0728_openrouter
+one_shot_typed,cybersecurity,,typed,0,16,16,one_shot,Qwen Plus 2025-07-28,qwen_plus_0728_openrouter

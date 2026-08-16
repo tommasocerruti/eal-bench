@@ -1,0 +1,71 @@
+ci_high,ci_low,cluster_count,cluster_unit,denominator,domain,failure_category,metric,numerator,rate,scope,triggering_event_type,writer
+0.42632543400385775,0.25,28,domain_case_family,428,,,error_introduction_probability,143,0.3341121495327103,pooled,,
+0.8967220167382377,0.8731177794812285,22,domain_case_family,562,,,error_persistence_probability,497,0.8843416370106761,pooled,,
+0.20371980676328494,0.09755110101708304,12,domain_case_family,243,procurement,,error_introduction_probability,37,0.1522633744855967,domain,,
+1.0,1.0,6,domain_case_family,27,procurement,,error_persistence_probability,27,1.0,domain,,
+0.6207049581718016,0.529695690157251,16,domain_case_family,185,cybersecurity,,error_introduction_probability,106,0.572972972972973,domain,,
+0.8878842676311031,0.8671696592118108,16,domain_case_family,535,cybersecurity,,error_persistence_probability,470,0.8785046728971962,domain,,
+0.3619047619047619,0.22764227642276422,28,domain_case_family,109,,,error_introduction_probability,32,0.29357798165137616,writer,,Nemotron 3 Ultra
+0.86,0.7741839477726574,18,domain_case_family,89,,,error_persistence_probability,73,0.8202247191011236,writer,,Nemotron 3 Ultra
+0.42862103174603144,0.2413793103448276,28,domain_case_family,80,,,error_introduction_probability,26,0.325,writer,,Grok 4.3
+0.896551724137931,0.8582677165354331,19,domain_case_family,118,,,error_persistence_probability,103,0.8728813559322034,writer,,Grok 4.3
+0.3888888888888889,0.25263157894736843,28,domain_case_family,85,,,error_introduction_probability,27,0.3176470588235294,writer,,Kimi K2.6
+0.8738738738738738,0.8125,20,domain_case_family,113,,,error_persistence_probability,96,0.8495575221238938,writer,,Kimi K2.6
+0.5584805194805192,0.27776402640264025,28,domain_case_family,90,,,error_introduction_probability,36,0.4,writer,,GLM 5.2
+0.8623853211009175,0.839622641509434,17,domain_case_family,108,,,error_persistence_probability,92,0.8518518518518519,writer,,GLM 5.2
+0.5306448111159356,0.21915840025192881,27,domain_case_family,64,,,error_introduction_probability,22,0.34375,writer,,Qwen Plus 2025-07-28
+1.0,0.9761904761904762,18,domain_case_family,134,,,error_persistence_probability,133,0.9925373134328358,writer,,Qwen Plus 2025-07-28
+0.24444444444444444,0.09090909090909091,12,domain_case_family,49,procurement,,error_introduction_probability,8,0.16326530612244897,domain_writer,,Nemotron 3 Ultra
+1.0,1.0,2,domain_case_family,5,procurement,,error_persistence_probability,5,1.0,domain_writer,,Nemotron 3 Ultra
+0.2391304347826087,0.09259259259259259,12,domain_case_family,49,procurement,,error_introduction_probability,8,0.16326530612244897,domain_writer,,Grok 4.3
+1.0,1.0,3,domain_case_family,5,procurement,,error_persistence_probability,5,1.0,domain_writer,,Grok 4.3
+0.3055555555555556,0.14582386363636365,12,domain_case_family,46,procurement,,error_introduction_probability,10,0.21739130434782608,domain_writer,,Kimi K2.6
+1.0,1.0,4,domain_case_family,8,procurement,,error_persistence_probability,8,1.0,domain_writer,,Kimi K2.6
+0.1800454545454543,0.05555555555555555,12,domain_case_family,52,procurement,,error_introduction_probability,6,0.11538461538461539,domain_writer,,GLM 5.2
+,,1,domain_case_family,2,procurement,,error_persistence_probability,2,1.0,domain_writer,,GLM 5.2
+0.17777777777777778,0.04081632653061224,11,domain_case_family,47,procurement,,error_introduction_probability,5,0.10638297872340426,domain_writer,,Qwen Plus 2025-07-28
+1.0,1.0,2,domain_case_family,7,procurement,,error_persistence_probability,7,1.0,domain_writer,,Qwen Plus 2025-07-28
+0.48148148148148145,0.34285714285714286,16,domain_case_family,60,cybersecurity,,error_introduction_probability,24,0.4,domain_writer,,Nemotron 3 Ultra
+0.8490566037735849,0.7631578947368421,16,domain_case_family,84,cybersecurity,,error_persistence_probability,68,0.8095238095238095,domain_writer,,Nemotron 3 Ultra
+0.6774193548387096,0.5,16,domain_case_family,31,cybersecurity,,error_introduction_probability,18,0.5806451612903226,domain_writer,,Grok 4.3
+0.8869565217391304,0.8571428571428571,16,domain_case_family,113,cybersecurity,,error_persistence_probability,98,0.8672566371681416,domain_writer,,Grok 4.3
+0.5,0.37029478458049886,16,domain_case_family,39,cybersecurity,,error_introduction_probability,17,0.4358974358974359,domain_writer,,Kimi K2.6
+0.8571428571428571,0.8041237113402062,16,domain_case_family,105,cybersecurity,,error_persistence_probability,88,0.8380952380952381,domain_writer,,Kimi K2.6
+0.96875,0.627906976744186,16,domain_case_family,38,cybersecurity,,error_introduction_probability,30,0.7894736842105263,domain_writer,,GLM 5.2
+0.8571428571428571,0.8367346938775511,16,domain_case_family,106,cybersecurity,,error_persistence_probability,90,0.8490566037735849,domain_writer,,GLM 5.2
+1.0,1.0,16,domain_case_family,17,cybersecurity,,error_introduction_probability,17,1.0,domain_writer,,Qwen Plus 2025-07-28
+1.0,0.976,16,domain_case_family,127,cybersecurity,,error_persistence_probability,126,0.9921259842519685,domain_writer,,Qwen Plus 2025-07-28
+0.08333333333333333,0.0,12,domain_case_family,59,procurement,,error_introduction_probability,2,0.03389830508474576,triggering_event,grant,
+,,1,domain_case_family,1,procurement,,error_persistence_probability,1,1.0,triggering_event,grant,
+0.2980876865671641,0.12656732781819996,12,domain_case_family,129,procurement,,error_introduction_probability,27,0.20930232558139536,triggering_event,non_authorization_update,
+1.0,1.0,6,domain_case_family,16,procurement,,error_persistence_probability,16,1.0,triggering_event,non_authorization_update,
+0.0,0.0,6,domain_case_family,29,procurement,,error_introduction_probability,0,0.0,triggering_event,narrowing,
+,,1,domain_case_family,1,procurement,,error_persistence_probability,1,1.0,triggering_event,narrowing,
+,,1,domain_case_family,5,procurement,,error_introduction_probability,0,0.0,triggering_event,scope_transition,
+,,0,domain_case_family,0,procurement,,error_persistence_probability,0,,triggering_event,scope_transition,
+0.75,0.2,3,domain_case_family,14,procurement,,error_introduction_probability,7,0.5,triggering_event,revocation,
+,,1,domain_case_family,1,procurement,,error_persistence_probability,1,1.0,triggering_event,revocation,
+0.25,0.0,3,domain_case_family,7,procurement,,error_introduction_probability,1,0.14285714285714285,triggering_event,replacement,
+1.0,1.0,3,domain_case_family,8,procurement,,error_persistence_probability,8,1.0,triggering_event,replacement,
+0.8605052125100238,0.631578947368421,16,domain_case_family,90,cybersecurity,,error_introduction_probability,68,0.7555555555555555,triggering_event,grant,
+1.0,1.0,16,domain_case_family,70,cybersecurity,,error_persistence_probability,70,1.0,triggering_event,grant,
+0.15,0.0,10,domain_case_family,16,cybersecurity,,error_introduction_probability,1,0.0625,triggering_event,narrowing,
+1.0,0.9785675745118191,16,domain_case_family,144,cybersecurity,,error_persistence_probability,143,0.9930555555555556,triggering_event,narrowing,
+1.0,1.0,10,domain_case_family,13,cybersecurity,,error_introduction_probability,13,1.0,triggering_event,revocation,
+1.0,0.9552238805970149,16,domain_case_family,67,cybersecurity,,error_persistence_probability,66,0.9850746268656716,triggering_event,revocation,
+,,1,domain_case_family,1,cybersecurity,,error_introduction_probability,0,0.0,triggering_event,replacement,
+1.0,0.9615384615384616,16,domain_case_family,79,cybersecurity,,error_persistence_probability,78,0.9873417721518988,triggering_event,replacement,
+,,1,domain_case_family,1,cybersecurity,,error_introduction_probability,0,0.0,triggering_event,non_authorization_update,
+1.0,1.0,16,domain_case_family,79,cybersecurity,,error_persistence_probability,79,1.0,triggering_event,non_authorization_update,
+0.4375473484848482,0.3173596304193319,16,domain_case_family,64,cybersecurity,,error_introduction_probability,24,0.375,triggering_event,portfolio_replacement,
+0.4158415841584158,0.2978723404255319,16,domain_case_family,96,cybersecurity,,error_persistence_probability,34,0.3541666666666667,triggering_event,portfolio_replacement,
+0.7407407407407407,0.5,9,domain_case_family,27,,boundary_loss,category_persistence_probability,17,0.6296296296296297,failure_category,,
+0.46153846153846156,0.0,7,domain_case_family,10,,cross_record_stitching,category_persistence_probability,2,0.2,failure_category,,
+,,1,domain_case_family,1,,hallucinated_authority,category_persistence_probability,0,0.0,failure_category,,
+,,1,domain_case_family,1,,historical_record_omission,category_persistence_probability,1,1.0,failure_category,,
+0.7968764966475096,0.7604540835100138,16,domain_case_family,254,,inactive_record_retention,category_persistence_probability,198,0.7795275590551181,failure_category,,
+0.8005869532475126,0.7395491171996843,18,domain_case_family,331,,record_lineage_error,category_persistence_probability,256,0.7734138972809668,failure_category,,
+1.0,0.0,2,domain_case_family,5,,revoked_record_retention,category_persistence_probability,4,0.8,failure_category,,
+0.0,0.0,5,domain_case_family,5,,scope_broadening,category_persistence_probability,0,0.0,failure_category,,
+1.0,0.0,2,domain_case_family,4,,scope_substitution,category_persistence_probability,3,0.75,failure_category,,
+0.8347686361931747,0.7957297189819724,20,domain_case_family,420,,undergrant_omission,category_persistence_probability,343,0.8166666666666667,failure_category,,

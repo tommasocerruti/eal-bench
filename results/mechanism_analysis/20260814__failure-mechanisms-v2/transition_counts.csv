@@ -1,0 +1,9 @@
+all_transitions,count,domain,rate,transition
+270,206,procurement,0.762962962962963,C→C
+270,37,procurement,0.13703703703703704,C→I
+270,27,procurement,0.1,I→I
+270,0,procurement,0.0,I→C
+720,79,cybersecurity,0.10972222222222222,C→C
+720,106,cybersecurity,0.14722222222222223,C→I
+720,470,cybersecurity,0.6527777777777778,I→I
+720,65,cybersecurity,0.09027777777777778,I→C

@@ -1,0 +1,286 @@
+{
+  "schema_version": "eal_failure_mechanisms_v2",
+  "created_at": "2026-08-14",
+  "analysis_module": "analysis.failure_mechanisms",
+  "model_calls": 0,
+  "source_runs": [
+    {
+      "domain": "procurement",
+      "writer_target": "nemotron_3_ultra_baseten",
+      "writer": "Nemotron 3 Ultra",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-005257-869522__authorization-memory-writer__procurement-v1-transfer-nemotron-3-ultra",
+      "manifest_sha256": "27887bef43b5503b58e34189c7895026060699e3884d3ef60c35d5ae47b069cf",
+      "states": 156,
+      "memories": 127,
+      "trials": 604,
+      "saved_fidelity_states_verified": 66
+    },
+    {
+      "domain": "procurement",
+      "writer_target": "grok_4_3_openrouter",
+      "writer": "Grok 4.3",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-010130-962971__authorization-memory-writer__procurement-v1-transfer-grok-4-3",
+      "manifest_sha256": "d361aadafe52ee431207bb047ef8533acc4e9b55ca2d1f7190006b271edabd95",
+      "states": 156,
+      "memories": 141,
+      "trials": 600,
+      "saved_fidelity_states_verified": 66
+    },
+    {
+      "domain": "procurement",
+      "writer_target": "kimi_baseten",
+      "writer": "Kimi K2.6",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-112937-803837__authorization-memory-writer__procurement-v1-transfer-kimi-k2-6-technical-completion",
+      "manifest_sha256": "cef1110b350e4a3a741452689560899427cb7210ea5998d705ff123110e5b3fc",
+      "states": 156,
+      "memories": 156,
+      "trials": 608,
+      "saved_fidelity_states_verified": 66
+    },
+    {
+      "domain": "procurement",
+      "writer_target": "glm_5_2_baseten",
+      "writer": "GLM 5.2",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-011450-878789__authorization-memory-writer__procurement-v1-transfer-glm-5-2",
+      "manifest_sha256": "6f110d72fb35a352e99e674337d72a0d65e309b99f373b1443e71297794292bf",
+      "states": 156,
+      "memories": 130,
+      "trials": 600,
+      "saved_fidelity_states_verified": 66
+    },
+    {
+      "domain": "procurement",
+      "writer_target": "qwen_plus_0728_openrouter",
+      "writer": "Qwen Plus 2025-07-28",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/procurement/20260809-124843-399194__authorization-memory-writer__procurement-v1-transfer-qwen-plus-0728",
+      "manifest_sha256": "fb9f85a60de65e2eebffa46077723327a864ab7e8621ba23cb01fd5aa61c2377",
+      "states": 156,
+      "memories": 131,
+      "trials": 604,
+      "saved_fidelity_states_verified": 67
+    },
+    {
+      "domain": "cybersecurity",
+      "writer_target": "nemotron_3_ultra_baseten",
+      "writer": "Nemotron 3 Ultra",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/cybersecurity/20260809-135826-033358__authorization-memory-writer__cybersecurity-v1-transfer-nemotron-3-ultra",
+      "manifest_sha256": "02f3841ce1e41d0297f7af824523cb30dc293dd5f8567a05d84315f3cb91eee8",
+      "states": 352,
+      "memories": 317,
+      "trials": 1032,
+      "saved_fidelity_states_verified": 160
+    },
+    {
+      "domain": "cybersecurity",
+      "writer_target": "grok_4_3_openrouter",
+      "writer": "Grok 4.3",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/cybersecurity/20260809-142320-393277__authorization-memory-writer__cybersecurity-v1-transfer-grok-4-3",
+      "manifest_sha256": "c5c305f3048b26310133eb30d0802395956560e5a3aabdcba3f1b4c614fe5526",
+      "states": 352,
+      "memories": 321,
+      "trials": 1040,
+      "saved_fidelity_states_verified": 160
+    },
+    {
+      "domain": "cybersecurity",
+      "writer_target": "kimi_baseten",
+      "writer": "Kimi K2.6",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/cybersecurity/20260809-144838-075045__authorization-memory-writer__cybersecurity-v1-transfer-kimi-k2-6",
+      "manifest_sha256": "b73fd87d97f58a1715d0a925ca05838077e454d3605946a82b7b1b4d88838ea1",
+      "states": 352,
+      "memories": 334,
+      "trials": 1032,
+      "saved_fidelity_states_verified": 160
+    },
+    {
+      "domain": "cybersecurity",
+      "writer_target": "glm_5_2_baseten",
+      "writer": "GLM 5.2",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/cybersecurity/20260809-151724-779809__authorization-memory-writer__cybersecurity-v1-transfer-glm-5-2",
+      "manifest_sha256": "caf9386b9d3b103a890c7eff7a91e68f22d25ff4986e5321db5c2749e0706446",
+      "states": 352,
+      "memories": 335,
+      "trials": 1032,
+      "saved_fidelity_states_verified": 160
+    },
+    {
+      "domain": "cybersecurity",
+      "writer_target": "qwen_plus_0728_openrouter",
+      "writer": "Qwen Plus 2025-07-28",
+      "path": "/Users/tommasocerruti/Workspace/eal-bench/results/cybersecurity/20260809-155214-731411__authorization-memory-writer__cybersecurity-v1-transfer-qwen-plus-0728",
+      "manifest_sha256": "647cef92324fa125842505eb49600ee44a766e4e9594168bf656e016200e9a0a",
+      "states": 352,
+      "memories": 325,
+      "trials": 1104,
+      "saved_fidelity_states_verified": 160
+    }
+  ],
+  "semantic_scope": "typed_only",
+  "free_text_exclusion": "memory_annotations.jsonl unavailable",
+  "figures": [
+    "figure_a_failure_trajectories.png",
+    "figure_a_failure_trajectories.pdf",
+    "figure_b_writer_taxonomy.png",
+    "figure_b_writer_taxonomy.pdf",
+    "figure_c_formation_propagation.png",
+    "figure_c_formation_propagation.pdf",
+    "figure_d_persistence.png",
+    "figure_d_persistence.pdf",
+    "figure_e_event_introduction_rates.png",
+    "figure_e_event_introduction_rates.pdf"
+  ],
+  "files": {
+    "REPORT.md": {
+      "sha256": "2acfb8c34908578fcef8926ba02db8bdbfac53c465718b7bba150ce763a6829b",
+      "rows": null
+    },
+    "apparent_authority.csv": {
+      "sha256": "afb1d1ea073cc40328921c609ded99782c8f02b15009a72beaa29bcec944033b",
+      "rows": 96
+    },
+    "category_authority_risk.csv": {
+      "sha256": "c82c7d3d458c11ad33d3219a691557382122438dfaf2bd9964325d58363db31c",
+      "rows": 30
+    },
+    "coverage_exclusions.csv": {
+      "sha256": "cc780b9b6d386e2862a4d445acd3f0fe9346bed3e45cdd698f6670694e47ec1e",
+      "rows": 40
+    },
+    "error_episodes.csv": {
+      "sha256": "f1c22fb700171a04033ffcb215af52b7d9ae349f00e072dad9000badd8067bfd",
+      "rows": 144
+    },
+    "event_introduction_rates.csv": {
+      "sha256": "ddbde6dfd2e96ecc917011b62f285f4f6902dfb273348f20a31086dd10e43824",
+      "rows": 19
+    },
+    "executor_outcomes.csv": {
+      "sha256": "2d091977e8e8cb35f6f7cb2a7151b03ed48b487a190428da5e140d9243f92096",
+      "rows": 4000
+    },
+    "fidelity_fields.csv": {
+      "sha256": "f0f3cbd9c9818a06c3210d7f43266ca8dbd838f9b81bd1b96fc1569e7d53d6ca",
+      "rows": 51006
+    },
+    "figure_a_failure_trajectories.pdf": {
+      "sha256": "445b4c5191b7f968c70d8fd93557485f484584bd279ae243144e3dc470b5ba17",
+      "rows": null
+    },
+    "figure_a_failure_trajectories.png": {
+      "sha256": "5ff41e5fe385dd22231edd22114682b05b64066c1227bd16efd171f6c0ac9160",
+      "rows": null
+    },
+    "figure_b_writer_taxonomy.pdf": {
+      "sha256": "338827b40135859b94618fa5f6ef9d87e68bdee2221a9b2b58b4d5db8a1dda46",
+      "rows": null
+    },
+    "figure_b_writer_taxonomy.png": {
+      "sha256": "fdf14b5ef1127d724da236f5c9f46877a9a32509ad0b7eb5d0cae9cc1f6ce113",
+      "rows": null
+    },
+    "figure_c_formation_propagation.pdf": {
+      "sha256": "3d25f744a51d06689585dc7b267d28a906fb19f41b5a9ae3e6c137da414497f9",
+      "rows": null
+    },
+    "figure_c_formation_propagation.png": {
+      "sha256": "ff8d982f9c3e54e645cd86423dd7eb11016f776d8cd4b1d0d30d62bd570053d0",
+      "rows": null
+    },
+    "figure_d_persistence.pdf": {
+      "sha256": "d9f3b307a34d5e927b0156466a94ff3621334c7a5afa245ae3ce59efa62bf2c3",
+      "rows": null
+    },
+    "figure_d_persistence.png": {
+      "sha256": "ed532a161b68ab1dc1c921f52f1bff87f52cacd10702091323a2ec47e24cdafb",
+      "rows": null
+    },
+    "figure_e_event_introduction_rates.pdf": {
+      "sha256": "6625a03426271854c0e236e72abf2b6c3ffb0704306b3bdee2444401e167e9cd",
+      "rows": null
+    },
+    "figure_e_event_introduction_rates.png": {
+      "sha256": "5e6217a832c6a4ce882a88ee8943e2d2a01df1e7c85f24bfc9d15c021bed7d89",
+      "rows": null
+    },
+    "final_memory_probe_propagation.csv": {
+      "sha256": "7e1ef8fd9e9ce92d07d13b23c8b62d14241efb08296404219c449cdd2eb9f0f0",
+      "rows": 86
+    },
+    "formation_funnel.csv": {
+      "sha256": "38ec70d2b8eebb6ad81ff0cb124cd087529ae37a9c82876dba00d3d856a478ae",
+      "rows": 10
+    },
+    "mechanism_summary.csv": {
+      "sha256": "5511174bc561fcebb3b8965ad5654a0ba429726919ec8306f8db3692f8317269",
+      "rows": 18
+    },
+    "persistence_survival.csv": {
+      "sha256": "56c4069ed260590434047e30ed072e4d9b84b9960dc9e756f2f7ef4cede55e5b",
+      "rows": 78
+    },
+    "propagation_events.csv": {
+      "sha256": "1b9339a110ad7111bef7cdbd60946231187d5928d246b5426670393a894ec433",
+      "rows": 2256
+    },
+    "repair_reconciliation.csv": {
+      "sha256": "6e72f1ebf0e1ea62c4b8094f58cda81a5ad00b770cb227e7a63e00d627cf13fc",
+      "rows": 3
+    },
+    "self_repair_summary.csv": {
+      "sha256": "5b7aeec85df31e515f71cf8e25885e7278d19e37778c1f772ba970179087712e",
+      "rows": 23
+    },
+    "semantic_errors.csv": {
+      "sha256": "393fd206ec9f56202e4bf471b05eab5b41a6db34795e9896234b328357344a75",
+      "rows": 2319
+    },
+    "source_runs.json": {
+      "sha256": "a8a8baf1e979dca046539d0f082bec2fcdd5fea38907b1324ab3fa87dae19fbc",
+      "rows": null
+    },
+    "state_observations.csv": {
+      "sha256": "ba3e33f5e542d9c635c18a7456bc1e39945e63699ff2609ebe5556b13e6ff150",
+      "rows": 1270
+    },
+    "taxonomy_summary.csv": {
+      "sha256": "bd3b0fa3ba2c2997d55dfa315456a744d026661b49b5e2d94446cf69f73ae7de",
+      "rows": 39
+    },
+    "trajectory_by_step.csv": {
+      "sha256": "11a45a5ca716e5fb5cc104b31eaa6b09e9ca12bf32a7d344f1b903068f773cb0",
+      "rows": 80
+    },
+    "trajectory_summary.csv": {
+      "sha256": "ba4f9b51f4d8ca9daf51427f34d4e30a6f75713bbadb279e43a7b5f7586fd2a2",
+      "rows": 140
+    },
+    "trajectory_transitions.csv": {
+      "sha256": "8e6a68ebfe13e5e42f9643ef67cf9a723bdd4944842a43d9f3aa9a16c8906ff9",
+      "rows": 1130
+    },
+    "transition_counts.csv": {
+      "sha256": "e4b7ae3a17ab3708868def2237c9777083edb5ccb1a7432a82c09276f3b4d443",
+      "rows": 8
+    },
+    "transition_rates.csv": {
+      "sha256": "db5bf83443a5ca2549d8ef1a0eb12cccfc3ce9e196816b800adcae2a34e6fc35",
+      "rows": 70
+    },
+    "write_mode_comparison.csv": {
+      "sha256": "d96f0f712ba358067e92ed4430552578a0a7c47688029d588ec9397af372334b",
+      "rows": 8
+    },
+    "writer_similarity.csv": {
+      "sha256": "8d39e6e5f08a13b935ca935e8058c58385084888155dfdf6493373d09134515e",
+      "rows": 20
+    },
+    "writer_similarity_support.csv": {
+      "sha256": "41fb2ff8f1942571ae98905b7ee2f7888b291b22e08e6833bd4bf03e6f558446",
+      "rows": 10
+    },
+    "writer_taxonomy.csv": {
+      "sha256": "4cd2710a8ed173590c22b83f3085d8881490e30c6c6ce1454f185ef9c429cb7a",
+      "rows": 140
+    }
+  }
+}

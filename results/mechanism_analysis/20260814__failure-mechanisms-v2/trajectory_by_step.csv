@@ -1,0 +1,81 @@
+domain,incorrect_rate,incorrect_states,state_observations,update_index,writer
+cybersecurity,0.0,0,16,0,GLM 5.2
+cybersecurity,0.8125,13,16,1,GLM 5.2
+cybersecurity,0.875,14,16,2,GLM 5.2
+cybersecurity,0.9375,15,16,3,GLM 5.2
+cybersecurity,1.0,16,16,4,GLM 5.2
+cybersecurity,1.0,16,16,5,GLM 5.2
+cybersecurity,1.0,16,16,6,GLM 5.2
+cybersecurity,1.0,16,16,7,GLM 5.2
+cybersecurity,0.0,0,16,8,GLM 5.2
+cybersecurity,0.875,14,16,9,GLM 5.2
+cybersecurity,0.0,0,16,0,Grok 4.3
+cybersecurity,1.0,16,16,1,Grok 4.3
+cybersecurity,1.0,16,16,2,Grok 4.3
+cybersecurity,1.0,16,16,3,Grok 4.3
+cybersecurity,1.0,16,16,4,Grok 4.3
+cybersecurity,1.0,16,16,5,Grok 4.3
+cybersecurity,1.0,16,16,6,Grok 4.3
+cybersecurity,1.0,16,16,7,Grok 4.3
+cybersecurity,0.0625,1,16,8,Grok 4.3
+cybersecurity,0.1875,3,16,9,Grok 4.3
+cybersecurity,0.0,0,16,0,Kimi K2.6
+cybersecurity,0.9375,15,16,1,Kimi K2.6
+cybersecurity,0.9375,15,16,2,Kimi K2.6
+cybersecurity,0.9375,15,16,3,Kimi K2.6
+cybersecurity,1.0,16,16,4,Kimi K2.6
+cybersecurity,0.875,14,16,5,Kimi K2.6
+cybersecurity,0.9375,15,16,6,Kimi K2.6
+cybersecurity,0.9375,15,16,7,Kimi K2.6
+cybersecurity,0.0,0,16,8,Kimi K2.6
+cybersecurity,0.0,0,16,9,Kimi K2.6
+cybersecurity,0.0,0,16,0,Nemotron 3 Ultra
+cybersecurity,0.4375,7,16,1,Nemotron 3 Ultra
+cybersecurity,0.4375,7,16,2,Nemotron 3 Ultra
+cybersecurity,0.5,8,16,3,Nemotron 3 Ultra
+cybersecurity,0.8125,13,16,4,Nemotron 3 Ultra
+cybersecurity,1.0,16,16,5,Nemotron 3 Ultra
+cybersecurity,1.0,16,16,6,Nemotron 3 Ultra
+cybersecurity,1.0,16,16,7,Nemotron 3 Ultra
+cybersecurity,0.0625,1,16,8,Nemotron 3 Ultra
+cybersecurity,0.5,8,16,9,Nemotron 3 Ultra
+cybersecurity,0.0,0,16,0,Qwen Plus 2025-07-28
+cybersecurity,1.0,16,16,1,Qwen Plus 2025-07-28
+cybersecurity,1.0,16,16,2,Qwen Plus 2025-07-28
+cybersecurity,1.0,16,16,3,Qwen Plus 2025-07-28
+cybersecurity,1.0,16,16,4,Qwen Plus 2025-07-28
+cybersecurity,1.0,16,16,5,Qwen Plus 2025-07-28
+cybersecurity,1.0,16,16,6,Qwen Plus 2025-07-28
+cybersecurity,1.0,16,16,7,Qwen Plus 2025-07-28
+cybersecurity,0.9375,15,16,8,Qwen Plus 2025-07-28
+cybersecurity,1.0,16,16,9,Qwen Plus 2025-07-28
+procurement,0.0,0,12,0,GLM 5.2
+procurement,0.0,0,12,1,GLM 5.2
+procurement,0.0,0,12,2,GLM 5.2
+procurement,0.08333333333333333,1,12,3,GLM 5.2
+procurement,0.25,3,12,4,GLM 5.2
+procurement,0.6666666666666666,4,6,5,GLM 5.2
+procurement,0.0,0,12,0,Grok 4.3
+procurement,0.0,0,12,1,Grok 4.3
+procurement,0.16666666666666666,2,12,2,Grok 4.3
+procurement,0.16666666666666666,2,12,3,Grok 4.3
+procurement,0.3333333333333333,4,12,4,Grok 4.3
+procurement,0.8333333333333334,5,6,5,Grok 4.3
+procurement,0.0,0,12,0,Kimi K2.6
+procurement,0.08333333333333333,1,12,1,Kimi K2.6
+procurement,0.16666666666666666,2,12,2,Kimi K2.6
+procurement,0.3333333333333333,4,12,3,Kimi K2.6
+procurement,0.5,6,12,4,Kimi K2.6
+procurement,0.8333333333333334,5,6,5,Kimi K2.6
+procurement,0.0,0,12,0,Nemotron 3 Ultra
+procurement,0.08333333333333333,1,12,1,Nemotron 3 Ultra
+procurement,0.08333333333333333,1,12,2,Nemotron 3 Ultra
+procurement,0.16666666666666666,2,12,3,Nemotron 3 Ultra
+procurement,0.4166666666666667,5,12,4,Nemotron 3 Ultra
+procurement,0.6666666666666666,4,6,5,Nemotron 3 Ultra
+procurement,0.08333333333333333,1,12,0,Qwen Plus 2025-07-28
+procurement,0.08333333333333333,1,12,1,Qwen Plus 2025-07-28
+procurement,0.16666666666666666,2,12,2,Qwen Plus 2025-07-28
+procurement,0.16666666666666666,2,12,3,Qwen Plus 2025-07-28
+procurement,0.25,3,12,4,Qwen Plus 2025-07-28
+procurement,0.6666666666666666,4,6,5,Qwen Plus 2025-07-28
