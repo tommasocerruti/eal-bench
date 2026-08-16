@@ -1,0 +1,112 @@
+{
+  "schema_version": "procurement_evaluation_cue_final_audit_v1",
+  "status": "complete",
+  "date": "2026-08-15",
+  "study": "evaluation_cue",
+  "domain": "procurement",
+  "design": {
+    "cue_levels": [
+      "l0",
+      "l1",
+      "l2"
+    ],
+    "writer_targets": [
+      "nemotron_3_ultra_baseten",
+      "grok_4_3_openrouter",
+      "glm_5_2_baseten",
+      "qwen_plus_0728_openrouter",
+      "kimi_baseten"
+    ],
+    "executor_targets": [
+      "gptoss_baseten",
+      "deepseek_baseten"
+    ],
+    "writer_seeds": [
+      20260816,
+      20260817,
+      20260818
+    ],
+    "cases": 12,
+    "memory_conditions": 4
+  },
+  "coverage": {
+    "valid_source_runs": 48,
+    "writer_runs": 45,
+    "executor_runs": 3,
+    "paired_trial_units": 7200,
+    "paired_typed_memory_units": 360,
+    "writer_state_profile_triplets": 2340,
+    "cue_pair_artifact_rows": 21600,
+    "prompt_pair_units": 5221,
+    "treatment_mediated_later_prompt_differences": 1148,
+    "excluded_nonordinary_source_trials": 0
+  },
+  "budget": {
+    "hard_cap_usd": 80.0,
+    "claim_run_cost_usd": 59.93899023,
+    "excluded_and_qualification_cost_usd": 0.72659578,
+    "total_e1_cost_usd": 60.66558601,
+    "remaining_under_cap_usd": 19.33441399,
+    "total_e1_call_records": 33178,
+    "claim_run_call_records": 26746,
+    "excluded_and_qualification_call_records": 6432,
+    "unpriced_claim_calls": 0,
+    "claim_calls_missing_usage": 37,
+    "pricing_basis": "provider-reported OpenRouter cost and cache-aware frozen-rate Baseten cost"
+  },
+  "budget_gate": {
+    "spent_before_third_wave_usd": 48.26758727,
+    "two_replicate_writer_cost_usd": 29.11919121,
+    "risk_adjusted_third_wave_reserve_usd": 22.572,
+    "projected_gate_total_usd": 70.83958727,
+    "decision": "passed_launch_complete_balanced_third_wave"
+  },
+  "technical_dispositions": {
+    "random_session_canary": "excluded_and_replaced_after_deterministic_session_fix",
+    "openrouter_credit_partial": "excluded_and_replaced_only_for_the_incomplete_qwen_arm",
+    "unpaired_framework_prompt": "rejected_provider_error_subcall_with_no_accepted_memory; clean_second_logical_attempt_used",
+    "outcome_based_reruns": false
+  },
+  "validation": {
+    "analysis_pairing": "passed",
+    "artifact_hashes": "passed",
+    "prompt_prefix_and_surface_gates": "passed",
+    "profile_identity_gates": "passed",
+    "all_domain_offline_validation": "passed",
+    "ruff": "passed",
+    "python_compilation": "passed",
+    "git_diff_check": "passed",
+    "forest_plot_visual_check": "passed"
+  },
+  "analysis": {
+    "path": "results/procurement/20260815__evaluation_cue_final_analysis",
+    "manifest_sha256": "c088bd2392c4260dd76b49c60ef5d23d3df646c3c853ff3593e3ead5b22f2850",
+    "summary_sha256": "19071b94f42b4e35dc4bc9b84a7f53f3b11f7f38d0b1d688f2f8a3056ca7b373",
+    "report_sha256": "c87a04a679726c36db07e4fd62393e324d5d075b8aee5b090c6e538cfc87feb7",
+    "forest_pdf_sha256": "b94b01139239abf0081aa381d813cade656cadc38cc41b495634215afae1c83c",
+    "forest_png_sha256": "4244c0b9a98c1b28ea04d2d310c3e5984a40960f462e3c19a0136c347abaf289",
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 20260816,
+    "confidence": 0.95
+  },
+  "implementation": {
+    "pre_execution_freeze": "results/procurement/procurement_v1__evaluation_cue_implementation_freeze_v3.json",
+    "pre_execution_freeze_sha256": "bbe1c79e48266452c64728a6e4264b5a99aa76e6d568713667f8eaa0f5da8e5f",
+    "analysis_evaluation_cue_sha256": "0bbce490cf22ccb03454de5462cb8353ced9f6c464a5684fec9282304cdde87b",
+    "study_evaluation_cue_sha256": "5c5a29dd38b3e82fc370aba857568da9662d826009e4c6554e7da485eb7a57db",
+    "langmem_writer_sha256": "1dde21592cd3792561b142b7e614ec401279916277dfd545f5c4631f52a16880",
+    "leakage_sha256": "c81971f5cad505e8dca780300df7726e1cee4424b43eb4479e7083c30144b13b",
+    "pipeline_sha256": "ab3ddf8ac8dce8341386454610d8949cb5f1606990db7d51b7ce07c2ed603dca",
+    "study_engine_sha256": "6fdd95b1d9eeb3ec97b5943699d95e8603e896d0d5b143c1a8c73f55f71ee7c6",
+    "study_plan_sha256": "96fe799ffa638fdac43481d68b16eaf8bac99ebdbb3ab81c645ff1879131845c",
+    "runner_sha256": "3978091d8eec9ee421b85358e9fed14a78cca95c754ac35c86d28c1149f80ee6",
+    "langchain_models_sha256": "a832ff8d2fdeed0dbad9afbad8829ebc6b15b6f4be13cbc719c3e826638f84f9"
+  },
+  "paper_interpretation": {
+    "headline": "Explicit evaluation cues do not produce a uniform monotonic improvement across writers or executors.",
+    "writer_fidelity": "Most target-specific typed-memory contrasts include zero. Kimi shows the largest generic-cue reduction in authorization-error rate: -9.72 percentage points with a 95% paired case interval of [-18.06, 0.00].",
+    "writer_downstream": "For GLM, the generic cue reduces paired discrimination by 5.09 points [-9.26, -1.16], while authorization-specific framing recovers 5.56 points [0.23, 10.65], driven by a 5.32-point reduction in unauthorized submission [-8.80, -1.85]. Kimi's generic cue reduces unauthorized submission by 3.24 points [-6.02, -0.69].",
+    "executor": "Executor-stage effects are generally small and context-dependent. The largest primary contrast is Qwen-memory plus DeepSeek execution, where authorization-specific versus generic framing increases authorized use by 6.25 points [2.08, 11.11] without changing unauthorized submission.",
+    "caveat": "Targets are reported separately, intervals are not multiplicity-adjusted, and non-significant contrasts are not evidence of equivalence."
+  }
+}

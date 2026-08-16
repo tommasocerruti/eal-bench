@@ -1,0 +1,261 @@
+{
+  "schema_version": "procurement_evaluation_cue_cost_estimate_v1",
+  "status": "approved_frozen",
+  "approved_at": "2026-08-15",
+  "network_request_made": false,
+  "domain_id": "procurement",
+  "corpus_version": "benchmark_v1",
+  "presentation_id": "naturalistic_v1",
+  "presentation_hash": "907945a6c03f738899e366e86cd54f6fbf8171fed9b88581dabcda97dda66b0d",
+  "currency": "USD",
+  "approved_budget": {
+    "hard_cap_usd": 80.0,
+    "canary_sub_cap_usd": 0.75,
+    "expected_total_usd": 68.3,
+    "authorization": "User approved the complete Procurement E1 protocol up to USD 80 on 2026-08-15."
+  },
+  "pricing_frozen_at": "2026-08-15",
+  "pricing_usd_per_million_tokens": {
+    "gptoss_baseten": {
+      "provider": "baseten",
+      "input": 0.1,
+      "output": 0.5
+    },
+    "deepseek_baseten": {
+      "provider": "baseten",
+      "input": 1.74,
+      "cached_input": 0.145,
+      "output": 3.48
+    },
+    "nemotron_3_ultra_baseten": {
+      "provider": "baseten",
+      "input": 0.6,
+      "output": 2.4
+    },
+    "kimi_baseten": {
+      "provider": "baseten",
+      "input": 0.95,
+      "output": 4.0
+    },
+    "glm_5_2_baseten": {
+      "provider": "baseten",
+      "input": 1.4,
+      "output": 4.4
+    },
+    "grok_4_3_openrouter": {
+      "provider": "openrouter",
+      "input": 1.25,
+      "output": 2.5
+    },
+    "qwen_plus_0728_openrouter": {
+      "provider": "openrouter",
+      "input": 0.26,
+      "output": 0.78
+    }
+  },
+  "pricing_sources": {
+    "baseten": {
+      "label": "Baseten published pricing",
+      "url": "https://www.baseten.co/pricing/",
+      "verified_at": "2026-08-15"
+    },
+    "grok_4_3_openrouter": {
+      "label": "OpenRouter x-ai/grok-4.3 model pricing",
+      "url": "https://openrouter.ai/x-ai/grok-4.3/api",
+      "verified_at": "2026-08-15"
+    },
+    "qwen_plus_0728_openrouter": {
+      "label": "OpenRouter qwen/qwen-plus-2025-07-28 model pricing",
+      "url": "https://openrouter.ai/qwen/qwen-plus-2025-07-28",
+      "verified_at": "2026-08-15"
+    }
+  },
+  "accounting_policy": {
+    "openrouter": "Use provider-reported usage.cost when present; otherwise derive from saved token usage and the frozen rate.",
+    "baseten": "Derive cost from saved prompt and completion tokens at the frozen rate because source call records do not report cost.",
+    "cached_input": "Assume no cache discount in projections.",
+    "transport_retries": "Charge every paid transport attempt, including provider or transport failures.",
+    "journal": "After every paid batch, sum repository calls.jsonl cost by Europe/Zurich date and update exactly one API COSTS entry for that date."
+  },
+  "historical_writer_observations": [
+    {
+      "writer_target": "nemotron_3_ultra_baseten",
+      "logical_updates": 156,
+      "physical_calls": 184,
+      "prompt_tokens": 877801,
+      "completion_tokens": 147423,
+      "cost_usd": 0.8804958,
+      "cost_basis": "rate_derived"
+    },
+    {
+      "writer_target": "grok_4_3_openrouter",
+      "logical_updates": 156,
+      "physical_calls": 157,
+      "prompt_tokens": 602389,
+      "completion_tokens": 131428,
+      "provider_reported_cost_usd": 1.04990505,
+      "rate_derived_cost_usd": 1.08155625,
+      "cost_usd": 1.04990505,
+      "cost_basis": "provider_reported"
+    },
+    {
+      "writer_target": "kimi_baseten",
+      "logical_updates": 156,
+      "physical_calls": 168,
+      "prompt_tokens": 595651,
+      "completion_tokens": 92062,
+      "cost_usd": 0.93411645,
+      "cost_basis": "rate_derived"
+    },
+    {
+      "writer_target": "glm_5_2_baseten",
+      "logical_updates": 156,
+      "physical_calls": 202,
+      "prompt_tokens": 881906,
+      "completion_tokens": 162542,
+      "cost_usd": 1.9498532,
+      "cost_basis": "rate_derived"
+    },
+    {
+      "writer_target": "qwen_plus_0728_openrouter",
+      "logical_updates": 156,
+      "physical_calls": 183,
+      "prompt_tokens": 825201,
+      "completion_tokens": 159376,
+      "provider_reported_cost_usd": 0.33886554,
+      "rate_derived_cost_usd": 0.33886554,
+      "cost_usd": 0.33886554,
+      "cost_basis": "provider_reported"
+    }
+  ],
+  "historical_writer_aggregate": {
+    "logical_updates": 780,
+    "physical_calls": 894,
+    "repair_overhead_fraction": 0.1461538462,
+    "cost_usd": 5.15323604
+  },
+  "historical_ordinary_executor_observations": [
+    {
+      "writer_target": "nemotron_3_ultra_baseten",
+      "gptoss_baseten": {
+        "calls": 288,
+        "prompt_tokens": 292682,
+        "completion_tokens": 102788
+      },
+      "deepseek_baseten": {
+        "calls": 288,
+        "prompt_tokens": 385590,
+        "completion_tokens": 270944
+      }
+    },
+    {
+      "writer_target": "grok_4_3_openrouter",
+      "gptoss_baseten": {
+        "calls": 288,
+        "prompt_tokens": 247538,
+        "completion_tokens": 100973
+      },
+      "deepseek_baseten": {
+        "calls": 288,
+        "prompt_tokens": 339624,
+        "completion_tokens": 273597
+      }
+    },
+    {
+      "writer_target": "kimi_baseten",
+      "gptoss_baseten": {
+        "calls": 288,
+        "prompt_tokens": 281522,
+        "completion_tokens": 103153
+      },
+      "deepseek_baseten": {
+        "calls": 288,
+        "prompt_tokens": 374442,
+        "completion_tokens": 276761
+      }
+    },
+    {
+      "writer_target": "glm_5_2_baseten",
+      "gptoss_baseten": {
+        "calls": 288,
+        "prompt_tokens": 311342,
+        "completion_tokens": 103812
+      },
+      "deepseek_baseten": {
+        "calls": 288,
+        "prompt_tokens": 405012,
+        "completion_tokens": 278322
+      }
+    },
+    {
+      "writer_target": "qwen_plus_0728_openrouter",
+      "gptoss_baseten": {
+        "calls": 288,
+        "prompt_tokens": 281798,
+        "completion_tokens": 108833
+      },
+      "deepseek_baseten": {
+        "calls": 288,
+        "prompt_tokens": 374232,
+        "completion_tokens": 282297
+      }
+    }
+  ],
+  "historical_ordinary_executor_aggregate_per_cue": {
+    "gptoss_baseten": {
+      "calls": 1440,
+      "prompt_tokens": 1414882,
+      "completion_tokens": 519559,
+      "rate_derived_cost_usd": 0.4012677
+    },
+    "deepseek_baseten": {
+      "calls": 1440,
+      "prompt_tokens": 1878900,
+      "completion_tokens": 1381921,
+      "rate_derived_cost_usd": 8.07837108
+    },
+    "total_cost_usd": 8.47963878,
+    "note": "The treatment prefix adds a negligible number of input tokens; the approved stage projection supplies additional headroom."
+  },
+  "projected_stages": [
+    {
+      "stage_id": "canary",
+      "expected_calls": 209,
+      "maximum_calls": 240,
+      "expected_cost_usd": 0.5,
+      "hard_sub_cap_usd": 0.75
+    },
+    {
+      "stage_id": "executor_l1_l2_replay",
+      "calls": 5760,
+      "historical_rate_derived_cost_usd": 16.95927756,
+      "approved_projection_usd": 17.65
+    },
+    {
+      "stage_id": "writer_replicates_20260816_20260817",
+      "estimated_calls": 14004,
+      "historical_rate_derived_cost_usd": 33.32702244,
+      "approved_projection_usd": 33.43
+    },
+    {
+      "stage_id": "writer_replicate_20260818",
+      "estimated_calls": 7002,
+      "historical_rate_derived_cost_usd": 16.66351122,
+      "approved_projection_usd": 16.72,
+      "conditional": true
+    }
+  ],
+  "expected_totals": {
+    "claim_calls_excluding_canary": 26766,
+    "calls_including_expected_canary": 26975,
+    "cost_usd": 68.3,
+    "headroom_under_hard_cap_usd": 11.7
+  },
+  "budget_gates": {
+    "before_every_stage": "Do not launch a stage when spent_to_date_usd plus the risk-adjusted projected cost of that complete stage exceeds 80.00.",
+    "third_writer_replicate_formula": "spent_to_date_usd + 1.35 * max(16.72, 0.5 * actual_two_replicate_writer_spend_usd) <= 80.00",
+    "third_writer_replicate_scope": "Launch all five writers and all three cues for seed 20260818, or launch none of that replicate.",
+    "balanced_fallback": "If the third-replicate gate fails, retain two complete replicates; do not drop a writer, cue, condition, case, or probe.",
+    "outcome_retries": "Forbidden. Provider failures and invalid model outputs remain benchmark outcomes."
+  }
+}

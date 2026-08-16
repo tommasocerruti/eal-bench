@@ -1,0 +1,70 @@
+{
+  "schema_version": "procurement_evaluation_cue_canary_failure_v1",
+  "status": "halted_after_failed_prompt_validation",
+  "date": "2026-08-15",
+  "case_id": "procurement_v1_software_license_grant",
+  "failed_gate": "cue_arms_must_differ_only_by_registered_prefix_before_treatment_mediated_memory_changes",
+  "diagnosis": "LangMem inserted a random session-envelope UUID into each writer manager request. This changed an exogenous provider-visible message surface across arms.",
+  "scientific_disposition": "invalid_technical_canary_do_not_combine_with_replacement_runs",
+  "paid_runs": [
+    {
+      "cue_level": "l0",
+      "path": "results/procurement/20260815-153840-278048__authorization-memory-evaluation_cue__e1-canary-writer-l0",
+      "manifest_sha256": "1d6ee6cfbb9147934c969584e47302c6986973b1f42f36587d79e5d67ce88d38",
+      "calls_sha256": "17c7d89b8c34ab7ac317a7feea5e19011c2556c9fd756ce907870f1802ac9407",
+      "cue_prompt_pairs_sha256": "a02e1401bd894d3087c48a3fa4b711338dab41a264098db31af07544963ad575",
+      "calls": 40,
+      "trials": 24,
+      "prompt_pairs": 12,
+      "rate_derived_cost_usd": 0.09177690
+    },
+    {
+      "cue_level": "l1",
+      "path": "results/procurement/20260815-154142-710208__authorization-memory-evaluation_cue__e1-canary-writer-l1",
+      "manifest_sha256": "15cdaa29e78266651affb98f99c0172ff2f8a2b32d4b0501e8d0687477bf6df5",
+      "calls_sha256": "fb1cde04cd43f1a90843c6005ec4425493055224141be0ccea4354b6f4efda06",
+      "cue_prompt_pairs_sha256": "0b845d3d36c6d9173877b7ea33e641179e5437ec3282029d8c0c2fab28182a72",
+      "calls": 41,
+      "trials": 24,
+      "prompt_pairs": 12,
+      "rate_derived_cost_usd": 0.09844850
+    }
+  ],
+  "observed_total": {
+    "calls": 81,
+    "rate_derived_cost_usd": 0.19022540,
+    "completed_cue_arms": [
+      "l0",
+      "l1"
+    ],
+    "unstarted_components": [
+      "writer_l2",
+      "executor_l1",
+      "executor_l2"
+    ]
+  },
+  "prompt_audit": {
+    "paired_writer_requests": 12,
+    "exact_after_removing_registered_cue_and_random_session_envelope": 8,
+    "treatment_mediated_later_incremental_differences": 4,
+    "forbidden_initial_or_one_shot_difference": "random_session_envelope_uuid"
+  },
+  "corrective_action": {
+    "implementation_freeze": "results/procurement/procurement_v1__evaluation_cue_implementation_freeze_v2.json",
+    "implementation_freeze_sha256": "e7ad9f23c00584758b2cc05fd5616ec40ee639cd5a22e7295f02bcec61b0d8f7",
+    "mechanism": "E1-only deterministic cue-independent UUID5 session envelopes",
+    "offline_validation": "passed",
+    "paid_calls_for_correction": 0
+  },
+  "canary_budget_gate": {
+    "approved_subcap_usd": 0.75,
+    "sunk_invalid_canary_cost_usd": 0.19022540,
+    "replacement_three_arm_writer_projection_usd": 0.28533810,
+    "replacement_two_cue_two_executor_projection_usd": 0.27593832,
+    "projected_cumulative_canary_cost_usd": 0.75150182,
+    "projected_overage_usd": 0.00150182,
+    "decision": "do_not_resume_paid_calls_without_revised_canary_cap",
+    "overall_experiment_hard_cap_usd": 80.0,
+    "overall_budget_risk": "unchanged_and_well_below_hard_cap"
+  }
+}
