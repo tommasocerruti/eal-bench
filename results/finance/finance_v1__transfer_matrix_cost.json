@@ -1,0 +1,65 @@
+{
+  "schema_version": "1",
+  "domain_id": "finance",
+  "release_id": "finance_v1",
+  "approved_cap_usd": 80.0,
+  "expected_usd": 49.04633531,
+  "actual_usd": 39.344316185000054,
+  "provider_reported_openrouter_usd": 5.618291480000001,
+  "rate_derived_baseten_usd": 33.72602470500005,
+  "call_records": 6802,
+  "call_errors": 29,
+  "by_writer_usd": {
+    "nemotron_3_ultra_baseten": 8.026887354999994,
+    "grok_4_3_openrouter": 7.628537715,
+    "kimi_baseten": 7.8348607750000046,
+    "glm_5_2_baseten": 10.711794735,
+    "qwen_plus_0728_openrouter": 5.142235605000001
+  },
+  "by_target_usd": {
+    "nemotron_3_ultra_baseten": 3.4306206,
+    "deepseek_baseten": 19.292996314999993,
+    "gptoss_baseten": 1.0206796999999996,
+    "grok_4_3_openrouter": 4.452199800000001,
+    "kimi_baseten": 3.7918566500000015,
+    "glm_5_2_baseten": 6.189871439999994,
+    "qwen_plus_0728_openrouter": 1.1660916800000005
+  },
+  "tokens_by_target": {
+    "nemotron_3_ultra_baseten": {
+      "input_tokens": 3996897,
+      "cached_input_tokens": 0,
+      "output_tokens": 430201
+    },
+    "deepseek_baseten": {
+      "input_tokens": 5285744,
+      "cached_input_tokens": 268703,
+      "output_tokens": 3024248
+    },
+    "gptoss_baseten": {
+      "input_tokens": 4363652,
+      "cached_input_tokens": 2853536,
+      "output_tokens": 1168629
+    },
+    "grok_4_3_openrouter": {
+      "input_tokens": 2997604,
+      "cached_input_tokens": 52224,
+      "output_tokens": 304012
+    },
+    "kimi_baseten": {
+      "input_tokens": 3016159,
+      "cached_input_tokens": 358560,
+      "output_tokens": 302442
+    },
+    "glm_5_2_baseten": {
+      "input_tokens": 3403372,
+      "cached_input_tokens": 544256,
+      "output_tokens": 479753
+    },
+    "qwen_plus_0728_openrouter": {
+      "input_tokens": 3816289,
+      "cached_input_tokens": 0,
+      "output_tokens": 222893
+    }
+  }
+}

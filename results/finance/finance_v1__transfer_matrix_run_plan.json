@@ -1,0 +1,86 @@
+{
+  "schema_version": "finance_writer_transfer_plan_v1",
+  "domain_id": "finance",
+  "release_id": "finance_v1",
+  "corpus_version": "benchmark_v1",
+  "presentation_id": "naturalistic_v1",
+  "pressure_profile": "loss_containment_v1",
+  "status": "completed",
+  "planned_at": "2026-08-15",
+  "repository_commit": "4e1f9649851b8c62bd472d59ed80e611c3b53789",
+  "frozen_inputs": {
+    "release_sha256": "5812222e7e5426cddd63da9c57d268c65d3e8661b2db4c86af8c140b0abad9f0",
+    "corpus_source_sha256": "d73afe1331f5a6aee2b5ebed81c7ec3403490c5402a6f8f05956db77934ed927",
+    "compiled_corpus_sha256": "afdb6aa90633a64f78b6c1c94f29b9d9add4cd437a27ccaac43cc287c0b2c878",
+    "presentation_sha256": "a9e4076d420c2c1ef474232900b080e8e48ddf12f18ca12ff5a0c35c6958c925",
+    "pressure_profile_sha256": "e6d67d940ba250c06560650dccc32b4e5b8e127945a8c9d1e818176c8b692a04",
+    "memory_implementation_id": "langmem_profile",
+    "memory_implementation_sha256": "e19c96fdcf904476b6e469775566b05d288232cc2e0143b5167f4656d4f33bdb",
+    "typed_schema_version": "5",
+    "typed_schema_sha256": "a141c26ecbda7c88c4b3f054ca89c4439af6237862721844a50f21afac02e9b8"
+  },
+  "design": {
+    "writer_targets_in_order": [
+      "nemotron_3_ultra_baseten",
+      "grok_4_3_openrouter",
+      "kimi_baseten",
+      "glm_5_2_baseten",
+      "qwen_plus_0728_openrouter"
+    ],
+    "executor_targets": ["gptoss_baseten", "deepseek_baseten"],
+    "seed": 20260814,
+    "temperature": 1.0,
+    "writer_runs": 1,
+    "executor_runs": 1,
+    "writer_max_attempts": 2,
+    "capacity_tier": "primary",
+    "conditions": [
+      "one_shot_text",
+      "one_shot_typed",
+      "incremental_text",
+      "incremental_typed"
+    ],
+    "candidate_cap_per_writer": 20,
+    "candidate_cap_per_family": 2,
+    "selection_uses_executor_behavior": false
+  },
+  "execution": {
+    "controls": "Reuse completed GPT-OSS and DeepSeek final Finance controls; make no new control calls.",
+    "writer_routes": "Run each writer separately and reuse its exact memories with both executors.",
+    "pressure_routes": "Run pressure immediately from each exact completed writer source with zero writer calls and zero baseline reruns.",
+    "resampling": "No outcome-based reruns, removals, replacement targets, or successful-trial reruns.",
+    "technical_failures": "Preserve provider failures and use only hash-linked missing-call continuation when technically required."
+  },
+  "call_plan": {
+    "per_writer_expected": 1296,
+    "per_writer_scheduled_maximum": 1696,
+    "matrix_expected": 6480,
+    "matrix_scheduled_maximum": 8480,
+    "transport_retries_excluded": true
+  },
+  "cost_plan_usd": {
+    "nemotron_3_ultra_baseten": 8.97282604,
+    "grok_4_3_openrouter": 10.39351269,
+    "kimi_baseten": 9.91918246,
+    "glm_5_2_baseten": 13.32028984,
+    "qwen_plus_0728_openrouter": 6.44052428,
+    "expected_total": 49.04633531,
+    "approved_hard_cap": 80.0,
+    "approval_status": "approved",
+    "approved_at": "2026-08-15",
+    "approver_role": "repository_owner",
+    "no_cache_discount_assumed": true
+  },
+  "completion": {
+    "completed_at": "2026-08-15",
+    "writer_routes_completed": 5,
+    "pressure_routes_completed": 5,
+    "call_records": 6802,
+    "actual_cost_usd": 39.344316185000054,
+    "results": "finance_v1__transfer_matrix_results.json",
+    "cost_report": "finance_v1__transfer_matrix_cost.json",
+    "all_pressure_source_job_hashes_match": true,
+    "outcome_based_resampling": false
+  },
+  "outcome_based_resampling": false
+}
