@@ -95,6 +95,7 @@ def validate_study_plan(
         raise ValueError(
             "writer_visible_capacity_tokens plan metadata must be a positive integer"
         )
+    reviewer_calls = int(plan.metadata.get("planned_reviewer_calls", 0))
     writer_route_timeout_seconds = int(
         options.get("writer_route_timeout_seconds", 3600)
     )
@@ -137,7 +138,11 @@ def validate_study_plan(
         executor_calls_min = executor_calls
         executor_calls_max = executor_calls
     estimated_cost = options.get("estimated_cost_usd")
-    if executor_calls_max == 0 and logical_writer_updates == 0:
+    if (
+        executor_calls_max == 0
+        and logical_writer_updates == 0
+        and reviewer_calls == 0
+    ):
         estimated_cost = 0.0
     return {
         "status": "passed",
@@ -179,6 +184,7 @@ def validate_study_plan(
             "writer_calls_maximum": (
                 logical_writer_updates * writer_max_attempts
             ),
+            "reviewer_calls": reviewer_calls,
             "executor_calls": (
                 executor_calls_min
                 if executor_calls_min == executor_calls_max
@@ -199,10 +205,11 @@ def validate_study_plan(
             ),
             "executor_calls_source_frozen": frozen_jobs,
             "scheduled_calls_without_writer_repairs": (
-                logical_writer_updates + executor_calls_min
+                logical_writer_updates + reviewer_calls + executor_calls_min
             ),
             "scheduled_calls_maximum": (
                 logical_writer_updates * writer_max_attempts
+                + reviewer_calls
                 + executor_calls_max
             ),
             "transport_retries_excluded": True,
@@ -254,6 +261,11 @@ def _offline_expansion(
             evidence
             for expansion in expansions
             for evidence in expansion.additional_evidence
+        ),
+        additional_contexts=tuple(
+            context
+            for expansion in expansions
+            for context in expansion.additional_contexts
         ),
         artifact_rows={
             name: tuple(values) for name, values in artifact_rows.items()
@@ -389,7 +401,15 @@ def run_study_plan(
             contexts=tuple(contexts),
         )
         expansion = (
-            plan.post_writer_builder(
+            plan.post_writer_reviewer(
+                llm,
+                domain,
+                cases,
+                writer_bundle,
+                options,
+            )
+            if plan.post_writer_reviewer is not None
+            else plan.post_writer_builder(
                 domain,
                 cases,
                 writer_bundle,
@@ -400,6 +420,7 @@ def run_study_plan(
         )
         memories.extend(expansion.additional_memories)
         evidence.extend(expansion.additional_evidence)
+        contexts.extend(expansion.additional_contexts)
         unique_memories: dict[str, MemoryArtifact] = {}
         for memory in memories:
             prior = unique_memories.setdefault(memory.memory_id, memory)
@@ -566,6 +587,15 @@ def run_study_plan(
             manifest["executor"]["target_routes"],
             (trial.executor for trial in trials),
         )
+        if manifest.get("reviewer") is not None:
+            _record_response_models(
+                manifest["reviewer"]["target_routes"],
+                (
+                    context.model
+                    for context in contexts
+                    if context.stage == "writer_selector"
+                ),
+            )
         write_json(manifest_path, manifest)
         return run_dir
     except Exception as exc:
@@ -588,7 +618,10 @@ def _freeze_pre_execution_expansion(
     dynamic_rows: Mapping[str, Sequence[Any]],
     jobs: Sequence[Any],
 ) -> None:
-    if plan.post_writer_builder is None:
+    if (
+        plan.post_writer_builder is None
+        and plan.post_writer_reviewer is None
+    ):
         return
     frozen_files: dict[str, dict[str, Any]] = {}
     frozen_counts: dict[str, int] = {}
@@ -668,6 +701,19 @@ def _manifest(
         runs=int(options.get("executor_runs", 1)),
         seed=int(options.get("seed", 0)),
     )
+    reviewer_active = plan.post_writer_reviewer is not None
+    reviewer_calls = int(plan.metadata.get("planned_reviewer_calls", 0))
+    reviewer_task = str(options.get("reviewer_task") or "memory_selector")
+    reviewer_target = str(
+        options.get("reviewer_target")
+        or (writer_targets[0] if writer_targets else "")
+    )
+    reviewer_seed = int(options.get("reviewer_seed", 0))
+    reviewer_parameters = {
+        "temperature": 0.0,
+        "max_tokens": int(options.get("reviewer_max_tokens", 768)),
+        "seed": reviewer_seed,
+    }
     implementation_files = _implementation_files(domain)
     manifest = {
         "status": "running",
@@ -745,6 +791,30 @@ def _manifest(
             ],
             "runs": int(options.get("executor_runs", 1)),
         },
+        "reviewer": (
+            {
+                "active": True,
+                "task": reviewer_task,
+                "target": reviewer_target,
+                "task_parameters": dict(config.task(reviewer_task).params),
+                "target_routes": [
+                    target_route_manifest(
+                        config,
+                        reviewer_task,
+                        reviewer_target,
+                        call_profiles=[
+                            {
+                                "role": "trajectory_selector",
+                                "effective_parameters": reviewer_parameters,
+                            }
+                        ],
+                    )
+                ],
+                "planned_calls": reviewer_calls,
+            }
+            if reviewer_active
+            else None
+        ),
         "capacity_tier": str(options.get("capacity_tier") or "primary"),
         "capacity": dict(calibration),
         "batch_size": options.get("batch_size") or config.batch_size,
