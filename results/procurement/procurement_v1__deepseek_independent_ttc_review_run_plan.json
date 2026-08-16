@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "status": "approved_frozen",
+  "approved_at": "2026-08-14",
+  "domain_id": "procurement",
+  "corpus_version": "benchmark_v1",
+  "presentation_id": "naturalistic_v1",
+  "question": "Is the TTC bottleneck specifically weak self-review, or is selecting the faithful candidate difficult even for an independent calibrated model?",
+  "method": "independent_trajectory_level_selected_best_of_k",
+  "review_only": true,
+  "candidate_pool_contract": "reuse exact frozen C2 and C4 pools; generate no writer candidates",
+  "reviewer_target": "deepseek_baseten",
+  "reviewer_resolved_model": "deepseek-ai/DeepSeek-V4-Pro",
+  "reviewer_temperature": 0.0,
+  "reviewer_max_tokens": 768,
+  "reviewer_surface": "exact saved self-review messages, tools, blinded labels, and candidate order",
+  "executor_target": "gptoss_baseten",
+  "executor_temperature": 1.0,
+  "executor_runs": 1,
+  "approved_budget": {
+    "currency": "USD",
+    "hard_cap": 12.0,
+    "expected_total_with_typed_oracle_behavior": 9.186,
+    "conservative_no_retry_projection": 10.3,
+    "stop_policy": "run and account k=2 before k=4; stop before any stage whose projected cumulative spend exceeds the hard cap"
+  },
+  "expected_calls": {
+    "writer": 0,
+    "deepseek_reviewer": 480,
+    "gptoss_deepseek_selection_maximum": 2880,
+    "gptoss_typed_oracle_additional_maximum": 888,
+    "standard_total_maximum": 4248,
+    "transport_retries_excluded": true
+  },
+  "pricing_usd_per_million_tokens": {
+    "deepseek_baseten": {
+      "input": 1.74,
+      "cached_input": 0.145,
+      "output": 3.48
+    },
+    "gptoss_baseten": {
+      "input": 0.1,
+      "output": 0.5
+    }
+  },
+  "oracle_policy": {
+    "typed_candidate_objective": "minimum deterministic canonical field-error count",
+    "tie_break": "lowest frozen candidate index",
+    "free_text_oracle_regret": "undefined",
+    "executor_outcomes_are_not_used_for_selection": true,
+    "reviewer_has_canonical_oracle": false
+  },
+  "failure_policy": {
+    "paid_selector_attempts_per_pool": 1,
+    "invalid_review_fallback": "retain the source run's original self-reviewed selection",
+    "report_failures_separately": true,
+    "valid_review_sensitivity": true
+  },
+  "sources": [
+    {
+      "writer_target": "qwen_plus_0728_openrouter",
+      "k": 2,
+      "path": "results/procurement/20260814-185501-912396__authorization-memory-writer_ttc__procurement-v1-qwen-ttc-k2-network",
+      "manifest_sha256": "6709ce8fbe1ef70d7ce9b8bf70a6c9fc31abef1a8c36a5e2cf0c0a61759f371d",
+      "expected_deepseek_arm_cost_usd": 0.8554
+    },
+    {
+      "writer_target": "qwen_plus_0728_openrouter",
+      "k": 4,
+      "path": "results/procurement/20260814-190327-016820__authorization-memory-writer_ttc__procurement-v1-qwen-ttc-k4",
+      "manifest_sha256": "58edcfd6e565e9f3b7cefbbdbc678ae9c80c66fbc61d14405fb4d95036b3baff",
+      "expected_deepseek_arm_cost_usd": 0.9309
+    },
+    {
+      "writer_target": "nemotron_3_ultra_baseten",
+      "k": 2,
+      "path": "results/procurement/20260814-202606-735967__authorization-memory-writer_ttc__procurement-v1-nemotron-ttc-k2-4writer",
+      "manifest_sha256": "e8bbc44ee98cd713405c74fabbfef3c16a733d369af326898c9dbd535a8fa867",
+      "expected_deepseek_arm_cost_usd": 0.8576
+    },
+    {
+      "writer_target": "nemotron_3_ultra_baseten",
+      "k": 4,
+      "path": "results/procurement/20260814-203219-882959__authorization-memory-writer_ttc__procurement-v1-nemotron-ttc-k4-4writer",
+      "manifest_sha256": "35a40603467def91df9de5673e64de526556cf77f2debda67793281fe1feeb1d",
+      "expected_deepseek_arm_cost_usd": 0.9346
+    },
+    {
+      "writer_target": "grok_4_3_openrouter",
+      "k": 2,
+      "path": "results/procurement/20260814-205214-448388__authorization-memory-writer_ttc__procurement-v1-grok-ttc-k2-4writer",
+      "manifest_sha256": "118c396525c8c74f5eb9eb637fd500eaad987b93fc18fdd95f1ff4750482ecd9",
+      "expected_deepseek_arm_cost_usd": 0.8321
+    },
+    {
+      "writer_target": "grok_4_3_openrouter",
+      "k": 4,
+      "path": "results/procurement/20260814-221345-180977__authorization-memory-writer_ttc__procurement-v1-grok-ttc-k4-4writer-clean",
+      "manifest_sha256": "64804bf2d9cc6db8dd8213a9ad4a625befa8dff4927f6875c786ed48c4ee3c7c",
+      "expected_deepseek_arm_cost_usd": 0.8874
+    },
+    {
+      "writer_target": "kimi_baseten",
+      "k": 2,
+      "path": "results/procurement/20260814-204231-099365__authorization-memory-writer_ttc__procurement-v1-kimi-ttc-k2-4writer",
+      "manifest_sha256": "6fa16f94ad3dd3648d067ca6f52df9564d48e1480325d30b946c34446acc88d3",
+      "expected_deepseek_arm_cost_usd": 0.856
+    },
+    {
+      "writer_target": "kimi_baseten",
+      "k": 4,
+      "path": "results/procurement/20260814-204604-422546__authorization-memory-writer_ttc__procurement-v1-kimi-ttc-k4-4writer",
+      "manifest_sha256": "1dcaae943d3b3575ecb1911be646f4a10bc1a8c15720ed77ee4a718b62bd3609",
+      "expected_deepseek_arm_cost_usd": 0.9305
+    },
+    {
+      "writer_target": "glm_5_2_baseten",
+      "k": 2,
+      "path": "results/procurement/20260814-210831-239580__authorization-memory-writer_ttc__procurement-v1-glm-ttc-k2-4writer-retry",
+      "manifest_sha256": "cdb42d5e88e143a1bca6f02982b300b21f42f5a297ba9ff843d656bc799afbea",
+      "expected_deepseek_arm_cost_usd": 0.8767
+    },
+    {
+      "writer_target": "glm_5_2_baseten",
+      "k": 4,
+      "path": "results/procurement/20260814-211630-403934__authorization-memory-writer_ttc__procurement-v1-glm-ttc-k4-4writer",
+      "manifest_sha256": "12bd77759edd040e8c9ab895795d38765637ac2b02b91c1951aa50328e274ba8",
+      "expected_deepseek_arm_cost_usd": 0.9718
+    }
+  ],
+  "offline_validation": {
+    "all_ten_sources": "passed",
+    "writer_calls_per_route": 0,
+    "reviewer_calls_per_route": 48,
+    "executor_calls_per_route": 288,
+    "saved_reviewer_surface_hashes_per_route": 48
+  }
+}

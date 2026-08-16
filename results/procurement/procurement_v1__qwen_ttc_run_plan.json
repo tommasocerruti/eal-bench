@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "status": "approved_frozen",
+  "approved_at": "2026-08-14",
+  "domain_id": "procurement",
+  "corpus_version": "benchmark_v1",
+  "presentation_id": "naturalistic_v1",
+  "method": "trajectory_level_selected_best_of_k",
+  "candidate_pool_contract": "C1 subset C2 subset C4",
+  "aggregation": "one complete trajectory selected without merging",
+  "writer_target": "qwen_plus_0728_openrouter",
+  "reviewer_target": "qwen_plus_0728_openrouter",
+  "executor_target": "gptoss_baseten",
+  "writer_temperature": 1.0,
+  "reviewer_temperature": 0.0,
+  "executor_temperature": 1.0,
+  "base_writer_seed": 20260719,
+  "candidate_seeds": {
+    "0": 20260719,
+    "1": 20260720,
+    "2": 20260721,
+    "3": 20260722
+  },
+  "source_k1_run": "results/procurement/20260809-124843-399194__authorization-memory-writer__procurement-v1-transfer-qwen-plus-0728",
+  "source_k1_manifest_sha256": "fb9f85a60de65e2eebffa46077723327a864ab7e8621ba23cb01fd5aa61c2377",
+  "reused_k1_executor_calls": 288,
+  "budget": {
+    "currency": "USD",
+    "hard_cap": 4.0,
+    "expected_total": 1.44318763,
+    "stop_before_next_stage_if_cumulative_cost_reaches": 4.0,
+    "calls_missing_cost_metadata_are_treated_as_unresolved_spend": true
+  },
+  "stages": [
+    {
+      "pool_size": 2,
+      "source_pool_size": 1,
+      "new_candidate_indices": [1],
+      "expected_calls": {
+        "writer": 183,
+        "reviewer": 48,
+        "executor": 288,
+        "total": 519
+      },
+      "maximum_scheduled_calls_excluding_transport_retries": 648,
+      "expected_cost_usd": 0.54785187,
+      "gate_after_completion": [
+        "completed manifest and artifact hashes",
+        "candidate diversity is nonzero",
+        "reviewer and executor call counts are complete",
+        "cumulative provider-reported cost remains below hard cap"
+      ]
+    },
+    {
+      "pool_size": 4,
+      "source_pool_size": 2,
+      "new_candidate_indices": [2, 3],
+      "expected_calls": {
+        "writer": 366,
+        "reviewer": 48,
+        "executor": 288,
+        "total": 702
+      },
+      "maximum_scheduled_calls_excluding_transport_retries": 960,
+      "expected_cost_usd": 0.89533576,
+      "requires_previous_gate": true
+    }
+  ],
+  "oracle_policy": {
+    "reviewer_has_canonical_oracle": false,
+    "typed_selection_regret": "defined by deterministic canonical-state fidelity",
+    "free_text_selection_regret": "undefined",
+    "executor_outcomes_are_not_used_as_a_selection_oracle": true
+  }
+}

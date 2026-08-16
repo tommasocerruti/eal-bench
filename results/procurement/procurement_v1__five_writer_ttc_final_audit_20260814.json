@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "status": "completed",
+  "completed_at": "2026-08-14",
+  "domain_id": "procurement",
+  "corpus_version": "benchmark_v1",
+  "presentation_id": "naturalistic_v1",
+  "method": "trajectory_level_selected_best_of_k",
+  "candidate_pool_contract": "C1 subset C2 subset C4",
+  "aggregation": "same-model blinded selection of one complete trajectory without rewriting or merging",
+  "executor_target": "gptoss_baseten",
+  "writers": [
+    "qwen_plus_0728_openrouter",
+    "nemotron_3_ultra_baseten",
+    "grok_4_3_openrouter",
+    "kimi_baseten",
+    "glm_5_2_baseten"
+  ],
+  "approved_budget": {
+    "four_writer_extension_cap_usd": 23.0,
+    "qwen_pilot_cap_usd": 4.0
+  },
+  "accounting": {
+    "clean_four_writer_extension_cost_usd": 16.50824325,
+    "excluded_four_writer_technical_attempt_cost_usd": 1.14616112,
+    "four_writer_extension_spend_usd": 17.65440437,
+    "four_writer_extension_remaining_under_cap_usd": 5.34559563,
+    "clean_five_writer_new_stage_cost_usd": 17.95725965,
+    "five_writer_spend_including_excluded_attempts_usd": 19.10342077,
+    "clean_four_writer_extension_call_records": 4806,
+    "clean_four_writer_extension_error_call_records": 38,
+    "excluded_four_writer_technical_call_records": 10387,
+    "all_four_writer_extension_call_records": 15193,
+    "clean_five_writer_new_stage_call_records": 6043,
+    "pricing_basis": "provider-reported cost where present; otherwise saved token usage at frozen 2026-08-08 rates"
+  },
+  "credential_rotation": {
+    "reason": "the originally supplied OpenRouter inference key exhausted its account-controlled total limit during the first Grok k=4 attempt",
+    "old_key_metadata": {
+      "is_management_key": false,
+      "total_limit_usd": 20.0,
+      "remaining_usd": 0.0,
+      "limit_reset": null
+    },
+    "replacement_key_metadata_before_run": {
+      "is_management_key": false,
+      "per_key_limit": null,
+      "usage_usd": 0.0
+    },
+    "scientific_treatment_unchanged": true,
+    "unchanged_route": "openrouter/x-ai/grok-4.3",
+    "secret_or_key_identifier_saved": false
+  },
+  "clean_grok_k4": {
+    "run": "results/procurement/20260814-221345-180977__authorization-memory-writer_ttc__procurement-v1-grok-ttc-k4-4writer-clean",
+    "manifest_sha256": "64804bf2d9cc6db8dd8213a9ad4a625befa8dff4927f6875c786ed48c4ee3c7c",
+    "source_k2_run": "results/procurement/20260814-205214-448388__authorization-memory-writer_ttc__procurement-v1-grok-ttc-k2-4writer",
+    "call_records": 652,
+    "call_errors": 0,
+    "writer_calls": 316,
+    "reviewer_calls": 48,
+    "executor_calls": 288,
+    "review_fallbacks": 4,
+    "cost_usd": 2.72632,
+    "nested_lineage_status": "exact_match"
+  },
+  "excluded_technical_attempts": [
+    {
+      "run": "results/procurement/20260814-205748-667144__authorization-memory-writer_ttc__procurement-v1-grok-ttc-k4-4writer",
+      "manifest_sha256": "3814a8574e19b92d142c7612db05ef55e9c9feb680a03985451b8200d93ef956",
+      "reason": "OpenRouter key total limit exhausted during generation; infrastructure-confounded",
+      "call_records": 10350,
+      "cost_usd": 0.7999584
+    },
+    {
+      "run": "results/procurement/20260814-210534-312641__authorization-memory-writer_ttc__procurement-v1-glm-ttc-k2-4writer",
+      "manifest_sha256": "ee6233f85b4a1b70af217125821dd67d8be2b47a1d38dde7b7ac3ec7936ebd03",
+      "reason": "runtime leakage-guard false positive on ordinary model-managed existing-memory prose",
+      "call_records": 37,
+      "cost_usd": 0.34620272
+    }
+  ],
+  "reviewer_outcomes": {
+    "attempted_pools_k2": 240,
+    "failed_reviews_k2": 14,
+    "failure_rate_k2": 0.058333333333333334,
+    "attempted_pools_k4": 240,
+    "failed_reviews_k4": 54,
+    "failure_rate_k4": 0.225,
+    "fallback_policy": "retain the source level's prior selected candidate",
+    "failures_retained_in_denominators": true
+  },
+  "analysis": {
+    "grok_analysis": "results/procurement/20260814__grok_writer_ttc_analysis",
+    "grok_analysis_manifest_sha256": "b8bfcb715e8df01f51abb4cad61069c4bb6a17c8dfd37dcfe20ca33f3302ea26",
+    "five_writer_analysis": "results/procurement/20260814__five_writer_ttc_analysis_v3",
+    "five_writer_analysis_manifest_sha256": "662ce78e2942a9752f3253927a47dc09809445ee39d98b4a6492bc16c28e8723",
+    "free_text_oracle_regret": "undefined",
+    "executor_outcomes_used_as_oracle": false
+  },
+  "validation": {
+    "clean_grok_k4_manifest_file_hashes": "passed",
+    "nested_candidate_lineage": "passed",
+    "analysis_source_and_output_hashes": "passed",
+    "ruff": "passed",
+    "all_domain_offline_validation": "passed"
+  },
+  "immutability": "No existing frozen run artifact was modified. Both technical attempts remain preserved and explicitly excluded."
+}

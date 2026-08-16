@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "status": "blocked_external_openrouter_key_limit",
+  "created_at": "2026-08-14",
+  "domain_id": "procurement",
+  "corpus_version": "benchmark_v1",
+  "presentation_id": "naturalistic_v1",
+  "method": "trajectory_level_selected_best_of_k",
+  "candidate_pool_contract": "C1 subset C2 subset C4",
+  "executor_target": "gptoss_baseten",
+  "approved_extension_budget_usd": 23.0,
+  "accounting": {
+    "valid_stage_cost_usd": 13.78192325,
+    "excluded_technical_attempt_cost_usd": 1.14616112,
+    "extension_cost_to_date_usd": 14.92808437,
+    "remaining_budget_usd": 8.07191563,
+    "projected_clean_grok_k4_cost_usd": 2.829513077484625,
+    "projected_extension_total_usd": 17.757597447484624,
+    "valid_stage_call_records": 4154,
+    "valid_stage_successful_call_records": 4116,
+    "valid_stage_error_call_records": 38,
+    "excluded_technical_call_records": 10387,
+    "all_extension_call_records_to_date": 14541,
+    "pricing_basis": "provider-reported cost where present; otherwise saved token usage at frozen 2026-08-08 rates"
+  },
+  "valid_stages": [
+    {
+      "writer_target": "nemotron_3_ultra_baseten",
+      "k": 2,
+      "run": "results/procurement/20260814-202606-735967__authorization-memory-writer_ttc__procurement-v1-nemotron-ttc-k2-4writer",
+      "manifest_sha256": "e8bbc44ee98cd713405c74fabbfef3c16a733d369af326898c9dbd535a8fa867",
+      "call_records": 521,
+      "call_errors": 0,
+      "review_fallbacks": 2,
+      "cost_usd": 1.24054794
+    },
+    {
+      "writer_target": "nemotron_3_ultra_baseten",
+      "k": 4,
+      "run": "results/procurement/20260814-203219-882959__authorization-memory-writer_ttc__procurement-v1-nemotron-ttc-k4-4writer",
+      "manifest_sha256": "35a40603467def91df9de5673e64de526556cf77f2debda67793281fe1feeb1d",
+      "call_records": 690,
+      "call_errors": 0,
+      "review_fallbacks": 16,
+      "cost_usd": 2.04789674
+    },
+    {
+      "writer_target": "kimi_baseten",
+      "k": 2,
+      "run": "results/procurement/20260814-204231-099365__authorization-memory-writer_ttc__procurement-v1-kimi-ttc-k2-4writer",
+      "manifest_sha256": "6fa16f94ad3dd3648d067ca6f52df9564d48e1480325d30b946c34446acc88d3",
+      "call_records": 502,
+      "call_errors": 0,
+      "review_fallbacks": 0,
+      "cost_usd": 1.28879525
+    },
+    {
+      "writer_target": "kimi_baseten",
+      "k": 4,
+      "run": "results/procurement/20260814-204604-422546__authorization-memory-writer_ttc__procurement-v1-kimi-ttc-k4-4writer",
+      "manifest_sha256": "1dcaae943d3b3575ecb1911be646f4a10bc1a8c15720ed77ee4a718b62bd3609",
+      "call_records": 669,
+      "call_errors": 3,
+      "review_fallbacks": 3,
+      "cost_usd": 2.08427277
+    },
+    {
+      "writer_target": "grok_4_3_openrouter",
+      "k": 2,
+      "run": "results/procurement/20260814-205214-448388__authorization-memory-writer_ttc__procurement-v1-grok-ttc-k2-4writer",
+      "manifest_sha256": "118c396525c8c74f5eb9eb637fd500eaad987b93fc18fdd95f1ff4750482ecd9",
+      "call_records": 494,
+      "call_errors": 0,
+      "review_fallbacks": 6,
+      "cost_usd": 1.53904815
+    },
+    {
+      "writer_target": "glm_5_2_baseten",
+      "k": 2,
+      "run": "results/procurement/20260814-210831-239580__authorization-memory-writer_ttc__procurement-v1-glm-ttc-k2-4writer-retry",
+      "manifest_sha256": "cdb42d5e88e143a1bca6f02982b300b21f42f5a297ba9ff843d656bc799afbea",
+      "call_records": 537,
+      "call_errors": 6,
+      "review_fallbacks": 6,
+      "cost_usd": 2.10074598
+    },
+    {
+      "writer_target": "glm_5_2_baseten",
+      "k": 4,
+      "run": "results/procurement/20260814-211630-403934__authorization-memory-writer_ttc__procurement-v1-glm-ttc-k4-4writer",
+      "manifest_sha256": "12bd77759edd040e8c9ab895795d38765637ac2b02b91c1951aa50328e274ba8",
+      "call_records": 741,
+      "call_errors": 29,
+      "review_fallbacks": 31,
+      "cost_usd": 3.48061642
+    }
+  ],
+  "excluded_technical_attempts": [
+    {
+      "writer_target": "grok_4_3_openrouter",
+      "k": 4,
+      "run": "results/procurement/20260814-205748-667144__authorization-memory-writer_ttc__procurement-v1-grok-ttc-k4-4writer",
+      "manifest_sha256": "3814a8574e19b92d142c7612db05ef55e9c9feb680a03985451b8200d93ef956",
+      "reason": "OpenRouter key total limit exhausted during writer generation; 9900 writer 403 records and all 48 reviews failed, so the completed artifact is infrastructure-confounded and excluded",
+      "call_records": 10350,
+      "cost_usd": 0.7999584
+    },
+    {
+      "writer_target": "glm_5_2_baseten",
+      "k": 2,
+      "run": "results/procurement/20260814-210534-312641__authorization-memory-writer_ttc__procurement-v1-glm-ttc-k2-4writer",
+      "manifest_sha256": "ee6233f85b4a1b70af217125821dd67d8be2b47a1d38dde7b7ac3ec7936ebd03",
+      "reason": "runtime leakage guard false-positive on ordinary model-managed existing-memory prose; preserved as a failed technical attempt",
+      "call_records": 37,
+      "cost_usd": 0.34620272
+    }
+  ],
+  "completed_writer_analyses": [
+    "results/procurement/20260814__qwen_writer_ttc_analysis_v2",
+    "results/procurement/20260814__nemotron_writer_ttc_analysis",
+    "results/procurement/20260814__kimi_writer_ttc_analysis",
+    "results/procurement/20260814__glm_writer_ttc_analysis"
+  ],
+  "missing_stage": {
+    "writer_target": "grok_4_3_openrouter",
+    "k": 4,
+    "source_run": "results/procurement/20260814-205214-448388__authorization-memory-writer_ttc__procurement-v1-grok-ttc-k2-4writer",
+    "required_action": "increase or reset the OpenRouter key total spending limit, then run one clean nested k=4 stage",
+    "provider_key_status_at_block": {
+      "total_limit_usd": 20.0,
+      "remaining_usd": 0.0,
+      "usage_usd": 20.034318001
+    }
+  },
+  "immutability": "No existing frozen artifact was modified. Technical attempts remain preserved and excluded by explicit lineage."
+}
