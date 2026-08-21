@@ -283,10 +283,26 @@
     "frozen_scientific_base_revision": "2b02cc58f435c7274fe927028a6425aac20c7049",
     "compatibility_patch_base_revision": "e23e8206fc81c42c64e64d7b60795b5d5f140bb4",
     "new_execution_revision": {
-      "git_ref": "refs/tags/phase2-seeded-replication-20260821",
+      "git_ref": "refs/tags/phase2-seeded-replication-20260821-r2",
       "must_resolve_to_head": true,
-      "required_clean_worktree": true
+      "required_clean_tracked_worktree": true,
+      "allowed_untracked_output_patterns": [
+        "results/finance/*__phase2-*",
+        "results/procurement/*__phase2-*",
+        "results/cybersecurity/*__phase2-*"
+      ]
     },
+    "prior_execution_revisions": [
+      {
+        "git_ref": "refs/tags/phase2-seeded-replication-20260821",
+        "commit": "b843262f708c55bf1c427c01e5ddd28ebe6183e7",
+        "precommit_sha256": "9fa50e24b83a3c9a7c74486971cab16e93cf83c9fcfcbc495181d31a476a9610",
+        "completed_routes": [
+          "finance-replacement-controls-gptoss"
+        ],
+        "superseded_for_remaining_routes_because": "The first preserved Phase 2 result correctly made the worktree non-empty; the original gate did not distinguish untracked experiment outputs from tracked source changes."
+      }
+    ],
     "ordinary_run_behavior_unchanged": true,
     "provider_visible_behavior_unchanged": true,
     "bypass_scope": "Only the frozen Finance route validator and its identical builder-entry validation receive a copy with validate_only=true after exact precommit authorization. The retained live options are used for plan validation, manifests, execution, and every provider call; Finance uses validate_only nowhere else.",
@@ -309,7 +325,7 @@
         "experiments/replication_release_compatibility.py",
         "experiments/authorization_memory/study_engine.py"
       ],
-      "unified_diff_sha256": "63a3cab6185a66ae3b944bc1d98bd9e44f873665b28fd4f256da21ec997f2521"
+      "unified_diff_sha256": "b3054fb71bb9926badcccad2a65a2b410a3e58f74f98d76094a2d25edeef2117"
     },
     "unchanged_surfaces": [
       "frozen domain adapters",
@@ -361,8 +377,8 @@
     "experiments/authorization_memory/resume.py": "55245024062401888e615f4f9b68d702f115f146ac2d10d1ac540479eb4ee451",
     "experiments/authorization_memory/study_engine.py": "2141cadba7d5460f88236a47cd3f25dd7c15c8b9909b0ef329bf86178fc74901",
     "experiments/run.py": "945b7ea8252630bd66025c6043c63672b78b3870cbe464b0161dee5dd0bf540a",
-    "experiments/phase2_precommit.py": "a8cbbdd1df415a2234a1d7b11e5e6aa05090ee472177d794cfb06ab084d8bf68",
-    "experiments/replication_release_compatibility.py": "b9b2b478781fe03351141d667b10dbc0e6fb96bae66562beee440f7b7d96f5e1",
+    "experiments/phase2_precommit.py": "f18db47eea0ebc4cfd2ebdb62cfd6454b941c724a8721c51a5355d99d03b9871",
+    "experiments/replication_release_compatibility.py": "bf60b95f83daca9e5fafbcd0a42ee5f7608330767380fa31bca09f8df3fd5798",
     "domains/finance/finalize_replacement.py": "16e703cdd78333ed63fc16a5c4a48838f5d02c699c2fbbc1b2b0810fb5c8bfca",
     "domains/finance/release.json": "ba86fc8e3927ce851c051e176d48d9eecc81a0313bd55cd8d45903ac95a0e59c",
     "domains/finance/data/benchmark_v2.json": "e0d24a535ee2e052a260ab4e76f35b371d0eae9c16a4f5b6e65217b616923bae",

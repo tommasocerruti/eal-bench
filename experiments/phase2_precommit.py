@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 from concurrent.futures import ThreadPoolExecutor
+import fnmatch
 import hashlib
 import json
 from pathlib import Path
@@ -60,17 +61,11 @@ def validate(path: Path) -> dict[str, Any]:
     _equal(revision.get("must_resolve_to_head"), True, "execution ref policy")
     _equal(revision_head, head, "execution revision")
     _equal(
-        revision.get("required_clean_worktree"),
+        revision.get("required_clean_tracked_worktree"),
         True,
-        "clean execution worktree policy",
+        "clean tracked execution worktree policy",
     )
-    worktree_status = subprocess.run(
-        ["git", "status", "--porcelain"],
-        capture_output=True,
-        text=True,
-        check=True,
-    ).stdout.strip()
-    _equal(worktree_status, "", "execution worktree status")
+    _validate_execution_worktree(revision)
     scientific_hashes = compatibility.get("scientific_hash_requirements")
     if not isinstance(scientific_hashes, dict) or not scientific_hashes:
         raise ValueError("compatibility scientific hash requirements are missing")
@@ -434,6 +429,32 @@ def _validate_default_finance_lifecycle_gate() -> dict[str, Any]:
             "network_calls_made": 0,
         }
     raise ValueError("default Finance completed-release lifecycle gate was bypassed")
+
+
+def _validate_execution_worktree(revision: Mapping[str, Any]) -> None:
+    allowed = revision.get("allowed_untracked_output_patterns")
+    if not isinstance(allowed, list) or not all(
+        isinstance(item, str) and item for item in allowed
+    ):
+        raise ValueError("execution output allowlist is invalid")
+    status = subprocess.run(
+        ["git", "status", "--porcelain"],
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.splitlines()
+    unexpected = []
+    for line in status:
+        if line.startswith("?? ") and any(
+            fnmatch.fnmatch(line[3:].rstrip("/"), pattern)
+            for pattern in allowed
+        ):
+            continue
+        unexpected.append(line)
+    if unexpected:
+        raise ValueError(
+            "execution worktree has non-output changes: " + ", ".join(unexpected)
+        )
 
 
 def _without_compatibility_flags(args: list[str]) -> list[str]:

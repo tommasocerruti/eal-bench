@@ -105,11 +105,10 @@ def authorize_completed_release_replication(
     expected_head = _git("rev-parse", str(revision.get("git_ref") or ""))
     if revision.get("must_resolve_to_head") is not True or head != expected_head:
         raise ValueError("completed-release execution ref does not resolve to HEAD")
-    if (
-        revision.get("required_clean_worktree") is not True
-        or _git("status", "--porcelain")
-    ):
-        raise ValueError("completed-release execution requires a clean worktree")
+    if revision.get("required_clean_tracked_worktree") is not True:
+        raise ValueError(
+            "completed-release execution requires a clean tracked worktree"
+        )
 
     release_path = Path("domains/finance/release.json")
     release = json.loads(release_path.read_text(encoding="utf-8"))
