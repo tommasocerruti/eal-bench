@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 import subprocess
 import sys
-from typing import Any
+from typing import Any, Mapping
 
 
 DEFAULT_PATH = Path("results/primary_writer_replication/phase2_precommit.json")
@@ -319,8 +319,22 @@ def validate_routes(plan: dict[str, Any], *, workers: int = 4) -> dict[str, Any]
                 baseline_result,
                 f"{command['route_id']} provider-visible plan",
             )
+            live_result = _build_compatible_live_plan_without_execution(command)
+            _equal(
+                result,
+                live_result,
+                f"{command['route_id']} compatible live plan",
+            )
+            live_plan_hash = hashlib.sha256(
+                json.dumps(
+                    live_result,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                ).encode()
+            ).hexdigest()
         else:
             baseline_hash = provider_plan_hash
+            live_plan_hash = provider_plan_hash
         _equal(result.get("status"), "passed", f"{command['route_id']} status")
         call_plan = result.get("call_plan")
         if not isinstance(call_plan, dict):
@@ -366,6 +380,7 @@ def validate_routes(plan: dict[str, Any], *, workers: int = 4) -> dict[str, Any]
             "scheduled_calls_maximum": call_plan["scheduled_calls_maximum"],
             "provider_visible_plan_before_sha256": baseline_hash,
             "provider_visible_plan_after_sha256": provider_plan_hash,
+            "compatible_live_plan_sha256": live_plan_hash,
             "provider_visible_plan_identical": baseline_hash == provider_plan_hash,
             "status": "passed",
         }
@@ -427,6 +442,50 @@ def _without_compatibility_flags(args: list[str]) -> list[str]:
         index = result.index(flag)
         del result[index : index + 2]
     return result
+
+
+def _build_compatible_live_plan_without_execution(
+    command: Mapping[str, Any],
+) -> dict[str, Any]:
+    from domains import get_domain
+    from eal_bench.llm import load_config
+    from experiments.authorization_memory.study_engine import validate_study_plan
+    from experiments.replication_release_compatibility import (
+        compatibility_validation_options,
+    )
+    from experiments.run import _parser, _route_options, _selected_cases, _study_profile
+
+    raw_argv = list(command["live"][5:])
+    args = _parser().parse_args(raw_argv)
+    args._raw_argv = tuple(raw_argv)
+    args._provided_flags = tuple(
+        item.split("=", 1)[0] for item in raw_argv if item.startswith("--")
+    )
+    domain = get_domain(args.domain)
+    profile = _study_profile(domain, args.study)
+    options = _route_options(args, domain, profile)
+    requested_cases = args.case_ids or ",".join(
+        options.get("_source_case_ids", ())
+    )
+    cases = _selected_cases(
+        domain,
+        str(options["corpus_version"]),
+        requested_cases,
+    )
+    if profile.builder is None:
+        raise ValueError("precommitted compatibility route has no plan builder")
+    plan = profile.builder(
+        domain,
+        cases,
+        compatibility_validation_options(options),
+    )
+    return validate_study_plan(
+        domain,
+        cases,
+        plan,
+        options,
+        config=load_config(),
+    )
 
 
 def _writer_args(

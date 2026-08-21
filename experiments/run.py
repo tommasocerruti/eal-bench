@@ -730,7 +730,11 @@ def _run(args: argparse.Namespace) -> Path:
         )
     if is_completed_release_replication(options):
         assert profile.builder is not None
-        plan = profile.builder(domain, cases, options)
+        plan = profile.builder(
+            domain,
+            cases,
+            compatibility_validation_options(options),
+        )
     else:
         plan = profile.build_jobs(domain, cases, options)
     validation = validate_study_plan(
