@@ -309,7 +309,7 @@
         "experiments/replication_release_compatibility.py",
         "experiments/authorization_memory/study_engine.py"
       ],
-      "unified_diff_sha256": "ee6a6f4b3d48262bc9666665205a391b2f5c8917a993123c3558985dd25c6fc1"
+      "unified_diff_sha256": "00f07fecb5c0baf09197e766a11f43d7d63faebd12f3b4eca2cc15c3e2300e06"
     },
     "unchanged_surfaces": [
       "frozen domain adapters",
