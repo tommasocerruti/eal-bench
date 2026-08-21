@@ -50,6 +50,7 @@ from experiments.authorization_memory.validation import (
 from experiments.replication_release_compatibility import (
     authorize_completed_release_replication,
     compatibility_validation_options,
+    completed_release_execution_options,
     is_completed_release_replication,
 )
 
@@ -737,6 +738,7 @@ def _run(args: argparse.Namespace) -> Path:
         )
     else:
         plan = profile.build_jobs(domain, cases, options)
+    options = completed_release_execution_options(options, plan)
     validation = validate_study_plan(
         domain, cases, plan, options, config=load_config()
     )

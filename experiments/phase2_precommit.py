@@ -473,6 +473,7 @@ def _build_compatible_live_plan_without_execution(
     from experiments.authorization_memory.study_engine import validate_study_plan
     from experiments.replication_release_compatibility import (
         compatibility_validation_options,
+        completed_release_execution_options,
     )
     from experiments.run import _parser, _route_options, _selected_cases, _study_profile
 
@@ -500,6 +501,7 @@ def _build_compatible_live_plan_without_execution(
         cases,
         compatibility_validation_options(options),
     )
+    options = completed_release_execution_options(options, plan)
     return validate_study_plan(
         domain,
         cases,

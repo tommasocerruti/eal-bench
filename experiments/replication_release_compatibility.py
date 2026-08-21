@@ -171,6 +171,30 @@ def is_completed_release_replication(options: Mapping[str, Any]) -> bool:
     return options.get("_completed_release_replication_compatibility") is not None
 
 
+def completed_release_execution_options(
+    options: Mapping[str, Any],
+    plan: Any,
+) -> Mapping[str, Any]:
+    if not is_completed_release_replication(options) or plan.study_id != "pressure":
+        return options
+    frozen_targets = []
+    for job in plan.jobs:
+        if (
+            job.executor_target_id is None
+            or job.executor_run_id is None
+            or job.executor_seed is None
+        ):
+            raise ValueError(
+                "completed-release pressure compatibility requires a fully "
+                "frozen executor route on every job"
+            )
+        if job.executor_target_id not in frozen_targets:
+            frozen_targets.append(job.executor_target_id)
+    if not frozen_targets:
+        raise ValueError("completed-release pressure plan has no frozen executor jobs")
+    return {**options, "executor_targets": tuple(frozen_targets)}
+
+
 def _validate_exact_command(
     actual: list[str],
     expected: list[str],
