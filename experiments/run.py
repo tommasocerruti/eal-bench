@@ -47,6 +47,11 @@ from experiments.authorization_memory.validation import (
     validate_langmem_writer_behaviors,
     validate_shared_domain_boundaries,
 )
+from experiments.replication_release_compatibility import (
+    authorize_completed_release_replication,
+    compatibility_validation_options,
+    is_completed_release_replication,
+)
 
 
 def _csv(value: str) -> tuple[str, ...]:
@@ -211,6 +216,16 @@ def _parser() -> argparse.ArgumentParser:
         help="domain-registered awareness protocol; defaults to the first registered protocol",
     )
     parser.add_argument("--tag", default=None)
+    parser.add_argument(
+        "--replication-precommit",
+        default="",
+        help="explicit precommit for a narrowly authorized completed-release rerun",
+    )
+    parser.add_argument(
+        "--replication-route-id",
+        default="",
+        help="exact route ID in the completed-release replication precommit",
+    )
     return parser
 
 
@@ -653,7 +668,14 @@ def _route_options(
             )
         options["writer_targets"] = ()
         options["executor_targets"] = ()
-    profile.validate_options(options)
+    compatibility = authorize_completed_release_replication(
+        options,
+        domain,
+        profile,
+    )
+    if compatibility is not None:
+        options["_completed_release_replication_compatibility"] = compatibility
+    profile.validate_options(compatibility_validation_options(options))
     return options
 
 
@@ -698,12 +720,19 @@ def _run(args: argparse.Namespace) -> Path:
         requested_cases,
     )
     if profile.runner is not None:
+        if is_completed_release_replication(options):
+            assert profile.runner is not None
+            return Path(profile.runner(domain, cases, options))
         return profile.run(domain, cases, options)
     if profile.builder is None:
         raise NotImplementedError(
             f"study {args.study!r} does not provide a runner or job builder"
         )
-    plan = profile.build_jobs(domain, cases, options)
+    if is_completed_release_replication(options):
+        assert profile.builder is not None
+        plan = profile.builder(domain, cases, options)
+    else:
+        plan = profile.build_jobs(domain, cases, options)
     validation = validate_study_plan(
         domain, cases, plan, options, config=load_config()
     )
@@ -793,6 +822,7 @@ def _selected_cases(
 def main(argv: list[str] | None = None) -> None:
     raw_argv = list(sys.argv[1:] if argv is None else argv)
     args = _parser().parse_args(raw_argv)
+    args._raw_argv = tuple(raw_argv)
     args._provided_flags = tuple(
         item.split("=", 1)[0]
         for item in raw_argv

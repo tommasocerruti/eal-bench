@@ -273,6 +273,55 @@
     ],
     "offline_fixture": "one missing executor call with all earlier executor successes and the writer prefix retained"
   },
+  "completed_release_replication_compatibility": {
+    "schema_version": "phase2_completed_release_replication_v1",
+    "enabled": true,
+    "justification": "The frozen Finance release is scientifically valid and completed. This explicit replication-only gate bypasses only the historical already-completed lifecycle rejection for the exact precommitted Phase 2 routes; it does not change the release or any scientific/provider-visible configuration.",
+    "domain_id": "finance",
+    "accepted_lifecycle_status": "approved_and_completed",
+    "precommit_path": "results/primary_writer_replication/phase2_precommit.json",
+    "frozen_scientific_base_revision": "2b02cc58f435c7274fe927028a6425aac20c7049",
+    "compatibility_patch_base_revision": "e23e8206fc81c42c64e64d7b60795b5d5f140bb4",
+    "new_execution_revision": {
+      "git_ref": "refs/tags/phase2-seeded-replication-20260821",
+      "must_resolve_to_head": true,
+      "required_clean_worktree": true
+    },
+    "ordinary_run_behavior_unchanged": true,
+    "provider_visible_behavior_unchanged": true,
+    "bypass_scope": "Only StudyProfile validation's completed-release lifecycle rejection is evaluated with validate_only=true after exact precommit authorization; builders and provider calls receive the original live options.",
+    "scientific_hash_requirements": {
+      "config.yaml": "d0bb7e6372248d52d9323f2ae9c3aa1f84544a0c8bf7fffe889f63c9e7402dc8",
+      "domains/procurement/release.json": "e031279388062a915416babd4fe9aa6502f88129f8ad5cc17118bb3d25f0f613",
+      "domains/cybersecurity/release.json": "a6de16240f71c24bcc999cd4e06dbc9d12608c2087b38b64b1935296463aa6a6",
+      "domains/finance/release.json": "ba86fc8e3927ce851c051e176d48d9eecc81a0313bd55cd8d45903ac95a0e59c",
+      "domains/finance/adapter.py": "114f95dfd2537b9c80d26b3ce57d5a6551d923450199d61d91d68ca883cb1377",
+      "domains/finance/studies.py": "9b431f6194349d1f7113ffafeb701cf254b02b3893538582deede39875da0ea8",
+      "domains/finance/data/benchmark_v2.json": "e0d24a535ee2e052a260ab4e76f35b371d0eae9c16a4f5b6e65217b616923bae",
+      "domains/finance/presentations/naturalistic_v1.json": "7da8754a8cae5d0bd757b0d668e50d4b96dd61379504b6065435ba095691655f",
+      "domains/finance/pressure_profiles/loss_containment_v1.json": "85080adbca8a1ed5a7133d905b5197b7556d805aceaf71e1fe3576c783159306"
+    },
+    "exact_diff": {
+      "base_revision": "e23e8206fc81c42c64e64d7b60795b5d5f140bb4",
+      "files": [
+        "experiments/run.py",
+        "experiments/phase2_precommit.py",
+        "experiments/replication_release_compatibility.py",
+        "experiments/authorization_memory/study_engine.py"
+      ],
+      "unified_diff_sha256": "ee6a6f4b3d48262bc9666665205a391b2f5c8917a993123c3558985dd25c6fc1"
+    },
+    "unchanged_surfaces": [
+      "frozen domain adapters",
+      "prompts and provider-visible messages",
+      "tools and tool choice",
+      "model targets and providers",
+      "generation parameters",
+      "seeds",
+      "scoring",
+      "analysis"
+    ]
+  },
   "required_artifacts": [
     "manifest.json",
     "calls.jsonl",
@@ -310,9 +359,10 @@
     "experiments/authorization_memory/schemas.py": "e336e5b65faebcd45470b180557d1800ab2021fdabd99e0b58135997a5b0f5f9",
     "experiments/authorization_memory/executor_plan.py": "0a99082608f800b2370633067816ece2cfd768ac26e0ec3af0f008ba3533e309",
     "experiments/authorization_memory/resume.py": "55245024062401888e615f4f9b68d702f115f146ac2d10d1ac540479eb4ee451",
-    "experiments/authorization_memory/study_engine.py": "66181b7118116a6fa082656c4151f1b372ca35fe2053022bfcb882fca9f958a1",
-    "experiments/run.py": "dbc4e06caee2475def705374b58ed67a9a2f71348f406b012665a7a62b7a7e70",
-    "experiments/phase2_precommit.py": "cb97dab91a772a07666da75ab2fbf29c8f6450051fa506c92a725020ec55a317",
+    "experiments/authorization_memory/study_engine.py": "2141cadba7d5460f88236a47cd3f25dd7c15c8b9909b0ef329bf86178fc74901",
+    "experiments/run.py": "a3e9e9ad25ffa77c267e7bd3d7c1c023d780b80b1bb18904a35be6b4b46fe640",
+    "experiments/phase2_precommit.py": "194d761c7be9cd112adcf5f9fee7f43947fc34c3f55d89a7e398fd865cde930b",
+    "experiments/replication_release_compatibility.py": "b9b2b478781fe03351141d667b10dbc0e6fb96bae66562beee440f7b7d96f5e1",
     "domains/finance/finalize_replacement.py": "16e703cdd78333ed63fc16a5c4a48838f5d02c699c2fbbc1b2b0810fb5c8bfca",
     "domains/finance/release.json": "ba86fc8e3927ce851c051e176d48d9eecc81a0313bd55cd8d45903ac95a0e59c",
     "domains/finance/data/benchmark_v2.json": "e0d24a535ee2e052a260ab4e76f35b371d0eae9c16a4f5b6e65217b616923bae",

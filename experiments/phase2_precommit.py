@@ -19,6 +19,89 @@ def validate(path: Path) -> dict[str, Any]:
         raise TypeError("phase-2 precommit must be a JSON object")
     _equal(plan.get("schema_version"), "eal_phase2_precommit_v1", "schema")
     _equal(plan.get("status"), "approved_not_started", "status")
+    compatibility = plan.get("completed_release_replication_compatibility")
+    if not isinstance(compatibility, dict):
+        raise ValueError("completed-release compatibility record is missing")
+    for key, expected in {
+        "schema_version": "phase2_completed_release_replication_v1",
+        "enabled": True,
+        "domain_id": "finance",
+        "accepted_lifecycle_status": "approved_and_completed",
+        "ordinary_run_behavior_unchanged": True,
+        "provider_visible_behavior_unchanged": True,
+        "frozen_scientific_base_revision": (
+            "2b02cc58f435c7274fe927028a6425aac20c7049"
+        ),
+        "compatibility_patch_base_revision": (
+            "e23e8206fc81c42c64e64d7b60795b5d5f140bb4"
+        ),
+    }.items():
+        _equal(compatibility.get(key), expected, f"compatibility {key}")
+    _equal(
+        compatibility.get("precommit_path"),
+        str(DEFAULT_PATH),
+        "compatibility precommit path",
+    )
+    revision = compatibility.get("new_execution_revision")
+    if not isinstance(revision, dict):
+        raise ValueError("compatibility execution revision record is missing")
+    head = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.strip()
+    revision_head = subprocess.run(
+        ["git", "rev-parse", str(revision.get("git_ref") or "")],
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.strip()
+    _equal(revision.get("must_resolve_to_head"), True, "execution ref policy")
+    _equal(revision_head, head, "execution revision")
+    _equal(
+        revision.get("required_clean_worktree"),
+        True,
+        "clean execution worktree policy",
+    )
+    worktree_status = subprocess.run(
+        ["git", "status", "--porcelain"],
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.strip()
+    _equal(worktree_status, "", "execution worktree status")
+    scientific_hashes = compatibility.get("scientific_hash_requirements")
+    if not isinstance(scientific_hashes, dict) or not scientific_hashes:
+        raise ValueError("compatibility scientific hash requirements are missing")
+    for raw_path, expected_hash in scientific_hashes.items():
+        actual_hash = hashlib.sha256(Path(raw_path).read_bytes()).hexdigest()
+        _equal(actual_hash, expected_hash, f"scientific hash {raw_path}")
+    exact_diff = compatibility.get("exact_diff")
+    if not isinstance(exact_diff, dict):
+        raise ValueError("compatibility exact diff record is missing")
+    diff_files = exact_diff.get("files")
+    if not isinstance(diff_files, list) or not all(
+        isinstance(item, str) and item for item in diff_files
+    ):
+        raise ValueError("compatibility exact diff file list is invalid")
+    completed = subprocess.run(
+        [
+            "git",
+            "diff",
+            "--binary",
+            compatibility["compatibility_patch_base_revision"],
+            "--",
+            *diff_files,
+        ],
+        capture_output=True,
+        check=True,
+    )
+    _equal(
+        hashlib.sha256(completed.stdout).hexdigest(),
+        exact_diff.get("unified_diff_sha256"),
+        "compatibility exact diff hash",
+    )
     budget = plan["budget_usd"]
     _close(budget["expected_total"], 195.486942, "expected total")
     _close(budget["hard_ceiling"], 292.0, "hard ceiling")
@@ -187,6 +270,8 @@ def validate_routes(plan: dict[str, Any], *, workers: int = 4) -> dict[str, Any]
     runnable = [command for command in commands if command["depends_on"] is None]
     deferred = [command for command in commands if command["depends_on"] is not None]
 
+    default_gate = _validate_default_finance_lifecycle_gate()
+
     def run(command: dict[str, Any]) -> dict[str, Any]:
         local = [
             sys.executable,
@@ -205,6 +290,37 @@ def validate_routes(plan: dict[str, Any], *, workers: int = 4) -> dict[str, Any]
                 f"{command['route_id']} validation failed:\n{completed.stderr}"
             )
         result = json.loads(completed.stdout)
+        provider_plan_hash = hashlib.sha256(
+            json.dumps(result, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+        if _argument_value(command["live"], "--domain") == "finance":
+            baseline_args = _without_compatibility_flags(command["validate"][5:])
+            baseline = subprocess.run(
+                [sys.executable, "-m", "experiments.run", *baseline_args],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            if baseline.returncode != 0:
+                raise ValueError(
+                    f"{command['route_id']} baseline validation failed:\n"
+                    f"{baseline.stderr}"
+                )
+            baseline_result = json.loads(baseline.stdout)
+            baseline_hash = hashlib.sha256(
+                json.dumps(
+                    baseline_result,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                ).encode()
+            ).hexdigest()
+            _equal(
+                result,
+                baseline_result,
+                f"{command['route_id']} provider-visible plan",
+            )
+        else:
+            baseline_hash = provider_plan_hash
         _equal(result.get("status"), "passed", f"{command['route_id']} status")
         call_plan = result.get("call_plan")
         if not isinstance(call_plan, dict):
@@ -248,6 +364,9 @@ def validate_routes(plan: dict[str, Any], *, workers: int = 4) -> dict[str, Any]
         return {
             "route_id": command["route_id"],
             "scheduled_calls_maximum": call_plan["scheduled_calls_maximum"],
+            "provider_visible_plan_before_sha256": baseline_hash,
+            "provider_visible_plan_after_sha256": provider_plan_hash,
+            "provider_visible_plan_identical": baseline_hash == provider_plan_hash,
             "status": "passed",
         }
 
@@ -266,8 +385,48 @@ def validate_routes(plan: dict[str, Any], *, workers: int = 4) -> dict[str, Any]
             result["scheduled_calls_maximum"] for result in results
         ),
         "network_calls_made": 0,
+        "default_finance_lifecycle_gate": default_gate,
+        "provider_visible_plan_comparisons": len(results),
+        "provider_visible_plan_mismatches": sum(
+            not result["provider_visible_plan_identical"] for result in results
+        ),
         "routes": results,
     }
+
+
+def _validate_default_finance_lifecycle_gate() -> dict[str, Any]:
+    from domains import get_domain
+
+    domain = get_domain("finance")
+    profile = domain.get_study("controls")
+    try:
+        profile.validate_options(
+            {
+                "corpus_version": "benchmark_v1",
+                "presentation_version": "naturalistic_v1",
+                "validate_only": False,
+            }
+        )
+    except ValueError as exc:
+        expected = (
+            "Finance final live routes require the frozen claim release and "
+            "approved budget"
+        )
+        _equal(str(exc), expected, "default Finance lifecycle gate")
+        return {
+            "status": "passed",
+            "ordinary_unflagged_live_route_rejected": True,
+            "network_calls_made": 0,
+        }
+    raise ValueError("default Finance completed-release lifecycle gate was bypassed")
+
+
+def _without_compatibility_flags(args: list[str]) -> list[str]:
+    result = list(args)
+    for flag in ("--replication-precommit", "--replication-route-id"):
+        index = result.index(flag)
+        del result[index : index + 2]
+    return result
 
 
 def _writer_args(
@@ -305,6 +464,14 @@ def _command(
     args: list[str],
     depends_on: str | None = None,
 ) -> dict[str, Any]:
+    if _argument_value(args, "--domain") == "finance":
+        args = [
+            *args,
+            "--replication-precommit",
+            str(DEFAULT_PATH),
+            "--replication-route-id",
+            route_id,
+        ]
     live = ["uv", "run", "python", "-m", "experiments.run", *args]
     return {
         "route_id": route_id,
@@ -313,6 +480,11 @@ def _command(
         "live": live,
         "paid": True,
     }
+
+
+def _argument_value(args: list[str], flag: str) -> str:
+    index = args.index(flag)
+    return args[index + 1]
 
 
 def _equal(actual: Any, expected: Any, label: str) -> None:

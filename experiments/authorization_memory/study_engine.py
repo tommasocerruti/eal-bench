@@ -1133,6 +1133,11 @@ def _manifest(
             f"study plan metadata collides with manifest fields: {joined}"
         )
     manifest.update(dict(plan.metadata))
+    compatibility = options.get("_completed_release_replication_compatibility")
+    if compatibility is not None:
+        manifest["completed_release_replication_compatibility"] = dict(
+            compatibility
+        )
     return manifest
 
 
