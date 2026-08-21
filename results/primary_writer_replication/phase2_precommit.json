@@ -11,6 +11,8 @@
   "budget_usd": {
     "expected_total": 195.486942,
     "hard_ceiling": 292.0,
+    "authorized_route_ceiling_sum": 293.0,
+    "aggregate_hard_ceiling_remains_binding": true,
     "replication": {
       "expected": 153.896528,
       "hard_ceiling": 212.0
@@ -19,7 +21,7 @@
       "expected": 41.590414,
       "hard_ceiling": 80.0
     },
-    "accounting_policy": "After every route, sum provider-reported usage.cost where present and otherwise apply the frozen Phase-1 target rates to recorded token usage. Stop before the next route if its ceiling or the aggregate hard ceiling could be exceeded."
+    "accounting_policy": "After every route, sum provider-reported usage.cost where present and otherwise apply the frozen Phase-1 target rates to recorded token usage. Stop before the next route if its ceiling or the aggregate hard ceiling could be exceeded. The individually authorized route ceilings total USD 293 after the Procurement/Qwen amendment, but the unchanged USD 292 aggregate hard ceiling remains binding."
   },
   "wall_clock_hours": {
     "optimistic": 7.5,
@@ -90,7 +92,7 @@
           "kimi_baseten": 3.5,
           "glm_5_2_baseten": 4.5,
           "grok_4_3_openrouter": 4.5,
-          "qwen_plus_0728_openrouter": 2.0
+          "qwen_plus_0728_openrouter": 2.5
         }
       },
       "cybersecurity": {
@@ -129,7 +131,28 @@
     "total_logical_writer_calls": 6840,
     "ordinary_executor_calls": 21120,
     "outcome_based_seed_selection": false,
-    "pool_or_replace_original_seed": false
+    "pool_or_replace_original_seed": false,
+    "cost_ceiling_amendment_20260821": {
+      "scope": "planning_and_execution_metadata_only",
+      "approved_on": "2026-08-21",
+      "route_ids": [
+        "replication-20260821-procurement-qwen",
+        "replication-20260822-procurement-qwen"
+      ],
+      "prior_ceiling_usd_each": 2.0,
+      "amended_ceiling_usd_each": 2.5,
+      "aggregate_phase2_hard_ceiling_usd": 292.0,
+      "aggregate_hard_ceiling_changed": false,
+      "scientific_configuration_changed": false,
+      "completed_route_preserved_without_rerun": {
+        "route_id": "replication-20260821-procurement-qwen",
+        "run": "results/procurement/20260821-065105-762467__authorization-memory-writer__phase2-primary-s20260821-procurement-qwen",
+        "trials": 616,
+        "witnesses": 10,
+        "realized_cost_usd": 2.11910725,
+        "rerun_forbidden": true
+      }
+    }
   },
   "finance_replacement": {
     "route_count": 12,
@@ -283,7 +306,7 @@
     "frozen_scientific_base_revision": "2b02cc58f435c7274fe927028a6425aac20c7049",
     "compatibility_patch_base_revision": "e23e8206fc81c42c64e64d7b60795b5d5f140bb4",
     "new_execution_revision": {
-      "git_ref": "refs/tags/phase2-seeded-replication-20260821-r3",
+      "git_ref": "refs/tags/phase2-seeded-replication-20260821-r4",
       "must_resolve_to_head": true,
       "required_clean_tracked_worktree": true,
       "allowed_untracked_output_patterns": [
@@ -311,6 +334,35 @@
           "finance-replacement-writer-nemotron"
         ],
         "superseded_for_remaining_routes_because": "The first source-bound pressure replay exposed a shared preflight requirement for a nonempty executor target list even though every pressure job already carried its exact frozen target, run, and seed and the pressure CLI correctly forbids target overrides."
+      },
+      {
+        "git_ref": "refs/tags/phase2-seeded-replication-20260821-r3",
+        "commit": "f70754f21c8272f839cd1d05c9b3a54db35aa8c9",
+        "precommit_sha256": "a68521b727dbb1675ae1cf63c87b8c67d7811737ad1da126ae0f5ca19e45a5f5",
+        "completed_routes": [
+          "finance-replacement-pressure-nemotron",
+          "finance-replacement-writer-kimi",
+          "finance-replacement-pressure-kimi",
+          "finance-replacement-writer-glm",
+          "finance-replacement-pressure-glm",
+          "finance-replacement-writer-grok",
+          "finance-replacement-pressure-grok",
+          "finance-replacement-writer-qwen",
+          "finance-replacement-pressure-qwen",
+          "replication-20260821-procurement-nemotron",
+          "replication-20260821-procurement-kimi",
+          "replication-20260821-procurement-glm",
+          "replication-20260821-procurement-grok",
+          "replication-20260821-procurement-qwen"
+        ],
+        "preserved_non_provider_attempt": {
+          "route_id": "finance-replacement-pressure-glm",
+          "run": "results/finance/20260821-045954-136401__authorization-memory-pressure__phase2-finance-replacement-pressure-glm",
+          "provider_calls": 0,
+          "realized_cost_usd": 0.0,
+          "reason": "Local sandbox DNS denied all transport attempts before any provider request; the artifact remains immutable and is excluded from replacement selection."
+        },
+        "superseded_for_remaining_routes_because": "The owner authorized a planning-only increase of the two Procurement/Qwen seed-route ceilings from USD 2.00 to USD 2.50 after the completed 20260821 route realized USD 2.119107; the aggregate Phase 2 hard ceiling remains USD 292."
       }
     ],
     "ordinary_run_behavior_unchanged": true,
@@ -335,7 +387,7 @@
         "experiments/replication_release_compatibility.py",
         "experiments/authorization_memory/study_engine.py"
       ],
-      "unified_diff_sha256": "2f0aba72ea446422b71b6582115371591eedb25247c9abedd03017545d6d95c2"
+      "unified_diff_sha256": "391528f12911d9a8450093fc622b8bd742025ec0a35d7e345afa630c04d9e8ef"
     },
     "unchanged_surfaces": [
       "frozen domain adapters",
@@ -387,7 +439,7 @@
     "experiments/authorization_memory/resume.py": "55245024062401888e615f4f9b68d702f115f146ac2d10d1ac540479eb4ee451",
     "experiments/authorization_memory/study_engine.py": "2141cadba7d5460f88236a47cd3f25dd7c15c8b9909b0ef329bf86178fc74901",
     "experiments/run.py": "96b3a3ccb9a9f29c9da34619cc3bfe1c8eb85c359931b48829faa05d32d9adcb",
-    "experiments/phase2_precommit.py": "a5923b6e593b8ef2b7a7cfe4f8b694255dd542125710cad2003735d73a72d9e1",
+    "experiments/phase2_precommit.py": "ff1a06088e5998a0bb457bd3e5a826b62b78f4887f1d5aad353206d2b4432c51",
     "experiments/replication_release_compatibility.py": "eae24af0d8102831b1b41510132a5f5c3fc7b95bd8dc984c87230b64b3ad1723",
     "domains/finance/finalize_replacement.py": "16e703cdd78333ed63fc16a5c4a48838f5d02c699c2fbbc1b2b0810fb5c8bfca",
     "domains/finance/release.json": "ba86fc8e3927ce851c051e176d48d9eecc81a0313bd55cd8d45903ac95a0e59c",

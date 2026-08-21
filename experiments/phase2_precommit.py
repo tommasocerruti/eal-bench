@@ -125,13 +125,28 @@ def validate(path: Path) -> dict[str, Any]:
         sum(domain["route_cost_ceiling_usd"].values())
         for domain in replication["domains"].values()
     ) * len(replication["seeds"])
-    _close(replication_ceiling, 212.0, "replication route ceilings")
+    _close(replication_ceiling, 213.0, "replication route ceilings")
     replacement = plan["finance_replacement"]
     _equal(replacement["seed"], 20260816, "Finance replacement seed")
     replacement_ceiling = sum(replacement["controls_cost_ceiling_usd"].values())
     replacement_ceiling += sum(replacement["writer_cost_ceiling_usd"].values())
     replacement_ceiling += sum(replacement["pressure_cost_ceiling_usd"].values())
     _close(replacement_ceiling, 80.0, "Finance replacement route ceilings")
+    _close(
+        replication_ceiling + replacement_ceiling,
+        budget["authorized_route_ceiling_sum"],
+        "authorized route ceiling sum",
+    )
+    _close(
+        budget["authorized_route_ceiling_sum"],
+        293.0,
+        "authorized route ceiling sum",
+    )
+    _equal(
+        budget["aggregate_hard_ceiling_remains_binding"],
+        True,
+        "aggregate hard ceiling policy",
+    )
     _equal(replacement["route_count"], 12, "Finance replacement routes")
     calls = plan["call_accounting"]
     _equal(
