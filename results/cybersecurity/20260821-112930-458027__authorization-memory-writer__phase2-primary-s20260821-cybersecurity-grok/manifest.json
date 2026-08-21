@@ -1,0 +1,838 @@
+{
+  "affected_family_count": 1,
+  "artifact_schema_versions": {
+    "evidence": 3,
+    "executor_plan": 1,
+    "fidelity": 2,
+    "interventions": 2,
+    "memories": 4,
+    "memory_attempts": 6,
+    "memory_states": 3,
+    "model_contexts": 1,
+    "pressure_source_jobs": 1,
+    "substantive_eligibility": 2,
+    "trials": 5,
+    "typed_memory_payload": "3",
+    "witnesses": 2,
+    "writer_bundle_evidence": 3,
+    "writer_bundle_memories": 4,
+    "writer_calls": 1,
+    "writer_model_contexts": 1
+  },
+  "batch_size": 20,
+  "candidate_cap": 20,
+  "candidate_cap_per_family": 2,
+  "capacity": {
+    "cases": [
+      {
+        "case_id": "cyberv3_claim_identity",
+        "faithful_text_tokens": 1219,
+        "faithful_typed_tokens": 1312,
+        "history_tokens": 21619
+      },
+      {
+        "case_id": "cyberv3_claim_endpoint",
+        "faithful_text_tokens": 1211,
+        "faithful_typed_tokens": 1304,
+        "history_tokens": 21606
+      },
+      {
+        "case_id": "cyberv3_claim_vault",
+        "faithful_text_tokens": 1219,
+        "faithful_typed_tokens": 1312,
+        "history_tokens": 21408
+      },
+      {
+        "case_id": "cyberv3_claim_kubernetes",
+        "faithful_text_tokens": 1219,
+        "faithful_typed_tokens": 1316,
+        "history_tokens": 21679
+      },
+      {
+        "case_id": "cyberv3_claim_firewall",
+        "faithful_text_tokens": 1207,
+        "faithful_typed_tokens": 1298,
+        "history_tokens": 21536
+      },
+      {
+        "case_id": "cyberv3_claim_storage",
+        "faithful_text_tokens": 1237,
+        "faithful_typed_tokens": 1328,
+        "history_tokens": 22052
+      },
+      {
+        "case_id": "cyberv3_claim_database",
+        "faithful_text_tokens": 1211,
+        "faithful_typed_tokens": 1308,
+        "history_tokens": 21576
+      },
+      {
+        "case_id": "cyberv3_claim_runner",
+        "faithful_text_tokens": 1193,
+        "faithful_typed_tokens": 1284,
+        "history_tokens": 21225
+      },
+      {
+        "case_id": "cyberv3_claim_email",
+        "faithful_text_tokens": 1213,
+        "faithful_typed_tokens": 1304,
+        "history_tokens": 21723
+      },
+      {
+        "case_id": "cyberv3_claim_edge",
+        "faithful_text_tokens": 1223,
+        "faithful_typed_tokens": 1314,
+        "history_tokens": 21984
+      },
+      {
+        "case_id": "cyberv3_claim_observability",
+        "faithful_text_tokens": 1201,
+        "faithful_typed_tokens": 1294,
+        "history_tokens": 21541
+      },
+      {
+        "case_id": "cyberv3_claim_artifact",
+        "faithful_text_tokens": 1215,
+        "faithful_typed_tokens": 1308,
+        "history_tokens": 21172
+      },
+      {
+        "case_id": "cyberv3_claim_vpn",
+        "faithful_text_tokens": 1229,
+        "faithful_typed_tokens": 1324,
+        "history_tokens": 22292
+      },
+      {
+        "case_id": "cyberv3_claim_broker",
+        "faithful_text_tokens": 1213,
+        "faithful_typed_tokens": 1306,
+        "history_tokens": 21971
+      },
+      {
+        "case_id": "cyberv3_claim_backup",
+        "faithful_text_tokens": 1205,
+        "faithful_typed_tokens": 1296,
+        "history_tokens": 21506
+      },
+      {
+        "case_id": "cyberv3_claim_ca",
+        "faithful_text_tokens": 1229,
+        "faithful_typed_tokens": 1320,
+        "history_tokens": 21828
+      }
+    ],
+    "largest_faithful_tokens": 1328,
+    "minimum_history_ratio": 8,
+    "primary_tokens": 2646,
+    "reference_tokenizer": "cl100k_base",
+    "tight_tokens": 1654
+  },
+  "capacity_tier": "primary",
+  "case_ids": [
+    "cyberv3_claim_identity",
+    "cyberv3_claim_endpoint",
+    "cyberv3_claim_vault",
+    "cyberv3_claim_kubernetes",
+    "cyberv3_claim_firewall",
+    "cyberv3_claim_storage",
+    "cyberv3_claim_database",
+    "cyberv3_claim_runner",
+    "cyberv3_claim_email",
+    "cyberv3_claim_edge",
+    "cyberv3_claim_observability",
+    "cyberv3_claim_artifact",
+    "cyberv3_claim_vpn",
+    "cyberv3_claim_broker",
+    "cyberv3_claim_backup",
+    "cyberv3_claim_ca"
+  ],
+  "checkpoint": {
+    "counts": {
+      "evidence": 68,
+      "executor_plan": 1032,
+      "fidelity": 160,
+      "interventions": 2,
+      "memories": 318,
+      "memory_attempts": 358,
+      "memory_states": 352,
+      "pressure_source_jobs": 1032,
+      "substantive_eligibility": 163,
+      "witnesses": 2,
+      "writer_bundle_evidence": 64,
+      "writer_bundle_memories": 316,
+      "writer_calls": 358,
+      "writer_model_contexts": 358
+    },
+    "executor_call_ids_sha256": "da99e4ac142bf1d6d5c7945b0bf1d9784bc252ca2ee1b0e5bc1e83c50dc7cdb6",
+    "executor_calls": 1032,
+    "files": {
+      "evidence": {
+        "path": "evidence.jsonl",
+        "rows": 68,
+        "sha256": "927b3fc3fca8ecd953b85c76df3d16366b76c73094ae748cd1ca03d1350ac97b"
+      },
+      "executor_plan": {
+        "path": "executor_plan.jsonl",
+        "rows": 1032,
+        "sha256": "d70edeee875d35ec04f55fc09eed8da3c0184170f159f1f58113aa4ddc574c38"
+      },
+      "fidelity": {
+        "path": "fidelity.jsonl",
+        "rows": 160,
+        "sha256": "bda461d45a9de2f4d4b24806d48b4a1407c496fb5b532501e401ae3d8a377204"
+      },
+      "interventions": {
+        "path": "interventions.jsonl",
+        "rows": 2,
+        "sha256": "0f9b953250cadb60a6af345b9dfe8ec0a7cc0664d9f3b78cffc70aa464501761"
+      },
+      "memories": {
+        "path": "memories.jsonl",
+        "rows": 318,
+        "sha256": "ca2e8cc74e7a9641d355cdce324d53dd6b977e6608f7b594d8613928b5cd6393"
+      },
+      "memory_attempts": {
+        "path": "memory_attempts.jsonl",
+        "rows": 358,
+        "sha256": "2e92241076183f044eb5bdddf1a988fe6cb453688adf2647283cfeba77f35043"
+      },
+      "memory_states": {
+        "path": "memory_states.jsonl",
+        "rows": 352,
+        "sha256": "42edd587810a45e803de33ce3c913f80634cae5a89a5f2ed5fb662654ec2ad77"
+      },
+      "pressure_source_jobs": {
+        "path": "pressure_source_jobs.jsonl",
+        "rows": 1032,
+        "sha256": "8d809628cbfe29a55a7f1f21d6650edf5c7e116404a7621dbf02b45e4d1a2804"
+      },
+      "substantive_eligibility": {
+        "path": "substantive_eligibility.jsonl",
+        "rows": 163,
+        "sha256": "10591622b9bd29d8be1bb0c1b6a9613cec7f4a17df6549a8dd78647f16f36c58"
+      },
+      "witnesses": {
+        "path": "witnesses.jsonl",
+        "rows": 2,
+        "sha256": "ef7a6d9c4c117d339deb74037abcddfb08939a2283caccddc30da39dc9cd8410"
+      },
+      "writer_bundle_evidence": {
+        "path": "writer_bundle_evidence.jsonl",
+        "rows": 64,
+        "sha256": "f98b4c83b7c29605eacc1ac6e3c5be6fb717bbb7e8d0398f770e677b524a4c30"
+      },
+      "writer_bundle_memories": {
+        "path": "writer_bundle_memories.jsonl",
+        "rows": 316,
+        "sha256": "b0bb3eab2b1e9a8da6aaa72ffec97ece4c1382ec40e96b805eb2dbf39f35467e"
+      },
+      "writer_calls": {
+        "path": "writer_calls.jsonl",
+        "rows": 358,
+        "sha256": "ed63ca29e397ad17ae5c5e18b4a6297e02af4af2f6cbcf2985ae1d55030571ab"
+      },
+      "writer_model_contexts": {
+        "path": "writer_model_contexts.jsonl",
+        "rows": 358,
+        "sha256": "9a1a0a5ed34eb7950b0bc7988150908528e01c00e9bce0bd464ded65dd39e4d9"
+      }
+    },
+    "schema_version": "writer_execution_checkpoint_v1",
+    "selected_before_executor_calls": true,
+    "writer_calls_immutable": true,
+    "writer_trajectories_regenerated_on_resume": 0
+  },
+  "command": "python -m experiments.run --domain cybersecurity --corpus-version benchmark_v1 --presentation-version naturalistic_v1 --study writer --writer-targets grok_4_3_openrouter --executor-targets gptoss_baseten,deepseek_baseten --writer-runs 1 --executor-runs 1 --writer-max-attempts 2 --capacity-tier primary --seed 20260821 --tag phase2-primary-s20260821-cybersecurity-grok --estimated-cost-usd 11.0",
+  "conditions": [
+    "one_shot_text",
+    "one_shot_typed",
+    "incremental_text",
+    "incremental_typed"
+  ],
+  "corpus_provenance": {
+    "case_count": 16,
+    "challenge": {
+      "freeze_status": "frozen",
+      "maturity": "core",
+      "presentation": "naturalistic_v1",
+      "pressure_profile": "financial_urgency_v1"
+    },
+    "corpus_version": "benchmark_v1",
+    "freeze_status": "frozen",
+    "generator_version": "cybersecurity_final_signed_snapshot_v1",
+    "release": {
+      "freeze_status": "claim_frozen",
+      "maturity": "core",
+      "release_id": "cybersecurity_v1",
+      "release_manifest_sha256": "a6de16240f71c24bcc999cd4e06dbc9d12608c2087b38b64b1935296463aa6a6"
+    },
+    "release_hash": "a6de16240f71c24bcc999cd4e06dbc9d12608c2087b38b64b1935296463aa6a6",
+    "release_id": "cybersecurity_v1",
+    "source_files": {
+      "compile_v3.py": "e10a3bd1bb75740bdbee543db560da26859ca1b6a2081bdf4e347f97b38c53c7",
+      "corpus_final.py": "d098df0de41510019c82d1effc0c797e62e91618560688d09a72bf0caf75e8e3",
+      "corpus_v10.py": "ace3b242cff0fa845c71ea1caf92ad3f119f4b78f2b8567a36f56ca748db7282",
+      "corpus_v11.py": "ed1affd83a2a1a0a342717ac5803b1e24eb2afbb15be17399beaea8ad1e06ed0",
+      "corpus_v12.py": "798137d734db98ce06391c0287a709df725fa56721c972b0e3d72801f750e44f",
+      "corpus_v3.py": "9af2797ff5c42b370229d6496711e1d885684e709a95a3f60e2b341f5357ad00",
+      "corpus_v3/benchmark_v1_base.yaml": "3626c3aef57e53bb2718f2bd1c35e68169be150089d56ac328d8c987cba26f2c",
+      "corpus_v7.py": "b113050b3abf8d9a54e67bd9cceb1a145ee525fdedf43c2493f6e73e5e2a5019",
+      "data/benchmark_v1_base.json": "4b6cb0ee7e880edf619fe0447993cd1462e8f9d4dceed0f5ace61f90489dab62"
+    },
+    "source_format": "cybersecurity_source_v1",
+    "source_sha256": "889a48dd228d35edd761201f0749e32e6e29e911cf2e4ce1e20785e9276f085c"
+  },
+  "corpus_version": "benchmark_v1",
+  "counts": {
+    "calls": 1494,
+    "evidence": 68,
+    "executor_plan": 1032,
+    "fidelity": 160,
+    "interventions": 2,
+    "memories": 318,
+    "memory_attempts": 358,
+    "memory_states": 352,
+    "model_contexts": 1390,
+    "pressure_source_jobs": 1032,
+    "substantive_eligibility": 163,
+    "trials": 1032,
+    "witnesses": 2,
+    "writer_bundle_evidence": 64,
+    "writer_bundle_memories": 316,
+    "writer_calls": 358,
+    "writer_model_contexts": 358
+  },
+  "domain_adapter_version": "1",
+  "domain_id": "cybersecurity",
+  "domain_maturity": "core",
+  "executor": {
+    "active": true,
+    "runs": 1,
+    "target_routes": [
+      {
+        "call_profiles": [
+          {
+            "effective_parameters": {
+              "max_tokens": 4096,
+              "required_capabilities": [
+                "native_tools",
+                "seed"
+              ],
+              "seed": 20260821,
+              "temperature": 1.0,
+              "tool_choice": "auto",
+              "tool_names": [
+                "execute_submitted_payload",
+                "execute_operational_payload",
+                "request_incident_approval",
+                "decline_response_action"
+              ]
+            },
+            "run_id": 0
+          }
+        ],
+        "capabilities": [
+          "forced_tool_choice",
+          "native_tools",
+          "seed"
+        ],
+        "max_concurrency": 20,
+        "provider": "baseten",
+        "rate_limit": {
+          "max_rate": null,
+          "period_seconds": 60.0
+        },
+        "request_parameters": {},
+        "requested_model": "gptoss",
+        "resolved_model": "openai/gpt-oss-120b",
+        "response_model": "openai/gpt-oss-120b",
+        "response_models_observed": [
+          "openai/gpt-oss-120b"
+        ],
+        "target_id": "gptoss_baseten"
+      },
+      {
+        "call_profiles": [
+          {
+            "effective_parameters": {
+              "max_tokens": 4096,
+              "required_capabilities": [
+                "native_tools",
+                "seed"
+              ],
+              "seed": 20260821,
+              "temperature": 1.0,
+              "tool_choice": "auto",
+              "tool_names": [
+                "execute_submitted_payload",
+                "execute_operational_payload",
+                "request_incident_approval",
+                "decline_response_action"
+              ]
+            },
+            "run_id": 0
+          }
+        ],
+        "capabilities": [
+          "forced_tool_choice",
+          "native_tools",
+          "seed"
+        ],
+        "max_concurrency": 20,
+        "provider": "baseten",
+        "rate_limit": {
+          "max_rate": null,
+          "period_seconds": 60.0
+        },
+        "request_parameters": {},
+        "requested_model": "deepseek",
+        "resolved_model": "deepseek-ai/DeepSeek-V4-Pro",
+        "response_model": "deepseek-ai/DeepSeek-V4-Pro",
+        "response_models_observed": [
+          "deepseek-ai/DeepSeek-V4-Pro"
+        ],
+        "target_id": "deepseek_baseten"
+      }
+    ],
+    "targets": [
+      "gptoss_baseten",
+      "deepseek_baseten"
+    ],
+    "task": "executor",
+    "task_parameters": {
+      "max_tokens": 4096,
+      "temperature": 1.0
+    }
+  },
+  "files": {
+    "calls": {
+      "path": "calls.jsonl",
+      "rows": 1494,
+      "sha256": "d2fbb8cd11bcb7e25dddee687bc46ab2e6e185d3775b947b24f7a8078098edf2"
+    },
+    "evidence": {
+      "path": "evidence.jsonl",
+      "rows": 68,
+      "sha256": "927b3fc3fca8ecd953b85c76df3d16366b76c73094ae748cd1ca03d1350ac97b"
+    },
+    "executor_plan": {
+      "path": "executor_plan.jsonl",
+      "rows": 1032,
+      "sha256": "d70edeee875d35ec04f55fc09eed8da3c0184170f159f1f58113aa4ddc574c38"
+    },
+    "fidelity": {
+      "path": "fidelity.jsonl",
+      "rows": 160,
+      "sha256": "bda461d45a9de2f4d4b24806d48b4a1407c496fb5b532501e401ae3d8a377204"
+    },
+    "interventions": {
+      "path": "interventions.jsonl",
+      "rows": 2,
+      "sha256": "0f9b953250cadb60a6af345b9dfe8ec0a7cc0664d9f3b78cffc70aa464501761"
+    },
+    "memories": {
+      "path": "memories.jsonl",
+      "rows": 318,
+      "sha256": "ca2e8cc74e7a9641d355cdce324d53dd6b977e6608f7b594d8613928b5cd6393"
+    },
+    "memory_attempts": {
+      "path": "memory_attempts.jsonl",
+      "rows": 358,
+      "sha256": "2e92241076183f044eb5bdddf1a988fe6cb453688adf2647283cfeba77f35043"
+    },
+    "memory_states": {
+      "path": "memory_states.jsonl",
+      "rows": 352,
+      "sha256": "42edd587810a45e803de33ce3c913f80634cae5a89a5f2ed5fb662654ec2ad77"
+    },
+    "model_contexts": {
+      "path": "model_contexts.jsonl",
+      "rows": 1390,
+      "sha256": "590890a8e30b13a07d0add03b4e0bd33809a30721aed0076ee776c6938755c17"
+    },
+    "pressure_source_jobs": {
+      "path": "pressure_source_jobs.jsonl",
+      "rows": 1032,
+      "sha256": "8d809628cbfe29a55a7f1f21d6650edf5c7e116404a7621dbf02b45e4d1a2804"
+    },
+    "substantive_eligibility": {
+      "path": "substantive_eligibility.jsonl",
+      "rows": 163,
+      "sha256": "10591622b9bd29d8be1bb0c1b6a9613cec7f4a17df6549a8dd78647f16f36c58"
+    },
+    "trials": {
+      "path": "trials.jsonl",
+      "rows": 1032,
+      "sha256": "dc2066669e90a93f6da9af32eab62cd8667c8f43240164dd5dc5c7a87fa76b66"
+    },
+    "witnesses": {
+      "path": "witnesses.jsonl",
+      "rows": 2,
+      "sha256": "ef7a6d9c4c117d339deb74037abcddfb08939a2283caccddc30da39dc9cd8410"
+    },
+    "writer_bundle_evidence": {
+      "path": "writer_bundle_evidence.jsonl",
+      "rows": 64,
+      "sha256": "f98b4c83b7c29605eacc1ac6e3c5be6fb717bbb7e8d0398f770e677b524a4c30"
+    },
+    "writer_bundle_memories": {
+      "path": "writer_bundle_memories.jsonl",
+      "rows": 316,
+      "sha256": "b0bb3eab2b1e9a8da6aaa72ffec97ece4c1382ec40e96b805eb2dbf39f35467e"
+    },
+    "writer_calls": {
+      "path": "writer_calls.jsonl",
+      "rows": 358,
+      "sha256": "ed63ca29e397ad17ae5c5e18b4a6297e02af4af2f6cbcf2985ae1d55030571ab"
+    },
+    "writer_model_contexts": {
+      "path": "writer_model_contexts.jsonl",
+      "rows": 358,
+      "sha256": "9a1a0a5ed34eb7950b0bc7988150908528e01c00e9bce0bd464ded65dd39e4d9"
+    }
+  },
+  "finished_at": "2026-08-21T11:46:12.043160+02:00",
+  "git": {
+    "branch": "chore/phase2-seeded-replication",
+    "commit": "2c88d8c2f0a92b06a53eb15d95eb2a35f3aeeefa",
+    "dirty": true
+  },
+  "implementation_files": {
+    "config.yaml": "d0bb7e6372248d52d9323f2ae9c3aa1f84544a0c8bf7fffe889f63c9e7402dc8",
+    "domains/__init__.py": "13c24d8783d5cb8d7067bbb16aed8bee31a20f5d3ee6c881042eedbdde4f68e7",
+    "domains/base.py": "ebcc9b0111d21471064c28a0d0ed42d959dd5ba122193b0d58223b5e34abbfcd",
+    "domains/cybersecurity/__init__.py": "6c5752b9cc0eb2770e52b7f6877faa11c1c6bc41ccf063da92d7f13c52bc8651",
+    "domains/cybersecurity/adapter.py": "bd8e92a86d4248a138dbf8ca5364509a039e1c62ac5e7dddab498e8f36ce8e7e",
+    "domains/cybersecurity/capacity.py": "fb8fe3bc604a74152ba745a39ec80649f2e9f54467fa7d92e4f4041391aec35e",
+    "domains/cybersecurity/compile_v3.py": "e10a3bd1bb75740bdbee543db560da26859ca1b6a2081bdf4e347f97b38c53c7",
+    "domains/cybersecurity/corpus.py": "eca10de8b419d6909bd47052b0f75470ccfb5e5810d45eb5cd711d76b14960ec",
+    "domains/cybersecurity/corpus_final.py": "d098df0de41510019c82d1effc0c797e62e91618560688d09a72bf0caf75e8e3",
+    "domains/cybersecurity/corpus_v10.py": "ace3b242cff0fa845c71ea1caf92ad3f119f4b78f2b8567a36f56ca748db7282",
+    "domains/cybersecurity/corpus_v11.py": "ed1affd83a2a1a0a342717ac5803b1e24eb2afbb15be17399beaea8ad1e06ed0",
+    "domains/cybersecurity/corpus_v12.py": "798137d734db98ce06391c0287a709df725fa56721c972b0e3d72801f750e44f",
+    "domains/cybersecurity/corpus_v3.py": "9af2797ff5c42b370229d6496711e1d885684e709a95a3f60e2b341f5357ad00",
+    "domains/cybersecurity/corpus_v7.py": "b113050b3abf8d9a54e67bd9cceb1a145ee525fdedf43c2493f6e73e5e2a5019",
+    "domains/cybersecurity/finalize_results.py": "5d04ed6352c8efccb2d31d7b8dfebce6b0644fd8cc96724f98eef33d5d8b1f3d",
+    "domains/cybersecurity/models.py": "49e9a3541312b529437528ffe91f95e5c590d1d893e868427ea8f68dc540715c",
+    "domains/cybersecurity/prepare_final_release.py": "1e36915e3b53a11d9f32699837c2dbe28aad6cca5d383fc7af7092898a07f601",
+    "domains/cybersecurity/prepare_review_materials.py": "9f3d2fc256cb8258e9b38bf492c77ceac7d4e3f5053f5face4c3c73041ede3b3",
+    "domains/cybersecurity/pressure_final.py": "b0a4c84a5d659581c968dcf0f352bf985714653b2d36457db3c84fe40eb1636b",
+    "domains/cybersecurity/release.py": "1a7394f9e699fb7ad9684f26c740804352847769498874be40d21865c3b3c9b3",
+    "domains/cybersecurity/release_adoption.py": "e905371f414c798e950f09187779e6e912a75e3f41b2c5bf157ecdae27d82873",
+    "domains/cybersecurity/semantics.py": "6d4a6b601288843255093b671e0a53e8bedf62567476f54c8bf3815a9e8080ea",
+    "domains/cybersecurity/studies.py": "16d20c07d8288f7fa507344f7d656173a2a562f5a4f7a4b2d653e68321ddd653",
+    "experiments/authorization_memory/__init__.py": "cd85087993a4e0f108f35e74b8dc8b25781625ef13aa8671173d33dc2095e08e",
+    "experiments/authorization_memory/challenges.py": "5cec878d34254d47b66d3419471a41e913ccf5b443228efd5c3480333e1c615d",
+    "experiments/authorization_memory/conditions.py": "ebf4cb2df1e5e65eab3b1c8a57de6284584b801b1003f8cab3669ddbd30d65eb",
+    "experiments/authorization_memory/conformance.py": "41473787ac790ec571f3519b6a48bdaa6aea845eb6e2e402f422fa6199e6b8bd",
+    "experiments/authorization_memory/evaluation_awareness.py": "9524532b7e61c1b8bf1c28274d65752da5c44fb16e849f2633848872f37f64c1",
+    "experiments/authorization_memory/evaluation_awareness_fixture.py": "0ae75c6ae5d7e770a22459c9773f1a8c4ff141639b7b9900c9a811dd40559f98",
+    "experiments/authorization_memory/executor_plan.py": "0a99082608f800b2370633067816ece2cfd768ac26e0ec3af0f008ba3533e309",
+    "experiments/authorization_memory/langmem_writer.py": "0bd4d2c6d86837e0234bec1247aecef3828e2365cdfafd42d2f237212072ed8e",
+    "experiments/authorization_memory/leakage.py": "58e64a4b74df03e4e9a46f7515b3f44744acf67ea33e3c26f39b70bde533d9f5",
+    "experiments/authorization_memory/persistence.py": "a7a23b65cddaa76498729c2db57ad8b1ee0bb85bf193d75e6f6af97dc321ff91",
+    "experiments/authorization_memory/pipeline.py": "ab3ddf8ac8dce8341386454610d8949cb5f1606990db7d51b7ce07c2ed603dca",
+    "experiments/authorization_memory/provenance.py": "05595bff207ad987f4f29231393a4ce1138efa33a610e62bf6a87f88a6e06fbc",
+    "experiments/authorization_memory/resume.py": "55245024062401888e615f4f9b68d702f115f146ac2d10d1ac540479eb4ee451",
+    "experiments/authorization_memory/runner.py": "f1b163d3a35a2bd83f25947afba27b82859fb605de1f53be0c779ee24f4b7c1a",
+    "experiments/authorization_memory/schemas.py": "e336e5b65faebcd45470b180557d1800ab2021fdabd99e0b58135997a5b0f5f9",
+    "experiments/authorization_memory/study_engine.py": "2141cadba7d5460f88236a47cd3f25dd7c15c8b9909b0ef329bf86178fc74901",
+    "experiments/authorization_memory/study_plan.py": "96fe799ffa638fdac43481d68b16eaf8bac99ebdbb3ab81c645ff1879131845c",
+    "experiments/authorization_memory/surfaces.py": "5a9e4a04e569c802a16b029d85506f4135912181a8422feac00f0f9ea506814f",
+    "experiments/authorization_memory/tokens.py": "4c74ba3268f9831e6285921fa4365692e774a8a9c9845b7b0f47bcca69d4138d",
+    "experiments/authorization_memory/validation.py": "24ef23e698001ac48bfda29f927970e7d8ad915737aa198dc44e9b7cfa8c5103",
+    "experiments/run.py": "96b3a3ccb9a9f29c9da34619cc3bfe1c8eb85c359931b48829faa05d32d9adcb",
+    "pyproject.toml": "527d7bb5236cba1b1b7778dd06307b168b6c703ce203d8881edbf9db06473ce0",
+    "src/eal_bench/llm/__init__.py": "8932ac3b18bfc43b0a702b30cb813d541dec522fd76d65adcc8a7cd9387d0573",
+    "src/eal_bench/llm/client.py": "98ae242d4eb608fdd9d18ad87460f0480a5aa955d29e15d430ad3c742339ea54",
+    "src/eal_bench/llm/config.py": "ed8a4887ca8146f3f4c3b9803b4cede4ab0682ddf97da4f021ca85679207e9fd",
+    "src/eal_bench/llm/errors.py": "4f1ae9e1d3cc961d25172a93e9e6952dae0b1dc419d29da61cc7ea85b169d7f1",
+    "src/eal_bench/llm/langchain_models.py": "a832ff8d2fdeed0dbad9afbad8829ebc6b15b6f4be13cbc719c3e826638f84f9",
+    "src/eal_bench/llm/logger.py": "1f2e50ff91ec1dbe3c9429ffee8b1091a6137b784aff0824ea77758e43bf7b9a",
+    "src/eal_bench/llm/models.py": "d5215df9477892824fdbb6b3b2eff77f00a05e8462278530a8f0ab61332fccf3",
+    "src/eal_bench/llm/ratelimit.py": "4069046b916569aab9c45417fb96be09f7c2fad5f1c8e850764782ec142fddbb",
+    "uv.lock": "413cc53a2524bb4064a89029545e2d594ed8154ac2e74b8d54e524d69fd0fefc"
+  },
+  "memory_implementation_hash": "bd98a82055492a8311fb5b1d93a31bbede967762b79fa3696bb00f1e658ece03",
+  "memory_implementation_id": "langmem_profile",
+  "model_visible_executor_surfaces": {
+    "context_hashes": 516,
+    "jobs": 516,
+    "status": "passed",
+    "unique_context_hashes": 412
+  },
+  "offline_writer_fixture_scenarios": [
+    "exact_memory",
+    "substantive_typed_overgrant",
+    "typed_undergrant",
+    "failed_update",
+    "no_change_update",
+    "repair",
+    "zero_eligible_overgrant"
+  ],
+  "planned_dynamic_executor_jobs_max": 40,
+  "planned_dynamic_executor_jobs_min": 0,
+  "planned_ordinary_executor_jobs": 512,
+  "post_writer_expansion": {
+    "counts": {
+      "fidelity": 160,
+      "interventions": 2,
+      "pressure_source_jobs": 1032,
+      "substantive_eligibility": 163,
+      "witnesses": 2
+    },
+    "executor_jobs": 516,
+    "files": {
+      "fidelity": {
+        "path": "fidelity.jsonl",
+        "rows": 160,
+        "sha256": "bda461d45a9de2f4d4b24806d48b4a1407c496fb5b532501e401ae3d8a377204"
+      },
+      "interventions": {
+        "path": "interventions.jsonl",
+        "rows": 2,
+        "sha256": "0f9b953250cadb60a6af345b9dfe8ec0a7cc0664d9f3b78cffc70aa464501761"
+      },
+      "pressure_source_jobs": {
+        "path": "pressure_source_jobs.jsonl",
+        "rows": 1032,
+        "sha256": "8d809628cbfe29a55a7f1f21d6650edf5c7e116404a7621dbf02b45e4d1a2804"
+      },
+      "substantive_eligibility": {
+        "path": "substantive_eligibility.jsonl",
+        "rows": 163,
+        "sha256": "10591622b9bd29d8be1bb0c1b6a9613cec7f4a17df6549a8dd78647f16f36c58"
+      },
+      "witnesses": {
+        "path": "witnesses.jsonl",
+        "rows": 2,
+        "sha256": "ef7a6d9c4c117d339deb74037abcddfb08939a2283caccddc30da39dc9cd8410"
+      }
+    },
+    "selected_before_executor_calls": true
+  },
+  "presentation": {
+    "description": "Naturalistic incident-response workplace rendering.",
+    "overlay_files": [
+      "domains/cybersecurity/presentations/naturalistic_v1.json"
+    ],
+    "overlay_hashes": {
+      "domains/cybersecurity/presentations/naturalistic_v1.json": "fd2f56e4fe630522c977bfbefbeef505c40b5ceda5651daa143f27ebe52a2d68"
+    },
+    "presentation_id": "naturalistic_v1",
+    "prompt_policy_id": "cybersecurity_prompt_v1",
+    "validity_gates": [
+      "cybersecurity_naturalistic_surface_v1"
+    ]
+  },
+  "presentation_hash": "e46b8ffa20c275d467504b8d48221fd7879c4c36fc2da38376be6fe01b333512",
+  "pressure_source_job_count": 1032,
+  "reviewer": null,
+  "route": "writer",
+  "runtime": {
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.6"
+  },
+  "screened_typed_checkpoint_count": 160,
+  "seed": 20260821,
+  "selected_candidate_count": 2,
+  "selected_family_count": 1,
+  "selection_uses_executor_behavior": false,
+  "source_files": {
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/cybersecurity/compile_v3.py": "e10a3bd1bb75740bdbee543db560da26859ca1b6a2081bdf4e347f97b38c53c7",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/cybersecurity/corpus_final.py": "d098df0de41510019c82d1effc0c797e62e91618560688d09a72bf0caf75e8e3",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/cybersecurity/corpus_v10.py": "ace3b242cff0fa845c71ea1caf92ad3f119f4b78f2b8567a36f56ca748db7282",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/cybersecurity/corpus_v11.py": "ed1affd83a2a1a0a342717ac5803b1e24eb2afbb15be17399beaea8ad1e06ed0",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/cybersecurity/corpus_v12.py": "798137d734db98ce06391c0287a709df725fa56721c972b0e3d72801f750e44f",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/cybersecurity/corpus_v3.py": "9af2797ff5c42b370229d6496711e1d885684e709a95a3f60e2b341f5357ad00",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/cybersecurity/corpus_v3/benchmark_v1_base.yaml": "3626c3aef57e53bb2718f2bd1c35e68169be150089d56ac328d8c987cba26f2c",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/cybersecurity/corpus_v7.py": "b113050b3abf8d9a54e67bd9cceb1a145ee525fdedf43c2493f6e73e5e2a5019",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/cybersecurity/data/benchmark_v1_base.json": "4b6cb0ee7e880edf619fe0447993cd1462e8f9d4dceed0f5ace61f90489dab62"
+  },
+  "started_at": "2026-08-21T11:29:30.473663+02:00",
+  "status": "completed",
+  "study": "writer",
+  "study_plan": {
+    "executor_only": false,
+    "metadata": {
+      "candidate_cap": 20,
+      "candidate_cap_per_family": 2,
+      "conditions": [
+        "one_shot_text",
+        "one_shot_typed",
+        "incremental_text",
+        "incremental_typed"
+      ],
+      "offline_writer_fixture_scenarios": [
+        "exact_memory",
+        "substantive_typed_overgrant",
+        "typed_undergrant",
+        "failed_update",
+        "no_change_update",
+        "repair",
+        "zero_eligible_overgrant"
+      ],
+      "planned_dynamic_executor_jobs_max": 40,
+      "planned_dynamic_executor_jobs_min": 0,
+      "planned_ordinary_executor_jobs": 512,
+      "route": "writer",
+      "selection_uses_executor_behavior": false,
+      "typed_screening_checkpoints": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "pressure_specs": [],
+    "writer_only": false
+  },
+  "substantive_candidate_count": 5,
+  "typed_screening_checkpoints": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9
+  ],
+  "writer": {
+    "active": true,
+    "framework": {
+      "manager": {
+        "async_lifecycle": "single_event_loop_per_target_group_v1",
+        "enable_deletes": false,
+        "enable_inserts": false,
+        "enable_updates": true,
+        "free_text_value_contract": "atomic_plain_text_string_v1",
+        "invocation_timeout_seconds": 180,
+        "max_steps": 1,
+        "profile_identity_contract": "exact_existing_profile_id_v1",
+        "route_timeout_seconds": 3600,
+        "trustcall_validation_attempts": 1,
+        "typed_value_contract": "schema_native_json_v1"
+      },
+      "memory_implementation_hash": "bd98a82055492a8311fb5b1d93a31bbede967762b79fa3696bb00f1e658ece03",
+      "memory_implementation_id": "langmem_profile",
+      "profile_mode": "single_stable_profile",
+      "versions": {
+        "langchain": "1.3.14",
+        "langchain-core": "1.4.9",
+        "langchain-openai": "1.3.5",
+        "langchain-openrouter": "0.2.6",
+        "langmem": "0.0.30",
+        "trustcall": "0.0.39"
+      }
+    },
+    "max_attempts": 2,
+    "memory_implementation_hash": "bd98a82055492a8311fb5b1d93a31bbede967762b79fa3696bb00f1e658ece03",
+    "memory_implementation_id": "langmem_profile",
+    "profile_schema": {
+      "free_text": "langmem.knowledge.extraction.Memory",
+      "typed": "domains.cybersecurity.adapter.MemoryProfile",
+      "typed_payload_schema_id": "cybersecurity/incident-response-state/v4"
+    },
+    "route_timeout_override": false,
+    "route_timeout_seconds": 3600,
+    "runs": 1,
+    "target_routes": [
+      {
+        "call_profiles": [
+          {
+            "architecture": "free_text",
+            "effective_parameters": {
+              "max_tokens": 4096,
+              "required_capabilities": [
+                "forced_tool_choice",
+                "native_tools",
+                "seed"
+              ],
+              "seed": 20260821,
+              "temperature": 1.0
+            },
+            "manager": {
+              "async_lifecycle": "single_event_loop_per_target_group_v1",
+              "enable_deletes": false,
+              "enable_inserts": false,
+              "enable_updates": true,
+              "free_text_value_contract": "atomic_plain_text_string_v1",
+              "invocation_timeout_seconds": 180,
+              "max_steps": 1,
+              "profile_identity_contract": "exact_existing_profile_id_v1",
+              "route_timeout_seconds": 3600,
+              "trustcall_validation_attempts": 1,
+              "typed_value_contract": "schema_native_json_v1"
+            },
+            "model_override": null,
+            "run_id": 0,
+            "writer_seed": 20260821
+          },
+          {
+            "architecture": "typed",
+            "effective_parameters": {
+              "max_tokens": 4096,
+              "required_capabilities": [
+                "forced_tool_choice",
+                "native_tools",
+                "seed"
+              ],
+              "seed": 20260821,
+              "temperature": 1.0
+            },
+            "manager": {
+              "async_lifecycle": "single_event_loop_per_target_group_v1",
+              "enable_deletes": false,
+              "enable_inserts": false,
+              "enable_updates": true,
+              "free_text_value_contract": "atomic_plain_text_string_v1",
+              "invocation_timeout_seconds": 180,
+              "max_steps": 1,
+              "profile_identity_contract": "exact_existing_profile_id_v1",
+              "route_timeout_seconds": 3600,
+              "trustcall_validation_attempts": 1,
+              "typed_value_contract": "schema_native_json_v1"
+            },
+            "model_override": null,
+            "run_id": 0,
+            "writer_seed": 20260821
+          }
+        ],
+        "capabilities": [
+          "forced_tool_choice",
+          "native_tools",
+          "seed"
+        ],
+        "max_concurrency": 20,
+        "provider": "openrouter",
+        "rate_limit": {
+          "max_rate": null,
+          "period_seconds": 60.0
+        },
+        "request_parameters": {},
+        "requested_model": "x-ai/grok-4.3",
+        "resolved_model": "x-ai/grok-4.3",
+        "response_model": "x-ai/grok-4.3",
+        "response_models_observed": [
+          "x-ai/grok-4.3"
+        ],
+        "target_id": "grok_4_3_openrouter"
+      }
+    ],
+    "targets": [
+      "grok_4_3_openrouter"
+    ],
+    "task": "writer",
+    "task_parameters": {
+      "max_tokens": 4096,
+      "temperature": 1.0
+    }
+  }
+}

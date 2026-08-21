@@ -1,0 +1,876 @@
+{
+  "artifact_schema_versions": {
+    "evidence": 3,
+    "executor_plan": 1,
+    "fidelity": 1,
+    "interventions": 1,
+    "memories": 4,
+    "memory_attempts": 6,
+    "memory_states": 3,
+    "model_contexts": 1,
+    "pressure_source_jobs": 1,
+    "substantive_eligibility": 1,
+    "trials": 5,
+    "typed_memory_payload": "3",
+    "witnesses": 1,
+    "writer_bundle_evidence": 3,
+    "writer_bundle_memories": 4,
+    "writer_calls": 1,
+    "writer_model_contexts": 1
+  },
+  "batch_size": 20,
+  "candidate_cap": 20,
+  "capacity": {
+    "cases": [
+      {
+        "case_id": "procurement_v1_software_license_grant",
+        "faithful_text_tokens": 130,
+        "faithful_typed_tokens": 127,
+        "history_tokens": 5321
+      },
+      {
+        "case_id": "procurement_v1_facilities_emergency_grant",
+        "faithful_text_tokens": 132,
+        "faithful_typed_tokens": 130,
+        "history_tokens": 7046
+      },
+      {
+        "case_id": "procurement_v1_cloud_spend_narrowing",
+        "faithful_text_tokens": 140,
+        "faithful_typed_tokens": 136,
+        "history_tokens": 6814
+      },
+      {
+        "case_id": "procurement_v1_reagent_window_narrowing",
+        "faithful_text_tokens": 138,
+        "faithful_typed_tokens": 137,
+        "history_tokens": 4743
+      },
+      {
+        "case_id": "procurement_v1_catering_category_narrowing",
+        "faithful_text_tokens": 139,
+        "faithful_typed_tokens": 135,
+        "history_tokens": 4623
+      },
+      {
+        "case_id": "procurement_v1_freight_vendor_change",
+        "faithful_text_tokens": 138,
+        "faithful_typed_tokens": 136,
+        "history_tokens": 5753
+      },
+      {
+        "case_id": "procurement_v1_print_budget_narrowing",
+        "faithful_text_tokens": 140,
+        "faithful_typed_tokens": 136,
+        "history_tokens": 4629
+      },
+      {
+        "case_id": "procurement_v1_spare_parts_time_shift",
+        "faithful_text_tokens": 136,
+        "faithful_typed_tokens": 133,
+        "history_tokens": 5997
+      },
+      {
+        "case_id": "procurement_v1_hardware_revoke_replace",
+        "faithful_text_tokens": 285,
+        "faithful_typed_tokens": 265,
+        "history_tokens": 6404
+      },
+      {
+        "case_id": "procurement_v1_calibration_revoke_replace",
+        "faithful_text_tokens": 272,
+        "faithful_typed_tokens": 254,
+        "history_tokens": 4920
+      },
+      {
+        "case_id": "procurement_v1_staffing_category_narrowing",
+        "faithful_text_tokens": 138,
+        "faithful_typed_tokens": 135,
+        "history_tokens": 6402
+      },
+      {
+        "case_id": "procurement_v1_relocation_revoke_replace",
+        "faithful_text_tokens": 282,
+        "faithful_typed_tokens": 264,
+        "history_tokens": 4808
+      }
+    ],
+    "largest_faithful_tokens": 285,
+    "minimum_history_ratio": 8,
+    "primary_tokens": 572,
+    "reference_tokenizer": "cl100k_base",
+    "tight_tokens": 358
+  },
+  "capacity_tier": "primary",
+  "case_ids": [
+    "procurement_v1_software_license_grant",
+    "procurement_v1_facilities_emergency_grant",
+    "procurement_v1_cloud_spend_narrowing",
+    "procurement_v1_reagent_window_narrowing",
+    "procurement_v1_catering_category_narrowing",
+    "procurement_v1_freight_vendor_change",
+    "procurement_v1_print_budget_narrowing",
+    "procurement_v1_spare_parts_time_shift",
+    "procurement_v1_hardware_revoke_replace",
+    "procurement_v1_calibration_revoke_replace",
+    "procurement_v1_staffing_category_narrowing",
+    "procurement_v1_relocation_revoke_replace"
+  ],
+  "checkpoint": {
+    "counts": {
+      "evidence": 60,
+      "executor_plan": 600,
+      "fidelity": 951,
+      "interventions": 6,
+      "memories": 127,
+      "memory_attempts": 157,
+      "memory_states": 156,
+      "pressure_source_jobs": 24,
+      "substantive_eligibility": 49,
+      "witnesses": 6,
+      "writer_bundle_evidence": 48,
+      "writer_bundle_memories": 121,
+      "writer_calls": 157,
+      "writer_model_contexts": 157
+    },
+    "executor_call_ids_sha256": "caed639e1b98114a5b7b605a956fabefd2e833bf9f2d871dfc0c176458daaf2d",
+    "executor_calls": 600,
+    "files": {
+      "evidence": {
+        "path": "evidence.jsonl",
+        "rows": 60,
+        "sha256": "63cc817ae9ac59a3cff90c0b37770ea9f126b3fdbe9882ade7c10a47c3217f4c"
+      },
+      "executor_plan": {
+        "path": "executor_plan.jsonl",
+        "rows": 600,
+        "sha256": "d00aa6f9b95b86d6b194b82dae554118ba38d7c8db7079215040e2a7b3ea1e22"
+      },
+      "fidelity": {
+        "path": "fidelity.jsonl",
+        "rows": 951,
+        "sha256": "1ecae1908a2209fcf803d2e50cada054fc6be02ad799ad3258dbe658c9b39cdc"
+      },
+      "interventions": {
+        "path": "interventions.jsonl",
+        "rows": 6,
+        "sha256": "067c70501b8973b14b293af84beb391d6c069af410c6196ff8e6f8fd05e5ce04"
+      },
+      "memories": {
+        "path": "memories.jsonl",
+        "rows": 127,
+        "sha256": "8ade66238bbd9b19064e6385a971021ebbc7354c8a5e77a6b05f86c8ca9599f0"
+      },
+      "memory_attempts": {
+        "path": "memory_attempts.jsonl",
+        "rows": 157,
+        "sha256": "6084cf81f9051b4fed5d401fbc5168d2a312ff464dd6a98befa9ce643894ca76"
+      },
+      "memory_states": {
+        "path": "memory_states.jsonl",
+        "rows": 156,
+        "sha256": "3b880f60b280bd4f4e1e6e7d24de9a0da8cab0141c0b145ae5fef0ffa69f9b40"
+      },
+      "pressure_source_jobs": {
+        "path": "pressure_source_jobs.jsonl",
+        "rows": 24,
+        "sha256": "529884c28b5c7d9857258dc4def1ee72c2f5aace418a85ae95fe7aca76c9d21e"
+      },
+      "substantive_eligibility": {
+        "path": "substantive_eligibility.jsonl",
+        "rows": 49,
+        "sha256": "df9629742f77dacdcb49564c59bba10a9d7da5b28fb375a1fbef805b65298ab4"
+      },
+      "witnesses": {
+        "path": "witnesses.jsonl",
+        "rows": 6,
+        "sha256": "225be7a628bd3d026118e8940f0747cfa2bc95bae11a5dd74507c7e06e96f51d"
+      },
+      "writer_bundle_evidence": {
+        "path": "writer_bundle_evidence.jsonl",
+        "rows": 48,
+        "sha256": "18f73bc1d28bcbd8444027a7cf554020daa80312d1ffb17b8ca78d5dbfb9b30b"
+      },
+      "writer_bundle_memories": {
+        "path": "writer_bundle_memories.jsonl",
+        "rows": 121,
+        "sha256": "4828209335330b9a316b1eb6be744306bd8f5c18db0c57038f1db77a1f741759"
+      },
+      "writer_calls": {
+        "path": "writer_calls.jsonl",
+        "rows": 157,
+        "sha256": "8c9acc088326d5c768dc296d11aa02d0f45514840d7da43411f2166e973e383f"
+      },
+      "writer_model_contexts": {
+        "path": "writer_model_contexts.jsonl",
+        "rows": 157,
+        "sha256": "2abdb3f08141120a138fff06b897f8c7bf9c3a34bcd2879da744f5bf31544b0b"
+      }
+    },
+    "schema_version": "writer_execution_checkpoint_v1",
+    "selected_before_executor_calls": true,
+    "writer_calls_immutable": true,
+    "writer_trajectories_regenerated_on_resume": 0
+  },
+  "command": "python -m experiments.run --domain procurement --corpus-version benchmark_v1 --presentation-version naturalistic_v1 --study writer --writer-targets grok_4_3_openrouter --executor-targets gptoss_baseten,deepseek_baseten --writer-runs 1 --executor-runs 1 --writer-max-attempts 2 --capacity-tier primary --seed 20260821 --tag phase2-primary-s20260821-procurement-grok --estimated-cost-usd 4.5",
+  "conditions": [
+    "one_shot_text",
+    "one_shot_typed",
+    "incremental_text",
+    "incremental_typed"
+  ],
+  "corpus_provenance": {
+    "challenge": {
+      "freeze_status": "frozen",
+      "maturity": "core",
+      "presentation": "naturalistic_v1",
+      "pressure_profile": "pressure_v1",
+      "release": "procurement_v1",
+      "review_manifest_sha256": "6b8550c2b87b685553205c3358f1e49715ee3f1b473d822fe1c6531f6774fc90"
+    }
+  },
+  "corpus_version": "benchmark_v1",
+  "counts": {
+    "calls": 783,
+    "evidence": 60,
+    "executor_plan": 600,
+    "fidelity": 951,
+    "interventions": 6,
+    "memories": 127,
+    "memory_attempts": 157,
+    "memory_states": 156,
+    "model_contexts": 757,
+    "pressure_source_jobs": 24,
+    "substantive_eligibility": 49,
+    "trials": 600,
+    "witnesses": 6,
+    "writer_bundle_evidence": 48,
+    "writer_bundle_memories": 121,
+    "writer_calls": 157,
+    "writer_model_contexts": 157
+  },
+  "domain_adapter_version": "3",
+  "domain_id": "procurement",
+  "domain_maturity": "core",
+  "executor": {
+    "active": true,
+    "runs": 1,
+    "target_routes": [
+      {
+        "call_profiles": [
+          {
+            "effective_parameters": {
+              "max_tokens": 4096,
+              "required_capabilities": [
+                "native_tools",
+                "seed"
+              ],
+              "seed": 20260821,
+              "temperature": 1.0,
+              "tool_choice": "auto",
+              "tool_names": [
+                "submit_order",
+                "request_authorization",
+                "decline_order"
+              ]
+            },
+            "run_id": 0
+          }
+        ],
+        "capabilities": [
+          "forced_tool_choice",
+          "native_tools",
+          "seed"
+        ],
+        "max_concurrency": 20,
+        "provider": "baseten",
+        "rate_limit": {
+          "max_rate": null,
+          "period_seconds": 60.0
+        },
+        "request_parameters": {},
+        "requested_model": "gptoss",
+        "resolved_model": "openai/gpt-oss-120b",
+        "response_model": "openai/gpt-oss-120b",
+        "response_models_observed": [
+          "openai/gpt-oss-120b"
+        ],
+        "target_id": "gptoss_baseten"
+      },
+      {
+        "call_profiles": [
+          {
+            "effective_parameters": {
+              "max_tokens": 4096,
+              "required_capabilities": [
+                "native_tools",
+                "seed"
+              ],
+              "seed": 20260821,
+              "temperature": 1.0,
+              "tool_choice": "auto",
+              "tool_names": [
+                "submit_order",
+                "request_authorization",
+                "decline_order"
+              ]
+            },
+            "run_id": 0
+          }
+        ],
+        "capabilities": [
+          "forced_tool_choice",
+          "native_tools",
+          "seed"
+        ],
+        "max_concurrency": 20,
+        "provider": "baseten",
+        "rate_limit": {
+          "max_rate": null,
+          "period_seconds": 60.0
+        },
+        "request_parameters": {},
+        "requested_model": "deepseek",
+        "resolved_model": "deepseek-ai/DeepSeek-V4-Pro",
+        "response_model": "deepseek-ai/DeepSeek-V4-Pro",
+        "response_models_observed": [
+          "deepseek-ai/DeepSeek-V4-Pro"
+        ],
+        "target_id": "deepseek_baseten"
+      }
+    ],
+    "targets": [
+      "gptoss_baseten",
+      "deepseek_baseten"
+    ],
+    "task": "executor",
+    "task_parameters": {
+      "max_tokens": 4096,
+      "temperature": 1.0
+    }
+  },
+  "files": {
+    "calls": {
+      "path": "calls.jsonl",
+      "rows": 783,
+      "sha256": "a6f45027149323bb8feeb2c655f675a0c9bcdc77ad40f38f218ab6910487aef3"
+    },
+    "evidence": {
+      "path": "evidence.jsonl",
+      "rows": 60,
+      "sha256": "63cc817ae9ac59a3cff90c0b37770ea9f126b3fdbe9882ade7c10a47c3217f4c"
+    },
+    "executor_plan": {
+      "path": "executor_plan.jsonl",
+      "rows": 600,
+      "sha256": "d00aa6f9b95b86d6b194b82dae554118ba38d7c8db7079215040e2a7b3ea1e22"
+    },
+    "fidelity": {
+      "path": "fidelity.jsonl",
+      "rows": 951,
+      "sha256": "1ecae1908a2209fcf803d2e50cada054fc6be02ad799ad3258dbe658c9b39cdc"
+    },
+    "interventions": {
+      "path": "interventions.jsonl",
+      "rows": 6,
+      "sha256": "067c70501b8973b14b293af84beb391d6c069af410c6196ff8e6f8fd05e5ce04"
+    },
+    "memories": {
+      "path": "memories.jsonl",
+      "rows": 127,
+      "sha256": "8ade66238bbd9b19064e6385a971021ebbc7354c8a5e77a6b05f86c8ca9599f0"
+    },
+    "memory_attempts": {
+      "path": "memory_attempts.jsonl",
+      "rows": 157,
+      "sha256": "6084cf81f9051b4fed5d401fbc5168d2a312ff464dd6a98befa9ce643894ca76"
+    },
+    "memory_states": {
+      "path": "memory_states.jsonl",
+      "rows": 156,
+      "sha256": "3b880f60b280bd4f4e1e6e7d24de9a0da8cab0141c0b145ae5fef0ffa69f9b40"
+    },
+    "model_contexts": {
+      "path": "model_contexts.jsonl",
+      "rows": 757,
+      "sha256": "707f9bd268deb338f3c2eb66b43d381fb8fcc6ac627f717eb2fdf9595b93e329"
+    },
+    "pressure_source_jobs": {
+      "path": "pressure_source_jobs.jsonl",
+      "rows": 24,
+      "sha256": "529884c28b5c7d9857258dc4def1ee72c2f5aace418a85ae95fe7aca76c9d21e"
+    },
+    "substantive_eligibility": {
+      "path": "substantive_eligibility.jsonl",
+      "rows": 49,
+      "sha256": "df9629742f77dacdcb49564c59bba10a9d7da5b28fb375a1fbef805b65298ab4"
+    },
+    "trials": {
+      "path": "trials.jsonl",
+      "rows": 600,
+      "sha256": "ba9d9378ce0dc05476dfec315d5c903e6427775e14dc568f3308437a166d2df6"
+    },
+    "witnesses": {
+      "path": "witnesses.jsonl",
+      "rows": 6,
+      "sha256": "225be7a628bd3d026118e8940f0747cfa2bc95bae11a5dd74507c7e06e96f51d"
+    },
+    "writer_bundle_evidence": {
+      "path": "writer_bundle_evidence.jsonl",
+      "rows": 48,
+      "sha256": "18f73bc1d28bcbd8444027a7cf554020daa80312d1ffb17b8ca78d5dbfb9b30b"
+    },
+    "writer_bundle_memories": {
+      "path": "writer_bundle_memories.jsonl",
+      "rows": 121,
+      "sha256": "4828209335330b9a316b1eb6be744306bd8f5c18db0c57038f1db77a1f741759"
+    },
+    "writer_calls": {
+      "path": "writer_calls.jsonl",
+      "rows": 157,
+      "sha256": "8c9acc088326d5c768dc296d11aa02d0f45514840d7da43411f2166e973e383f"
+    },
+    "writer_model_contexts": {
+      "path": "writer_model_contexts.jsonl",
+      "rows": 157,
+      "sha256": "2abdb3f08141120a138fff06b897f8c7bf9c3a34bcd2879da744f5bf31544b0b"
+    }
+  },
+  "finished_at": "2026-08-21T06:50:42.462887+02:00",
+  "git": {
+    "branch": "chore/phase2-seeded-replication",
+    "commit": "f70754f21c8272f839cd1d05c9b3a54db35aa8c9",
+    "dirty": true
+  },
+  "implementation_files": {
+    "config.yaml": "d0bb7e6372248d52d9323f2ae9c3aa1f84544a0c8bf7fffe889f63c9e7402dc8",
+    "domains/__init__.py": "13c24d8783d5cb8d7067bbb16aed8bee31a20f5d3ee6c881042eedbdde4f68e7",
+    "domains/base.py": "ebcc9b0111d21471064c28a0d0ed42d959dd5ba122193b0d58223b5e34abbfcd",
+    "domains/procurement/__init__.py": "3a5223fc87d4c65c23a9e227fa129b0043072da50369d623351232a6879979f1",
+    "domains/procurement/adapter.py": "5a0c63478194b9ae564fc3ccf4d98e53dc4d5a66ed7a1ea6c10f282b53193dac",
+    "domains/procurement/awareness.py": "d2759f6d5261cb088587e90a4f9c31a2630d7d2c94e0fe8c12de097460503de2",
+    "domains/procurement/awareness_controls/__init__.py": "f72f672acb386b30d41171be25b4aadde657b1bb7f7ab787fb34e62086372ea3",
+    "domains/procurement/awareness_controls/authoring.py": "c05cb801d46459d1ac36f4ce0f8e09dc3584e4635dda2996df6addb98098eaac",
+    "domains/procurement/awareness_controls/constants.py": "8b1a40d2af006e8578b0e1513b033390df38e646d1b45cc4053dcea45e4dd3ed",
+    "domains/procurement/capacity.py": "e76e195f71346ae16f011b9cb58ce452e9bab8472947acc97b77f79e39f4e9d0",
+    "domains/procurement/capacity_ablation_analysis.py": "09b67c0c9131d63120ca7ea70d177287377acf4a1063a544c9ec37611f0675aa",
+    "domains/procurement/cases.py": "9bc4b4a99bbf6d3ebf09ce3b2f4316cef40725d5e6fec680c320f23aba02d333",
+    "domains/procurement/challenge.py": "e7c87dce63e7f723e097005e92bbe9768fcc4b981c45c16e59da07326b9d6554",
+    "domains/procurement/challenge_data.py": "34e3388ab3f372faff9c8283b089ad9df32960a633edf5402aad8a309242ae22",
+    "domains/procurement/compile_corpus.py": "6f2f94de78c4d4e4ce33bec6a4d5fca7cdfb8d15dfc52b47bc3dd539bc6d3a6d",
+    "domains/procurement/corpus_lint.py": "53895b3a94e086d62d9c998591e74b121ecdc1e56e8926fdc5f5049869a15342",
+    "domains/procurement/domain.py": "9ddadeef8005f340af083082551901619636d4e5bc67cd94f54d8aa1d8094aa9",
+    "domains/procurement/oracle.py": "13948e672b928a2380db8b67729fd1d7d81387886928aaf8daedcb8ffc3ce4bf",
+    "domains/procurement/prepare_review_materials.py": "9131207a59342d0b7a41843204497b84a783f580bab8278c27c30a79d0b35493",
+    "domains/procurement/presentations.py": "a5d3a7e5deec1aa3702f5346eae92713f409020e12fb44ed3290a7d08d7540a6",
+    "domains/procurement/release.py": "e6b6bfe31b4a461fb5c9ab6c04f16f5669b5afd5f5ab29a886ff5398ac6c18a3",
+    "domains/procurement/release_adoption.py": "30e110467c9deb93c781389066624318749ed05d9699eb68f24d04d247d3ab32",
+    "domains/procurement/review.py": "1cc77842861ed4c30ab92a96f2da5b72f52a102df000a23f034567de52abc308",
+    "domains/procurement/schemas.py": "250e3cf11a871a1162bab4652f6343b4dbaf77b83fb370609c405f22d8ed2402",
+    "domains/procurement/semantics.py": "96365c5847d941cc21d5921b4d68230e76fe1e6821a245bbb5f98baf0c157a77",
+    "domains/procurement/studies/__init__.py": "754b7a294b7a186a43d0faeb18f51452e9899d78569f4025c32127fe05087a5c",
+    "domains/procurement/studies/annotation_agreement.py": "59bd8a460cf9f2c6fdd88c8daaca60e4c5a1782e16c05d67761000921dfaf242",
+    "domains/procurement/studies/annotations.py": "a698327b2fca264cb57b0a0beab69976b5d3c1c6d1d53fdee1711a4ea0d278b3",
+    "domains/procurement/studies/capacity_ablation.py": "79f2a049c0db18e1f331ffaca2ba47fcb9c0a0ceac390d8949e1b5af70299b4f",
+    "domains/procurement/studies/conditions.py": "dabc7d51ae2f431cedad252a85b369faed4b3bb269cc61846f096ae6192a4795",
+    "domains/procurement/studies/evaluation_cue.py": "5c5a29dd38b3e82fc370aba857568da9662d826009e4c6554e7da485eb7a57db",
+    "domains/procurement/studies/fidelity.py": "a5f8403f15c37b159e5915f257209fcf6105a585c182dfb098426fdb4c21b4fa",
+    "domains/procurement/studies/interventions.py": "f6f56188d3ecc276877cd2e8545d43ee3135be4b9f9797ce9015cf0db9827634",
+    "domains/procurement/studies/memory.py": "9ab0f486c35f68677ac07c85ebaaa3e2bd4ef4ac08517773b1f2f6d13dcc4ecb",
+    "domains/procurement/studies/pipeline.py": "3d5a00752d1c72a00af55e78178a846aedc95f2b101b99735b3b4467de7b1ff9",
+    "domains/procurement/studies/prompts.py": "16ef208e860f21cd8422c78f9f68ef3c3078f09b67e45d4ed83835b42eeac8c6",
+    "domains/procurement/studies/route_support.py": "6ea4d6999c8ebf35361afe53df540aef1539a562f9a03ff8d6f2c7c4639ff0b5",
+    "domains/procurement/studies/routes.py": "31c4e2b8939dd57c5eeef23523b92af16de3f018d6c459732118a17688266305",
+    "domains/procurement/studies/schemas.py": "569cb506bc286fdfde143376777be58367997edae68eb06fc0f880c34c683449",
+    "domains/procurement/studies/substantive_overgrant.py": "341cd46cff547167e5c40883c29d7df7c04a8165c48002460b53a6b289c0bdb1",
+    "domains/procurement/studies/writer_ttc.py": "ad7997dbe0b426e2c658fb381b7db47bba1b27eb960720e2e7f9b5e78966a297",
+    "domains/procurement/surface.py": "13b7133f9802ebc7ab8a9796ae7cb093e13fcc42f8a0ff2896c05567fccf7f50",
+    "domains/procurement/tools.py": "2f0202ae0d654f6d0546a23e7b1e1a8935543e04102d1f51e95b4eb5a4ceabfa",
+    "experiments/authorization_memory/__init__.py": "cd85087993a4e0f108f35e74b8dc8b25781625ef13aa8671173d33dc2095e08e",
+    "experiments/authorization_memory/challenges.py": "5cec878d34254d47b66d3419471a41e913ccf5b443228efd5c3480333e1c615d",
+    "experiments/authorization_memory/conditions.py": "ebf4cb2df1e5e65eab3b1c8a57de6284584b801b1003f8cab3669ddbd30d65eb",
+    "experiments/authorization_memory/conformance.py": "41473787ac790ec571f3519b6a48bdaa6aea845eb6e2e402f422fa6199e6b8bd",
+    "experiments/authorization_memory/evaluation_awareness.py": "9524532b7e61c1b8bf1c28274d65752da5c44fb16e849f2633848872f37f64c1",
+    "experiments/authorization_memory/evaluation_awareness_fixture.py": "0ae75c6ae5d7e770a22459c9773f1a8c4ff141639b7b9900c9a811dd40559f98",
+    "experiments/authorization_memory/executor_plan.py": "0a99082608f800b2370633067816ece2cfd768ac26e0ec3af0f008ba3533e309",
+    "experiments/authorization_memory/langmem_writer.py": "0bd4d2c6d86837e0234bec1247aecef3828e2365cdfafd42d2f237212072ed8e",
+    "experiments/authorization_memory/leakage.py": "58e64a4b74df03e4e9a46f7515b3f44744acf67ea33e3c26f39b70bde533d9f5",
+    "experiments/authorization_memory/persistence.py": "a7a23b65cddaa76498729c2db57ad8b1ee0bb85bf193d75e6f6af97dc321ff91",
+    "experiments/authorization_memory/pipeline.py": "ab3ddf8ac8dce8341386454610d8949cb5f1606990db7d51b7ce07c2ed603dca",
+    "experiments/authorization_memory/provenance.py": "05595bff207ad987f4f29231393a4ce1138efa33a610e62bf6a87f88a6e06fbc",
+    "experiments/authorization_memory/resume.py": "55245024062401888e615f4f9b68d702f115f146ac2d10d1ac540479eb4ee451",
+    "experiments/authorization_memory/runner.py": "f1b163d3a35a2bd83f25947afba27b82859fb605de1f53be0c779ee24f4b7c1a",
+    "experiments/authorization_memory/schemas.py": "e336e5b65faebcd45470b180557d1800ab2021fdabd99e0b58135997a5b0f5f9",
+    "experiments/authorization_memory/study_engine.py": "2141cadba7d5460f88236a47cd3f25dd7c15c8b9909b0ef329bf86178fc74901",
+    "experiments/authorization_memory/study_plan.py": "96fe799ffa638fdac43481d68b16eaf8bac99ebdbb3ab81c645ff1879131845c",
+    "experiments/authorization_memory/surfaces.py": "5a9e4a04e569c802a16b029d85506f4135912181a8422feac00f0f9ea506814f",
+    "experiments/authorization_memory/tokens.py": "4c74ba3268f9831e6285921fa4365692e774a8a9c9845b7b0f47bcca69d4138d",
+    "experiments/authorization_memory/validation.py": "24ef23e698001ac48bfda29f927970e7d8ad915737aa198dc44e9b7cfa8c5103",
+    "experiments/run.py": "96b3a3ccb9a9f29c9da34619cc3bfe1c8eb85c359931b48829faa05d32d9adcb",
+    "pyproject.toml": "527d7bb5236cba1b1b7778dd06307b168b6c703ce203d8881edbf9db06473ce0",
+    "src/eal_bench/llm/__init__.py": "8932ac3b18bfc43b0a702b30cb813d541dec522fd76d65adcc8a7cd9387d0573",
+    "src/eal_bench/llm/client.py": "98ae242d4eb608fdd9d18ad87460f0480a5aa955d29e15d430ad3c742339ea54",
+    "src/eal_bench/llm/config.py": "ed8a4887ca8146f3f4c3b9803b4cede4ab0682ddf97da4f021ca85679207e9fd",
+    "src/eal_bench/llm/errors.py": "4f1ae9e1d3cc961d25172a93e9e6952dae0b1dc419d29da61cc7ea85b169d7f1",
+    "src/eal_bench/llm/langchain_models.py": "a832ff8d2fdeed0dbad9afbad8829ebc6b15b6f4be13cbc719c3e826638f84f9",
+    "src/eal_bench/llm/logger.py": "1f2e50ff91ec1dbe3c9429ffee8b1091a6137b784aff0824ea77758e43bf7b9a",
+    "src/eal_bench/llm/models.py": "d5215df9477892824fdbb6b3b2eff77f00a05e8462278530a8f0ab61332fccf3",
+    "src/eal_bench/llm/ratelimit.py": "4069046b916569aab9c45417fb96be09f7c2fad5f1c8e850764782ec142fddbb",
+    "uv.lock": "413cc53a2524bb4064a89029545e2d594ed8154ac2e74b8d54e524d69fd0fefc"
+  },
+  "memory_implementation_hash": "bf9a1583ab4f3e70bf8e075b988a2149d9cb170c3443f3646964840193d5655a",
+  "memory_implementation_id": "langmem_profile",
+  "model_visible_executor_surfaces": {
+    "context_hashes": 300,
+    "jobs": 300,
+    "status": "passed",
+    "unique_context_hashes": 266
+  },
+  "offline_writer_fixture_scenarios": [
+    "exact_memory",
+    "substantive_typed_overgrant",
+    "typed_undergrant",
+    "failed_update",
+    "no_change_update",
+    "repair",
+    "zero_eligible_overgrant"
+  ],
+  "planned_dynamic_executor_jobs_max": 40,
+  "planned_dynamic_executor_jobs_min": 0,
+  "planned_ordinary_executor_jobs": 288,
+  "post_writer_expansion": {
+    "counts": {
+      "fidelity": 951,
+      "interventions": 6,
+      "pressure_source_jobs": 24,
+      "substantive_eligibility": 49,
+      "witnesses": 6
+    },
+    "executor_jobs": 300,
+    "files": {
+      "fidelity": {
+        "path": "fidelity.jsonl",
+        "rows": 951,
+        "sha256": "1ecae1908a2209fcf803d2e50cada054fc6be02ad799ad3258dbe658c9b39cdc"
+      },
+      "interventions": {
+        "path": "interventions.jsonl",
+        "rows": 6,
+        "sha256": "067c70501b8973b14b293af84beb391d6c069af410c6196ff8e6f8fd05e5ce04"
+      },
+      "pressure_source_jobs": {
+        "path": "pressure_source_jobs.jsonl",
+        "rows": 24,
+        "sha256": "529884c28b5c7d9857258dc4def1ee72c2f5aace418a85ae95fe7aca76c9d21e"
+      },
+      "substantive_eligibility": {
+        "path": "substantive_eligibility.jsonl",
+        "rows": 49,
+        "sha256": "df9629742f77dacdcb49564c59bba10a9d7da5b28fb375a1fbef805b65298ab4"
+      },
+      "witnesses": {
+        "path": "witnesses.jsonl",
+        "rows": 6,
+        "sha256": "225be7a628bd3d026118e8940f0747cfa2bc95bae11a5dd74507c7e06e96f51d"
+      }
+    },
+    "selected_before_executor_calls": true
+  },
+  "presentation": {
+    "description": "Naturalistic workplace rendering for Procurement Core v1.",
+    "overlay_files": [
+      "domains/procurement/presentations/naturalistic_v1.json"
+    ],
+    "overlay_hashes": {
+      "domains/procurement/presentations/naturalistic_v1.json": "d004f24f4d078b2a1a9132ca4f206c1f7209d1064d9cf91e8308d3262d245879"
+    },
+    "presentation_id": "naturalistic_v1",
+    "prompt_policy_id": "procurement_prompt_naturalistic_v1",
+    "validity_gates": [
+      "pressure_answer_coaching"
+    ]
+  },
+  "presentation_hash": "907945a6c03f738899e366e86cd54f6fbf8171fed9b88581dabcda97dda66b0d",
+  "reviewer": null,
+  "route": "writer",
+  "runtime": {
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.6"
+  },
+  "seed": 20260821,
+  "selection_uses_executor_behavior": false,
+  "source_files": {
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/CONTRIBUTING.md": "d12a42ce87151807138b0e973724150fc2e8174da6eafdbd1ee8094a4aa1597c",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/__init__.py": "3a5223fc87d4c65c23a9e227fa129b0043072da50369d623351232a6879979f1",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/adapter.py": "5a0c63478194b9ae564fc3ccf4d98e53dc4d5a66ed7a1ea6c10f282b53193dac",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/awareness.py": "d2759f6d5261cb088587e90a4f9c31a2630d7d2c94e0fe8c12de097460503de2",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/benchmark_blueprint.yaml": "e6b8fbb7643cd72d1bec13a1e073bb30dc9719e6003e04a39f36c93d81908633",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/capacity.py": "e76e195f71346ae16f011b9cb58ce452e9bab8472947acc97b77f79e39f4e9d0",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/capacity_ablation_analysis.py": "09b67c0c9131d63120ca7ea70d177287377acf4a1063a544c9ec37611f0675aa",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/capacity_calibration.json": "fcb2d28d1e37fdf669651941f8773cd3059d7ebf9f02df0597c1fe6fb68648da",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/cases.py": "9bc4b4a99bbf6d3ebf09ce3b2f4316cef40725d5e6fec680c320f23aba02d333",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/challenge.py": "e7c87dce63e7f723e097005e92bbe9768fcc4b981c45c16e59da07326b9d6554",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/challenge_data.py": "34e3388ab3f372faff9c8283b089ad9df32960a633edf5402aad8a309242ae22",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/compile_corpus.py": "6f2f94de78c4d4e4ce33bec6a4d5fca7cdfb8d15dfc52b47bc3dd539bc6d3a6d",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/corpus/benchmark_v1/01_procurement_v1_software_license_grant.yaml": "c3e5308cdb28765e4d60547b06b3213eb6f1c3b7d095028184209d02379d70d3",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/corpus/benchmark_v1/02_procurement_v1_facilities_emergency_grant.yaml": "17097de4ec293b6c2cff3acca51804880c45457f1d45f19f221d1400682681e4",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/corpus/benchmark_v1/03_procurement_v1_cloud_spend_narrowing.yaml": "25a21fe19472f63b79191c96e9f750978665992e938ec26e38fafbfc48593621",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/corpus/benchmark_v1/04_procurement_v1_reagent_window_narrowing.yaml": "d489afd6541d2c92bebc82d1eb103d2de80bebdf5804ab46382bed485dbc4286",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/corpus/benchmark_v1/05_procurement_v1_catering_category_narrowing.yaml": "3aba130fa95ef32eb2dc6c8e449e2249d95a0f9ebf4159382ede922835c7019e",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/corpus/benchmark_v1/06_procurement_v1_freight_vendor_change.yaml": "d7ad87552eff5238f8079fa554c4c421efd79c438abafdd7332f87cfd0094915",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/corpus/benchmark_v1/07_procurement_v1_print_budget_narrowing.yaml": "78f27bc681584801717566f560a9286e22e23b970bf7e9308c6ffadcb480a276",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/corpus/benchmark_v1/08_procurement_v1_spare_parts_time_shift.yaml": "33019ae13bc821d463b3b341fd088dd8727e7930befbfd018a564b796fd624e5",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/corpus/benchmark_v1/09_procurement_v1_hardware_revoke_replace.yaml": "fb4eb7f0598d406439a03ff6bc250e764f04217ca8e1159394547a78296ef1d8",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/corpus/benchmark_v1/10_procurement_v1_calibration_revoke_replace.yaml": "621a438310302669c87c125dc765fc8444680b112cdff35a472e0de4bf011939",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/corpus/benchmark_v1/11_procurement_v1_staffing_category_narrowing.yaml": "44fd42501477181ed2291d83ce5f91172875c3fec70d8e4fed0938e6e2ae7d1d",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/corpus/benchmark_v1/12_procurement_v1_relocation_revoke_replace.yaml": "d4762e01a28901b1485313104d77f61f40dfd85f1c5c6fbab6ee2688efa73853",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/corpus_lint.py": "53895b3a94e086d62d9c998591e74b121ecdc1e56e8926fdc5f5049869a15342",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/data/benchmark_v1.jsonl": "6d6dd48dfa9c11fd7b1ffbc5d145c98a4d0a00e5e0cb9e0e40399f1f8d0d1596",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/domain.py": "9ddadeef8005f340af083082551901619636d4e5bc67cd94f54d8aa1d8094aa9",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/oracle.py": "13948e672b928a2380db8b67729fd1d7d81387886928aaf8daedcb8ffc3ce4bf",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/prepare_review_materials.py": "9131207a59342d0b7a41843204497b84a783f580bab8278c27c30a79d0b35493",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/presentations.py": "a5d3a7e5deec1aa3702f5346eae92713f409020e12fb44ed3290a7d08d7540a6",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/presentations/naturalistic_v1.json": "d004f24f4d078b2a1a9132ca4f206c1f7209d1064d9cf91e8308d3262d245879",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/release.json": "e031279388062a915416babd4fe9aa6502f88129f8ad5cc17118bb3d25f0f613",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/release.py": "e6b6bfe31b4a461fb5c9ab6c04f16f5669b5afd5f5ab29a886ff5398ac6c18a3",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/release_adoption.py": "30e110467c9deb93c781389066624318749ed05d9699eb68f24d04d247d3ab32",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/review.py": "1cc77842861ed4c30ab92a96f2da5b72f52a102df000a23f034567de52abc308",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/reviews/benchmark_v1.json": "6b8550c2b87b685553205c3358f1e49715ee3f1b473d822fe1c6531f6774fc90",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/reviews/benchmark_v1_attractiveness_blinded.jsonl": "9d12a97382ff8ecc74e116a778c68e103ef9277aeb3ad7efaf48445cf373acf3",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/reviews/benchmark_v1_authorization_blinded.jsonl": "4921b0c70ccb923f2bcd8a542798116ce972c9e924411547f6e756dff3bf6c3c",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/reviews/benchmark_v1_private_mapping.json": "6339d9345ec7fd25d394f8d1913b0b7d89f46f87ea31abbd8cbe27f9c5e98976",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/schemas.py": "250e3cf11a871a1162bab4652f6343b4dbaf77b83fb370609c405f22d8ed2402",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/semantics.py": "96365c5847d941cc21d5921b4d68230e76fe1e6821a245bbb5f98baf0c157a77",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/studies/__init__.py": "754b7a294b7a186a43d0faeb18f51452e9899d78569f4025c32127fe05087a5c",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/studies/annotation_agreement.py": "59bd8a460cf9f2c6fdd88c8daaca60e4c5a1782e16c05d67761000921dfaf242",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/studies/annotations.py": "a698327b2fca264cb57b0a0beab69976b5d3c1c6d1d53fdee1711a4ea0d278b3",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/studies/capacity_ablation.py": "79f2a049c0db18e1f331ffaca2ba47fcb9c0a0ceac390d8949e1b5af70299b4f",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/studies/conditions.py": "dabc7d51ae2f431cedad252a85b369faed4b3bb269cc61846f096ae6192a4795",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/studies/evaluation_cue.py": "5c5a29dd38b3e82fc370aba857568da9662d826009e4c6554e7da485eb7a57db",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/studies/fidelity.py": "a5f8403f15c37b159e5915f257209fcf6105a585c182dfb098426fdb4c21b4fa",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/studies/interventions.py": "f6f56188d3ecc276877cd2e8545d43ee3135be4b9f9797ce9015cf0db9827634",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/studies/memory.py": "9ab0f486c35f68677ac07c85ebaaa3e2bd4ef4ac08517773b1f2f6d13dcc4ecb",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/studies/pipeline.py": "3d5a00752d1c72a00af55e78178a846aedc95f2b101b99735b3b4467de7b1ff9",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/studies/prompts.py": "16ef208e860f21cd8422c78f9f68ef3c3078f09b67e45d4ed83835b42eeac8c6",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/studies/route_support.py": "6ea4d6999c8ebf35361afe53df540aef1539a562f9a03ff8d6f2c7c4639ff0b5",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/studies/routes.py": "31c4e2b8939dd57c5eeef23523b92af16de3f018d6c459732118a17688266305",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/studies/schemas.py": "569cb506bc286fdfde143376777be58367997edae68eb06fc0f880c34c683449",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/studies/substantive_overgrant.py": "341cd46cff547167e5c40883c29d7df7c04a8165c48002460b53a6b289c0bdb1",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/studies/writer_ttc.py": "ad7997dbe0b426e2c658fb381b7db47bba1b27eb960720e2e7f9b5e78966a297",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/surface.py": "13b7133f9802ebc7ab8a9796ae7cb093e13fcc42f8a0ff2896c05567fccf7f50",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/procurement/tools.py": "2f0202ae0d654f6d0546a23e7b1e1a8935543e04102d1f51e95b4eb5a4ceabfa"
+  },
+  "started_at": "2026-08-21T06:43:14.910409+02:00",
+  "status": "completed",
+  "status_detail": "ready_pressure_sources",
+  "study": "writer",
+  "study_plan": {
+    "executor_only": false,
+    "metadata": {
+      "candidate_cap": 20,
+      "conditions": [
+        "one_shot_text",
+        "one_shot_typed",
+        "incremental_text",
+        "incremental_typed"
+      ],
+      "offline_writer_fixture_scenarios": [
+        "exact_memory",
+        "substantive_typed_overgrant",
+        "typed_undergrant",
+        "failed_update",
+        "no_change_update",
+        "repair",
+        "zero_eligible_overgrant"
+      ],
+      "planned_dynamic_executor_jobs_max": 40,
+      "planned_dynamic_executor_jobs_min": 0,
+      "planned_ordinary_executor_jobs": 288,
+      "route": "writer",
+      "selection_uses_executor_behavior": false,
+      "writer_architecture": "all",
+      "writer_strategy": "all"
+    },
+    "pressure_specs": [],
+    "writer_only": false
+  },
+  "substantive_overgrant": {
+    "base_executor_jobs": 48,
+    "description": "Source-linked natural typed-memory overgrant study at frozen authorization-change checkpoints.",
+    "evidence_roles": [
+      "natural_error",
+      "exact_repair",
+      "surface_sham",
+      "faithful_canonical"
+    ],
+    "executor_eligible_artifacts": 6,
+    "harvested_artifacts": 49,
+    "pressure_conditions": [
+      "none"
+    ],
+    "pressure_source_jobs": 24,
+    "request_roles": [
+      "witness",
+      "utility"
+    ],
+    "selected_before_executor_calls": true,
+    "selected_candidates": 6,
+    "selected_cases": 6,
+    "selection_policy": {
+      "maximum_per_case": 2,
+      "maximum_total": 20,
+      "order": "sha256(candidate_id)"
+    },
+    "source_run": {
+      "derived_no_repair_counterfactuals": 0,
+      "file_sha256": {},
+      "manifest_sha256": "777ffd4619cd8492c0cbd1a20812e94a270a8804ed3c64217430c8b3b71f4def",
+      "path": "<current-writer-route>",
+      "run": "current-writer-route",
+      "saved_checkpoint_evidence_count": 49,
+      "screened_checkpoint_states": 49,
+      "status": "completed",
+      "writer_profile": "writer",
+      "writer_runs": 1
+    },
+    "states_by_update_policy": {
+      "bounded_repair": 49
+    },
+    "status": "ready_pressure_sources",
+    "study_id": "substantive_overgrant_v1",
+    "substantive_eligible_artifacts": 6
+  },
+  "writer": {
+    "active": true,
+    "framework": {
+      "manager": {
+        "async_lifecycle": "single_event_loop_per_target_group_v1",
+        "enable_deletes": false,
+        "enable_inserts": false,
+        "enable_updates": true,
+        "free_text_value_contract": "atomic_plain_text_string_v1",
+        "invocation_timeout_seconds": 180,
+        "max_steps": 1,
+        "profile_identity_contract": "exact_existing_profile_id_v1",
+        "route_timeout_seconds": 3600,
+        "trustcall_validation_attempts": 1,
+        "typed_value_contract": "schema_native_json_v1"
+      },
+      "memory_implementation_hash": "bf9a1583ab4f3e70bf8e075b988a2149d9cb170c3443f3646964840193d5655a",
+      "memory_implementation_id": "langmem_profile",
+      "profile_mode": "single_stable_profile",
+      "versions": {
+        "langchain": "1.3.14",
+        "langchain-core": "1.4.9",
+        "langchain-openai": "1.3.5",
+        "langchain-openrouter": "0.2.6",
+        "langmem": "0.0.30",
+        "trustcall": "0.0.39"
+      }
+    },
+    "max_attempts": 2,
+    "memory_implementation_hash": "bf9a1583ab4f3e70bf8e075b988a2149d9cb170c3443f3646964840193d5655a",
+    "memory_implementation_id": "langmem_profile",
+    "profile_schema": {
+      "free_text": "langmem.knowledge.extraction.Memory",
+      "typed": "domains.procurement.schemas.ProcurementAuthorizationMemoryProfile",
+      "typed_payload_schema_id": "procurement/authorization-state/v3"
+    },
+    "route_timeout_override": false,
+    "route_timeout_seconds": 3600,
+    "runs": 1,
+    "target_routes": [
+      {
+        "call_profiles": [
+          {
+            "architecture": "free_text",
+            "effective_parameters": {
+              "max_tokens": 4096,
+              "required_capabilities": [
+                "forced_tool_choice",
+                "native_tools",
+                "seed"
+              ],
+              "seed": 20260821,
+              "temperature": 1.0
+            },
+            "manager": {
+              "async_lifecycle": "single_event_loop_per_target_group_v1",
+              "enable_deletes": false,
+              "enable_inserts": false,
+              "enable_updates": true,
+              "free_text_value_contract": "atomic_plain_text_string_v1",
+              "invocation_timeout_seconds": 180,
+              "max_steps": 1,
+              "profile_identity_contract": "exact_existing_profile_id_v1",
+              "route_timeout_seconds": 3600,
+              "trustcall_validation_attempts": 1,
+              "typed_value_contract": "schema_native_json_v1"
+            },
+            "model_override": null,
+            "run_id": 0,
+            "writer_seed": 20260821
+          },
+          {
+            "architecture": "typed",
+            "effective_parameters": {
+              "max_tokens": 4096,
+              "required_capabilities": [
+                "forced_tool_choice",
+                "native_tools",
+                "seed"
+              ],
+              "seed": 20260821,
+              "temperature": 1.0
+            },
+            "manager": {
+              "async_lifecycle": "single_event_loop_per_target_group_v1",
+              "enable_deletes": false,
+              "enable_inserts": false,
+              "enable_updates": true,
+              "free_text_value_contract": "atomic_plain_text_string_v1",
+              "invocation_timeout_seconds": 180,
+              "max_steps": 1,
+              "profile_identity_contract": "exact_existing_profile_id_v1",
+              "route_timeout_seconds": 3600,
+              "trustcall_validation_attempts": 1,
+              "typed_value_contract": "schema_native_json_v1"
+            },
+            "model_override": null,
+            "run_id": 0,
+            "writer_seed": 20260821
+          }
+        ],
+        "capabilities": [
+          "forced_tool_choice",
+          "native_tools",
+          "seed"
+        ],
+        "max_concurrency": 20,
+        "provider": "openrouter",
+        "rate_limit": {
+          "max_rate": null,
+          "period_seconds": 60.0
+        },
+        "request_parameters": {},
+        "requested_model": "x-ai/grok-4.3",
+        "resolved_model": "x-ai/grok-4.3",
+        "response_model": "x-ai/grok-4.3",
+        "response_models_observed": [
+          "x-ai/grok-4.3"
+        ],
+        "target_id": "grok_4_3_openrouter"
+      }
+    ],
+    "targets": [
+      "grok_4_3_openrouter"
+    ],
+    "task": "writer",
+    "task_parameters": {
+      "max_tokens": 4096,
+      "temperature": 1.0
+    }
+  },
+  "writer_architecture": "all",
+  "writer_strategy": "all"
+}
