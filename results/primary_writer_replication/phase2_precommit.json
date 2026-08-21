@@ -309,7 +309,7 @@
         "experiments/replication_release_compatibility.py",
         "experiments/authorization_memory/study_engine.py"
       ],
-      "unified_diff_sha256": "f2c94cfe2cd9d80f49384ac249d94abeab6f22cb5a422bcdb21822a7c2fe3807"
+      "unified_diff_sha256": "63a3cab6185a66ae3b944bc1d98bd9e44f873665b28fd4f256da21ec997f2521"
     },
     "unchanged_surfaces": [
       "frozen domain adapters",
@@ -361,7 +361,7 @@
     "experiments/authorization_memory/resume.py": "55245024062401888e615f4f9b68d702f115f146ac2d10d1ac540479eb4ee451",
     "experiments/authorization_memory/study_engine.py": "2141cadba7d5460f88236a47cd3f25dd7c15c8b9909b0ef329bf86178fc74901",
     "experiments/run.py": "945b7ea8252630bd66025c6043c63672b78b3870cbe464b0161dee5dd0bf540a",
-    "experiments/phase2_precommit.py": "dc2f82fbe086e8ebb6fbf98cbf38255b379eb4dfbccf2effb69cf1e5b3762d6e",
+    "experiments/phase2_precommit.py": "a8cbbdd1df415a2234a1d7b11e5e6aa05090ee472177d794cfb06ab084d8bf68",
     "experiments/replication_release_compatibility.py": "b9b2b478781fe03351141d667b10dbc0e6fb96bae66562beee440f7b7d96f5e1",
     "domains/finance/finalize_replacement.py": "16e703cdd78333ed63fc16a5c4a48838f5d02c699c2fbbc1b2b0810fb5c8bfca",
     "domains/finance/release.json": "ba86fc8e3927ce851c051e176d48d9eecc81a0313bd55cd8d45903ac95a0e59c",

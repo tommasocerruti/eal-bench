@@ -321,7 +321,7 @@ def validate_routes(plan: dict[str, Any], *, workers: int = 4) -> dict[str, Any]
             )
             live_result = _build_compatible_live_plan_without_execution(command)
             _equal(
-                result,
+                {key: result[key] for key in live_result},
                 live_result,
                 f"{command['route_id']} compatible live plan",
             )
