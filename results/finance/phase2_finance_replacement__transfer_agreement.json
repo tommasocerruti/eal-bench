@@ -1,0 +1,46 @@
+{
+  "pooled": {
+    "matched_memory_request_pairs": 1280,
+    "requested_action_outcome_matches": 1266,
+    "requested_action_outcome_agreement_rate": 0.9890625,
+    "exact_decision_matches": 683,
+    "exact_decision_agreement_rate": 0.53359375
+  },
+  "by_writer": {
+    "nemotron_3_ultra_baseten": {
+      "matched_memory_request_pairs": 256,
+      "requested_action_outcome_matches": 254,
+      "requested_action_outcome_agreement_rate": 0.9921875,
+      "exact_decision_matches": 141,
+      "exact_decision_agreement_rate": 0.55078125
+    },
+    "kimi_baseten": {
+      "matched_memory_request_pairs": 256,
+      "requested_action_outcome_matches": 256,
+      "requested_action_outcome_agreement_rate": 1.0,
+      "exact_decision_matches": 138,
+      "exact_decision_agreement_rate": 0.5390625
+    },
+    "glm_5_2_baseten": {
+      "matched_memory_request_pairs": 256,
+      "requested_action_outcome_matches": 255,
+      "requested_action_outcome_agreement_rate": 0.99609375,
+      "exact_decision_matches": 144,
+      "exact_decision_agreement_rate": 0.5625
+    },
+    "grok_4_3_openrouter": {
+      "matched_memory_request_pairs": 256,
+      "requested_action_outcome_matches": 249,
+      "requested_action_outcome_agreement_rate": 0.97265625,
+      "exact_decision_matches": 131,
+      "exact_decision_agreement_rate": 0.51171875
+    },
+    "qwen_plus_0728_openrouter": {
+      "matched_memory_request_pairs": 256,
+      "requested_action_outcome_matches": 252,
+      "requested_action_outcome_agreement_rate": 0.984375,
+      "exact_decision_matches": 129,
+      "exact_decision_agreement_rate": 0.50390625
+    }
+  }
+}

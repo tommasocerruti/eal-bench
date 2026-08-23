@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
+from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+import shutil
 from typing import Any
 
 from eal_bench.llm import LLM
@@ -10,6 +12,7 @@ from eal_bench.llm.logger import JSONLLogger
 
 from domains.base import AuthorizationMemoryDomain, PresentationProfile
 
+from .executor_plan import executor_plan_rows, planned_executor_calls
 from .langmem_writer import framework_manifest, run_writer_chains
 from .persistence import (
     content_hash,
@@ -38,8 +41,26 @@ from .schemas import (
     LANGMEM_IMPLEMENTATION_ID,
     FrozenEvidence,
     MemoryArtifact,
+    frozen_evidence_from_dict,
+    memory_artifact_from_dict,
+    memory_attempt_from_dict,
+    memory_state_from_dict,
+    model_context_from_dict,
 )
 from .study_plan import StudyExpansion, StudyPlan, WriterRunBundle
+
+
+@dataclass(frozen=True)
+class PreparedExecution:
+    memories: tuple[Any, ...]
+    attempts: tuple[Any, ...]
+    states: tuple[Any, ...]
+    evidence: tuple[FrozenEvidence, ...]
+    contexts: tuple[Any, ...]
+    writer_bundle: WriterRunBundle
+    jobs: tuple[Any, ...]
+    dynamic_rows: Mapping[str, Sequence[Any]]
+    manifest_metadata: Mapping[str, Any]
 
 
 def validate_study_plan(
@@ -47,6 +68,8 @@ def validate_study_plan(
     cases: Sequence[Any],
     plan: StudyPlan,
     options: Mapping[str, Any],
+    *,
+    config: Any | None = None,
 ) -> dict[str, Any]:
     """Validate every plan surface that can be built without a provider call."""
 
@@ -144,6 +167,14 @@ def validate_study_plan(
         and reviewer_calls == 0
     ):
         estimated_cost = 0.0
+    checkpoint_validation = _validate_writer_checkpoint_round_trip(
+        domain,
+        cases,
+        plan,
+        options,
+        presentation=presentation,
+        config=config,
+    )
     return {
         "status": "passed",
         "study_id": plan.study_id,
@@ -171,6 +202,7 @@ def validate_study_plan(
         "artifact_schemas": dict(plan.artifact_schemas),
         "artifact_paths": dict(plan.artifact_paths),
         "plan_metadata": dict(plan.metadata),
+        "writer_checkpoint": checkpoint_validation,
         "call_plan": {
             "capacity_enforced": capacity_enforced,
             "calibrated_capacity_tokens": calibrated_capacity_tokens,
@@ -223,6 +255,98 @@ def validate_study_plan(
                 )
             ),
         },
+    }
+
+
+def _validate_writer_checkpoint_round_trip(
+    domain: AuthorizationMemoryDomain,
+    cases: Sequence[Any],
+    plan: StudyPlan,
+    options: Mapping[str, Any],
+    *,
+    presentation: PresentationProfile,
+    config: Any | None,
+) -> dict[str, Any]:
+    if not plan.writer_chains:
+        return {"status": "not_applicable"}
+    if plan.post_writer_reviewer is not None:
+        return {
+            "status": "not_resumable",
+            "reason": "post-writer reviewer requires a model call",
+        }
+    if not plan.validation_writer_bundles:
+        raise ValueError("writer checkpoint validation requires an offline bundle")
+    fixture_hashes = []
+    executor_plan_hashes = []
+    for bundle in plan.validation_writer_bundles:
+        memories = tuple(
+            memory_artifact_from_dict(item.to_dict()) for item in bundle.memories
+        )
+        attempts = tuple(
+            memory_attempt_from_dict(item.to_dict()) for item in bundle.attempts
+        )
+        states = tuple(
+            memory_state_from_dict(item.to_dict()) for item in bundle.states
+        )
+        evidence = tuple(
+            frozen_evidence_from_dict(item.to_dict()) for item in bundle.evidence
+        )
+        contexts = tuple(
+            model_context_from_dict(item.to_dict()) for item in bundle.contexts
+        )
+        base_evidence = [*plan.source_evidence]
+        base_evidence.extend(
+            item
+            for item in plan.controlled_memories
+            if isinstance(item, FrozenEvidence)
+        )
+        base_evidence.extend(evidence)
+        prepared = prepare_execution(
+            domain,
+            cases,
+            plan,
+            options,
+            memories=memories,
+            attempts=attempts,
+            states=states,
+            evidence=base_evidence,
+            contexts=contexts,
+            writer_evidence=evidence,
+            reviewer_llm=None,
+        )
+        round_trip = {
+            "memories": prepared.memories,
+            "attempts": prepared.attempts,
+            "states": prepared.states,
+            "evidence": prepared.evidence,
+            "contexts": prepared.contexts,
+            "dynamic_rows": prepared.dynamic_rows,
+            "manifest_metadata": prepared.manifest_metadata,
+            "job_ids": [job.job_id for job in prepared.jobs],
+        }
+        fixture_hashes.append(content_hash(round_trip))
+        if config is not None:
+            planned = planned_executor_calls(
+                domain,
+                prepared.jobs,
+                study_id=plan.study_id,
+                executor_task=str(options.get("executor_task") or "executor"),
+                executor_targets=_targets(options.get("executor_targets")),
+                executor_runs=int(options.get("executor_runs", 1)),
+                seed=int(options.get("seed", 0)),
+                presentation=presentation,
+                config=config,
+                pressure_specs=plan.pressure_specs,
+            )
+            executor_plan_hashes.append(content_hash(executor_plan_rows(planned)))
+    return {
+        "status": "passed",
+        "schema_version": "writer_execution_checkpoint_v1",
+        "offline_bundle_count": len(plan.validation_writer_bundles),
+        "round_trip_hashes": fixture_hashes,
+        "executor_plan_hashes": executor_plan_hashes,
+        "writer_trajectories_regenerated_on_resume": 0,
+        "deterministic_post_writer_expansion": True,
     }
 
 
@@ -393,54 +517,27 @@ def run_study_plan(
             writer_evidence.extend(generated.final_evidence)
             contexts.extend(generated.model_contexts)
 
-        writer_bundle = WriterRunBundle(
-            memories=tuple(memories),
-            attempts=tuple(attempts),
-            states=tuple(states),
-            evidence=tuple(writer_evidence),
-            contexts=tuple(contexts),
-        )
-        expansion = (
-            plan.post_writer_reviewer(
-                llm,
-                domain,
-                cases,
-                writer_bundle,
-                options,
-            )
-            if plan.post_writer_reviewer is not None
-            else plan.post_writer_builder(
-                domain,
-                cases,
-                writer_bundle,
-                options,
-            )
-            if plan.post_writer_builder is not None
-            else StudyExpansion()
-        )
-        memories.extend(expansion.additional_memories)
-        evidence.extend(expansion.additional_evidence)
-        contexts.extend(expansion.additional_contexts)
-        unique_memories: dict[str, MemoryArtifact] = {}
-        for memory in memories:
-            prior = unique_memories.setdefault(memory.memory_id, memory)
-            if prior != memory:
-                raise ValueError(
-                    f"memory ID collision: {memory.memory_id}"
-                )
-        memories = list(unique_memories.values())
-        dynamic_rows: dict[str, Sequence[Any]] = {
-            name: tuple(values)
-            for name, values in expansion.artifact_rows.items()
-        }
-        manifest.update(dict(expansion.manifest_metadata))
-        jobs = plan.validate(
+        prepared = prepare_execution(
             domain,
             cases,
+            plan,
             options,
-            generated_evidence=writer_evidence,
-            expansion_jobs=expansion.jobs,
+            memories=memories,
+            attempts=attempts,
+            states=states,
+            evidence=evidence,
+            contexts=contexts,
+            writer_evidence=writer_evidence,
+            reviewer_llm=llm,
         )
+        memories = list(prepared.memories)
+        attempts = list(prepared.attempts)
+        states = list(prepared.states)
+        evidence = list(prepared.evidence)
+        contexts = list(prepared.contexts)
+        dynamic_rows = dict(prepared.dynamic_rows)
+        jobs = prepared.jobs
+        manifest.update(dict(prepared.manifest_metadata))
         manifest["model_visible_executor_surfaces"] = (
             validate_executor_job_surfaces(
                 domain,
@@ -449,49 +546,20 @@ def run_study_plan(
                 pressure_specs=plan.pressure_specs,
             )
         )
-        evidence_by_id = {
-            item.evidence_id: item for item in evidence
-        }
-        for job in jobs:
-            prior = evidence_by_id.setdefault(
-                job.evidence.evidence_id,
-                job.evidence,
-            )
-            if prior != job.evidence:
-                raise ValueError(
-                    f"evidence ID collision: {job.evidence.evidence_id}"
-                )
-        evidence = list(evidence_by_id.values())
-        if plan.finalizer is not None:
-            finalized = plan.finalizer(
-                domain,
-                cases,
-                memories,
-                attempts,
-                states,
-                evidence,
-                options,
-            )
-            if finalized.replace_evidence:
-                evidence = list(finalized.additional_evidence)
-            else:
-                evidence.extend(finalized.additional_evidence)
-            dynamic_rows.update(finalized.artifact_rows)
-            manifest.update(dict(finalized.manifest_metadata))
-        finalized_evidence: dict[str, FrozenEvidence] = {}
-        for item in evidence:
-            prior = finalized_evidence.setdefault(item.evidence_id, item)
-            if prior != item:
-                raise ValueError(f"evidence ID collision: {item.evidence_id}")
-        evidence = list(finalized_evidence.values())
-
-        _freeze_pre_execution_expansion(
+        _freeze_pre_execution_checkpoint(
             run_dir,
             manifest_path,
             manifest,
             plan,
-            dynamic_rows,
-            jobs,
+            prepared,
+            calls_path=calls_path,
+            domain=domain,
+            executor_task=executor_task,
+            executor_targets=executor_targets,
+            executor_runs=executor_runs,
+            seed=seed,
+            presentation=presentation,
+            config=llm.config,
         )
         trials: list[Any] = []
         if jobs:
@@ -565,6 +633,26 @@ def run_study_plan(
                 "sha256": file_hash(calls_path),
                 "rows": call_count,
             }
+        checkpoint = manifest.get("checkpoint")
+        if isinstance(checkpoint, Mapping):
+            checkpoint_files = checkpoint.get("files")
+            if not isinstance(checkpoint_files, Mapping):
+                raise ValueError("writer checkpoint has no file map")
+            for name in (
+                "writer_bundle_memories",
+                "writer_bundle_evidence",
+                "writer_model_contexts",
+                "executor_plan",
+                "writer_calls",
+            ):
+                entry = checkpoint_files.get(name)
+                if not isinstance(entry, Mapping):
+                    raise ValueError(f"writer checkpoint is missing {name!r}")
+                checkpoint_path = run_dir / str(entry["path"])
+                if file_hash(checkpoint_path) != entry.get("sha256"):
+                    raise ValueError(f"writer checkpoint artifact changed: {name}")
+                files[name] = dict(entry)
+                counts[name] = int(entry["rows"])
         for alias, target in plan.file_aliases.items():
             if target not in files:
                 raise ValueError(
@@ -610,40 +698,246 @@ def run_study_plan(
         raise
 
 
-def _freeze_pre_execution_expansion(
+def prepare_execution(
+    domain: AuthorizationMemoryDomain,
+    cases: Sequence[Any],
+    plan: StudyPlan,
+    options: Mapping[str, Any],
+    *,
+    memories: Sequence[Any],
+    attempts: Sequence[Any],
+    states: Sequence[Any],
+    evidence: Sequence[FrozenEvidence],
+    contexts: Sequence[Any],
+    writer_evidence: Sequence[FrozenEvidence],
+    reviewer_llm: Any | None,
+) -> PreparedExecution:
+    writer_bundle = WriterRunBundle(
+        memories=tuple(memories),
+        attempts=tuple(attempts),
+        states=tuple(states),
+        evidence=tuple(writer_evidence),
+        contexts=tuple(contexts),
+    )
+    if plan.post_writer_reviewer is not None:
+        if reviewer_llm is None:
+            raise ValueError("reviewer-backed writer checkpoints cannot be rebuilt")
+        expansion = plan.post_writer_reviewer(
+            reviewer_llm,
+            domain,
+            cases,
+            writer_bundle,
+            options,
+        )
+    elif plan.post_writer_builder is not None:
+        expansion = plan.post_writer_builder(
+            domain,
+            cases,
+            writer_bundle,
+            options,
+        )
+    else:
+        expansion = StudyExpansion()
+
+    prepared_memories = [*memories, *expansion.additional_memories]
+    prepared_evidence = [*evidence, *expansion.additional_evidence]
+    prepared_contexts = [*contexts, *expansion.additional_contexts]
+    unique_memories: dict[str, MemoryArtifact] = {}
+    for memory in prepared_memories:
+        prior = unique_memories.setdefault(memory.memory_id, memory)
+        if prior != memory:
+            raise ValueError(f"memory ID collision: {memory.memory_id}")
+    prepared_memories = list(unique_memories.values())
+    dynamic_rows: dict[str, Sequence[Any]] = {
+        name: tuple(values)
+        for name, values in expansion.artifact_rows.items()
+    }
+    manifest_metadata = dict(expansion.manifest_metadata)
+    jobs = plan.validate(
+        domain,
+        cases,
+        options,
+        generated_evidence=writer_evidence,
+        expansion_jobs=expansion.jobs,
+    )
+    evidence_by_id = {item.evidence_id: item for item in prepared_evidence}
+    for job in jobs:
+        prior = evidence_by_id.setdefault(
+            job.evidence.evidence_id,
+            job.evidence,
+        )
+        if prior != job.evidence:
+            raise ValueError(f"evidence ID collision: {job.evidence.evidence_id}")
+    prepared_evidence = list(evidence_by_id.values())
+    if plan.finalizer is not None:
+        finalized = plan.finalizer(
+            domain,
+            cases,
+            prepared_memories,
+            attempts,
+            states,
+            prepared_evidence,
+            options,
+        )
+        if finalized.replace_evidence:
+            prepared_evidence = list(finalized.additional_evidence)
+        else:
+            prepared_evidence.extend(finalized.additional_evidence)
+        dynamic_rows.update(finalized.artifact_rows)
+        manifest_metadata.update(dict(finalized.manifest_metadata))
+    finalized_evidence: dict[str, FrozenEvidence] = {}
+    for item in prepared_evidence:
+        prior = finalized_evidence.setdefault(item.evidence_id, item)
+        if prior != item:
+            raise ValueError(f"evidence ID collision: {item.evidence_id}")
+    return PreparedExecution(
+        memories=tuple(prepared_memories),
+        attempts=tuple(attempts),
+        states=tuple(states),
+        evidence=tuple(finalized_evidence.values()),
+        contexts=tuple(prepared_contexts),
+        writer_bundle=writer_bundle,
+        jobs=tuple(jobs),
+        dynamic_rows=dynamic_rows,
+        manifest_metadata=manifest_metadata,
+    )
+
+
+def _freeze_pre_execution_checkpoint(
     run_dir: Path,
     manifest_path: Path,
     manifest: dict[str, Any],
     plan: StudyPlan,
-    dynamic_rows: Mapping[str, Sequence[Any]],
-    jobs: Sequence[Any],
+    prepared: PreparedExecution,
+    *,
+    calls_path: Path,
+    domain: AuthorizationMemoryDomain,
+    executor_task: str,
+    executor_targets: Sequence[str],
+    executor_runs: int,
+    seed: int,
+    presentation: PresentationProfile,
+    config: Any,
 ) -> None:
-    if (
-        plan.post_writer_builder is None
-        and plan.post_writer_reviewer is None
-    ):
+    dynamic_rows = prepared.dynamic_rows
+    if not plan.writer_chains:
+        if (
+            plan.post_writer_builder is None
+            and plan.post_writer_reviewer is None
+        ):
+            return
+        frozen_files: dict[str, dict[str, Any]] = {}
+        frozen_counts: dict[str, int] = {}
+        for name, values in dynamic_rows.items():
+            filename = plan.artifact_paths.get(name, f"{name}.jsonl")
+            path = run_dir / filename
+            count = write_jsonl(path, values)
+            frozen_counts[name] = count
+            frozen_files[name] = {
+                "path": path.name,
+                "sha256": file_hash(path),
+                "rows": count,
+            }
+        manifest.update(
+            {
+                "status": "expansion_frozen",
+                "post_writer_expansion": {
+                    "executor_jobs": len(prepared.jobs),
+                    "files": frozen_files,
+                    "counts": frozen_counts,
+                    "selected_before_executor_calls": True,
+                },
+            }
+        )
+        write_json(manifest_path, manifest)
         return
-    frozen_files: dict[str, dict[str, Any]] = {}
-    frozen_counts: dict[str, int] = {}
-    for name, values in dynamic_rows.items():
+
+    planned = planned_executor_calls(
+        domain,
+        prepared.jobs,
+        study_id=plan.study_id,
+        executor_task=executor_task,
+        executor_targets=executor_targets,
+        executor_runs=executor_runs,
+        seed=seed,
+        presentation=presentation,
+        config=config,
+        pressure_specs=plan.pressure_specs,
+    )
+    checkpoint_rows: dict[str, Sequence[Any]] = {
+        "memories": prepared.memories,
+        "memory_attempts": prepared.attempts,
+        "memory_states": prepared.states,
+        "evidence": prepared.evidence,
+        "writer_bundle_memories": prepared.writer_bundle.memories,
+        "writer_bundle_evidence": prepared.writer_bundle.evidence,
+        "writer_model_contexts": prepared.writer_bundle.contexts,
+        "executor_plan": executor_plan_rows(planned),
+        **plan.artifact_rows,
+        **dynamic_rows,
+    }
+    checkpoint_files: dict[str, dict[str, Any]] = {}
+    checkpoint_counts: dict[str, int] = {}
+    for name, values in checkpoint_rows.items():
         filename = plan.artifact_paths.get(name, f"{name}.jsonl")
         path = run_dir / filename
         count = write_jsonl(path, values)
-        frozen_counts[name] = count
-        frozen_files[name] = {
+        checkpoint_counts[name] = count
+        checkpoint_files[name] = {
             "path": path.name,
             "sha256": file_hash(path),
             "rows": count,
         }
+    if not calls_path.is_file():
+        raise ValueError("writer checkpoint has no call log")
+    writer_calls_path = run_dir / "writer_calls.jsonl"
+    shutil.copy2(calls_path, writer_calls_path)
+    writer_call_count = sum(
+        bool(line.strip())
+        for line in writer_calls_path.read_text(encoding="utf-8").splitlines()
+    )
+    checkpoint_counts["writer_calls"] = writer_call_count
+    checkpoint_files["writer_calls"] = {
+        "path": writer_calls_path.name,
+        "sha256": file_hash(writer_calls_path),
+        "rows": writer_call_count,
+    }
+    dynamic_files = {
+        name: checkpoint_files[name] for name in dynamic_rows
+    }
+    dynamic_counts = {
+        name: checkpoint_counts[name] for name in dynamic_rows
+    }
     manifest.update(
         {
-            "status": "expansion_frozen",
-            "post_writer_expansion": {
-                "executor_jobs": len(jobs),
-                "files": frozen_files,
-                "counts": frozen_counts,
+            "status": "execution_frozen",
+            "files": checkpoint_files,
+            "counts": checkpoint_counts,
+            "checkpoint": {
+                "schema_version": "writer_execution_checkpoint_v1",
+                "executor_calls": len(planned),
+                "executor_call_ids_sha256": content_hash(list(planned)),
+                "files": checkpoint_files,
+                "counts": checkpoint_counts,
+                "writer_calls_immutable": True,
+                "writer_trajectories_regenerated_on_resume": 0,
                 "selected_before_executor_calls": True,
             },
+            "post_writer_expansion": {
+                "executor_jobs": len(prepared.jobs),
+                "files": dynamic_files,
+                "counts": dynamic_counts,
+                "selected_before_executor_calls": True,
+            },
+        }
+    )
+    manifest["artifact_schema_versions"].update(
+        {
+            "writer_bundle_memories": ARTIFACT_SCHEMA_VERSIONS["memories"],
+            "writer_bundle_evidence": ARTIFACT_SCHEMA_VERSIONS["evidence"],
+            "writer_model_contexts": ARTIFACT_SCHEMA_VERSIONS["model_contexts"],
+            "executor_plan": 1,
+            "writer_calls": 1,
         }
     )
     write_json(manifest_path, manifest)
@@ -839,6 +1133,11 @@ def _manifest(
             f"study plan metadata collides with manifest fields: {joined}"
         )
     manifest.update(dict(plan.metadata))
+    compatibility = options.get("_completed_release_replication_compatibility")
+    if compatibility is not None:
+        manifest["completed_release_replication_compatibility"] = dict(
+            compatibility
+        )
     return manifest
 
 

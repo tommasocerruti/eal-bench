@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass, field
+from collections.abc import Mapping
+from dataclasses import asdict, dataclass, field, fields
 from enum import Enum
 from typing import Any
 
@@ -269,3 +270,91 @@ class ModelContext:
         data["messages"] = list(self.messages)
         data["tools"] = list(self.tools)
         return data
+
+
+def model_provenance_from_dict(row: Mapping[str, Any]) -> ModelProvenance:
+    return _from_mapping(
+        ModelProvenance,
+        row,
+        effective_parameters=dict(row.get("effective_parameters") or {}),
+    )
+
+
+def memory_artifact_from_dict(row: Mapping[str, Any]) -> MemoryArtifact:
+    writer = row.get("writer")
+    return _from_mapping(
+        MemoryArtifact,
+        row,
+        architecture=MemoryArchitecture(str(row["architecture"])),
+        origin=MemoryOrigin(str(row["origin"])),
+        writer=(
+            model_provenance_from_dict(writer)
+            if isinstance(writer, Mapping)
+            else None
+        ),
+        framework_run_ids=tuple(row.get("framework_run_ids") or ()),
+        framework=dict(row.get("framework") or {}),
+    )
+
+
+def memory_attempt_from_dict(row: Mapping[str, Any]) -> MemoryAttempt:
+    writer = row.get("writer")
+    if not isinstance(writer, Mapping):
+        raise ValueError("memory attempt writer must be an object")
+    return _from_mapping(
+        MemoryAttempt,
+        row,
+        architecture=MemoryArchitecture(str(row["architecture"])),
+        writer=model_provenance_from_dict(writer),
+        framework_run_ids=tuple(row.get("framework_run_ids") or ()),
+        framework=dict(row.get("framework") or {}),
+    )
+
+
+def memory_state_from_dict(row: Mapping[str, Any]) -> MemoryState:
+    return _from_mapping(
+        MemoryState,
+        row,
+        architecture=MemoryArchitecture(str(row["architecture"])),
+        attempt_ids=tuple(row.get("attempt_ids") or ()),
+    )
+
+
+def frozen_evidence_from_dict(row: Mapping[str, Any]) -> FrozenEvidence:
+    writer = row.get("writer")
+    architecture = row.get("architecture")
+    return _from_mapping(
+        FrozenEvidence,
+        row,
+        architecture=(
+            MemoryArchitecture(str(architecture))
+            if architecture is not None
+            else None
+        ),
+        writer=(
+            model_provenance_from_dict(writer)
+            if isinstance(writer, Mapping)
+            else None
+        ),
+    )
+
+
+def model_context_from_dict(row: Mapping[str, Any]) -> ModelContext:
+    model = row.get("model")
+    if not isinstance(model, Mapping):
+        raise ValueError("model context provenance must be an object")
+    return _from_mapping(
+        ModelContext,
+        row,
+        messages=tuple(dict(item) for item in row.get("messages") or ()),
+        tools=tuple(dict(item) for item in row.get("tools") or ()),
+        model=model_provenance_from_dict(model),
+        metadata=dict(row.get("metadata") or {}),
+    )
+
+
+def _from_mapping(model: type[Any], row: Mapping[str, Any], **overrides: Any) -> Any:
+    names = {item.name for item in fields(model)}
+    values = {name: row[name] for name in names if name in row}
+    values.update(overrides)
+    return model(**values)

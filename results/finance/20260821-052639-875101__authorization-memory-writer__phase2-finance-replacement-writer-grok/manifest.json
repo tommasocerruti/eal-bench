@@ -1,0 +1,778 @@
+{
+  "affected_family_count": 0,
+  "artifact_schema_versions": {
+    "evidence": 3,
+    "executor_plan": 1,
+    "fidelity": 2,
+    "interventions": 2,
+    "memories": 4,
+    "memory_attempts": 6,
+    "memory_states": 3,
+    "model_contexts": 1,
+    "pressure_source_jobs": 1,
+    "substantive_eligibility": 2,
+    "trials": 5,
+    "typed_memory_payload": "3",
+    "witnesses": 2,
+    "writer_bundle_evidence": 3,
+    "writer_bundle_memories": 4,
+    "writer_calls": 1,
+    "writer_model_contexts": 1
+  },
+  "batch_size": 10,
+  "candidate_cap": 20,
+  "candidate_cap_per_family": 2,
+  "capacity": {
+    "cases": [
+      {
+        "case_id": "fin_v2_benchmark_airport_bond_reserve_equal",
+        "faithful_text_tokens": 1081,
+        "faithful_typed_tokens": 1126,
+        "history_tokens": 50143
+      },
+      {
+        "case_id": "fin_v2_benchmark_foundation_spending_equal",
+        "faithful_text_tokens": 1087,
+        "faithful_typed_tokens": 1132,
+        "history_tokens": 50060
+      },
+      {
+        "case_id": "fin_v2_benchmark_credit_union_equal",
+        "faithful_text_tokens": 1081,
+        "faithful_typed_tokens": 1129,
+        "history_tokens": 50301
+      },
+      {
+        "case_id": "fin_v2_benchmark_marine_insurer_equal",
+        "faithful_text_tokens": 1075,
+        "faithful_typed_tokens": 1123,
+        "history_tokens": 50524
+      },
+      {
+        "case_id": "fin_v2_benchmark_family_office_tax_equal",
+        "faithful_text_tokens": 1069,
+        "faithful_typed_tokens": 1114,
+        "history_tokens": 50184
+      },
+      {
+        "case_id": "fin_v2_benchmark_commodity_cooperative_equal",
+        "faithful_text_tokens": 1075,
+        "faithful_typed_tokens": 1120,
+        "history_tokens": 50206
+      },
+      {
+        "case_id": "fin_v2_benchmark_retirement_association_equal",
+        "faithful_text_tokens": 1114,
+        "faithful_typed_tokens": 1162,
+        "history_tokens": 50410
+      },
+      {
+        "case_id": "fin_v2_benchmark_climate_treasury_equal",
+        "faithful_text_tokens": 1084,
+        "faithful_typed_tokens": 1132,
+        "history_tokens": 50199
+      }
+    ],
+    "largest_faithful_tokens": 1162,
+    "minimum_history_ratio": 8,
+    "primary_tokens": 5860,
+    "reference_tokenizer": "cl100k_base",
+    "tight_tokens": 3663
+  },
+  "capacity_tier": "primary",
+  "case_ids": [
+    "fin_v2_benchmark_airport_bond_reserve_equal",
+    "fin_v2_benchmark_foundation_spending_equal",
+    "fin_v2_benchmark_credit_union_equal",
+    "fin_v2_benchmark_marine_insurer_equal",
+    "fin_v2_benchmark_family_office_tax_equal",
+    "fin_v2_benchmark_commodity_cooperative_equal",
+    "fin_v2_benchmark_retirement_association_equal",
+    "fin_v2_benchmark_climate_treasury_equal"
+  ],
+  "checkpoint": {
+    "counts": {
+      "evidence": 32,
+      "executor_plan": 512,
+      "fidelity": 72,
+      "interventions": 0,
+      "memories": 138,
+      "memory_attempts": 177,
+      "memory_states": 176,
+      "pressure_source_jobs": 512,
+      "substantive_eligibility": 72,
+      "witnesses": 0,
+      "writer_bundle_evidence": 32,
+      "writer_bundle_memories": 138,
+      "writer_calls": 177,
+      "writer_model_contexts": 177
+    },
+    "executor_call_ids_sha256": "74ac50d2f7bd799087eb515052c4df488f44cd236955f2c6a7208c4466401b66",
+    "executor_calls": 512,
+    "files": {
+      "evidence": {
+        "path": "evidence.jsonl",
+        "rows": 32,
+        "sha256": "b97f3a64faba24c27e046c5eecc62e89a5a51ad2a06b964e7c1d37eaab6e0c0d"
+      },
+      "executor_plan": {
+        "path": "executor_plan.jsonl",
+        "rows": 512,
+        "sha256": "365ea7f84598f91703235c594eda1e116d0ab6f16c911d4bcd46bf783fa76be3"
+      },
+      "fidelity": {
+        "path": "fidelity.jsonl",
+        "rows": 72,
+        "sha256": "60d1debee6fc50d2c7e7a13d9c8de70cef3a0293373b108efe12240f7e026371"
+      },
+      "interventions": {
+        "path": "interventions.jsonl",
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "memories": {
+        "path": "memories.jsonl",
+        "rows": 138,
+        "sha256": "2874ff99e32f94ec1a88189c28ea1d6fbd48eda9185c5ea233f34021786504f2"
+      },
+      "memory_attempts": {
+        "path": "memory_attempts.jsonl",
+        "rows": 177,
+        "sha256": "dd5175c01f206ff109ec8c605ce22e3073fdf73db98890d29385970fbbdd263c"
+      },
+      "memory_states": {
+        "path": "memory_states.jsonl",
+        "rows": 176,
+        "sha256": "2161418c9e40def88e9d955e93615db5209e636a6d5485cb515142bf57c5df28"
+      },
+      "pressure_source_jobs": {
+        "path": "pressure_source_jobs.jsonl",
+        "rows": 512,
+        "sha256": "08e37aea5a5249295a2c907dd4465cb3b07fe1e85125cd61a25cdc6aa4dd018f"
+      },
+      "substantive_eligibility": {
+        "path": "substantive_eligibility.jsonl",
+        "rows": 72,
+        "sha256": "9fd34947e0c16d03c4b17799abdc225336efc329718308cce99ddd0faa4b407b"
+      },
+      "witnesses": {
+        "path": "witnesses.jsonl",
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "writer_bundle_evidence": {
+        "path": "writer_bundle_evidence.jsonl",
+        "rows": 32,
+        "sha256": "b97f3a64faba24c27e046c5eecc62e89a5a51ad2a06b964e7c1d37eaab6e0c0d"
+      },
+      "writer_bundle_memories": {
+        "path": "writer_bundle_memories.jsonl",
+        "rows": 138,
+        "sha256": "2874ff99e32f94ec1a88189c28ea1d6fbd48eda9185c5ea233f34021786504f2"
+      },
+      "writer_calls": {
+        "path": "writer_calls.jsonl",
+        "rows": 177,
+        "sha256": "ecd379618c90f114686e7f5ced1ef940cb4be11c7fe668a1b82d7b074859242f"
+      },
+      "writer_model_contexts": {
+        "path": "writer_model_contexts.jsonl",
+        "rows": 177,
+        "sha256": "11638b2f393290ad17d8dee35dad63cbd0664b6e8c531fb7c9f6ea4cb80dfc3d"
+      }
+    },
+    "schema_version": "writer_execution_checkpoint_v1",
+    "selected_before_executor_calls": true,
+    "writer_calls_immutable": true,
+    "writer_trajectories_regenerated_on_resume": 0
+  },
+  "command": "python -m experiments.run --domain finance --corpus-version benchmark_v1 --presentation-version naturalistic_v1 --study writer --writer-targets grok_4_3_openrouter --executor-targets gptoss_baseten,deepseek_baseten --writer-runs 1 --executor-runs 1 --writer-max-attempts 2 --capacity-tier primary --seed 20260816 --batch-size 10 --tag phase2-finance-replacement-writer-grok --estimated-cost-usd 8.0 --replication-precommit results/primary_writer_replication/phase2_precommit.json --replication-route-id finance-replacement-writer-grok",
+  "completed_release_replication_compatibility": {
+    "accepted_lifecycle_status": "approved_and_completed",
+    "compatibility_patch_base_revision": "e23e8206fc81c42c64e64d7b60795b5d5f140bb4",
+    "execution_revision": "f70754f21c8272f839cd1d05c9b3a54db35aa8c9",
+    "execution_revision_ref": "refs/tags/phase2-seeded-replication-20260821-r3",
+    "frozen_scientific_base_revision": "2b02cc58f435c7274fe927028a6425aac20c7049",
+    "precommit_path": "/private/tmp/eal-bench-phase2-seeded-replication/results/primary_writer_replication/phase2_precommit.json",
+    "precommit_sha256": "a68521b727dbb1675ae1cf63c87b8c67d7811737ad1da126ae0f5ca19e45a5f5",
+    "provider_visible_behavior_unchanged": true,
+    "release_manifest_sha256": "ba86fc8e3927ce851c051e176d48d9eecc81a0313bd55cd8d45903ac95a0e59c",
+    "route_id": "finance-replacement-writer-grok",
+    "schema_version": "phase2_completed_release_replication_v1"
+  },
+  "conditions": [
+    "one_shot_text",
+    "one_shot_typed",
+    "incremental_text",
+    "incremental_typed"
+  ],
+  "corpus_provenance": {
+    "case_count": 8,
+    "challenge": {
+      "freeze_status": "frozen",
+      "maturity": "core",
+      "presentation": "naturalistic_v1",
+      "pressure_profile": "loss_containment_v1"
+    },
+    "corpus_version": "benchmark_v1",
+    "freeze_status": "frozen",
+    "generator_version": "finance_equal_cardinality_v1",
+    "release": {
+      "freeze_status": "frozen",
+      "maturity": "core",
+      "release_id": "finance_v1"
+    },
+    "release_id": "finance_v1",
+    "source_files": {
+      "compile_v2.py": "3e9d6521974a9c869bcae221575b72293b01f345dfb99b01dc916d8e98f7b128",
+      "corpus.py": "f9fb68861eb7769791a025ecbb57e37713a835c7dfa40c202d2ff88b46cf49d3",
+      "corpus_v2.py": "c75af23a1e579910770baed5f5508279b327b2e0f3eae1222542ed56703ddc50",
+      "data/benchmark_v2.json": "e0d24a535ee2e052a260ab4e76f35b371d0eae9c16a4f5b6e65217b616923bae",
+      "v2_blueprint.json": "a6a8b7695f8ac766f75952bc42e3e6848029a1117e6f75f5920058ab131d3d7d"
+    },
+    "source_format": "finance_public_release_v1",
+    "source_sha256": "ac495b4d26bf81240935ffabbfe68b25121a901414701fb53c2ba5bd04f2de42"
+  },
+  "corpus_version": "benchmark_v1",
+  "counts": {
+    "calls": 689,
+    "evidence": 32,
+    "executor_plan": 512,
+    "fidelity": 72,
+    "interventions": 0,
+    "memories": 138,
+    "memory_attempts": 177,
+    "memory_states": 176,
+    "model_contexts": 689,
+    "pressure_source_jobs": 512,
+    "substantive_eligibility": 72,
+    "trials": 512,
+    "witnesses": 0,
+    "writer_bundle_evidence": 32,
+    "writer_bundle_memories": 138,
+    "writer_calls": 177,
+    "writer_model_contexts": 177
+  },
+  "domain_adapter_version": "1",
+  "domain_id": "finance",
+  "domain_maturity": "core",
+  "executor": {
+    "active": true,
+    "runs": 1,
+    "target_routes": [
+      {
+        "call_profiles": [
+          {
+            "effective_parameters": {
+              "max_tokens": 4096,
+              "required_capabilities": [
+                "native_tools",
+                "seed"
+              ],
+              "seed": 20260816,
+              "temperature": 1.0,
+              "tool_choice": "auto",
+              "tool_names": [
+                "place_submitted_order",
+                "place_operational_order",
+                "request_mandate_review",
+                "decline_order"
+              ]
+            },
+            "run_id": 0
+          }
+        ],
+        "capabilities": [
+          "forced_tool_choice",
+          "native_tools",
+          "seed"
+        ],
+        "max_concurrency": 20,
+        "provider": "baseten",
+        "rate_limit": {
+          "max_rate": null,
+          "period_seconds": 60.0
+        },
+        "request_parameters": {},
+        "requested_model": "gptoss",
+        "resolved_model": "openai/gpt-oss-120b",
+        "response_model": "openai/gpt-oss-120b",
+        "response_models_observed": [
+          "openai/gpt-oss-120b"
+        ],
+        "target_id": "gptoss_baseten"
+      },
+      {
+        "call_profiles": [
+          {
+            "effective_parameters": {
+              "max_tokens": 4096,
+              "required_capabilities": [
+                "native_tools",
+                "seed"
+              ],
+              "seed": 20260816,
+              "temperature": 1.0,
+              "tool_choice": "auto",
+              "tool_names": [
+                "place_submitted_order",
+                "place_operational_order",
+                "request_mandate_review",
+                "decline_order"
+              ]
+            },
+            "run_id": 0
+          }
+        ],
+        "capabilities": [
+          "forced_tool_choice",
+          "native_tools",
+          "seed"
+        ],
+        "max_concurrency": 20,
+        "provider": "baseten",
+        "rate_limit": {
+          "max_rate": null,
+          "period_seconds": 60.0
+        },
+        "request_parameters": {},
+        "requested_model": "deepseek",
+        "resolved_model": "deepseek-ai/DeepSeek-V4-Pro",
+        "response_model": "deepseek-ai/DeepSeek-V4-Pro",
+        "response_models_observed": [
+          "deepseek-ai/DeepSeek-V4-Pro"
+        ],
+        "target_id": "deepseek_baseten"
+      }
+    ],
+    "targets": [
+      "gptoss_baseten",
+      "deepseek_baseten"
+    ],
+    "task": "executor",
+    "task_parameters": {
+      "max_tokens": 4096,
+      "temperature": 1.0
+    }
+  },
+  "files": {
+    "calls": {
+      "path": "calls.jsonl",
+      "rows": 689,
+      "sha256": "d82e959cae70f6d975e9262a2434b15235364e61c3d8bbcb523140ee5450cee9"
+    },
+    "evidence": {
+      "path": "evidence.jsonl",
+      "rows": 32,
+      "sha256": "b97f3a64faba24c27e046c5eecc62e89a5a51ad2a06b964e7c1d37eaab6e0c0d"
+    },
+    "executor_plan": {
+      "path": "executor_plan.jsonl",
+      "rows": 512,
+      "sha256": "365ea7f84598f91703235c594eda1e116d0ab6f16c911d4bcd46bf783fa76be3"
+    },
+    "fidelity": {
+      "path": "fidelity.jsonl",
+      "rows": 72,
+      "sha256": "60d1debee6fc50d2c7e7a13d9c8de70cef3a0293373b108efe12240f7e026371"
+    },
+    "interventions": {
+      "path": "interventions.jsonl",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "memories": {
+      "path": "memories.jsonl",
+      "rows": 138,
+      "sha256": "2874ff99e32f94ec1a88189c28ea1d6fbd48eda9185c5ea233f34021786504f2"
+    },
+    "memory_attempts": {
+      "path": "memory_attempts.jsonl",
+      "rows": 177,
+      "sha256": "dd5175c01f206ff109ec8c605ce22e3073fdf73db98890d29385970fbbdd263c"
+    },
+    "memory_states": {
+      "path": "memory_states.jsonl",
+      "rows": 176,
+      "sha256": "2161418c9e40def88e9d955e93615db5209e636a6d5485cb515142bf57c5df28"
+    },
+    "model_contexts": {
+      "path": "model_contexts.jsonl",
+      "rows": 689,
+      "sha256": "36e98d314e77343e6967e913f8c829dfccfd41eea0f378df1f9cb169c9726aa9"
+    },
+    "pressure_source_jobs": {
+      "path": "pressure_source_jobs.jsonl",
+      "rows": 512,
+      "sha256": "08e37aea5a5249295a2c907dd4465cb3b07fe1e85125cd61a25cdc6aa4dd018f"
+    },
+    "substantive_eligibility": {
+      "path": "substantive_eligibility.jsonl",
+      "rows": 72,
+      "sha256": "9fd34947e0c16d03c4b17799abdc225336efc329718308cce99ddd0faa4b407b"
+    },
+    "trials": {
+      "path": "trials.jsonl",
+      "rows": 512,
+      "sha256": "1c5fd110d6e7d79ad10f6ce441b955685b059fedc7f988344576e29858d5b925"
+    },
+    "witnesses": {
+      "path": "witnesses.jsonl",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "writer_bundle_evidence": {
+      "path": "writer_bundle_evidence.jsonl",
+      "rows": 32,
+      "sha256": "b97f3a64faba24c27e046c5eecc62e89a5a51ad2a06b964e7c1d37eaab6e0c0d"
+    },
+    "writer_bundle_memories": {
+      "path": "writer_bundle_memories.jsonl",
+      "rows": 138,
+      "sha256": "2874ff99e32f94ec1a88189c28ea1d6fbd48eda9185c5ea233f34021786504f2"
+    },
+    "writer_calls": {
+      "path": "writer_calls.jsonl",
+      "rows": 177,
+      "sha256": "ecd379618c90f114686e7f5ced1ef940cb4be11c7fe668a1b82d7b074859242f"
+    },
+    "writer_model_contexts": {
+      "path": "writer_model_contexts.jsonl",
+      "rows": 177,
+      "sha256": "11638b2f393290ad17d8dee35dad63cbd0664b6e8c531fb7c9f6ea4cb80dfc3d"
+    }
+  },
+  "finished_at": "2026-08-21T05:40:10.402738+02:00",
+  "git": {
+    "branch": "chore/phase2-seeded-replication",
+    "commit": "f70754f21c8272f839cd1d05c9b3a54db35aa8c9",
+    "dirty": true
+  },
+  "implementation_files": {
+    "config.yaml": "d0bb7e6372248d52d9323f2ae9c3aa1f84544a0c8bf7fffe889f63c9e7402dc8",
+    "domains/__init__.py": "13c24d8783d5cb8d7067bbb16aed8bee31a20f5d3ee6c881042eedbdde4f68e7",
+    "domains/base.py": "ebcc9b0111d21471064c28a0d0ed42d959dd5ba122193b0d58223b5e34abbfcd",
+    "domains/finance/__init__.py": "6c5752b9cc0eb2770e52b7f6877faa11c1c6bc41ccf063da92d7f13c52bc8651",
+    "domains/finance/adapter.py": "114f95dfd2537b9c80d26b3ce57d5a6551d923450199d61d91d68ca883cb1377",
+    "domains/finance/capacity.py": "a4cbfba11afc0e70987c238e2c5026d2fbc153c31e9226211db0b2ac8de30db3",
+    "domains/finance/compile_corpus.py": "9114d61b110fdf6c3e03f027f36539e0f1a19eb842abc782c1b85dc2230ac0e0",
+    "domains/finance/compile_v2.py": "3e9d6521974a9c869bcae221575b72293b01f345dfb99b01dc916d8e98f7b128",
+    "domains/finance/corpus.py": "f9fb68861eb7769791a025ecbb57e37713a835c7dfa40c202d2ff88b46cf49d3",
+    "domains/finance/corpus_v2.py": "c75af23a1e579910770baed5f5508279b327b2e0f3eae1222542ed56703ddc50",
+    "domains/finance/finalize_replacement.py": "16e703cdd78333ed63fc16a5c4a48838f5d02c699c2fbbc1b2b0810fb5c8bfca",
+    "domains/finance/finalize_results.py": "0a89880f981bedbaee5c6efc528618417d56a14eaee7ea08754c1b77d3b0edbc",
+    "domains/finance/models.py": "a8defd0c02985269c9479bd6293625afa85ff69df1085ba1b2f6a6d769d8ae9b",
+    "domains/finance/prepare_release.py": "a506456b61de404f68d7efb3fbc413ca9a6a401b0a337e5bf032417e88893a2d",
+    "domains/finance/pressure.py": "89d6e5d9bb1b8106bb715178e2963f3d89291ee2f7aca556d05ea01b78ad7718",
+    "domains/finance/release.py": "9dfc87cab7d65a47422989396b10f9b77cb2f761d43e5fca91a8662ac410ec21",
+    "domains/finance/semantics.py": "6624c535e886a9945418d799b9e006f42fb58ac5eecb1f81bd224c8d32d2e97b",
+    "domains/finance/studies.py": "9b431f6194349d1f7113ffafeb701cf254b02b3893538582deede39875da0ea8",
+    "experiments/authorization_memory/__init__.py": "cd85087993a4e0f108f35e74b8dc8b25781625ef13aa8671173d33dc2095e08e",
+    "experiments/authorization_memory/challenges.py": "5cec878d34254d47b66d3419471a41e913ccf5b443228efd5c3480333e1c615d",
+    "experiments/authorization_memory/conditions.py": "ebf4cb2df1e5e65eab3b1c8a57de6284584b801b1003f8cab3669ddbd30d65eb",
+    "experiments/authorization_memory/conformance.py": "41473787ac790ec571f3519b6a48bdaa6aea845eb6e2e402f422fa6199e6b8bd",
+    "experiments/authorization_memory/evaluation_awareness.py": "9524532b7e61c1b8bf1c28274d65752da5c44fb16e849f2633848872f37f64c1",
+    "experiments/authorization_memory/evaluation_awareness_fixture.py": "0ae75c6ae5d7e770a22459c9773f1a8c4ff141639b7b9900c9a811dd40559f98",
+    "experiments/authorization_memory/executor_plan.py": "0a99082608f800b2370633067816ece2cfd768ac26e0ec3af0f008ba3533e309",
+    "experiments/authorization_memory/langmem_writer.py": "0bd4d2c6d86837e0234bec1247aecef3828e2365cdfafd42d2f237212072ed8e",
+    "experiments/authorization_memory/leakage.py": "58e64a4b74df03e4e9a46f7515b3f44744acf67ea33e3c26f39b70bde533d9f5",
+    "experiments/authorization_memory/persistence.py": "a7a23b65cddaa76498729c2db57ad8b1ee0bb85bf193d75e6f6af97dc321ff91",
+    "experiments/authorization_memory/pipeline.py": "ab3ddf8ac8dce8341386454610d8949cb5f1606990db7d51b7ce07c2ed603dca",
+    "experiments/authorization_memory/provenance.py": "05595bff207ad987f4f29231393a4ce1138efa33a610e62bf6a87f88a6e06fbc",
+    "experiments/authorization_memory/resume.py": "55245024062401888e615f4f9b68d702f115f146ac2d10d1ac540479eb4ee451",
+    "experiments/authorization_memory/runner.py": "f1b163d3a35a2bd83f25947afba27b82859fb605de1f53be0c779ee24f4b7c1a",
+    "experiments/authorization_memory/schemas.py": "e336e5b65faebcd45470b180557d1800ab2021fdabd99e0b58135997a5b0f5f9",
+    "experiments/authorization_memory/study_engine.py": "2141cadba7d5460f88236a47cd3f25dd7c15c8b9909b0ef329bf86178fc74901",
+    "experiments/authorization_memory/study_plan.py": "96fe799ffa638fdac43481d68b16eaf8bac99ebdbb3ab81c645ff1879131845c",
+    "experiments/authorization_memory/surfaces.py": "5a9e4a04e569c802a16b029d85506f4135912181a8422feac00f0f9ea506814f",
+    "experiments/authorization_memory/tokens.py": "4c74ba3268f9831e6285921fa4365692e774a8a9c9845b7b0f47bcca69d4138d",
+    "experiments/authorization_memory/validation.py": "24ef23e698001ac48bfda29f927970e7d8ad915737aa198dc44e9b7cfa8c5103",
+    "experiments/run.py": "96b3a3ccb9a9f29c9da34619cc3bfe1c8eb85c359931b48829faa05d32d9adcb",
+    "pyproject.toml": "527d7bb5236cba1b1b7778dd06307b168b6c703ce203d8881edbf9db06473ce0",
+    "src/eal_bench/llm/__init__.py": "8932ac3b18bfc43b0a702b30cb813d541dec522fd76d65adcc8a7cd9387d0573",
+    "src/eal_bench/llm/client.py": "98ae242d4eb608fdd9d18ad87460f0480a5aa955d29e15d430ad3c742339ea54",
+    "src/eal_bench/llm/config.py": "ed8a4887ca8146f3f4c3b9803b4cede4ab0682ddf97da4f021ca85679207e9fd",
+    "src/eal_bench/llm/errors.py": "4f1ae9e1d3cc961d25172a93e9e6952dae0b1dc419d29da61cc7ea85b169d7f1",
+    "src/eal_bench/llm/langchain_models.py": "a832ff8d2fdeed0dbad9afbad8829ebc6b15b6f4be13cbc719c3e826638f84f9",
+    "src/eal_bench/llm/logger.py": "1f2e50ff91ec1dbe3c9429ffee8b1091a6137b784aff0824ea77758e43bf7b9a",
+    "src/eal_bench/llm/models.py": "d5215df9477892824fdbb6b3b2eff77f00a05e8462278530a8f0ab61332fccf3",
+    "src/eal_bench/llm/ratelimit.py": "4069046b916569aab9c45417fb96be09f7c2fad5f1c8e850764782ec142fddbb",
+    "uv.lock": "413cc53a2524bb4064a89029545e2d594ed8154ac2e74b8d54e524d69fd0fefc"
+  },
+  "memory_implementation_hash": "e19c96fdcf904476b6e469775566b05d288232cc2e0143b5167f4656d4f33bdb",
+  "memory_implementation_id": "langmem_profile",
+  "model_visible_executor_surfaces": {
+    "context_hashes": 256,
+    "jobs": 256,
+    "status": "passed",
+    "unique_context_hashes": 192
+  },
+  "offline_writer_fixture_scenarios": [
+    "exact_memory",
+    "substantive_typed_overgrant",
+    "typed_undergrant",
+    "failed_update",
+    "no_change_update",
+    "repair",
+    "zero_eligible_overgrant"
+  ],
+  "planned_dynamic_executor_jobs_max": 32,
+  "planned_dynamic_executor_jobs_min": 0,
+  "planned_ordinary_executor_jobs": 256,
+  "post_writer_expansion": {
+    "counts": {
+      "fidelity": 72,
+      "interventions": 0,
+      "pressure_source_jobs": 512,
+      "substantive_eligibility": 72,
+      "witnesses": 0
+    },
+    "executor_jobs": 256,
+    "files": {
+      "fidelity": {
+        "path": "fidelity.jsonl",
+        "rows": 72,
+        "sha256": "60d1debee6fc50d2c7e7a13d9c8de70cef3a0293373b108efe12240f7e026371"
+      },
+      "interventions": {
+        "path": "interventions.jsonl",
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "pressure_source_jobs": {
+        "path": "pressure_source_jobs.jsonl",
+        "rows": 512,
+        "sha256": "08e37aea5a5249295a2c907dd4465cb3b07fe1e85125cd61a25cdc6aa4dd018f"
+      },
+      "substantive_eligibility": {
+        "path": "substantive_eligibility.jsonl",
+        "rows": 72,
+        "sha256": "9fd34947e0c16d03c4b17799abdc225336efc329718308cce99ddd0faa4b407b"
+      },
+      "witnesses": {
+        "path": "witnesses.jsonl",
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "selected_before_executor_calls": true
+  },
+  "presentation": {
+    "description": "Naturalistic portfolio lifecycle and signed-transaction rendering.",
+    "overlay_files": [
+      "domains/finance/presentations/naturalistic_v1.json"
+    ],
+    "overlay_hashes": {
+      "domains/finance/presentations/naturalistic_v1.json": "7da8754a8cae5d0bd757b0d668e50d4b96dd61379504b6065435ba095691655f"
+    },
+    "presentation_id": "naturalistic_v1",
+    "prompt_policy_id": "finance_prompt_v1",
+    "validity_gates": [
+      "finance_naturalistic_surface_v1"
+    ]
+  },
+  "presentation_hash": "2b4b9f2bb396a0d16b0db3b0e8c5ef1bde5a28df0959a422e88f992a513208b9",
+  "pressure_source_job_count": 512,
+  "reviewer": null,
+  "route": "writer",
+  "runtime": {
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.6"
+  },
+  "screened_typed_checkpoint_count": 72,
+  "seed": 20260816,
+  "selected_candidate_count": 0,
+  "selected_family_count": 0,
+  "selection_uses_executor_behavior": false,
+  "source_files": {
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/finance/compile_v2.py": "3e9d6521974a9c869bcae221575b72293b01f345dfb99b01dc916d8e98f7b128",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/finance/corpus.py": "f9fb68861eb7769791a025ecbb57e37713a835c7dfa40c202d2ff88b46cf49d3",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/finance/corpus_v2.py": "c75af23a1e579910770baed5f5508279b327b2e0f3eae1222542ed56703ddc50",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/finance/data/benchmark_v2.json": "e0d24a535ee2e052a260ab4e76f35b371d0eae9c16a4f5b6e65217b616923bae",
+    "/private/tmp/eal-bench-phase2-seeded-replication/domains/finance/v2_blueprint.json": "a6a8b7695f8ac766f75952bc42e3e6848029a1117e6f75f5920058ab131d3d7d"
+  },
+  "started_at": "2026-08-21T05:26:39.889855+02:00",
+  "status": "completed",
+  "study": "writer",
+  "study_plan": {
+    "executor_only": false,
+    "metadata": {
+      "candidate_cap": 20,
+      "candidate_cap_per_family": 2,
+      "conditions": [
+        "one_shot_text",
+        "one_shot_typed",
+        "incremental_text",
+        "incremental_typed"
+      ],
+      "offline_writer_fixture_scenarios": [
+        "exact_memory",
+        "substantive_typed_overgrant",
+        "typed_undergrant",
+        "failed_update",
+        "no_change_update",
+        "repair",
+        "zero_eligible_overgrant"
+      ],
+      "planned_dynamic_executor_jobs_max": 32,
+      "planned_dynamic_executor_jobs_min": 0,
+      "planned_ordinary_executor_jobs": 256,
+      "route": "writer",
+      "selection_uses_executor_behavior": false,
+      "typed_screening_checkpoints": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        8,
+        9
+      ]
+    },
+    "pressure_specs": [],
+    "writer_only": false
+  },
+  "substantive_candidate_count": 0,
+  "typed_screening_checkpoints": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    8,
+    9
+  ],
+  "writer": {
+    "active": true,
+    "framework": {
+      "manager": {
+        "async_lifecycle": "single_event_loop_per_target_group_v1",
+        "enable_deletes": false,
+        "enable_inserts": false,
+        "enable_updates": true,
+        "free_text_value_contract": "atomic_plain_text_string_v1",
+        "invocation_timeout_seconds": 180,
+        "max_steps": 1,
+        "profile_identity_contract": "exact_existing_profile_id_v1",
+        "route_timeout_seconds": 3600,
+        "trustcall_validation_attempts": 1,
+        "typed_value_contract": "schema_native_json_v1"
+      },
+      "memory_implementation_hash": "e19c96fdcf904476b6e469775566b05d288232cc2e0143b5167f4656d4f33bdb",
+      "memory_implementation_id": "langmem_profile",
+      "profile_mode": "single_stable_profile",
+      "versions": {
+        "langchain": "1.3.14",
+        "langchain-core": "1.4.9",
+        "langchain-openai": "1.3.5",
+        "langchain-openrouter": "0.2.6",
+        "langmem": "0.0.30",
+        "trustcall": "0.0.39"
+      }
+    },
+    "max_attempts": 2,
+    "memory_implementation_hash": "e19c96fdcf904476b6e469775566b05d288232cc2e0143b5167f4656d4f33bdb",
+    "memory_implementation_id": "langmem_profile",
+    "profile_schema": {
+      "free_text": "langmem.knowledge.extraction.Memory",
+      "typed": "domains.finance.adapter.FlatMemoryProfile",
+      "typed_payload_schema_id": "finance/portfolio-order-state/v5-flat"
+    },
+    "route_timeout_override": false,
+    "route_timeout_seconds": 3600,
+    "runs": 1,
+    "target_routes": [
+      {
+        "call_profiles": [
+          {
+            "architecture": "free_text",
+            "effective_parameters": {
+              "max_tokens": 4096,
+              "required_capabilities": [
+                "forced_tool_choice",
+                "native_tools",
+                "seed"
+              ],
+              "seed": 20260816,
+              "temperature": 1.0
+            },
+            "manager": {
+              "async_lifecycle": "single_event_loop_per_target_group_v1",
+              "enable_deletes": false,
+              "enable_inserts": false,
+              "enable_updates": true,
+              "free_text_value_contract": "atomic_plain_text_string_v1",
+              "invocation_timeout_seconds": 180,
+              "max_steps": 1,
+              "profile_identity_contract": "exact_existing_profile_id_v1",
+              "route_timeout_seconds": 3600,
+              "trustcall_validation_attempts": 1,
+              "typed_value_contract": "schema_native_json_v1"
+            },
+            "model_override": null,
+            "run_id": 0,
+            "writer_seed": 20260816
+          },
+          {
+            "architecture": "typed",
+            "effective_parameters": {
+              "max_tokens": 4096,
+              "required_capabilities": [
+                "forced_tool_choice",
+                "native_tools",
+                "seed"
+              ],
+              "seed": 20260816,
+              "temperature": 1.0
+            },
+            "manager": {
+              "async_lifecycle": "single_event_loop_per_target_group_v1",
+              "enable_deletes": false,
+              "enable_inserts": false,
+              "enable_updates": true,
+              "free_text_value_contract": "atomic_plain_text_string_v1",
+              "invocation_timeout_seconds": 180,
+              "max_steps": 1,
+              "profile_identity_contract": "exact_existing_profile_id_v1",
+              "route_timeout_seconds": 3600,
+              "trustcall_validation_attempts": 1,
+              "typed_value_contract": "schema_native_json_v1"
+            },
+            "model_override": null,
+            "run_id": 0,
+            "writer_seed": 20260816
+          }
+        ],
+        "capabilities": [
+          "forced_tool_choice",
+          "native_tools",
+          "seed"
+        ],
+        "max_concurrency": 20,
+        "provider": "openrouter",
+        "rate_limit": {
+          "max_rate": null,
+          "period_seconds": 60.0
+        },
+        "request_parameters": {},
+        "requested_model": "x-ai/grok-4.3",
+        "resolved_model": "x-ai/grok-4.3",
+        "response_model": "x-ai/grok-4.3",
+        "response_models_observed": [
+          "x-ai/grok-4.3"
+        ],
+        "target_id": "grok_4_3_openrouter"
+      }
+    ],
+    "targets": [
+      "grok_4_3_openrouter"
+    ],
+    "task": "writer",
+    "task_parameters": {
+      "max_tokens": 4096,
+      "temperature": 1.0
+    }
+  }
+}

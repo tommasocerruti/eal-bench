@@ -34,7 +34,10 @@ from experiments.authorization_memory.persistence import content_hash, file_hash
 from experiments.authorization_memory.resume import (
     prepare_provider_error_resume,
     resume_executor_only_study_plan,
+    resume_writer_checkpoint_study_plan,
     validate_executor_only_resume,
+    validate_writer_checkpoint_resume,
+    validate_writer_checkpoint_resume_fixture,
 )
 from experiments.authorization_memory.study_engine import (
     run_study_plan,
@@ -43,6 +46,12 @@ from experiments.authorization_memory.study_engine import (
 from experiments.authorization_memory.validation import (
     validate_langmem_writer_behaviors,
     validate_shared_domain_boundaries,
+)
+from experiments.replication_release_compatibility import (
+    authorize_completed_release_replication,
+    compatibility_validation_options,
+    completed_release_execution_options,
+    is_completed_release_replication,
 )
 
 
@@ -183,7 +192,10 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--resume-run",
         default="",
-        help="continue the missing calls of an interrupted executor-only run",
+        help=(
+            "continue missing calls from an executor-only run or a frozen "
+            "post-writer executor checkpoint"
+        ),
     )
     parser.add_argument(
         "--retry-provider-errors",
@@ -205,6 +217,16 @@ def _parser() -> argparse.ArgumentParser:
         help="domain-registered awareness protocol; defaults to the first registered protocol",
     )
     parser.add_argument("--tag", default=None)
+    parser.add_argument(
+        "--replication-precommit",
+        default="",
+        help="explicit precommit for a narrowly authorized completed-release rerun",
+    )
+    parser.add_argument(
+        "--replication-route-id",
+        default="",
+        help="exact route ID in the completed-release replication precommit",
+    )
     return parser
 
 
@@ -365,16 +387,38 @@ def _validate(args: argparse.Namespace) -> None:
             }
         elif profile.builder is not None:
             plan = profile.build_jobs(domain, cases, options)
-            result = validate_study_plan(domain, cases, plan, options)
+            result = validate_study_plan(
+                domain, cases, plan, options, config=load_config()
+            )
+            if plan.writer_chains:
+                result["writer_checkpoint_resume_fixture"] = (
+                    validate_writer_checkpoint_resume_fixture(
+                        domain,
+                        cases,
+                        plan,
+                        options,
+                        config=load_config(),
+                    )
+                )
             if args.retry_provider_errors:
                 raise ValueError("--retry-provider-errors is a live continuation operation")
             if args.resume_run:
-                result["resume"] = validate_executor_only_resume(
-                    domain,
-                    cases,
-                    plan,
-                    options,
-                    config=load_config(),
+                result["resume"] = (
+                    validate_writer_checkpoint_resume(
+                        domain,
+                        cases,
+                        plan,
+                        options,
+                        config=load_config(),
+                    )
+                    if plan.writer_chains
+                    else validate_executor_only_resume(
+                        domain,
+                        cases,
+                        plan,
+                        options,
+                        config=load_config(),
+                    )
                 ).to_dict()
             result["domain_id"] = domain_id
             if profile.study_id == "writer":
@@ -625,7 +669,14 @@ def _route_options(
             )
         options["writer_targets"] = ()
         options["executor_targets"] = ()
-    profile.validate_options(options)
+    compatibility = authorize_completed_release_replication(
+        options,
+        domain,
+        profile,
+    )
+    if compatibility is not None:
+        options["_completed_release_replication_compatibility"] = compatibility
+    profile.validate_options(compatibility_validation_options(options))
     return options
 
 
@@ -670,13 +721,37 @@ def _run(args: argparse.Namespace) -> Path:
         requested_cases,
     )
     if profile.runner is not None:
+        if is_completed_release_replication(options):
+            assert profile.runner is not None
+            return Path(profile.runner(domain, cases, options))
         return profile.run(domain, cases, options)
     if profile.builder is None:
         raise NotImplementedError(
             f"study {args.study!r} does not provide a runner or job builder"
         )
-    plan = profile.build_jobs(domain, cases, options)
-    validation = validate_study_plan(domain, cases, plan, options)
+    if is_completed_release_replication(options):
+        assert profile.builder is not None
+        plan = profile.builder(
+            domain,
+            cases,
+            compatibility_validation_options(options),
+        )
+    else:
+        plan = profile.build_jobs(domain, cases, options)
+    options = completed_release_execution_options(options, plan)
+    validation = validate_study_plan(
+        domain, cases, plan, options, config=load_config()
+    )
+    if plan.writer_chains:
+        validation["writer_checkpoint_resume_fixture"] = (
+            validate_writer_checkpoint_resume_fixture(
+                domain,
+                cases,
+                plan,
+                options,
+                config=load_config(),
+            )
+        )
     if args.retry_provider_errors and not args.resume_run:
         raise ValueError("--retry-provider-errors requires --resume-run")
     if args.retry_provider_errors:
@@ -689,12 +764,22 @@ def _run(args: argparse.Namespace) -> Path:
         )
         options = {**options, "resume_run": str(continuation)}
     if args.resume_run:
-        resume_validation = validate_executor_only_resume(
-            domain,
-            cases,
-            plan,
-            options,
-            config=load_config(),
+        resume_validation = (
+            validate_writer_checkpoint_resume(
+                domain,
+                cases,
+                plan,
+                options,
+                config=load_config(),
+            )
+            if plan.writer_chains
+            else validate_executor_only_resume(
+                domain,
+                cases,
+                plan,
+                options,
+                config=load_config(),
+            )
         )
         validation["resume"] = resume_validation.to_dict()
     print(
@@ -716,6 +801,10 @@ def _run(args: argparse.Namespace) -> Path:
             "printed call plan"
         )
     if args.resume_run:
+        if plan.writer_chains:
+            return resume_writer_checkpoint_study_plan(
+                domain, cases, plan, options
+            )
         return resume_executor_only_study_plan(domain, cases, plan, options)
     return run_study_plan(domain, cases, plan, options)
 
@@ -739,6 +828,7 @@ def _selected_cases(
 def main(argv: list[str] | None = None) -> None:
     raw_argv = list(sys.argv[1:] if argv is None else argv)
     args = _parser().parse_args(raw_argv)
+    args._raw_argv = tuple(raw_argv)
     args._provided_flags = tuple(
         item.split("=", 1)[0]
         for item in raw_argv
