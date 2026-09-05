@@ -24,6 +24,7 @@ from experiments.authorization_memory.extensions_common import (
     base_manifest,
     behavior_by,
     build_llm,
+    evidence_by_spec,
     formation_over_probes,
     freeze_artifact,
     jobs_for_evidence,
@@ -115,6 +116,9 @@ def main(argv: list[str] | None = None) -> int:
             ]
             groups.append((condition_id, domain, specs))
 
+    condition_ids = [g[0] for g in groups]
+    if len(condition_ids) != len(set(condition_ids)):
+        raise SystemExit(f"duplicate conditions: {sorted(c for c in condition_ids if condition_ids.count(c) > 1)}")
     writer_updates = sum(len(spec.updates) for _, _, specs in groups for spec in specs)
     executor_calls = sum(len(base.corpus.probes(spec.case)) for _, _, specs in groups for spec in specs) * len(_split(args.executor_targets))
     print(f"cases={len(cases)} conditions={[g[0] for g in groups]}")
@@ -149,7 +153,7 @@ def main(argv: list[str] | None = None) -> int:
         states += written.states
         contexts += written.contexts
         by_id = {m.memory_id: m for m in written.memories}
-        for spec, frozen in zip(specs, written.evidence):
+        for spec, frozen in zip(specs, evidence_by_spec(base, specs, written.evidence)):
             evidence[frozen.evidence_id] = frozen
             jobs += jobs_for_evidence(base, spec.case, frozen, route=STUDY_ID, metadata={"writer_target_id": spec.target_id})
             payload = by_id[frozen.memory_id].payload

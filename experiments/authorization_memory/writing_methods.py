@@ -28,6 +28,8 @@ def parse_method(value: str) -> tuple[int | None, int | None]:
             retrieve = int(number)
         elif name != "incremental":
             raise ValueError(f"unknown writing method {part!r}")
+    if (rebuild is not None and rebuild < 1) or (retrieve is not None and retrieve < 1):
+        raise ValueError(f"writing method {value!r} needs k >= 1")
     return rebuild, retrieve
 
 

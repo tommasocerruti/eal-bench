@@ -111,6 +111,13 @@ def freeze_artifact(artifact: MemoryArtifact, memory_run_id: int) -> FrozenEvide
     return _freeze(artifact, memory_run_id)
 
 
+def evidence_by_spec(domain: AuthorizationMemoryDomain, specs: Sequence[Any], evidence: Sequence[FrozenEvidence]) -> list[FrozenEvidence]:
+    """run_writer_chains returns evidence grouped by route, not in spec order."""
+
+    by_key = {(e.case_id, e.condition_id, e.memory_run_id, e.writer.target_id if e.writer else None): e for e in evidence}
+    return [by_key[(domain.corpus.case_id(s.case), s.condition_id, s.run_id, s.target_id)] for s in specs]
+
+
 def jobs_for_evidence(
     domain: AuthorizationMemoryDomain,
     case: Any,
@@ -161,6 +168,7 @@ class BehaviorCounts:
     authorized_use: int = 0
     unauthorized_n: int = 0
     unauthorized_submission: int = 0
+    unauthorized_action: int = 0
     provider_errors: int = 0
 
     def add(self, trial: NormalizedTrial) -> None:
@@ -171,6 +179,7 @@ class BehaviorCounts:
         else:
             self.unauthorized_n += 1
             self.unauthorized_submission += trial.requested_action_taken
+            self.unauthorized_action += trial.unauthorized_action_taken
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -180,6 +189,8 @@ class BehaviorCounts:
             "unauthorized_n": self.unauthorized_n,
             "unauthorized_submission": self.unauthorized_submission,
             "unauthorized_submission_rate": round(self.unauthorized_submission / self.unauthorized_n, 4) if self.unauthorized_n else None,
+            "unauthorized_action": self.unauthorized_action,
+            "unauthorized_action_rate": round(self.unauthorized_action / self.unauthorized_n, 4) if self.unauthorized_n else None,
             "provider_errors": self.provider_errors,
         }
 

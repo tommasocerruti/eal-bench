@@ -34,6 +34,7 @@ from experiments.authorization_memory.extensions_common import (
     base_manifest,
     behavior_by,
     build_llm,
+    evidence_by_spec,
     format_ts,
     formation,
     formation_over_probes,
@@ -176,11 +177,12 @@ def main(argv: list[str] | None = None) -> int:
     base = write_chains(specs)
     memories, attempts, states, contexts = list(base.memories), list(base.attempts), list(base.states), list(base.contexts)
     by_id = {m.memory_id: m for m in memories}
-    current = {i: by_id[e.memory_id] for i, e in enumerate(base.evidence)}
-    evidence = {e.evidence_id: e for e in base.evidence}
+    base_evidence = evidence_by_spec(domain, specs, base.evidence)
+    current = {i: by_id[e.memory_id] for i, e in enumerate(base_evidence)}
+    evidence = {e.evidence_id: e for e in base_evidence}
     trials, executor_contexts = execute([
         job for i, spec in enumerate(specs)
-        for job in jobs_for_evidence(domain, spec.case, base.evidence[i], route=STUDY_ID, metadata={"loop": "open", "chain": i, "position": None})
+        for job in jobs_for_evidence(domain, spec.case, base_evidence[i], route=STUDY_ID, metadata={"loop": "open", "chain": i, "position": None})
     ])
 
     # 2. The closed loop.
@@ -202,7 +204,7 @@ def main(argv: list[str] | None = None) -> int:
                     "self_cited_records": sum(bool(set(r["source_turn_ids"]) & appended[i]) for r in state["authorizations"]),
                     **formation_over_probes(domain, spec.case, state),
                 })
-            frozen = base.evidence[i] if position == 1 else freeze_artifact(artifact, 0)
+            frozen = base_evidence[i] if position == 1 else freeze_artifact(artifact, 0)
             evidence[frozen.evidence_id] = frozen
             jobs += jobs_for_evidence(domain, spec.case, frozen, route=STUDY_ID, probes=(probe,), metadata={"loop": "closed", "chain": i, "position": position, "loop_writer": args.loop_writer, "action_log": args.action_log})
         step_trials, step_contexts = execute(jobs)
@@ -234,7 +236,7 @@ def main(argv: list[str] | None = None) -> int:
             attempts += step.attempts
             states += step.states
             contexts += step.contexts
-            for i, frozen in zip(seeded_index, step.evidence):
+            for i, frozen in zip(seeded_index, evidence_by_spec(domain, seeded, step.evidence)):
                 current[i] = by_id[frozen.memory_id]
 
     write_rows(run_dir, "memories.jsonl", memories)
