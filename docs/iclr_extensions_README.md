@@ -71,5 +71,4 @@ default off. `generated_v1` registration in `domains/procurement/adapter.py`. Th
 targets in `config.yaml`.
 
 Not built: extraction majority voting (the event-sourcing code is not in the public repo),
-writer-flagged uncertainty, the source-content check (parked outside the repo; Mika flagged
-it as possibly trivial and Tommaso did not pick it up).
+writer-flagged uncertainty, and a source-content check on stored records.
