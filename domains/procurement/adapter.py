@@ -128,19 +128,35 @@ def _envelope(record: CanonicalAuthorizationRecord) -> AuthorizationEnvelope:
     )
 
 
+GENERATED_CORPUS_VERSION = "generated_v1"
+
+
+def _optional_versions() -> tuple[str, ...]:
+    """Generated corpora are registered only when their compiled JSONL exists."""
+
+    return tuple(
+        version
+        for version in (GENERATED_CORPUS_VERSION,)
+        if (DATA_DIR / f"{version}.jsonl").is_file()
+    )
+
+
 class ProcurementCorpusAdapter:
     versions = (
         CALIBRATION_CORPUS_VERSION,
         BENCHMARK_CORPUS_VERSION,
         CONTROL_CORPUS_VERSION,
+        *_optional_versions(),
     )
     default_version = BENCHMARK_CORPUS_VERSION
     capacity_policy = CapacityPolicy(
-        minimum_history_ratios={"benchmark_v1": 8},
+        minimum_history_ratios={"benchmark_v1": 8, GENERATED_CORPUS_VERSION: 8},
         calibrated_tokens={
             "calibration_v1": {"primary": 572, "tight": 358},
             "benchmark_v1": {"primary": 572, "tight": 358},
             CONTROL_CORPUS_VERSION: {"primary": 572, "tight": 358},
+            # Same frozen budget as benchmark_v1 so generated histories stay comparable.
+            GENERATED_CORPUS_VERSION: {"primary": 572, "tight": 358},
         }
     )
 

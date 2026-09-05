@@ -92,6 +92,7 @@ class WriterUpdateSpec:
     messages: tuple[dict[str, str], ...]
     visible_source_ids: frozenset[str]
     input_kind: str
+    rebuild_from_history: bool = False  # LangMem sees an empty existing profile for this update
 
 
 @dataclass(frozen=True)
@@ -111,6 +112,7 @@ class WriterChainSpec:
     artifact_instance_id: str = "default"
     deterministic_session_ids: bool = False
     metadata: Mapping[str, Any] = field(default_factory=dict)
+    initial_memory: MemoryArtifact | None = None  # continue from this accepted memory
 
 
 @dataclass(frozen=True)
@@ -448,6 +450,7 @@ def _run_writer_chains(
                 profile_id="",
                 writer=base_writer,
                 framework=framework,
+                current=spec.initial_memory,
             )
             for spec in group
         ]
@@ -716,7 +719,11 @@ async def _invoke_wave(
         existing = [
             (
                 chain.profile_id,
-                _profile_from_current(domain, chain),
+                _profile_from_current(
+                    domain,
+                    chain,
+                    empty=update.rebuild_from_history,
+                ),
             )
         ]
         config = {
@@ -1126,17 +1133,19 @@ def _state_after_update(
 def _profile_from_current(
     domain: AuthorizationMemoryDomain,
     chain: _ActiveChain,
+    *,
+    empty: bool = False,
 ) -> BaseModel:
     if chain.spec.architecture is MemoryArchitecture.FREE_TEXT:
         content = (
             chain.current.payload
-            if chain.current is not None
+            if chain.current is not None and not empty
             else ""
         )
         if not isinstance(content, str):
             raise TypeError("free-text memory artifact contains a non-string payload")
         return LangMemTextProfile(content=content)
-    if chain.current is None:
+    if chain.current is None or empty:
         state = domain.memory.empty_typed()
     else:
         if not isinstance(chain.current.payload, Mapping):

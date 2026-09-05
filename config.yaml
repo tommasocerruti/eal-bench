@@ -99,6 +99,22 @@ model_targets:
     model: qwen/qwen-plus-2025-07-28
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
+  glm_5_3_baseten:
+    provider: baseten
+    model: zai-org/GLM-5.3
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+  kimi_k3_baseten:
+    provider: baseten
+    model: moonshotai/Kimi-K3
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+  deepseek_v4_flash_baseten:
+    provider: baseten
+    model: deepseek-ai/DeepSeek-V4-Flash-0731
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+
 tasks:
   # A task selects its default route by target ID. Calls can override it with
   # `target=`, including a target on a different provider.
