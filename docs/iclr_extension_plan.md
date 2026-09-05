@@ -1,6 +1,6 @@
 # EAL-Bench for ICLR 2027: proposed additions
 
-Working document, not committed. 2026-09-04. Written against the PALM draft in
+Working document. 2026-09-04. Written against the PALM draft in
 `eal-bench-paper/main.tex` and the public repo at `24bb9ee` (only `main` exists on origin; all
 PRs are merged; the source-authority gate and event-sourcing code are not in the public repo, so
 they must live in a private checkout).

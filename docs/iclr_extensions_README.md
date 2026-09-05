@@ -1,6 +1,6 @@
 # Extension studies
 
-Local branch `iclr-extensions`, uncommitted. All three keep the paper's pipeline: a LangMem
+Branch `mika/experiments`. All three keep the paper's pipeline: a LangMem
 writer turns the history into one bounded memory, the executor reads only that memory, and
 the shared executor path scores the same six requests per case. Both study scripts have
 `--dry-run` and refuse a live run without `--estimated-cost-usd`. The DEPLOYED2 key is in `.env` as
