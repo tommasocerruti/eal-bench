@@ -177,6 +177,13 @@ def main(argv: list[str] | None = None) -> int:
         ]
         return WriterRunArtifacts(*(tuple(x for part in parts for x in getattr(part, name)) for name in ("memories", "attempts", "states", "final_evidence", "model_contexts")))
 
+    def loop_evidence(chain_specs, step):
+        # A rejected update leaves the chain on its seed memory, whose writer may differ from
+        # the loop writer, so match evidence to specs through the seed instead of the writer.
+        parent = {m.memory_id: m.parent_memory_id for m in step.memories}
+        by_seed = {parent.get(e.memory_id, e.memory_id): e for e in step.final_evidence}
+        return [by_seed[s.initial_memory.memory_id] for s in chain_specs]
+
     def execute(jobs):
         return run_executor_jobs(llm, domain, jobs, study_id=STUDY_ID, executor_task="executor", executor_targets=executor_targets, executor_runs=1, batch_size=args.batch_size, seed=seed, presentation=presentation)
 
@@ -243,7 +250,7 @@ def main(argv: list[str] | None = None) -> int:
             attempts += step.attempts
             states += step.states
             contexts += step.model_contexts
-            for i, frozen in zip(seeded_index, evidence_by_spec(domain, seeded, step.final_evidence)):
+            for i, frozen in zip(seeded_index, loop_evidence(seeded, step)):
                 current[i] = by_id[frozen.memory_id]
 
     write_rows(run_dir, "memories.jsonl", memories)
