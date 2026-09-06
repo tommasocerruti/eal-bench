@@ -175,7 +175,7 @@ def main(argv: list[str] | None = None) -> int:
 
     # 1. The paper's incremental chains, then the open loop on their frozen memories.
     base = write_chains(specs)
-    memories, attempts, states, contexts = list(base.memories), list(base.attempts), list(base.states), list(base.contexts)
+    memories, attempts, states, contexts = list(base.memories), list(base.attempts), list(base.states), list(base.model_contexts)
     by_id = {m.memory_id: m for m in memories}
     base_evidence = evidence_by_spec(domain, specs, base.evidence)
     current = {i: by_id[e.memory_id] for i, e in enumerate(base_evidence)}
@@ -235,7 +235,7 @@ def main(argv: list[str] | None = None) -> int:
                     memories.append(m)
             attempts += step.attempts
             states += step.states
-            contexts += step.contexts
+            contexts += step.model_contexts
             for i, frozen in zip(seeded_index, evidence_by_spec(domain, seeded, step.evidence)):
                 current[i] = by_id[frozen.memory_id]
 

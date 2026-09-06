@@ -151,7 +151,7 @@ def main(argv: list[str] | None = None) -> int:
         memories += written.memories
         attempts += written.attempts
         states += written.states
-        contexts += written.contexts
+        contexts += written.model_contexts
         by_id = {m.memory_id: m for m in written.memories}
         for spec, frozen in zip(specs, evidence_by_spec(base, specs, written.evidence)):
             evidence[frozen.evidence_id] = frozen
