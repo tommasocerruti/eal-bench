@@ -46,7 +46,7 @@ from experiments.authorization_memory.extensions_common import (
     write_manifest,
     write_rows,
 )
-from experiments.authorization_memory.langmem_writer import WriterChainSpec, WriterUpdateSpec, run_writer_chains
+from experiments.authorization_memory.langmem_writer import WriterChainSpec, WriterRunArtifacts, WriterUpdateSpec, run_writer_chains
 from experiments.authorization_memory.persistence import content_hash, create_run_dir
 from experiments.authorization_memory.pipeline import calibrate_capacity, run_executor_jobs, validate_executor_job_surfaces
 from experiments.authorization_memory.writing_methods import incremental_updates
@@ -168,7 +168,14 @@ def main(argv: list[str] | None = None) -> int:
     write_manifest(run_dir, manifest)
 
     def write_chains(chain_specs):
-        return run_writer_chains(llm, domain, chain_specs, writer_task="writer", max_attempts=args.writer_max_attempts, capacity_tokens=capacity_tokens, batch_size=args.batch_size)
+        # One condition per call: langchain_openai shares a cached async HTTP client across
+        # models, and a second event loop in the same call inherits its pooled connections
+        # and hangs to the timeout on the first batch.
+        parts = [
+            run_writer_chains(llm, domain, [s for s in chain_specs if s.condition_id == cond], writer_task="writer", max_attempts=args.writer_max_attempts, capacity_tokens=capacity_tokens, batch_size=args.batch_size)
+            for cond in dict.fromkeys(s.condition_id for s in chain_specs)
+        ]
+        return WriterRunArtifacts(*(tuple(x for part in parts for x in getattr(part, name)) for name in ("memories", "attempts", "states", "final_evidence", "model_contexts")))
 
     def execute(jobs):
         return run_executor_jobs(llm, domain, jobs, study_id=STUDY_ID, executor_task="executor", executor_targets=executor_targets, executor_runs=1, batch_size=args.batch_size, seed=seed, presentation=presentation)
