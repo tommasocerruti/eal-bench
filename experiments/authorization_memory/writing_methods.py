@@ -1,7 +1,7 @@
 """How the LangMem writer is fed at each block.
 
 incremental          (previous memory, new block), the paper's method
-rebuild_every=k      every k blocks, and at the last block, an empty profile plus the history
+rebuild_every=k      every k blocks, an empty profile plus the history so far; other blocks incremental
                      so far, so memory is rebuilt from source
 writer_retrieval_k=k the new block plus the k earlier messages most similar to it (BM25)
 """
@@ -55,7 +55,7 @@ def incremental_updates(
     updates = []
     for position, block in enumerate(blocks):
         visible = frozenset(domain.corpus.source_turn_ids(case, through_block_index=block.block_index))
-        if rebuild_every and ((position + 1) % rebuild_every == 0 or block is blocks[-1]):
+        if rebuild_every and (position + 1) % rebuild_every == 0:
             history = "\n\n".join(domain.corpus.render_block(b, presentation) for b in blocks[: position + 1])
             updates.append(WriterUpdateSpec(block.block_index, (_wrap("SOURCE_HISTORY", history),), visible, "full_history", rebuild_from_history=True))
             continue
