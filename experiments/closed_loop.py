@@ -177,7 +177,7 @@ def main(argv: list[str] | None = None) -> int:
     base = write_chains(specs)
     memories, attempts, states, contexts = list(base.memories), list(base.attempts), list(base.states), list(base.model_contexts)
     by_id = {m.memory_id: m for m in memories}
-    base_evidence = evidence_by_spec(domain, specs, base.evidence)
+    base_evidence = evidence_by_spec(domain, specs, base.final_evidence)
     current = {i: by_id[e.memory_id] for i, e in enumerate(base_evidence)}
     evidence = {e.evidence_id: e for e in base_evidence}
     trials, executor_contexts = execute([
@@ -236,7 +236,7 @@ def main(argv: list[str] | None = None) -> int:
             attempts += step.attempts
             states += step.states
             contexts += step.model_contexts
-            for i, frozen in zip(seeded_index, evidence_by_spec(domain, seeded, step.evidence)):
+            for i, frozen in zip(seeded_index, evidence_by_spec(domain, seeded, step.final_evidence)):
                 current[i] = by_id[frozen.memory_id]
 
     write_rows(run_dir, "memories.jsonl", memories)

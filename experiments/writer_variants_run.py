@@ -153,7 +153,7 @@ def main(argv: list[str] | None = None) -> int:
         states += written.states
         contexts += written.model_contexts
         by_id = {m.memory_id: m for m in written.memories}
-        for spec, frozen in zip(specs, evidence_by_spec(base, specs, written.evidence)):
+        for spec, frozen in zip(specs, evidence_by_spec(base, specs, written.final_evidence)):
             evidence[frozen.evidence_id] = frozen
             jobs += jobs_for_evidence(base, spec.case, frozen, route=STUDY_ID, metadata={"writer_target_id": spec.target_id})
             payload = by_id[frozen.memory_id].payload
