@@ -13,7 +13,7 @@ from collections.abc import Mapping, Sequence
 from dataclasses import fields, replace
 from typing import Annotated, Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, StringConstraints, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from domains.base import AuthorizationDecision, AuthorizationMemoryDomain, FidelityReport, MemoryArchitecture
 
@@ -32,7 +32,7 @@ def _hybrid_profile(record_model: type[BaseModel]) -> type[BaseModel]:
 
         schema_version: Literal["3"]
         authorizations: Annotated[list[record_model], Field(max_length=32)]  # type: ignore[valid-type]
-        notes: Annotated[str, StringConstraints(max_length=1200)]
+        notes: str
 
         @field_validator("authorizations")
         @classmethod
