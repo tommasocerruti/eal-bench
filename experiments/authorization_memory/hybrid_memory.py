@@ -21,7 +21,8 @@ from domains.base import AuthorizationDecision, AuthorizationMemoryDomain, Fidel
 NOTES_INSTRUCTION = (
     " The profile also has one top-level free-text field named notes. Put anything relevant "
     "that does not fit the record fields in notes, such as pending changes, informal requests, "
-    "or context; never record a permission only in notes. Update notes with a single replace "
+    "or context; never record a permission only in notes. Keep notes to at most three short "
+    "sentences so the profile stays within its token budget. Update notes with a single replace "
     "patch at /notes."
 )
 
