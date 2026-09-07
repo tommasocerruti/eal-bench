@@ -127,7 +127,7 @@ model_targets:
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
     request_parameters:
-      max_tokens: 16384   # reasons inside the completion; 4096 truncates its PatchDoc calls
+      max_tokens: 32768   # reasons inside the completion; 4096 truncates its PatchDoc calls
 
 tasks:
   # A task selects its default route by target ID. Calls can override it with
