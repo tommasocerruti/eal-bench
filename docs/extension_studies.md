@@ -34,7 +34,21 @@ Scripts: `experiments/writer_variants_run.py` (studies 1, 2, 4, 5) and `experime
 | hybrid, incremental | 96.8% | 15.4% | 12.9–18.4 |
 | hybrid, rebuild every 3 | 98.8% | 2.6% | 1.6–4.2 |
 
-Single seed, 108 unauthorized requests per cell: free text incremental launders less (14.8%) but loses a fifth of authorized use (80.6%), because half its updates exceed the size limit and are discarded, the same behavior as in the paper's own free-text run. Retrieval changes nothing (typed 25.9%, hybrid 16.7%, free text 17.6%). A single rebuild from the whole history at the last block gives 0.0 to 0.9% for every memory type.
+The full grid at one seed, three writers pooled, GPT-OSS executor; 108 unauthorized requests per cell. The rebuild rows here used an earlier schedule that also rebuilt at the last block, so they measure a full rebuild from the whole history right before the requests.
+
+| Memory | Writing method | AU | US | P(F) | Exact memories |
+|---|---|---|---|---|---|
+| typed | incremental | 97.2% | 28.7% | 27.8% | 4/36 |
+| typed | retrieval, 6 messages | 99.1% | 25.9% | 25.9% | 3/36 |
+| typed | rebuild at the last block | 100% | 0.9% | 0.9% | 20/36 |
+| free text | incremental | 80.6% | 14.8% | n/a | n/a |
+| free text | retrieval, 6 messages | 85.2% | 17.6% | n/a | n/a |
+| free text | rebuild at the last block | 100% | 0.0% | n/a | n/a |
+| hybrid | incremental | 94.4% | 17.6% | 16.7% | 8/36 |
+| hybrid | retrieval, 6 messages | 98.1% | 16.7% | 16.7% | 8/36 |
+| hybrid | rebuild at the last block | 100% | 0.9% | 0.0% | 23/36 |
+
+Free text launders less than typed but loses a fifth of authorized use, because half its updates exceed the size limit and are discarded, the same behavior as in the paper's own free-text run. Retrieval changes nothing for any memory type.
 
 **Reading.** The failure follows incremental writing over a stale history, not the typed schema. The hybrid lowers it for every writer (GLM 15.3%, Kimi 18.1%, Nemotron 13.0% against 26.9 / 20.4 / 28.2% typed) and raises AU, plausibly because informal or pending changes now have a place other than a permission record. Retrieval does not help because the misleading material is already in the new block the writer is reading.
 
