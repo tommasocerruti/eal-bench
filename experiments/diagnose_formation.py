@@ -103,6 +103,49 @@ def judge(llm: LLM, target: str, payload: dict[str, str]) -> dict[str, Any]:
         return {"cause": "other", "explanation": text[:300]}
 
 
+def row_key(r: dict[str, Any]) -> tuple:
+    return (r.get("chain_id"), r.get("failure"), r.get("probe_id"), r.get("request_kind", "submitted"), r.get("record_id"))
+
+
+def canonical_chains(memories: list[dict[str, Any]], states: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
+    """One memory per (chain, block): the memory the run recorded as current after that block, when the state log has it.
+
+    A block can carry several memory rows (one per writer attempt); memory_states.jsonl names the accepted one."""
+    by_id = {m["memory_id"]: m for m in memories}
+    canon: dict[tuple[str, int], dict[str, Any]] = {}
+    for st in states:
+        m = by_id.get(st.get("current_memory_id"))
+        if m is not None:
+            canon[(m["chain_id"], st["block_index"])] = m
+    chains: dict[str, list[dict[str, Any]]] = collections.defaultdict(list)
+    seen: set[tuple[str, int]] = set()
+    for m in memories:
+        key = (m["chain_id"], m["block_index"])
+        if key in seen:
+            continue
+        chains[m["chain_id"]].append(canon.get(key, m))
+        seen.add(key)
+    return chains
+
+
+def candidate_requests(domain: Any, case: Any) -> list[tuple[Any, str, Any]]:
+    """(probe, kind, request): each probe's submitted request plus, when the domain defines an operational alternative
+    for the probe, that alternative (the executor may execute it instead of the submitted request)."""
+    probes = list(domain.corpus.probes(case))
+    out = [(probe, "submitted", probe.request) for probe in probes]  # submitted requests first: an alternative that equals another probe's request is attributed to that probe
+    challenge = getattr(domain, "challenge", None)
+    if challenge is not None and challenge.applies(case):
+        for probe in probes:
+            try:
+                ctx = challenge.context(case, probe)
+            except Exception:
+                continue
+            for course in ctx.courses:
+                if course.request is not None and course.request != probe.request:
+                    out.append((probe, "alternative", course.request))
+    return out
+
+
 def judge_all(llm: LLM, targets: list[str], payload: dict[str, str], row: dict[str, Any], summary: collections.Counter) -> None:
     row["judges"] = {t: judge(llm, t, payload) for t in targets}
     votes = collections.Counter(v.get("cause", "other") for v in row["judges"].values())
@@ -113,7 +156,7 @@ def judge_all(llm: LLM, targets: list[str], payload: dict[str, str], row: dict[s
     summary[row["consensus_cause"]] += 1
 
 
-def born_records(fh, domain, cases, presentation, chains, attempts, written_back, llm, target, summary) -> int:
+def born_records(fh, domain, cases, presentation, chains, attempts, written_back, llm, target, summary, existing=None) -> int:
     """Closed loop: a record whose every cited source is one of the agent's own written-back lines."""
 
     def loop_ids(record):
@@ -139,6 +182,8 @@ def born_records(fh, domain, cases, presentation, chains, attempts, written_back
                     continue
                 seen.add(rid)
                 b = m["block_index"]
+                if existing and (chain_id, "record_born_from_action", None, "submitted", rid) in existing:
+                    continue
                 before = {k: v for k, v in mems[i - 1]["payload"].items() if k != "notes"} if i else domain.memory.empty_typed()
                 block_attempts = sorted([a for a in attempts if a["case_id"] == case_id and a["condition_id"] == condition and a["block_index"] == b], key=lambda a: a["attempt_index"])
                 plan = "\n---\n".join(f"attempt {a['attempt_index']} ({a['status']}): {args_of(a).get('planned_edits', '')}" for a in block_attempts) or "(no attempt recorded)"
@@ -186,12 +231,11 @@ def main(argv: list[str] | None = None) -> int:
             memories = [m for m in rows(run / "memories.jsonl") if m["architecture"] == "typed"]
             attempts = rows(run / "memory_attempts.jsonl")
             written_back = rows(run / "written_back.jsonl")
-            chains: dict[str, list[dict[str, Any]]] = collections.defaultdict(list)
-            for m in memories:
-                chains[m["chain_id"]].append(m)
+            chains = canonical_chains(memories, rows(run / "memory_states.jsonl"))
             out_path = out_dir / f"{run.name.split('__')[-1]}.jsonl"
+            existing = {row_key(r) for r in rows(out_path)}
             written = 0
-            with open(out_path, "w", encoding="utf-8") as fh:
+            with open(out_path, "a", encoding="utf-8") as fh:
                 for chain_id, mems in chains.items():
                     mems.sort(key=lambda m: m["block_index"])
                     case = cases[mems[0]["case_id"]]
@@ -204,7 +248,7 @@ def main(argv: list[str] | None = None) -> int:
                     n_base = len(list(domain.corpus.blocks(case)))
                     base_max = n_base - 1
                     block_indices = sorted({m["block_index"] for m in mems})
-                    all_blocks = list(range(0, max(block_indices) + 1))
+                    all_blocks = list(range(0, max(max(block_indices), base_max) + 1))  # a failed update at the last block leaves no memory row there, but the stale state still answers requests
 
                     def state_at(b: int) -> dict[str, Any] | None:
                         prior = [m for m in mems if m["block_index"] <= b]
@@ -216,19 +260,26 @@ def main(argv: list[str] | None = None) -> int:
                     final = state_at(all_blocks[-1])
                     if final is None:
                         continue
-                    for probe in domain.corpus.probes(case):
-                        if domain.executor.oracle(case, probe.request).authorized:
+                    seen_requests: set[str] = set()
+                    for probe, kind, request in candidate_requests(domain, case):
+                        request_json = json.dumps(domain.executor.serialize_request(request), sort_keys=True, default=str)
+                        if request_json in seen_requests:
                             continue
-                        if not domain.memory.authorizes(case, final, probe.request).authorized:
+                        seen_requests.add(request_json)
+                        if domain.executor.oracle(case, request).authorized:
+                            continue
+                        if not domain.memory.authorizes(case, final, request).authorized:
+                            continue
+                        if (chain_id, "false_authorization", probe.probe_id, kind, None) in existing:
                             continue
                         mem_auth = {}
                         for b in all_blocks:
                             st = state_at(b)
-                            mem_auth[b] = bool(st) and domain.memory.authorizes(case, st, probe.request).authorized
+                            mem_auth[b] = bool(st) and domain.memory.authorizes(case, st, request).authorized
                         # truth as of block b (loop blocks carry the final truth)
                         def truth_auth(b: int) -> bool:
                             tb = min(b, base_max)
-                            return domain.memory.authorizes(case, domain.memory.faithful_typed(case, through_block_index=tb), probe.request).authorized
+                            return domain.memory.authorizes(case, domain.memory.faithful_typed(case, through_block_index=tb), request).authorized
 
                         error_block = None
                         for b in all_blocks:
@@ -245,7 +296,7 @@ def main(argv: list[str] | None = None) -> int:
                         truth = domain.memory.faithful_typed(case, through_block_index=min(error_block, base_max))
                         row = {
                             "run": run.name, "domain": manifest["domain_id"], "case_id": case_id, "condition_id": condition, "writer": writer, "chain_id": chain_id,
-                            "probe_id": probe.probe_id, "request": domain.executor.serialize_request(probe.request), "error_block": error_block,
+                            "probe_id": probe.probe_id, "request_kind": kind, "request": domain.executor.serialize_request(request), "error_block": error_block,
                             "failure": "false_authorization", "loop_block": error_block > base_max, "attempt_statuses": [a["status"] for a in block_attempts],
                         }
                         if llm is not None:
@@ -265,8 +316,8 @@ def main(argv: list[str] | None = None) -> int:
                     if args.limit and n_rows >= args.limit:
                         break
                 if written_back:
-                    written += born_records(fh, domain, cases, presentation, chains, attempts, written_back, llm, targets, summary)
-            print(f"{run.name.split('__')[-1]}: {written} failures -> {out_path}")
+                    written += born_records(fh, domain, cases, presentation, chains, attempts, written_back, llm, targets, summary, existing)
+            print(f"{run.name.split('__')[-1]}: {written} new failures ({len(existing)} already judged) -> {out_path}")
     print("\nby cause:", dict(summary.most_common()))
     return 0
 
