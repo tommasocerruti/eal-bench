@@ -227,8 +227,24 @@ class BM25Index:
         return sorted(range(n), key=lambda i: (-scores[i], i))[:k]
 
 
+def turn_content(turn: Any) -> str:
+    """Turn dataclasses differ by domain: procurement uses content and speaker, the others text and speaker_label."""
+
+    return getattr(turn, "content", None) or getattr(turn, "text", "")
+
+
 def turn_text(turn: Any) -> str:
-    return f"[{turn.occurred_at}] {turn.speaker} (ref {turn.turn_id}): {turn.content}"
+    speaker = getattr(turn, "speaker", None) or getattr(turn, "speaker_label", "")
+    return f"[{turn.occurred_at}] {speaker} (ref {turn.turn_id}): {turn_content(turn)}"
+
+
+def record_source_ids(record: Mapping[str, Any]) -> frozenset[str]:
+    """Source ids of one typed record: a list in procurement, a ' | '-joined string in the flat schemas."""
+
+    value = record.get("source_turn_ids") or ()
+    if isinstance(value, str):
+        return frozenset(part.strip() for part in value.split("|") if part.strip())
+    return frozenset(value)
 
 
 def parse_ts(value: str) -> datetime:

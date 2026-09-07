@@ -12,7 +12,7 @@ from typing import Any
 
 from domains.base import AuthorizationMemoryDomain, PresentationProfile
 
-from .extensions_common import BM25Index, turn_text
+from .extensions_common import BM25Index, turn_content, turn_text
 from .langmem_writer import WriterUpdateSpec
 
 
@@ -62,7 +62,7 @@ def incremental_updates(
         content = _wrap("NEW_CONVERSATION_BLOCK", domain.corpus.render_block(block, presentation))["content"]
         earlier = [turn for b in blocks[:position] for turn in b.turns]
         if writer_retrieval_k and earlier:
-            picked = sorted(BM25Index([turn_text(t) for t in earlier]).top(" ".join(t.content for t in block.turns), writer_retrieval_k))
+            picked = sorted(BM25Index([turn_text(t) for t in earlier]).top(" ".join(turn_content(t) for t in block.turns), writer_retrieval_k))
             retrieved = "\n".join(turn_text(earlier[i]) for i in picked)
             content += f"\n\n<RETRIEVED_EARLIER_MESSAGES>\n{retrieved}\n</RETRIEVED_EARLIER_MESSAGES>"
         updates.append(WriterUpdateSpec(block.block_index, ({"role": "user", "content": content},), visible, "new_conversation_block"))

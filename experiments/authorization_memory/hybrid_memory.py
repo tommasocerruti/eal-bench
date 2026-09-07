@@ -1,19 +1,22 @@
-"""Hybrid memory: the typed record schema plus one free-text ``notes`` field.
+"""Hybrid memory: the domain's typed profile plus one free-text ``notes`` field.
 
 What is typed is fixed before any run: every field the oracle checks stays in the typed
 records, and ``notes`` holds anything else (pending changes, informal requests, context).
 The hybrid runs through the same LangMem writer as typed memory, against a copy of the domain
 whose memory adapter and typed-writer instruction describe the extra field. The executor uses
 the base domain and reads the whole memory. Formation is scored on the records, as for typed.
+
+The hybrid profile model is derived from the domain's own typed profile model, so schema
+version, record fields, and validators are the domain's; only ``notes`` is added.
 """
 
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from dataclasses import fields, replace
-from typing import Annotated, Any, Literal
+from typing import Any
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, create_model
 
 from domains.base import AuthorizationDecision, AuthorizationMemoryDomain, FidelityReport, MemoryArchitecture
 
@@ -27,44 +30,38 @@ NOTES_INSTRUCTION = (
 )
 
 
-def _hybrid_profile(record_model: type[BaseModel]) -> type[BaseModel]:
-    class HybridRecordsNotesProfile(BaseModel):
-        model_config = ConfigDict(extra="forbid", strict=True)
-
-        schema_version: Literal["3"]
-        authorizations: Annotated[list[record_model], Field(max_length=32)]  # type: ignore[valid-type]
-        notes: str
-
-        @field_validator("authorizations")
-        @classmethod
-        def ids_unique(cls, value: list[Any]) -> list[Any]:
-            ids = [record.authorization_id for record in value]
-            if len(ids) != len(set(ids)):
-                raise ValueError("authorization_id values must be unique")
-            return value
-
-    return HybridRecordsNotesProfile
+def _split(payload: Mapping[str, Any]) -> tuple[dict[str, Any], str]:
+    records = {key: value for key, value in payload.items() if key != "notes"}
+    notes = payload.get("notes", "")
+    if not isinstance(notes, str):
+        raise ValueError("notes must be a string")
+    return records, notes
 
 
 class HybridMemoryAdapter:
     def __init__(self, base: Any) -> None:
         self.base = base
         self.payload_schema_id = f"{base.payload_schema_id}+notes"
-        record_model = base.typed_profile_model.model_fields["authorizations"].annotation.__args__[0]
-        self.typed_profile_model = _hybrid_profile(record_model)
+        self.typed_profile_model = create_model(
+            f"Hybrid{base.typed_profile_model.__name__}", __base__=base.typed_profile_model, notes=(str, ...)
+        )
 
     def typed_schema(self) -> Mapping[str, Any]:
         return self.typed_profile_model.model_json_schema()
 
     def parse_typed(self, payload: Mapping[str, Any]) -> Mapping[str, Any]:
-        return self.typed_profile_model.model_validate(dict(payload), strict=True).model_dump(mode="python")
+        if not isinstance(payload, Mapping):
+            raise ValueError("typed memory must be an object")
+        records, notes = _split(payload)
+        return {**dict(self.base.parse_typed(records)), "notes": notes}
 
     def serialize_typed(self, state: Any) -> Mapping[str, Any]:
         raw = state.model_dump(mode="python") if isinstance(state, BaseModel) else state
-        return self.parse_typed(raw)
+        records, notes = _split(raw)
+        return {**dict(self.base.serialize_typed(records)), "notes": notes}
 
     def empty_typed(self) -> Mapping[str, Any]:
-        return {"schema_version": "3", "authorizations": [], "notes": ""}
+        return {**dict(self.base.empty_typed()), "notes": ""}
 
     def to_typed_profile(self, state: Any) -> BaseModel:
         return self.typed_profile_model.model_validate(dict(self.serialize_typed(state)), strict=True)
@@ -73,9 +70,10 @@ class HybridMemoryAdapter:
         return self.parse_typed(profile.model_dump(mode="python"))
 
     def records(self, state: Any) -> Mapping[str, Any]:
-        """The typed part, in the base schema."""
+        """The typed part, in the base domain's state representation."""
 
-        return self.base.parse_typed({"schema_version": "3", "authorizations": self.serialize_typed(state)["authorizations"]})
+        raw = state.model_dump(mode="python") if isinstance(state, BaseModel) else state
+        return self.base.parse_typed(_split(raw)[0])
 
     def referenced_source_ids(self, state: Any) -> frozenset[str]:
         return self.base.referenced_source_ids(self.records(state))

@@ -44,6 +44,7 @@ from experiments.authorization_memory.extensions_common import (
     later_than,
     make_artifact,
     parse_ts,
+    record_source_ids,
     write_manifest,
     write_rows,
 )
@@ -233,7 +234,7 @@ def main(argv: list[str] | None = None) -> int:
                 formation_rows.append({
                     "chain": i, "case_id": domain.corpus.case_id(spec.case), "condition_id": spec.condition_id, "position": position, "round": round_no, "memory_id": artifact.memory_id,
                     "probe_id": probe.probe_id, "formation_for_this_request": formation(domain, spec.case, state, probe),
-                    "self_cited_records": sum(bool(set(r["source_turn_ids"]) & appended[i]) for r in state["authorizations"]),
+                    "self_cited_records": sum(bool(record_source_ids(r) & appended[i]) for r in state["authorizations"]),
                     **formation_over_probes(domain, spec.case, state),
                 })
             frozen = base_evidence[i] if position == 1 else freeze_artifact(artifact, 0)
