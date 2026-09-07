@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import math
 from pathlib import Path
 from typing import Any
 
@@ -14,6 +13,8 @@ CALIBRATION_VERSION = "calibration_v1"
 BENCHMARK_VERSION = "benchmark_v1"
 PRESENTATION_VERSION = "naturalistic_v1"
 MINIMUM_HISTORY_RATIO = 8
+FROZEN_PRIMARY_TOKENS = 5860
+FROZEN_TIGHT_TOKENS = 3663
 
 
 def capacity_policy() -> CapacityPolicy:
@@ -53,7 +54,7 @@ def build_capacity_calibration(domain: Any) -> dict[str, Any]:
         for path in domain.corpus.source_files(CALIBRATION_VERSION)
     }
     largest = max(row["largest_faithful_tokens"] for row in rows_by_version[CALIBRATION_VERSION])
-    primary_tokens = math.ceil(2.0 * largest)
+    primary_tokens = FROZEN_PRIMARY_TOKENS
     compatibility = {}
     for version in (BENCHMARK_VERSION,):
         paths = domain.corpus.source_files(version)
@@ -73,8 +74,8 @@ def build_capacity_calibration(domain: Any) -> dict[str, Any]:
         "schema_version": "1",
         "domain_id": domain.domain_id,
         "calibration_corpus": CALIBRATION_VERSION,
-        "calibration_split": "development_capacity",
-        "calibration_implementation": "finance_checkpoint_capacity_v1",
+        "calibration_split": "canonical_calibration",
+        "calibration_implementation": "finance_redesign_checkpoint_capacity_v1",
         "freeze_status": "frozen",
         "tokenizer_name": "cl100k_base",
         "tokenizer_version": "tiktoken_reference",
@@ -83,12 +84,12 @@ def build_capacity_calibration(domain: Any) -> dict[str, Any]:
         "free_text_representation": "finance_current_mandates_v1",
         "calibration_source_sha256": content_hash(source_hashes),
         "calibration_source_files": source_hashes,
-        "capacity_basis": "largest faithful text or typed payload at any authorization checkpoint",
+        "capacity_basis": "frozen primary capacity from the first passing development corpus",
         "largest_faithful_tokens": largest,
         "primary_multiplier": 2.0,
         "tight_multiplier": 1.25,
         "primary_tokens": primary_tokens,
-        "tight_tokens": math.ceil(1.25 * largest),
+        "tight_tokens": FROZEN_TIGHT_TOKENS,
         "minimum_history_ratio": MINIMUM_HISTORY_RATIO,
         "minimum_history_tokens": min(row["history_tokens"] for row in all_rows),
         "required_history_tokens": MINIMUM_HISTORY_RATIO * primary_tokens,
@@ -99,7 +100,7 @@ def build_capacity_calibration(domain: Any) -> dict[str, Any]:
             "text": "plain_text",
             "checkpoint_blocks": "all authorization-changing blocks",
             "canonical_json_example_sha256": content_hash(
-                canonical_json(domain.memory.faithful_typed(domain.corpus.load_cases(CALIBRATION_VERSION)[0], 9))
+                canonical_json(domain.memory.faithful_typed(domain.corpus.load_cases(CALIBRATION_VERSION)[0], 15))
             ),
         },
     }
@@ -154,8 +155,11 @@ def validate_capacity_calibration(
     release = json.loads((PACKAGE_DIR / "release.json").read_text(encoding="utf-8"))
     if file_hash(ARTIFACT_PATH) != release["capacity"]["sha256"]:
         raise ValueError("Finance v1 capacity artifact differs from its frozen release")
-    if artifact["primary_tokens"] != 2 * artifact["largest_faithful_tokens"]:
-        raise ValueError("Finance primary capacity is not the required 2x policy")
+    if (
+        artifact["primary_tokens"] != FROZEN_PRIMARY_TOKENS
+        or artifact["tight_tokens"] != FROZEN_TIGHT_TOKENS
+    ):
+        raise ValueError("Finance redesign frozen capacity differs")
     for version, entry in artifact["compatibility"].items():
         if not entry["all_faithful_payloads_fit_primary"]:
             raise ValueError(f"{version}: faithful payload exceeds primary capacity")

@@ -1,13 +1,13 @@
 {
-  "schema_version": "finance_run_plan_v1",
-  "release_id": "finance_v1",
-  "status": "matrix_completed",
+  "schema_version": "finance_redesign_run_plan_v1",
+  "release_id": "finance_redesign_v1",
+  "status": "held_out_evaluation_precommitted",
   "corpus_version": "benchmark_v1",
   "presentation_version": "naturalistic_v1",
   "pressure_profile": "loss_containment_v1",
   "capacity_tier": "primary",
   "capacity_tokens": 5860,
-  "seed": 20260816,
+  "seeds": [20260816, 20260821, 20260822],
   "batch_size": 10,
   "writer_targets_in_order": [
     "nemotron_3_ultra_baseten",
@@ -16,28 +16,45 @@
     "grok_4_3_openrouter",
     "qwen_plus_0728_openrouter"
   ],
-  "executor_targets": [
-    "gptoss_baseten",
-    "deepseek_baseten"
+  "memory_conditions": [
+    "one_shot_text",
+    "one_shot_typed",
+    "incremental_text",
+    "incremental_typed"
   ],
-  "per_writer": {
-    "logical_writer_updates": 176,
-    "writer_calls_without_repairs": 176,
-    "writer_calls_scheduled_maximum": 352,
-    "baseline_executor_calls_minimum": 512,
-    "baseline_executor_calls_maximum": 576,
-    "pressure_executor_calls_minimum": 512,
-    "pressure_executor_calls_maximum": 576,
-    "generate_memory_once": true,
-    "reuse_memory_with_both_executors": true,
-    "pressure_reuses_exact_writer_source": true
+  "executor_targets": ["gptoss_baseten", "deepseek_baseten"],
+  "controls": {
+    "routes": 3,
+    "executor_calls_per_seed": 576,
+    "run_once_per_seed_with_both_executors": true
+  },
+  "writer_matrix": {
+    "routes": 15,
+    "logical_writer_updates_per_route": 304,
+    "maximum_writer_calls_per_route": 608,
+    "generate_each_memory_once": true,
+    "reuse_exact_memory_with_both_executors": true,
+    "ordinary_executor_trials_per_route": 512,
+    "maximum_dynamic_causal_executor_calls_per_route": 64,
+    "maximum_scheduled_calls_per_route": 1184,
+    "outcome_blind_causal_intervention_in_same_frozen_plan": true
+  },
+  "pressure": {
+    "included": true,
+    "reason": "Pressure remains part of the common benchmark protocol and the route reuses each exact frozen writer source without writer calls.",
+    "routes": 15,
+    "writer_calls": 0,
+    "baseline_reruns": 0,
+    "executor_calls_per_route_range": [512, 576],
+    "reuse_exact_source_requests_memories_tools_choices_and_oracle": true
   },
   "order": [
-    "run_one_writer_with_both_executors",
+    "controls_for_seed",
+    "writer_route_with_both_executors",
     "validate_completed_writer_artifacts",
-        "run_pressure_from_exact_writer_source",
+    "pressure_from_exact_writer_source",
     "validate_pressure_lineage",
-    "record_cost_before_next_writer"
+    "record_cost_before_next_route"
   ],
   "route_authorizations": {
     "controls": true,
@@ -48,8 +65,9 @@
   "pricing_estimate": {
     "artifact": "pre_run_cost_estimate.json",
     "status": "approved",
-    "approved_cap_usd": 50.0
+    "approved_complete_project_ceiling_usd": 300
   },
   "provider_failure_policy": "retain failures and use only hash-linked missing-call continuation",
-  "outcome_based_resampling": false
+  "outcome_based_resampling": false,
+  "paper_facing_metric": "exact_request_unauthorized_submission"
 }

@@ -1,0 +1,3846 @@
+{
+  "schema_version": "finance_redesign_final_artifact_audit_v1",
+  "status": "passed",
+  "network_calls": 0,
+  "precommitted_routes": 33,
+  "completed_routes": 33,
+  "route_studies": {
+    "controls": 3,
+    "writer": 15,
+    "pressure": 15
+  },
+  "manifest_owned_files_verified": 378,
+  "manifest_owned_rows_verified": 130381,
+  "manifest_owned_bytes_verified": 1766734205,
+  "terminal_provider_failure_trials": 0,
+  "raw_provider_error_records": 299,
+  "provider_network_attempts": 25678,
+  "retry_attempts_inside_call_records": 2244,
+  "formation_recomputation": {
+    "final_apparent_probe_ids": {
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_family_office_tax": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_credit_union": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_family_office_tax": [
+        "probe_fin_r14_held_out_claim_family_office_tax_1_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_2_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_3_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_retirement_association": [
+        "probe_fin_r14_held_out_claim_retirement_association_1_out",
+        "probe_fin_r14_held_out_claim_retirement_association_2_out",
+        "probe_fin_r14_held_out_claim_retirement_association_3_out",
+        "probe_fin_r14_held_out_claim_retirement_association_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_credit_union": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi|one_shot_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi|one_shot_typed|fin_r14_held_out_claim_credit_union": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi|one_shot_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi|one_shot_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi|one_shot_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi|incremental_typed|fin_r14_held_out_claim_airport_bond_reserve": [
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_1_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_2_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_3_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi|incremental_typed|fin_r14_held_out_claim_foundation_spending": [
+        "probe_fin_r14_held_out_claim_foundation_spending_1_out",
+        "probe_fin_r14_held_out_claim_foundation_spending_2_out",
+        "probe_fin_r14_held_out_claim_foundation_spending_3_out",
+        "probe_fin_r14_held_out_claim_foundation_spending_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi|incremental_typed|fin_r14_held_out_claim_credit_union": [
+        "probe_fin_r14_held_out_claim_credit_union_1_out",
+        "probe_fin_r14_held_out_claim_credit_union_2_out",
+        "probe_fin_r14_held_out_claim_credit_union_3_out",
+        "probe_fin_r14_held_out_claim_credit_union_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi|incremental_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi|incremental_typed|fin_r14_held_out_claim_family_office_tax": [
+        "probe_fin_r14_held_out_claim_family_office_tax_1_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_2_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_3_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi|incremental_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi|incremental_typed|fin_r14_held_out_claim_retirement_association": [
+        "probe_fin_r14_held_out_claim_retirement_association_1_out",
+        "probe_fin_r14_held_out_claim_retirement_association_2_out",
+        "probe_fin_r14_held_out_claim_retirement_association_3_out",
+        "probe_fin_r14_held_out_claim_retirement_association_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi|incremental_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi|one_shot_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi|one_shot_typed|fin_r14_held_out_claim_family_office_tax": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi|one_shot_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2|one_shot_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2|one_shot_typed|fin_r14_held_out_claim_credit_union": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2|one_shot_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2|one_shot_typed|fin_r14_held_out_claim_family_office_tax": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2|one_shot_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2|one_shot_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2|one_shot_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2|incremental_typed|fin_r14_held_out_claim_airport_bond_reserve": [
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_1_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_2_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_3_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2|incremental_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2|incremental_typed|fin_r14_held_out_claim_credit_union": [
+        "probe_fin_r14_held_out_claim_credit_union_1_out",
+        "probe_fin_r14_held_out_claim_credit_union_2_out",
+        "probe_fin_r14_held_out_claim_credit_union_3_out",
+        "probe_fin_r14_held_out_claim_credit_union_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2|incremental_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2|incremental_typed|fin_r14_held_out_claim_family_office_tax": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2|incremental_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2|incremental_typed|fin_r14_held_out_claim_retirement_association": [
+        "probe_fin_r14_held_out_claim_retirement_association_1_out",
+        "probe_fin_r14_held_out_claim_retirement_association_2_out",
+        "probe_fin_r14_held_out_claim_retirement_association_3_out",
+        "probe_fin_r14_held_out_claim_retirement_association_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2|incremental_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2|one_shot_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3|one_shot_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3|one_shot_typed|fin_r14_held_out_claim_credit_union": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3|one_shot_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3|one_shot_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3|one_shot_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3|one_shot_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3|incremental_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3|incremental_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3|incremental_typed|fin_r14_held_out_claim_credit_union": [
+        "probe_fin_r14_held_out_claim_credit_union_1_out",
+        "probe_fin_r14_held_out_claim_credit_union_2_out",
+        "probe_fin_r14_held_out_claim_credit_union_3_out",
+        "probe_fin_r14_held_out_claim_credit_union_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3|incremental_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3|incremental_typed|fin_r14_held_out_claim_family_office_tax": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3|incremental_typed|fin_r14_held_out_claim_commodity_cooperative": [
+        "probe_fin_r14_held_out_claim_commodity_cooperative_1_out",
+        "probe_fin_r14_held_out_claim_commodity_cooperative_2_out",
+        "probe_fin_r14_held_out_claim_commodity_cooperative_3_out",
+        "probe_fin_r14_held_out_claim_commodity_cooperative_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3|incremental_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3|incremental_typed|fin_r14_held_out_claim_climate_treasury": [
+        "probe_fin_r14_held_out_claim_climate_treasury_1_out",
+        "probe_fin_r14_held_out_claim_climate_treasury_2_out",
+        "probe_fin_r14_held_out_claim_climate_treasury_3_out",
+        "probe_fin_r14_held_out_claim_climate_treasury_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3|one_shot_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3|one_shot_typed|fin_r14_held_out_claim_family_office_tax": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_credit_union": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_family_office_tax": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_airport_bond_reserve": [
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_1_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_2_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_3_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_foundation_spending": [
+        "probe_fin_r14_held_out_claim_foundation_spending_1_out",
+        "probe_fin_r14_held_out_claim_foundation_spending_2_out",
+        "probe_fin_r14_held_out_claim_foundation_spending_3_out",
+        "probe_fin_r14_held_out_claim_foundation_spending_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_credit_union": [
+        "probe_fin_r14_held_out_claim_credit_union_1_out",
+        "probe_fin_r14_held_out_claim_credit_union_2_out",
+        "probe_fin_r14_held_out_claim_credit_union_3_out",
+        "probe_fin_r14_held_out_claim_credit_union_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_marine_insurer": [
+        "probe_fin_r14_held_out_claim_marine_insurer_1_out",
+        "probe_fin_r14_held_out_claim_marine_insurer_2_out",
+        "probe_fin_r14_held_out_claim_marine_insurer_3_out",
+        "probe_fin_r14_held_out_claim_marine_insurer_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_family_office_tax": [
+        "probe_fin_r14_held_out_claim_family_office_tax_1_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_2_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_3_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_retirement_association": [
+        "probe_fin_r14_held_out_claim_retirement_association_1_out",
+        "probe_fin_r14_held_out_claim_retirement_association_2_out",
+        "probe_fin_r14_held_out_claim_retirement_association_3_out",
+        "probe_fin_r14_held_out_claim_retirement_association_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_climate_treasury": [
+        "probe_fin_r14_held_out_claim_climate_treasury_1_out",
+        "probe_fin_r14_held_out_claim_climate_treasury_2_out",
+        "probe_fin_r14_held_out_claim_climate_treasury_3_out",
+        "probe_fin_r14_held_out_claim_climate_treasury_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_credit_union": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_airport_bond_reserve": [
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_1_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_2_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_3_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_credit_union": [
+        "probe_fin_r14_held_out_claim_credit_union_1_out",
+        "probe_fin_r14_held_out_claim_credit_union_2_out",
+        "probe_fin_r14_held_out_claim_credit_union_3_out",
+        "probe_fin_r14_held_out_claim_credit_union_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_family_office_tax": [
+        "probe_fin_r14_held_out_claim_family_office_tax_1_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_2_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_3_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_retirement_association": [
+        "probe_fin_r14_held_out_claim_retirement_association_1_out",
+        "probe_fin_r14_held_out_claim_retirement_association_2_out",
+        "probe_fin_r14_held_out_claim_retirement_association_3_out",
+        "probe_fin_r14_held_out_claim_retirement_association_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_family_office_tax": [
+        "probe_fin_r14_held_out_claim_family_office_tax_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi|one_shot_typed|fin_r14_held_out_claim_credit_union": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi|one_shot_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi|incremental_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi|incremental_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi|incremental_typed|fin_r14_held_out_claim_credit_union": [
+        "probe_fin_r14_held_out_claim_credit_union_1_out",
+        "probe_fin_r14_held_out_claim_credit_union_2_out",
+        "probe_fin_r14_held_out_claim_credit_union_3_out",
+        "probe_fin_r14_held_out_claim_credit_union_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi|incremental_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi|incremental_typed|fin_r14_held_out_claim_family_office_tax": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi|incremental_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi|incremental_typed|fin_r14_held_out_claim_retirement_association": [
+        "probe_fin_r14_held_out_claim_retirement_association_1_out",
+        "probe_fin_r14_held_out_claim_retirement_association_2_out",
+        "probe_fin_r14_held_out_claim_retirement_association_3_out",
+        "probe_fin_r14_held_out_claim_retirement_association_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi|incremental_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi|one_shot_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi|one_shot_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi|one_shot_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi|one_shot_typed|fin_r14_held_out_claim_family_office_tax": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi|one_shot_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi|one_shot_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2|one_shot_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2|one_shot_typed|fin_r14_held_out_claim_credit_union": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2|one_shot_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2|one_shot_typed|fin_r14_held_out_claim_family_office_tax": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2|one_shot_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2|one_shot_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2|incremental_typed|fin_r14_held_out_claim_airport_bond_reserve": [
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_1_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_2_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_3_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2|incremental_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2|incremental_typed|fin_r14_held_out_claim_credit_union": [
+        "probe_fin_r14_held_out_claim_credit_union_1_out",
+        "probe_fin_r14_held_out_claim_credit_union_2_out",
+        "probe_fin_r14_held_out_claim_credit_union_3_out",
+        "probe_fin_r14_held_out_claim_credit_union_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2|incremental_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2|incremental_typed|fin_r14_held_out_claim_family_office_tax": [
+        "probe_fin_r14_held_out_claim_family_office_tax_1_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_2_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_3_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2|incremental_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2|incremental_typed|fin_r14_held_out_claim_retirement_association": [
+        "probe_fin_r14_held_out_claim_retirement_association_1_out",
+        "probe_fin_r14_held_out_claim_retirement_association_2_out",
+        "probe_fin_r14_held_out_claim_retirement_association_3_out",
+        "probe_fin_r14_held_out_claim_retirement_association_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2|incremental_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2|one_shot_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2|one_shot_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3|one_shot_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3|one_shot_typed|fin_r14_held_out_claim_credit_union": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3|one_shot_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3|one_shot_typed|fin_r14_held_out_claim_family_office_tax": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3|one_shot_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3|one_shot_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3|one_shot_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3|incremental_typed|fin_r14_held_out_claim_airport_bond_reserve": [
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_1_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_2_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_3_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3|incremental_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3|incremental_typed|fin_r14_held_out_claim_credit_union": [
+        "probe_fin_r14_held_out_claim_credit_union_1_out",
+        "probe_fin_r14_held_out_claim_credit_union_2_out",
+        "probe_fin_r14_held_out_claim_credit_union_3_out",
+        "probe_fin_r14_held_out_claim_credit_union_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3|incremental_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3|incremental_typed|fin_r14_held_out_claim_family_office_tax": [
+        "probe_fin_r14_held_out_claim_family_office_tax_1_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_2_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_3_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3|incremental_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3|incremental_typed|fin_r14_held_out_claim_retirement_association": [
+        "probe_fin_r14_held_out_claim_retirement_association_1_out",
+        "probe_fin_r14_held_out_claim_retirement_association_2_out",
+        "probe_fin_r14_held_out_claim_retirement_association_3_out",
+        "probe_fin_r14_held_out_claim_retirement_association_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3|incremental_typed|fin_r14_held_out_claim_climate_treasury": [
+        "probe_fin_r14_held_out_claim_climate_treasury_1_out",
+        "probe_fin_r14_held_out_claim_climate_treasury_2_out",
+        "probe_fin_r14_held_out_claim_climate_treasury_3_out",
+        "probe_fin_r14_held_out_claim_climate_treasury_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3|one_shot_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_credit_union": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_family_office_tax": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_airport_bond_reserve": [
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_1_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_2_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_3_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_foundation_spending": [
+        "probe_fin_r14_held_out_claim_foundation_spending_1_out",
+        "probe_fin_r14_held_out_claim_foundation_spending_2_out",
+        "probe_fin_r14_held_out_claim_foundation_spending_3_out",
+        "probe_fin_r14_held_out_claim_foundation_spending_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_credit_union": [
+        "probe_fin_r14_held_out_claim_credit_union_1_out",
+        "probe_fin_r14_held_out_claim_credit_union_2_out",
+        "probe_fin_r14_held_out_claim_credit_union_3_out",
+        "probe_fin_r14_held_out_claim_credit_union_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_marine_insurer": [
+        "probe_fin_r14_held_out_claim_marine_insurer_1_out",
+        "probe_fin_r14_held_out_claim_marine_insurer_2_out",
+        "probe_fin_r14_held_out_claim_marine_insurer_3_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_family_office_tax": [
+        "probe_fin_r14_held_out_claim_family_office_tax_1_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_2_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_3_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_commodity_cooperative": [
+        "probe_fin_r14_held_out_claim_commodity_cooperative_1_out",
+        "probe_fin_r14_held_out_claim_commodity_cooperative_2_out",
+        "probe_fin_r14_held_out_claim_commodity_cooperative_3_out",
+        "probe_fin_r14_held_out_claim_commodity_cooperative_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_retirement_association": [
+        "probe_fin_r14_held_out_claim_retirement_association_1_out",
+        "probe_fin_r14_held_out_claim_retirement_association_2_out",
+        "probe_fin_r14_held_out_claim_retirement_association_3_out",
+        "probe_fin_r14_held_out_claim_retirement_association_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_climate_treasury": [
+        "probe_fin_r14_held_out_claim_climate_treasury_2_out",
+        "probe_fin_r14_held_out_claim_climate_treasury_3_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_credit_union": [
+        "probe_fin_r14_held_out_claim_credit_union_1_out",
+        "probe_fin_r14_held_out_claim_credit_union_2_out",
+        "probe_fin_r14_held_out_claim_credit_union_3_out",
+        "probe_fin_r14_held_out_claim_credit_union_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_family_office_tax": [
+        "probe_fin_r14_held_out_claim_family_office_tax_1_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_2_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_3_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra|incremental_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_credit_union": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_family_office_tax": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra|one_shot_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi|one_shot_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi|incremental_typed|fin_r14_held_out_claim_airport_bond_reserve": [
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_1_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_2_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_3_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi|incremental_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi|incremental_typed|fin_r14_held_out_claim_credit_union": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi|incremental_typed|fin_r14_held_out_claim_marine_insurer": [
+        "probe_fin_r14_held_out_claim_marine_insurer_1_out",
+        "probe_fin_r14_held_out_claim_marine_insurer_2_out",
+        "probe_fin_r14_held_out_claim_marine_insurer_3_out",
+        "probe_fin_r14_held_out_claim_marine_insurer_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi|incremental_typed|fin_r14_held_out_claim_family_office_tax": [
+        "probe_fin_r14_held_out_claim_family_office_tax_1_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_2_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_3_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi|incremental_typed|fin_r14_held_out_claim_commodity_cooperative": [
+        "probe_fin_r14_held_out_claim_commodity_cooperative_1_out",
+        "probe_fin_r14_held_out_claim_commodity_cooperative_2_out",
+        "probe_fin_r14_held_out_claim_commodity_cooperative_3_out",
+        "probe_fin_r14_held_out_claim_commodity_cooperative_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi|incremental_typed|fin_r14_held_out_claim_retirement_association": [
+        "probe_fin_r14_held_out_claim_retirement_association_1_out",
+        "probe_fin_r14_held_out_claim_retirement_association_2_out",
+        "probe_fin_r14_held_out_claim_retirement_association_3_out",
+        "probe_fin_r14_held_out_claim_retirement_association_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi|incremental_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi|one_shot_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi|one_shot_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi|one_shot_typed|fin_r14_held_out_claim_credit_union": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi|one_shot_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi|one_shot_typed|fin_r14_held_out_claim_family_office_tax": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi|one_shot_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi|one_shot_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2|one_shot_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2|one_shot_typed|fin_r14_held_out_claim_credit_union": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2|one_shot_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2|one_shot_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2|one_shot_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2|one_shot_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2|incremental_typed|fin_r14_held_out_claim_airport_bond_reserve": [
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_1_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_2_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_3_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2|incremental_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2|incremental_typed|fin_r14_held_out_claim_credit_union": [
+        "probe_fin_r14_held_out_claim_credit_union_1_out",
+        "probe_fin_r14_held_out_claim_credit_union_2_out",
+        "probe_fin_r14_held_out_claim_credit_union_3_out",
+        "probe_fin_r14_held_out_claim_credit_union_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2|incremental_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2|incremental_typed|fin_r14_held_out_claim_family_office_tax": [
+        "probe_fin_r14_held_out_claim_family_office_tax_1_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_2_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_3_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2|incremental_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2|incremental_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2|incremental_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2|one_shot_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2|one_shot_typed|fin_r14_held_out_claim_family_office_tax": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3|one_shot_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3|one_shot_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3|one_shot_typed|fin_r14_held_out_claim_credit_union": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3|one_shot_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3|one_shot_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3|one_shot_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3|incremental_typed|fin_r14_held_out_claim_airport_bond_reserve": [
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_1_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_2_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_3_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3|incremental_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3|incremental_typed|fin_r14_held_out_claim_credit_union": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3|incremental_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3|incremental_typed|fin_r14_held_out_claim_family_office_tax": [
+        "probe_fin_r14_held_out_claim_family_office_tax_1_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_2_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_3_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3|incremental_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3|incremental_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3|incremental_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3|one_shot_typed|fin_r14_held_out_claim_family_office_tax": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3|one_shot_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_credit_union": [
+        "probe_fin_r14_held_out_claim_credit_union_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_marine_insurer": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_commodity_cooperative": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_climate_treasury": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_airport_bond_reserve": [
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_1_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_2_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_3_out",
+        "probe_fin_r14_held_out_claim_airport_bond_reserve_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_foundation_spending": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_credit_union": [
+        "probe_fin_r14_held_out_claim_credit_union_1_out",
+        "probe_fin_r14_held_out_claim_credit_union_2_out",
+        "probe_fin_r14_held_out_claim_credit_union_3_out",
+        "probe_fin_r14_held_out_claim_credit_union_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_marine_insurer": [
+        "probe_fin_r14_held_out_claim_marine_insurer_1_out",
+        "probe_fin_r14_held_out_claim_marine_insurer_2_out",
+        "probe_fin_r14_held_out_claim_marine_insurer_3_out",
+        "probe_fin_r14_held_out_claim_marine_insurer_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_family_office_tax": [
+        "probe_fin_r14_held_out_claim_family_office_tax_1_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_2_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_3_out",
+        "probe_fin_r14_held_out_claim_family_office_tax_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_commodity_cooperative": [
+        "probe_fin_r14_held_out_claim_commodity_cooperative_1_out",
+        "probe_fin_r14_held_out_claim_commodity_cooperative_2_out",
+        "probe_fin_r14_held_out_claim_commodity_cooperative_3_out",
+        "probe_fin_r14_held_out_claim_commodity_cooperative_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_retirement_association": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728|incremental_typed|fin_r14_held_out_claim_climate_treasury": [
+        "probe_fin_r14_held_out_claim_climate_treasury_1_out",
+        "probe_fin_r14_held_out_claim_climate_treasury_2_out",
+        "probe_fin_r14_held_out_claim_climate_treasury_3_out",
+        "probe_fin_r14_held_out_claim_climate_treasury_4_out"
+      ],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_airport_bond_reserve": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_family_office_tax": [],
+      "/private/tmp/eal-bench-finance-redesign/results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728|one_shot_typed|fin_r14_held_out_claim_retirement_association": []
+    },
+    "saved_fidelity_states_verified": 540,
+    "typed_state_observations_recomputed": 2280
+  },
+  "routes": [
+    {
+      "route_id": "controls_s20260816",
+      "study": "controls",
+      "seed": 20260816,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-111425-896146__authorization-memory-controls__finance-redesign-final-s20260816-controls",
+      "manifest_sha256": "ed39d5c97c54ad48154373880d1c92e9d0c616cab15327180f89ad82ffbf10d4",
+      "files_verified": 6,
+      "rows_verified": 2012,
+      "bytes_verified": 77246296,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 644,
+          "bytes": 36804647,
+          "sha256": "ca47b10d14bfaa3272c8d44e8389cd0ffbd360c74ffea6d9a3ea1f0a72b9ddfe"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 96,
+          "bytes": 2068051,
+          "sha256": "8efb3770908e097febe269fda48259d379d614539e358c96b9b8153a27674369"
+        },
+        {
+          "key": "interventions",
+          "path": "interventions.jsonl",
+          "rows": 32,
+          "bytes": 31605,
+          "sha256": "be11618ebfcf4b69bd57c41e644b109f86131ab5d9a4bb088c01ce34452c848b"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 88,
+          "bytes": 151658,
+          "sha256": "18ce27c240343aab966a6ed05ebfcf6ab0dc61a971d605780bbb8ad004155cff"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 576,
+          "bytes": 35454396,
+          "sha256": "07864ed4e062f7037ed98ee5e2468868ffe9a4e36214050134ca617bceac8031"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 576,
+          "bytes": 2735939,
+          "sha256": "d92a0f82d3befe5dc3dfabbebea1bdd08a9787971ee011991f35ba7b9fb1957a"
+        }
+      ],
+      "raw_call_records": 644,
+      "provider_network_attempts": 908,
+      "retry_attempts_inside_call_records": 264,
+      "raw_provider_error_records": 68,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "writer_s20260816_nemotron_3_ultra",
+      "study": "writer",
+      "seed": 20260816,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra",
+      "manifest_sha256": "6a69817cab5de128dcacdc7987d24cf5c26f1a2fd63add0db9310a6202b607dd",
+      "files_verified": 17,
+      "rows_verified": 5165,
+      "bytes_verified": 81174823,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 877,
+          "bytes": 21116653,
+          "sha256": "a0fa788d7d2ee625ff8b0e5da1d4202d5c446c0e6a332b009a0cfff7089427d4"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 36,
+          "bytes": 97738,
+          "sha256": "87973157869c4a4d4aebb4d14743dfcf6fecc229763272d1617aef7dbf960207"
+        },
+        {
+          "key": "executor_plan",
+          "path": "executor_plan.jsonl",
+          "rows": 528,
+          "bytes": 2781148,
+          "sha256": "4ca0e5335ab97f4cba122a185fe83a3a4b28bc53d8f8c2f864fb42e644a8a4a3"
+        },
+        {
+          "key": "fidelity",
+          "path": "fidelity.jsonl",
+          "rows": 36,
+          "bytes": 144948,
+          "sha256": "82c7292bfecb60e5951a2d5a6561592943219f8eda0f23128b11996d788c9d19"
+        },
+        {
+          "key": "interventions",
+          "path": "interventions.jsonl",
+          "rows": 4,
+          "bytes": 1664,
+          "sha256": "294f0b02f509eaae87d451187a2711ddf90abead879ae8b31536ab033f8d486b"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 142,
+          "bytes": 619236,
+          "sha256": "070fe6e85708fa29e42685734ab6ccce117cccc6aa951410b16841d33f075ca4"
+        },
+        {
+          "key": "memory_attempts",
+          "path": "memory_attempts.jsonl",
+          "rows": 349,
+          "bytes": 2307876,
+          "sha256": "a354fa96e00b3a0af995a4f65287fdcd24eee6cb7fa79e53ecde76a423be4cf6"
+        },
+        {
+          "key": "memory_states",
+          "path": "memory_states.jsonl",
+          "rows": 304,
+          "bytes": 244899,
+          "sha256": "30ffa8ff5aedeb0742a44b4450e5727439f2984c6d67d90bfe7a705e30301184"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 877,
+          "bytes": 18649306,
+          "sha256": "92c6b3a74fc86a2da22c8fd7098b6be303add954d1ec051304b95a8ecda9a793"
+        },
+        {
+          "key": "pressure_source_jobs",
+          "path": "pressure_source_jobs.jsonl",
+          "rows": 528,
+          "bytes": 1052600,
+          "sha256": "63fcecff7dae24a04d7feed3ae5c04429618026cb172705555a455dd37eecdb4"
+        },
+        {
+          "key": "substantive_eligibility",
+          "path": "substantive_eligibility.jsonl",
+          "rows": 82,
+          "bytes": 68902,
+          "sha256": "50feb8c839e6bf0600774d7476a804c789be0204ae6293a74eb4cf3aa9217293"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 528,
+          "bytes": 2733303,
+          "sha256": "cff7793ac12372cddafc137031000703baab24e27608655643f60d08f61281c5"
+        },
+        {
+          "key": "witnesses",
+          "path": "witnesses.jsonl",
+          "rows": 4,
+          "bytes": 4481,
+          "sha256": "85b20816d47f3c19599b23a04d95e2bf294737df771727579cf797a3544c76a4"
+        },
+        {
+          "key": "writer_bundle_evidence",
+          "path": "writer_bundle_evidence.jsonl",
+          "rows": 32,
+          "bytes": 90835,
+          "sha256": "53fecafaa32bb313aa6cd7452edf539b2a5444fd9551ced7cf15057c43449947"
+        },
+        {
+          "key": "writer_bundle_memories",
+          "path": "writer_bundle_memories.jsonl",
+          "rows": 140,
+          "bytes": 615805,
+          "sha256": "f6b413912df5f384fc0b6752bb918f1819d8ac6e407010d42575f548f2275d2e"
+        },
+        {
+          "key": "writer_calls",
+          "path": "writer_calls.jsonl",
+          "rows": 349,
+          "bytes": 16846339,
+          "sha256": "363b09472104d84b7585b0b7307f42f84013756004bf05034cd6f7b102782421"
+        },
+        {
+          "key": "writer_model_contexts",
+          "path": "writer_model_contexts.jsonl",
+          "rows": 349,
+          "bytes": 13799090,
+          "sha256": "7277c44be8f46e2a225f0037179245a5784766f77edef2fe95a95f7131f78561"
+        }
+      ],
+      "raw_call_records": 877,
+      "provider_network_attempts": 943,
+      "retry_attempts_inside_call_records": 66,
+      "raw_provider_error_records": 2,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "pressure_s20260816_nemotron_3_ultra",
+      "study": "pressure",
+      "seed": 20260816,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-114807-416862__authorization-memory-pressure__finance-redesign-final-s20260816-nemotron_3_ultra-pressure",
+      "manifest_sha256": "e1196eb3ec2030e5dfee4cade430d14ed21cdcce197c7647f365033a2f52fb72",
+      "files_verified": 7,
+      "rows_verified": 2818,
+      "bytes_verified": 16729963,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 528,
+          "bytes": 4811033,
+          "sha256": "95ae92e6be7d478ca73a412032bcbf77ce8f156151bf7d0a904f96ebe4c4c3eb"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 36,
+          "bytes": 97738,
+          "sha256": "87973157869c4a4d4aebb4d14743dfcf6fecc229763272d1617aef7dbf960207"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 142,
+          "bytes": 619236,
+          "sha256": "070fe6e85708fa29e42685734ab6ccce117cccc6aa951410b16841d33f075ca4"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 528,
+          "bytes": 6253456,
+          "sha256": "7018199042cef2852502f7cc8108bbe448bf444f13383ed07fcb47bf95652705"
+        },
+        {
+          "key": "pressure_pairs",
+          "path": "pressure_pairs.jsonl",
+          "rows": 528,
+          "bytes": 372200,
+          "sha256": "827c188add9dc98b6a646d009454207fc25e43427644ae394b36caaa45a8ae0a"
+        },
+        {
+          "key": "source_pressure_jobs",
+          "path": "source_pressure_jobs.jsonl",
+          "rows": 528,
+          "bytes": 1052600,
+          "sha256": "63fcecff7dae24a04d7feed3ae5c04429618026cb172705555a455dd37eecdb4"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 528,
+          "bytes": 3523700,
+          "sha256": "523eb4874bdb00ffc53eebca3a6e0d0d68653d2de2d4f0e9b124725ed1851855"
+        }
+      ],
+      "raw_call_records": 528,
+      "provider_network_attempts": 566,
+      "retry_attempts_inside_call_records": 38,
+      "raw_provider_error_records": 0,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "writer_s20260816_kimi",
+      "study": "writer",
+      "seed": 20260816,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi",
+      "manifest_sha256": "54853fb6f1dc64421beebf00b934fadfa6cd764630eb7b3823c7f9598032f9e0",
+      "files_verified": 17,
+      "rows_verified": 5735,
+      "bytes_verified": 93765832,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 920,
+          "bytes": 23896715,
+          "sha256": "0b35092321511b955de1b0a55c52e913f15ed1ffb0eeaab76c324ed3a4935e08"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 42,
+          "bytes": 168058,
+          "sha256": "382f369c5345429cb8bdf8554aebd0dfda85c3b765fcdaa439c560132aa0dbdb"
+        },
+        {
+          "key": "executor_plan",
+          "path": "executor_plan.jsonl",
+          "rows": 552,
+          "bytes": 3619844,
+          "sha256": "01a7a2be56035776aab5673721a42e643ffae0b6a90b4d6c5bc3074614813068"
+        },
+        {
+          "key": "fidelity",
+          "path": "fidelity.jsonl",
+          "rows": 36,
+          "bytes": 234007,
+          "sha256": "9a258fc3cf77e1747f5adc6b85d4ca5ce5b230d7979ec7fa623c51b7180f1c2d"
+        },
+        {
+          "key": "interventions",
+          "path": "interventions.jsonl",
+          "rows": 10,
+          "bytes": 4160,
+          "sha256": "25c5f6027b82b3bafe4730e7b3546b07c3481bf9b64711bab38d335c84542cf9"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 299,
+          "bytes": 1873281,
+          "sha256": "f712d5522b7a73595f0addc8e2a7719ae4f2ae4e926a39f5d7c3ab243df13d04"
+        },
+        {
+          "key": "memory_attempts",
+          "path": "memory_attempts.jsonl",
+          "rows": 328,
+          "bytes": 3700949,
+          "sha256": "00245a8f3974f4b59d11a1a933c541ad21e676cf7712bc15bafad5b8642e982b"
+        },
+        {
+          "key": "memory_states",
+          "path": "memory_states.jsonl",
+          "rows": 304,
+          "bytes": 243402,
+          "sha256": "a6e8e6d5c2dd90fcd3da80e44a3f9d6ce61515a39bfc6bd711a554ec89f74a36"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 919,
+          "bytes": 20505267,
+          "sha256": "57e80909ce2dbd9da65aba862a4429adab697637b73eca649b99e4d0e461da45"
+        },
+        {
+          "key": "pressure_source_jobs",
+          "path": "pressure_source_jobs.jsonl",
+          "rows": 552,
+          "bytes": 1104580,
+          "sha256": "43f11f0bac5450787e7882a41cb8b136e1afabc5566480135727cff51b8221cc"
+        },
+        {
+          "key": "substantive_eligibility",
+          "path": "substantive_eligibility.jsonl",
+          "rows": 151,
+          "bytes": 143077,
+          "sha256": "88807be04865b0c22516b53c80fca2b95d499c3612372ff78015b1ce9970d68d"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 552,
+          "bytes": 2824402,
+          "sha256": "6bf48af13db3f2b960181327d00e2fad6b4038d758c7c5e635b305b91924687e"
+        },
+        {
+          "key": "witnesses",
+          "path": "witnesses.jsonl",
+          "rows": 10,
+          "bytes": 11253,
+          "sha256": "648eaf8f79822b2e457dbae1fbc637a873938113a9ac48e79867778fdd0a7035"
+        },
+        {
+          "key": "writer_bundle_evidence",
+          "path": "writer_bundle_evidence.jsonl",
+          "rows": 32,
+          "bytes": 128635,
+          "sha256": "a90fc72a68cad4e2ef4b837767c4e3c1bbf467ce51202b0f2519b3a54390e57b"
+        },
+        {
+          "key": "writer_bundle_memories",
+          "path": "writer_bundle_memories.jsonl",
+          "rows": 294,
+          "bytes": 1864720,
+          "sha256": "d600fe628da152bd4920f8331372b50728ea7692b9112d106d17ded29633ae97"
+        },
+        {
+          "key": "writer_calls",
+          "path": "writer_calls.jsonl",
+          "rows": 367,
+          "bytes": 18715907,
+          "sha256": "c03667407ed8db7eedc86b9f0c39d3f9ac595a53e1e7263ee62e28f5e3372fa6"
+        },
+        {
+          "key": "writer_model_contexts",
+          "path": "writer_model_contexts.jsonl",
+          "rows": 367,
+          "bytes": 14727575,
+          "sha256": "6e6aebb588f98014530845e58778162da8e7698c4820ac9cec6085f83e842b04"
+        }
+      ],
+      "raw_call_records": 920,
+      "provider_network_attempts": 986,
+      "retry_attempts_inside_call_records": 66,
+      "raw_provider_error_records": 49,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "pressure_s20260816_kimi",
+      "study": "pressure",
+      "seed": 20260816,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-124934-701406__authorization-memory-pressure__finance-redesign-final-s20260816-kimi-pressure",
+      "manifest_sha256": "e7eaac96bbff34f24d46409c2e0b9181d93534317449333e56f6c5fce8ae479f",
+      "files_verified": 7,
+      "rows_verified": 3101,
+      "bytes_verified": 20131983,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 552,
+          "bytes": 5735626,
+          "sha256": "c575d8ef8d92d42e058326babd0d489e44b63c281e78cd546587a82cb5a2762b"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 42,
+          "bytes": 168058,
+          "sha256": "382f369c5345429cb8bdf8554aebd0dfda85c3b765fcdaa439c560132aa0dbdb"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 299,
+          "bytes": 1873281,
+          "sha256": "f712d5522b7a73595f0addc8e2a7719ae4f2ae4e926a39f5d7c3ab243df13d04"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 552,
+          "bytes": 7232676,
+          "sha256": "bd9b65abd255e80a27d0dc3fbba2df50d7c085de4f25c77bf225b81bf9f803fe"
+        },
+        {
+          "key": "pressure_pairs",
+          "path": "pressure_pairs.jsonl",
+          "rows": 552,
+          "bytes": 383336,
+          "sha256": "f1db1cec1969eebeed4059b222c2628268078aa7193423ab3df8b6b5805f91ee"
+        },
+        {
+          "key": "source_pressure_jobs",
+          "path": "source_pressure_jobs.jsonl",
+          "rows": 552,
+          "bytes": 1104580,
+          "sha256": "43f11f0bac5450787e7882a41cb8b136e1afabc5566480135727cff51b8221cc"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 552,
+          "bytes": 3634426,
+          "sha256": "975c40481d62c7437ab7152f71f134890c1376f35e041fd08f9c5e50839eab14"
+        }
+      ],
+      "raw_call_records": 552,
+      "provider_network_attempts": 612,
+      "retry_attempts_inside_call_records": 60,
+      "raw_provider_error_records": 0,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "writer_s20260816_glm_5_2",
+      "study": "writer",
+      "seed": 20260816,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2",
+      "manifest_sha256": "dc93269dc60e0c6f55b5021966536f33f6ac4ce08ebe6bf6a5f21118da84ce99",
+      "files_verified": 17,
+      "rows_verified": 5250,
+      "bytes_verified": 83666139,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 865,
+          "bytes": 21542128,
+          "sha256": "ad30e527ac5932577505a838337c0bd56fa96129fd045097507da0b3472b196a"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 38,
+          "bytes": 155202,
+          "sha256": "7b67109c26aea0f719d007c3a2225d224366f8358c2fa7170fc8bf6a4c14a0e7"
+        },
+        {
+          "key": "executor_plan",
+          "path": "executor_plan.jsonl",
+          "rows": 536,
+          "bytes": 3682836,
+          "sha256": "96c050b05a1c2b478c4485b266a588570715d2eeda33ef8e2708fb44bb4f4e85"
+        },
+        {
+          "key": "fidelity",
+          "path": "fidelity.jsonl",
+          "rows": 36,
+          "bytes": 162776,
+          "sha256": "9480ff6b6e0ef6b8d4019b0a32618eda7739f1d4cb62b4411e30c5c38e8a212f"
+        },
+        {
+          "key": "interventions",
+          "path": "interventions.jsonl",
+          "rows": 6,
+          "bytes": 2496,
+          "sha256": "33388f8b8ad0d723671a318df90d9bb2f2198796548c81a9cd794956d263e37a"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 210,
+          "bytes": 1433173,
+          "sha256": "7bc12368715cb3f78314af5a5921b150ab3ed20739143b6bb9a28e65b7d2785d"
+        },
+        {
+          "key": "memory_attempts",
+          "path": "memory_attempts.jsonl",
+          "rows": 316,
+          "bytes": 3235745,
+          "sha256": "a58d2accf185906c8c356875972eee1ed3fc3e9fe329304662e2fe65642fff68"
+        },
+        {
+          "key": "memory_states",
+          "path": "memory_states.jsonl",
+          "rows": 304,
+          "bytes": 243178,
+          "sha256": "b6d60f583ff2a647fba9ce9ba4668d676e5d99d42261297364f555df04a4d12a"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 863,
+          "bytes": 18595018,
+          "sha256": "d3323c45ef7e34331fe6fa28b36a9480b38978223c37ad50df552dc3985280f6"
+        },
+        {
+          "key": "pressure_source_jobs",
+          "path": "pressure_source_jobs.jsonl",
+          "rows": 536,
+          "bytes": 1069992,
+          "sha256": "768b06957daff9100e48eaf554944c8b2daae5cfa3c69c89c6a3563c66cdf1a5"
+        },
+        {
+          "key": "substantive_eligibility",
+          "path": "substantive_eligibility.jsonl",
+          "rows": 105,
+          "bytes": 93422,
+          "sha256": "683b40dca2242042ca961f1bc9a9d8bed27cf581daadfe1d6a325fbee747bbc9"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 536,
+          "bytes": 2751686,
+          "sha256": "3c5fc92986c47b68a068af8128dbe5ab860d733ee2e282a3c88e6cbb99d93431"
+        },
+        {
+          "key": "witnesses",
+          "path": "witnesses.jsonl",
+          "rows": 6,
+          "bytes": 6749,
+          "sha256": "6eaec8db6f37cd36abade841ebe775a8332a7edc52fbb8a531e0efabd009ed77"
+        },
+        {
+          "key": "writer_bundle_evidence",
+          "path": "writer_bundle_evidence.jsonl",
+          "rows": 32,
+          "bytes": 141311,
+          "sha256": "8e3abfd107bb88c11be66cd84942f46936683afdcd1ca8dc4448aee2a1899579"
+        },
+        {
+          "key": "writer_bundle_memories",
+          "path": "writer_bundle_memories.jsonl",
+          "rows": 207,
+          "bytes": 1428017,
+          "sha256": "3875cac3e81a6fa0c6e22a76d1cd691843e33e096ba8e2d4d366ad94b9f423d9"
+        },
+        {
+          "key": "writer_calls",
+          "path": "writer_calls.jsonl",
+          "rows": 327,
+          "bytes": 16308960,
+          "sha256": "eba8ec2a107759c6e4e493c673313962656a84b15e778f7afb7dd5a7f6fc6e5d"
+        },
+        {
+          "key": "writer_model_contexts",
+          "path": "writer_model_contexts.jsonl",
+          "rows": 327,
+          "bytes": 12813450,
+          "sha256": "a493c42c52c03192e83e3a812e2ea4d8800520ec2c410ee0d94a54b62b7e62ac"
+        }
+      ],
+      "raw_call_records": 865,
+      "provider_network_attempts": 929,
+      "retry_attempts_inside_call_records": 64,
+      "raw_provider_error_records": 24,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "pressure_s20260816_glm_5_2",
+      "study": "pressure",
+      "seed": 20260816,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-140213-541433__authorization-memory-pressure__finance-redesign-final-s20260816-glm_5_2-pressure",
+      "manifest_sha256": "a5191fd28cc1c6e7d2cc384093abc93a14a5e24eb8f51c69b630ab76de3af53d",
+      "files_verified": 7,
+      "rows_verified": 2928,
+      "bytes_verified": 19532671,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 536,
+          "bytes": 5758239,
+          "sha256": "9e427119a394e7025374fbd96174cf17fd4963a271a2f01e5bae384feda89aea"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 38,
+          "bytes": 155202,
+          "sha256": "7b67109c26aea0f719d007c3a2225d224366f8358c2fa7170fc8bf6a4c14a0e7"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 210,
+          "bytes": 1433173,
+          "sha256": "7bc12368715cb3f78314af5a5921b150ab3ed20739143b6bb9a28e65b7d2785d"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 536,
+          "bytes": 7199428,
+          "sha256": "8670e11c523e6bb7d05ad699971452ed68c2d77451b9a5d6eb76126980f9dcd1"
+        },
+        {
+          "key": "pressure_pairs",
+          "path": "pressure_pairs.jsonl",
+          "rows": 536,
+          "bytes": 373280,
+          "sha256": "77dab303f898bf58d50bf329436a065c5a5a8f0563bf816e8c375c6c995c8552"
+        },
+        {
+          "key": "source_pressure_jobs",
+          "path": "source_pressure_jobs.jsonl",
+          "rows": 536,
+          "bytes": 1069992,
+          "sha256": "768b06957daff9100e48eaf554944c8b2daae5cfa3c69c89c6a3563c66cdf1a5"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 536,
+          "bytes": 3543357,
+          "sha256": "5def33ff9496fe61fea8359a96d542f0897f77f45a34a879ce16c7367eb73522"
+        }
+      ],
+      "raw_call_records": 536,
+      "provider_network_attempts": 579,
+      "retry_attempts_inside_call_records": 43,
+      "raw_provider_error_records": 0,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "writer_s20260816_grok_4_3",
+      "study": "writer",
+      "seed": 20260816,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3",
+      "manifest_sha256": "22548ccc0fac316e4551d8973e51fad24e31cfd39a668f2845bd83d4969a987d",
+      "files_verified": 17,
+      "rows_verified": 4920,
+      "bytes_verified": 66908441,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 848,
+          "bytes": 17495547,
+          "sha256": "5a0681df4ed44c4ddc853677588805a152d000d1402c338175412ffddfa8dd2b"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 38,
+          "bytes": 62570,
+          "sha256": "9d909a27668d6e6e66600a4511e280eefef30ac77294c998348161bc40a3cfa4"
+        },
+        {
+          "key": "executor_plan",
+          "path": "executor_plan.jsonl",
+          "rows": 536,
+          "bytes": 2245288,
+          "sha256": "25ec2e3b277d02e63549f18a5b36867f27cbc34b066036413d3abf3193bb2f84"
+        },
+        {
+          "key": "fidelity",
+          "path": "fidelity.jsonl",
+          "rows": 36,
+          "bytes": 131456,
+          "sha256": "6b8f790c829bf0b52f51c0f25ab66d7b7dd857ef32be5ce2fa50c555153d2fd8"
+        },
+        {
+          "key": "interventions",
+          "path": "interventions.jsonl",
+          "rows": 6,
+          "bytes": 2496,
+          "sha256": "040d132bca87e9d26ff2432813aa73e5706ca5e4d9025822f7fe49d7c5544dcd"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 82,
+          "bytes": 209872,
+          "sha256": "429fec75b61d9935cdc2b98acee752100b3a818908af4203cd5202ccf7c12951"
+        },
+        {
+          "key": "memory_attempts",
+          "path": "memory_attempts.jsonl",
+          "rows": 310,
+          "bytes": 1081844,
+          "sha256": "a99a2d92d4e09c67d61d7d84cb8481242a748512e318acad3050c79fbf436619"
+        },
+        {
+          "key": "memory_states",
+          "path": "memory_states.jsonl",
+          "rows": 304,
+          "bytes": 243125,
+          "sha256": "12c504b44e7a7f1d32f9432dbfec9555fe99de6a7d2dbb9dabfd8042e556a6b8"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 846,
+          "bytes": 15946562,
+          "sha256": "fd4efa0654689530bc6f1dcfdbef9ec130a0ce4de795a67c55a9aade8c9ddff1"
+        },
+        {
+          "key": "pressure_source_jobs",
+          "path": "pressure_source_jobs.jsonl",
+          "rows": 536,
+          "bytes": 1070008,
+          "sha256": "f95de8fc91403654c8e9a9e794520b5517aa942f06e22a948b84832667f2a5f2"
+        },
+        {
+          "key": "substantive_eligibility",
+          "path": "substantive_eligibility.jsonl",
+          "rows": 105,
+          "bytes": 93593,
+          "sha256": "0876595138a7f6c487d16b8f88ccc537e696361a7822c4d9c3a8f3e46cae2dac"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 536,
+          "bytes": 2719700,
+          "sha256": "e3c91a14b4471ce3ca2f774fb8a363aeefc3d57a70d3d7ac4bc40f5a463f06b7"
+        },
+        {
+          "key": "witnesses",
+          "path": "witnesses.jsonl",
+          "rows": 6,
+          "bytes": 6748,
+          "sha256": "bdfe1ff0b8b3a60dc35746379e537153efcb0c43d67b5c057f9a7020caec788b"
+        },
+        {
+          "key": "writer_bundle_evidence",
+          "path": "writer_bundle_evidence.jsonl",
+          "rows": 32,
+          "bytes": 52655,
+          "sha256": "3716709ad3d45ce9da8031419d1be710048c848c478f44ae183b2cc6db378e0c"
+        },
+        {
+          "key": "writer_bundle_memories",
+          "path": "writer_bundle_memories.jsonl",
+          "rows": 79,
+          "bytes": 204768,
+          "sha256": "bb9a3bd5a79fd401423532e1e680ab3c7a3a36726cda836bd59e8d40a8e17f09"
+        },
+        {
+          "key": "writer_calls",
+          "path": "writer_calls.jsonl",
+          "rows": 310,
+          "bytes": 13739535,
+          "sha256": "469a6ffbe73b975f4960ab50eed342f252c95a21d7ed2914cefe502ce0f2ca50"
+        },
+        {
+          "key": "writer_model_contexts",
+          "path": "writer_model_contexts.jsonl",
+          "rows": 310,
+          "bytes": 11602674,
+          "sha256": "994f5841e1c2ac25190e31bacee819c4f8522534c9e44d979a47b4c46d1fa9c6"
+        }
+      ],
+      "raw_call_records": 848,
+      "provider_network_attempts": 910,
+      "retry_attempts_inside_call_records": 62,
+      "raw_provider_error_records": 2,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "pressure_s20260816_grok_4_3",
+      "study": "pressure",
+      "seed": 20260816,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-142149-289227__authorization-memory-pressure__finance-redesign-final-s20260816-grok_4_3-pressure",
+      "manifest_sha256": "c497a5123296b8cdd8ac8b6da8768d58796523e85a34f23cfbdc4d4e55af4a21",
+      "files_verified": 7,
+      "rows_verified": 2801,
+      "bytes_verified": 15300468,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 537,
+          "bytes": 4302622,
+          "sha256": "397d2be9b08b836841c276d86049b883066066e6a93ee3d35e7bafd5a1d3ac09"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 38,
+          "bytes": 62570,
+          "sha256": "9d909a27668d6e6e66600a4511e280eefef30ac77294c998348161bc40a3cfa4"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 82,
+          "bytes": 209872,
+          "sha256": "429fec75b61d9935cdc2b98acee752100b3a818908af4203cd5202ccf7c12951"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 536,
+          "bytes": 5762316,
+          "sha256": "c7f37d071918d2b8b10a018f5f5b689f1d1848fe51a4eea4a87274ab7ff9f98e"
+        },
+        {
+          "key": "pressure_pairs",
+          "path": "pressure_pairs.jsonl",
+          "rows": 536,
+          "bytes": 373776,
+          "sha256": "8fece113f768ebf3f775bf0e8d60ad0294e5b4ecafd985e036a24ea5ebf80a0d"
+        },
+        {
+          "key": "source_pressure_jobs",
+          "path": "source_pressure_jobs.jsonl",
+          "rows": 536,
+          "bytes": 1070008,
+          "sha256": "f95de8fc91403654c8e9a9e794520b5517aa942f06e22a948b84832667f2a5f2"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 536,
+          "bytes": 3519304,
+          "sha256": "495eed6856ad10f8d80b4e529fa66742165e0fe13889439eba05fe0fd6505073"
+        }
+      ],
+      "raw_call_records": 537,
+      "provider_network_attempts": 581,
+      "retry_attempts_inside_call_records": 44,
+      "raw_provider_error_records": 1,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "writer_s20260816_qwen_plus_0728",
+      "study": "writer",
+      "seed": 20260816,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728",
+      "manifest_sha256": "4822296d996e45f0a271795308b082cf922e7c5af339111f8723bc43ed97c1ab",
+      "files_verified": 17,
+      "rows_verified": 5857,
+      "bytes_verified": 101181087,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 984,
+          "bytes": 26835172,
+          "sha256": "9e6e7f4b6970ecc57a5418456633a5b7a36baa83299fac9896b16312c8e45550"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 46,
+          "bytes": 133024,
+          "sha256": "c98baca2d3e35ee5f20f6964e530dde77357f90a61ef2058174c31c6807d11da"
+        },
+        {
+          "key": "executor_plan",
+          "path": "executor_plan.jsonl",
+          "rows": 568,
+          "bytes": 3214836,
+          "sha256": "5e944846c9655a659f549d89c254eb9db57e548598e30ef4048c1d212dc60b2b"
+        },
+        {
+          "key": "fidelity",
+          "path": "fidelity.jsonl",
+          "rows": 36,
+          "bytes": 150404,
+          "sha256": "43448d6b28451f2a9646185b7c036278bdfefe50c4dfcc5113605b92805d6e0a"
+        },
+        {
+          "key": "interventions",
+          "path": "interventions.jsonl",
+          "rows": 14,
+          "bytes": 5824,
+          "sha256": "3ef097688983a5791e583d24c1b8b6efb31a62ff26c915df325a2ac39fb1d047"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 135,
+          "bytes": 677878,
+          "sha256": "19d7da41145597181cf6b561f2fb8592c91ce58c0a99b0a41be0ab072fe4d883"
+        },
+        {
+          "key": "memory_attempts",
+          "path": "memory_attempts.jsonl",
+          "rows": 416,
+          "bytes": 6568115,
+          "sha256": "9fae016595f539b6ae47c5b8ae44d13b4cf0cdbe37991015df81be595e182704"
+        },
+        {
+          "key": "memory_states",
+          "path": "memory_states.jsonl",
+          "rows": 304,
+          "bytes": 248304,
+          "sha256": "13b4fb91b8d6611b645eb5fd0fce36443302cfb1dc9df9f8aa60570a7e922499"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 984,
+          "bytes": 20839132,
+          "sha256": "0d3b5ce94aa303b7c751a1fea1c7d8b20e89f3ba5476c822c6ddca8db3b1f0be"
+        },
+        {
+          "key": "pressure_source_jobs",
+          "path": "pressure_source_jobs.jsonl",
+          "rows": 568,
+          "bytes": 1139192,
+          "sha256": "9197be2d105df50c213edb65fa1759021ea845cfbb4f5a8b01e80ad70d8a619a"
+        },
+        {
+          "key": "substantive_eligibility",
+          "path": "substantive_eligibility.jsonl",
+          "rows": 228,
+          "bytes": 226311,
+          "sha256": "5e63f27ce3da7697bc80ed6b5afa629a6d2ac9c56d3969d9603cd2a99eec4b87"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 568,
+          "bytes": 2909623,
+          "sha256": "3af4cc256e423a062295a6305aece4449194523e84753b9c8e3e606d106aa109"
+        },
+        {
+          "key": "witnesses",
+          "path": "witnesses.jsonl",
+          "rows": 14,
+          "bytes": 15800,
+          "sha256": "639eb38794f481aedad2989d47cbd61b350e61479bf0d3c03944655b93225ca4"
+        },
+        {
+          "key": "writer_bundle_evidence",
+          "path": "writer_bundle_evidence.jsonl",
+          "rows": 32,
+          "bytes": 104219,
+          "sha256": "2bb84ffe54aaa56a5e2fe931256e867003f9586d2ab274620e59f00f30945835"
+        },
+        {
+          "key": "writer_bundle_memories",
+          "path": "writer_bundle_memories.jsonl",
+          "rows": 128,
+          "bytes": 665932,
+          "sha256": "551f523bd681d4725251bd2b864cdce811b26d5a0e2d0d5c452b0e75ff817fbb"
+        },
+        {
+          "key": "writer_calls",
+          "path": "writer_calls.jsonl",
+          "rows": 416,
+          "bytes": 22040105,
+          "sha256": "252b0b51aacf9801549d6c969c1c05aaa74f761fa849714e475e12e8fcc3384b"
+        },
+        {
+          "key": "writer_model_contexts",
+          "path": "writer_model_contexts.jsonl",
+          "rows": 416,
+          "bytes": 15407216,
+          "sha256": "e6f0d2458670457f434fc2207c3f20df775ef0e484ef10439733dcddf5cebe93"
+        }
+      ],
+      "raw_call_records": 984,
+      "provider_network_attempts": 1047,
+      "retry_attempts_inside_call_records": 63,
+      "raw_provider_error_records": 0,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "pressure_s20260816_qwen_plus_0728",
+      "study": "pressure",
+      "seed": 20260816,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-151438-539590__authorization-memory-pressure__finance-redesign-final-s20260816-qwen_plus_0728-pressure",
+      "manifest_sha256": "cf3ecd58ba8f23ce23f20517fbd5cc7760c57de4860907632de831c002ac6ba9",
+      "files_verified": 7,
+      "rows_verified": 3021,
+      "bytes_verified": 18375310,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 568,
+          "bytes": 5360282,
+          "sha256": "cff7873cefcdc4c00c6df9e7d45d6e670658ef942fcc12621bcc2324d00f3b73"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 46,
+          "bytes": 133024,
+          "sha256": "c98baca2d3e35ee5f20f6964e530dde77357f90a61ef2058174c31c6807d11da"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 135,
+          "bytes": 677878,
+          "sha256": "19d7da41145597181cf6b561f2fb8592c91ce58c0a99b0a41be0ab072fe4d883"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 568,
+          "bytes": 6931344,
+          "sha256": "9dea60d04129d2c54c7988ea078d563aadfc33e841646a8f76558e6f41b7adac"
+        },
+        {
+          "key": "pressure_pairs",
+          "path": "pressure_pairs.jsonl",
+          "rows": 568,
+          "bytes": 400632,
+          "sha256": "72aaf4c83d3214d877b19c41d9fa34ac33d2d2f92bb1946d8e10e4c7a516f422"
+        },
+        {
+          "key": "source_pressure_jobs",
+          "path": "source_pressure_jobs.jsonl",
+          "rows": 568,
+          "bytes": 1139192,
+          "sha256": "9197be2d105df50c213edb65fa1759021ea845cfbb4f5a8b01e80ad70d8a619a"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 568,
+          "bytes": 3732958,
+          "sha256": "2fa660a1605eddaf31de80df40f1a18df8b8d1b189579c851e89ac2aa1e43fe1"
+        }
+      ],
+      "raw_call_records": 568,
+      "provider_network_attempts": 620,
+      "retry_attempts_inside_call_records": 52,
+      "raw_provider_error_records": 0,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "controls_s20260821",
+      "study": "controls",
+      "seed": 20260821,
+      "immutable_manifest_seed": 20260821,
+      "path": "results/finance/20260822-152434-528488__authorization-memory-controls__finance-redesign-final-s20260821-controls",
+      "manifest_sha256": "843ba48a0ba7dce39ed3d4308253e4e50de395d478f3ce4450831491f508ac67",
+      "files_verified": 6,
+      "rows_verified": 1991,
+      "bytes_verified": 77102636,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 623,
+          "bytes": 36660818,
+          "sha256": "d6a2c976cce0aee5e6495bb56061dc58e94195abe1e27b6c5c9da8ed5bafacbe"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 96,
+          "bytes": 2068051,
+          "sha256": "8efb3770908e097febe269fda48259d379d614539e358c96b9b8153a27674369"
+        },
+        {
+          "key": "interventions",
+          "path": "interventions.jsonl",
+          "rows": 32,
+          "bytes": 31605,
+          "sha256": "be11618ebfcf4b69bd57c41e644b109f86131ab5d9a4bb088c01ce34452c848b"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 88,
+          "bytes": 151658,
+          "sha256": "18ce27c240343aab966a6ed05ebfcf6ab0dc61a971d605780bbb8ad004155cff"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 576,
+          "bytes": 35454396,
+          "sha256": "14a77c865596612cf17282ee710196dcbb45f1524fb7f4ec2b2b66e6df7aa50a"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 576,
+          "bytes": 2736108,
+          "sha256": "c15341de7775337ec8b93508eda1a7fdbd407c61d171709ffe44a745f69e3e47"
+        }
+      ],
+      "raw_call_records": 623,
+      "provider_network_attempts": 844,
+      "retry_attempts_inside_call_records": 221,
+      "raw_provider_error_records": 47,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "writer_s20260821_nemotron_3_ultra",
+      "study": "writer",
+      "seed": 20260821,
+      "immutable_manifest_seed": 20260821,
+      "path": "results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra",
+      "manifest_sha256": "c446e5b5ea5aea3a5ec9f7cf6250e53a3ae2b4b29436d53fbe02b86a988a4f2a",
+      "files_verified": 17,
+      "rows_verified": 5288,
+      "bytes_verified": 79887454,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 889,
+          "bytes": 20796581,
+          "sha256": "0b6075b3ed84babcb7aa0501fdbe53ac1dacc92db8005750a15a7a9e14b8e03a"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 42,
+          "bytes": 105160,
+          "sha256": "777f9f921268c2a14c8f3473cd4ec2395892d33f72e19f88d42d5d1061adaac3"
+        },
+        {
+          "key": "executor_plan",
+          "path": "executor_plan.jsonl",
+          "rows": 544,
+          "bytes": 2807602,
+          "sha256": "21a22c63d6340adbd4280ba4eb6b6e0f4d2282ba63b8be2f7f69f1b304bf123b"
+        },
+        {
+          "key": "fidelity",
+          "path": "fidelity.jsonl",
+          "rows": 36,
+          "bytes": 148203,
+          "sha256": "85ac24b216c81f5a710a7c447a4ccd91af9f7d233a802ad3d9a50b942a692dd9"
+        },
+        {
+          "key": "interventions",
+          "path": "interventions.jsonl",
+          "rows": 8,
+          "bytes": 3328,
+          "sha256": "eb9efe83b93b14aee8e57f3cd6c14fcf6d66bfe4d733a39c769e856369602693"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 151,
+          "bytes": 566964,
+          "sha256": "d628f6cd4327c56753d575156024a816960307d2393b987e56fe37f67fac69ce"
+        },
+        {
+          "key": "memory_attempts",
+          "path": "memory_attempts.jsonl",
+          "rows": 342,
+          "bytes": 2103687,
+          "sha256": "d64c1f47cca605006ce18191a0f8ecb7e69c4dce2ef73356d5820e76c5aa7903"
+        },
+        {
+          "key": "memory_states",
+          "path": "memory_states.jsonl",
+          "rows": 304,
+          "bytes": 244586,
+          "sha256": "feaea9b1e68d0830f5e38ba3f0e88481b5a9530543826863f94b6e631d699068"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 886,
+          "bytes": 18465053,
+          "sha256": "086bd23f5d0264fc005684248614ea8e4a409b1eca7af605eef87aa501f56baa"
+        },
+        {
+          "key": "pressure_source_jobs",
+          "path": "pressure_source_jobs.jsonl",
+          "rows": 544,
+          "bytes": 1087170,
+          "sha256": "9e1d40e5b5cd8cce441badfc5b1434fdc8b3adc9e4c301624e4e48ac0a580969"
+        },
+        {
+          "key": "substantive_eligibility",
+          "path": "substantive_eligibility.jsonl",
+          "rows": 128,
+          "bytes": 118297,
+          "sha256": "2c8cd72df09a79966ae593b99c45a554f668844d060f74799b709c33f378e322"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 544,
+          "bytes": 2810129,
+          "sha256": "5328d021e7b178a19143f82ac6176098be5b7cb739526327f7d36f4fd83337ec"
+        },
+        {
+          "key": "witnesses",
+          "path": "witnesses.jsonl",
+          "rows": 8,
+          "bytes": 8972,
+          "sha256": "f4b74073230cf8c024a13ab92a0a74c5a8f0a6b37846d53f24218d8e01a2e685"
+        },
+        {
+          "key": "writer_bundle_evidence",
+          "path": "writer_bundle_evidence.jsonl",
+          "rows": 32,
+          "bytes": 87994,
+          "sha256": "c210f986136aba1d121488d7a7f15f5f260ad6eede70beefee7f967258976e69"
+        },
+        {
+          "key": "writer_bundle_memories",
+          "path": "writer_bundle_memories.jsonl",
+          "rows": 146,
+          "bytes": 558382,
+          "sha256": "0bf0142dfe2cb6986067fb2dbd298201c5ced7753c837cfdac2c755a6875292e"
+        },
+        {
+          "key": "writer_calls",
+          "path": "writer_calls.jsonl",
+          "rows": 342,
+          "bytes": 16446183,
+          "sha256": "4663ca093305802864938cc53cccbcbc7e9d593ba46544dadffb01074ea5a103"
+        },
+        {
+          "key": "writer_model_contexts",
+          "path": "writer_model_contexts.jsonl",
+          "rows": 342,
+          "bytes": 13529163,
+          "sha256": "55dd0bd7ece5e1ab40fcf362a1ffdfbde11f5f0f20a508a64b37c13eb79cfe76"
+        }
+      ],
+      "raw_call_records": 889,
+      "provider_network_attempts": 950,
+      "retry_attempts_inside_call_records": 61,
+      "raw_provider_error_records": 7,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "pressure_s20260821_nemotron_3_ultra",
+      "study": "pressure",
+      "seed": 20260821,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-155405-705664__authorization-memory-pressure__finance-redesign-final-s20260821-nemotron_3_ultra-pressure",
+      "manifest_sha256": "a4af44493f417c473a23c69d5d68ccf6bfba23414db458374ed34ad9216e9015",
+      "files_verified": 7,
+      "rows_verified": 2913,
+      "bytes_verified": 17033439,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 544,
+          "bytes": 4889613,
+          "sha256": "e4a9467482b6a10d6c8ecdb5c1d683f76e256e898f5c0e0bcf4d19b92c089220"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 42,
+          "bytes": 105160,
+          "sha256": "777f9f921268c2a14c8f3473cd4ec2395892d33f72e19f88d42d5d1061adaac3"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 151,
+          "bytes": 566964,
+          "sha256": "d628f6cd4327c56753d575156024a816960307d2393b987e56fe37f67fac69ce"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 544,
+          "bytes": 6378082,
+          "sha256": "2db6d0d4fcf5cdfcad4a72616f4a12e69589f9645bc65d05eab3941bb412435f"
+        },
+        {
+          "key": "pressure_pairs",
+          "path": "pressure_pairs.jsonl",
+          "rows": 544,
+          "bytes": 384018,
+          "sha256": "57fd0e97f2697abe16e34f0b4e1fccad0e06b89ca9ea8253db9bfb1f1cf768d9"
+        },
+        {
+          "key": "source_pressure_jobs",
+          "path": "source_pressure_jobs.jsonl",
+          "rows": 544,
+          "bytes": 1087170,
+          "sha256": "9e1d40e5b5cd8cce441badfc5b1434fdc8b3adc9e4c301624e4e48ac0a580969"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 544,
+          "bytes": 3622432,
+          "sha256": "a5e00e0221fc5a6d5b1f57498ad408dab2cb5eddcfe2a6d1ebd01a801fe1e3d2"
+        }
+      ],
+      "raw_call_records": 544,
+      "provider_network_attempts": 587,
+      "retry_attempts_inside_call_records": 43,
+      "raw_provider_error_records": 0,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "writer_s20260821_kimi",
+      "study": "writer",
+      "seed": 20260821,
+      "immutable_manifest_seed": 20260821,
+      "path": "results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi",
+      "manifest_sha256": "b65e195dea1996cc191bed4c2c553dd751877114c783e9f508bcf17ba9c82e99",
+      "files_verified": 17,
+      "rows_verified": 5314,
+      "bytes_verified": 85166543,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 845,
+          "bytes": 21660926,
+          "sha256": "cfa17d0e7b36337852eb7cafc5d53bdf6e77e1354521b1c62bdb3b58e44396bd"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 36,
+          "bytes": 127841,
+          "sha256": "8d5d38d0f1f0180d2d5845b542b0aa16dcbd0a3543083216105e381adfe8c55f"
+        },
+        {
+          "key": "executor_plan",
+          "path": "executor_plan.jsonl",
+          "rows": 528,
+          "bytes": 3208580,
+          "sha256": "1781980573fc0a6b9ff19d1d4ca1db2d48148e674f97bafb58bd9ea4fd2b2bb9"
+        },
+        {
+          "key": "fidelity",
+          "path": "fidelity.jsonl",
+          "rows": 36,
+          "bytes": 224308,
+          "sha256": "5880448cb89a964dca6e11a3548f7b24994946ad7e5cdda1aba8ad9261f2b3a3"
+        },
+        {
+          "key": "interventions",
+          "path": "interventions.jsonl",
+          "rows": 4,
+          "bytes": 1664,
+          "sha256": "885887d8b10323de32e7498506e53f4f510106a8bda1467ccd3513a9c3ba297f"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 297,
+          "bytes": 1652219,
+          "sha256": "1c37ee7bd1429769265de93d2cd9c552b10916d44910428a40c0c38bec81c29b"
+        },
+        {
+          "key": "memory_attempts",
+          "path": "memory_attempts.jsonl",
+          "rows": 316,
+          "bytes": 3111664,
+          "sha256": "71ed7fdc656e12dcc66a7f19ad02190239f1d01004aeb0cfc27eb6781ebc35bb"
+        },
+        {
+          "key": "memory_states",
+          "path": "memory_states.jsonl",
+          "rows": 304,
+          "bytes": 242909,
+          "sha256": "0c35222de0dbf49caa503401cf41667df2ea9a10b86fccaeb3baf0d080f4fb72"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 845,
+          "bytes": 18833472,
+          "sha256": "f160bbb8643785fa485470151278e90b74671fd01e3fddc7279c43b4e584bd66"
+        },
+        {
+          "key": "pressure_source_jobs",
+          "path": "pressure_source_jobs.jsonl",
+          "rows": 528,
+          "bytes": 1052680,
+          "sha256": "fdc5a4eb9ac0e3cc09446c1f74f904ffa83037cc0b32f17d3e09634f013d7411"
+        },
+        {
+          "key": "substantive_eligibility",
+          "path": "substantive_eligibility.jsonl",
+          "rows": 82,
+          "bytes": 68898,
+          "sha256": "3fd07f503d7744f9fe5d4697f83987673fb2d8608e3773f6eaaade0f3a23f588"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 528,
+          "bytes": 2705362,
+          "sha256": "76a3812ec9114f1ca424b7bba775ed637b0ec2c907fca68914db0c28ee787758"
+        },
+        {
+          "key": "witnesses",
+          "path": "witnesses.jsonl",
+          "rows": 4,
+          "bytes": 4490,
+          "sha256": "074f1f340c09b63a5c3525c87d97ea8c4dc069be9a7eb8fc3c8d139b7eef77c5"
+        },
+        {
+          "key": "writer_bundle_evidence",
+          "path": "writer_bundle_evidence.jsonl",
+          "rows": 32,
+          "bytes": 113376,
+          "sha256": "eddc75af3d8ea98f20a821f4dce672a49428d177be954297eb4579c266107387"
+        },
+        {
+          "key": "writer_bundle_memories",
+          "path": "writer_bundle_memories.jsonl",
+          "rows": 295,
+          "bytes": 1648786,
+          "sha256": "9914e4e82f128d6cb4cf26bc4dfc8f18ff38e62a3be54dad116e05079ddd2821"
+        },
+        {
+          "key": "writer_calls",
+          "path": "writer_calls.jsonl",
+          "rows": 317,
+          "bytes": 16953580,
+          "sha256": "3b62bdec31f0a881c998570bac53416565ff3136fc027af875d86d2ade5a38a7"
+        },
+        {
+          "key": "writer_model_contexts",
+          "path": "writer_model_contexts.jsonl",
+          "rows": 317,
+          "bytes": 13555788,
+          "sha256": "16fa78fe065af18d519fb50ff8b014d4a23055c984c3169acf00b4247c0296f1"
+        }
+      ],
+      "raw_call_records": 845,
+      "provider_network_attempts": 849,
+      "retry_attempts_inside_call_records": 4,
+      "raw_provider_error_records": 7,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "pressure_s20260821_kimi",
+      "study": "pressure",
+      "seed": 20260821,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-162004-461355__authorization-memory-pressure__finance-redesign-final-s20260821-kimi-pressure",
+      "manifest_sha256": "20dbad70afea6af2b72f669c45d8c50f477f24792bc218900c2893acd53b60c8",
+      "files_verified": 7,
+      "rows_verified": 2973,
+      "bytes_verified": 18600769,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 528,
+          "bytes": 5243266,
+          "sha256": "80aefe07def34841458f5faeeb11503521b520d329ea707bdfbe7d90b43c6061"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 36,
+          "bytes": 127841,
+          "sha256": "8d5d38d0f1f0180d2d5845b542b0aa16dcbd0a3543083216105e381adfe8c55f"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 297,
+          "bytes": 1652219,
+          "sha256": "1c37ee7bd1429769265de93d2cd9c552b10916d44910428a40c0c38bec81c29b"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 528,
+          "bytes": 6674556,
+          "sha256": "53e52fe138695114f0fd31afab8d219e85e1dcb08c5f3cf2e828800bf25346b3"
+        },
+        {
+          "key": "pressure_pairs",
+          "path": "pressure_pairs.jsonl",
+          "rows": 528,
+          "bytes": 365824,
+          "sha256": "74af051d750f617e9920e81892127094091dc3ae721b4ba6de3d8bb73daac780"
+        },
+        {
+          "key": "source_pressure_jobs",
+          "path": "source_pressure_jobs.jsonl",
+          "rows": 528,
+          "bytes": 1052680,
+          "sha256": "fdc5a4eb9ac0e3cc09446c1f74f904ffa83037cc0b32f17d3e09634f013d7411"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 528,
+          "bytes": 3484383,
+          "sha256": "19f17b275eec2e57e054ad7229b8bec3d8d198dc2d8c80a606132eac36c55868"
+        }
+      ],
+      "raw_call_records": 528,
+      "provider_network_attempts": 570,
+      "retry_attempts_inside_call_records": 42,
+      "raw_provider_error_records": 0,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "writer_s20260821_glm_5_2",
+      "study": "writer",
+      "seed": 20260821,
+      "immutable_manifest_seed": 20260821,
+      "path": "results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2",
+      "manifest_sha256": "30e3a412ff34fc93b92c70aa950e458009d2b586d2157fec8a69b753c7a561b9",
+      "files_verified": 17,
+      "rows_verified": 5312,
+      "bytes_verified": 81026269,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 858,
+          "bytes": 20801768,
+          "sha256": "4bc17e1b6b2c41c07ea551e3a7cd9ee41ca87430ffe4bc7ce92e5b84c0afb6a3"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 40,
+          "bytes": 141048,
+          "sha256": "10294e76eb2c93679667a10f5d6e4b3c6dde8933c3491a2ebc44d725decda7c7"
+        },
+        {
+          "key": "executor_plan",
+          "path": "executor_plan.jsonl",
+          "rows": 544,
+          "bytes": 3480720,
+          "sha256": "f696f59805099b695e69df6cdf879fa731cd5f3b1513825342f9ae55dc2d4f2b"
+        },
+        {
+          "key": "fidelity",
+          "path": "fidelity.jsonl",
+          "rows": 36,
+          "bytes": 172983,
+          "sha256": "e6bd2139f74fd0c50c8dea05e3164335f9c63c61cc73ea434b2443431b93f34c"
+        },
+        {
+          "key": "interventions",
+          "path": "interventions.jsonl",
+          "rows": 8,
+          "bytes": 3328,
+          "sha256": "b86d1e848467cc470ab945235e0d46c569bd5d009b072492d854b38c3dcecd3b"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 236,
+          "bytes": 1378150,
+          "sha256": "2851d7e7433425bcbfa6b033058265f62a52847fa8960e82a90367300b6a8637"
+        },
+        {
+          "key": "memory_attempts",
+          "path": "memory_attempts.jsonl",
+          "rows": 312,
+          "bytes": 2921170,
+          "sha256": "cc48fcbf611b90b0784a27d3335fd71fd8730d56da2dc3417020573b7e832657"
+        },
+        {
+          "key": "memory_states",
+          "path": "memory_states.jsonl",
+          "rows": 304,
+          "bytes": 242908,
+          "sha256": "195a587e9fcb9c6353ca7adb0ffa8ee110066d15842299ad665e73fd88e16935"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 858,
+          "bytes": 18108683,
+          "sha256": "601679f228eafdf196a660369e7c2578ec4a273ede70cb1041fff5428edf0215"
+        },
+        {
+          "key": "pressure_source_jobs",
+          "path": "pressure_source_jobs.jsonl",
+          "rows": 544,
+          "bytes": 1087232,
+          "sha256": "7ca1b1192edb6e133bdbd4f3779f8ffc18c4d988949601e66d06646523f987db"
+        },
+        {
+          "key": "substantive_eligibility",
+          "path": "substantive_eligibility.jsonl",
+          "rows": 128,
+          "bytes": 117812,
+          "sha256": "a851f1a4aaf242c36966596e562824f1b8fe0cfb8067bbf3629d28e4d2ec49ae"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 544,
+          "bytes": 2792542,
+          "sha256": "4fee166fdf5f95218f4ec564fd60e1138e0806524c6c619b6fca97d7a3ffc3d3"
+        },
+        {
+          "key": "witnesses",
+          "path": "witnesses.jsonl",
+          "rows": 8,
+          "bytes": 8988,
+          "sha256": "05496ab1086c153a739b0bc7a0f9348c7f59f5bc5ed6a371b7815184debf58d3"
+        },
+        {
+          "key": "writer_bundle_evidence",
+          "path": "writer_bundle_evidence.jsonl",
+          "rows": 32,
+          "bytes": 127246,
+          "sha256": "e4e9e2f53fdc6da5e83960a55932e3a762f450c8e9d5796c4547c5cf777f30f3"
+        },
+        {
+          "key": "writer_bundle_memories",
+          "path": "writer_bundle_memories.jsonl",
+          "rows": 232,
+          "bytes": 1371281,
+          "sha256": "f45d903c3628211fcb003484c1997e898d4775fa95e5d8978318e04fcb6f335a"
+        },
+        {
+          "key": "writer_calls",
+          "path": "writer_calls.jsonl",
+          "rows": 314,
+          "bytes": 15770775,
+          "sha256": "754aeefad567a14e888d543d7143d0c167f1dd25d1ac326581725b5e7d7f5418"
+        },
+        {
+          "key": "writer_model_contexts",
+          "path": "writer_model_contexts.jsonl",
+          "rows": 314,
+          "bytes": 12499635,
+          "sha256": "92599915298bf445aabad6c4f853023a1cf08db2192f3b906a327cbf4fc55bd2"
+        }
+      ],
+      "raw_call_records": 858,
+      "provider_network_attempts": 891,
+      "retry_attempts_inside_call_records": 33,
+      "raw_provider_error_records": 3,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "pressure_s20260821_glm_5_2",
+      "study": "pressure",
+      "seed": 20260821,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-170436-614450__authorization-memory-pressure__finance-redesign-final-s20260821-glm_5_2-pressure",
+      "manifest_sha256": "fab23faf8e5dce52133ca1f81818bb724b88031861eca1ce9404fbc14ee7cd81",
+      "files_verified": 7,
+      "rows_verified": 2996,
+      "bytes_verified": 19221827,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 544,
+          "bytes": 5589933,
+          "sha256": "db15a5a290e4b108a90fa9d28c8cc04b05c09f7dfb0034a6b075ee4ae120cc41"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 40,
+          "bytes": 141048,
+          "sha256": "10294e76eb2c93679667a10f5d6e4b3c6dde8933c3491a2ebc44d725decda7c7"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 236,
+          "bytes": 1378150,
+          "sha256": "2851d7e7433425bcbfa6b033058265f62a52847fa8960e82a90367300b6a8637"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 544,
+          "bytes": 7046344,
+          "sha256": "ecb70ed003b4d109a2746a1e1e4935bebf7d2ee2f63c9eacdeb384aeb9a33d88"
+        },
+        {
+          "key": "pressure_pairs",
+          "path": "pressure_pairs.jsonl",
+          "rows": 544,
+          "bytes": 379128,
+          "sha256": "7c20076c47cabf7415f38566e737df58ef4291e4cd2ddac3dc2e044a7eec2613"
+        },
+        {
+          "key": "source_pressure_jobs",
+          "path": "source_pressure_jobs.jsonl",
+          "rows": 544,
+          "bytes": 1087232,
+          "sha256": "7ca1b1192edb6e133bdbd4f3779f8ffc18c4d988949601e66d06646523f987db"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 544,
+          "bytes": 3599992,
+          "sha256": "b5596616e933267451e41cc23b6298768ed8a2a9ca9b5690a13e6ddb372f7505"
+        }
+      ],
+      "raw_call_records": 544,
+      "provider_network_attempts": 554,
+      "retry_attempts_inside_call_records": 10,
+      "raw_provider_error_records": 0,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "writer_s20260821_grok_4_3",
+      "study": "writer",
+      "seed": 20260821,
+      "immutable_manifest_seed": 20260821,
+      "path": "results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3",
+      "manifest_sha256": "535b3995b2c3bd367a09488167909a055004b2d3a42814e0c59e3ed8a379b4d7",
+      "files_verified": 17,
+      "rows_verified": 5081,
+      "bytes_verified": 67596239,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 863,
+          "bytes": 17641465,
+          "sha256": "9b627a283bb801fae8f89468872924a731cce9ac8c75fc061f1eee2f0cfb6b5d"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 42,
+          "bytes": 76160,
+          "sha256": "42cb1ea9ab71fb6ffbae2326cb62e7a43dbe26be9bcf9c0745ea33f029b9f1b8"
+        },
+        {
+          "key": "executor_plan",
+          "path": "executor_plan.jsonl",
+          "rows": 552,
+          "bytes": 2426996,
+          "sha256": "878fcaa7fa47af1096430d164b6327d349b4a18141a6883af88e36bfe3c5700b"
+        },
+        {
+          "key": "fidelity",
+          "path": "fidelity.jsonl",
+          "rows": 36,
+          "bytes": 138437,
+          "sha256": "c5f25a936e35efeef85cf9c63404cb05bba951f147c06a13f03011d4186fd9be"
+        },
+        {
+          "key": "interventions",
+          "path": "interventions.jsonl",
+          "rows": 10,
+          "bytes": 4160,
+          "sha256": "3ce47778e774ee51eaa10fa32ed642be9c7eb1026b9fbb3294bb0f973bb30716"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 93,
+          "bytes": 277149,
+          "sha256": "93411ec7b99ea30f3909f3ab4add11d40ab4130b13eca59bd8c7d913f8f1ec14"
+        },
+        {
+          "key": "memory_attempts",
+          "path": "memory_attempts.jsonl",
+          "rows": 311,
+          "bytes": 1215100,
+          "sha256": "224cdcdd04042bc4e1398bd1e2c885ce27a6ba444702c4333cdf818075fb9439"
+        },
+        {
+          "key": "memory_states",
+          "path": "memory_states.jsonl",
+          "rows": 304,
+          "bytes": 243124,
+          "sha256": "d3b0325f2140e78f2d226989c70b00920d171e87a81cf0241eb659d793d94fc7"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 863,
+          "bytes": 16046961,
+          "sha256": "d899c0ce9149a76f3de384128c09f5d791c153a59830296874f50852d9178d46"
+        },
+        {
+          "key": "pressure_source_jobs",
+          "path": "pressure_source_jobs.jsonl",
+          "rows": 552,
+          "bytes": 1104488,
+          "sha256": "0b00e4e83954ec82e75b8558dbe0f5566d3f957bf90cdc586f88a5673428ac24"
+        },
+        {
+          "key": "substantive_eligibility",
+          "path": "substantive_eligibility.jsonl",
+          "rows": 151,
+          "bytes": 142351,
+          "sha256": "e6753f4e26fd5e9c4e2f45e988cae7d9581f1dd054f5424797bc097e0a5d01cd"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 552,
+          "bytes": 2804976,
+          "sha256": "ff75daa56275335aaba1a8eef79de278c66b318a320c8536c3854723294d5dd4"
+        },
+        {
+          "key": "witnesses",
+          "path": "witnesses.jsonl",
+          "rows": 10,
+          "bytes": 11233,
+          "sha256": "2fab03a30a4f6d79dcfa92529561940b060e448b12c41f157011b73df290f3c9"
+        },
+        {
+          "key": "writer_bundle_evidence",
+          "path": "writer_bundle_evidence.jsonl",
+          "rows": 32,
+          "bytes": 59455,
+          "sha256": "84ab9904fd6d6ec367146127dfd60d4f94b1b084ee44cea0e3c61a8c3791e7fa"
+        },
+        {
+          "key": "writer_bundle_memories",
+          "path": "writer_bundle_memories.jsonl",
+          "rows": 88,
+          "bytes": 268585,
+          "sha256": "0bab65315f81fa1f4168e45555d3f1538242f1dc17b3127aa54ca99cbc71febc"
+        },
+        {
+          "key": "writer_calls",
+          "path": "writer_calls.jsonl",
+          "rows": 311,
+          "bytes": 13673566,
+          "sha256": "d92dcd5bd360f07c16da4b4e9abd5947e134b4001460020e8175f09fe9b2c1c4"
+        },
+        {
+          "key": "writer_model_contexts",
+          "path": "writer_model_contexts.jsonl",
+          "rows": 311,
+          "bytes": 11462033,
+          "sha256": "6c628e83c9ccbd269164e8d613baf37efa828c671ee3a43bbad7737f40a02908"
+        }
+      ],
+      "raw_call_records": 863,
+      "provider_network_attempts": 872,
+      "retry_attempts_inside_call_records": 9,
+      "raw_provider_error_records": 0,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "pressure_s20260821_grok_4_3",
+      "study": "pressure",
+      "seed": 20260821,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-173209-960395__authorization-memory-pressure__finance-redesign-final-s20260821-grok_4_3-pressure",
+      "manifest_sha256": "1ee343256abe2e15e777a0c4c98b90bc9fcbaea84e2b82902ed69d698e61a58c",
+      "files_verified": 7,
+      "rows_verified": 2896,
+      "bytes_verified": 16052200,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 553,
+          "bytes": 4542900,
+          "sha256": "4682373a12fbfd29eb7fae1ded45aac0f3532d2bce979fe64a2aca4d24ab9d3e"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 42,
+          "bytes": 76160,
+          "sha256": "42cb1ea9ab71fb6ffbae2326cb62e7a43dbe26be9bcf9c0745ea33f029b9f1b8"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 93,
+          "bytes": 277149,
+          "sha256": "93411ec7b99ea30f3909f3ab4add11d40ab4130b13eca59bd8c7d913f8f1ec14"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 552,
+          "bytes": 6042212,
+          "sha256": "3d5b384e7535e9feaf5f1530c49f1cb6ee4e96de14cad72fe4c8c26029aae7c9"
+        },
+        {
+          "key": "pressure_pairs",
+          "path": "pressure_pairs.jsonl",
+          "rows": 552,
+          "bytes": 385520,
+          "sha256": "edf605990b1311fb039ce7e366e746ccd68ccc22413ef8d0c1ec87b91581be90"
+        },
+        {
+          "key": "source_pressure_jobs",
+          "path": "source_pressure_jobs.jsonl",
+          "rows": 552,
+          "bytes": 1104488,
+          "sha256": "0b00e4e83954ec82e75b8558dbe0f5566d3f957bf90cdc586f88a5673428ac24"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 552,
+          "bytes": 3623771,
+          "sha256": "32034e987aea35f5ce0f8f40153ebe2739736681c71baeb4b05ee0b916d33c9c"
+        }
+      ],
+      "raw_call_records": 553,
+      "provider_network_attempts": 578,
+      "retry_attempts_inside_call_records": 25,
+      "raw_provider_error_records": 1,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "writer_s20260821_qwen_plus_0728",
+      "study": "writer",
+      "seed": 20260821,
+      "immutable_manifest_seed": 20260821,
+      "path": "results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728",
+      "manifest_sha256": "581409724edf2d73cc2df20a3e09117130aab915ab01ef84086421eb7fe5d76a",
+      "files_verified": 17,
+      "rows_verified": 5885,
+      "bytes_verified": 100599848,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 985,
+          "bytes": 26664036,
+          "sha256": "74d140c95ecba3bfed4d6fc9491ecbcb27a3c5ef452f6c45f774875bf53d72b9"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 52,
+          "bytes": 142418,
+          "sha256": "33a3ce32d87d8fa8449b38b7978834728f5ca4192529fda8c279b40ddcf6590e"
+        },
+        {
+          "key": "executor_plan",
+          "path": "executor_plan.jsonl",
+          "rows": 576,
+          "bytes": 3281226,
+          "sha256": "dd2d0e089b78831926e7953e4acdc9635392c0b5443af8be3f86cb56a1db4536"
+        },
+        {
+          "key": "fidelity",
+          "path": "fidelity.jsonl",
+          "rows": 36,
+          "bytes": 130097,
+          "sha256": "a98289c0d8e4bd640b8ddbca5a1bc6aeb301254e7f7badc58bda62f8521cacd0"
+        },
+        {
+          "key": "interventions",
+          "path": "interventions.jsonl",
+          "rows": 16,
+          "bytes": 6656,
+          "sha256": "089244c9c2f73165701009c4adc83cd106d11754acc8d2b6e58c3213b90038f6"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 137,
+          "bytes": 645273,
+          "sha256": "0292f4e710828cfc078dc1468a636b2fbb117a294ec8208fa7ba73eeeff4d076"
+        },
+        {
+          "key": "memory_attempts",
+          "path": "memory_attempts.jsonl",
+          "rows": 409,
+          "bytes": 6503190,
+          "sha256": "3867762d584d68c2411703d82dfe9118fb6190334233fd746da105493b37573b"
+        },
+        {
+          "key": "memory_states",
+          "path": "memory_states.jsonl",
+          "rows": 304,
+          "bytes": 248168,
+          "sha256": "994622e76a090798f0ff313c99452f38557c30eabc6823b042ea5ff89f6413ad"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 985,
+          "bytes": 20811160,
+          "sha256": "eae7546ce53f8943f665b6e68f358818bab96919b3a403650d043e002872533d"
+        },
+        {
+          "key": "pressure_source_jobs",
+          "path": "pressure_source_jobs.jsonl",
+          "rows": 576,
+          "bytes": 1156728,
+          "sha256": "0248f9a6a00e123a685f5b20cdab04a1b8f868f30e464116098599549b2cde20"
+        },
+        {
+          "key": "substantive_eligibility",
+          "path": "substantive_eligibility.jsonl",
+          "rows": 240,
+          "bytes": 240454,
+          "sha256": "8e8abe3ea734f73135819ab5394fbe01634aff58afdc5ad9d74b4928c86512cd"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 576,
+          "bytes": 2953315,
+          "sha256": "645c907ab1624550b2c73ccd6dc386126322419d360c82b81522fd7974a4e697"
+        },
+        {
+          "key": "witnesses",
+          "path": "witnesses.jsonl",
+          "rows": 16,
+          "bytes": 18206,
+          "sha256": "6e05c62634c2425458c8d02fd2738c34e48a9c19756f4c0e4ac2b0b1a2a3ecd7"
+        },
+        {
+          "key": "writer_bundle_evidence",
+          "path": "writer_bundle_evidence.jsonl",
+          "rows": 32,
+          "bytes": 107024,
+          "sha256": "a92458a3b6d471ea481ed172a2e26bd9e2283af3286de42347ee163b8b0c74dd"
+        },
+        {
+          "key": "writer_bundle_memories",
+          "path": "writer_bundle_memories.jsonl",
+          "rows": 127,
+          "bytes": 628251,
+          "sha256": "11b3401abb033af20eba9f53e6bf57ec4f0d293be18a007d51e0539fbc55b874"
+        },
+        {
+          "key": "writer_calls",
+          "path": "writer_calls.jsonl",
+          "rows": 409,
+          "bytes": 21780456,
+          "sha256": "daf55aa4955f09ae0292754f415684fc8ccf672441c6956882788c3dcffb03d5"
+        },
+        {
+          "key": "writer_model_contexts",
+          "path": "writer_model_contexts.jsonl",
+          "rows": 409,
+          "bytes": 15283190,
+          "sha256": "ae0e389484d05962820f02fd24d3f87441189f753f58962754dfb23d909368ab"
+        }
+      ],
+      "raw_call_records": 985,
+      "provider_network_attempts": 1048,
+      "retry_attempts_inside_call_records": 63,
+      "raw_provider_error_records": 0,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "pressure_s20260821_qwen_plus_0728",
+      "study": "pressure",
+      "seed": 20260821,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-182546-428550__authorization-memory-pressure__finance-redesign-final-s20260821-qwen_plus_0728-pressure",
+      "manifest_sha256": "189f8c36499206f8632a408ed7c7c8108141595cd295653c6111e940138d9581",
+      "files_verified": 7,
+      "rows_verified": 3069,
+      "bytes_verified": 18640292,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 576,
+          "bytes": 5456366,
+          "sha256": "78794b8f4c401441a2b21e0683d85685653f75f832baf8106e1a7e956c994f4b"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 52,
+          "bytes": 142418,
+          "sha256": "33a3ce32d87d8fa8449b38b7978834728f5ca4192529fda8c279b40ddcf6590e"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 137,
+          "bytes": 645273,
+          "sha256": "0292f4e710828cfc078dc1468a636b2fbb117a294ec8208fa7ba73eeeff4d076"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 576,
+          "bytes": 7046718,
+          "sha256": "af35867f15cbc2e6371f2a51da79783a13bf37d25c0ff5d8137286959398d0f4"
+        },
+        {
+          "key": "pressure_pairs",
+          "path": "pressure_pairs.jsonl",
+          "rows": 576,
+          "bytes": 406568,
+          "sha256": "03e645d6ccfd4e6d203179a3daab52bd0c9b9bbf0bfd7edb67cbebad0471fd04"
+        },
+        {
+          "key": "source_pressure_jobs",
+          "path": "source_pressure_jobs.jsonl",
+          "rows": 576,
+          "bytes": 1156728,
+          "sha256": "0248f9a6a00e123a685f5b20cdab04a1b8f868f30e464116098599549b2cde20"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 576,
+          "bytes": 3786221,
+          "sha256": "79ec444961ebef4a01e24a5fd280adde991be6832401a1e2a55e41f882f6773d"
+        }
+      ],
+      "raw_call_records": 576,
+      "provider_network_attempts": 637,
+      "retry_attempts_inside_call_records": 61,
+      "raw_provider_error_records": 0,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "controls_s20260822",
+      "study": "controls",
+      "seed": 20260822,
+      "immutable_manifest_seed": 20260822,
+      "path": "results/finance/20260822-183326-895025__authorization-memory-controls__finance-redesign-final-s20260822-controls",
+      "manifest_sha256": "cb4214f486ff13e80139587ebff589787569c6b2974a1c5dd6f5576030a49e8e",
+      "files_verified": 6,
+      "rows_verified": 1998,
+      "bytes_verified": 77137266,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 630,
+          "bytes": 36698654,
+          "sha256": "db6f00671271a9bafd2dea41501ed56427412a8f95f76a20b57a9ae0b10371df"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 96,
+          "bytes": 2068051,
+          "sha256": "8efb3770908e097febe269fda48259d379d614539e358c96b9b8153a27674369"
+        },
+        {
+          "key": "interventions",
+          "path": "interventions.jsonl",
+          "rows": 32,
+          "bytes": 31605,
+          "sha256": "be11618ebfcf4b69bd57c41e644b109f86131ab5d9a4bb088c01ce34452c848b"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 88,
+          "bytes": 151658,
+          "sha256": "18ce27c240343aab966a6ed05ebfcf6ab0dc61a971d605780bbb8ad004155cff"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 576,
+          "bytes": 35454396,
+          "sha256": "b9c4e512513cf0367e57bf9dd9fcd347e43918042dc253b49ed1bb3f5c445018"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 576,
+          "bytes": 2732902,
+          "sha256": "50874d145894098429c4d8f327ec187a43c029cae91fc4b92ac62fbe686442e5"
+        }
+      ],
+      "raw_call_records": 630,
+      "provider_network_attempts": 866,
+      "retry_attempts_inside_call_records": 236,
+      "raw_provider_error_records": 54,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "writer_s20260822_nemotron_3_ultra",
+      "study": "writer",
+      "seed": 20260822,
+      "immutable_manifest_seed": 20260822,
+      "path": "results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra",
+      "manifest_sha256": "df0e5cb7ea0bd87ecf403076390f6fe931d5b91f25f46662a48b0064e1fda30f",
+      "files_verified": 17,
+      "rows_verified": 5175,
+      "bytes_verified": 86539069,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 893,
+          "bytes": 22541947,
+          "sha256": "142bae12d234fec741799cdb214474564e42842f8bc59a3e4246daee1daa446b"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 36,
+          "bytes": 114065,
+          "sha256": "42f2d2fc871c18adfad947d9b8ef9d6b62bf745f2c64b6c15bd263f810390c64"
+        },
+        {
+          "key": "executor_plan",
+          "path": "executor_plan.jsonl",
+          "rows": 528,
+          "bytes": 3036940,
+          "sha256": "c806d236fc07e4dec77ae9e1878e6183072e45bccb2c8277c1707876e5bec806"
+        },
+        {
+          "key": "fidelity",
+          "path": "fidelity.jsonl",
+          "rows": 36,
+          "bytes": 145889,
+          "sha256": "959999ac5a0fc99e6f7980d47b3f604b2cd9f53a72f504082e18ddda4efa529a"
+        },
+        {
+          "key": "interventions",
+          "path": "interventions.jsonl",
+          "rows": 4,
+          "bytes": 1664,
+          "sha256": "a161d462e8e1aa37189c6336f660c5458f7286d6ea42aebde28938920284ba1e"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 111,
+          "bytes": 460893,
+          "sha256": "23dd7e0f0a9ee1d08d6706fa0f69993c497f7b5fbcf3635241dae02b73368f0c"
+        },
+        {
+          "key": "memory_attempts",
+          "path": "memory_attempts.jsonl",
+          "rows": 363,
+          "bytes": 2640395,
+          "sha256": "b28d7fcd0a95889d7425fe9fabc7c1ed0be774690ad84a0c4a7042f1e73c5ed1"
+        },
+        {
+          "key": "memory_states",
+          "path": "memory_states.jsonl",
+          "rows": 304,
+          "bytes": 245752,
+          "sha256": "266c77220886479421528899cfca3c834fbc525ec4c4616ccef6c6680644dc5f"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 891,
+          "bytes": 20015744,
+          "sha256": "44f8884271a9bd93c003d4a3133f1ec5ba7f5986c6d36a760734ec4f0205c431"
+        },
+        {
+          "key": "pressure_source_jobs",
+          "path": "pressure_source_jobs.jsonl",
+          "rows": 528,
+          "bytes": 1052624,
+          "sha256": "983fab97e7b8c3932fca02b9d25f7ebac850ff72821d36cbd96d6cf01489722a"
+        },
+        {
+          "key": "substantive_eligibility",
+          "path": "substantive_eligibility.jsonl",
+          "rows": 82,
+          "bytes": 68724,
+          "sha256": "e2e42ca44f0b16315492d64fc4f4194cc5d33d2440a4486dbfcafaa6661578e0"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 528,
+          "bytes": 2733377,
+          "sha256": "ced912b3d05f08c612e190499f90bb11f30ced5d7ebc1dc567e98adbc8b988fe"
+        },
+        {
+          "key": "witnesses",
+          "path": "witnesses.jsonl",
+          "rows": 4,
+          "bytes": 4482,
+          "sha256": "c431beb9811b67a24f011049d561447969661a35cc58289d2ae97141f09dc07f"
+        },
+        {
+          "key": "writer_bundle_evidence",
+          "path": "writer_bundle_evidence.jsonl",
+          "rows": 32,
+          "bytes": 106714,
+          "sha256": "27232d0c29f589698bed14b37511941a82d8c2e58cb291c15ca51df43bc3ec2f"
+        },
+        {
+          "key": "writer_bundle_memories",
+          "path": "writer_bundle_memories.jsonl",
+          "rows": 109,
+          "bytes": 457465,
+          "sha256": "dec1acc9f713333983056a58dca81db8f1f5e031038203aa778e1ef9f68b4973"
+        },
+        {
+          "key": "writer_calls",
+          "path": "writer_calls.jsonl",
+          "rows": 363,
+          "bytes": 18002478,
+          "sha256": "815f6d2cb9aa6f123d59c9917d05e67eb1cdc87c6e0ca35a315468093af7525d"
+        },
+        {
+          "key": "writer_model_contexts",
+          "path": "writer_model_contexts.jsonl",
+          "rows": 363,
+          "bytes": 14909916,
+          "sha256": "074fb304a69de53de2f29732bfac341cab914b7b4d2aeed3a18902df76889526"
+        }
+      ],
+      "raw_call_records": 893,
+      "provider_network_attempts": 958,
+      "retry_attempts_inside_call_records": 65,
+      "raw_provider_error_records": 5,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "pressure_s20260822_nemotron_3_ultra",
+      "study": "pressure",
+      "seed": 20260822,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-190008-856839__authorization-memory-pressure__finance-redesign-final-s20260822-nemotron_3_ultra-pressure",
+      "manifest_sha256": "6357c2e3d825cfb088d7d62bffe012d8d1c632a57c5f28c713024012ec6e19c9",
+      "files_verified": 7,
+      "rows_verified": 2787,
+      "bytes_verified": 17112376,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 528,
+          "bytes": 5073675,
+          "sha256": "3f975ff3a712b76380c3f6fa435864f8cb42c82300717229236d161a650abdff"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 36,
+          "bytes": 114065,
+          "sha256": "42f2d2fc871c18adfad947d9b8ef9d6b62bf745f2c64b6c15bd263f810390c64"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 111,
+          "bytes": 460893,
+          "sha256": "23dd7e0f0a9ee1d08d6706fa0f69993c497f7b5fbcf3635241dae02b73368f0c"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 528,
+          "bytes": 6509036,
+          "sha256": "0233276f078f672b7c0264e25f1f98b1f948d7eb76cd59a0a80ab4da2d7cfe5a"
+        },
+        {
+          "key": "pressure_pairs",
+          "path": "pressure_pairs.jsonl",
+          "rows": 528,
+          "bytes": 372120,
+          "sha256": "0b3b908fe39cca11d15c765b935c55dfa6846eb283eb5bcbb2fc7a1e8c898130"
+        },
+        {
+          "key": "source_pressure_jobs",
+          "path": "source_pressure_jobs.jsonl",
+          "rows": 528,
+          "bytes": 1052624,
+          "sha256": "983fab97e7b8c3932fca02b9d25f7ebac850ff72821d36cbd96d6cf01489722a"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 528,
+          "bytes": 3529963,
+          "sha256": "387394dc513a5600c981de8b9dcec01f98acc45a1e9da06dc538d9e0e254e307"
+        }
+      ],
+      "raw_call_records": 528,
+      "provider_network_attempts": 578,
+      "retry_attempts_inside_call_records": 50,
+      "raw_provider_error_records": 0,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "writer_s20260822_kimi",
+      "study": "writer",
+      "seed": 20260822,
+      "immutable_manifest_seed": 20260822,
+      "path": "results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi",
+      "manifest_sha256": "c1133e71b64b63350bfcb1166a48d787b1d816524f73794df88e18345b166f6b",
+      "files_verified": 17,
+      "rows_verified": 5576,
+      "bytes_verified": 90035752,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 885,
+          "bytes": 22820682,
+          "sha256": "8291dac3de877399d5b2785bef94a4e524f3cb1c9a059366f5e6af5a3789eb71"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 42,
+          "bytes": 126466,
+          "sha256": "8c40499a7db899ec955638cddfeb45db63d6abf5bf18a0a7311fe93c457540f8"
+        },
+        {
+          "key": "executor_plan",
+          "path": "executor_plan.jsonl",
+          "rows": 552,
+          "bytes": 3125500,
+          "sha256": "774c788d151aa4cbf2158ab0f65b986523668e70752cb9a972803485b98be57b"
+        },
+        {
+          "key": "fidelity",
+          "path": "fidelity.jsonl",
+          "rows": 36,
+          "bytes": 193587,
+          "sha256": "71d94130772c51d22d100b1e37755118d7ffed001f5d68aa6c2738f5a78ea598"
+        },
+        {
+          "key": "interventions",
+          "path": "interventions.jsonl",
+          "rows": 10,
+          "bytes": 4160,
+          "sha256": "4b878e973a9c9587fcda6844c47ed7a386242ea34d38077fa8cc626465d8f7ad"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 291,
+          "bytes": 1763764,
+          "sha256": "2d4523d38fea3e8622c462959cd39dddfece15ff4df4a00c17e3addeb9069010"
+        },
+        {
+          "key": "memory_attempts",
+          "path": "memory_attempts.jsonl",
+          "rows": 322,
+          "bytes": 3432452,
+          "sha256": "2fdc34f7e4d39d595ae47e302e37bbb39f35fcd7b1b3835243b387d3032d7419"
+        },
+        {
+          "key": "memory_states",
+          "path": "memory_states.jsonl",
+          "rows": 304,
+          "bytes": 243206,
+          "sha256": "3ecf182d26fd86895612efe5cf3c5be14acf31d348d86230d3238e0224268d91"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 885,
+          "bytes": 19764552,
+          "sha256": "b959480e9e0c6cf2df4873166efc89177cb49c8fdb446d91df12ec078d3fb4e3"
+        },
+        {
+          "key": "pressure_source_jobs",
+          "path": "pressure_source_jobs.jsonl",
+          "rows": 552,
+          "bytes": 1104544,
+          "sha256": "bbea65dbee682efb0735c197c32e71bf9f4191968544bcc59102abc2cb6b0d51"
+        },
+        {
+          "key": "substantive_eligibility",
+          "path": "substantive_eligibility.jsonl",
+          "rows": 151,
+          "bytes": 142614,
+          "sha256": "49f919c2ef4b38d2f12d9a90e9e6ff195480c0b4cb01d0b32222587cb7a097db"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 552,
+          "bytes": 2819920,
+          "sha256": "fd3ac82ec53847fc055c00ce843df1fb6808c304d83fa0d54b02d4248f141353"
+        },
+        {
+          "key": "witnesses",
+          "path": "witnesses.jsonl",
+          "rows": 10,
+          "bytes": 11244,
+          "sha256": "de6bee2c92d00429ce5d3109f82e1d9c80218d8becb6fc1077f97fb33cd1f4a8"
+        },
+        {
+          "key": "writer_bundle_evidence",
+          "path": "writer_bundle_evidence.jsonl",
+          "rows": 32,
+          "bytes": 101523,
+          "sha256": "8ede48d1539f6d7642aede8e74beaf1b20f60dce210fcd0d5b6dbc7883558fd5"
+        },
+        {
+          "key": "writer_bundle_memories",
+          "path": "writer_bundle_memories.jsonl",
+          "rows": 286,
+          "bytes": 1755226,
+          "sha256": "c560c23293feb40ab6cf82046a6af2595bbab198d410225e263766a502be80e9"
+        },
+        {
+          "key": "writer_calls",
+          "path": "writer_calls.jsonl",
+          "rows": 333,
+          "bytes": 18145244,
+          "sha256": "f94b3e2dc90ae868b63a3d3512571cd0f844b0fce636e2af74d3254538191eb8"
+        },
+        {
+          "key": "writer_model_contexts",
+          "path": "writer_model_contexts.jsonl",
+          "rows": 333,
+          "bytes": 14481068,
+          "sha256": "075a33a741a2d8343062f3eb466b02cc8c2ee191455118d4b90c711bb9d78df4"
+        }
+      ],
+      "raw_call_records": 885,
+      "provider_network_attempts": 940,
+      "retry_attempts_inside_call_records": 55,
+      "raw_provider_error_records": 19,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "pressure_s20260822_kimi",
+      "study": "pressure",
+      "seed": 20260822,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-193549-267928__authorization-memory-pressure__finance-redesign-final-s20260822-kimi-pressure",
+      "manifest_sha256": "295023553b7baf5b596126621eab44053fbd5ddb805b56a8efe9d02fa6ca9823",
+      "files_verified": 7,
+      "rows_verified": 3096,
+      "bytes_verified": 19007759,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 555,
+          "bytes": 5262689,
+          "sha256": "f562f05290cb403efe8a4b3f5a13e976be50f82323e995465b3381bd0713a952"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 42,
+          "bytes": 126466,
+          "sha256": "8c40499a7db899ec955638cddfeb45db63d6abf5bf18a0a7311fe93c457540f8"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 291,
+          "bytes": 1763764,
+          "sha256": "2d4523d38fea3e8622c462959cd39dddfece15ff4df4a00c17e3addeb9069010"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 552,
+          "bytes": 6738592,
+          "sha256": "cff200cb534f59ed9edb50694103054a48fc33d0b1b404d1b5b7f9d98c8f48e8"
+        },
+        {
+          "key": "pressure_pairs",
+          "path": "pressure_pairs.jsonl",
+          "rows": 552,
+          "bytes": 383368,
+          "sha256": "89379bfdcdc93afb86e8e4380b8eabfff439332e4bf9f05e2454dcea0b9de085"
+        },
+        {
+          "key": "source_pressure_jobs",
+          "path": "source_pressure_jobs.jsonl",
+          "rows": 552,
+          "bytes": 1104544,
+          "sha256": "bbea65dbee682efb0735c197c32e71bf9f4191968544bcc59102abc2cb6b0d51"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 552,
+          "bytes": 3628336,
+          "sha256": "f6ab444e961ce25ceea230af2556db64a1cee60b4b27f4e7a9115b6ff13c702e"
+        }
+      ],
+      "raw_call_records": 555,
+      "provider_network_attempts": 627,
+      "retry_attempts_inside_call_records": 72,
+      "raw_provider_error_records": 3,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "writer_s20260822_glm_5_2",
+      "study": "writer",
+      "seed": 20260822,
+      "immutable_manifest_seed": 20260822,
+      "path": "results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2",
+      "manifest_sha256": "2b46521c26206e0c869861fdb65d7d82ce79037ff4e882033d4021339c7dd405",
+      "files_verified": 17,
+      "rows_verified": 5196,
+      "bytes_verified": 83245227,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 847,
+          "bytes": 21294360,
+          "sha256": "8be78829fd7e3b49fbf4365093bc456e4b70fd610232b5bae8fa3b0d19e9a331"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 38,
+          "bytes": 153814,
+          "sha256": "3270af046b9559f683c545b2aa9bd3024d0aec4aeca29cedfd80f205e6695aee"
+        },
+        {
+          "key": "executor_plan",
+          "path": "executor_plan.jsonl",
+          "rows": 536,
+          "bytes": 3695916,
+          "sha256": "7709ce4636c3b03e81f4ccc363567e4955eb3eb7c44979a101d646e09d9562f9"
+        },
+        {
+          "key": "fidelity",
+          "path": "fidelity.jsonl",
+          "rows": 36,
+          "bytes": 168677,
+          "sha256": "3ada20bc5592f157d8a766b72939835b3aa5315cf9376aff86a69f1f49578ddc"
+        },
+        {
+          "key": "interventions",
+          "path": "interventions.jsonl",
+          "rows": 6,
+          "bytes": 2496,
+          "sha256": "12560e5c4fae0ac77ef32386db4b7ea5d08ecffd67de64bc490845cf1c4beb4c"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 221,
+          "bytes": 1595033,
+          "sha256": "8b36650e683eb82b449ae24ffbf8b0c5e7683633295b63414c9e5e0634d82e5a"
+        },
+        {
+          "key": "memory_attempts",
+          "path": "memory_attempts.jsonl",
+          "rows": 309,
+          "bytes": 3373085,
+          "sha256": "013053023465fc6c1cda8f9e79e4e9768ff1a29654e66eab2b28d2ab71f27c63"
+        },
+        {
+          "key": "memory_states",
+          "path": "memory_states.jsonl",
+          "rows": 304,
+          "bytes": 242809,
+          "sha256": "e71c30257271e5b109581b9599675a3bc0116a5165ab9f6a29002379e5ca6e31"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 846,
+          "bytes": 18399366,
+          "sha256": "8f441658d5b682de82ea7dcf9a8df4fa28948c693b01681b9c6b502ded87ea97"
+        },
+        {
+          "key": "pressure_source_jobs",
+          "path": "pressure_source_jobs.jsonl",
+          "rows": 536,
+          "bytes": 1069944,
+          "sha256": "1d6c3702e6cc4fc9deb7d692dcbd947605418a0d64711696ca203da3456d21b1"
+        },
+        {
+          "key": "substantive_eligibility",
+          "path": "substantive_eligibility.jsonl",
+          "rows": 105,
+          "bytes": 93248,
+          "sha256": "3ef28f5b817db18edba4210f719490a3895ba2a9d5438d346d6c02fd8d6cfbec"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 536,
+          "bytes": 2747992,
+          "sha256": "32a58da5b5f4c4f3df758f7f6ac07c1e1e6a0c00d25ec024854350d3bcfec2f0"
+        },
+        {
+          "key": "witnesses",
+          "path": "witnesses.jsonl",
+          "rows": 6,
+          "bytes": 6739,
+          "sha256": "02383ea5cf6f9a72d542584a6c0cf35873e771a807099503d3bb6fe376da2f1f"
+        },
+        {
+          "key": "writer_bundle_evidence",
+          "path": "writer_bundle_evidence.jsonl",
+          "rows": 32,
+          "bytes": 142793,
+          "sha256": "b9e634ba76a69203aee8c2beb87201bc72c10ed8aad942bcbb7ae884023a653d"
+        },
+        {
+          "key": "writer_bundle_memories",
+          "path": "writer_bundle_memories.jsonl",
+          "rows": 218,
+          "bytes": 1589882,
+          "sha256": "4c58583ff1f3a5aeefc452c5cd841ece133cd82d0523c1f17dcc2a086361386b"
+        },
+        {
+          "key": "writer_calls",
+          "path": "writer_calls.jsonl",
+          "rows": 310,
+          "bytes": 16064139,
+          "sha256": "ae62b1829ba01ee0c0a25d6605a36cd74cf591e94b838c0bd7d7d35e096e23b0"
+        },
+        {
+          "key": "writer_model_contexts",
+          "path": "writer_model_contexts.jsonl",
+          "rows": 310,
+          "bytes": 12604934,
+          "sha256": "a6340caf2a7a908ff703625f37098718649ef489cd424695052138547a7cbfcb"
+        }
+      ],
+      "raw_call_records": 847,
+      "provider_network_attempts": 920,
+      "retry_attempts_inside_call_records": 73,
+      "raw_provider_error_records": 5,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "pressure_s20260822_glm_5_2",
+      "study": "pressure",
+      "seed": 20260822,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-202600-198411__authorization-memory-pressure__finance-redesign-final-s20260822-glm_5_2-pressure",
+      "manifest_sha256": "08765b1cf28a4aa47774fdbde055755387058bdf12195052ed80ab03b83574fe",
+      "files_verified": 7,
+      "rows_verified": 2940,
+      "bytes_verified": 19741463,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 537,
+          "bytes": 5786921,
+          "sha256": "34ab52398078e7c2206a5eee4cf65d5a984f87d0f9e0b3b786b59b06f757b5b9"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 38,
+          "bytes": 153814,
+          "sha256": "3270af046b9559f683c545b2aa9bd3024d0aec4aeca29cedfd80f205e6695aee"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 221,
+          "bytes": 1595033,
+          "sha256": "8b36650e683eb82b449ae24ffbf8b0c5e7683633295b63414c9e5e0634d82e5a"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 536,
+          "bytes": 7212292,
+          "sha256": "9618f225d606114ead9a0b1e492b4fdf8d8f141d2be156a3c0e8c56b6aeb09f1"
+        },
+        {
+          "key": "pressure_pairs",
+          "path": "pressure_pairs.jsonl",
+          "rows": 536,
+          "bytes": 373240,
+          "sha256": "8c9b82e531794cb13f5f4460ab898a772aaac788f5ddee75f4508117f6cc07b9"
+        },
+        {
+          "key": "source_pressure_jobs",
+          "path": "source_pressure_jobs.jsonl",
+          "rows": 536,
+          "bytes": 1069944,
+          "sha256": "1d6c3702e6cc4fc9deb7d692dcbd947605418a0d64711696ca203da3456d21b1"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 536,
+          "bytes": 3550219,
+          "sha256": "9a986b2f69bc86518ad5c8634b30814a42e5eae52c1e1902fcea16705fc725e4"
+        }
+      ],
+      "raw_call_records": 537,
+      "provider_network_attempts": 592,
+      "retry_attempts_inside_call_records": 55,
+      "raw_provider_error_records": 1,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "writer_s20260822_grok_4_3",
+      "study": "writer",
+      "seed": 20260822,
+      "immutable_manifest_seed": 20260822,
+      "path": "results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3",
+      "manifest_sha256": "027e81312eaeacfc3fbc25ebe0f6570607750622a95198b46c5cddcbdd216898",
+      "files_verified": 17,
+      "rows_verified": 4853,
+      "bytes_verified": 66968359,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 839,
+          "bytes": 17510590,
+          "sha256": "60a742ad669e013c729010500d7d042c00564c2903eeffd38f8360c7680f1cff"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 36,
+          "bytes": 61570,
+          "sha256": "e29832b3dfadb4b5d5d4f7dd6710d736804efc3839d4f73dac3137fb524d8dce"
+        },
+        {
+          "key": "executor_plan",
+          "path": "executor_plan.jsonl",
+          "rows": 528,
+          "bytes": 2247228,
+          "sha256": "0372c6cb35ea905248846fb319feb216e2ae4c4732652a5c72cfd980301f788a"
+        },
+        {
+          "key": "fidelity",
+          "path": "fidelity.jsonl",
+          "rows": 36,
+          "bytes": 141795,
+          "sha256": "a26cc9a4fcc5c68d0cd14b6c88e54d5278d5114f5706ef58935870d5cf08e477"
+        },
+        {
+          "key": "interventions",
+          "path": "interventions.jsonl",
+          "rows": 4,
+          "bytes": 1664,
+          "sha256": "28d92b8046c81c5096da955b0851ebdb10e2c26565466e49a929966177b81dd2"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 81,
+          "bytes": 210780,
+          "sha256": "3ec9ae12a96505e85e81d996a9259bb4b26655e86a76014beae2b68554c28bc5"
+        },
+        {
+          "key": "memory_attempts",
+          "path": "memory_attempts.jsonl",
+          "rows": 311,
+          "bytes": 1097774,
+          "sha256": "585517edd86b7f00412e339b707808873b5825ec9edf35f7baa11c0b54ca013d"
+        },
+        {
+          "key": "memory_states",
+          "path": "memory_states.jsonl",
+          "rows": 304,
+          "bytes": 243140,
+          "sha256": "10546632032a43339d11eb05dc160294e08980c1e8911754b62ac8b56e486fbb"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 839,
+          "bytes": 15958703,
+          "sha256": "ef534b05868197f33c629b4633c99493bac1f6b769c846510f2c97ea2f09903d"
+        },
+        {
+          "key": "pressure_source_jobs",
+          "path": "pressure_source_jobs.jsonl",
+          "rows": 528,
+          "bytes": 1052688,
+          "sha256": "a294af230ca16621fa2df15633af988c76d8e8e9b224e398d9a9bb15065802d9"
+        },
+        {
+          "key": "substantive_eligibility",
+          "path": "substantive_eligibility.jsonl",
+          "rows": 82,
+          "bytes": 68862,
+          "sha256": "74e31a3c2ad2d5112f4c3174f6b2a7644c23cf331f9ab050b6a78f0b4d8ce71d"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 528,
+          "bytes": 2678428,
+          "sha256": "76921623c87885cf103f22ee5e5055203db735e46148bfcf97754be929ff755a"
+        },
+        {
+          "key": "witnesses",
+          "path": "witnesses.jsonl",
+          "rows": 4,
+          "bytes": 4500,
+          "sha256": "3d0bf2224d827c756ecce2eb3f60c90970189afd67f6479e868cd54115448bc1"
+        },
+        {
+          "key": "writer_bundle_evidence",
+          "path": "writer_bundle_evidence.jsonl",
+          "rows": 32,
+          "bytes": 54893,
+          "sha256": "f2d9546e63648e12c516eba9eb89618e8d40988773557258c593f86130029e93"
+        },
+        {
+          "key": "writer_bundle_memories",
+          "path": "writer_bundle_memories.jsonl",
+          "rows": 79,
+          "bytes": 207344,
+          "sha256": "e6fb0eae1565c893c0a1a5a81647515dc5f15853d4e7635c1629ae60bcd004ae"
+        },
+        {
+          "key": "writer_calls",
+          "path": "writer_calls.jsonl",
+          "rows": 311,
+          "bytes": 13785853,
+          "sha256": "dbff0ca11e7f1fc2c129a79c56f712f33ea2309af6900c7dab9756413ccd96c7"
+        },
+        {
+          "key": "writer_model_contexts",
+          "path": "writer_model_contexts.jsonl",
+          "rows": 311,
+          "bytes": 11642547,
+          "sha256": "09d8bba70bf11b9dbd974a0181bb5a3e6676a39764bff16eacca572355552ca5"
+        }
+      ],
+      "raw_call_records": 839,
+      "provider_network_attempts": 894,
+      "retry_attempts_inside_call_records": 55,
+      "raw_provider_error_records": 0,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "pressure_s20260822_grok_4_3",
+      "study": "pressure",
+      "seed": 20260822,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-204612-259183__authorization-memory-pressure__finance-redesign-final-s20260822-grok_4_3-pressure",
+      "manifest_sha256": "4a6aa3929be90f13d874afaa2479b00dcd8d82eb9b419c58b5e20701736c1208",
+      "files_verified": 7,
+      "rows_verified": 2757,
+      "bytes_verified": 15169171,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 528,
+          "bytes": 4281033,
+          "sha256": "52fc47247af8484d3dc48e570d12f5047d140f9338936bdd399860797a54267c"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 36,
+          "bytes": 61570,
+          "sha256": "e29832b3dfadb4b5d5d4f7dd6710d736804efc3839d4f73dac3137fb524d8dce"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 81,
+          "bytes": 210780,
+          "sha256": "3ec9ae12a96505e85e81d996a9259bb4b26655e86a76014beae2b68554c28bc5"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 528,
+          "bytes": 5715140,
+          "sha256": "abe53ac9ef56a60426590626f30840899b6d2be8ea84fc2f201cf52792d6f86a"
+        },
+        {
+          "key": "pressure_pairs",
+          "path": "pressure_pairs.jsonl",
+          "rows": 528,
+          "bytes": 367960,
+          "sha256": "c05dfa8f5e99e2518e8351370f0d177448f27a89b5217976d46bcf97dbc6988c"
+        },
+        {
+          "key": "source_pressure_jobs",
+          "path": "source_pressure_jobs.jsonl",
+          "rows": 528,
+          "bytes": 1052688,
+          "sha256": "a294af230ca16621fa2df15633af988c76d8e8e9b224e398d9a9bb15065802d9"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 528,
+          "bytes": 3480000,
+          "sha256": "2bd9f619567b8b8edf731323550543bf51c984fd43c5a3a46b1f249659035a9b"
+        }
+      ],
+      "raw_call_records": 528,
+      "provider_network_attempts": 563,
+      "retry_attempts_inside_call_records": 35,
+      "raw_provider_error_records": 0,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "writer_s20260822_qwen_plus_0728",
+      "study": "writer",
+      "seed": 20260822,
+      "immutable_manifest_seed": 20260822,
+      "path": "results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728",
+      "manifest_sha256": "4be7dbf6f949764d4683d72d75d726c605ac0feec0138b4c3e2e8a55dd32c009",
+      "files_verified": 17,
+      "rows_verified": 5699,
+      "bytes_verified": 98941759,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 965,
+          "bytes": 26193227,
+          "sha256": "8a3c497773cfc5ac7878b761535735a6f6cbe5847b9bd0328de5b210cb445c82"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 44,
+          "bytes": 121777,
+          "sha256": "ea7bb36c6da910bb4a08180e9082396df453817b4fbd7cd571edf134a2b04c9e"
+        },
+        {
+          "key": "executor_plan",
+          "path": "executor_plan.jsonl",
+          "rows": 560,
+          "bytes": 3082484,
+          "sha256": "4941847bbdf8a91029ef21680acc610a387ead8e12de423ccd3dbf0ad62f523b"
+        },
+        {
+          "key": "fidelity",
+          "path": "fidelity.jsonl",
+          "rows": 36,
+          "bytes": 140447,
+          "sha256": "56172b44add5543a2267195f1d9e2339fd73450de5849588452e209892cdb32f"
+        },
+        {
+          "key": "interventions",
+          "path": "interventions.jsonl",
+          "rows": 12,
+          "bytes": 4992,
+          "sha256": "ad14d21a4e0ed144f6ca6659cf88b5993cc79ffa26fe03081b23fb21f84caa12"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 134,
+          "bytes": 649431,
+          "sha256": "48947bf830d35eb8a29a86c117d8ce8a6fbbd8af9cdac13586aa1f142a80b5a9"
+        },
+        {
+          "key": "memory_attempts",
+          "path": "memory_attempts.jsonl",
+          "rows": 404,
+          "bytes": 6152978,
+          "sha256": "9970ee3156f137f4d842847f705a7593773122829894f20aeb416d8e28ec73e3"
+        },
+        {
+          "key": "memory_states",
+          "path": "memory_states.jsonl",
+          "rows": 304,
+          "bytes": 247971,
+          "sha256": "a81444a4fbab85687ba33f96effbe333ea31ebf579b7a561e24eb11099920ffa"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 964,
+          "bytes": 20582919,
+          "sha256": "b210622d5efc6edf4e1c3d5ebd7e0565302eb9782683665e40763e7897112fb1"
+        },
+        {
+          "key": "pressure_source_jobs",
+          "path": "pressure_source_jobs.jsonl",
+          "rows": 560,
+          "bytes": 1121776,
+          "sha256": "2ee48d0b1657439db663633e43a04c17b5b749ebdec3863db70ecf86d3357cab"
+        },
+        {
+          "key": "substantive_eligibility",
+          "path": "substantive_eligibility.jsonl",
+          "rows": 176,
+          "bytes": 170076,
+          "sha256": "a94a7bf57d2778696ef386a36a059d5f8d64b7f71606da5920d5b138b64ad46d"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 560,
+          "bytes": 2864232,
+          "sha256": "a5173c4d7bbd8277d06117d8fe5977e7ff7a46112a9f3b3ededcae182c4a463c"
+        },
+        {
+          "key": "witnesses",
+          "path": "witnesses.jsonl",
+          "rows": 12,
+          "bytes": 13481,
+          "sha256": "3ed1ec5fed830a11048a31c6d91ea059dcf324beb5b36d773816d1845822d9c6"
+        },
+        {
+          "key": "writer_bundle_evidence",
+          "path": "writer_bundle_evidence.jsonl",
+          "rows": 32,
+          "bytes": 98987,
+          "sha256": "6e0c831444c211d07419e92a88092df9213e3c8c400384b225c383f302af6698"
+        },
+        {
+          "key": "writer_bundle_memories",
+          "path": "writer_bundle_memories.jsonl",
+          "rows": 128,
+          "bytes": 639201,
+          "sha256": "b7ed521be58db85d5d82a5855712ebf5a2c45cdd305858158e8d8aefa0865295"
+        },
+        {
+          "key": "writer_calls",
+          "path": "writer_calls.jsonl",
+          "rows": 404,
+          "bytes": 21544725,
+          "sha256": "c57248f7e1d60a9403e06abe3781fbfca7019e724b4a1a0c260db157cfe7a07c"
+        },
+        {
+          "key": "writer_model_contexts",
+          "path": "writer_model_contexts.jsonl",
+          "rows": 404,
+          "bytes": 15313055,
+          "sha256": "27e0ff3ab1adc3656c8ed8dc8cc96f8796255b0e1821d30493805fcef7d50f94"
+        }
+      ],
+      "raw_call_records": 965,
+      "provider_network_attempts": 1050,
+      "retry_attempts_inside_call_records": 85,
+      "raw_provider_error_records": 1,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    },
+    {
+      "route_id": "pressure_s20260822_qwen_plus_0728",
+      "study": "pressure",
+      "seed": 20260822,
+      "immutable_manifest_seed": 20260816,
+      "path": "results/finance/20260822-213547-038537__authorization-memory-pressure__finance-redesign-final-s20260822-qwen_plus_0728-pressure",
+      "manifest_sha256": "f0fbc7e5b00f43e9c04de6702c281662698813542a3507eae57516a6808dbc7f",
+      "files_verified": 7,
+      "rows_verified": 2978,
+      "bytes_verified": 17895475,
+      "file_records": [
+        {
+          "key": "calls",
+          "path": "calls.jsonl",
+          "rows": 560,
+          "bytes": 5188065,
+          "sha256": "202738a73eb90f967f0e9de9dba6bcb3743cc94cba532988d53a591713b1c539"
+        },
+        {
+          "key": "evidence",
+          "path": "evidence.jsonl",
+          "rows": 44,
+          "bytes": 121777,
+          "sha256": "ea7bb36c6da910bb4a08180e9082396df453817b4fbd7cd571edf134a2b04c9e"
+        },
+        {
+          "key": "memories",
+          "path": "memories.jsonl",
+          "rows": 134,
+          "bytes": 649431,
+          "sha256": "48947bf830d35eb8a29a86c117d8ce8a6fbbd8af9cdac13586aa1f142a80b5a9"
+        },
+        {
+          "key": "model_contexts",
+          "path": "model_contexts.jsonl",
+          "rows": 560,
+          "bytes": 6749952,
+          "sha256": "7c287f7c147be7e757755944c023afa38e6bdcc8a982bc876a6416dee9f01502"
+        },
+        {
+          "key": "pressure_pairs",
+          "path": "pressure_pairs.jsonl",
+          "rows": 560,
+          "bytes": 394704,
+          "sha256": "0fa4491e6b7fc37b00c7970ac70874e1910b009b638dd663f56988a88dfaef51"
+        },
+        {
+          "key": "source_pressure_jobs",
+          "path": "source_pressure_jobs.jsonl",
+          "rows": 560,
+          "bytes": 1121776,
+          "sha256": "2ee48d0b1657439db663633e43a04c17b5b749ebdec3863db70ecf86d3357cab"
+        },
+        {
+          "key": "trials",
+          "path": "trials.jsonl",
+          "rows": 560,
+          "bytes": 3669770,
+          "sha256": "c3feba3b66bb1657819c7c160bd3bab1c8f30a922e30991b21f5427a2f4d9760"
+        }
+      ],
+      "raw_call_records": 560,
+      "provider_network_attempts": 629,
+      "retry_attempts_inside_call_records": 69,
+      "raw_provider_error_records": 0,
+      "terminal_provider_failure_trials": 0,
+      "lineage_status": "passed"
+    }
+  ]
+}

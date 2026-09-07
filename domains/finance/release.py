@@ -10,21 +10,24 @@ from experiments.authorization_memory.persistence import content_hash, file_hash
 
 PACKAGE_DIR = Path(__file__).parent
 RELEASE_PATH = PACKAGE_DIR / "release.json"
+RELEASE_ID = "finance_redesign_v1"
+EVALUATION_SEEDS = [20260816, 20260821, 20260822]
 
 
 def validate_release(domain: Any, corpus_version: str = "benchmark_v1") -> dict[str, Any]:
     release = json.loads(RELEASE_PATH.read_text(encoding="utf-8"))
     if (
-        release.get("schema_version") != "final_v1"
-        or release.get("release_id") != "finance_v1"
+        release.get("schema_version") != "finance_redesign_release_v1"
+        or release.get("release_id") != RELEASE_ID
         or release.get("domain_id") != domain.domain_id
         or release.get("maturity") != domain.maturity
         or release.get("freeze_status") != "claim_frozen"
+        or release.get("evaluation_seeds") != EVALUATION_SEEDS
         or int(release.get("canonical_seed", -1)) != domain.canonical_seed
     ):
-        raise ValueError("Finance release identity differs")
-    if corpus_version not in {"calibration_v1", "benchmark_v1"}:
-        raise ValueError(f"unsupported Finance release corpus: {corpus_version!r}")
+        raise ValueError("Finance redesign release identity differs")
+    if corpus_version not in domain.corpus.versions:
+        raise ValueError(f"unsupported Finance redesign release corpus: {corpus_version!r}")
 
     hashed = (
         (release["capacity"], "artifact"),
@@ -33,14 +36,17 @@ def validate_release(domain: Any, corpus_version: str = "benchmark_v1") -> dict[
         (release["analysis_plan"], "source"),
         (release["run_plan"], "source"),
         (release["run_plan"]["pricing_estimate"], "artifact"),
+        (release["final_precommit"], "path"),
+        (release["offline_validation"], "report"),
+        (release["legacy_archive"], "manifest"),
     )
     for entry, path_key in hashed:
         path = PACKAGE_DIR / entry[path_key]
         if file_hash(path) != entry["sha256"]:
-            raise ValueError(f"Finance release hash differs for {path.name}")
+            raise ValueError(f"Finance redesign release hash differs for {path.name}")
 
-    cases = domain.corpus.load_cases("benchmark_v1")
     provenance = domain.corpus.provenance("benchmark_v1")
+    cases = domain.corpus.load_cases("benchmark_v1")
     claim = release["claim_corpus"]
     if (
         claim.get("corpus_version") != "benchmark_v1"
@@ -51,43 +57,46 @@ def validate_release(domain: Any, corpus_version: str = "benchmark_v1") -> dict[
         or claim.get("sha256") != provenance["source_sha256"]
         or claim.get("freeze_status") != "frozen"
         or claim.get("paid_execution_authorized") is not True
+        or claim.get("development_iteration") != "finance_redesign_dev_014"
     ):
-        raise ValueError("Finance claim corpus differs")
+        raise ValueError("Finance redesign claim corpus differs")
 
-    implementation = memory_implementation_manifest(domain)
-    if implementation["memory_implementation_hash"] != release["memory"][
-        "implementation_sha256"
-    ]:
-        raise ValueError("Finance memory implementation differs")
+    memory = memory_implementation_manifest(domain)
+    if memory["memory_implementation_hash"] != release["memory"]["implementation_sha256"]:
+        raise ValueError("Finance redesign memory implementation differs")
     if content_hash(domain.memory.typed_schema()) != release["memory"]["typed_schema_sha256"]:
-        raise ValueError("Finance typed schema differs")
+        raise ValueError("Finance redesign typed schema differs")
     for filename, expected in release["implementation"].items():
         if file_hash(PACKAGE_DIR / filename) != expected:
-            raise ValueError(f"Finance implementation hash differs for {filename}")
+            raise ValueError(f"Finance redesign implementation hash differs for {filename}")
 
-    results = release["results"]
+    review = release["review"]
+    pricing = release["run_plan"]["pricing_estimate"]
     if (
-        results.get("status") != "completed_claim_release"
-        or results.get("eligible_to_merge") is not True
-        or results.get("outcome_based_resampling") is not False
+        review.get("status") != "approved"
+        or pricing.get("status") != "approved"
+        or float(pricing.get("approved_complete_project_ceiling_usd", 0)) != 300
+        or release["run_plan"].get("route_authorizations")
+        != {"controls": True, "writer": True, "pressure": True, "witness_replay": False}
     ):
-        raise ValueError("Finance result status differs")
-    acceptance_entry = results["reports"].get("acceptance")
-    if acceptance_entry is None:
-        raise ValueError("Finance release acceptance is missing")
-    acceptance_path = (PACKAGE_DIR / acceptance_entry["path"]).resolve()
-    acceptance = json.loads(acceptance_path.read_text(encoding="utf-8"))
-    if (
-        acceptance.get("release_id") != release["release_id"]
-        or acceptance.get("status") != "passed"
-        or acceptance.get("decision") != "claim_valid"
-        or acceptance.get("eligible_to_merge") is not True
-    ):
-        raise ValueError("Finance release acceptance differs")
-    for entry in (*results["reports"].values(), *results["run_manifests"].values()):
-        path = (PACKAGE_DIR / entry["path"]).resolve()
-        if file_hash(path) != entry["sha256"]:
-            raise ValueError(f"Finance result hash differs for {path.name}")
+        raise ValueError("Finance redesign execution approval differs")
+
+    results = release.get("results", {})
+    if results.get("status") not in {
+        "held_out_evaluation_pending",
+        "completed_held_out_evaluation",
+    }:
+        raise ValueError("Finance redesign result lifecycle differs")
+    if results.get("status") == "completed_held_out_evaluation":
+        if (
+            results.get("outcome_based_resampling") is not False
+            or results.get("complete_artifact_audit") is not True
+        ):
+            raise ValueError("Finance redesign completed-result contract differs")
+        for entry in (*results.get("reports", {}).values(), *results.get("run_manifests", {}).values()):
+            path = (PACKAGE_DIR / entry["path"]).resolve()
+            if file_hash(path) != entry["sha256"]:
+                raise ValueError(f"Finance redesign result hash differs for {path.name}")
 
     return {
         "status": "passed",
@@ -96,8 +105,9 @@ def validate_release(domain: Any, corpus_version: str = "benchmark_v1") -> dict[
         "freeze_status": release["freeze_status"],
         "corpus_version": corpus_version,
         "case_count": len(domain.corpus.load_cases(corpus_version)),
-        "review_status": release["review"]["status"],
+        "review_status": review["status"],
+        "pricing_status": pricing["status"],
         "results_status": results["status"],
-        "eligible_to_merge": results["eligible_to_merge"],
         "manifest_sha256": file_hash(RELEASE_PATH),
+        "legacy_archive_active": False,
     }

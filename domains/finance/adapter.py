@@ -778,10 +778,10 @@ def _capacity_check(domain: AuthorizationMemoryDomain, cases: Sequence[Any], opt
 
 
 def _compiled_source_check(domain: AuthorizationMemoryDomain, cases: Sequence[Any], options: Mapping[str, Any]) -> Mapping[str, Any]:
-    del domain, cases, options
-    from .compile_corpus import compile_all
+    del domain, cases
+    from .compile_redesign import compile_canonical
 
-    compile_all(check=True)
+    compile_canonical(check=True)
     return {"status": "passed", "versions": list(corpus.VERSIONS)}
 
 
@@ -791,6 +791,7 @@ def _pressure_fixture_check(domain: AuthorizationMemoryDomain, cases: Sequence[A
 
 def _release_check(domain: AuthorizationMemoryDomain, cases: Sequence[Any], options: Mapping[str, Any]) -> Mapping[str, Any]:
     del cases
+    corpus_version = str(options["corpus_version"])
     from .release import validate_release
 
-    return validate_release(domain, str(options["corpus_version"]))
+    return validate_release(domain, corpus_version)

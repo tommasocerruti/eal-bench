@@ -561,6 +561,23 @@ def run_study_plan(
             presentation=presentation,
             config=llm.config,
         )
+        if options.get("stop_after_writer_checkpoint"):
+            if not plan.writer_chains or plan.writer_only:
+                raise ValueError(
+                    "writer checkpoint stops require a writer-backed executor plan"
+                )
+            _validate_model_context_call_log(contexts, calls_path)
+            manifest.update(
+                {
+                    "execution_pause": {
+                        "reason": "precommitted_writer_formation_review",
+                        "executor_calls_made": 0,
+                        "resume_required": True,
+                    }
+                }
+            )
+            write_json(manifest_path, manifest)
+            return run_dir
         trials: list[Any] = []
         if jobs:
             trials, executor_contexts = run_executor_jobs(

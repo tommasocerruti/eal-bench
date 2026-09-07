@@ -198,6 +198,14 @@ def _parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument(
+        "--stop-after-writer-checkpoint",
+        action="store_true",
+        help=(
+            "freeze a writer study's immutable executor plan, then stop before "
+            "executor calls so formation can be inspected offline"
+        ),
+    )
+    parser.add_argument(
         "--retry-provider-errors",
         action="store_true",
         help="derive a continuation that retries only provider-error calls",
@@ -504,6 +512,15 @@ def _route_options(
     profile: Any,
 ) -> dict[str, Any]:
     provided = set(getattr(args, "_provided_flags", ()))
+    if args.stop_after_writer_checkpoint:
+        if profile.study_id != "writer":
+            raise ValueError(
+                "--stop-after-writer-checkpoint applies only to --study writer"
+            )
+        if args.resume_run or args.retry_provider_errors:
+            raise ValueError(
+                "--stop-after-writer-checkpoint cannot be combined with resume options"
+            )
     if profile.study_id != "writer_ttc":
         forbidden_ttc = sorted(
             provided

@@ -1,0 +1,51 @@
+{
+  "schema_version": "finance_legacy_archive_v1",
+  "archive_id": "legacy_finance_v1",
+  "status": "historical_immutable_recoverable",
+  "active_benchmark_surface": false,
+  "recovery": {
+    "frozen_scientific_revision": "5dea5dc7f1c0c55ddc01159cc699274097b32b0b",
+    "completed_release_manifest_path_at_revision": "domains/finance/release.json",
+    "completed_release_manifest_sha256": "ba86fc8e3927ce851c051e176d48d9eecc81a0313bd55cd8d45903ac95a0e59c",
+    "instruction": "Recover the previous Finance implementation and release manifest from the frozen Git revision; do not regenerate historical outcomes."
+  },
+  "historical_corpus": {
+    "public_version": "benchmark_v1",
+    "technical_source": "domains/finance/data/benchmark_v2.json",
+    "technical_source_sha256": "e0d24a535ee2e052a260ab4e76f35b371d0eae9c16a4f5b6e65217b616923bae",
+    "blueprint": "domains/finance/v2_blueprint.json",
+    "blueprint_sha256": "a6a8b7695f8ac766f75952bc42e3e6848029a1117e6f75f5920058ab131d3d7d"
+  },
+  "historical_results": {
+    "original_release_acceptance": {
+      "path": "results/finance/finance_v1__acceptance.json",
+      "sha256": "0317b5eb7fb9fb854378b8171ee0c171b9effe0fa6428f1c2699e1dd33dd7fc9"
+    },
+    "original_release_matrix": {
+      "path": "results/finance/finance_v1__matrix_report.json",
+      "sha256": "18e4b1cd4c7857113327300516722d26ce6486d08e8beb0b691ca2ab5168d3e7"
+    },
+    "original_release_causal_repair": {
+      "path": "results/finance/finance_v1__witness_repair_report.json",
+      "sha256": "c249b9eb2faeccfb2cc77d63a619d098488c4e7b5b294963d7c3312eb78844b9"
+    },
+    "phase2_precommit": {
+      "path": "results/primary_writer_replication/phase2_precommit.json",
+      "sha256": "c1ede5f12aa6cc5fff9acaaf83327bfc87c5e28a2db3c7a0c39ff788acefdc17"
+    },
+    "original_seed_replacement": {
+      "path": "results/finance/phase2_finance_replacement_report.json",
+      "sha256": "c6f74bd5744679bc0ad8088c27e9fb0273305dbceb791becaadfe1317f208d2d"
+    },
+    "fresh_replication_seed_causal_replay": {
+      "path": "results/finance/phase2_seed_witness_replay_report.json",
+      "sha256": "2af16bf45089153ffaba06052c102733b21f4a12cbf1d3d41874dfad1c3c99c2"
+    }
+  },
+  "preservation_contract": {
+    "historical_run_directories_modified": false,
+    "historical_results_deleted": false,
+    "outcomes_regenerated": false,
+    "source_recovery_requires_git_history": true
+  }
+}
