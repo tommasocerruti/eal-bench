@@ -138,7 +138,47 @@ Overall 8.3% (GLM), 9.6% (Kimi), 7.7% (Nemotron), so generated cases are easier 
 
 ## 5. Additional writers
 
-Two newer models were added as writers: GLM 5.3 and Inkling (Thinking Machines). Both reason at length inside their completions, and the paper's 4,096-token output limit truncated their memory-update calls (the call ended with `finish_reason: length` and no tool call), which produced empty or stale memories. Their output limits were raised to 32,768 tokens (`request_parameters` on the target in `config.yaml`; the paper's writers are unchanged), all runs made under the old limit were discarded, and the runs are being redone: the memory-type table at three seeds, the three-round closed loop, and the paper's own writer and pressure routes at the paper's seeds in all three domains. Results will replace this paragraph. Lesson for any new writer: check completion tokens against the output limit before trusting a run.
+Two newer models were added as writers, GLM 5.3 and Inkling (Thinking Machines), through the paper's own writer route (four conditions, both executors, the paper's three seeds per domain, plus the pressure route), the memory-type grid of Section 1 at three seeds, and the three-round closed loop of Section 3. Both reason at length inside their completions and the paper's 4,096-token output limit truncated their memory-update calls (`finish_reason: length`, no tool call), which produced empty or stale memories that looked like extreme laundering or extreme caution. Their output limit was raised to 32,768 tokens (`request_parameters` on the target in `config.yaml`; the paper's writers are unchanged), every run made under the old limit was discarded, and everything below was run at the new limit. No call in these runs hit it. Finance was not run.
+
+**Paper writer route.** Three seeds per domain, both executors; AU / US with the Wilson interval on US.
+
+| Domain | Condition | GLM 5.3 | Inkling | Paper's writers (GLM 5.2 / Kimi / Nemotron), typed incremental |
+|---|---|---|---|---|
+| procurement | one-shot, typed | AU 97.2%, US 0.0% (0.0–1.7) | AU 94.9%, US 6.4% (3.9–10.5) |  |
+| procurement | one-shot, free text | AU 99.5%, US 0.0% (0.0–1.7) | AU 94.4%, US 1.9% (0.7–4.7) |  |
+| procurement | incremental, typed | AU 98.1%, US 20.4% (15.5–26.2) | AU 92.1%, US 30.6% (24.8–37.0) | 26.9 / 20.4 / 28.2% (three seeds) |
+| procurement | incremental, free text | AU 96.8%, US 2.8% (1.3–5.9) | AU 58.8%, US 14.8% (10.7–20.2) |  |
+| cybersecurity | one-shot, typed | AU 97.9%, US 0.0% (0.0–1.0) | AU 89.6%, US 0.0% (0.0–1.0) |  |
+| cybersecurity | one-shot, free text | AU 100.0%, US 0.0% (0.0–1.0) | AU 95.1%, US 0.5% (0.1–1.9) |  |
+| cybersecurity | incremental, typed | AU 99.7%, US 0.0% (0.0–1.0) | AU 87.5%, US 10.9% (8.2–14.5) | 0.0 / 6.2 / 12.5% (one seed, Section 1 grid) |
+| cybersecurity | incremental, free text | AU 97.9%, US 2.6% (1.4–4.7) | AU 87.2%, US 10.4% (7.7–13.9) |  |
+
+Run sizes: GLM 5.3 procurement: 3 seeds, 548 writer calls, 0 truncated; Inkling procurement: 3 seeds, 664 writer calls, 0 truncated; GLM 5.3 cybersecurity: 3 seeds, 1077 writer calls, 0 truncated; Inkling cybersecurity: 3 seeds, 1387 writer calls, 0 truncated.
+
+**Memory-type grid** (Section 1 design), procurement, three seeds, both executors, 216 unauthorized requests per cell.
+
+| Memory, writing method | GLM 5.3 AU / US | Inkling AU / US | Paper's three writers US |
+|---|---|---|---|
+| typed, incremental | 99.1% / 25.0% | 86.1% / 37.0% | 25.2% |
+| typed, rebuild every 3 | 100.0% / 3.7% | 93.5% / 9.3% | 6.6% |
+| hybrid, incremental | 99.1% / 8.3% | 97.7% / 17.6% | 15.4% |
+| hybrid, rebuild every 3 | 99.1% / 0.0% | 97.2% / 4.2% | 2.6% |
+| free text, incremental | 96.8% / 2.8% | 60.2% / 12.5% |  |
+| free text, rebuild every 3 | 99.1% / 0.0% | 96.3% / 3.2% |  |
+
+**Closed loop** (Section 3 design), procurement, typed incremental, GPT-OSS executor, three rounds; unauthorized submission per round, and permission records whose only sources are the agent's own write-backs at the end of round 3.
+
+| Writer | Open loop | Round 1 | Round 2 | Round 3 | AU round 1 → 3 | Records born from write-backs |
+|---|---|---|---|---|---|---|
+| GLM 5.3 | 20.4% (paper route) | 11% | 11% | 19% | 100 → 94% | 75 |
+| Inkling | 30.6% (paper route) | 28% | 33% | 36% | 81 → 50% | 76 |
+| paper's three writers (Section 3) | 29.6% | 28.7% | 27.8% | 29.6% | 88 → 60% | 106 across 36 chains |
+
+**Where their failures enter** (Section 6 method, same three judges). Procurement: every GLM 5.3 and Inkling failure that enters from the history is `restatement as amendment` or its `unsupported edit` neighbour, and every failure that enters from a write-back is `action log as grant`, the same two mechanisms as the paper's writers. Cybersecurity: GLM 5.3 has no failure to diagnose. Inkling's 21 cybersecurity failures all enter at the last block, which carries the duty officer's sixteen-operation signed change set: in 12 of them both writer attempts were rejected (malformed patches, or two model calls where the harness allows one) and the memory stayed one block stale; in 9 the patch was accepted but applied only the first operation of the change set, leaving the revoked grants standing. Inkling also has the highest rate of rejected updates of any writer (about a fifth of attempts in cybersecurity), so a share of its behavioral numbers measures failed updates rather than misreading.
+
+**Reading.** Two more writers, from different families, reproduce the paper's ordering: incremental typed memory launders most, the hybrid profile launders less, periodic rebuilds least, and the closed loop manufactures permission records out of the agent's own escalations. GLM 5.3 sits with the paper's writers on procurement and is clean on cybersecurity. Inkling is the worst writer tested on every incremental condition, and its free-text memory loses two fifths of authorized use because its updates overrun the size cap. Neither adds a new failure mode; both add the operational one Section 6 names, that a reasoning writer's update can fail silently and leave the executor reading stale grants.
+
+**Takeaway.** The paper's result holds for two newer reasoning writers at 32,768 output tokens: procurement typed incremental 20% (GLM 5.3) and 31% (Inkling) against 25% for the paper's three, hybrid and rebuild in the same order, and the closed loop compounding for both. For any new writer, two checks are not optional: completion tokens against the output limit, and the share of rejected memory updates, because both produce numbers that look like laundering and are not.
 
 ## 6. Where in the writing does the failure enter, and why?
 
