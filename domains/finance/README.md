@@ -1,83 +1,106 @@
 # Finance domain
 
-Finance studies authorization-memory failures in portfolio-order execution. A portfolio mandate
-officer may permit trades only for a named account, strategy, instrument set, side, order type,
-quantity ceiling, price interval, settlement currency, and half-open time window.
+Finance studies authorization-memory failures in portfolio-order execution. A mandate must
+jointly cover the trader, account, strategy, instrument, side, order type, quantity, price,
+settlement currency, and half-open validity window.
 
-The active release is `finance_v1`.
+The paper uses **`finance_redesign_v1`**, frozen after development iteration 14 and evaluated
+on 22 August 2026. Its release declaration is [`release.json`](release.json).
 
-| Component | ID |
+| Component | Identity |
 |---|---|
-| Behavioral corpus | `benchmark_v1` |
-| Capacity corpus | `calibration_v1` |
+| Held-out corpus | `benchmark_v1`: 8 families, 32 authorized and 32 unauthorized requests |
+| Calibration corpus | `calibration_v1` |
 | Presentation | `naturalistic_v1` |
 | Pressure profile | `loss_containment_v1` |
 | Memory implementation | `langmem_profile` |
-| Canonical seed | `20260816` |
+| Evaluation seeds | `20260816`, `20260821`, `20260822` |
+| Corpus provenance SHA-256 | `e16f7342262b32188cff39e315c6041505195aceffea500d56a6a3e99a551966` |
 
-The release declaration and immutable hashes are in [`release.json`](release.json). The corpus has
-eight held-out families and four matched request pairs per family. Each final signed transaction
-replaces six obsolete mandates with six current mandates. Every outside request is covered by one
-complete pre-final mandate and denied by the final state; its inside match differs in exactly one
-serialized request field and has the opposite authorization result.
+The histories place an authoritative mandate contraction or revoke-and-replace before a later
+operational OMS handoff from a non-issuer. The canonical ledger follows authoritative events;
+operational records cannot restore the obsolete authority. Matched requests differ in one field.
+Development families and the development seed are excluded from the final evaluation.
 
-## Routes
+## Results used in the paper
 
-- `controls`: faithful free-text and typed evidence, full history, controlled broadening, exact
-  repair, and semantic sham conditions with GPT-OSS and DeepSeek executors.
-- `writer`: the full free-text/typed × one-shot/incremental LangMem factorial.
-- `pressure`: exact replay of every frozen writer baseline under `loss_containment_v1`, with no
-  writer calls or baseline reruns.
+The complete design contains five writers, two executors, four memory conditions, and three
+seeds. Each condition below pools 960 authorized and 960 unauthorized requests. The target-level
+breakdown remains available in the frozen report; pooling here follows the paper's stated design.
 
-## Results
+| Memory condition | Authorized use | Unauthorized submission |
+|---|---:|---:|
+| Text, one-shot | 954/960 (99.4%) | 26/960 (2.7%) |
+| Text, incremental | 908/960 (94.6%) | 296/960 (30.8%) |
+| Typed, one-shot | 880/960 (91.7%) | 4/960 (0.4%) |
+| Typed, incremental | 944/960 (98.3%) | 490/960 (51.0%) |
 
-Both executors passed isolation: faithful text and typed memory each produced 32/32 authorized
-uses and 0/32 unauthorized submissions, while controlled broadening produced 32/32 unauthorized
-submissions.
+Unauthorized submission means the executor takes the **exact requested action** when the final
+canonical state denies that request. It is different from the older broad `unsafe_action` metric.
+Model-invalid and no-action outcomes remain in the denominators; provider failures are separate.
 
-Across five writers and both executors, baseline authorized use was 86.6% and unsafe action was
-5.9%. Under pressure these changed to 77.3% and 10.1%. Natural substantive memory
-errors caused 24/24 unsafe actions, while exact canonical repair caused 0/24. Fixed-memory action
-outcomes agreed across executors on 98.4% of matched requests.
+The overall unauthorized-submission rate is 816/3,840 (21.25%). GPT-OSS contributes 398/1,920 and
+DeepSeek 418/1,920, with requested-action agreement on 3,802/3,840 paired replays. The primary
+matrix contains no terminal provider-error trials.
 
-The shared typed-state mechanism analysis yields an 80 → 19 → 6 → 6 → 6
-final-memory funnel: final typed memories, semantic errors, authority-gaining errors,
-apparent-authority memories, and propagated unsafe actions. The frozen derivation is in
-[`finance_v1__mechanism_extension.json`](../../results/finance/finance_v1__mechanism_extension.json).
+Sources:
 
-Qwen's incremental free-text initialization succeeded for 7/8 families, so its failed initial
-profile remains in the intention-to-treat results. The complete transfer matrix cost USD 37.29
-under its USD 50 cap; isolation controls cost USD 4.30 separately. Full tables are in
-[`results/finance/finance_v1__matrix_results.md`](../../results/finance/finance_v1__matrix_results.md).
+- [Final scientific report](../../results/finance_redesign/final_held_out_evaluation.md):
+  120 ordinary cells, pressure cells, development history, controls, and causal analysis.
+- [Frozen JSON report](../../results/finance_redesign/final_held_out_evaluation.json):
+  machine-readable counts and provenance.
+- [Paper Appendix B.2](https://arxiv.org/html/2609.01836v1#A2.SS2): Tables 11–13.
+- [Reproduction and artifact guide](../../results/finance_redesign/README.md).
 
-Finance is a claim-valid, merge-eligible core domain. The repository owner's final acceptance
-treats the completed five-writer by two-executor matrix, passed isolation controls, exact-repair
-reversal, and byte-identical public release mapping as sufficient evidence. This acceptance
-supersedes the earlier plan for a separate GPT-OSS writer → GPT-OSS executor merge route without
-altering or resampling any completed result. The decision and its retained limitations are frozen
-in [`finance_v1__acceptance.json`](../../results/finance/finance_v1__acceptance.json).
+## Reproduce the saved tables offline
 
-## Offline validation
+This command uses Python's standard library and makes no provider calls:
 
 ```bash
-uv run python -m experiments.run \
-  --domain finance \
-  --corpus-version benchmark_v1 \
-  --presentation-version naturalistic_v1 \
-  --study controls \
-  --validate-only
+python3 -m analysis.finance_paper_results --output-dir /tmp/finance-paper-tables
+```
 
+It verifies the frozen sources, reports, and run manifests, sums the saved aggregate cells,
+exports seed/condition/executor CSVs, and lists every expected raw artifact with its hash.
+It does not reconstruct individual trials or independently repeat scoring from raw memory.
+
+The 33 final run manifests survive, but their 378 referenced raw JSONL files were unavailable
+when this correction was prepared. The original completion audit records their integrity at
+execution time; it is not a claim that those files are currently distributed. Restoring those
+exact files is necessary for trial-level reanalysis and independent scoring verification.
+
+## Validate the dataset and planned routes
+
+After installing the repository dependencies and caching the tokenizer data:
+
+```bash
+uv run python -m domains.finance.compile_corpus --check
+uv run python -m experiments.run --validate-only --all-domains
 uv run python -m experiments.run \
   --domain finance \
   --corpus-version benchmark_v1 \
   --presentation-version naturalistic_v1 \
   --study writer \
-  --validate-only
-
-uv run python -m experiments.run --validate-only --all-domains
-uv run ruff check .
+  --writer-targets nemotron_3_ultra_baseten,kimi_baseten,glm_5_2_baseten,grok_4_3_openrouter,qwen_plus_0728_openrouter \
+  --executor-targets gptoss_baseten,deepseek_baseten \
+  --writer-architecture all --writer-strategy all \
+  --seed 20260816 --validate-only
 ```
 
-The public package exposes only the two v1 corpus identities. Immutable paid-run manifests retain
-their original technical execution identifiers; the byte-identical model-surface mapping is
-recorded in `results/finance/finance_v1__release_equivalence.json`.
+Repeat route validation with seeds `20260821` and `20260822` to inspect the complete design.
+The frozen [final precommit](redesign_final_precommit.json) records all 33 routes, parameters,
+and historical commands. Its old absolute worktree paths are provenance, not required locations.
+New live runs require credentials and an explicit cost ceiling and create new stochastic samples;
+they cannot replace the original raw artifacts or be expected to match published counts exactly.
+
+## Earlier Finance results
+
+The older `finance_v1` release also used the corpus name `benchmark_v1`, but it has a different
+source hash (`ac495b4d26bf81240935ffabbfe68b25121a901414701fb53c2ba5bd04f2de42`). Its
+`finance_v1__*` and `phase2_finance_replacement*` reports under `results/finance/` describe
+superseded experiments, including the older 5.9% baseline unsafe-action figure. They are not the
+paper's redesigned Finance results. Match release and source hashes, not just corpus names.
+
+The [legacy archive declaration](archive/legacy_finance_v1/archive_manifest.json) preserves the
+earlier construction's identity. Development corpora and reports are retained for provenance;
+only `calibration_v1` and `benchmark_v1` are exposed by the active domain registry.

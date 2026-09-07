@@ -152,9 +152,18 @@ Depending on the study, it records the resolved configuration, generated memorie
 model-visible contexts, native tool calls, normalized decisions, oracle scores, hashes, and
 provider usage. The completed `manifest.json` is the authoritative artifact inventory.
 
-Procurement and Cybersecurity include the raw artifacts needed to verify reported counts. Finance
-currently retains aggregate reports and hashed manifests; restoring the referenced raw JSONL files
-is necessary for a fully independent end-to-end rebuild.
+Finance uses the paper's `finance_redesign_v1` release. The [Finance result guide](results/finance_redesign/README.md)
+maps the frozen reports to the published tables and distinguishes the older `finance_v1` results.
+Rebuild the Finance aggregate tables without model calls or API keys:
+
+```bash
+python3 -m analysis.finance_paper_results --output-dir /tmp/finance-paper-tables
+```
+
+Procurement and Cybersecurity include raw artifacts for reported counts. Finance retains its
+aggregate reports and all 33 final run manifests, but their 378 referenced raw JSONL files are
+currently unavailable. The command above verifies saved aggregates and reports missing files;
+restoring the originals is necessary for independent trial-level scoring and bootstrap reanalysis.
 
 ## Extending EAL-Bench
 
