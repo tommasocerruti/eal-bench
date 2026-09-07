@@ -50,9 +50,22 @@ The full grid at one seed, three writers pooled, GPT-OSS executor; 108 unauthori
 
 Free text launders less than typed but loses a fifth of authorized use, because half its updates exceed the size limit and are discarded, the same behavior as in the paper's own free-text run. Retrieval changes nothing for any memory type.
 
+The same grid on cybersecurity (16 cases, 8 requests each), one seed, three writers, both executors; 384 unauthorized requests per row.
+
+| Memory | Writing method | AU | US | 95% CI |
+|---|---|---|---|---|
+| typed | incremental | 93.5% | 6.2% | 4.2–9.1 |
+| typed | rebuild every 3 | 99.5% | 0.0% | 0.0–1.0 |
+| free text | incremental | 91.7% | 6.8% | 4.7–9.7 |
+| free text | rebuild every 3 | 99.2% | 0.0% | 0.0–1.0 |
+| hybrid | incremental | 96.1% | 3.6% | 2.2–6.0 |
+| hybrid | rebuild every 3 | 95.1% | 4.2% | 2.6–6.7 |
+
+Cybersecurity launders far less than procurement, as in the paper, and it does so a whole case at a time: every non-zero cell is one or two cases in which all eight unauthorized requests were executed under both executors (GLM hybrid: `claim_vault`; Kimi typed: `claim_ca`; Nemotron typed: `claim_vault`, `claim_runner`). Nemotron is the only writer that launders in every incremental memory type, and its one rebuild failure (hybrid, `claim_edge` and `claim_artifact`) is a rebuild landing before the stale restatements, the timing effect of Section 2.
+
 **Reading.** The failure follows incremental writing over a stale history, not the typed schema. The hybrid lowers it for every writer (GLM 15.3%, Kimi 18.1%, Nemotron 13.0% against 26.9 / 20.4 / 28.2% typed) and raises AU, plausibly because informal or pending changes now have a place other than a permission record. Retrieval does not help because the misleading material is already in the new block the writer is reading.
 
-**Takeaway.** Laundering is a property of incremental writing, not of the typed schema: it appears in all three memory types and only disappears when memory is rebuilt from source. The hybrid profile is the best incremental design we found (US 15.4% vs 25.2%, AU 96.8% vs 90.1%); writer-side retrieval is not a mitigation. Goes next to the paper's 2×2 memory-design comparison as one extra row and two extra columns.
+**Takeaway.** Laundering is a property of incremental writing, not of the typed schema: it appears in all three memory types and only disappears when memory is rebuilt from source. The hybrid profile is the best incremental design we found (US 15.4% vs 25.2%, AU 96.8% vs 90.1%); writer-side retrieval is not a mitigation. On cybersecurity the same ordering holds at lower rates (typed 6.2%, hybrid 3.6%, rebuild 0%), and a laundered memory there fails every unauthorized request in the case rather than a few. Goes next to the paper's 2×2 memory-design comparison as one extra row and two extra columns.
 
 ## 2. When does rebuilding from the history help?
 
