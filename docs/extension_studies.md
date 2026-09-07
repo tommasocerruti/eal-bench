@@ -178,7 +178,7 @@ Nemotron labels many restatement rows `unsupported edit` and a few `authoritativ
 
 **Reading.** A writer that follows every operational message will, in an organization that keeps referring to the old grant, eventually rewrite the grant. The trigger is a specific kind of message: a system or a colleague reporting what a screen still shows. In the closed loop the same reflex turns the agent's own escalation into the permission it was asking for.
 
-**Takeaway.** The writer's error is one thing, not many: it lets non-authoritative messages change permissions. From the history those are stale status restatements (92%); from write-backs they are the agent's own escalation lines (99%). Authoritative changes are read correctly. What to watch for in a deployment: system status lines and workflow-log entries reaching the writer on equal footing with the principal's messages. Rows are in `results/diagnosis/`; `experiments/diagnose_formation.py` reruns the diagnosis on any run directory and skips failures already judged.
+**Takeaway.** The writer's error is one thing, not many: it lets non-authoritative messages change permissions. From the history those are stale status restatements (92%); from write-backs they are the agent's own escalation lines (99%). Authoritative changes are read correctly. What to watch for in a deployment: system status lines and workflow-log entries reaching the writer on equal footing with the principal's messages. One row per failure, with each judge's label, is in `results/diagnosis/failures.csv`; `experiments/diagnose_formation.py` reruns the diagnosis on any run directory and skips failures already judged.
 
 ## 7. Bugs found
 
