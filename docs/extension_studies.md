@@ -14,6 +14,17 @@ Follow-up experiments to the EAL-Bench paper. This note is self-contained: it ex
 
 **Fixed across every study.** Same writer prompt, same LangMem profile mechanism, same executor prompt and tools, same requests, same scoring. Writers are the paper's three that run on Baseten: GLM 5.2, Kimi K2.6, Nemotron 3 Ultra. Executor is GPT-OSS-120B, with DeepSeek V4 Pro added where noted. Temperature 1.0, 4,096 output tokens for these writers, procurement unless noted. Intervals are Wilson 95%. Only the factor under study changes.
 
+**Coverage.** Which study ran on which domain, all on the paper's Baseten writers unless noted:
+
+| Study | procurement | cybersecurity | finance |
+|---|---|---|---|
+| 1. memory type × writing method | three seeds (typed, hybrid), one seed (full grid with retrieval) | one seed (typed, free text, hybrid × incremental, rebuild) | not run |
+| 2. rebuild timing | yes | no | no |
+| 3. closed loop, one pass and three rounds | yes | three rounds | three rounds |
+| 4. generated histories | yes (108 generated cases) | no | no |
+| 5. additional writers (GLM 5.3, Inkling) | paper route, memory grid, closed loop | paper route | not run |
+| 6. root-cause diagnosis | every failure in 1, 3, 4 and 5 | every failure in 1, 3 and 5 | every failure in 3 |
+
 Scripts: `experiments/writer_variants_run.py` (studies 1, 2, 4, 5), `experiments/closed_loop.py` (study 3), and `experiments/diagnose_formation.py` (study 6). The first two have `--dry-run` and refuse live runs without `--estimated-cost-usd`.
 
 ## 1. Does the failure depend on how memory is represented or written?
