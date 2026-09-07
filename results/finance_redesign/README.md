@@ -1,6 +1,6 @@
-# Finance results accompanying arXiv:2609.01836v1
+# Finance scientific report archive
 
-Use this directory for the paper's **`finance_redesign_v1`** results. The older
+This directory preserves the frozen source reports for **`finance_redesign_v1`**. The older
 `results/finance/finance_v1__*` and `phase2_finance_replacement*` summaries describe earlier
 datasets, even though those releases also used the corpus name `benchmark_v1`.
 
@@ -27,54 +27,25 @@ are immutable outputs. The pressure report also contains other seeds; use the se
 above when matching the published fixed-seed table. Do not substitute the three-seed pressure
 aggregate for that table.
 
-## Rebuild the aggregate tables
+## Standard result package
 
-From the repository root, with Python 3.10 or later:
-
-```bash
-python3 -m analysis.finance_paper_results --output-dir /tmp/finance-paper-tables
-```
-
-No API keys, model calls, tokenizer download, or optional analysis packages are needed. Outputs:
-
-- `ordinary_matrix.csv`: all 120 ordinary result cells with seeds and provider-specific targets.
-- `seed_conditions.csv`: the 12 seed-by-condition cells behind Table 11.
-- `memory_design.csv`: the four three-seed aggregate cells behind Table 12.
-- `executor_transfer.csv` and `executor_agreement.csv`: counts behind Table 13.
-- `tables.md` and `summary.json`: readable results, source hashes, and audit limits.
-- `artifact_inventory.csv`: relative paths, expected hashes and row counts, and current status
-  for every raw artifact referenced by the final manifests.
-
-The script rejects altered frozen inputs, duplicate/missing matrix cells, and inconsistent
-aggregates. A successful aggregate check means the saved result cells reproduce the tables;
-it does not establish independent correctness of the original trial scoring.
-
-## Raw artifact availability and recovery
-
-As checked on 7 September 2026, the 33 final run manifests and the aggregate reports survive,
-but all **378 referenced JSONL files** are absent from the available run directories. The
-[historical artifact audit](final_artifact_audit.json) records the successful completion-time
-verification of 130,381 rows and 1,766,734,205 bytes. That historical audit is retained unchanged.
-
-The original execution root was `/private/tmp/eal-bench-finance-redesign`. A backup should contain
-`results/finance/20260822-*__finance-redesign-final-*/` and its manifest-owned `trials.jsonl`,
-`memories.jsonl`, `memory_states.jsonl`, `calls.jsonl`, `model_contexts.jsonl`, and other files.
-The inventory generated above gives the exact expected paths and hashes. Restore recovered
-files at those relative paths without overwriting a different file, then run:
+The public entry point is the same as every domain: [`results/finance/`](../finance/README.md).
+Use the [shared command and artifact policy](../README.md):
 
 ```bash
-python3 -m analysis.finance_paper_results --require-raw
+python3 -m analysis.paper_results --domain finance --output-dir /tmp/eal-paper-tables
 ```
 
-This command exits with status 2 while raw files are missing and rejects any recovered file
-whose hash or row count differs. It must pass before claiming full raw-artifact availability.
-After restoration, the original domain finalizer can recompute trial-level analyses; direct its
-outputs to a separate directory and preserve the frozen reports. Its legacy execution paths may
-need an explicit local mapping.
+This historical directory retains the original report filenames and hashes. The shared paper
+package selects its 15 writer routes for Tables 11–13. The full release also contains controls
+and pressure: all 33 final manifests survive, while their 378 raw JSONL files were unavailable
+in the inspected local archives on 7 September 2026. The historical completion audit records
+130,381 rows and 1,766,734,205 bytes verified at execution time. It remains unchanged.
 
-Raw `results/**/*.jsonl` files are excluded from Git. A code push alone will not distribute
-recovered originals; they require a separately approved archive with a complete checksum list.
-Do not invent trial rows from aggregate counts or substitute newly sampled runs for lost outputs.
+A backup would contain the original `results/finance/20260822-*__finance-redesign-final-*/`
+run directories from `/private/tmp/eal-bench-finance-redesign`. The selected writer inventory and
+all other final manifests specify the exact original paths and hashes. Restore originals only;
+aggregate counts cannot recover individual trials, memories, or provider-visible contexts.
 
 ## Development record
 

@@ -1,0 +1,300 @@
+{
+  "schema_version": "paper_result_manifest_v1",
+  "domain_id": "finance",
+  "release_id": "finance_redesign_v1",
+  "paper": "https://arxiv.org/html/2609.01836v1#A2.SS2",
+  "tables": [
+    11,
+    12,
+    13
+  ],
+  "release": {
+    "path": "domains/finance/release.json",
+    "sha256": "a19b0bb5ee2f6d23a064e9dfe041b2ff90866b656bc78f32c9ee5d981d9d55ce"
+  },
+  "seeds": [
+    20260816,
+    20260821,
+    20260822
+  ],
+  "writer_targets": [
+    "nemotron_3_ultra_baseten",
+    "kimi_baseten",
+    "glm_5_2_baseten",
+    "grok_4_3_openrouter",
+    "qwen_plus_0728_openrouter"
+  ],
+  "executor_targets": [
+    "gptoss_baseten",
+    "deepseek_baseten"
+  ],
+  "authorized_trials_per_writer_condition": 64,
+  "selection": "Five paper writers; generated_final ordinary trials; all outcomes retained.",
+  "metric": "exact_request_unauthorized_submission",
+  "sources": {
+    "evaluation": {
+      "format": "factorial_matrix_counts_v1",
+      "path": "results/finance_redesign/final_held_out_evaluation.json",
+      "sha256": "c39545add07586dba9056bffda72bd3e31df04e2d4f9e8c64b3fbf22d4c619fa"
+    }
+  },
+  "routes": [
+    {
+      "route_id": "finance-s20260816-nemotron_3_ultra_baseten",
+      "domain_id": "finance",
+      "seed": 20260816,
+      "writer_target": "nemotron_3_ultra_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra/manifest.json",
+        "sha256": "6a69817cab5de128dcacdc7987d24cf5c26f1a2fd63add0db9310a6202b607dd"
+      },
+      "source_id": "evaluation"
+    },
+    {
+      "route_id": "finance-s20260816-kimi_baseten",
+      "domain_id": "finance",
+      "seed": 20260816,
+      "writer_target": "kimi_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi/manifest.json",
+        "sha256": "54853fb6f1dc64421beebf00b934fadfa6cd764630eb7b3823c7f9598032f9e0"
+      },
+      "source_id": "evaluation"
+    },
+    {
+      "route_id": "finance-s20260816-glm_5_2_baseten",
+      "domain_id": "finance",
+      "seed": 20260816,
+      "writer_target": "glm_5_2_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2/manifest.json",
+        "sha256": "dc93269dc60e0c6f55b5021966536f33f6ac4ce08ebe6bf6a5f21118da84ce99"
+      },
+      "source_id": "evaluation"
+    },
+    {
+      "route_id": "finance-s20260816-grok_4_3_openrouter",
+      "domain_id": "finance",
+      "seed": 20260816,
+      "writer_target": "grok_4_3_openrouter",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3/manifest.json",
+        "sha256": "22548ccc0fac316e4551d8973e51fad24e31cfd39a668f2845bd83d4969a987d"
+      },
+      "source_id": "evaluation"
+    },
+    {
+      "route_id": "finance-s20260816-qwen_plus_0728_openrouter",
+      "domain_id": "finance",
+      "seed": 20260816,
+      "writer_target": "qwen_plus_0728_openrouter",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728/manifest.json",
+        "sha256": "4822296d996e45f0a271795308b082cf922e7c5af339111f8723bc43ed97c1ab"
+      },
+      "source_id": "evaluation"
+    },
+    {
+      "route_id": "finance-s20260821-nemotron_3_ultra_baseten",
+      "domain_id": "finance",
+      "seed": 20260821,
+      "writer_target": "nemotron_3_ultra_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra/manifest.json",
+        "sha256": "c446e5b5ea5aea3a5ec9f7cf6250e53a3ae2b4b29436d53fbe02b86a988a4f2a"
+      },
+      "source_id": "evaluation"
+    },
+    {
+      "route_id": "finance-s20260821-kimi_baseten",
+      "domain_id": "finance",
+      "seed": 20260821,
+      "writer_target": "kimi_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi/manifest.json",
+        "sha256": "b65e195dea1996cc191bed4c2c553dd751877114c783e9f508bcf17ba9c82e99"
+      },
+      "source_id": "evaluation"
+    },
+    {
+      "route_id": "finance-s20260821-glm_5_2_baseten",
+      "domain_id": "finance",
+      "seed": 20260821,
+      "writer_target": "glm_5_2_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2/manifest.json",
+        "sha256": "30e3a412ff34fc93b92c70aa950e458009d2b586d2157fec8a69b753c7a561b9"
+      },
+      "source_id": "evaluation"
+    },
+    {
+      "route_id": "finance-s20260821-grok_4_3_openrouter",
+      "domain_id": "finance",
+      "seed": 20260821,
+      "writer_target": "grok_4_3_openrouter",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3/manifest.json",
+        "sha256": "535b3995b2c3bd367a09488167909a055004b2d3a42814e0c59e3ed8a379b4d7"
+      },
+      "source_id": "evaluation"
+    },
+    {
+      "route_id": "finance-s20260821-qwen_plus_0728_openrouter",
+      "domain_id": "finance",
+      "seed": 20260821,
+      "writer_target": "qwen_plus_0728_openrouter",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728/manifest.json",
+        "sha256": "581409724edf2d73cc2df20a3e09117130aab915ab01ef84086421eb7fe5d76a"
+      },
+      "source_id": "evaluation"
+    },
+    {
+      "route_id": "finance-s20260822-nemotron_3_ultra_baseten",
+      "domain_id": "finance",
+      "seed": 20260822,
+      "writer_target": "nemotron_3_ultra_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra/manifest.json",
+        "sha256": "df0e5cb7ea0bd87ecf403076390f6fe931d5b91f25f46662a48b0064e1fda30f"
+      },
+      "source_id": "evaluation"
+    },
+    {
+      "route_id": "finance-s20260822-kimi_baseten",
+      "domain_id": "finance",
+      "seed": 20260822,
+      "writer_target": "kimi_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi/manifest.json",
+        "sha256": "c1133e71b64b63350bfcb1166a48d787b1d816524f73794df88e18345b166f6b"
+      },
+      "source_id": "evaluation"
+    },
+    {
+      "route_id": "finance-s20260822-glm_5_2_baseten",
+      "domain_id": "finance",
+      "seed": 20260822,
+      "writer_target": "glm_5_2_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2/manifest.json",
+        "sha256": "2b46521c26206e0c869861fdb65d7d82ce79037ff4e882033d4021339c7dd405"
+      },
+      "source_id": "evaluation"
+    },
+    {
+      "route_id": "finance-s20260822-grok_4_3_openrouter",
+      "domain_id": "finance",
+      "seed": 20260822,
+      "writer_target": "grok_4_3_openrouter",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3/manifest.json",
+        "sha256": "027e81312eaeacfc3fbc25ebe0f6570607750622a95198b46c5cddcbdd216898"
+      },
+      "source_id": "evaluation"
+    },
+    {
+      "route_id": "finance-s20260822-qwen_plus_0728_openrouter",
+      "domain_id": "finance",
+      "seed": 20260822,
+      "writer_target": "qwen_plus_0728_openrouter",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728/manifest.json",
+        "sha256": "4be7dbf6f949764d4683d72d75d726c605ac0feec0138b4c3e2e8a55dd32c009"
+      },
+      "source_id": "evaluation"
+    }
+  ],
+  "treatment": {
+    "corpus_version": "benchmark_v1",
+    "presentation_hash": "2b4b9f2bb396a0d16b0db3b0e8c5ef1bde5a28df0959a422e88f992a513208b9",
+    "memory_implementation_id": "langmem_profile",
+    "memory_implementation_hash": "e19c96fdcf904476b6e469775566b05d288232cc2e0143b5167f4656d4f33bdb"
+  },
+  "counts": {
+    "path": "results/finance/paper/counts.json",
+    "sha256": "423d56428fcb64ce46dca77d5d6a3a45bc2b679a6c7556369a90d51699aaa445"
+  },
+  "dataset_sources": [
+    {
+      "path": "domains/finance/data/benchmark_v1.json",
+      "sha256": "23b175f00509692f13dd5462cd2504a9aae36b81a26f6db4ec86ca4f7bbe48e4"
+    },
+    {
+      "path": "domains/finance/v2_blueprint.json",
+      "sha256": "a6a8b7695f8ac766f75952bc42e3e6848029a1117e6f75f5920058ab131d3d7d"
+    },
+    {
+      "path": "domains/finance/compile_redesign.py",
+      "sha256": "c51b4e324789bff1f1c1b541db311100b241d3de7a2cc6716b88a9a02229e256"
+    },
+    {
+      "path": "domains/finance/corpus_redesign.py",
+      "sha256": "20f2f0d3db810ef9bcc2dd52b004bda517c9bbdc7c170a2e652a1ecc414f215c"
+    },
+    {
+      "path": "domains/finance/corpus.py",
+      "sha256": "2ae522a6b26f994b2ccf6528c3bed0e27566019f80c6f205b533b07c26c6788e"
+    }
+  ]
+}
