@@ -93,7 +93,7 @@
     "pricing_estimate": {
       "artifact": "pre_run_cost_estimate.json",
       "sha256": "d82693185bf067b8284ab01f8c6f6c1d9bf4862bbd8bb172b18f3a89ba57aea2",
-      "status": "approved_and_completed",
+      "status": "approved",
       "approved_cap_usd": 50.0
     }
   },
