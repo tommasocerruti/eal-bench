@@ -25,7 +25,7 @@ Single-seed grid (108 unauthorized requests per cell): free text incremental 14.
 
 **Reading.** Laundering is a property of incremental writing over stale material, not of the typed schema. The hybrid profile lowers it for every writer (GLM 15.3%, Kimi 18.1%, Nemotron 13.0% against 26.9 / 20.4 / 28.2% typed) and raises AU, presumably because pending or informal changes have somewhere to go besides a record. Retrieval fails because the writer already sees the laundering material in the new block.
 
-**Paper.** Extends the 2×2 memory design (Section 4) with a third representation and two more writing methods. Supports the mechanism claim and answers "is this an artifact of the typed schema".
+**Paper.** Extends the 2×2 memory-design results with a third representation and two more writing methods. Supports the mechanism claim and answers "is this an artifact of the typed schema".
 
 ## 2. When a rebuild helps
 
@@ -79,18 +79,18 @@ Authorized use falls in every domain across rounds (procurement 88 → 67 → 60
 
 **Question.** What in a history makes the writer launder: distance between grant and change, stale restatements of the old grant, explicit versus implied revocation, revoke-and-replace versus amendment?
 
-**Method.** `domains/procurement/generate_cases.py` builds 108 procurement cases in the existing schema (corpus `generated_v1`, linted with the frozen corpora) from four themes, crossing gap (1, 2, 3 blocks), stale restatements (0, 2, 4), lifecycle (revoke-and-replace or amendment), and implicit revocation. Typed incremental, GLM and Kimi.
+**Method.** `domains/procurement/generate_cases.py` builds 108 procurement cases in the existing schema (corpus `generated_v1`, linted with the frozen corpora) from four themes, crossing gap (1, 2, 3 blocks), stale restatements (0, 2, 4), lifecycle (revoke-and-replace or amendment), and implicit revocation. Typed incremental, GLM, Kimi, and Nemotron.
 
-**Results.** P(F) by knob, GLM / Kimi:
+**Results.** P(F) by knob, GLM / Kimi / Nemotron:
 
 | Knob | Values | P(F) |
 |---|---|---|
-| stale restatements | 0 / 2 / 4 | 0 / 4.6 / 20.4% and 0 / 5.6 / 23.1% |
-| lifecycle | amendment / revoke-and-replace | 20.4 / 2.3% and 18.5 / 5.1% |
-| gap | 1 / 2 / 3 | 10.2 / 8.3 / 6.5% and 7.4 / 11.1 / 10.2% |
+| stale restatements | 0 / 2 / 4 | 0 / 4.6 / 20.4%, 0 / 5.6 / 23.1%, 0 / 3.7 / 19.4% |
+| lifecycle | amendment / revoke-and-replace | 20.4 / 2.3%, 18.5 / 5.1%, 16.7 / 3.2% |
+| gap | 1 / 2 / 3 | 10.2 / 8.3 / 6.5%, 7.4 / 11.1 / 10.2%, 7.4 / 9.3 / 6.5% |
 | implicit revocation | yes / no | flat |
 
-Overall 8.3% (GLM) and 9.6% (Kimi), so generated cases are easier than the hand-written twelve (about 25%). AU 97 to 100%.
+Overall 8.3% (GLM), 9.6% (Kimi), and 7.7% (Nemotron), so generated cases are easier than the hand-written twelve (about 25%). AU 97 to 100%.
 
 **Reading.** Stale restatements of the superseded grant drive formation with a clean dose response; amendments launder far more than clean replacements; gap and wording do not matter.
 
