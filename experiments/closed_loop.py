@@ -81,6 +81,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--loop-writer", choices=("same", "executor"), default="same")
     parser.add_argument("--action-log", action="store_true")
     parser.add_argument("--rounds", type=int, default=1, help="passes over each case's requests; later rounds repeat the same requests")
+    parser.add_argument("--writer-instruction", default=None, help="one line prepended to the writer's instructions for every update, including write-backs")
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--batch-size", type=int, default=None)
     parser.add_argument("--estimated-cost-usd", type=float, default=None)
@@ -155,6 +156,7 @@ def main(argv: list[str] | None = None) -> int:
             updates=incremental_updates(domain, case, presentation),
             presentation_id=presentation.presentation_id,
             presentation_hash=presentation_hash,
+            instruction_prefix=args.writer_instruction,
         )
         for condition_id in _split(args.conditions)
         for target_id in _split(args.writer_targets)

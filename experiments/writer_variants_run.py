@@ -66,6 +66,8 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--batch-size", type=int, default=None)
     parser.add_argument("--estimated-cost-usd", type=float, default=None)
     parser.add_argument("--tag", default=None)
+    parser.add_argument("--writer-instruction", default=None, help="one line prepended to the writer's instructions; condition ids get the --instruction-tag suffix")
+    parser.add_argument("--instruction-tag", default="instructed")
     parser.add_argument("--dry-run", action="store_true")
     return parser
 
@@ -97,7 +99,7 @@ def main(argv: list[str] | None = None) -> int:
         domain = hybrid if type_name == "hybrid" else base
         for method in _split(args.writing_methods):
             rebuild, retrieve = parse_method(method)
-            condition_id = prefix + method_suffix(rebuild, retrieve)
+            condition_id = prefix + method_suffix(rebuild, retrieve) + (f"__{args.instruction_tag}" if args.writer_instruction else "")
             specs = [
                 WriterChainSpec(
                     case=case,
@@ -109,6 +111,7 @@ def main(argv: list[str] | None = None) -> int:
                     updates=incremental_updates(base, case, presentation, rebuild_every=rebuild, writer_retrieval_k=retrieve),
                     presentation_id=presentation.presentation_id,
                     presentation_hash=presentation_hash,
+                    instruction_prefix=args.writer_instruction,
                 )
                 for target_id in _split(args.writer_targets)
                 for run_id in range(args.writer_runs)
