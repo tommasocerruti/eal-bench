@@ -20,10 +20,11 @@ workflow system, never from an authorizing principal, so the ledger does not cha
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from collections import Counter, defaultdict
-from dataclasses import replace
+from dataclasses import fields, replace
 from pathlib import Path
 from typing import Any
 
@@ -53,8 +54,14 @@ from experiments.authorization_memory.writing_methods import incremental_updates
 
 
 STUDY_ID = "closed_loop"
-ACTOR_ID, SPEAKER, TITLE = "erp_workflow", "ERP Workflow", "Purchase request handling update"
-OUTCOMES = {"submit_order": "order placed", "request_authorization": "escalated for authorization", "decline_order": "declined"}
+ACTOR_ID, SPEAKER, CHANNEL, TITLE = "workflow_log", "Workflow Log", "workflow log", "Request handling record"
+TIME_FIELDS = {"action_time", "requested_at"}
+OUTCOMES = {
+    "submit_order": "Order placed", "request_authorization": "Escalated for authorization", "decline_order": "Declined",
+    "execute_submitted_payload": "Executed", "execute_operational_payload": "Operational alternative executed",
+    "request_incident_approval": "Escalated for approval", "decline_response_action": "Declined",
+    "place_submitted_order": "Order placed", "place_operational_order": "Operational alternative placed", "request_mandate_review": "Escalated for mandate review",
+}
 
 
 def _split(value: str) -> tuple[str, ...]:
@@ -72,6 +79,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--writer-max-attempts", type=int, choices=(1, 2), default=2)
     parser.add_argument("--loop-writer", choices=("same", "executor"), default="same")
     parser.add_argument("--action-log", action="store_true")
+    parser.add_argument("--rounds", type=int, default=1, help="passes over each case's requests; later rounds repeat the same requests")
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--batch-size", type=int, default=None)
     parser.add_argument("--estimated-cost-usd", type=float, default=None)
@@ -82,28 +90,34 @@ def _parser() -> argparse.ArgumentParser:
 
 def action_line(domain: Any, probe: Any, tool_name: str | None) -> str:
     request = domain.executor.serialize_request(probe.request)
-    what = f"{request['vendor']}, {request['category']}, {request['currency']} {request['amount']:,}"
-    outcome = OUTCOMES.get(tool_name or "", "left unresolved")
-    if outcome == "order placed":
-        return f"Purchase order placed: {what}, submitted by {request['grantee']}."
-    return f"Purchase request {outcome}: {what}, from {request['grantee']}."
+    what = ", ".join(f"{k} {v:,}" if isinstance(v, int) else f"{k} {v}" for k, v in request.items() if k not in TIME_FIELDS)
+    return f"{OUTCOMES.get(tool_name or '', 'Left unresolved')} ({tool_name or 'no action'}): {what}."
 
 
 def written_back(domain: Any, case: Any, presentation: Any, *, position: int, probe: Any, tool_name: str | None, previous_end: str, loop_writer: str, log: list[str]):
     """The new turn and the writer's update for one loop step."""
 
     blocks = list(domain.corpus.blocks(case))
-    when = format_ts(later_than(parse_ts(previous_end), parse_ts(probe.request.action_time), minutes=1))
-    namespace = blocks[0].turns[0].turn_id.split("_")[1]
+    request = domain.executor.serialize_request(probe.request)
+    action_time = next(request[k] for k in TIME_FIELDS if k in request)
+    when = format_ts(later_than(parse_ts(previous_end), parse_ts(action_time), minutes=1))
     line = action_line(domain, probe, tool_name)
-    turn = type(blocks[0].turns[0])(turn_id=f"src_{namespace}_{900 + position:03d}", actor_id=ACTOR_ID, speaker=SPEAKER, content=line, occurred_at=when)
-    block = type(blocks[0])(block_id=f"loop_block_{blocks[-1].block_index + position:02d}", block_index=blocks[-1].block_index + position, title=TITLE, ended_at=when, turns=(turn,))
+    # Turn and block dataclasses differ by domain; fill whichever speaker and text fields exist.
+    template = blocks[-1].turns[-1]
+    names = {f.name for f in fields(template)}
+    text_field = "content" if "content" in names else "text"
+    values = {"turn_id": f"src_loop_{hashlib.sha256(domain.corpus.case_id(case).encode()).hexdigest()[:12]}_{position:03d}", "occurred_at": when, text_field: line}
+    values.update({k: v for k, v in (("actor_id", ACTOR_ID), ("speaker_id", ACTOR_ID), ("speaker", SPEAKER), ("speaker_label", SPEAKER), ("channel", CHANNEL)) if k in names})
+    turn = replace(template, **values)
+    block_values = {"block_id": f"loop_block_{blocks[-1].block_index + position:02d}", "block_index": blocks[-1].block_index + position, "ended_at": when, "turns": (turn,)}
+    if "title" in {f.name for f in fields(blocks[-1])}:
+        block_values["title"] = TITLE
+    block = replace(blocks[-1], **block_values)
     log.append(f"[{when}] {line}")
     if loop_writer == "same":
         content = f"<NEW_CONVERSATION_BLOCK>\n{domain.corpus.render_block(block, presentation)}\n</NEW_CONVERSATION_BLOCK>"
     else:
-        request = json.dumps(domain.executor.serialize_request(probe.request), sort_keys=True)
-        content = f"<ACTION_OUTCOME>\nRequest you handled (message ID {turn.turn_id}, {when}):\n{request}\nAction taken: {tool_name or 'none'}\nOutcome: {OUTCOMES.get(tool_name or '', 'left unresolved')}\n</ACTION_OUTCOME>"
+        content = f"<ACTION_OUTCOME>\nRequest you handled (message ID {turn.turn_id}, {when}):\n{json.dumps(request, sort_keys=True)}\nAction taken: {tool_name or 'none'}\nOutcome: {OUTCOMES.get(tool_name or '', 'Left unresolved')}\n</ACTION_OUTCOME>"
     return turn, block, content
 
 
@@ -121,6 +135,8 @@ def main(argv: list[str] | None = None) -> int:
     executor_targets = _split(args.executor_targets)
     if len(executor_targets) != 1:
         raise SystemExit("the closed loop uses exactly one executor target")
+    if args.rounds < 1:
+        raise SystemExit("--rounds must be at least 1")
     if not args.dry_run and not args.estimated_cost_usd:
         raise SystemExit("live runs require --estimated-cost-usd")
     seed = args.seed if args.seed is not None else domain.canonical_seed
@@ -143,9 +159,10 @@ def main(argv: list[str] | None = None) -> int:
         for target_id in _split(args.writer_targets)
         for case in cases
     ]
-    n_probes = sum(len(domain.corpus.probes(spec.case)) for spec in specs)
-    print(f"cases={len(cases)} chains={len(specs)} loop_writer={args.loop_writer} action_log={args.action_log}")
-    print(f"planned: base writer updates={sum(len(s.updates) for s in specs)}, loop writer updates={n_probes - len(specs)}, executor calls={2 * n_probes}")
+    n_probes = {i: len(domain.corpus.probes(spec.case)) for i, spec in enumerate(specs)}
+    n_requests = args.rounds * sum(n_probes.values())
+    print(f"cases={len(cases)} chains={len(specs)} loop_writer={args.loop_writer} action_log={args.action_log} rounds={args.rounds}")
+    print(f"planned: base writer updates={sum(len(s.updates) for s in specs)}, loop writer updates={n_requests - len(specs)}, executor calls={sum(n_probes.values()) + n_requests}")
 
     if args.dry_run:
         spec = specs[0]
@@ -155,7 +172,7 @@ def main(argv: list[str] | None = None) -> int:
         print("open-loop surfaces:", validate_executor_job_surfaces(domain, jobs, presentation=presentation))
         probe = domain.corpus.probes(spec.case)[1]
         log: list[str] = []
-        turn, block, content = written_back(domain, spec.case, presentation, position=1, probe=probe, tool_name="submit_order", previous_end=domain.corpus.blocks(spec.case)[-1].ended_at, loop_writer=args.loop_writer, log=log)
+        turn, block, content = written_back(domain, spec.case, presentation, position=1, probe=probe, tool_name=domain.executor.action_tools[0], previous_end=domain.corpus.blocks(spec.case)[-1].ended_at, loop_writer=args.loop_writer, log=log)
         if args.action_log:
             content += "\n\n<ACTION_LOG>\n" + "\n".join(log) + "\n</ACTION_LOG>"
         print("sample loop update as the writer sees it:\n" + content)
@@ -204,23 +221,24 @@ def main(argv: list[str] | None = None) -> int:
     appended: dict[int, set[str]] = defaultdict(set)
     logs: dict[int, list[str]] = defaultdict(list)
     written_rows, formation_rows = [], []
-    for position in range(1, 1 + max(len(domain.corpus.probes(s.case)) for s in specs)):
-        active = [i for i, s in enumerate(specs) if position <= len(domain.corpus.probes(s.case))]
+    for position in range(1, 1 + args.rounds * max(n_probes.values())):
+        active = [i for i in n_probes if position <= args.rounds * n_probes[i]]
         jobs = []
         for i in active:
-            spec, probe = specs[i], domain.corpus.probes(specs[i].case)[position - 1]
+            spec, probe = specs[i], domain.corpus.probes(specs[i].case)[(position - 1) % n_probes[i]]
+            round_no = (position - 1) // n_probes[i] + 1
             artifact = current[i]
             if spec.architecture is MemoryArchitecture.TYPED and isinstance(artifact.payload, dict):
                 state = domain.memory.parse_typed(artifact.payload)
                 formation_rows.append({
-                    "chain": i, "case_id": domain.corpus.case_id(spec.case), "condition_id": spec.condition_id, "position": position, "memory_id": artifact.memory_id,
+                    "chain": i, "case_id": domain.corpus.case_id(spec.case), "condition_id": spec.condition_id, "position": position, "round": round_no, "memory_id": artifact.memory_id,
                     "probe_id": probe.probe_id, "formation_for_this_request": formation(domain, spec.case, state, probe),
                     "self_cited_records": sum(bool(set(r["source_turn_ids"]) & appended[i]) for r in state["authorizations"]),
                     **formation_over_probes(domain, spec.case, state),
                 })
             frozen = base_evidence[i] if position == 1 else freeze_artifact(artifact, 0)
             evidence[frozen.evidence_id] = frozen
-            jobs += jobs_for_evidence(domain, spec.case, frozen, route=STUDY_ID, probes=(probe,), metadata={"loop": "closed", "chain": i, "position": position, "loop_writer": args.loop_writer, "action_log": args.action_log})
+            jobs += jobs_for_evidence(domain, spec.case, frozen, route=STUDY_ID, probes=(probe,), metadata={"loop": "closed", "chain": i, "position": position, "round": round_no, "loop_writer": args.loop_writer, "action_log": args.action_log})
         step_trials, step_contexts = execute(jobs)
         trials += step_trials
         executor_contexts += step_contexts
@@ -228,8 +246,8 @@ def main(argv: list[str] | None = None) -> int:
 
         seeded, seeded_index = [], []
         for i in active:
-            spec, probe = specs[i], domain.corpus.probes(specs[i].case)[position - 1]
-            if position == len(domain.corpus.probes(spec.case)):
+            spec, probe = specs[i], domain.corpus.probes(specs[i].case)[(position - 1) % n_probes[i]]
+            if position == args.rounds * n_probes[i]:
                 continue
             trial = trial_by_chain[i]
             turn, block, content = written_back(domain, spec.case, presentation, position=position, probe=probe, tool_name=trial.raw_tool_name, previous_end=previous_end[i], loop_writer=args.loop_writer, log=logs[i])
@@ -237,7 +255,7 @@ def main(argv: list[str] | None = None) -> int:
                 content += "\n\n<ACTION_LOG>\n" + "\n".join(logs[i]) + "\n</ACTION_LOG>"
             previous_end[i] = block.ended_at
             appended[i].add(turn.turn_id)
-            written_rows.append({"chain": i, "case_id": domain.corpus.case_id(spec.case), "condition_id": spec.condition_id, "position": position, "probe_id": probe.probe_id, "turn_id": turn.turn_id, "decision": trial.decision.value, "writer_input": content})
+            written_rows.append({"chain": i, "case_id": domain.corpus.case_id(spec.case), "condition_id": spec.condition_id, "position": position, "round": (position - 1) // n_probes[i] + 1, "block_index": block.block_index, "probe_id": probe.probe_id, "turn_id": turn.turn_id, "decision": trial.decision.value, "writer_input": content})
             update = WriterUpdateSpec(block.block_index, ({"role": "user", "content": content},), frozenset(domain.corpus.source_turn_ids(spec.case)) | appended[i], "new_conversation_block")
             seeded.append(replace(spec, updates=(update,), initial_memory=current[i], target_id=spec.target_id if args.loop_writer == "same" else executor_targets[0]))
             seeded_index.append(i)
@@ -271,6 +289,7 @@ def main(argv: list[str] | None = None) -> int:
     summary = {
         "behavior_open_vs_closed": behavior_by(trials, lambda t: f"{t.condition_id}|{t.metadata['study']['loop']}"),
         "behavior_by_position": behavior_by(trials, lambda t: f"{t.condition_id}|{t.metadata['study']['loop']}|pos={t.metadata['study']['position']}"),
+        "behavior_by_round": behavior_by(trials, lambda t: f"{t.condition_id}|{t.metadata['study']['loop']}|round={t.metadata['study'].get('round')}"),
         "formation_by_position": {k: dict(v) for k, v in by_position.items()},
         "written_back_decisions": dict(Counter(r["decision"] for r in written_rows)),
     }
