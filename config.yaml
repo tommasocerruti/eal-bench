@@ -119,9 +119,9 @@ model_targets:
     model: zai-org/GLM-5.3-Flash
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
-  glm_4_7_baseten:
+  inkling_baseten:
     provider: baseten
-    model: zai-org/GLM-4.7
+    model: thinkingmachines/inkling
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
 
