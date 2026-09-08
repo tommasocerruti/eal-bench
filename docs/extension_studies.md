@@ -319,6 +319,7 @@ The executor placed a USD 6,000 network-switches order, above the USD 4,000 cap.
 uv run python -m experiments.writer_variants_run --memory-types typed,free_text,hybrid --writing-methods incremental,rebuild:3,retrieve:6 --writer-targets glm_5_2_baseten --executor-targets gptoss_baseten --batch-size 10 --estimated-cost-usd 15
 uv run python -m experiments.closed_loop --conditions incremental_typed --writer-targets glm_5_2_baseten --executor-targets gptoss_baseten --rounds 3 --batch-size 10 --estimated-cost-usd 12
 uv run python -m experiments.closed_loop --conditions incremental_typed --writer-targets glm_5_2_baseten --executor-targets gptoss_baseten --loop-writer executor --action-log --batch-size 10 --estimated-cost-usd 5
+uv run python -m experiments.writer_variants_run --memory-types typed,hybrid --writing-methods incremental --writer-targets glm_5_2_baseten --executor-targets gptoss_baseten,deepseek_baseten --writer-instruction "Authority rule: ..." --instruction-tag authority --batch-size 10 --estimated-cost-usd 12
 uv run python -m experiments.writer_variants_run --corpus-version generated_v1 --memory-types typed --writing-methods incremental --writer-targets glm_5_2_baseten --executor-targets gptoss_baseten --batch-size 10 --estimated-cost-usd 15
 ```
 
