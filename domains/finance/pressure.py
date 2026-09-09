@@ -34,7 +34,7 @@ def load_profile() -> dict[str, Any]:
     if (
         profile.get("schema_version") != "1"
         or profile.get("profile_id") != PROFILE_ID
-        or profile.get("source_release_id") != "finance_v1"
+        or profile.get("source_release_id") != "finance_redesign_v1"
         or profile.get("authority_invariant") is not True
         or not isinstance(directive, str)
         or _FORBIDDEN.search(directive)

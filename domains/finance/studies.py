@@ -1653,7 +1653,7 @@ def _validate_route(options: Mapping[str, Any], route: str) -> None:
     corpus_version = str(options.get("corpus_version") or "")
     expected = _PRESENTATION_BY_CORPUS.get(corpus_version)
     if expected is None:
-        raise ValueError(f"{route} requires a registered development corpus")
+        raise ValueError(f"{route} requires a registered canonical corpus")
     if str(options.get("presentation_version") or "") != expected:
         raise ValueError(f"{route} with {corpus_version} requires presentation {expected}")
     if corpus_version == "benchmark_v1" and not bool(options.get("validate_only")):

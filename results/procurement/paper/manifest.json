@@ -1,0 +1,323 @@
+{
+  "schema_version": "paper_result_manifest_v1",
+  "domain_id": "procurement",
+  "release_id": "procurement_v1",
+  "paper": "https://arxiv.org/html/2609.01836v1#A2.SS2",
+  "tables": [
+    11,
+    12,
+    13
+  ],
+  "release": {
+    "path": "domains/procurement/release.json",
+    "sha256": "e031279388062a915416babd4fe9aa6502f88129f8ad5cc17118bb3d25f0f613"
+  },
+  "seeds": [
+    20260719,
+    20260821,
+    20260822
+  ],
+  "writer_targets": [
+    "nemotron_3_ultra_baseten",
+    "kimi_baseten",
+    "glm_5_2_baseten",
+    "grok_4_3_openrouter",
+    "qwen_plus_0728_openrouter"
+  ],
+  "executor_targets": [
+    "gptoss_baseten",
+    "deepseek_baseten"
+  ],
+  "authorized_trials_per_writer_condition": 72,
+  "selection": "Five paper writers; generated_final ordinary trials; all outcomes retained.",
+  "metric": "exact_request_unauthorized_submission",
+  "sources": {
+    "original-nemotron_3_ultra_baseten": {
+      "format": "trials_v5",
+      "path": "results/procurement/20260809-005257-869522__authorization-memory-writer__procurement-v1-transfer-nemotron-3-ultra/manifest.json",
+      "sha256": "27887bef43b5503b58e34189c7895026060699e3884d3ef60c35d5ae47b069cf"
+    },
+    "original-kimi_baseten": {
+      "format": "trials_v5",
+      "path": "results/procurement/20260809-112937-803837__authorization-memory-writer__procurement-v1-transfer-kimi-k2-6-technical-completion/manifest.json",
+      "sha256": "cef1110b350e4a3a741452689560899427cb7210ea5998d705ff123110e5b3fc"
+    },
+    "original-glm_5_2_baseten": {
+      "format": "trials_v5",
+      "path": "results/procurement/20260809-011450-878789__authorization-memory-writer__procurement-v1-transfer-glm-5-2/manifest.json",
+      "sha256": "6f110d72fb35a352e99e674337d72a0d65e309b99f373b1443e71297794292bf"
+    },
+    "original-grok_4_3_openrouter": {
+      "format": "trials_v5",
+      "path": "results/procurement/20260809-010130-962971__authorization-memory-writer__procurement-v1-transfer-grok-4-3/manifest.json",
+      "sha256": "d361aadafe52ee431207bb047ef8533acc4e9b55ca2d1f7190006b271edabd95"
+    },
+    "original-qwen_plus_0728_openrouter": {
+      "format": "trials_v5",
+      "path": "results/procurement/20260809-124843-399194__authorization-memory-writer__procurement-v1-transfer-qwen-plus-0728/manifest.json",
+      "sha256": "fb9f85a60de65e2eebffa46077723327a864ab7e8621ba23cb01fd5aa61c2377"
+    },
+    "replication": {
+      "format": "grouped_route_counts_v1",
+      "path": "results/primary_writer_replication/phase2_results.json",
+      "sha256": "fb625e357f4457ecd3025e7427f81b29da286bca041865d9eea8c6023fd3246b"
+    }
+  },
+  "routes": [
+    {
+      "route_id": "procurement-s20260719-nemotron_3_ultra_baseten",
+      "domain_id": "procurement",
+      "seed": 20260719,
+      "writer_target": "nemotron_3_ultra_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/procurement/20260809-005257-869522__authorization-memory-writer__procurement-v1-transfer-nemotron-3-ultra/manifest.json",
+        "sha256": "27887bef43b5503b58e34189c7895026060699e3884d3ef60c35d5ae47b069cf"
+      },
+      "source_id": "original-nemotron_3_ultra_baseten"
+    },
+    {
+      "route_id": "procurement-s20260719-kimi_baseten",
+      "domain_id": "procurement",
+      "seed": 20260719,
+      "writer_target": "kimi_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/procurement/20260809-112937-803837__authorization-memory-writer__procurement-v1-transfer-kimi-k2-6-technical-completion/manifest.json",
+        "sha256": "cef1110b350e4a3a741452689560899427cb7210ea5998d705ff123110e5b3fc"
+      },
+      "source_id": "original-kimi_baseten"
+    },
+    {
+      "route_id": "procurement-s20260719-glm_5_2_baseten",
+      "domain_id": "procurement",
+      "seed": 20260719,
+      "writer_target": "glm_5_2_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/procurement/20260809-011450-878789__authorization-memory-writer__procurement-v1-transfer-glm-5-2/manifest.json",
+        "sha256": "6f110d72fb35a352e99e674337d72a0d65e309b99f373b1443e71297794292bf"
+      },
+      "source_id": "original-glm_5_2_baseten"
+    },
+    {
+      "route_id": "procurement-s20260719-grok_4_3_openrouter",
+      "domain_id": "procurement",
+      "seed": 20260719,
+      "writer_target": "grok_4_3_openrouter",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/procurement/20260809-010130-962971__authorization-memory-writer__procurement-v1-transfer-grok-4-3/manifest.json",
+        "sha256": "d361aadafe52ee431207bb047ef8533acc4e9b55ca2d1f7190006b271edabd95"
+      },
+      "source_id": "original-grok_4_3_openrouter"
+    },
+    {
+      "route_id": "procurement-s20260719-qwen_plus_0728_openrouter",
+      "domain_id": "procurement",
+      "seed": 20260719,
+      "writer_target": "qwen_plus_0728_openrouter",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/procurement/20260809-124843-399194__authorization-memory-writer__procurement-v1-transfer-qwen-plus-0728/manifest.json",
+        "sha256": "fb9f85a60de65e2eebffa46077723327a864ab7e8621ba23cb01fd5aa61c2377"
+      },
+      "source_id": "original-qwen_plus_0728_openrouter"
+    },
+    {
+      "route_id": "procurement-s20260821-nemotron_3_ultra_baseten",
+      "domain_id": "procurement",
+      "seed": 20260821,
+      "writer_target": "nemotron_3_ultra_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/procurement/20260821-061339-382144__authorization-memory-writer__phase2-primary-s20260821-procurement-nemotron/manifest.json",
+        "sha256": "720bce2043be3a607cd355d1a0945460dfa6005780fe6fe673fb758e85e381fd"
+      },
+      "source_id": "replication",
+      "source_row": 5
+    },
+    {
+      "route_id": "procurement-s20260821-kimi_baseten",
+      "domain_id": "procurement",
+      "seed": 20260821,
+      "writer_target": "kimi_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/procurement/20260821-062114-348261__authorization-memory-writer__phase2-primary-s20260821-procurement-kimi/manifest.json",
+        "sha256": "4d59448b5d0b8ef230af82bf8e1c49f19b58a1eab04bdce9e1a5c7f7f77e177e"
+      },
+      "source_id": "replication",
+      "source_row": 6
+    },
+    {
+      "route_id": "procurement-s20260821-glm_5_2_baseten",
+      "domain_id": "procurement",
+      "seed": 20260821,
+      "writer_target": "glm_5_2_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/procurement/20260821-062752-002072__authorization-memory-writer__phase2-primary-s20260821-procurement-glm/manifest.json",
+        "sha256": "40c17b81c8c76216b545cbdc0365515f58a497231afa493a809757f17a46605c"
+      },
+      "source_id": "replication",
+      "source_row": 7
+    },
+    {
+      "route_id": "procurement-s20260821-grok_4_3_openrouter",
+      "domain_id": "procurement",
+      "seed": 20260821,
+      "writer_target": "grok_4_3_openrouter",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/procurement/20260821-064314-894193__authorization-memory-writer__phase2-primary-s20260821-procurement-grok/manifest.json",
+        "sha256": "130fb7fda43897bc991c476810089e3e41a60682b29eb45a2bb980ae8bbf70b2"
+      },
+      "source_id": "replication",
+      "source_row": 8
+    },
+    {
+      "route_id": "procurement-s20260821-qwen_plus_0728_openrouter",
+      "domain_id": "procurement",
+      "seed": 20260821,
+      "writer_target": "qwen_plus_0728_openrouter",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/procurement/20260821-065105-762467__authorization-memory-writer__phase2-primary-s20260821-procurement-qwen/manifest.json",
+        "sha256": "e07fdecf957eb3335da969920051d446f8986f811191d0abe936375a767fe61e"
+      },
+      "source_id": "replication",
+      "source_row": 9
+    },
+    {
+      "route_id": "procurement-s20260822-nemotron_3_ultra_baseten",
+      "domain_id": "procurement",
+      "seed": 20260822,
+      "writer_target": "nemotron_3_ultra_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/procurement/20260821-133054-743320__authorization-memory-writer__phase2-primary-s20260822-procurement-nemotron/manifest.json",
+        "sha256": "4f5706f47bae45a817c00b1049e9bd8477bb1956c66d99a626217d804c11255a"
+      },
+      "source_id": "replication",
+      "source_row": 20
+    },
+    {
+      "route_id": "procurement-s20260822-kimi_baseten",
+      "domain_id": "procurement",
+      "seed": 20260822,
+      "writer_target": "kimi_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/procurement/20260821-133859-479640__authorization-memory-writer__phase2-primary-s20260822-procurement-kimi/manifest.json",
+        "sha256": "3fd698bde4aeee1536293f2ffd8f0426a09ad30e91c85ac279c6d2baf31641af"
+      },
+      "source_id": "replication",
+      "source_row": 21
+    },
+    {
+      "route_id": "procurement-s20260822-glm_5_2_baseten",
+      "domain_id": "procurement",
+      "seed": 20260822,
+      "writer_target": "glm_5_2_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/procurement/20260821-134620-064642__authorization-memory-writer__phase2-primary-s20260822-procurement-glm/manifest.json",
+        "sha256": "c88226162b6d507bbb617e27d25a409992adc7a9616703a8360f69aaa9eb1b98"
+      },
+      "source_id": "replication",
+      "source_row": 22
+    },
+    {
+      "route_id": "procurement-s20260822-grok_4_3_openrouter",
+      "domain_id": "procurement",
+      "seed": 20260822,
+      "writer_target": "grok_4_3_openrouter",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/procurement/20260821-140116-584312__authorization-memory-writer__phase2-primary-s20260822-procurement-grok/manifest.json",
+        "sha256": "0c3f76821a49e950af7ca8ed1ee1581e847cd25a85497a34da0b8e5796717fed"
+      },
+      "source_id": "replication",
+      "source_row": 23
+    },
+    {
+      "route_id": "procurement-s20260822-qwen_plus_0728_openrouter",
+      "domain_id": "procurement",
+      "seed": 20260822,
+      "writer_target": "qwen_plus_0728_openrouter",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/procurement/20260821-140936-583788__authorization-memory-writer__phase2-primary-s20260822-procurement-qwen/manifest.json",
+        "sha256": "8b2a07520c149a805993d0b5a4e785a6f7d3cdab80d6e501b80e8a46bd255943"
+      },
+      "source_id": "replication",
+      "source_row": 24
+    }
+  ],
+  "treatment": {
+    "corpus_version": "benchmark_v1",
+    "presentation_hash": "907945a6c03f738899e366e86cd54f6fbf8171fed9b88581dabcda97dda66b0d",
+    "memory_implementation_id": "langmem_profile",
+    "memory_implementation_hash": "bf9a1583ab4f3e70bf8e075b988a2149d9cb170c3443f3646964840193d5655a"
+  },
+  "counts": {
+    "path": "results/procurement/paper/counts.json",
+    "sha256": "9b365ddffd51ea6590b198ddafe2254410717cdc6812f2ba80658d71d5538df1"
+  },
+  "dataset_sources": [
+    {
+      "path": "domains/procurement/data/benchmark_v1.jsonl",
+      "sha256": "6d6dd48dfa9c11fd7b1ffbc5d145c98a4d0a00e5e0cb9e0e40399f1f8d0d1596"
+    },
+    {
+      "path": "domains/procurement/data/calibration_v1.jsonl",
+      "sha256": "fd4dcb51b2ea77f2eb6288016987c3144005f37fa572fb0f09c17c1fd4cc4c6f"
+    }
+  ]
+}

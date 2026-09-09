@@ -1,0 +1,351 @@
+{
+  "schema_version": "paper_result_manifest_v1",
+  "domain_id": "cybersecurity",
+  "release_id": "cybersecurity_v1",
+  "paper": "https://arxiv.org/html/2609.01836v1#A2.SS2",
+  "tables": [
+    11,
+    12,
+    13
+  ],
+  "release": {
+    "path": "domains/cybersecurity/release.json",
+    "sha256": "a6de16240f71c24bcc999cd4e06dbc9d12608c2087b38b64b1935296463aa6a6"
+  },
+  "seeds": [
+    20260812,
+    20260821,
+    20260822
+  ],
+  "writer_targets": [
+    "nemotron_3_ultra_baseten",
+    "kimi_baseten",
+    "glm_5_2_baseten",
+    "grok_4_3_openrouter",
+    "qwen_plus_0728_openrouter"
+  ],
+  "executor_targets": [
+    "gptoss_baseten",
+    "deepseek_baseten"
+  ],
+  "authorized_trials_per_writer_condition": 128,
+  "selection": "Five paper writers; generated_final ordinary trials; all outcomes retained.",
+  "metric": "exact_request_unauthorized_submission",
+  "sources": {
+    "original-nemotron_3_ultra_baseten": {
+      "format": "trials_v5",
+      "path": "results/cybersecurity/20260809-135826-033358__authorization-memory-writer__cybersecurity-v1-transfer-nemotron-3-ultra/manifest.json",
+      "sha256": "02f3841ce1e41d0297f7af824523cb30dc293dd5f8567a05d84315f3cb91eee8"
+    },
+    "original-kimi_baseten": {
+      "format": "trials_v5",
+      "path": "results/cybersecurity/20260809-144838-075045__authorization-memory-writer__cybersecurity-v1-transfer-kimi-k2-6/manifest.json",
+      "sha256": "b73fd87d97f58a1715d0a925ca05838077e454d3605946a82b7b1b4d88838ea1"
+    },
+    "original-glm_5_2_baseten": {
+      "format": "trials_v5",
+      "path": "results/cybersecurity/20260809-151724-779809__authorization-memory-writer__cybersecurity-v1-transfer-glm-5-2/manifest.json",
+      "sha256": "caf9386b9d3b103a890c7eff7a91e68f22d25ff4986e5321db5c2749e0706446"
+    },
+    "original-grok_4_3_openrouter": {
+      "format": "trials_v5",
+      "path": "results/cybersecurity/20260809-142320-393277__authorization-memory-writer__cybersecurity-v1-transfer-grok-4-3/manifest.json",
+      "sha256": "c5c305f3048b26310133eb30d0802395956560e5a3aabdcba3f1b4c614fe5526"
+    },
+    "original-qwen_plus_0728_openrouter": {
+      "format": "trials_v5",
+      "path": "results/cybersecurity/20260809-155214-731411__authorization-memory-writer__cybersecurity-v1-transfer-qwen-plus-0728/manifest.json",
+      "sha256": "647cef92324fa125842505eb49600ee44a766e4e9594168bf656e016200e9a0a"
+    },
+    "replication": {
+      "format": "grouped_route_counts_v1",
+      "path": "results/primary_writer_replication/phase2_results.json",
+      "sha256": "fb625e357f4457ecd3025e7427f81b29da286bca041865d9eea8c6023fd3246b"
+    }
+  },
+  "routes": [
+    {
+      "route_id": "cybersecurity-s20260812-nemotron_3_ultra_baseten",
+      "domain_id": "cybersecurity",
+      "seed": 20260812,
+      "writer_target": "nemotron_3_ultra_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/cybersecurity/20260809-135826-033358__authorization-memory-writer__cybersecurity-v1-transfer-nemotron-3-ultra/manifest.json",
+        "sha256": "02f3841ce1e41d0297f7af824523cb30dc293dd5f8567a05d84315f3cb91eee8"
+      },
+      "source_id": "original-nemotron_3_ultra_baseten"
+    },
+    {
+      "route_id": "cybersecurity-s20260812-kimi_baseten",
+      "domain_id": "cybersecurity",
+      "seed": 20260812,
+      "writer_target": "kimi_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/cybersecurity/20260809-144838-075045__authorization-memory-writer__cybersecurity-v1-transfer-kimi-k2-6/manifest.json",
+        "sha256": "b73fd87d97f58a1715d0a925ca05838077e454d3605946a82b7b1b4d88838ea1"
+      },
+      "source_id": "original-kimi_baseten"
+    },
+    {
+      "route_id": "cybersecurity-s20260812-glm_5_2_baseten",
+      "domain_id": "cybersecurity",
+      "seed": 20260812,
+      "writer_target": "glm_5_2_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/cybersecurity/20260809-151724-779809__authorization-memory-writer__cybersecurity-v1-transfer-glm-5-2/manifest.json",
+        "sha256": "caf9386b9d3b103a890c7eff7a91e68f22d25ff4986e5321db5c2749e0706446"
+      },
+      "source_id": "original-glm_5_2_baseten"
+    },
+    {
+      "route_id": "cybersecurity-s20260812-grok_4_3_openrouter",
+      "domain_id": "cybersecurity",
+      "seed": 20260812,
+      "writer_target": "grok_4_3_openrouter",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/cybersecurity/20260809-142320-393277__authorization-memory-writer__cybersecurity-v1-transfer-grok-4-3/manifest.json",
+        "sha256": "c5c305f3048b26310133eb30d0802395956560e5a3aabdcba3f1b4c614fe5526"
+      },
+      "source_id": "original-grok_4_3_openrouter"
+    },
+    {
+      "route_id": "cybersecurity-s20260812-qwen_plus_0728_openrouter",
+      "domain_id": "cybersecurity",
+      "seed": 20260812,
+      "writer_target": "qwen_plus_0728_openrouter",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/cybersecurity/20260809-155214-731411__authorization-memory-writer__cybersecurity-v1-transfer-qwen-plus-0728/manifest.json",
+        "sha256": "647cef92324fa125842505eb49600ee44a766e4e9594168bf656e016200e9a0a"
+      },
+      "source_id": "original-qwen_plus_0728_openrouter"
+    },
+    {
+      "route_id": "cybersecurity-s20260821-nemotron_3_ultra_baseten",
+      "domain_id": "cybersecurity",
+      "seed": 20260821,
+      "writer_target": "nemotron_3_ultra_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/cybersecurity/20260821-101143-561665__authorization-memory-writer__phase2-primary-s20260821-cybersecurity-nemotron/manifest.json",
+        "sha256": "038c54bdc15a879b95ffbc0a64976a236ab5ec6d502afa466d894dde265c4519"
+      },
+      "source_id": "replication",
+      "source_row": 10
+    },
+    {
+      "route_id": "cybersecurity-s20260821-kimi_baseten",
+      "domain_id": "cybersecurity",
+      "seed": 20260821,
+      "writer_target": "kimi_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/cybersecurity/20260821-102811-045213__authorization-memory-writer__phase2-primary-s20260821-cybersecurity-kimi/manifest.json",
+        "sha256": "eaa431ce61b3c0f3d8c01f24b664f67ded832bc9fbe9cf52314a7271eb15422d"
+      },
+      "source_id": "replication",
+      "source_row": 11
+    },
+    {
+      "route_id": "cybersecurity-s20260821-glm_5_2_baseten",
+      "domain_id": "cybersecurity",
+      "seed": 20260821,
+      "writer_target": "glm_5_2_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/cybersecurity/20260821-104828-524206__authorization-memory-writer__phase2-primary-s20260821-cybersecurity-glm/manifest.json",
+        "sha256": "6eee8382d8a5c416705160de07e09aa3554dcd9317da94e4144d45a8b36504d1"
+      },
+      "source_id": "replication",
+      "source_row": 12
+    },
+    {
+      "route_id": "cybersecurity-s20260821-grok_4_3_openrouter",
+      "domain_id": "cybersecurity",
+      "seed": 20260821,
+      "writer_target": "grok_4_3_openrouter",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/cybersecurity/20260821-112930-458027__authorization-memory-writer__phase2-primary-s20260821-cybersecurity-grok/manifest.json",
+        "sha256": "a99c90719839ba59d6d93d80adcdf318440220df8182a116bb5fb8a3ff9bafc7"
+      },
+      "source_id": "replication",
+      "source_row": 13
+    },
+    {
+      "route_id": "cybersecurity-s20260821-qwen_plus_0728_openrouter",
+      "domain_id": "cybersecurity",
+      "seed": 20260821,
+      "writer_target": "qwen_plus_0728_openrouter",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/cybersecurity/20260821-114704-624775__authorization-memory-writer__phase2-primary-s20260821-cybersecurity-qwen/manifest.json",
+        "sha256": "c7380fd1ed91fa919adebe32b3220a84a11414fe4b271c2580b71723bac4b960"
+      },
+      "source_id": "replication",
+      "source_row": 14
+    },
+    {
+      "route_id": "cybersecurity-s20260822-nemotron_3_ultra_baseten",
+      "domain_id": "cybersecurity",
+      "seed": 20260822,
+      "writer_target": "nemotron_3_ultra_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/cybersecurity/20260821-142152-937588__authorization-memory-writer__phase2-primary-s20260822-cybersecurity-nemotron/manifest.json",
+        "sha256": "e5e7917ea9800fedc11e84b77a65982e7e541a490aa58502c8869967e3d774fc"
+      },
+      "source_id": "replication",
+      "source_row": 25
+    },
+    {
+      "route_id": "cybersecurity-s20260822-kimi_baseten",
+      "domain_id": "cybersecurity",
+      "seed": 20260822,
+      "writer_target": "kimi_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/cybersecurity/20260821-143900-977426__authorization-memory-writer__phase2-primary-s20260822-cybersecurity-kimi/manifest.json",
+        "sha256": "c1564892aa51d0c6029aec46eaa0db8a51985f81f6d5c4ef6cff35219b26170e"
+      },
+      "source_id": "replication",
+      "source_row": 26
+    },
+    {
+      "route_id": "cybersecurity-s20260822-glm_5_2_baseten",
+      "domain_id": "cybersecurity",
+      "seed": 20260822,
+      "writer_target": "glm_5_2_baseten",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/cybersecurity/20260821-150407-548613__authorization-memory-writer__phase2-primary-s20260822-cybersecurity-glm/manifest.json",
+        "sha256": "6527211c7230bf5a445920e93021684713a5fe204588f461bb4ea0950e874a12"
+      },
+      "source_id": "replication",
+      "source_row": 27
+    },
+    {
+      "route_id": "cybersecurity-s20260822-grok_4_3_openrouter",
+      "domain_id": "cybersecurity",
+      "seed": 20260822,
+      "writer_target": "grok_4_3_openrouter",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/cybersecurity/20260821-154203-028951__authorization-memory-writer__phase2-primary-s20260822-cybersecurity-grok/manifest.json",
+        "sha256": "5cb7132e617cc21bfb2cae0339d8813814b635fce48b1524e174b071e4c7a6be"
+      },
+      "source_id": "replication",
+      "source_row": 28
+    },
+    {
+      "route_id": "cybersecurity-s20260822-qwen_plus_0728_openrouter",
+      "domain_id": "cybersecurity",
+      "seed": 20260822,
+      "writer_target": "qwen_plus_0728_openrouter",
+      "executor_targets": [
+        "gptoss_baseten",
+        "deepseek_baseten"
+      ],
+      "manifest": {
+        "path": "results/cybersecurity/20260821-155816-454157__authorization-memory-writer__phase2-primary-s20260822-cybersecurity-qwen/manifest.json",
+        "sha256": "a5535002edbad23c48c42b133863d0b792e282b4d6e3db217a1dbe80d2e2c377"
+      },
+      "source_id": "replication",
+      "source_row": 29
+    }
+  ],
+  "treatment": {
+    "corpus_version": "benchmark_v1",
+    "presentation_hash": "e46b8ffa20c275d467504b8d48221fd7879c4c36fc2da38376be6fe01b333512",
+    "memory_implementation_id": "langmem_profile",
+    "memory_implementation_hash": "bd98a82055492a8311fb5b1d93a31bbede967762b79fa3696bb00f1e658ece03"
+  },
+  "counts": {
+    "path": "results/cybersecurity/paper/counts.json",
+    "sha256": "79174370914c71da462209d42f6fc9f95c796e175f17da981fca66498c338fda"
+  },
+  "dataset_sources": [
+    {
+      "path": "domains/cybersecurity/corpus_v3/benchmark_v1_base.yaml",
+      "sha256": "3626c3aef57e53bb2718f2bd1c35e68169be150089d56ac328d8c987cba26f2c"
+    },
+    {
+      "path": "domains/cybersecurity/data/benchmark_v1_base.json",
+      "sha256": "4b6cb0ee7e880edf619fe0447993cd1462e8f9d4dceed0f5ace61f90489dab62"
+    },
+    {
+      "path": "domains/cybersecurity/compile_v3.py",
+      "sha256": "e10a3bd1bb75740bdbee543db560da26859ca1b6a2081bdf4e347f97b38c53c7"
+    },
+    {
+      "path": "domains/cybersecurity/corpus_v3.py",
+      "sha256": "9af2797ff5c42b370229d6496711e1d885684e709a95a3f60e2b341f5357ad00"
+    },
+    {
+      "path": "domains/cybersecurity/corpus_v7.py",
+      "sha256": "b113050b3abf8d9a54e67bd9cceb1a145ee525fdedf43c2493f6e73e5e2a5019"
+    },
+    {
+      "path": "domains/cybersecurity/corpus_v10.py",
+      "sha256": "ace3b242cff0fa845c71ea1caf92ad3f119f4b78f2b8567a36f56ca748db7282"
+    },
+    {
+      "path": "domains/cybersecurity/corpus_v11.py",
+      "sha256": "ed1affd83a2a1a0a342717ac5803b1e24eb2afbb15be17399beaea8ad1e06ed0"
+    },
+    {
+      "path": "domains/cybersecurity/corpus_v12.py",
+      "sha256": "798137d734db98ce06391c0287a709df725fa56721c972b0e3d72801f750e44f"
+    },
+    {
+      "path": "domains/cybersecurity/corpus_final.py",
+      "sha256": "d098df0de41510019c82d1effc0c797e62e91618560688d09a72bf0caf75e8e3"
+    }
+  ]
+}

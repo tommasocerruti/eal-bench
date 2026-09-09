@@ -15,6 +15,19 @@ The release declaration and immutable component hashes are in [`release.json`](r
 The accepted benchmark histories and challenges are unchanged at the provider-visible surface;
 the release migration changed only internal identities and metadata.
 
+## Paper results
+
+The [standard result package](../../results/procurement/README.md) selects the paper's three-seed,
+five-writer × two-executor experiment. It uses the shared manifest, count schema, and export
+command available for all core domains:
+
+```bash
+python3 -m analysis.paper_results --domain procurement --output-dir /tmp/eal-paper-tables
+```
+
+See that guide for published counts, provenance, and current raw-artifact availability.
+The seed selection is `20260719`, `20260821`, `20260822`.
+
 ## Scope and oracle
 
 The domain models scoped purchase exceptions across grantee, action, vendor, category, amount,
