@@ -28,6 +28,8 @@ def load_fixture(name: str) -> Any:
 def verify_resources() -> dict[str, Any]:
     """Resource identity must match the recorded snapshot for every domain."""
 
+    from experiments.authorization_memory.tokens import reference_tokenizer_name
+
     expected = load_fixture("resource_versions.json")
     mismatches: list[dict[str, Any]] = []
     checked = 0
@@ -35,11 +37,18 @@ def verify_resources() -> dict[str, Any]:
         domain = eval_resources.load_domain(domain_id)
         observed = eval_resources.describe(domain).to_dict()
         checked += 1
-        if observed != recorded:
+        # The snapshot was recorded under cl100k_base. An offline install counts with
+        # the regex fallback, which is a different identity on purpose, so compare the
+        # rest and require the field to name whichever tokenizer is active.
+        if observed.get("reference_tokenizer") != reference_tokenizer_name():
+            mismatches.append({"domain_id": domain_id, "fields": ["reference_tokenizer"]})
+        comparable = {k: v for k, v in observed.items() if k != "reference_tokenizer"}
+        expected_row = {k: v for k, v in recorded.items() if k != "reference_tokenizer"}
+        if comparable != expected_row:
             differing = sorted(
                 key
-                for key in set(observed) | set(recorded)
-                if observed.get(key) != recorded.get(key)
+                for key in set(comparable) | set(expected_row)
+                if comparable.get(key) != expected_row.get(key)
             )
             mismatches.append({"domain_id": domain_id, "fields": differing})
     if mismatches:
@@ -47,6 +56,7 @@ def verify_resources() -> dict[str, Any]:
     return {
         "status": "passed",
         "domains_checked": checked,
+        "reference_tokenizer": reference_tokenizer_name(),
         "protocol_id": eval_resources.PROTOCOL_ID,
         "scorer_id": eval_resources.SCORER_ID,
     }

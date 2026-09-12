@@ -119,7 +119,9 @@ installation with a cold cache and no network falls back to a regex counter, whi
 different counts.
 
 The policy is resolved once per process, so the counter and the name it reports can never
-disagree. `verify()` reports `reference_tokenizer`. The declared capacities were calibrated
+disagree, and the active tokenizer is part of `ResourceVersions`. A run counted with the
+fallback therefore has a different `resource_key` and the pooling guard refuses to combine it
+with a `cl100k_base` run. `verify()` reports `reference_tokenizer`. The declared capacities were calibrated
 with `cl100k_base`, so enforcing them against the fallback would accept an oversized memory;
 warm the tiktoken cache before any run that enforces capacity.
 

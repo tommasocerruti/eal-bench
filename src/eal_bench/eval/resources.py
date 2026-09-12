@@ -36,6 +36,9 @@ class ResourceVersions:
     presentation_hash: str
     memory_implementation_id: str
     memory_implementation_hash: str
+    # Token counts decide what fits in a memory, so a run counted with the regex
+    # fallback is a different treatment from one counted with cl100k_base.
+    reference_tokenizer: str
     scorer_id: str = SCORER_ID
     protocol_id: str = PROTOCOL_ID
 
@@ -95,6 +98,7 @@ def describe(
         memory_implementation_manifest,
     )
     from experiments.authorization_memory.persistence import content_hash
+    from experiments.authorization_memory.tokens import reference_tokenizer_name
 
     presentation = resolve_presentation(domain, presentation_id)
     manifest = memory_implementation_manifest(domain)
@@ -107,4 +111,5 @@ def describe(
         presentation_hash=content_hash(presentation.to_dict()),
         memory_implementation_id=manifest["memory_implementation_id"],
         memory_implementation_hash=manifest["memory_implementation_hash"],
+        reference_tokenizer=reference_tokenizer_name(),
     )

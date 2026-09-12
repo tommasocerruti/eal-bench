@@ -10,6 +10,7 @@
       "presentation_hash": "e46b8ffa20c275d467504b8d48221fd7879c4c36fc2da38376be6fe01b333512",
       "presentation_id": "naturalistic_v1",
       "protocol_id": "eal_bench.eval/v1",
+      "reference_tokenizer": "cl100k_base",
       "scorer_id": "eal_bench.eval.scoring/v1"
     },
     "finance": {
@@ -22,6 +23,7 @@
       "presentation_hash": "2b4b9f2bb396a0d16b0db3b0e8c5ef1bde5a28df0959a422e88f992a513208b9",
       "presentation_id": "naturalistic_v1",
       "protocol_id": "eal_bench.eval/v1",
+      "reference_tokenizer": "cl100k_base",
       "scorer_id": "eal_bench.eval.scoring/v1"
     },
     "procurement": {
@@ -34,6 +36,7 @@
       "presentation_hash": "907945a6c03f738899e366e86cd54f6fbf8171fed9b88581dabcda97dda66b0d",
       "presentation_id": "naturalistic_v1",
       "protocol_id": "eal_bench.eval/v1",
+      "reference_tokenizer": "cl100k_base",
       "scorer_id": "eal_bench.eval.scoring/v1"
     }
   }
