@@ -55,9 +55,12 @@ outcome = score_response(truth, response)
 metrics = aggregate([outcome], track="controls")
 ```
 
-Report a failed provider call rather than dropping it:
+If you already call an OpenAI-compatible endpoint, hand the reply over directly. The same
+call also absorbs an exception raised in place of a reply, so a failed call is reported rather
+than dropped.
 
 ```python
+ModelResponse.from_openai(completion)
 ModelResponse.provider_error("timeout after 60s")
 ```
 

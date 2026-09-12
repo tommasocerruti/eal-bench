@@ -116,6 +116,32 @@ class ModelResponse:
     def provider_error(cls, detail: str) -> ModelResponse:
         return cls(error=detail)
 
+    @classmethod
+    def from_openai(cls, completion: Any) -> ModelResponse:
+        """Normalize an OpenAI-shaped reply, or an exception raised in its place.
+
+        Accepts the SDK object or the equivalent mapping. Uses the runner's own
+        readers, so a reply reaching the scorer through this path is read the same
+        way the experiment runner reads it.
+        """
+
+        from experiments.authorization_memory.pipeline import (
+            _finish_reason,
+            _response_model,
+            _response_text,
+            _response_tool_calls,
+            _tool_name_arguments,
+        )
+
+        if isinstance(completion, BaseException):
+            return cls.provider_error(f"{type(completion).__name__}: {completion}")
+        return cls.from_tool_calls(
+            [_tool_name_arguments(call) for call in _response_tool_calls(completion)],
+            text=_response_text(completion),
+            finish_reason=_finish_reason(completion),
+            model=_response_model(completion),
+        )
+
     def to_dict(self) -> dict[str, Any]:
         return {
             "tool_calls": [
