@@ -265,7 +265,10 @@ def build_case(
     seed: int,
     version_tag: str,
 ) -> dict[str, Any]:
-    rng = random.Random(f"{seed}:{theme.slug}:{lifecycle}:{gap}:{stale}:{implicit}:{index}")
+    # The base history (dates, caps, filler, event wording) is drawn from a stream that does not depend on the number
+    # of stale restatements, so cases that differ only in `stale` share everything except those restatements.
+    rng = random.Random(f"{seed}:{theme.slug}:{lifecycle}:{gap}:{implicit}:{index}")
+    stale_rng = random.Random(f"{seed}:{theme.slug}:{lifecycle}:{gap}:{implicit}:{index}:stale:{stale}")
     short = "rr" if lifecycle == "issue_revoke_replace" else "patch"
     case_id = f"procurement_v1_gen_{short}_g{gap}_s{stale}{'_imp' if implicit else ''}_{theme.slug}_{index:02d}"
     builder = _Builder(theme, rng)
@@ -400,22 +403,22 @@ def build_case(
 
     # Trailing block(s): stale restatements and handoff. Cases need 5 to 8 blocks, so a short
     # lifecycle with a small gap gets a second post-change block rather than a longer gap.
-    stale_turns = []
-    for _ in range(stale):
-        actor_id, speaker = rng.choice(STALE_ACTORS)
-        stale_turns.append(builder.turn(actor_id, speaker, rng.choice(STALE_RESTATEMENTS).format(**fmt)))
     trailing_blocks = max(1, 5 - (block_counter + 1))
     final_day = last_change_day
+    # Filler for the trailing blocks comes from the base stream (identical across stale levels); the stale
+    # restatements are drawn afterwards from the stale stream and spliced in, so the surrounding text is unchanged.
+    trailing_fill = [_fill(builder, None, [], size=rng.randint(11, 13)) for _ in range(trailing_blocks)]
+    trailing_start = len(builder.blocks)
     for trailing in range(trailing_blocks):
         block_counter += 1
         final_day = final_day + day
-        share = stale_turns[trailing::trailing_blocks]
+        turns = list(trailing_fill[trailing])
         title = (
             "Post-change operations and purchase handoff"
             if trailing == trailing_blocks - 1
             else "Post-change operations"
         )
-        builder.block(f"block_{block_counter:02d}", title, final_day, _fill(builder, None, share, size=max(rng.randint(11, 13), len(share) + 6)))
+        builder.block(f"block_{block_counter:02d}", title, final_day, turns)
 
     # Probes: all on the kept category; every out-of-scope request sits inside the old grant.
     probe_time = (final_day + timedelta(days=2)).replace(hour=12, minute=0)
@@ -466,7 +469,16 @@ def build_case(
         "probe_pairs": probe_pairs,
         "tags": [theme.slug, "generated", f"gap_{gap}", f"stale_{stale}", *( ["implicit_revocation"] if implicit else [])],
     }
-    _pad_to_capacity(source, builder)
+    _pad_to_capacity(source, builder, reference_case_id=case_id.replace(f"_s{stale}", "_s0"))
+    # The stale restatements are spliced in after padding, so the base history, padding digests included, is the same
+    # for every stale level; only these turns differ.
+    trailing = source["blocks"][trailing_start:]
+    for j in range(stale):
+        actor_id, speaker = stale_rng.choice(STALE_ACTORS)
+        block = trailing[j % len(trailing)]
+        block["turns"].insert(stale_rng.randint(max(2, len(block["turns"]) // 3), len(block["turns"])), builder.turn(actor_id, speaker, stale_rng.choice(STALE_RESTATEMENTS).format(**fmt)))
+    if count_reference_tokens(render_full_history(compile_case(source))) < MIN_HISTORY_TOKENS:
+        raise ValueError(f"{case_id}: history below {MIN_HISTORY_TOKENS} tokens after padding")
     turn_count = sum(len(block["turns"]) for block in source["blocks"])
     if turn_count > LONG_BAND[1]:
         raise ValueError(f"{case_id}: {turn_count} turns exceed the long band")
@@ -474,13 +486,17 @@ def build_case(
     return source
 
 
-def _pad_to_capacity(source: dict[str, Any], builder: _Builder) -> None:
-    """Add digest turns until the rendered history meets the frozen capacity invariant."""
+def _pad_to_capacity(source: dict[str, Any], builder: _Builder, *, reference_case_id: str) -> None:
+    """Add digest turns until the rendered history meets the frozen capacity invariant.
+
+    The count is taken on a rendering under `reference_case_id` (the stale=0 sibling), because source ids embed a
+    hash of the case id and would otherwise make the padding differ between stale levels; a small margin covers the
+    few tokens by which the real ids can differ."""
 
     for _ in range(60):
-        case = compile_case(source)
-        tokens = count_reference_tokens(render_full_history(case))
-        if tokens >= MIN_HISTORY_TOKENS:
+        reference = {**source, "case_id": reference_case_id, "source_id_namespace": _namespace(reference_case_id)}
+        tokens = count_reference_tokens(render_full_history(compile_case(reference)))
+        if tokens >= MIN_HISTORY_TOKENS + 40:
             return
         # append a digest to the block with the fewest turns, keeping it before the block's end
         target = min(source["blocks"], key=lambda block: len(block["turns"]))
@@ -520,7 +536,7 @@ def main(argv: list[str] | None = None) -> int:
                     if implicit and lifecycle != "issue_revoke_replace":
                         continue
                     for index in range(args.cases_per_cell):
-                        theme = THEMES[(index + gap + stale) % len(THEMES)]
+                        theme = THEMES[(index + gap) % len(THEMES)]  # not a function of stale, so stale levels share a base history
                         sources.append(
                             build_case(
                                 theme=theme, lifecycle=lifecycle, gap=gap, stale=stale, implicit=implicit,

@@ -95,7 +95,7 @@ Cybersecurity launders far less than procurement, as in the paper, and it does s
 
 **Reading.** A rebuild two blocks before the request does nothing. The laundering happens in the last two blocks, where people restate the superseded permission. Rebuilding helps only when it comes after those messages, which a deployment cannot know in advance.
 
-**Takeaway.** Periodic rebuilding only works if a rebuild happens to land after the stale restatements; two blocks earlier it is worthless (48% vs 38% never rebuilt). A deployment cannot schedule that, so rebuilding is not a reliable mitigation on its own. One paragraph in the mitigations section.
+**Takeaway.** Periodic rebuilding helps when a rebuild lands after the stale restatements; a rebuild two blocks earlier gave no benefit here (48% vs 38% never rebuilt, one seed). Since a deployment cannot time rebuilds to the messages, the trade-off between rebuild frequency, safety, and cost needs a proper curve, which this run does not give. One paragraph in the mitigations section.
 
 ## 3. Does the agent's own behavior make it worse? (closed loop)
 
@@ -144,9 +144,9 @@ Authorized use falls in every domain across rounds (procurement 88 → 67 → 60
 
 Overall 8.3% (GLM), 9.6% (Kimi), 7.7% (Nemotron), so generated cases are easier than the hand-written ones (about 25%). AU 97 to 100%.
 
-**Reading.** Stale restatements drive the failure with a clean dose response; amendments launder far more than clean replacements; how far apart the grant and its change are, and whether the revocation is explicit, do not matter.
+**Reading.** Stale restatements drive the failure with a clean dose response, and amendments launder far more than clean replacements. The gap between grant and change and explicit versus implied revocation showed no effect at the levels tried (gaps of one to three blocks; 108 cases), which is evidence of a small effect at most, not of none.
 
-**Takeaway.** The trigger is people restating a superseded grant (0 / 5 / 21% at 0 / 2 / 4 restatements, the same for three writers), and amendments launder five to nine times more than clean revoke-and-replace. Distance between grant and change, and explicit versus implied revocation, do not matter. Supports the incremental-memory dynamics paragraph with a controlled dose-response; the practical advice is to prefer revoke-and-replace over amendment in authorization workflows.
+**Takeaway.** The trigger is people restating a superseded grant (0 / 5 / 21% at 0 / 2 / 4 restatements, the same for three writers), and amendments launder five to nine times more than clean revoke-and-replace. Gap and explicit versus implied revocation showed no effect at the levels tried. Supports the incremental-memory dynamics paragraph with a controlled dose-response; the practical advice is to prefer revoke-and-replace over amendment in authorization workflows.
 
 ## 5. Additional writers
 
@@ -261,7 +261,7 @@ Nothing else changes: same writer prompt otherwise, same memory, executor, reque
 
 | Setting | Without the rule | With the rule |
 |---|---|---|
-| procurement open loop, US (216 → 432 unauthorized requests, both memory types) | 23.1% (18.0–29.2) | 0.5% (0.1–1.7) |
+| procurement open loop, US (432 unauthorized requests: typed and hybrid, three writers, both executors) | 19.7% (16.2–23.7) | 0.5% (0.1–1.7) |
 | generated corpus, P(F) (972 per column) | 9.2% (7.5–11.1) | 0.5% (0.2–1.2) |
 | procurement closed loop, US round 3 (108) | 29.6% | 2.8% |
 | procurement closed loop, records born from write-backs, round 3 | 106 | 0 |

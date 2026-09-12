@@ -182,22 +182,28 @@ def born_records(fh, domain, cases, presentation, chains, attempts, written_back
                     continue
                 seen.add(rid)
                 b = m["block_index"]
-                if existing and (chain_id, "record_born_from_action", None, "submitted", rid) in existing:
-                    continue
                 before = {k: v for k, v in mems[i - 1]["payload"].items() if k != "notes"} if i else domain.memory.empty_typed()
+                # A record whose id already existed before this write-back is not new: its citations were replaced
+                # with action-log references. Judge it as its own failure type rather than as a record born from actions.
+                prior_ids = {r.get("authorization_id") for r in domain.memory.parse_typed(before).get("authorizations", [])}
+                failure = "record_recited_from_action" if rid in prior_ids else "record_born_from_action"
+                if existing and (chain_id, failure, None, "submitted", rid) in existing:
+                    continue
                 block_attempts = sorted([a for a in attempts if a["case_id"] == case_id and a["condition_id"] == condition and a["block_index"] == b], key=lambda a: a["attempt_index"])
                 plan = "\n---\n".join(f"attempt {a['attempt_index']} ({a['status']}): {args_of(a).get('planned_edits', '')}" for a in block_attempts) or "(no attempt recorded)"
                 row = {"run": None, "domain": domain.domain_id, "case_id": case_id, "condition_id": condition, "writer": m["writer"]["target_id"], "chain_id": chain_id,
-                       "failure": "record_born_from_action", "record_id": rid, "record": compact({"authorizations": [rec]}), "error_block": b, "loop_block": True,
+                       "failure": failure, "record_id": rid, "record": compact({"authorizations": [rec]}), "error_block": b, "loop_block": True,
                        "attempt_statuses": [a["status"] for a in block_attempts]}
                 if llm is not None:
-                    payload_j = {"policy": str(getattr(case, "policy", "") or ""), "request": f"(none; the record itself is the failure) new record: {compact({'authorizations': [rec]})}",
+                    what = ("new record, not present before this block" if failure == "record_born_from_action"
+                            else "existing record whose cited sources were replaced by the agent's own action lines")
+                    payload_j = {"policy": str(getattr(case, "policy", "") or ""), "request": f"(none; the record itself is the failure) {what}: {compact({'authorizations': [rec]})}",
                                  "truth": compact(domain.memory.faithful_typed(case)), "before": compact(domain.memory.parse_typed(before)), "block_index": str(b),
                                  "block": block_text(domain, case, presentation, b, wb, base_max)[:14000], "plan": plan[:6000],
                                  "patches": json.dumps([args_of(a).get("patches") for a in block_attempts])[:6000], "after": compact(domain.memory.parse_typed(payload))}
                     judge_all(llm, target, payload_j, row, summary)
                 else:
-                    summary["born_record_unlabeled"] += 1
+                    summary[f"{failure}_unlabeled"] += 1
                 fh.write(json.dumps(row, ensure_ascii=False) + "\n")
                 n += 1
     return n

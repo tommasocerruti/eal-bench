@@ -128,7 +128,8 @@ def _envelope(record: CanonicalAuthorizationRecord) -> AuthorizationEnvelope:
     )
 
 
-GENERATED_CORPUS_VERSION = "generated_v1"
+GENERATED_CORPUS_VERSIONS = ("generated_v1", "generated_v2")  # v2: stale restatements isolated from the base history
+GENERATED_CORPUS_VERSION = GENERATED_CORPUS_VERSIONS[0]
 
 
 def _optional_versions() -> tuple[str, ...]:
@@ -136,7 +137,7 @@ def _optional_versions() -> tuple[str, ...]:
 
     return tuple(
         version
-        for version in (GENERATED_CORPUS_VERSION,)
+        for version in GENERATED_CORPUS_VERSIONS
         if (DATA_DIR / f"{version}.jsonl").is_file()
     )
 
@@ -150,13 +151,13 @@ class ProcurementCorpusAdapter:
     )
     default_version = BENCHMARK_CORPUS_VERSION
     capacity_policy = CapacityPolicy(
-        minimum_history_ratios={"benchmark_v1": 8, GENERATED_CORPUS_VERSION: 8},
+        minimum_history_ratios={"benchmark_v1": 8, **{version: 8 for version in GENERATED_CORPUS_VERSIONS}},
         calibrated_tokens={
             "calibration_v1": {"primary": 572, "tight": 358},
             "benchmark_v1": {"primary": 572, "tight": 358},
             CONTROL_CORPUS_VERSION: {"primary": 572, "tight": 358},
             # Same frozen budget as benchmark_v1 so generated histories stay comparable.
-            GENERATED_CORPUS_VERSION: {"primary": 572, "tight": 358},
+            **{version: {"primary": 572, "tight": 358} for version in GENERATED_CORPUS_VERSIONS},
         }
     )
 
