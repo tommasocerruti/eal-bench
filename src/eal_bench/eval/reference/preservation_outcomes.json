@@ -1,5 +1,36 @@
 {
+  "failed_first_update_episode": {
+    "accepted_before": false,
+    "accepted_memory_ids": [
+      "mem_197f3601c189b9b9db4cb9b3"
+    ],
+    "attempts": [
+      {
+        "accepted_memory_id": null,
+        "attempt_index": 1,
+        "repair_of_attempt_id": false,
+        "retained_memory_id": "mem_197f3601c189b9b9db4cb9b3",
+        "status": "invalid_payload"
+      },
+      {
+        "accepted_memory_id": null,
+        "attempt_index": 2,
+        "repair_of_attempt_id": true,
+        "retained_memory_id": "mem_197f3601c189b9b9db4cb9b3",
+        "status": "invalid_payload"
+      }
+    ],
+    "case_id": "procurement_v1_software_license_grant",
+    "domain_id": "procurement",
+    "final_changed": false,
+    "final_current_memory_id": "mem_197f3601c189b9b9db4cb9b3",
+    "final_state_status": "retained_after_failed_update",
+    "state_statuses": [
+      "retained_after_failed_update"
+    ]
+  },
   "failed_update_episode": {
+    "accepted_before": true,
     "accepted_memory_ids": [
       "mem_199c7eeb8074cddbec1925cf"
     ],
