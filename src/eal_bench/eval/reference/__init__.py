@@ -279,3 +279,127 @@ def verify_api_contracts() -> dict[str, Any]:
     checked.append("pooling guards")
 
     return {"status": "passed", "entry_points": checked}
+
+
+def _controls_fixture_path() -> str:
+    return "controls_outcomes.json"
+
+
+def build_controls_fixture() -> dict[str, Any]:
+    """Recorded executor replies covering every outcome class the scorer emits."""
+
+    from ..controls import build_control_trials
+    from ..scoring import score_response
+
+    rows: list[dict[str, Any]] = []
+    for domain_id in eval_resources.list_domains():
+        domain = eval_resources.load_domain(domain_id)
+        pairs = build_control_trials(domain_id, check_leakage=False)
+        by_pair: dict[str, list[Any]] = {}
+        for _, truth in pairs:
+            by_pair.setdefault(truth.pair_id, []).append(truth)
+        for truth in _fixture_truths(pairs):
+            partner = next(
+                other
+                for other in by_pair[truth.pair_id]
+                if other.probe_id != truth.probe_id and other.condition_id == truth.condition_id
+            )
+            for label, response in _fixture_responses(domain, truth, partner):
+                rows.append(
+                    {
+                        "label": label,
+                        "domain_id": domain_id,
+                        "trial_id": truth.trial_id,
+                        "response": response.to_dict(),
+                        "expected": score_response(truth, response).to_dict(),
+                    }
+                )
+    return {"schema_version": 1, "rows": rows}
+
+
+def _fixture_truths(pairs: list[Any]) -> list[Any]:
+    """One authorized and one unauthorized trial per faithful condition."""
+
+    picked: dict[tuple[str, bool], Any] = {}
+    for _, truth in pairs:
+        picked.setdefault((truth.condition_id, truth.request_authorized), truth)
+    return [picked[key] for key in sorted(picked, key=lambda key: (key[0], key[1]))]
+
+
+def _fixture_responses(domain: Any, truth: Any, partner: Any) -> list[tuple[str, Any]]:
+    from ..trials import ModelResponse
+
+    action_tool = domain.action_tools[0]
+    arguments = domain.conformance.action_arguments(truth.probe.request, action_tool)
+    # Domains with two action tools separate the submitted action from the operational
+    # alternative by tool. Procurement has one, so the partner's payload is the other action.
+    if len(domain.action_tools) > 1:
+        other_tool = domain.action_tools[1]
+        other = domain.conformance.action_arguments(truth.probe.request, other_tool)
+    else:
+        other_tool = action_tool
+        other = domain.conformance.action_arguments(partner.probe.request, action_tool)
+    escalate, decline = (name for name in domain.terminal_tools if name not in domain.action_tools)
+    escalate_arguments = domain.conformance.action_arguments(truth.probe.request, escalate)
+    decline_arguments = domain.conformance.action_arguments(truth.probe.request, decline)
+    return [
+        ("execute_requested", ModelResponse.from_tool_calls([(action_tool, arguments)])),
+        ("execute_other", ModelResponse.from_tool_calls([(other_tool, other)])),
+        ("escalate", ModelResponse.from_tool_calls([(escalate, escalate_arguments)])),
+        ("decline", ModelResponse.from_tool_calls([(decline, decline_arguments)])),
+        ("malformed_arguments", ModelResponse.from_tool_calls([(action_tool, "{not json")])),
+        (
+            "multiple_tool_calls",
+            ModelResponse.from_tool_calls([(action_tool, arguments), (decline, decline_arguments)]),
+        ),
+        ("unknown_tool", ModelResponse.from_tool_calls([("no_such_tool", {})])),
+        (
+            "missing_tool_call",
+            ModelResponse(text="I would need approval first.", finish_reason="stop"),
+        ),
+        ("provider_error", ModelResponse.provider_error("timeout after 60s")),
+    ]
+
+
+def verify_controls() -> dict[str, Any]:
+    """Re-score every recorded reply and require the frozen outcome."""
+
+    from ..controls import build_control_trials
+    from ..scoring import score_response
+    from ..trials import ModelResponse
+
+    fixture = load_fixture(_controls_fixture_path())
+    truths: dict[str, Any] = {}
+    mismatches: list[dict[str, Any]] = []
+    for row in fixture["rows"]:
+        domain_id = row["domain_id"]
+        if domain_id not in truths:
+            truths[domain_id] = {
+                truth.trial_id: truth
+                for _, truth in build_control_trials(domain_id, check_leakage=False)
+            }
+        truth = truths[domain_id].get(row["trial_id"])
+        if truth is None:
+            mismatches.append({"label": row["label"], "reason": "trial_id not built"})
+            continue
+        observed = score_response(truth, ModelResponse.from_dict(row["response"])).to_dict()
+        if observed != row["expected"]:
+            differing = sorted(
+                key
+                for key in set(observed) | set(row["expected"])
+                if observed.get(key) != row["expected"].get(key)
+            )
+            mismatches.append(
+                {
+                    "label": row["label"],
+                    "domain_id": domain_id,
+                    "fields": differing,
+                }
+            )
+    if mismatches:
+        raise AssertionError(f"control outcomes drifted: {mismatches}")
+    return {
+        "status": "passed",
+        "rows_checked": len(fixture["rows"]),
+        "labels": sorted({row["label"] for row in fixture["rows"]}),
+    }
