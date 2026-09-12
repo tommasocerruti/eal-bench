@@ -559,11 +559,10 @@ def verify_runner_parity() -> dict[str, Any]:
     from experiments.authorization_memory.pipeline import (
         _build_evidence,
         _executor_messages,
-        calibrate_capacity,
     )
     from experiments.authorization_memory.surfaces import model_visible_tools
 
-    from ..controls import CONTROL_CONDITIONS, build_control_trials
+    from ..controls import CONTROL_CONDITIONS, build_control_trials, capacity_tokens
 
     compared = 0
     for domain_id in eval_resources.list_domains():
@@ -571,9 +570,7 @@ def verify_runner_parity() -> dict[str, Any]:
         version = domain.corpus.default_version
         presentation = eval_resources.resolve_presentation(domain)
         cases = list(domain.corpus.load_cases(version))
-        capacity = calibrate_capacity(
-            domain, cases, corpus_version=version, presentation=presentation
-        ).tokens_for("primary")
+        capacity = capacity_tokens(domain, cases, version, presentation)
         # No writer condition is selected, so this makes no model call.
         _, _, _, evidence, _ = _build_evidence(
             None,
