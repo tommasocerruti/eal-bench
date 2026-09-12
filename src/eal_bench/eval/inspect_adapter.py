@@ -322,6 +322,7 @@ def _truth_for_state(state: Any) -> TrialTruth:
             f"sample {state.sample_id!r} carries no EAL truth metadata; "
             "it was not produced by eal_bench.eval.inspect_adapter"
         )
+    _require_matching_resources(metadata, domain_id)
     truths = _truths_for(domain_id, metadata.get("corpus_version"), metadata.get("presentation_id"))
     trial_id = str(state.sample_id)
     if trial_id not in truths:
