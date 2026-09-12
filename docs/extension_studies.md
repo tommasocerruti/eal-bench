@@ -99,6 +99,8 @@ Cybersecurity launders far less than procurement, as in the paper, and it does s
 
 ## 3. Does the agent's own behavior make it worse? (closed loop)
 
+*Earlier implementation.* The tables in this section come from the closed loop as first implemented: the write-back described the submitted request even when the executor ran the operational alternative, requests kept their corpus timestamps across rounds, and there was no control for the number of updates. The finance rows are on a superseded finance corpus. The rerun with the corrected loop, both executors, and a neutral-update control replaces this section when it finishes.
+
 **Why it matters.** In the paper the executor's actions vanish. In a real deployment they are logged and the log becomes part of the history the writer reads. If a wrongly executed order is written back into memory as a fact, it might become evidence for the permission that produced it, and false authority could compound.
 
 **What we ran.** *Open loop* is the paper's design: all requests answered against the frozen final memory. *Closed loop* answers requests one at a time; after each answer one workflow line describing what the agent did ("Order placed (submit_order): grantee ..., vendor ..., amount 4,900, currency USD" or "Escalated for authorization (...)") is appended as a new block, the writer updates memory from it exactly as it would from any block, and the next request runs on the updated memory. Variants: the same writer updates (default); the executor model itself updates from (previous memory, request, outcome) plus an append-only action log; free-text memory; and **rounds**, where the whole request set is asked again, with write-back between every request, so a laundered order from round 1 is in memory when the same request returns in round 2.
@@ -129,6 +131,8 @@ Authorized use falls in every domain across rounds (procurement 88 → 67 → 60
 
 ## 4. What in a history makes the writer launder? (generated histories)
 
+*Earlier corpus.* These results are on `generated_v1`, where the stale-restatement count also changed the random draws for dates, caps, and filler. `generated_v2` holds everything but the stale turns fixed within a group; its rerun replaces this table when it finishes.
+
 **Why it matters.** The paper's cases are hand-written, so the features that drive the failure are confounded. Generated cases let one feature vary at a time.
 
 **What we ran.** `domains/procurement/generate_cases.py` builds 108 procurement cases in the existing format (corpus `generated_v1`, validated with the same linter as the paper's corpora) from four themes, crossing: **gap** (blocks between the grant and its change: 1, 2, 3), **stale restatements** (later messages that repeat the superseded grant as if current: 0, 2, 4), **lifecycle** (the grant is revoked and replaced, or amended in place), and **implicit revocation** (stated outright, or only implied). Typed incremental, GLM, Kimi, Nemotron.
@@ -144,7 +148,7 @@ Authorized use falls in every domain across rounds (procurement 88 → 67 → 60
 
 Overall 8.3% (GLM), 9.6% (Kimi), 7.7% (Nemotron), so generated cases are easier than the hand-written ones (about 25%). AU 97 to 100%.
 
-**Reading.** Stale restatements drive the failure with a clean dose response, and amendments launder far more than clean replacements. The gap between grant and change and explicit versus implied revocation showed no effect at the levels tried (gaps of one to three blocks; 108 cases), which is evidence of a small effect at most, not of none.
+**Reading.** Stale restatements drive the failure with a clean dose response, and amendments launder far more than clean replacements. The gap between grant and change and explicit versus implied revocation showed no clear effect at the levels tried (gaps of one to three blocks; 108 cases).
 
 **Takeaway.** The trigger is people restating a superseded grant (0 / 5 / 21% at 0 / 2 / 4 restatements, the same for three writers), and amendments launder five to nine times more than clean revoke-and-replace. Gap and explicit versus implied revocation showed no effect at the levels tried. Supports the incremental-memory dynamics paragraph with a controlled dose-response; the practical advice is to prefer revoke-and-replace over amendment in authorization workflows.
 
@@ -178,12 +182,12 @@ Run sizes: GLM 5.3 procurement: 3 seeds, 548 writer calls, 0 truncated; Inkling 
 | free text, incremental | 96.8% / 2.8% | 60.2% / 12.5% |  |
 | free text, rebuild every 3 | 99.1% / 0.0% | 96.3% / 3.2% |  |
 
-**Closed loop** (Section 3 design), procurement, typed incremental, GPT-OSS executor, three rounds; unauthorized submission per round, and permission records whose only sources are the agent's own write-backs at the end of round 3.
+**Closed loop** (Section 3 design, earlier implementation; see the note there), procurement, typed incremental, GPT-OSS executor, three rounds; the open-loop column is the same run's frozen memories answered without write-back; unauthorized submission per round, and permission records whose only sources are the agent's own write-backs at the end of round 3.
 
-| Writer | Open loop | Round 1 | Round 2 | Round 3 | AU round 1 → 3 | Records born from write-backs |
+| Writer | Open loop, same memories | Round 1 | Round 2 | Round 3 | AU round 1 → 3 | Records born from write-backs |
 |---|---|---|---|---|---|---|
-| GLM 5.3 | 20.4% (paper route) | 11% | 11% | 19% | 100 → 94% | 75 |
-| Inkling | 30.6% (paper route) | 28% | 33% | 36% | 81 → 50% | 76 |
+| GLM 5.3 | 11.1% | 11% | 11% | 19% | 100 → 94% | 75 |
+| Inkling | 30.6% | 28% | 33% | 36% | 81 → 50% | 76 |
 | paper's three writers (Section 3) | 29.6% | 28.7% | 27.8% | 29.6% | 88 → 60% | 106 across 36 chains |
 
 **Where their failures enter** (Section 6 method, same three judges). Procurement: every GLM 5.3 and Inkling failure that enters from the history is `restatement as amendment` or its `unsupported edit` neighbour, and every failure that enters from a write-back is `action log as grant`, the same two mechanisms as the paper's writers. Cybersecurity: GLM 5.3 has no failure to diagnose. Inkling's 21 cybersecurity failures all enter at the last block, which carries the duty officer's sixteen-operation signed change set: in 12 of them both writer attempts were rejected (malformed patches, or two model calls where the harness allows one) and the memory stayed one block stale; in 9 the patch was accepted but applied only the first operation of the change set, leaving the revoked grants standing. Inkling also has the highest rate of rejected updates of any writer (about a fifth of attempts in cybersecurity), so a share of its behavioral numbers measures failed updates rather than misreading.
@@ -263,10 +267,10 @@ Nothing else changes: same writer prompt otherwise, same memory, executor, reque
 |---|---|---|
 | procurement open loop, US (432 unauthorized requests: typed and hybrid, three writers, both executors) | 19.7% (16.2–23.7) | 0.5% (0.1–1.7) |
 | generated corpus, P(F) (972 per column) | 9.2% (7.5–11.1) | 0.5% (0.2–1.2) |
-| procurement closed loop, US round 3 (108) | 29.6% | 2.8% |
-| procurement closed loop, records born from write-backs, round 3 | 106 | 0 |
-| cybersecurity closed loop, US round 1 → 3 (192 per round) | 4.7% → 16.1% | 21.4% → 20.3% |
-| cybersecurity closed loop, records born from write-backs, round 3 | 446 | 0 |
+| procurement closed loop, US round 3 (108; earlier implementation) | 29.6% | 2.8% |
+| procurement closed loop, records born from write-backs, round 3 (earlier implementation) | 106 | 0 |
+| cybersecurity closed loop, US round 1 → 3 (192 per round; earlier implementation) | 4.7% → 16.1% | 21.4% → 20.3% |
+| cybersecurity closed loop, records born from write-backs, round 3 (earlier implementation) | 446 | 0 |
 
 Authorized use with the rule: 100% in the procurement open loop, 99 to 100% on the generated corpus, 97 to 100% in the procurement closed loop (against 31 to 92% at round 3 without it), 66 to 88% in the cybersecurity closed loop (against 22 to 75%).
 

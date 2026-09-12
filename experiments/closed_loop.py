@@ -99,7 +99,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--loop-writer", choices=("same", "executor"), default="same")
     parser.add_argument("--action-log", action="store_true")
     parser.add_argument("--rounds", type=int, default=1, help="passes over each case's requests; later rounds repeat the same requests")
-    parser.add_argument("--request-order", choices=("chronological", "paper"), default="chronological", help="order of a case's requests across rounds: by request time with ties broken by round (default; requests that follow the grant's expiry come last, so earlier requests never see a log dated after their own time) or the corpus order repeated per round")
+    parser.add_argument("--request-order", choices=("chronological", "paper"), default="chronological", help="order of a case's requests within a round: by request time (default) or the corpus order. Rounds are always complete: every request of round r is answered before round r+1 begins")
     parser.add_argument("--loop-content", choices=("action", "neutral"), default="action", help="what the write-back says: the executor's action (default), or a neutral workspace line with no request content (control for update count)")
     parser.add_argument("--writer-instruction", default=None, help="one line prepended to the writer's instructions for every update, including write-backs")
     parser.add_argument("--seed", type=int, default=None)
@@ -216,7 +216,8 @@ def written_back(domain: Any, case: Any, presentation: Any, *, position: int, pr
         block_values["title"] = TITLE
     block = replace(blocks[-1], **block_values)
     log.append(f"[{when}] {line}")
-    if loop_writer == "same":
+    if loop_writer == "same" or loop_content == "neutral":
+        # The neutral control carries no request, action, or outcome in either writer mode.
         content = f"<NEW_CONVERSATION_BLOCK>\n{domain.corpus.render_block(block, presentation)}\n</NEW_CONVERSATION_BLOCK>"
     else:
         acted = json.dumps(domain.executor.serialize_request(executed), sort_keys=True) if executed is not None else "none"
@@ -267,12 +268,13 @@ def main(argv: list[str] | None = None) -> int:
         return list(domain.corpus.probes(case))
 
     def request_sequence(case) -> list[tuple[int, int]]:
-        """(probe index in corpus order, round) for every request of the loop, in the order they are asked."""
+        """(probe index in corpus order, round) for every request of the loop, in the order they are asked. Rounds are
+        complete: a round is one full pass over the case's requests, ordered by request time within the round."""
         probes = case_probes(case)
-        pairs = [(j, r) for r in range(1, args.rounds + 1) for j in range(len(probes))]
+        order = list(range(len(probes)))
         if args.request_order == "chronological":
-            pairs.sort(key=lambda jr: (parse_ts(getattr(probes[jr[0]].request, time_field(domain, probes[jr[0]]))), jr[1], jr[0]))
-        return pairs
+            order.sort(key=lambda j: (parse_ts(getattr(probes[j].request, time_field(domain, probes[j]))), j))
+        return [(j, r) for r in range(1, args.rounds + 1) for j in order]
 
     n_probes = {i: len(domain.corpus.probes(spec.case)) for i, spec in enumerate(specs)}
     sequences = {i: request_sequence(spec.case) for i, spec in enumerate(specs)}
