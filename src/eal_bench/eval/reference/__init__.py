@@ -1094,3 +1094,208 @@ def _verify_undefined_rates() -> None:
         raise AssertionError("a measured rate was lost")
     if _rates([])["authorized_use"] is not None:
         raise AssertionError("an empty population produced a rate")
+
+
+def _preservation_fixture_path() -> str:
+    return "preservation_outcomes.json"
+
+
+def _scope(record: dict[str, Any]) -> dict[str, Any]:
+    """Procurement and cybersecurity nest scope; finance keeps a flat record."""
+
+    nested = record.get("scope")
+    return nested if isinstance(nested, dict) else record
+
+
+def _mutations(domain: Any, case: Any, faithful: dict[str, Any]) -> list[tuple[str, Any]]:
+    import copy
+
+    rows: list[tuple[str, Any]] = [("faithful", faithful)]
+
+    stale_index = _stale_block_index(domain, case)
+    if stale_index is not None:
+        rows.append(
+            (
+                f"stale_state_block_{stale_index}",
+                domain.memory.serialize_typed(
+                    domain.memory.faithful_typed(case, through_block_index=stale_index)
+                ),
+            )
+        )
+
+    dropped = copy.deepcopy(faithful)
+    dropped["authorizations"] = dropped["authorizations"][:-1]
+    rows.append(("dropped_record", dropped))
+
+    widened = _widened(domain, case, faithful)
+    if widened is not None:
+        rows.append(widened)
+
+    contradicted = copy.deepcopy(faithful)
+    scope = _scope(contradicted["authorizations"][0])
+    for key in sorted(scope):
+        if isinstance(scope[key], str) and key not in {"valid_from", "valid_until"}:
+            scope[key] = "ContradictedValue"
+            rows.append((f"contradicted_{key}", contradicted))
+            break
+
+    return [row for row in rows if _parses(domain, row[1])]
+
+
+def _widened(domain: Any, case: Any, faithful: dict[str, Any]) -> tuple[str, Any] | None:
+    """Prefer a widening that creates false authority, so the fixture exercises P(F)."""
+
+    import copy
+
+    candidates: list[tuple[str, Any]] = []
+    scope = _scope(faithful["authorizations"][0])
+    for key in sorted(scope):
+        value = scope[key]
+        mutated = copy.deepcopy(faithful)
+        target = _scope(mutated["authorizations"][0])
+        if isinstance(value, int) and not isinstance(value, bool):
+            target[key] = value * 10
+        elif isinstance(value, list) and value and isinstance(value[0], str):
+            target[key] = [*value, "unauthorized_extra_value"]
+        else:
+            continue
+        if _parses(domain, mutated):
+            candidates.append((f"widened_{key}", mutated))
+    if not candidates:
+        return None
+    for label, payload in candidates:
+        if _forms(domain, case, payload):
+            return label, payload
+    return candidates[0]
+
+
+def _forms(domain: Any, case: Any, payload: Any) -> bool:
+    remembered = domain.memory.parse_typed(payload)
+    for probe in domain.corpus.probes(case):
+        if domain.executor.oracle(case, probe.request).authorized:
+            continue
+        if domain.memory.authorizes(case, remembered, probe.request).authorized:
+            return True
+    return False
+
+
+def _parses(domain: Any, payload: Any) -> bool:
+    try:
+        domain.memory.parse_typed(payload)
+    except Exception:
+        return False
+    return True
+
+
+def _stale_block_index(domain: Any, case: Any) -> int | None:
+    """Earliest inexact intermediate state, preferring one that creates false authority."""
+
+    inexact: list[int] = []
+    for index in range(len(domain.corpus.blocks(case)) - 1):
+        try:
+            state = domain.memory.serialize_typed(
+                domain.memory.faithful_typed(case, through_block_index=index)
+            )
+        except Exception:
+            continue
+        if domain.fidelity.compare(case, state).exact:
+            continue
+        inexact.append(index)
+        if _forms(domain, case, state):
+            return index
+    return inexact[0] if inexact else None
+
+
+def build_preservation_fixture() -> dict[str, Any]:
+    """Deterministic memories per domain, with their frozen fidelity and formation labels."""
+
+    from ..preservation import apparent_authority, score_memory, state_status
+
+    rows: list[dict[str, Any]] = []
+    for domain_id in eval_resources.list_domains():
+        domain = eval_resources.load_domain(domain_id)
+        version = domain.corpus.default_version
+        case = domain.corpus.load_cases(version)[0]
+        case_id = domain.corpus.case_id(case)
+        faithful = domain.memory.serialize_typed(domain.memory.faithful_typed(case))
+        for label, payload in _mutations(domain, case, faithful):
+            rows.append(
+                {
+                    "label": label,
+                    "domain_id": domain_id,
+                    "case_id": case_id,
+                    "payload": payload,
+                    "expected_fidelity": score_memory(domain_id, case_id, payload).to_dict(),
+                    "expected_formation": apparent_authority(domain_id, case_id, payload).to_dict(),
+                }
+            )
+        rows.append(
+            {
+                "label": "free_text_not_estimable",
+                "domain_id": domain_id,
+                "case_id": case_id,
+                "payload": domain.memory.faithful_free_text(case),
+                "architecture": "free_text",
+                "expected_fidelity": score_memory(
+                    domain_id, case_id, "", architecture="free_text"
+                ).to_dict(),
+                "expected_formation": apparent_authority(
+                    domain_id, case_id, "", architecture="free_text"
+                ).to_dict(),
+            }
+        )
+    return {
+        "schema_version": 1,
+        "rows": rows,
+        "state_statuses": [
+            {"attempts": ["accepted"], "expected": state_status(["accepted"])},
+            {"attempts": ["no_change"], "expected": state_status(["no_change"])},
+            {
+                "attempts": ["invalid_payload", "accepted"],
+                "expected": state_status(["invalid_payload", "accepted"]),
+            },
+            {
+                "attempts": ["accepted", "invalid_payload", "invalid_payload"],
+                "expected": state_status(["accepted", "invalid_payload", "invalid_payload"]),
+            },
+            {"attempts": ["writer_error"], "expected": state_status(["writer_error"])},
+        ],
+    }
+
+
+def verify_preservation() -> dict[str, Any]:
+    """Re-derive every frozen fidelity, formation and update-status label."""
+
+    from ..preservation import apparent_authority, score_memory, state_status
+
+    fixture = load_fixture(_preservation_fixture_path())
+    mismatches: list[dict[str, Any]] = []
+    for row in fixture["rows"]:
+        architecture = row.get("architecture", "typed")
+        observed_fidelity = score_memory(
+            row["domain_id"],
+            row["case_id"],
+            row["payload"],
+            architecture=architecture,
+        ).to_dict()
+        observed_formation = apparent_authority(
+            row["domain_id"],
+            row["case_id"],
+            row["payload"],
+            architecture=architecture,
+        ).to_dict()
+        if observed_fidelity != row["expected_fidelity"]:
+            mismatches.append({"label": row["label"], "part": "fidelity"})
+        if observed_formation != row["expected_formation"]:
+            mismatches.append({"label": row["label"], "part": "formation"})
+    for row in fixture["state_statuses"]:
+        if state_status(row["attempts"]) != row["expected"]:
+            mismatches.append({"label": "state_status", "attempts": row["attempts"]})
+    if mismatches:
+        raise AssertionError(f"preservation outcomes drifted: {mismatches}")
+    return {
+        "status": "passed",
+        "rows_checked": len(fixture["rows"]),
+        "state_statuses_checked": len(fixture["state_statuses"]),
+        "labels": sorted({row["label"] for row in fixture["rows"]}),
+    }

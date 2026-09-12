@@ -74,6 +74,66 @@ Trial counts per domain, pooling the faithful free-text and faithful typed condi
 Every built trial passes the same hidden-identifier leakage check the internal runner applies.
 Pass `check_leakage=False` to skip it.
 
+## Track: memory preservation
+
+Scores a memory against the canonical ledger.
+
+```python
+from eal_bench.eval.preservation import apparent_authority, score_memory
+
+outcome = score_memory("procurement", case_id, payload)
+outcome.exact                    # False
+outcome.errors                   # {'broadening': 1}
+outcome.overgrant_fields         # 1
+
+formation = apparent_authority("procurement", case_id, payload)
+formation.formed                 # True: the ledger denies a request the memory grants
+```
+
+`errors` uses the fixed vocabulary. `omission` and `missing_record` mean the memory omitted
+authorization, `broadening` means it widened it, `contradiction` means it disagrees, and
+`stale_retention` with `extra_record` means it kept an obsolete record.
+
+`apparent_authority` is formation, P(F) in the paper. `analysis/failure_mechanisms.py` is the
+reference implementation of the same predicate.
+
+Free-text memory carries no deterministic label:
+
+```python
+outcome = score_memory("procurement", case_id, text, architecture="free_text")
+outcome.exact                    # None
+outcome.unscored_reason          # 'free_text_requires_annotation'
+outcome.estimable                # False
+```
+
+Report it as not estimable. Do not report it as zero.
+
+### Producing memories
+
+The writer protocol is unchanged. Build a chain and run it through the official writer:
+
+```python
+from eal_bench.eval.preservation import build_writer_chain, writer_instructions
+from experiments.authorization_memory.langmem_writer import run_writer_chains
+
+chain = build_writer_chain(
+    "procurement", case_id, condition_id="incremental_typed", target_id="glm_baseten"
+)
+writer_instructions("procurement", case_id, capacity_tokens=572)   # the exact text
+```
+
+A rejected update keeps the previous accepted profile. `state_status` derives the logical
+update status from the attempt sequence:
+
+```python
+state_status(["accepted", "invalid_payload", "invalid_payload"])
+# 'retained_after_failed_update'
+```
+
+This track has no Inspect task. The writer runs through LangMem with its own update and
+repair behavior, which Inspect cannot drive without replacing the protocol the benchmark
+measures. Scoring is available to any framework through `score_memory`.
+
 ## Inspect
 
 ```bash
