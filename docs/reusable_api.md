@@ -90,7 +90,14 @@ yours.
 EAL tool schemas are converted to Inspect `ToolDef` objects, and unparseable tool arguments are
 forwarded through `ToolCall.parse_error` so the Inspect path and the direct scorer reach the
 same outcome. `python -m eal_bench.eval.reference --verify` checks that agreement on every
-recorded reply, and skips when `inspect-ai` is absent.
+recorded reply, and skips when `inspect-ai` is absent. Verification also runs a complete
+Inspect eval against Inspect's mock provider, so the solver, tool and scorer plumbing is
+exercised without credentials.
+
+Inspect rejects a tool parameter that has no description, and some EAL parameters have none.
+Those are filled with the parameter name, which adds no meaning the key does not already
+carry. `missing_parameter_descriptions` lists exactly which parameters are affected. This is
+the one place where the Inspect surface differs from what the native runner sends.
 
 ## Score a reply
 

@@ -17,6 +17,7 @@ __all__ = [
     "INSTALL_HINT",
     "available",
     "control_task",
+    "missing_parameter_descriptions",
     "response_from_inspect",
     "score_inspect_state",
     "to_samples",
@@ -39,11 +40,27 @@ def _require_inspect() -> None:
         raise ImportError(INSTALL_HINT)
 
 
+def missing_parameter_descriptions(tools: Sequence[dict[str, Any]]) -> list[str]:
+    """Tool parameters EAL leaves undescribed, which Inspect refuses to accept."""
+
+    missing = []
+    for tool in tools:
+        function = tool["function"]
+        for name, spec in function.get("parameters", {}).get("properties", {}).items():
+            if not str(spec.get("description", "")).strip():
+                missing.append(f"{function['name']}.{name}")
+    return sorted(missing)
+
+
 def to_tool_defs(tools: Sequence[dict[str, Any]]) -> list[Any]:
     """Convert EAL's OpenAI-shaped tool schemas into Inspect tool definitions.
 
     The callables are never invoked. A terminal action is scored from the call rather
     than executed.
+
+    Inspect rejects a parameter with no description, and some EAL parameters have none.
+    Those are filled with the parameter name, which adds no meaning the key does not
+    already carry. `missing_parameter_descriptions` lists exactly which ones.
     """
 
     _require_inspect()
@@ -63,10 +80,24 @@ def to_tool_defs(tools: Sequence[dict[str, Any]]) -> list[Any]:
                 tool=_unused,
                 name=function["name"],
                 description=function.get("description", ""),
-                parameters=ToolParams.model_validate(function.get("parameters", {})),
+                parameters=ToolParams.model_validate(
+                    _described_parameters(function.get("parameters", {}))
+                ),
             )
         )
     return defs
+
+
+def _described_parameters(schema: dict[str, Any]) -> dict[str, Any]:
+    described = dict(schema)
+    properties = {}
+    for name, spec in schema.get("properties", {}).items():
+        filled = dict(spec)
+        if not str(filled.get("description", "")).strip():
+            filled["description"] = name
+        properties[name] = filled
+    described["properties"] = properties
+    return described
 
 
 def to_samples(pairs: Sequence[tuple[Trial, TrialTruth]]) -> list[Any]:
@@ -156,7 +187,9 @@ def control_task(
 
     return Task(
         dataset=to_samples(pairs),
-        solver=[use_tools(tools, tool_choice="auto"), generate()],
+        # A terminal tool call is the answer. Resolving it would execute the action
+        # and loop for another generation.
+        solver=[use_tools(tools, tool_choice="auto"), generate(tool_calls="none")],
         scorer=eal_controls_scorer(),
         name=f"eal_controls_{domain_id}",
     )
