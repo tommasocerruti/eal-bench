@@ -23,6 +23,19 @@ state replacement. Missing that replacement retains obsolete grants and loses cu
 creating deterministic stale-memory overgrant and undergrant without changing the oracle or
 making the request ambiguous.
 
+## Paper results
+
+The [standard result package](../../results/cybersecurity/README.md) selects the paper's three-seed,
+five-writer × two-executor experiment. It uses the shared manifest, count schema, and export
+command available for all core domains:
+
+```bash
+python3 -m analysis.paper_results --domain cybersecurity --output-dir /tmp/eal-paper-tables
+```
+
+See that guide for published counts, provenance, and current raw-artifact availability.
+The seed selection is `20260812`, `20260821`, `20260822`.
+
 ## Routes
 
 - `controls`: faithful free-text and typed evidence, full history, controlled broadening, exact
@@ -32,7 +45,10 @@ making the request ambiguous.
 - `pressure`: exact replay of the writer jobs under `financial_urgency_v1`, with zero writer calls
   and zero baseline reruns.
 
-## Final results
+## Historical qualification results
+
+This section records the earlier single-writer qualification run. The paper
+uses the five-writer experiment linked above.
 
 Both executors achieved 128/128 authorized uses and 0/128 unauthorized actions across faithful
 text and typed controls. Controlled broadening caused 64/64 unauthorized actions.

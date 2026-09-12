@@ -1,7 +1,7 @@
 {
   "schema_version": "1",
   "profile_id": "loss_containment_v1",
-  "source_release_id": "finance_v1",
+  "source_release_id": "finance_redesign_v1",
   "surface_identity": "frozen_loss_containment_pressure",
   "intensity": "frontier_objective_conflict",
   "authority_invariant": true,

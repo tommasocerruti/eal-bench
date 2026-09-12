@@ -1,45 +1,22 @@
 # Authorization-memory domains
 
 Domains provide the model-visible setting and deterministic authorization semantics used by the
-shared writer→memory→executor engine. Procurement is the reference core domain. Its active
-release is `procurement_v1`, composed of:
+shared writer→memory→executor engine. The three core domains use the same experiment routes and
+[paper result format](../results/README.md):
 
-- capacity corpus `calibration_v1`;
-- behavioral corpus `benchmark_v1`;
-- presentation `naturalistic_v1`;
-- pressure profile `pressure_v1`;
-- memory implementation `langmem_profile`.
+| Domain | Paper release | Behavioral corpus | Presentation | Pressure profile |
+|---|---|---|---|---|
+| [Procurement](procurement/README.md) | `procurement_v1` | `benchmark_v1` | `naturalistic_v1` | `pressure_v1` |
+| [Cybersecurity](cybersecurity/README.md) | `cybersecurity_v1` | `benchmark_v1` | `naturalistic_v1` | `financial_urgency_v1` |
+| [Finance](finance/README.md) | `finance_redesign_v1` | `benchmark_v1` | `naturalistic_v1` | `loss_containment_v1` |
 
-`deployment_like_v1` is reserved for the procurement evaluation-awareness control collection;
+All use `calibration_v1` for capacity and `langmem_profile` for memory. Each release pins its own
+scientific sources and hashes; matching a corpus name alone does not identify an experiment.
+Historical single-writer qualification reports are retained separately from the paper's selected
+five-writer, two-executor, three-seed results. Their gate outcomes do not describe the full matrix.
+
+`deployment_like_v1` is reserved for Procurement's evaluation-awareness control collection;
 it is not a behavioral benchmark corpus.
-
-The registry also includes `cybersecurity`. Its historical frozen release is `cybersecurity_v1`,
-composed of:
-
-- capacity corpus `calibration_v1`;
-- behavioral corpus `benchmark_v1`;
-- presentation `naturalistic_v1`;
-- pressure profile `financial_urgency_v1`;
-- memory implementation `langmem_profile`.
-
-The original gate accepted this release, but the corrected gate now requires every one-shot chain
-and every incremental chain's initial update to create a usable profile. Cybersecurity fails that
-new viability check, so its saved behavioral results remain diagnostic until a successor passes.
-Procurement passes the corrected audit at 24/24 one-shot and 24/24 incremental initial profiles.
-
-The registry also includes the core domain `finance`. Its frozen public release is
-`finance_v1`, composed of:
-
-- capacity corpus `calibration_v1`;
-- behavioral corpus `benchmark_v1`;
-- presentation `naturalistic_v1`;
-- pressure profile `loss_containment_v1`;
-- memory implementation `langmem_profile`.
-
-Its eight-family final corpus passes offline validation and supplies 128 authorized plus 128
-unauthorized ordinary trials per writer–executor pair. GPT-OSS and DeepSeek pass the faithful-
-control isolation gate, and the five-writer × two-executor transfer matrix is complete. The
-canonical GPT-OSS writer route remains pending, so the release is not yet merge-eligible.
 
 ## Domain contract
 

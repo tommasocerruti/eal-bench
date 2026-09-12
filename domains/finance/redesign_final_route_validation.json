@@ -1,0 +1,430 @@
+{
+  "schema_version": "finance_redesign_final_route_validation_v1",
+  "status": "passed_pre_source_routes",
+  "network_calls": 0,
+  "routes_precommitted": 33,
+  "routes_executable_before_sources": 18,
+  "routes_validated": 18,
+  "pressure_routes_frozen_pending_exact_sources": 15,
+  "route_results": [
+    {
+      "route_id": "controls_s20260816",
+      "study": "controls",
+      "seed": 20260816,
+      "status": "passed",
+      "scheduled_calls_maximum": 576,
+      "writer_calls_maximum": 0,
+      "executor_calls_range": [
+        576,
+        576
+      ],
+      "provider_visible_plan_sha256": "373339dae352756a841f6c98dc2233895b8a50424740ad0440942b2e2b683323",
+      "checkpoint_resume": "not_applicable"
+    },
+    {
+      "route_id": "controls_s20260821",
+      "study": "controls",
+      "seed": 20260821,
+      "status": "passed",
+      "scheduled_calls_maximum": 576,
+      "writer_calls_maximum": 0,
+      "executor_calls_range": [
+        576,
+        576
+      ],
+      "provider_visible_plan_sha256": "470483bde36eda20f300b345751695332f2c685b7b959b547017d6fde023316a",
+      "checkpoint_resume": "not_applicable"
+    },
+    {
+      "route_id": "controls_s20260822",
+      "study": "controls",
+      "seed": 20260822,
+      "status": "passed",
+      "scheduled_calls_maximum": 576,
+      "writer_calls_maximum": 0,
+      "executor_calls_range": [
+        576,
+        576
+      ],
+      "provider_visible_plan_sha256": "970c45abfa1b0235c12371b4770787e4d663a52276faa8a56c69bc2099140e9f",
+      "checkpoint_resume": "not_applicable"
+    },
+    {
+      "route_id": "writer_s20260816_glm_5_2",
+      "study": "writer",
+      "seed": 20260816,
+      "status": "passed",
+      "scheduled_calls_maximum": 1184,
+      "writer_calls_maximum": 608,
+      "executor_calls_range": [
+        512,
+        576
+      ],
+      "provider_visible_plan_sha256": "264b82fcf6974385e9d0fcd9b28cc1c24bb3bb1f9d01b9861f8c1b4260a4df24",
+      "checkpoint_resume": "passed"
+    },
+    {
+      "route_id": "writer_s20260816_grok_4_3",
+      "study": "writer",
+      "seed": 20260816,
+      "status": "passed",
+      "scheduled_calls_maximum": 1184,
+      "writer_calls_maximum": 608,
+      "executor_calls_range": [
+        512,
+        576
+      ],
+      "provider_visible_plan_sha256": "abdff57e6bf5475a42486d06f5f446b705dfd640888b2232a783044c1481deba",
+      "checkpoint_resume": "passed"
+    },
+    {
+      "route_id": "writer_s20260816_kimi",
+      "study": "writer",
+      "seed": 20260816,
+      "status": "passed",
+      "scheduled_calls_maximum": 1184,
+      "writer_calls_maximum": 608,
+      "executor_calls_range": [
+        512,
+        576
+      ],
+      "provider_visible_plan_sha256": "548e7138a93e2f38f51641d7f822dc8534192387c03d2f861959ad2ac65a26c2",
+      "checkpoint_resume": "passed"
+    },
+    {
+      "route_id": "writer_s20260816_nemotron_3_ultra",
+      "study": "writer",
+      "seed": 20260816,
+      "status": "passed",
+      "scheduled_calls_maximum": 1184,
+      "writer_calls_maximum": 608,
+      "executor_calls_range": [
+        512,
+        576
+      ],
+      "provider_visible_plan_sha256": "2ba428916e885ee0ceea3799621a45611c9be267dbdd632a1b8525f80a0830e7",
+      "checkpoint_resume": "passed"
+    },
+    {
+      "route_id": "writer_s20260816_qwen_plus_0728",
+      "study": "writer",
+      "seed": 20260816,
+      "status": "passed",
+      "scheduled_calls_maximum": 1184,
+      "writer_calls_maximum": 608,
+      "executor_calls_range": [
+        512,
+        576
+      ],
+      "provider_visible_plan_sha256": "af8529c94601db9ac0ad14485fa3fc725a530531e006c96841d01c2a645da3d7",
+      "checkpoint_resume": "passed"
+    },
+    {
+      "route_id": "writer_s20260821_glm_5_2",
+      "study": "writer",
+      "seed": 20260821,
+      "status": "passed",
+      "scheduled_calls_maximum": 1184,
+      "writer_calls_maximum": 608,
+      "executor_calls_range": [
+        512,
+        576
+      ],
+      "provider_visible_plan_sha256": "8839fbbc975e4747f85d9f2da49d18e9a252d3db1e5b055bae5141da71cc1106",
+      "checkpoint_resume": "passed"
+    },
+    {
+      "route_id": "writer_s20260821_grok_4_3",
+      "study": "writer",
+      "seed": 20260821,
+      "status": "passed",
+      "scheduled_calls_maximum": 1184,
+      "writer_calls_maximum": 608,
+      "executor_calls_range": [
+        512,
+        576
+      ],
+      "provider_visible_plan_sha256": "b569fdcc708c59f0a64b0b98407f474efd70dd2f89a909548695ec2f031410d2",
+      "checkpoint_resume": "passed"
+    },
+    {
+      "route_id": "writer_s20260821_kimi",
+      "study": "writer",
+      "seed": 20260821,
+      "status": "passed",
+      "scheduled_calls_maximum": 1184,
+      "writer_calls_maximum": 608,
+      "executor_calls_range": [
+        512,
+        576
+      ],
+      "provider_visible_plan_sha256": "d4c2c1e651737d6184a8ba15a373031d28aaa4fdf87153d09622561fd70ab838",
+      "checkpoint_resume": "passed"
+    },
+    {
+      "route_id": "writer_s20260821_nemotron_3_ultra",
+      "study": "writer",
+      "seed": 20260821,
+      "status": "passed",
+      "scheduled_calls_maximum": 1184,
+      "writer_calls_maximum": 608,
+      "executor_calls_range": [
+        512,
+        576
+      ],
+      "provider_visible_plan_sha256": "fddacc577fa57c28824082faf64347fb24a2204ee21d7b49256db187dfe78025",
+      "checkpoint_resume": "passed"
+    },
+    {
+      "route_id": "writer_s20260821_qwen_plus_0728",
+      "study": "writer",
+      "seed": 20260821,
+      "status": "passed",
+      "scheduled_calls_maximum": 1184,
+      "writer_calls_maximum": 608,
+      "executor_calls_range": [
+        512,
+        576
+      ],
+      "provider_visible_plan_sha256": "ea0dcdfa2cc0eb322771bbd2620c4d047a348be7aa49db36a82a7bfb03c892c1",
+      "checkpoint_resume": "passed"
+    },
+    {
+      "route_id": "writer_s20260822_glm_5_2",
+      "study": "writer",
+      "seed": 20260822,
+      "status": "passed",
+      "scheduled_calls_maximum": 1184,
+      "writer_calls_maximum": 608,
+      "executor_calls_range": [
+        512,
+        576
+      ],
+      "provider_visible_plan_sha256": "0b55c1e8c65523fddb6ec77ff0b5057bed42f7bbee421d7563c9799d2415d1dc",
+      "checkpoint_resume": "passed"
+    },
+    {
+      "route_id": "writer_s20260822_grok_4_3",
+      "study": "writer",
+      "seed": 20260822,
+      "status": "passed",
+      "scheduled_calls_maximum": 1184,
+      "writer_calls_maximum": 608,
+      "executor_calls_range": [
+        512,
+        576
+      ],
+      "provider_visible_plan_sha256": "581fa2bc111e4e3ed7fa117a5e9cd473e261fe9294360d7ef0bdcaed165a3a7d",
+      "checkpoint_resume": "passed"
+    },
+    {
+      "route_id": "writer_s20260822_kimi",
+      "study": "writer",
+      "seed": 20260822,
+      "status": "passed",
+      "scheduled_calls_maximum": 1184,
+      "writer_calls_maximum": 608,
+      "executor_calls_range": [
+        512,
+        576
+      ],
+      "provider_visible_plan_sha256": "6f3f645e7ba9532fa60ec2869311014f510472b573c0f932d8910cb99d6d0bbf",
+      "checkpoint_resume": "passed"
+    },
+    {
+      "route_id": "writer_s20260822_nemotron_3_ultra",
+      "study": "writer",
+      "seed": 20260822,
+      "status": "passed",
+      "scheduled_calls_maximum": 1184,
+      "writer_calls_maximum": 608,
+      "executor_calls_range": [
+        512,
+        576
+      ],
+      "provider_visible_plan_sha256": "083a3798a28fec9f12a69c19e3d7adfb8ea8d24fdf3af00310eb7b9717c99683",
+      "checkpoint_resume": "passed"
+    },
+    {
+      "route_id": "writer_s20260822_qwen_plus_0728",
+      "study": "writer",
+      "seed": 20260822,
+      "status": "passed",
+      "scheduled_calls_maximum": 1184,
+      "writer_calls_maximum": 608,
+      "executor_calls_range": [
+        512,
+        576
+      ],
+      "provider_visible_plan_sha256": "d968ac4ccb249cb78716c00a53c1f29e1d027c5f451884a887ec76b6a1ac10f3",
+      "checkpoint_resume": "passed"
+    }
+  ],
+  "pressure_route_policy": [
+    {
+      "route_id": "pressure_s20260816_nemotron_3_ultra",
+      "source_route_id": "writer_s20260816_nemotron_3_ultra",
+      "status": "precommitted_source_pending",
+      "validation_policy": "validate against the completed hash-verified source immediately before this route's first live call",
+      "maximum_provider_calls": 576
+    },
+    {
+      "route_id": "pressure_s20260816_kimi",
+      "source_route_id": "writer_s20260816_kimi",
+      "status": "precommitted_source_pending",
+      "validation_policy": "validate against the completed hash-verified source immediately before this route's first live call",
+      "maximum_provider_calls": 576
+    },
+    {
+      "route_id": "pressure_s20260816_glm_5_2",
+      "source_route_id": "writer_s20260816_glm_5_2",
+      "status": "precommitted_source_pending",
+      "validation_policy": "validate against the completed hash-verified source immediately before this route's first live call",
+      "maximum_provider_calls": 576
+    },
+    {
+      "route_id": "pressure_s20260816_grok_4_3",
+      "source_route_id": "writer_s20260816_grok_4_3",
+      "status": "precommitted_source_pending",
+      "validation_policy": "validate against the completed hash-verified source immediately before this route's first live call",
+      "maximum_provider_calls": 576
+    },
+    {
+      "route_id": "pressure_s20260816_qwen_plus_0728",
+      "source_route_id": "writer_s20260816_qwen_plus_0728",
+      "status": "precommitted_source_pending",
+      "validation_policy": "validate against the completed hash-verified source immediately before this route's first live call",
+      "maximum_provider_calls": 576
+    },
+    {
+      "route_id": "pressure_s20260821_nemotron_3_ultra",
+      "source_route_id": "writer_s20260821_nemotron_3_ultra",
+      "status": "precommitted_source_pending",
+      "validation_policy": "validate against the completed hash-verified source immediately before this route's first live call",
+      "maximum_provider_calls": 576
+    },
+    {
+      "route_id": "pressure_s20260821_kimi",
+      "source_route_id": "writer_s20260821_kimi",
+      "status": "precommitted_source_pending",
+      "validation_policy": "validate against the completed hash-verified source immediately before this route's first live call",
+      "maximum_provider_calls": 576
+    },
+    {
+      "route_id": "pressure_s20260821_glm_5_2",
+      "source_route_id": "writer_s20260821_glm_5_2",
+      "status": "precommitted_source_pending",
+      "validation_policy": "validate against the completed hash-verified source immediately before this route's first live call",
+      "maximum_provider_calls": 576
+    },
+    {
+      "route_id": "pressure_s20260821_grok_4_3",
+      "source_route_id": "writer_s20260821_grok_4_3",
+      "status": "precommitted_source_pending",
+      "validation_policy": "validate against the completed hash-verified source immediately before this route's first live call",
+      "maximum_provider_calls": 576
+    },
+    {
+      "route_id": "pressure_s20260821_qwen_plus_0728",
+      "source_route_id": "writer_s20260821_qwen_plus_0728",
+      "status": "precommitted_source_pending",
+      "validation_policy": "validate against the completed hash-verified source immediately before this route's first live call",
+      "maximum_provider_calls": 576
+    },
+    {
+      "route_id": "pressure_s20260822_nemotron_3_ultra",
+      "source_route_id": "writer_s20260822_nemotron_3_ultra",
+      "status": "precommitted_source_pending",
+      "validation_policy": "validate against the completed hash-verified source immediately before this route's first live call",
+      "maximum_provider_calls": 576
+    },
+    {
+      "route_id": "pressure_s20260822_kimi",
+      "source_route_id": "writer_s20260822_kimi",
+      "status": "precommitted_source_pending",
+      "validation_policy": "validate against the completed hash-verified source immediately before this route's first live call",
+      "maximum_provider_calls": 576
+    },
+    {
+      "route_id": "pressure_s20260822_glm_5_2",
+      "source_route_id": "writer_s20260822_glm_5_2",
+      "status": "precommitted_source_pending",
+      "validation_policy": "validate against the completed hash-verified source immediately before this route's first live call",
+      "maximum_provider_calls": 576
+    },
+    {
+      "route_id": "pressure_s20260822_grok_4_3",
+      "source_route_id": "writer_s20260822_grok_4_3",
+      "status": "precommitted_source_pending",
+      "validation_policy": "validate against the completed hash-verified source immediately before this route's first live call",
+      "maximum_provider_calls": 576
+    },
+    {
+      "route_id": "pressure_s20260822_qwen_plus_0728",
+      "source_route_id": "writer_s20260822_qwen_plus_0728",
+      "status": "precommitted_source_pending",
+      "validation_policy": "validate against the completed hash-verified source immediately before this route's first live call",
+      "maximum_provider_calls": 576
+    }
+  ],
+  "target_checks": [
+    {
+      "target": "nemotron_3_ultra_baseten",
+      "component": "langmem-writer",
+      "status": "passed",
+      "provider": "baseten",
+      "model": null
+    },
+    {
+      "target": "kimi_baseten",
+      "component": "langmem-writer",
+      "status": "passed",
+      "provider": "baseten",
+      "model": null
+    },
+    {
+      "target": "glm_5_2_baseten",
+      "component": "langmem-writer",
+      "status": "passed",
+      "provider": "baseten",
+      "model": null
+    },
+    {
+      "target": "grok_4_3_openrouter",
+      "component": "langmem-writer",
+      "status": "passed",
+      "provider": "openrouter",
+      "model": null
+    },
+    {
+      "target": "qwen_plus_0728_openrouter",
+      "component": "langmem-writer",
+      "status": "passed",
+      "provider": "openrouter",
+      "model": null
+    },
+    {
+      "target": "gptoss_baseten",
+      "component": "native-tools",
+      "status": "passed",
+      "provider": "baseten",
+      "model": null
+    },
+    {
+      "target": "deepseek_baseten",
+      "component": "native-tools",
+      "status": "passed",
+      "provider": "baseten",
+      "model": null
+    }
+  ],
+  "all_writer_checkpoint_resume_fixtures_passed": true,
+  "maximum_calls": {
+    "controls_per_route": 576,
+    "writer_per_route": 1184,
+    "pressure_per_route": 576,
+    "all_routes_sum": 28128
+  },
+  "cost_plan_unchanged": true,
+  "scientific_configuration_changed": false
+}

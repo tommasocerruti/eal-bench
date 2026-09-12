@@ -1,0 +1,4 @@
+# Keep frozen generated corpora compact in reviews across every domain.
+domains/*/data/** linguist-generated=true
+results/**/manifest.json linguist-generated=true
+results/*/paper/counts.json linguist-generated=true

@@ -1,0 +1,204 @@
+{
+  "schema_version": "finance_redesign_development_iteration_index_v1",
+  "status": "development_complete_first_valid_pass_frozen_at_iteration_14",
+  "authoritative_precommit": "domains/finance/redesign_development_precommit_014.json",
+  "iterations": [
+    {
+      "iteration_id": "finance_redesign_dev_001",
+      "configuration_revision": "28ce73601de6ee03b4b60344bfc0be4c6a02c0bc",
+      "corpus_version": "finance_redesign_dev_001",
+      "corpus_source_sha256": "d39b698792171654bbd5a0c12532306a1e385eef0aa450942018a32af73bd1a9",
+      "execution_compatibility_revision": "e07f99568a054adae991adbc2698290641224687",
+      "status": "completed_failed_precommitted_gate",
+      "report": "results/finance_redesign/development_iteration_001_report.json",
+      "run_directories": [
+        "results/finance/20260821-193940-774569__authorization-memory-controls__finance-redesign-dev-001-controls",
+        "results/finance/20260821-194309-474468__authorization-memory-writer__finance-redesign-dev-001-glm-typed-one-shot",
+        "results/finance/20260821-194547-478082__authorization-memory-writer__finance-redesign-dev-001-qwen-typed-incremental"
+      ]
+    },
+    {
+      "iteration_id": "finance_redesign_dev_002",
+      "configuration_revision": "59c7a20901868a65193b66f3bf0b5b8caab0f4a4",
+      "corpus_version": "finance_redesign_dev_002",
+      "corpus_source_sha256": "6967a34d73acc117a09e45028577151a25ea7cd591e6c242771018b4a1d3f760",
+      "execution_precommit_revision": "bf8e850d3f860957062f2d6c9a5cd0557bc82746",
+      "status": "completed_failed_precommitted_gate",
+      "report": "results/finance_redesign/development_iteration_002_report.json",
+      "run_directories": [
+        "results/finance/20260821-200206-132938__authorization-memory-controls__finance-redesign-dev-002-controls",
+        "results/finance/20260821-200524-547426__authorization-memory-writer__finance-redesign-dev-002-glm-typed-one-shot",
+        "results/finance/20260821-200733-240138__authorization-memory-writer__finance-redesign-dev-002-qwen-typed-incremental"
+      ]
+    },
+    {
+      "iteration_id": "finance_redesign_dev_003",
+      "configuration_revision": "85f86374b9914d5b0885835712160dcd672455ac",
+      "corpus_version": "finance_redesign_dev_003",
+      "corpus_source_sha256": "abb8a560961dd179fee6dd4be50e91c1b43fb4138dc8b5bd4497393ab26b1bbf",
+      "execution_precommit_revision": "a3699df4921510f9534734bb276aed63e6ac69d7",
+      "status": "completed_failed_precommitted_gate",
+      "report": "results/finance_redesign/development_iteration_003_report.json",
+      "run_directories": [
+        "results/finance/20260821-202731-399926__authorization-memory-controls__finance-redesign-dev-003-controls",
+        "results/finance/20260821-203108-587704__authorization-memory-writer__finance-redesign-dev-003-glm-typed-one-shot",
+        "results/finance/20260821-203357-342157__authorization-memory-writer__finance-redesign-dev-003-qwen-typed-incremental"
+      ]
+    },
+    {
+      "iteration_id": "finance_redesign_dev_004",
+      "configuration_revision": "ab8913e7c5240f645f48b6549e4385301c789fd6",
+      "corpus_version": "finance_redesign_dev_004",
+      "corpus_source_sha256": "8367572a699a7f5032b1a7b1243671964a1372f0dd3a03900398b263b7e30e13",
+      "execution_precommit_revision": "ae59ba1d5bacd336f470d698fd8fd723380139f6",
+      "status": "completed_failed_precommitted_gate",
+      "report": "results/finance_redesign/development_iteration_004_report.json",
+      "run_directories": [
+        "results/finance/20260821-205011-360079__authorization-memory-controls__finance-redesign-dev-004-controls",
+        "results/finance/20260821-205428-054300__authorization-memory-writer__finance-redesign-dev-004-glm-typed-one-shot",
+        "results/finance/20260821-205746-503130__authorization-memory-writer__finance-redesign-dev-004-qwen-typed-incremental"
+      ]
+    },
+    {
+      "iteration_id": "finance_redesign_dev_005",
+      "configuration_revision": "078a479b6f717f5dc0d3586645b206626b0d799f",
+      "corpus_version": "finance_redesign_dev_005",
+      "corpus_source_sha256": "866d63f355baa179e77cce0ff051fb46dc9a246076288d4069ea53179e2132f9",
+      "execution_precommit_revision": "8c79d7c3108ee1765d4c9950d78c9b6c998906d2",
+      "status": "completed_failed_precommitted_gate",
+      "report": "results/finance_redesign/development_iteration_005_report.json",
+      "run_directories": [
+        "results/finance/20260821-211353-472692__authorization-memory-controls__finance-redesign-dev-005-controls",
+        "results/finance/20260821-211903-957120__authorization-memory-writer__finance-redesign-dev-005-glm-typed-one-shot",
+        "results/finance/20260821-212257-160647__authorization-memory-writer__finance-redesign-dev-005-qwen-typed-incremental"
+      ]
+    },
+    {
+      "iteration_id": "finance_redesign_dev_006",
+      "configuration_revision": "dab6f033a5e3e824a608d634a1f2bf5e4e85d122",
+      "corpus_version": "finance_redesign_dev_006",
+      "corpus_source_sha256": "8431ffc8ce51ecfc8bd91b1501089d0bd0508558d53ed3121a767634c99e3b38",
+      "execution_precommit_revision": "daea0a5fc80d43874b07e6334d61195318122133",
+      "status": "completed_failed_precommitted_gate_development_exhausted",
+      "report": "results/finance_redesign/development_iteration_006_report.json",
+      "run_directories": [
+        "results/finance/20260821-215714-842975__authorization-memory-controls__finance-redesign-dev-006-controls",
+        "results/finance/20260821-215714-842975__authorization-memory-controls__finance-redesign-dev-006-controls__provider-error-continuation",
+        "results/finance/20260821-220551-901766__authorization-memory-writer__finance-redesign-dev-006-glm-typed-one-shot",
+        "results/finance/20260821-221109-529068__authorization-memory-writer__finance-redesign-dev-006-qwen-typed-incremental"
+      ]
+    },
+    {
+      "iteration_id": "finance_redesign_dev_007",
+      "configuration_revision": "e06e16e2bc4bc4b0bc25a5a11b5a373bbf5a5559",
+      "corpus_version": "finance_redesign_dev_007",
+      "corpus_source_sha256": "99a602e800979f9138f031f2ab63b0b29a2c9e39bf3a3068d761a180944b597b",
+      "execution_precommit_revision": "1fdce42ecf2d91e18a80d58e0dc1f1f6dc9f0ad4",
+      "status": "completed_failed_precommitted_gate",
+      "report": "results/finance_redesign/development_iteration_007_report.json",
+      "run_directories": [
+        "results/finance/20260822-003839-606456__authorization-memory-controls__finance-redesign-dev-007-controls",
+        "results/finance/20260822-004220-577327__authorization-memory-writer__finance-redesign-dev-007-glm-typed-one-shot",
+        "results/finance/20260822-004350-469190__authorization-memory-writer__finance-redesign-dev-007-qwen-typed-incremental"
+      ]
+    },
+    {
+      "iteration_id": "finance_redesign_dev_008",
+      "configuration_revision": "65c85b15a3e312a43d7c97856338f463ba5cab41",
+      "corpus_version": "finance_redesign_dev_008",
+      "corpus_source_sha256": "d2d453c73b159beaa1ce4163cf0e158130f65d4b72d26fea07e9cc523c4ed0f8",
+      "execution_precommit_revision": "ff0322d4a96db7410268f056832f6e30cee398be",
+      "status": "completed_failed_precommitted_gate",
+      "report": "results/finance_redesign/development_iteration_008_report.json",
+      "run_directories": [
+        "results/finance/20260822-010741-635056__authorization-memory-controls__finance-redesign-dev-008-controls",
+        "results/finance/20260822-011136-928005__authorization-memory-writer__finance-redesign-dev-008-glm-typed-one-shot",
+        "results/finance/20260822-011749-564807__authorization-memory-writer__finance-redesign-dev-008-qwen-typed-incremental"
+      ]
+    },
+    {
+      "iteration_id": "finance_redesign_dev_009",
+      "configuration_revision": "4016bfa602ce5048a8473c92ebc16e6aa7f12c45",
+      "corpus_version": "finance_redesign_dev_009",
+      "corpus_source_sha256": "b7c29ebed4938ef66e67744a14df24b64b85eba2d50091710a47ad880fe21178",
+      "execution_precommit_revision": "214436be926e999c443c961c8785b46ab5f8d67c",
+      "status": "completed_failed_precommitted_gate",
+      "report": "results/finance_redesign/development_iteration_009_report.json",
+      "run_directories": [
+        "results/finance/20260822-013417-108362__authorization-memory-controls__finance-redesign-dev-009-controls",
+        "results/finance/20260822-013752-023521__authorization-memory-writer__finance-redesign-dev-009-glm-typed-one-shot",
+        "results/finance/20260822-014415-706071__authorization-memory-writer__finance-redesign-dev-009-qwen-typed-incremental"
+      ]
+    },
+    {
+      "iteration_id": "finance_redesign_dev_010",
+      "configuration_revision": "6dd3edd8476ee93dc0b8f7fdd2165b4bdf7a1bba",
+      "corpus_version": "finance_redesign_dev_010",
+      "corpus_source_sha256": "24084884edb8f2d89e1e3141a173355cb8e0ecff7db8bda5bcc3bf44bab83a3d",
+      "execution_precommit_revision": "f6276c84a9923f174554cb71115e26332f74c883",
+      "status": "completed_failed_precommitted_gate",
+      "report": "results/finance_redesign/development_iteration_010_report.json",
+      "run_directories": [
+        "results/finance/20260822-015905-827700__authorization-memory-controls__finance-redesign-dev-010-controls",
+        "results/finance/20260822-020226-002422__authorization-memory-writer__finance-redesign-dev-010-glm-typed-one-shot",
+        "results/finance/20260822-020458-461227__authorization-memory-writer__finance-redesign-dev-010-qwen-typed-incremental"
+      ]
+    },
+    {
+      "iteration_id": "finance_redesign_dev_011",
+      "configuration_revision": "73c90147b43a5ddd296efd299475b57530d1417d",
+      "corpus_version": "finance_redesign_dev_011",
+      "corpus_source_sha256": "9543a0dae48b315decd4dc1177a1d3511edcfebd84d104ca77b5d354359ba9bb",
+      "execution_precommit_revision": "98cda65220a60924c01502930fe4bd4fa3d049c9",
+      "status": "completed_failed_precommitted_gate",
+      "report": "results/finance_redesign/development_iteration_011_report.json",
+      "run_directories": [
+        "results/finance/20260822-022233-303368__authorization-memory-controls__finance-redesign-dev-011-controls",
+        "results/finance/20260822-022534-795594__authorization-memory-writer__finance-redesign-dev-011-glm-typed-one-shot",
+        "results/finance/20260822-022756-586416__authorization-memory-writer__finance-redesign-dev-011-qwen-typed-incremental"
+      ]
+    },
+    {
+      "iteration_id": "finance_redesign_dev_012",
+      "configuration_revision": "4696cc06e2bf56ec0d02e1ca71cdf81615fbf2c3",
+      "corpus_version": "finance_redesign_dev_012",
+      "corpus_source_sha256": "eaa7e604bebfaadf2636128f80aa021fed007c72faf5e96fe492bf3cbbe1a9fb",
+      "execution_precommit_revision": "23e375dc5435f597fc9240f935f5f796c2944fd1",
+      "status": "completed_failed_precommitted_gate_maximum_iteration_reached",
+      "report": "results/finance_redesign/development_iteration_012_report.json",
+      "run_directories": [
+        "results/finance/20260822-024629-110523__authorization-memory-controls__finance-redesign-dev-012-controls",
+        "results/finance/20260822-024956-519049__authorization-memory-writer__finance-redesign-dev-012-glm-typed-one-shot",
+        "results/finance/20260822-025214-711616__authorization-memory-writer__finance-redesign-dev-012-qwen-typed-incremental"
+      ]
+    },
+    {
+      "iteration_id": "finance_redesign_dev_013",
+      "configuration_revision": "7d61a64b738da06747f8eeb0428d6e38aa5c1cae",
+      "corpus_version": "finance_redesign_dev_013",
+      "corpus_source_sha256": "af90b5ecd6bc0719909e52203d6c4a6c1dc4a8d7b2f9ed582526ae820863826d",
+      "execution_precommit_revision": "15f648a5a0dd142cd2d6f125bbf42f79d37cd9fe",
+      "status": "completed_failed_precommitted_formation_gate_executor_skipped",
+      "report": "results/finance_redesign/development_iteration_013_report.json",
+      "run_directories": [
+        "results/finance/20260822-100802-052196__authorization-memory-writer__finance-redesign-dev-013-glm-typed-incremental",
+        "results/finance/20260822-101150-408393__authorization-memory-writer__finance-redesign-dev-013-qwen-typed-incremental"
+      ]
+    },
+    {
+      "iteration_id": "finance_redesign_dev_014",
+      "configuration_revision": "70e52b657bdfbb408a7165d0ecbce0f4ffcea448",
+      "corpus_version": "finance_redesign_dev_014",
+      "corpus_source_sha256": "140d01ac864cf7bbaabd68bad3673d4ac8bffbab1b3654372bfd71363f0e3fc4",
+      "execution_precommit_revision": "10f47b2bcbff0d42107f70445840576ee926e7b0",
+      "execution_revision": "cafee8912612906cf751f913b5feb5650d6ebc53",
+      "status": "completed_first_valid_pass_frozen",
+      "report": "results/finance_redesign/development_iteration_014_report.json",
+      "run_directories": [
+        "results/finance/20260822-103217-204218__authorization-memory-writer__finance-redesign-dev-014-glm-typed-incremental",
+        "results/finance/20260822-103817-792847__authorization-memory-writer__finance-redesign-dev-014-qwen-typed-incremental",
+        "results/finance/20260822-104938-184586__authorization-memory-controls__finance-redesign-dev-014-controls"
+      ]
+    }
+  ]
+}

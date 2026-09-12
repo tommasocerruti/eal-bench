@@ -353,8 +353,8 @@ def model_context_from_dict(row: Mapping[str, Any]) -> ModelContext:
     )
 
 
-def _from_mapping(model: type[Any], row: Mapping[str, Any], **overrides: Any) -> Any:
-    names = {item.name for item in fields(model)}
+def _from_mapping(model_type: type[Any], row: Mapping[str, Any], **overrides: Any) -> Any:
+    names = {item.name for item in fields(model_type)}
     values = {name: row[name] for name in names if name in row}
     values.update(overrides)
-    return model(**values)
+    return model_type(**values)

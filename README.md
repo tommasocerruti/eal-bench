@@ -152,9 +152,19 @@ Depending on the study, it records the resolved configuration, generated memorie
 model-visible contexts, native tool calls, normalized decisions, oracle scores, hashes, and
 provider usage. The completed `manifest.json` is the authoritative artifact inventory.
 
-Procurement and Cybersecurity include the raw artifacts needed to verify reported counts. Finance
-currently retains aggregate reports and hashed manifests; restoring the referenced raw JSONL files
-is necessary for a fully independent end-to-end rebuild.
+The [shared result guide](results/README.md) provides one layout for Procurement, Cybersecurity,
+and Finance. Each domain has a `results/<domain>/paper/manifest.json` selecting the exact runs,
+release, source hashes, and counts used in Appendix B.2, Tables 11–13. Reproduce all three domains
+without model calls or API keys:
+
+```bash
+python3 -m analysis.paper_results --domain all --output-dir /tmp/eal-paper-tables
+```
+
+Each domain exports the same CSV, JSON, and Markdown files, including writer/executor breakdowns
+and an artifact inventory. Raw JSONL files are excluded from Git across all domains; the command
+checks any originals present locally and reports missing files. Saved aggregates reproduce the
+published counts, while independent trial scoring and bootstrap reanalysis require the originals.
 
 ## Extending EAL-Bench
 

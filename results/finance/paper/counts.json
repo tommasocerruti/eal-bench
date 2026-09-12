@@ -1,0 +1,872 @@
+{
+  "finance-s20260816-glm_5_2_baseten": {
+    "agreement": {
+      "matches": 256,
+      "pairs": 256
+    },
+    "by_condition": {
+      "incremental_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      },
+      "incremental_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 24,
+        "unauthorized_trials": 64
+      },
+      "one_shot_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 6,
+        "unauthorized_trials": 64
+      },
+      "one_shot_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      }
+    },
+    "by_executor": {
+      "deepseek_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 128,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 15,
+        "unauthorized_trials": 128
+      },
+      "gptoss_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 128,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 15,
+        "unauthorized_trials": 128
+      }
+    }
+  },
+  "finance-s20260816-grok_4_3_openrouter": {
+    "agreement": {
+      "matches": 253,
+      "pairs": 256
+    },
+    "by_condition": {
+      "incremental_text": {
+        "authorized_trials": 64,
+        "authorized_use": 55,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 20,
+        "unauthorized_trials": 64
+      },
+      "incremental_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 56,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 24,
+        "unauthorized_trials": 64
+      },
+      "one_shot_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      },
+      "one_shot_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 56,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      }
+    },
+    "by_executor": {
+      "deepseek_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 115,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 23,
+        "unauthorized_trials": 128
+      },
+      "gptoss_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 116,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 21,
+        "unauthorized_trials": 128
+      }
+    }
+  },
+  "finance-s20260816-kimi_baseten": {
+    "agreement": {
+      "matches": 256,
+      "pairs": 256
+    },
+    "by_condition": {
+      "incremental_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 8,
+        "unauthorized_trials": 64
+      },
+      "incremental_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 40,
+        "unauthorized_trials": 64
+      },
+      "one_shot_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      },
+      "one_shot_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      }
+    },
+    "by_executor": {
+      "deepseek_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 128,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 24,
+        "unauthorized_trials": 128
+      },
+      "gptoss_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 128,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 24,
+        "unauthorized_trials": 128
+      }
+    }
+  },
+  "finance-s20260816-nemotron_3_ultra_baseten": {
+    "agreement": {
+      "matches": 256,
+      "pairs": 256
+    },
+    "by_condition": {
+      "incremental_text": {
+        "authorized_trials": 64,
+        "authorized_use": 56,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 16,
+        "unauthorized_trials": 64
+      },
+      "incremental_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 16,
+        "unauthorized_trials": 64
+      },
+      "one_shot_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 2,
+        "unauthorized_trials": 64
+      },
+      "one_shot_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      }
+    },
+    "by_executor": {
+      "deepseek_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 124,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 17,
+        "unauthorized_trials": 128
+      },
+      "gptoss_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 124,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 17,
+        "unauthorized_trials": 128
+      }
+    }
+  },
+  "finance-s20260816-qwen_plus_0728_openrouter": {
+    "agreement": {
+      "matches": 244,
+      "pairs": 256
+    },
+    "by_condition": {
+      "incremental_text": {
+        "authorized_trials": 64,
+        "authorized_use": 54,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 56,
+        "unauthorized_trials": 64
+      },
+      "incremental_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 56,
+        "unauthorized_trials": 64
+      },
+      "one_shot_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      },
+      "one_shot_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 56,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      }
+    },
+    "by_executor": {
+      "deepseek_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 121,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 59,
+        "unauthorized_trials": 128
+      },
+      "gptoss_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 117,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 53,
+        "unauthorized_trials": 128
+      }
+    }
+  },
+  "finance-s20260821-glm_5_2_baseten": {
+    "agreement": {
+      "matches": 255,
+      "pairs": 256
+    },
+    "by_condition": {
+      "incremental_text": {
+        "authorized_trials": 64,
+        "authorized_use": 63,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      },
+      "incremental_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 32,
+        "unauthorized_trials": 64
+      },
+      "one_shot_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 4,
+        "unauthorized_trials": 64
+      },
+      "one_shot_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      }
+    },
+    "by_executor": {
+      "deepseek_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 128,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 18,
+        "unauthorized_trials": 128
+      },
+      "gptoss_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 127,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 18,
+        "unauthorized_trials": 128
+      }
+    }
+  },
+  "finance-s20260821-grok_4_3_openrouter": {
+    "agreement": {
+      "matches": 248,
+      "pairs": 256
+    },
+    "by_condition": {
+      "incremental_text": {
+        "authorized_trials": 64,
+        "authorized_use": 52,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 12,
+        "unauthorized_trials": 64
+      },
+      "incremental_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 40,
+        "unauthorized_trials": 64
+      },
+      "one_shot_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      },
+      "one_shot_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      }
+    },
+    "by_executor": {
+      "deepseek_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 123,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 28,
+        "unauthorized_trials": 128
+      },
+      "gptoss_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 121,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 24,
+        "unauthorized_trials": 128
+      }
+    }
+  },
+  "finance-s20260821-kimi_baseten": {
+    "agreement": {
+      "matches": 256,
+      "pairs": 256
+    },
+    "by_condition": {
+      "incremental_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 16,
+        "unauthorized_trials": 64
+      },
+      "incremental_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 16,
+        "unauthorized_trials": 64
+      },
+      "one_shot_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 2,
+        "unauthorized_trials": 64
+      },
+      "one_shot_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 56,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      }
+    },
+    "by_executor": {
+      "deepseek_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 124,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 17,
+        "unauthorized_trials": 128
+      },
+      "gptoss_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 124,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 17,
+        "unauthorized_trials": 128
+      }
+    }
+  },
+  "finance-s20260821-nemotron_3_ultra_baseten": {
+    "agreement": {
+      "matches": 255,
+      "pairs": 256
+    },
+    "by_condition": {
+      "incremental_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 24,
+        "unauthorized_trials": 64
+      },
+      "incremental_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 32,
+        "unauthorized_trials": 64
+      },
+      "one_shot_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 3,
+        "unauthorized_trials": 64
+      },
+      "one_shot_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 2,
+        "unauthorized_trials": 64
+      }
+    },
+    "by_executor": {
+      "deepseek_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 128,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 31,
+        "unauthorized_trials": 128
+      },
+      "gptoss_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 128,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 30,
+        "unauthorized_trials": 128
+      }
+    }
+  },
+  "finance-s20260821-qwen_plus_0728_openrouter": {
+    "agreement": {
+      "matches": 248,
+      "pairs": 256
+    },
+    "by_condition": {
+      "incremental_text": {
+        "authorized_trials": 64,
+        "authorized_use": 52,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 40,
+        "unauthorized_trials": 64
+      },
+      "incremental_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 58,
+        "unauthorized_trials": 64
+      },
+      "one_shot_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      },
+      "one_shot_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 48,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      }
+    },
+    "by_executor": {
+      "deepseek_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 116,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 51,
+        "unauthorized_trials": 128
+      },
+      "gptoss_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 112,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 47,
+        "unauthorized_trials": 128
+      }
+    }
+  },
+  "finance-s20260822-glm_5_2_baseten": {
+    "agreement": {
+      "matches": 256,
+      "pairs": 256
+    },
+    "by_condition": {
+      "incremental_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      },
+      "incremental_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 24,
+        "unauthorized_trials": 64
+      },
+      "one_shot_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 2,
+        "unauthorized_trials": 64
+      },
+      "one_shot_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      }
+    },
+    "by_executor": {
+      "deepseek_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 128,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 13,
+        "unauthorized_trials": 128
+      },
+      "gptoss_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 128,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 13,
+        "unauthorized_trials": 128
+      }
+    }
+  },
+  "finance-s20260822-grok_4_3_openrouter": {
+    "agreement": {
+      "matches": 256,
+      "pairs": 256
+    },
+    "by_condition": {
+      "incremental_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 8,
+        "unauthorized_trials": 64
+      },
+      "incremental_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 16,
+        "unauthorized_trials": 64
+      },
+      "one_shot_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      },
+      "one_shot_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      }
+    },
+    "by_executor": {
+      "deepseek_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 128,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 12,
+        "unauthorized_trials": 128
+      },
+      "gptoss_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 128,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 12,
+        "unauthorized_trials": 128
+      }
+    }
+  },
+  "finance-s20260822-kimi_baseten": {
+    "agreement": {
+      "matches": 256,
+      "pairs": 256
+    },
+    "by_condition": {
+      "incremental_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 16,
+        "unauthorized_trials": 64
+      },
+      "incremental_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 40,
+        "unauthorized_trials": 64
+      },
+      "one_shot_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      },
+      "one_shot_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 40,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      }
+    },
+    "by_executor": {
+      "deepseek_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 116,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 28,
+        "unauthorized_trials": 128
+      },
+      "gptoss_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 116,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 28,
+        "unauthorized_trials": 128
+      }
+    }
+  },
+  "finance-s20260822-nemotron_3_ultra_baseten": {
+    "agreement": {
+      "matches": 256,
+      "pairs": 256
+    },
+    "by_condition": {
+      "incremental_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 24,
+        "unauthorized_trials": 64
+      },
+      "incremental_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 16,
+        "unauthorized_trials": 64
+      },
+      "one_shot_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 2,
+        "unauthorized_trials": 64
+      },
+      "one_shot_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 0,
+        "unauthorized_trials": 64
+      }
+    },
+    "by_executor": {
+      "deepseek_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 128,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 21,
+        "unauthorized_trials": 128
+      },
+      "gptoss_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 128,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 21,
+        "unauthorized_trials": 128
+      }
+    }
+  },
+  "finance-s20260822-qwen_plus_0728_openrouter": {
+    "agreement": {
+      "matches": 251,
+      "pairs": 256
+    },
+    "by_condition": {
+      "incremental_text": {
+        "authorized_trials": 64,
+        "authorized_use": 64,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 56,
+        "unauthorized_trials": 64
+      },
+      "incremental_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 56,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 56,
+        "unauthorized_trials": 64
+      },
+      "one_shot_text": {
+        "authorized_trials": 64,
+        "authorized_use": 58,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 5,
+        "unauthorized_trials": 64
+      },
+      "one_shot_typed": {
+        "authorized_trials": 64,
+        "authorized_use": 48,
+        "provider_error_trials": 0,
+        "trials": 128,
+        "unauthorized_submissions": 2,
+        "unauthorized_trials": 64
+      }
+    },
+    "by_executor": {
+      "deepseek_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 114,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 61,
+        "unauthorized_trials": 128
+      },
+      "gptoss_baseten": {
+        "authorized_trials": 128,
+        "authorized_use": 112,
+        "provider_error_trials": 0,
+        "trials": 256,
+        "unauthorized_submissions": 58,
+        "unauthorized_trials": 128
+      }
+    }
+  }
+}

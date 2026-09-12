@@ -1,69 +1,50 @@
 {
-  "schema_version": "finance_pre_run_cost_estimate_v1",
-  "release_id": "finance_v1",
-  "status": "approved_and_completed",
-  "estimated_on": "2026-08-15",
-  "approved_on": "2026-08-15",
-  "approval_source": "owner approval in experiment task",
+  "schema_version": "finance_redesign_pre_run_cost_estimate_v1",
+  "release_id": "finance_redesign_v1",
+  "status": "approved",
+  "estimated_on": "2026-08-22",
+  "approval_source": "Owner authorized autonomous completion under the USD 300 total Finance redesign ceiling.",
   "corpus_version": "benchmark_v1",
-  "presentation_version": "naturalistic_v1",
-  "pressure_profile": "loss_containment_v1",
-  "seed": 20260816,
-  "targets": {
-    "writer_targets": [
-      "nemotron_3_ultra_baseten",
-      "kimi_baseten",
-      "glm_5_2_baseten",
-      "grok_4_3_openrouter",
-      "qwen_plus_0728_openrouter"
-    ],
-    "executor_targets": [
-      "gptoss_baseten",
-      "deepseek_baseten"
-    ]
-  },
-  "call_plan": {
-    "writer_logical_updates": 880,
-    "writer_calls_without_repairs": 880,
-    "writer_calls_scheduled_maximum": 1760,
-    "baseline_executor_calls": {
-      "minimum": 2560,
-      "maximum_with_frozen_witnesses": 2624
-    },
-    "pressure_executor_calls": {
-      "minimum": 2560,
-      "maximum_with_frozen_witnesses": 2624
-    },
-    "total_expected_calls_without_writer_repairs": 6000,
-    "total_scheduled_maximum": 7008,
-    "transport_retries_excluded": true
+  "seeds": [20260816, 20260821, 20260822],
+  "prior_development_estimated_realized_usd": 27.48323686,
+  "final_evaluation_expected_usd": 110,
+  "complete_project_expected_usd": 137.48323686,
+  "remaining_global_authority_usd": 272.51676314,
+  "complete_project_never_exceed_usd": 300,
+  "final_phase_route_ceiling_sum_usd": 270,
+  "complete_project_if_every_route_reached_its_ceiling_usd": 297.48323686,
+  "per_seed_route_ceilings_usd": {
+    "controls_both_executors": 6,
+    "writer_nemotron_3_ultra_baseten": 12,
+    "writer_kimi_baseten": 14,
+    "writer_glm_5_2_baseten": 18,
+    "writer_grok_4_3_openrouter": 12,
+    "writer_qwen_plus_0728_openrouter": 8,
+    "pressure_per_writer_source": 4
   },
   "cost_basis": {
-    "prior_matrix_actual_usd": 39.344316185,
-    "prior_matrix_call_records": 6802,
-    "same_scale_qwen_and_nemotron_runs_used": true,
-    "deepseek_cache_and_rate_limit_behavior_from_held_out_controls_used": true,
-    "provider_price_source": "frozen repository target-price records",
-    "cache_discount_assumed_for_expected_range": true
-  },
-  "estimated_cost_usd": {
-    "expected_lower": 30.0,
-    "expected_upper": 38.0,
-    "requested_hard_cap": 50.0,
-    "approved_hard_cap": 50.0
-  },
-  "estimated_duration": {
-    "expected_hours_lower": 4,
-    "expected_hours_upper": 6,
-    "rate_limit_contingency_hours_upper": 8
+    "completed_development_iterations": 14,
+    "iteration_14_realized_usd": 1.9891202,
+    "long_history_writer_costs_use_frozen_cache_aware_provider_rates": true,
+    "pressure_and_controls_include_both_executor_targets": true,
+    "transport_retries_included_in_actual_cost_but_excluded_from_call_plan": true
   },
   "execution_contract": {
+    "sequential_routes": true,
     "generate_each_writer_memory_set_once": true,
     "reuse_exact_memories_with_both_executors": true,
     "pressure_reuses_exact_writer_source": true,
     "baseline_reruns": 0,
     "successful_trial_reruns": 0,
     "retain_provider_failures": true,
+    "minor_route_ceiling_reallocation_allowed_if_science_is_unchanged_and_global_ceiling_is_safe": true,
     "full_matrix_paid_execution_authorized": true
+  },
+  "post_start_metadata_adjustment": {
+    "completed_route": "controls_s20260816",
+    "derived_realized_usd": 4.797566,
+    "retained_rate_limit_retries": 68,
+    "reason": "Reallocate route ceilings after the first control route exceeded its planning estimate; do not change the USD 270 final route pool or USD 300 global ceiling.",
+    "scientific_or_provider_visible_configuration_changed": false
   }
 }
