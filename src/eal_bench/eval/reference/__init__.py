@@ -8,14 +8,33 @@ re-derives every recorded value.
 from __future__ import annotations
 
 import json
+from collections.abc import Mapping
 from importlib import resources
 from typing import Any
 
 from .. import resources as eval_resources
 
-__all__ = ["load_fixture", "verify", "verify_resources"]
+__all__ = [
+    "load_fixture",
+    "verify",
+    "verify_inspect",
+    "verify_inspect_eval",
+    "verify_resources",
+]
+
+_ABSENT = object()
 
 _PACKAGE = __name__
+
+
+def _differing_keys(observed: Mapping[str, Any], expected: Mapping[str, Any]) -> list[str]:
+    """Compare by key presence as well as value, so a new field is not read as None."""
+
+    return sorted(
+        key
+        for key in set(observed) | set(expected)
+        if observed.get(key, _ABSENT) != expected.get(key, _ABSENT)
+    )
 
 
 def load_fixture(name: str) -> Any:
@@ -36,12 +55,12 @@ def verify_resources() -> dict[str, Any]:
         observed = eval_resources.describe(domain).to_dict()
         checked += 1
         if observed != recorded:
-            differing = sorted(
-                key
-                for key in set(observed) | set(recorded)
-                if observed.get(key) != recorded.get(key)
+            mismatches.append(
+                {
+                    "domain_id": domain_id,
+                    "fields": _differing_keys(observed, recorded),
+                }
             )
-            mismatches.append({"domain_id": domain_id, "fields": differing})
     if mismatches:
         raise AssertionError(f"resource identity drifted: {mismatches}")
     return {
@@ -93,6 +112,8 @@ def _optional_track_checks() -> dict[str, Any]:
             }
             continue
         found[name] = import_module(qualified).verify_reference()
+    if found.get("controls", {}).get("status") != "skipped":
+        found["inspect"] = verify_inspect()
     return found
 
 
@@ -260,4 +281,646 @@ def verify_api_contracts() -> dict[str, Any]:
         raise AssertionError("explicit pooling lost the surface record")
     checked.append("pooling guards")
 
+    checked.extend(_verify_track_entry_points())
     return {"status": "passed", "entry_points": checked}
+
+
+def _verify_track_entry_points() -> list[str]:
+    """Entry points that need a track, so they cannot be checked by the core alone."""
+
+    import tempfile
+    from pathlib import Path
+
+    try:
+        from ..controls import build_control_trials
+    except ImportError:
+        return []
+
+    import json as _json
+
+    from experiments.authorization_memory.schemas import ModelProvenance
+
+    from ..export import EXPORT_SCHEMA_VERSION, build_track, write_trials
+    from ..scoring import score_many
+    from ..trials import ModelResponse, Trial
+
+    domain_id = "procurement"
+    case_id = build_control_trials(domain_id, check_leakage=False)[0][1].case_id
+    pairs = build_track("controls", domain_id, check_leakage=False, case_ids=[case_id])
+    if not pairs:
+        raise AssertionError("build_track returned no trials")
+
+    with tempfile.TemporaryDirectory() as directory:
+        path = Path(directory) / "trials.jsonl"
+        if write_trials(path, pairs) != len(pairs):
+            raise AssertionError("write_trials reported the wrong row count")
+        rows = [
+            _json.loads(line)
+            for line in path.read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        ]
+        if len(rows) != len(pairs):
+            raise AssertionError("write_trials lost a trial")
+        for row in rows:
+            if row.pop("schema_version", None) != EXPORT_SCHEMA_VERSION:
+                raise AssertionError("an exported trial carries the wrong schema version")
+            # Oracle state must never reach the file a model is sent.
+            serialized = _json.dumps(row)
+            for leaked in ("request_authorized", "oracle_reason", "pair_id"):
+                if leaked in serialized:
+                    raise AssertionError(f"exported trial leaks {leaked}")
+        restored = [Trial.from_dict(row) for row in rows]
+        if [trial.trial_id for trial in restored] != [trial.trial_id for trial, _ in pairs]:
+            raise AssertionError("exported trials did not round trip")
+
+    route = ModelProvenance(
+        target_id="gptoss_baseten",
+        provider="baseten",
+        requested_model="gptoss",
+        resolved_model="openai/gpt-oss-120b",
+    )
+    outcomes = score_many(
+        pairs,
+        [ModelResponse(text="", finish_reason="stop")] * len(pairs),
+        executor=route,
+    )
+    if any(row.executor_model != "openai/gpt-oss-120b" for row in outcomes):
+        raise AssertionError("score_many dropped the executor route")
+    if any(row.surface != "native" for row in outcomes):
+        raise AssertionError("score_many mislabelled the request surface")
+    return ["build_track", "write_trials", "score_many(executor=)"]
+
+
+def _controls_fixture_path() -> str:
+    return "controls_outcomes.json"
+
+
+def build_controls_fixture() -> dict[str, Any]:
+    """Recorded executor replies covering every outcome class the scorer emits."""
+
+    from ..controls import build_control_trials
+    from ..scoring import score_response
+
+    rows: list[dict[str, Any]] = []
+    for domain_id in eval_resources.list_domains():
+        domain = eval_resources.load_domain(domain_id)
+        pairs = build_control_trials(domain_id, check_leakage=False)
+        by_pair: dict[str, list[Any]] = {}
+        for _, truth in pairs:
+            by_pair.setdefault(truth.pair_id, []).append(truth)
+        for truth in _fixture_truths(pairs):
+            partner = next(
+                other
+                for other in by_pair[truth.pair_id]
+                if other.probe_id != truth.probe_id and other.condition_id == truth.condition_id
+            )
+            for label, response in _fixture_responses(domain, truth, partner):
+                rows.append(
+                    {
+                        "label": label,
+                        "domain_id": domain_id,
+                        "trial_id": truth.trial_id,
+                        "response": response.to_dict(),
+                        "expected": score_response(truth, response).to_dict(),
+                    }
+                )
+    return {"schema_version": 1, "rows": rows}
+
+
+def _fixture_truths(pairs: list[Any]) -> list[Any]:
+    """One authorized and one unauthorized trial per faithful condition."""
+
+    picked: dict[tuple[str, bool], Any] = {}
+    for _, truth in pairs:
+        picked.setdefault((truth.condition_id, truth.request_authorized), truth)
+    return [picked[key] for key in sorted(picked, key=lambda key: (key[0], key[1]))]
+
+
+def _fixture_responses(domain: Any, truth: Any, partner: Any) -> list[tuple[str, Any]]:
+    from ..trials import ModelResponse
+
+    action_tool = domain.action_tools[0]
+    arguments = domain.conformance.action_arguments(truth.probe.request, action_tool)
+    # Domains with two action tools separate the submitted action from the operational
+    # alternative by tool. Procurement has one, so the partner's payload is the other action.
+    if len(domain.action_tools) > 1:
+        other_tool = domain.action_tools[1]
+        other = domain.conformance.action_arguments(truth.probe.request, other_tool)
+    else:
+        other_tool = action_tool
+        other = domain.conformance.action_arguments(partner.probe.request, action_tool)
+    escalate, decline = (name for name in domain.terminal_tools if name not in domain.action_tools)
+    escalate_arguments = domain.conformance.action_arguments(truth.probe.request, escalate)
+    decline_arguments = domain.conformance.action_arguments(truth.probe.request, decline)
+    return [
+        ("execute_requested", ModelResponse.from_tool_calls([(action_tool, arguments)])),
+        ("execute_other", ModelResponse.from_tool_calls([(other_tool, other)])),
+        ("escalate", ModelResponse.from_tool_calls([(escalate, escalate_arguments)])),
+        ("decline", ModelResponse.from_tool_calls([(decline, decline_arguments)])),
+        ("malformed_arguments", ModelResponse.from_tool_calls([(action_tool, "{not json")])),
+        (
+            "multiple_tool_calls",
+            ModelResponse.from_tool_calls([(action_tool, arguments), (decline, decline_arguments)]),
+        ),
+        ("unknown_tool", ModelResponse.from_tool_calls([("no_such_tool", {})])),
+        (
+            "missing_tool_call",
+            ModelResponse(text="I would need approval first.", finish_reason="stop"),
+        ),
+        ("provider_error", ModelResponse.provider_error("timeout after 60s")),
+    ]
+
+
+def verify_controls() -> dict[str, Any]:
+    """Re-score every recorded reply and require the frozen outcome."""
+
+    from ..controls import build_control_trials
+    from ..scoring import score_response
+    from ..trials import ModelResponse
+
+    fixture = load_fixture(_controls_fixture_path())
+    truths: dict[str, Any] = {}
+    mismatches: list[dict[str, Any]] = []
+    for row in fixture["rows"]:
+        domain_id = row["domain_id"]
+        if domain_id not in truths:
+            truths[domain_id] = {
+                truth.trial_id: truth
+                for _, truth in build_control_trials(domain_id, check_leakage=False)
+            }
+        truth = truths[domain_id].get(row["trial_id"])
+        if truth is None:
+            mismatches.append({"label": row["label"], "reason": "trial_id not built"})
+            continue
+        observed = score_response(truth, ModelResponse.from_dict(row["response"])).to_dict()
+        if observed != row["expected"]:
+            mismatches.append(
+                {
+                    "label": row["label"],
+                    "domain_id": domain_id,
+                    "fields": _differing_keys(observed, row["expected"]),
+                }
+            )
+    if mismatches:
+        raise AssertionError(f"control outcomes drifted: {mismatches}")
+    return {
+        "status": "passed",
+        "rows_checked": len(fixture["rows"]),
+        "labels": sorted({row["label"] for row in fixture["rows"]}),
+        "determinism": verify_controls_determinism(),
+        "documented_quickstart": verify_documented_quickstart(),
+        "runner_parity": verify_runner_parity(),
+    }
+
+
+def verify_documented_quickstart() -> dict[str, Any]:
+    """Run the example in docs/reusable_api.md end to end.
+
+    It raised for every consumer once, because a pooling guard was added without
+    rerunning it. A documented example that is never executed is not documentation.
+    """
+
+    from ..controls import build_control_trials, calibration_verdict
+    from ..scoring import score_many
+    from ..trials import ModelResponse
+
+    domain_id = "procurement"
+    domain = eval_resources.load_domain(domain_id)
+    pairs = build_control_trials(domain_id)
+    action = domain.action_tools[0]
+    decline = [name for name in domain.terminal_tools if name not in domain.action_tools][-1]
+    replies = []
+    for _, truth in pairs:
+        name = action if truth.request_authorized else decline
+        replies.append(
+            ModelResponse.from_tool_calls(
+                [(name, domain.conformance.action_arguments(truth.probe.request, name))]
+            )
+        )
+    verdict = calibration_verdict(score_many(pairs, replies))
+    if not verdict.calibrated:
+        raise AssertionError(f"a perfect executor was not calibrated: {verdict.reasons}")
+    if len(verdict.by_condition) != 2:
+        raise AssertionError("the verdict lost its per-condition breakdown")
+    return {
+        "status": "passed",
+        "trials": len(pairs),
+        "conditions": [item.condition_id for item in verdict.by_condition],
+    }
+
+
+def verify_controls_determinism() -> dict[str, Any]:
+    """Two builds must produce identical trial ids and identical model-visible content."""
+
+    from ..controls import build_control_trials
+
+    checked = 0
+    for domain_id in eval_resources.list_domains():
+        # check_leakage defaults to True and the docs advertise it, so exercise the
+        # default path here rather than only the fast one the fixtures use.
+        first = build_control_trials(domain_id, check_leakage=True)
+        second = build_control_trials(domain_id, check_leakage=False)
+        if len(first) != len(second):
+            raise AssertionError(f"{domain_id}: trial count is not deterministic")
+        for (trial_a, truth_a), (trial_b, truth_b) in zip(first, second):
+            if trial_a.trial_id != trial_b.trial_id:
+                raise AssertionError(f"{domain_id}: trial ids are not deterministic")
+            if trial_a.to_dict() != trial_b.to_dict():
+                raise AssertionError(
+                    f"{domain_id}: trial {trial_a.trial_id} content is not deterministic"
+                )
+            if truth_a.to_dict() != truth_b.to_dict():
+                raise AssertionError(
+                    f"{domain_id}: truth for {trial_a.trial_id} is not deterministic"
+                )
+        if len({trial.trial_id for trial, _ in first}) != len(first):
+            raise AssertionError(f"{domain_id}: trial ids are not unique")
+        checked += len(first)
+    return {"status": "passed", "trials_checked": checked}
+
+
+def _inspect_output(response: dict[str, Any]) -> Any:
+    from inspect_ai.model import ChatCompletionChoice, ChatMessageAssistant, ModelOutput
+    from inspect_ai.tool import ToolCall
+
+    if response.get("error"):
+        return ModelOutput(model=response.get("model") or "", error=response["error"])
+    calls = []
+    for index, call in enumerate(response.get("tool_calls", ())):
+        arguments = call.get("arguments")
+        if isinstance(arguments, dict):
+            calls.append(ToolCall(id=str(index), function=call["name"], arguments=arguments))
+            continue
+        # Inspect never hands a raw string through; unparseable arguments arrive as
+        # an empty dict plus parse_error.
+        parsed, parse_error = _parse_arguments(arguments)
+        calls.append(
+            ToolCall(
+                id=str(index),
+                function=call["name"],
+                arguments=parsed,
+                parse_error=parse_error,
+            )
+        )
+    return ModelOutput(
+        model=response.get("model") or "",
+        choices=[
+            ChatCompletionChoice(
+                message=ChatMessageAssistant(
+                    content=response.get("text") or "", tool_calls=calls or None
+                ),
+                stop_reason=response.get("finish_reason") or "stop",
+            )
+        ],
+    )
+
+
+def _parse_arguments(arguments: Any) -> tuple[dict[str, Any], str | None]:
+    """Reproduce the parse_error text Inspect itself would produce."""
+
+    from inspect_ai.model._call_tools import tool_parse_error_message
+
+    if arguments is None:
+        return {}, None
+    try:
+        decoded = json.loads(arguments)
+    except (TypeError, ValueError) as exc:
+        return {}, tool_parse_error_message(str(arguments), exc)
+    if isinstance(decoded, dict):
+        return decoded, None
+    return {}, tool_parse_error_message(str(arguments), ValueError("not an object"))
+
+
+def verify_inspect() -> dict[str, Any]:
+    """The Inspect path must reach the same outcome as the direct scorer."""
+
+    from ..controls import build_control_trials
+    from ..inspect_adapter import available, control_task, response_from_inspect
+    from ..scoring import score_response
+
+    if not available():
+        return {"status": "skipped", "reason": "inspect-ai is not installed"}
+
+    fixture = load_fixture(_controls_fixture_path())
+    truths: dict[str, Any] = {}
+    mismatches: list[dict[str, Any]] = []
+    for row in fixture["rows"]:
+        domain_id = row["domain_id"]
+        if domain_id not in truths:
+            truths[domain_id] = {
+                truth.trial_id: truth
+                for _, truth in build_control_trials(domain_id, check_leakage=False)
+            }
+        truth = truths[domain_id].get(row["trial_id"])
+        if truth is None:
+            mismatches.append({"label": row["label"], "reason": "trial_id not built"})
+            continue
+        observed = score_response(
+            truth, response_from_inspect(_inspect_output(row["response"]))
+        ).to_dict()
+        # Inspect never exposes the raw text of an unparseable tool call, so the
+        # recorded argument string cannot survive the round trip. Every
+        # decision-relevant field must still agree.
+        ignore = (
+            {"tool_arguments"}
+            if any(
+                not isinstance(call.get("arguments"), dict)
+                for call in row["response"].get("tool_calls", ())
+            )
+            else set()
+        )
+        expected = {k: v for k, v in row["expected"].items() if k not in ignore}
+        observed = {k: v for k, v in observed.items() if k not in ignore}
+        if observed != expected:
+            mismatches.append(
+                {
+                    "label": row["label"],
+                    "domain_id": domain_id,
+                    "fields": _differing_keys(observed, expected),
+                }
+            )
+    if mismatches:
+        raise AssertionError(f"Inspect path disagrees with the scorer: {mismatches}")
+    task = control_task("procurement", check_leakage=False)
+    return {
+        "status": "passed",
+        "rows_checked": len(fixture["rows"]),
+        "task_built": task.name,
+        "task_samples": len(task.dataset),
+        "end_to_end_eval": verify_inspect_eval(),
+        "tool_surface": verify_inspect_tool_surface(),
+        "contract": verify_inspect_contract(),
+    }
+
+
+def verify_runner_parity() -> dict[str, Any]:
+    """Control trials must equal what the experiment runner builds for the same conditions.
+
+    Rebuilds faithful evidence through `pipeline._build_evidence` and compares evidence
+    ids, model-visible context hashes and tool schemas.
+    """
+
+    from experiments.authorization_memory.conditions import ExecutorEvidence, get_condition
+    from experiments.authorization_memory.persistence import content_hash
+    from experiments.authorization_memory.pipeline import (
+        _build_evidence,
+        _executor_messages,
+    )
+    from experiments.authorization_memory.surfaces import model_visible_tools
+
+    from ..controls import CONTROL_CONDITIONS, build_control_trials, capacity_tokens
+
+    compared = 0
+    for domain_id in eval_resources.list_domains():
+        domain = eval_resources.load_domain(domain_id)
+        version = domain.corpus.default_version
+        presentation = eval_resources.resolve_presentation(domain)
+        cases = list(domain.corpus.load_cases(version))
+        capacity = capacity_tokens(domain, cases, version, presentation)
+        # No writer condition is selected, so this makes no model call.
+        _, _, _, evidence, _ = _build_evidence(
+            None,
+            domain,
+            cases,
+            [get_condition(name) for name in CONTROL_CONDITIONS],
+            writer_task="writer",
+            writer_targets=(),
+            writer_runs=0,
+            writer_max_attempts=1,
+            capacity_tokens=capacity,
+            batch_size=None,
+            seed=0,
+            token_counter=None,
+            presentation=presentation,
+        )
+        expected: dict[tuple[str, str, str], tuple[str, str]] = {}
+        by_id = {domain.corpus.case_id(case): case for case in cases}
+        for item in evidence:
+            case = by_id[item.case_id]
+            for probe in domain.corpus.probes(case):
+                messages = _executor_messages(
+                    domain,
+                    case,
+                    probe,
+                    evidence_kind=ExecutorEvidence.MEMORY,
+                    memory=item.payload,
+                    presentation=presentation,
+                )
+                expected[(item.case_id, item.condition_id, probe.probe_id)] = (
+                    item.evidence_id,
+                    content_hash(messages),
+                )
+        tools_hash = content_hash(model_visible_tools(domain, presentation))
+        observed: dict[tuple[str, str, str], tuple[str, str]] = {}
+        for trial, truth in build_control_trials(domain_id, check_leakage=False):
+            if content_hash([dict(tool) for tool in trial.tools]) != tools_hash:
+                raise AssertionError(f"{domain_id}: tool schemas differ from the runner")
+            observed[(truth.case_id, truth.condition_id, truth.probe_id)] = (
+                truth.evidence.evidence_id,
+                content_hash([dict(message) for message in trial.messages]),
+            )
+        if set(observed) != set(expected):
+            raise AssertionError(f"{domain_id}: trial set differs from the runner")
+        differing = sorted(key for key in expected if expected[key] != observed[key])
+        if differing:
+            raise AssertionError(f"{domain_id}: {len(differing)} contexts differ from the runner")
+        compared += len(expected)
+    return {"status": "passed", "contexts_compared": compared}
+
+
+def verify_inspect_eval() -> dict[str, Any]:
+    """Run a real Inspect eval against the mock provider, with no credentials.
+
+    A scripted perfect executor must reach complete authorized use and zero
+    unauthorized submission through the Inspect solver, scorer and tool plumbing.
+    """
+
+    from ..controls import build_control_trials
+    from ..inspect_adapter import available, control_task
+
+    if not available():
+        return {"status": "skipped", "reason": "inspect-ai is not installed"}
+
+    import tempfile
+
+    from inspect_ai import eval as inspect_eval
+    from inspect_ai.model import (
+        ChatCompletionChoice,
+        ChatMessageAssistant,
+        ModelOutput,
+        get_model,
+    )
+    from inspect_ai.tool import ToolCall
+
+    domain_id = "procurement"
+    domain = eval_resources.load_domain(domain_id)
+    case_id = domain.corpus.case_id(domain.corpus.load_cases(domain.corpus.default_version)[0])
+    pairs = build_control_trials(domain_id, check_leakage=False, case_ids=[case_id])
+    by_request = {trial.messages[-1]["content"]: truth for trial, truth in pairs}
+    if len(by_request) != len(pairs):
+        raise AssertionError(
+            f"{len(pairs)} trials collapse to {len(by_request)} distinct requests; "
+            "the scripted model would answer one trial from another's truth"
+        )
+    action = domain.action_tools[0]
+    decline = [name for name in domain.terminal_tools if name not in domain.action_tools][-1]
+
+    def scripted(messages: Any, tools: Any, tool_choice: Any, config: Any) -> Any:
+        del tools, tool_choice, config
+        truth = by_request[messages[-1].content]
+        name = action if truth.request_authorized else decline
+        arguments = domain.conformance.action_arguments(truth.probe.request, name)
+        return ModelOutput(
+            model="mockllm/model",
+            choices=[
+                ChatCompletionChoice(
+                    message=ChatMessageAssistant(
+                        content="",
+                        tool_calls=[ToolCall(id="1", function=name, arguments=dict(arguments))],
+                    ),
+                    stop_reason="tool_calls",
+                )
+            ],
+        )
+
+    # The log is read lazily from log_dir, so collect everything before cleanup.
+    with tempfile.TemporaryDirectory() as log_dir:
+        log = inspect_eval(
+            control_task(domain_id, check_leakage=False, case_ids=[case_id]),
+            model=get_model("mockllm/model", custom_outputs=scripted),
+            log_dir=log_dir,
+            display="none",
+        )[0]
+        status = log.status
+        samples = list(log.samples or ())
+        scorer_name = next(iter(samples[0].scores)) if samples else ""
+        rows = [dict(sample.scores[scorer_name].metadata) for sample in samples]
+    log_status, log_samples = status, samples
+    if log_status != "success":
+        raise AssertionError(f"Inspect eval failed: {log_status}")
+    if len(log_samples) != len(pairs):
+        raise AssertionError(f"Inspect scored {len(log_samples)} samples for {len(pairs)} trials")
+    authorized = [row for row in rows if row["request_authorized"]]
+    unauthorized = [row for row in rows if not row["request_authorized"]]
+    used = sum(1 for row in authorized if row["requested_action_taken"])
+    submitted = sum(1 for row in unauthorized if row["requested_action_taken"])
+    if used != len(authorized) or submitted != 0:
+        raise AssertionError(
+            f"scripted perfect executor scored {used}/{len(authorized)} authorized use "
+            f"and {submitted}/{len(unauthorized)} unauthorized submission"
+        )
+    return {
+        "status": "passed",
+        "samples": len(log_samples),
+        "authorized_use": f"{used}/{len(authorized)}",
+        "unauthorized_submission": f"{submitted}/{len(unauthorized)}",
+    }
+
+
+def verify_inspect_tool_surface() -> dict[str, Any]:
+    """Pin the difference between the Inspect tool surface and the runner's.
+
+    Inspect requires a description on every parameter and adds
+    `additionalProperties`. That difference is acceptable but must stay known, so
+    any new divergence fails here rather than silently changing what a model sees.
+    """
+
+    from ..controls import build_control_trials
+    from ..inspect_adapter import (
+        available,
+        missing_parameter_descriptions,
+        rendered_tool_surface,
+    )
+
+    if not available():
+        return {"status": "skipped", "reason": "inspect-ai is not installed"}
+
+    allowed_top_level = {"additionalProperties"}
+    surfaces: dict[str, Any] = {}
+    for domain_id in eval_resources.list_domains():
+        trial = build_control_trials(domain_id, check_leakage=False)[0][0]
+        native = {tool["function"]["name"]: tool["function"]["parameters"] for tool in trial.tools}
+        filled = set(missing_parameter_descriptions(list(trial.tools)))
+        rendered = rendered_tool_surface(list(trial.tools))
+        for name, schema in rendered.items():
+            source = native[name]
+            added = set(schema) - set(source)
+            if added - allowed_top_level:
+                raise AssertionError(f"{domain_id}/{name}: Inspect added {sorted(added)}")
+            for parameter, spec in schema["properties"].items():
+                expected = source["properties"][parameter]
+                changed = {
+                    key for key in set(spec) | set(expected) if spec.get(key) != expected.get(key)
+                }
+                if not changed:
+                    continue
+                if changed != {"description"} or f"{name}.{parameter}" not in filled:
+                    raise AssertionError(
+                        f"{domain_id}/{name}.{parameter}: unexpected change {sorted(changed)}"
+                    )
+                if spec["description"] != parameter:
+                    raise AssertionError(
+                        f"{domain_id}/{name}.{parameter}: unexpected filled description"
+                    )
+        surfaces[domain_id] = sorted(filled)
+    return {
+        "status": "passed",
+        "added_schema_keys": sorted(allowed_top_level),
+        "filled_descriptions": surfaces,
+    }
+
+
+_REPAIRED_BY_INSPECT = ('{"vendor": "Acme"}"',)
+_REJECTED_BY_BOTH = ("{not json", '{"vendor": ')
+
+
+def verify_inspect_contract() -> dict[str, Any]:
+    """Pin Inspect's registered names and its extra tolerance for malformed arguments.
+
+    Inspect repairs a JSON object trailed by stray quotes without setting
+    `parse_error`, and keeps no copy of the original text. Such a reply scores
+    invalid natively and valid through the adapter. The difference is acceptable
+    only while it stays known, so any change here fails.
+    """
+
+    from ..inspect_adapter import (
+        available,
+        eal_controls_scorer,
+        eal_generate,
+        eal_metrics,
+        repaired_without_parse_error,
+    )
+
+    if not available():
+        return {"status": "skipped", "reason": "inspect-ai is not installed"}
+
+    from inspect_ai._util.registry import registry_info
+
+    names = {
+        "scorer": registry_info(eal_controls_scorer).name,
+        "metric": registry_info(eal_metrics).name,
+        "solver": registry_info(eal_generate).name,
+    }
+    expected = {
+        "scorer": "eal_bench/eal_controls",
+        "metric": "eal_bench/eal",
+        "solver": "eal_bench/eal_generate",
+    }
+    if names != expected:
+        raise AssertionError(f"registered names changed: {names}")
+
+    for arguments in _REPAIRED_BY_INSPECT:
+        if not repaired_without_parse_error(arguments):
+            raise AssertionError(
+                f"Inspect no longer repairs {arguments!r}; the recorded divergence is stale"
+            )
+    for arguments in _REJECTED_BY_BOTH:
+        if repaired_without_parse_error(arguments):
+            raise AssertionError(
+                f"Inspect now repairs {arguments!r}, which the native scorer rejects"
+            )
+    return {
+        "status": "passed",
+        "registered": names,
+        "repaired_by_inspect_only": list(_REPAIRED_BY_INSPECT),
+    }
