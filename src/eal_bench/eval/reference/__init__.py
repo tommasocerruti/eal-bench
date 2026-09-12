@@ -1478,9 +1478,11 @@ def verify_preservation() -> dict[str, Any]:
             architecture=architecture,
             annotations=notes,
         ).to_dict()
-        if observed_fidelity != row["expected_fidelity"]:
+        expected_fidelity = _with_live_resource_key(row["expected_fidelity"], row["domain_id"])
+        expected_formation = _with_live_resource_key(row["expected_formation"], row["domain_id"])
+        if observed_fidelity != expected_fidelity:
             mismatches.append({"label": row["label"], "part": "fidelity"})
-        if observed_formation != row["expected_formation"]:
+        if observed_formation != expected_formation:
             mismatches.append({"label": row["label"], "part": "formation"})
     for row in fixture["state_statuses"]:
         if state_status(row["attempts"]) != row["expected"]:
