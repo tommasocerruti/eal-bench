@@ -87,6 +87,11 @@ def procurement_controls():
 The adapter supplies the dataset, the tools and the scorer. The model and its configuration stay
 yours.
 
+EAL tool schemas are converted to Inspect `ToolDef` objects, and unparseable tool arguments are
+forwarded through `ToolCall.parse_error` so the Inspect path and the direct scorer reach the
+same outcome. `python -m eal_bench.eval.reference --verify` checks that agreement on every
+recorded reply, and skips when `inspect-ai` is absent.
+
 ## Score a reply
 
 `Trial` holds model-visible data only. `TrialTruth` holds the oracle state. Send the first to
