@@ -456,7 +456,7 @@ def _inspect_output(response: dict[str, Any]) -> Any:
     from inspect_ai.tool import ToolCall
 
     if response.get("error"):
-        return ModelOutput(model=response.get("model") or "offline", error=response["error"])
+        return ModelOutput(model=response.get("model") or "", error=response["error"])
     calls = []
     for index, call in enumerate(response.get("tool_calls", ())):
         arguments = call.get("arguments")
@@ -475,7 +475,7 @@ def _inspect_output(response: dict[str, Any]) -> Any:
             )
         )
     return ModelOutput(
-        model=response.get("model") or "offline",
+        model=response.get("model") or "",
         choices=[
             ChatCompletionChoice(
                 message=ChatMessageAssistant(
@@ -561,6 +561,7 @@ def verify_inspect() -> dict[str, Any]:
         "task_samples": len(task.dataset),
         "end_to_end_eval": verify_inspect_eval(),
         "tool_surface": verify_inspect_tool_surface(),
+        "contract": verify_inspect_contract(),
     }
 
 
@@ -781,4 +782,60 @@ def verify_inspect_tool_surface() -> dict[str, Any]:
         "status": "passed",
         "added_schema_keys": sorted(allowed_top_level),
         "filled_descriptions": surfaces,
+    }
+
+
+_REPAIRED_BY_INSPECT = ('{"vendor": "Acme"}"',)
+_REJECTED_BY_BOTH = ("{not json", '{"vendor": ')
+
+
+def verify_inspect_contract() -> dict[str, Any]:
+    """Pin Inspect's registered names and its extra tolerance for malformed arguments.
+
+    Inspect repairs a JSON object trailed by stray quotes without setting
+    `parse_error`, and keeps no copy of the original text. Such a reply scores
+    invalid natively and valid through the adapter. The difference is acceptable
+    only while it stays known, so any change here fails.
+    """
+
+    from ..inspect_adapter import (
+        available,
+        eal_controls_scorer,
+        eal_generate,
+        eal_metrics,
+        repaired_without_parse_error,
+    )
+
+    if not available():
+        return {"status": "skipped", "reason": "inspect-ai is not installed"}
+
+    from inspect_ai._util.registry import registry_info
+
+    names = {
+        "scorer": registry_info(eal_controls_scorer).name,
+        "metric": registry_info(eal_metrics).name,
+        "solver": registry_info(eal_generate).name,
+    }
+    expected = {
+        "scorer": "eal_bench/eal_controls",
+        "metric": "eal_bench/eal",
+        "solver": "eal_bench/eal_generate",
+    }
+    if names != expected:
+        raise AssertionError(f"registered names changed: {names}")
+
+    for arguments in _REPAIRED_BY_INSPECT:
+        if not repaired_without_parse_error(arguments):
+            raise AssertionError(
+                f"Inspect no longer repairs {arguments!r}; the recorded divergence is stale"
+            )
+    for arguments in _REJECTED_BY_BOTH:
+        if repaired_without_parse_error(arguments):
+            raise AssertionError(
+                f"Inspect now repairs {arguments!r}, which the native scorer rejects"
+            )
+    return {
+        "status": "passed",
+        "registered": names,
+        "repaired_by_inspect_only": list(_REPAIRED_BY_INSPECT),
     }
