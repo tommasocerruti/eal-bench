@@ -1,4 +1,41 @@
 {
+  "failed_update_episode": {
+    "accepted_memory_ids": [
+      "mem_199c7eeb8074cddbec1925cf"
+    ],
+    "attempts": [
+      {
+        "accepted_memory_id": "mem_199c7eeb8074cddbec1925cf",
+        "attempt_index": 1,
+        "repair_of_attempt_id": false,
+        "retained_memory_id": null,
+        "status": "accepted"
+      },
+      {
+        "accepted_memory_id": null,
+        "attempt_index": 1,
+        "repair_of_attempt_id": false,
+        "retained_memory_id": "mem_199c7eeb8074cddbec1925cf",
+        "status": "invalid_payload"
+      },
+      {
+        "accepted_memory_id": null,
+        "attempt_index": 2,
+        "repair_of_attempt_id": true,
+        "retained_memory_id": "mem_199c7eeb8074cddbec1925cf",
+        "status": "invalid_payload"
+      }
+    ],
+    "case_id": "procurement_v1_software_license_grant",
+    "domain_id": "procurement",
+    "final_changed": false,
+    "final_current_memory_id": "mem_199c7eeb8074cddbec1925cf",
+    "final_state_status": "retained_after_failed_update",
+    "state_statuses": [
+      "accepted",
+      "retained_after_failed_update"
+    ]
+  },
   "rows": [
     {
       "case_id": "cyberv3_claim_identity",

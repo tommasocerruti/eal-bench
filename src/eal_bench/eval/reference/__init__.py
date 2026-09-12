@@ -1077,6 +1077,7 @@ def build_preservation_fixture() -> dict[str, Any]:
     return {
         "schema_version": 1,
         "rows": rows,
+        "failed_update_episode": build_failed_update_episode(),
         "state_statuses": [
             {"attempts": ["accepted"], "expected": state_status(["accepted"])},
             {"attempts": ["no_change"], "expected": state_status(["no_change"])},
@@ -1128,4 +1129,140 @@ def verify_preservation() -> dict[str, Any]:
         "rows_checked": len(fixture["rows"]),
         "state_statuses_checked": len(fixture["state_statuses"]),
         "labels": sorted({row["label"] for row in fixture["rows"]}),
+        "failed_update": verify_failed_update(fixture["failed_update_episode"]),
+        "writer_chains": verify_writer_chains(),
     }
+
+
+_WRITER_CONDITIONS = (
+    "one_shot_text",
+    "one_shot_typed",
+    "incremental_text",
+    "incremental_typed",
+)
+
+
+def verify_writer_chains() -> dict[str, Any]:
+    """Build every writer chain offline and check its shape against the corpus."""
+
+    from ..preservation import build_writer_chain, writer_instructions
+
+    checked = 0
+    for domain_id in eval_resources.list_domains():
+        domain = eval_resources.load_domain(domain_id)
+        case = domain.corpus.load_cases(domain.corpus.default_version)[0]
+        case_id = domain.corpus.case_id(case)
+        blocks = tuple(domain.corpus.blocks(case))
+        every_source = domain.corpus.source_turn_ids(case)
+        for condition_id in _WRITER_CONDITIONS:
+            chain = build_writer_chain(
+                domain_id, case_id, condition_id=condition_id, target_id="offline"
+            )
+            expected = 1 if condition_id.startswith("one_shot") else len(blocks)
+            if len(chain.updates) != expected:
+                raise AssertionError(
+                    f"{domain_id}/{condition_id}: {len(chain.updates)} updates, expected {expected}"
+                )
+            seen: frozenset[str] = frozenset()
+            for update in chain.updates:
+                if not update.messages or not update.messages[0].get("content"):
+                    raise AssertionError(f"{domain_id}/{condition_id}: empty update")
+                if not update.visible_source_ids <= every_source:
+                    raise AssertionError(
+                        f"{domain_id}/{condition_id}: update cites unknown sources"
+                    )
+                if not seen <= update.visible_source_ids:
+                    raise AssertionError(
+                        f"{domain_id}/{condition_id}: visible sources are not monotonic"
+                    )
+                seen = update.visible_source_ids
+            if condition_id.endswith("typed"):
+                text = writer_instructions(
+                    domain_id,
+                    case_id,
+                    architecture="typed",
+                    capacity_tokens=572,
+                    profile_id="reference_profile",
+                )
+                if "572" not in text or "reference_profile" not in text:
+                    raise AssertionError(
+                        f"{domain_id}: writer instructions lost the capacity bound "
+                        "or the profile identity"
+                    )
+            checked += 1
+    return {"status": "passed", "chains_checked": checked}
+
+
+def build_failed_update_episode() -> dict[str, Any]:
+    """Run the repository's offline writer to produce a real rejected-update episode.
+
+    Generation needs the repository because the offline client reads `config.yaml`.
+    Verification only replays the recorded artifact.
+    """
+
+    from contextlib import redirect_stderr, redirect_stdout
+    from io import StringIO
+
+    from experiments.authorization_memory.validation import _run_scripted_text_chain
+
+    domain = eval_resources.load_domain("procurement")
+    case = domain.corpus.load_cases(domain.corpus.default_version)[0]
+    blocks = tuple(domain.corpus.blocks(case))
+    with redirect_stdout(StringIO()), redirect_stderr(StringIO()):
+        result = _run_scripted_text_chain(
+            domain,
+            case,
+            blocks,
+            marker="OFFLINE_ALWAYS_OVERFLOW",
+            target="gptoss_baseten",
+            capacity_tokens=20,
+            two_updates=True,
+        )
+    final = result.states[-1]
+    return {
+        "domain_id": "procurement",
+        "case_id": domain.corpus.case_id(case),
+        "attempts": [
+            {
+                "attempt_index": attempt.attempt_index,
+                "status": attempt.status,
+                "accepted_memory_id": attempt.accepted_memory_id,
+                "retained_memory_id": attempt.retained_memory_id,
+                "repair_of_attempt_id": attempt.repair_of_attempt_id is not None,
+            }
+            for attempt in result.attempts
+        ],
+        "state_statuses": [state.status for state in result.states],
+        "final_state_status": final.status,
+        "final_current_memory_id": final.current_memory_id,
+        "final_changed": final.changed,
+        "accepted_memory_ids": [memory.memory_id for memory in result.memories],
+    }
+
+
+def verify_failed_update(episode: dict[str, Any]) -> dict[str, Any]:
+    """Replay the recorded episode. A rejected update must keep the accepted profile."""
+
+    from ..preservation import retained_prior_profile, state_status
+
+    statuses = [attempt["status"] for attempt in episode["attempts"]]
+    if statuses != ["accepted", "invalid_payload", "invalid_payload"]:
+        raise AssertionError(f"unexpected attempt sequence: {statuses}")
+    if state_status(statuses) != episode["final_state_status"]:
+        raise AssertionError("state_status disagrees with the recorded state")
+    if episode["final_state_status"] != "retained_after_failed_update":
+        raise AssertionError("the failed repair did not retain the accepted profile")
+    if not retained_prior_profile(statuses):
+        raise AssertionError("retained_prior_profile disagrees with the recorded state")
+    if episode["final_current_memory_id"] != episode["accepted_memory_ids"][0]:
+        raise AssertionError("the failed repair mutated the accepted profile")
+    if episode["final_changed"]:
+        raise AssertionError("a retained update must not report a change")
+    rejected = [attempt for attempt in episode["attempts"] if attempt["status"] != "accepted"]
+    if any(attempt["accepted_memory_id"] is not None for attempt in rejected):
+        raise AssertionError("a rejected attempt recorded an accepted memory")
+    if any(
+        attempt["retained_memory_id"] != episode["accepted_memory_ids"][0] for attempt in rejected
+    ):
+        raise AssertionError("a rejected attempt did not point at the retained profile")
+    return {"status": "passed", "attempts_checked": len(statuses)}
