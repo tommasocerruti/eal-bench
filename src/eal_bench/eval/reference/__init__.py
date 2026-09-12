@@ -953,6 +953,8 @@ def verify_inspect_contract() -> dict[str, Any]:
             )
     _verify_raw_argument_recovery()
     _verify_undefined_rates()
+    _verify_tool_surface_in_event_loop()
+    _verify_resource_drift_guard()
     for arguments in _REJECTED_BY_BOTH:
         if repaired_without_parse_error(arguments):
             raise AssertionError(
@@ -964,7 +966,54 @@ def verify_inspect_contract() -> dict[str, Any]:
         "repaired_by_inspect_only": list(_REPAIRED_BY_INSPECT),
         "raw_arguments_recovered": True,
         "undefined_rates_stay_undefined": True,
+        "tool_surface_in_event_loop": True,
+        "resource_drift_refused": True,
     }
+
+
+def _verify_tool_surface_in_event_loop() -> None:
+    """The task factory runs inside Inspect's loop on the documented CLI path.
+
+    Building the tool surface there used to raise, because asyncio.run cannot be
+    called from a running loop.
+    """
+
+    import asyncio
+
+    from ..controls import build_control_trials
+    from ..inspect_adapter import tool_surface
+
+    tools = list(build_control_trials("procurement", check_leakage=False)[0][0].tools)
+
+    async def inside_loop() -> dict[str, Any]:
+        return tool_surface(tools)
+
+    surface = asyncio.run(inside_loop())
+    if sorted(surface) != sorted(tool_surface(tools)):
+        raise AssertionError("the tool surface differs inside and outside an event loop")
+
+
+def _verify_resource_drift_guard() -> None:
+    """A saved log recorded under other resources must not be re-scored silently."""
+
+    from types import SimpleNamespace
+
+    from ..inspect_adapter import _truth_for_state
+
+    state = SimpleNamespace(
+        sample_id="trial_missing",
+        metadata={
+            "truth": {"domain_id": "procurement"},
+            "resources": {"corpus_version": "benchmark_v1", "presentation_hash": "stale"},
+        },
+    )
+    try:
+        _truth_for_state(state)
+    except ValueError as exc:
+        if "different resource versions" not in str(exc):
+            raise AssertionError(f"unexpected drift error: {exc}") from exc
+        return
+    raise AssertionError("a log with drifted resources was accepted")
 
 
 def _verify_raw_argument_recovery() -> None:
