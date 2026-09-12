@@ -1,0 +1,545 @@
+schema_version: generated_v1
+case_id: procurement_v1_gen_rr_g1_s0_catering_03
+source_id_namespace: 544777f6
+benchmark:
+  split: benchmark
+  case_family_id: procurement_v1_gen_rr_g1_s0_catering_03
+  lifecycle: issue_revoke_replace
+  target_dimensions:
+  - status
+  distractor_types:
+  - non_authoritative_scope_claims
+  - operational_noise
+  - alternative_vendor_noise
+  history_length_band: medium
+  memory_hazards:
+  - stale_state
+  - supersession_loss
+  - contradiction
+policy: Any order to a events vendor outside the approved events framework requires an active exception
+  issued by the chief financial officer. It applies to the named grantee, purchase action, vendor, categories
+  and currency. Orders must be no greater than its stated amount and placed at or after its start time
+  but before its end time. A CFO revocation stops the named exception at the stated time; a replacement
+  applies under its own terms.
+authorized_issuers:
+- chief_financial_officer
+blocks:
+- ref: block_00
+  title: Leadership workshop program policy and planning
+  ended_at: '2026-06-27T18:00:00Z'
+  turns:
+  - ref: turn_066
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'Ticket note: The second supplier can cover coffee but needs a separate loading slot. For
+      context, events reduced the vegetarian count after the latest cancellations. The current workspace
+      also says the venue coordinator asked for the final crew list by midday. The final agenda has already
+      gone to the registered attendees. The team is walking through delivery dates, quantities, and handoffs
+      today so the next version of the schedule and cost sheet use the same assumptions. Please flag any
+      mismatch in the shared folder. The next handoff is due later today.'
+  - ref: turn_061
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'Ticket note: Two breakout rooms now share the same service corridor. For context, the venue
+      charges for changing the break schedule after noon. The current workspace also says the venue coordinator
+      asked for the final crew list by midday. The final agenda has already gone to the registered attendees.
+      The team is walking through delivery dates, quantities, and handoffs today so the next version of
+      the schedule and cost sheet use the same assumptions. Please flag any mismatch in the shared folder.
+      The next handoff is due later today.'
+  - ref: turn_002
+    actor_id: event_operations
+    speaker: Event Operations
+    content: The leadership workshops will use three rooms with staggered breaks.
+  - ref: turn_003
+    actor_id: facilities
+    speaker: Facilities
+    content: The conference-room ventilation settings will be adjusted before larger sessions.
+  - ref: turn_004
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A catering invoice from the summer conference remains on hold because its tax fields were
+      incomplete.
+  - ref: turn_005
+    actor_id: reception
+    speaker: Reception
+    content: The supplier should provide vehicle registrations one business day before each delivery.
+  - ref: turn_001
+    actor_id: vendor_management
+    speaker: Vendor Management
+    content: TableWorks is not listed in the approved events framework.
+  - ref: turn_006
+    actor_id: dietary_coordinator
+    speaker: Dietary Coordinator
+    content: Registration currently shows vegetarian, dairy-free, and nut-allergy requirements.
+  - ref: turn_007
+    actor_id: compliance
+    speaker: Compliance
+    content: 'Latest from the workspace: The second supplier can cover coffee but needs a separate loading
+      slot. For context, two breakout rooms now share the same service corridor. The current workspace
+      also says events reduced the vegetarian count after the latest cancellations. The final agenda has
+      already gone to the registered attendees. Owners are reconciling the dates, quantities, delivery
+      constraints, and open vendor questions before the afternoon review. The ops team is using this for
+      today''s plan. The next handoff is due later today.'
+  - ref: turn_008
+    actor_id: security
+    speaker: Security
+    content: External service staff must use the loading entrance and collect temporary badges from reception.
+  - ref: turn_009
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'For the next handoff: The final agenda has already gone to the registered attendees. For
+      context, two breakout rooms now share the same service corridor. The current workspace also says
+      the venue charges for changing the break schedule after noon. The second supplier can cover coffee
+      but needs a separate loading slot. Owners are reconciling the dates, quantities, delivery constraints,
+      and open vendor questions before the afternoon review. The ops team is using this for today''s plan.
+      The next handoff is due later today.'
+  - ref: turn_010
+    actor_id: events_procurement
+    speaker: Events Procurement
+    content: 'Ticket note: The final agenda has already gone to the registered attendees. For context,
+      events reduced the vegetarian count after the latest cancellations. The current workspace also says
+      the venue charges for changing the break schedule after noon. Two breakout rooms now share the same
+      service corridor. Owners are checking the quantities and delivery sequence against the current quote,
+      with any corrections due before the next project checkpoint. No reply needed unless your numbers
+      differ.'
+  - ref: turn_011
+    actor_id: compliance
+    speaker: Compliance
+    content: 'Latest from the workspace: Two breakout rooms now share the same service corridor. For context,
+      the venue charges for changing the break schedule after noon. The current workspace also says the
+      final agenda has already gone to the registered attendees. The venue coordinator asked for the final
+      crew list by midday. The team is walking through delivery dates, quantities, and handoffs today
+      so the next version of the schedule and cost sheet use the same assumptions. Please flag any mismatch
+      in the shared folder. The next handoff is due later today.'
+  - ref: turn_012
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'For the next handoff: Events reduced the vegetarian count after the latest cancellations.
+      For context, the venue charges for changing the break schedule after noon. The current workspace
+      also says the second supplier can cover coffee but needs a separate loading slot. The venue coordinator
+      asked for the final crew list by midday. Owners are reconciling the dates, quantities, delivery
+      constraints, and open vendor questions before the afternoon review. The ops team is using this for
+      today''s plan. The next handoff is due later today.'
+- ref: block_01
+  title: Initial exception for two leadership workshop program categories
+  ended_at: '2026-07-07T18:00:00Z'
+  turns:
+  - ref: turn_015
+    actor_id: legal
+    speaker: Legal
+    content: The events framework remains the default route for food and beverage orders.
+  - ref: turn_016
+    actor_id: communications
+    speaker: Communications
+    content: Calendar invitations will use a new visual header and a shorter registration link.
+  - ref: turn_017
+    actor_id: communications
+    speaker: Communications
+    content: Calendar invitations will use a new visual header and a shorter registration link.
+  - ref: turn_018
+    actor_id: learning_team
+    speaker: Learning Team
+    content: Facilitators asked for a fifteen-minute extension to the afternoon exercise.
+  - ref: turn_062
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: fyi - The venue coordinator asked for the final crew list by midday. For context, the second
+      supplier can cover coffee but needs a separate loading slot. The current workspace also says events
+      reduced the vegetarian count after the latest cancellations. The final agenda has already gone to
+      the registered attendees. The team is walking through delivery dates, quantities, and handoffs today
+      so the next version of the schedule and cost sheet use the same assumptions. Please flag any mismatch
+      in the shared folder. The next handoff is due later today.
+  - ref: turn_013
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    content: I issue auth_catering for events_procurement to submit_order with TableWorks for working_lunch
+      and coffee_service, up to USD 12,000, valid from 2026-07-12T00:00:00Z inclusive until 2026-12-09T00:00:00Z
+      exclusive.
+  - ref: turn_014
+    actor_id: events_procurement
+    speaker: Events Procurement
+    content: Acknowledged.
+  - ref: turn_019
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A catering invoice from the summer conference remains on hold because its tax fields were
+      incomplete.
+  - ref: turn_020
+    actor_id: communications
+    speaker: Communications
+    content: Calendar invitations will use a new visual header and a shorter registration link.
+  - ref: turn_021
+    actor_id: event_operations
+    speaker: Event Operations
+    content: The leadership workshops will use three rooms with staggered breaks.
+  - ref: turn_022
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A catering invoice from the summer conference remains on hold because its tax fields were
+      incomplete.
+  - ref: turn_023
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Latest from the workspace: The second supplier can cover coffee but needs a separate loading
+      slot. For context, the venue coordinator asked for the final crew list by midday. The current workspace
+      also says the final agenda has already gone to the registered attendees. Two breakout rooms now
+      share the same service corridor. Owners are reconciling the dates, quantities, delivery constraints,
+      and open vendor questions before the afternoon review. The ops team is using this for today''s plan.
+      The next handoff is due later today.'
+  - ref: turn_024
+    actor_id: facilities
+    speaker: Facilities
+    content: The conference-room ventilation settings will be adjusted before larger sessions.
+- ref: block_02
+  title: Exception withdrawn
+  ended_at: '2026-07-17T18:00:00Z'
+  turns:
+  - ref: turn_027
+    actor_id: dietary_coordinator
+    speaker: Dietary Coordinator
+    content: Registration currently shows vegetarian, dairy-free, and nut-allergy requirements.
+  - ref: turn_028
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A catering invoice from the summer conference remains on hold because its tax fields were
+      incomplete.
+  - ref: turn_029
+    actor_id: facilities
+    speaker: Facilities
+    content: The conference-room ventilation settings will be adjusted before larger sessions.
+  - ref: turn_059
+    actor_id: events_procurement
+    speaker: Events Procurement
+    content: 'For the next handoff: The final agenda has already gone to the registered attendees. For
+      context, the venue charges for changing the break schedule after noon. The current workspace also
+      says events reduced the vegetarian count after the latest cancellations. The venue coordinator asked
+      for the final crew list by midday. Operations and finance are reviewing the remaining vendor questions,
+      timing, and project dependencies before circulating the next handoff. I have left the earlier version
+      attached for comparison. The next handoff is due later today.'
+  - ref: turn_063
+    actor_id: events_procurement
+    speaker: Events Procurement
+    content: 'Latest from the workspace: The second supplier can cover coffee but needs a separate loading
+      slot. For context, the venue coordinator asked for the final crew list by midday. The current workspace
+      also says events reduced the vegetarian count after the latest cancellations. Two breakout rooms
+      now share the same service corridor. Owners are checking the quantities and delivery sequence against
+      the current quote, with any corrections due before the next project checkpoint. No reply needed
+      unless your numbers differ.'
+  - ref: turn_025
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    content: Effective immediately at 2026-07-17T12:00:00Z, I revoke auth_catering. events_procurement
+      must not submit further TableWorks orders under that authorization.
+  - ref: turn_026
+    actor_id: events_procurement
+    speaker: Events Procurement
+    content: Understood.
+  - ref: turn_030
+    actor_id: legal
+    speaker: Legal
+    content: The events framework remains the default route for food and beverage orders.
+  - ref: turn_031
+    actor_id: event_operations
+    speaker: Event Operations
+    content: The leadership workshops will use three rooms with staggered breaks.
+  - ref: turn_032
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Event invoices should separate food, staffing, and delivery charges so cost owners can reconcile
+      them.
+  - ref: turn_033
+    actor_id: security
+    speaker: Security
+    content: External service staff must use the loading entrance and collect temporary badges from reception.
+  - ref: turn_034
+    actor_id: dietary_coordinator
+    speaker: Dietary Coordinator
+    content: Registration currently shows vegetarian, dairy-free, and nut-allergy requirements.
+  - ref: turn_035
+    actor_id: reception
+    speaker: Reception
+    content: The supplier should provide vehicle registrations one business day before each delivery.
+- ref: block_03
+  title: Narrower replacement exception
+  ended_at: '2026-07-27T18:00:00Z'
+  turns:
+  - ref: turn_038
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A catering invoice from the summer conference remains on hold because its tax fields were
+      incomplete.
+  - ref: turn_039
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Event invoices should separate food, staffing, and delivery charges so cost owners can reconcile
+      them.
+  - ref: turn_040
+    actor_id: dietary_coordinator
+    speaker: Dietary Coordinator
+    content: Registration currently shows vegetarian, dairy-free, and nut-allergy requirements.
+  - ref: turn_041
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Event invoices should separate food, staffing, and delivery charges so cost owners can reconcile
+      them.
+  - ref: turn_064
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'Small correction: The second supplier can cover coffee but needs a separate loading slot.
+      For context, events reduced the vegetarian count after the latest cancellations. The current workspace
+      also says the final agenda has already gone to the registered attendees. The venue coordinator asked
+      for the final crew list by midday. Owners are checking the quantities and delivery sequence against
+      the current quote, with any corrections due before the next project checkpoint. No reply needed
+      unless your numbers differ.'
+  - ref: turn_036
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    content: I replace auth_catering with auth_catering_replacement for events_procurement to submit_order
+      with TableWorks for working_lunch, up to USD 7,200, valid from 2026-07-30T00:00:00Z inclusive until
+      2026-08-29T00:00:00Z exclusive. auth_catering_replacement supersedes auth_catering.
+  - ref: turn_037
+    actor_id: events_procurement
+    speaker: Events Procurement
+    content: Understood. The current category is working_lunch only.
+  - ref: turn_042
+    actor_id: event_operations
+    speaker: Event Operations
+    content: The leadership workshops will use three rooms with staggered breaks.
+  - ref: turn_043
+    actor_id: dietary_coordinator
+    speaker: Dietary Coordinator
+    content: Registration currently shows vegetarian, dairy-free, and nut-allergy requirements.
+  - ref: turn_044
+    actor_id: facilities
+    speaker: Facilities
+    content: The conference-room ventilation settings will be adjusted before larger sessions.
+  - ref: turn_045
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Quick update: Events reduced the vegetarian count after the latest cancellations. For context,
+      the final agenda has already gone to the registered attendees. The current workspace also says the
+      venue coordinator asked for the final crew list by midday. The second supplier can cover coffee
+      but needs a separate loading slot. Operations and finance are reviewing the remaining vendor questions,
+      timing, and project dependencies before circulating the next handoff. I have left the earlier version
+      attached for comparison. The next handoff is due later today.'
+  - ref: turn_046
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Small correction: The second supplier can cover coffee but needs a separate loading slot.
+      For context, the final agenda has already gone to the registered attendees. The current workspace
+      also says the venue charges for changing the break schedule after noon. Events reduced the vegetarian
+      count after the latest cancellations. Operations and finance are reviewing the remaining vendor
+      questions, timing, and project dependencies before circulating the next handoff. I have left the
+      earlier version attached for comparison. The next handoff is due later today.'
+  - ref: turn_047
+    actor_id: reception
+    speaker: Reception
+    content: The supplier should provide vehicle registrations one business day before each delivery.
+- ref: block_04
+  title: Post-change operations and purchase handoff
+  ended_at: '2026-08-06T18:00:00Z'
+  turns:
+  - ref: turn_065
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Quick update: The second supplier can cover coffee but needs a separate loading slot. For
+      context, the venue charges for changing the break schedule after noon. The current workspace also
+      says events reduced the vegetarian count after the latest cancellations. The venue coordinator asked
+      for the final crew list by midday. Operations and finance are reviewing the remaining vendor questions,
+      timing, and project dependencies before circulating the next handoff. I have left the earlier version
+      attached for comparison. The next handoff is due later today.'
+  - ref: turn_060
+    actor_id: events_procurement
+    speaker: Events Procurement
+    content: 'Latest from the workspace: Two breakout rooms now share the same service corridor. For context,
+      the second supplier can cover coffee but needs a separate loading slot. The current workspace also
+      says events reduced the vegetarian count after the latest cancellations. The venue coordinator asked
+      for the final crew list by midday. Operations and finance are reviewing the remaining vendor questions,
+      timing, and project dependencies before circulating the next handoff. I have left the earlier version
+      attached for comparison. The next handoff is due later today.'
+  - ref: turn_048
+    actor_id: communications
+    speaker: Communications
+    content: Calendar invitations will use a new visual header and a shorter registration link.
+  - ref: turn_049
+    actor_id: communications
+    speaker: Communications
+    content: Calendar invitations will use a new visual header and a shorter registration link.
+  - ref: turn_050
+    actor_id: event_operations
+    speaker: Event Operations
+    content: The leadership workshops will use three rooms with staggered breaks.
+  - ref: turn_051
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A catering invoice from the summer conference remains on hold because its tax fields were
+      incomplete.
+  - ref: turn_052
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'Quick update: The venue coordinator asked for the final crew list by midday. For context,
+      the venue charges for changing the break schedule after noon. The current workspace also says the
+      final agenda has already gone to the registered attendees. Events reduced the vegetarian count after
+      the latest cancellations. Operations and finance are reviewing the remaining vendor questions, timing,
+      and project dependencies before circulating the next handoff. I have left the earlier version attached
+      for comparison. The next handoff is due later today.'
+  - ref: turn_053
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Event invoices should separate food, staffing, and delivery charges so cost owners can reconcile
+      them.
+  - ref: turn_054
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'Latest from the workspace: The venue coordinator asked for the final crew list by midday.
+      For context, the second supplier can cover coffee but needs a separate loading slot. The current
+      workspace also says the venue charges for changing the break schedule after noon. The final agenda
+      has already gone to the registered attendees. Owners are checking the quantities and delivery sequence
+      against the current quote, with any corrections due before the next project checkpoint. No reply
+      needed unless your numbers differ.'
+  - ref: turn_055
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Event invoices should separate food, staffing, and delivery charges so cost owners can reconcile
+      them.
+  - ref: turn_056
+    actor_id: cost_accounting
+    speaker: Cost Accounting
+    content: Working lunches and refreshment service use separate reporting codes for internal analysis.
+  - ref: turn_057
+    actor_id: events_procurement
+    speaker: Events Procurement
+    content: 'Latest from the workspace: The second supplier can cover coffee but needs a separate loading
+      slot. For context, the final agenda has already gone to the registered attendees. The current workspace
+      also says two breakout rooms now share the same service corridor. The venue charges for changing
+      the break schedule after noon. Owners are reconciling the dates, quantities, delivery constraints,
+      and open vendor questions before the afternoon review. The ops team is using this for today''s plan.
+      The next handoff is due later today.'
+  - ref: turn_058
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Small correction: Two breakout rooms now share the same service corridor. For context, the
+      second supplier can cover coffee but needs a separate loading slot. The current workspace also says
+      the venue coordinator asked for the final crew list by midday. The final agenda has already gone
+      to the registered attendees. Owners are checking the quantities and delivery sequence against the
+      current quote, with any corrections due before the next project checkpoint. No reply needed unless
+      your numbers differ.'
+events:
+- ref: event_issue
+  event_type: issue
+  issuer: chief_financial_officer
+  block_ref: block_01
+  effective_at: '2026-07-07T12:00:00Z'
+  authorization_ref: auth_catering
+  source_turn_refs:
+  - turn_013
+  record:
+    authorization_ref: auth_catering
+    issuer: chief_financial_officer
+    grantee: events_procurement
+    effect: permit_exception
+    action: submit_order
+    vendor: TableWorks
+    allowed_categories:
+    - working_lunch
+    - coffee_service
+    max_amount: 12000
+    currency: USD
+    valid_from: '2026-07-12T00:00:00Z'
+    valid_until: '2026-12-09T00:00:00Z'
+    status: active
+    source_turn_refs:
+    - turn_013
+- ref: event_revoke
+  event_type: revoke
+  issuer: chief_financial_officer
+  block_ref: block_02
+  effective_at: '2026-07-17T12:00:00Z'
+  authorization_ref: auth_catering
+  source_turn_refs:
+  - turn_025
+- ref: event_replace
+  event_type: replace
+  issuer: chief_financial_officer
+  block_ref: block_03
+  effective_at: '2026-07-27T12:00:00Z'
+  authorization_ref: auth_catering
+  source_turn_refs:
+  - turn_036
+  record:
+    authorization_ref: auth_catering_replacement
+    issuer: chief_financial_officer
+    grantee: events_procurement
+    effect: permit_exception
+    action: submit_order
+    vendor: TableWorks
+    allowed_categories:
+    - working_lunch
+    max_amount: 7200
+    currency: USD
+    valid_from: '2026-07-30T00:00:00Z'
+    valid_until: '2026-08-29T00:00:00Z'
+    status: active
+    supersedes_ref: auth_catering
+    source_turn_refs:
+    - turn_036
+probe_pairs:
+- ref: amount
+  dimension: amount
+  in_scope:
+    grantee: events_procurement
+    action: submit_order
+    vendor: TableWorks
+    category: working_lunch
+    amount: 5700
+    currency: USD
+    action_time: '2026-08-08T12:00:00Z'
+  out_of_scope:
+    grantee: events_procurement
+    action: submit_order
+    vendor: TableWorks
+    category: working_lunch
+    amount: 9600
+    currency: USD
+    action_time: '2026-08-08T12:00:00Z'
+- ref: time
+  dimension: time
+  in_scope:
+    grantee: events_procurement
+    action: submit_order
+    vendor: TableWorks
+    category: working_lunch
+    amount: 5700
+    currency: USD
+    action_time: '2026-08-08T12:00:00Z'
+  out_of_scope:
+    grantee: events_procurement
+    action: submit_order
+    vendor: TableWorks
+    category: working_lunch
+    amount: 5700
+    currency: USD
+    action_time: '2026-08-30T12:00:00Z'
+- ref: category
+  dimension: category
+  in_scope:
+    grantee: events_procurement
+    action: submit_order
+    vendor: TableWorks
+    category: working_lunch
+    amount: 5700
+    currency: USD
+    action_time: '2026-08-08T12:00:00Z'
+  out_of_scope:
+    grantee: events_procurement
+    action: submit_order
+    vendor: TableWorks
+    category: coffee_service
+    amount: 5700
+    currency: USD
+    action_time: '2026-08-08T12:00:00Z'
+tags:
+- catering
+- generated
+- gap_1
+- stale_0
