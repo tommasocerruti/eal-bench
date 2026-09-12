@@ -62,20 +62,27 @@ def verify() -> dict[str, Any]:
     }
 
 
-def _optional_track_checks() -> dict[str, Any]:
-    """Track verifiers register here as each track lands."""
+_TRACK_MODULES = ("controls", "preservation")
 
+
+def _optional_track_checks() -> dict[str, Any]:
+    """Run every track verifier that is installed.
+
+    A track that is absent is reported as skipped. A track that is present but fails
+    to import is an error, not a silent pass.
+    """
+
+    from importlib import import_module, util
+
+    package = __package__.rsplit(".", 1)[0]
     found: dict[str, Any] = {}
-    try:
-        from ..controls import verify_reference as verify_controls
-    except ImportError:
-        pass
-    else:
-        found["controls"] = verify_controls()
-    try:
-        from ..preservation import verify_reference as verify_preservation
-    except ImportError:
-        pass
-    else:
-        found["preservation"] = verify_preservation()
+    for name in _TRACK_MODULES:
+        qualified = f"{package}.{name}"
+        if util.find_spec(qualified) is None:
+            found[name] = {
+                "status": "skipped",
+                "reason": f"{qualified} is not installed",
+            }
+            continue
+        found[name] = import_module(qualified).verify_reference()
     return found
