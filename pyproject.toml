@@ -31,6 +31,11 @@ inspect = [
     "inspect-ai>=0.3",
 ]
 
+# Lets `inspect score` and `inspect eval` resolve EAL's registered scorer, metric
+# and solver without importing the task file first.
+[project.entry-points.inspect_ai]
+eal_bench = "eal_bench.eval.inspect_adapter"
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
