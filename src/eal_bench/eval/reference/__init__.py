@@ -1401,6 +1401,10 @@ def _free_text_rows(
             ],
         ),
         (
+            "free_text_invalid_state",
+            [Annotation(extracted_state={"garbage": 1}, source_content_hash=digest)],
+        ),
+        (
             "free_text_conflicting",
             [
                 Annotation(extracted_state=faithful, source_content_hash=digest),
@@ -1413,6 +1417,16 @@ def _free_text_rows(
     ]
     rows = []
     for label, notes in variants:
+        if label == "free_text_invalid_state":
+            # An accepted annotation that does not validate is caller error, so it
+            # raises with the source identity rather than reading as not estimable.
+            try:
+                score_memory(domain_id, case_id, text, architecture="free_text", annotations=notes)
+            except ValueError as exc:
+                if "invalid accepted annotation" not in str(exc):
+                    raise AssertionError(f"unexpected annotation error: {exc}") from exc
+                continue
+            raise AssertionError("an invalid accepted annotation was accepted")
         rows.append(
             {
                 "label": label,

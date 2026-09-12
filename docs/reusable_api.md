@@ -130,7 +130,12 @@ score_memory(
 )
 ```
 
-Without them, two writers that land on the same records serialize identically.
+Without them, two writers that land on the same records serialize identically. Pass
+`presentation_id` too when a domain ships more than one, or results written under different
+presentations share a resource key.
+
+An accepted annotation whose state does not validate is caller error and raises with the
+source identity, rather than reading as not estimable.
 
 ### Producing memories
 

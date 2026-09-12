@@ -93,12 +93,19 @@ def _resolve_annotations(
     digest = content_hash(payload)
     if any(item.source_content_hash != digest for item in accepted):
         return None, "annotation_content_hash_mismatch"
-    signatures = {
-        canonical_json(domain.memory.parse_typed(item.extracted_state)) for item in accepted
-    }
-    if len(signatures) != 1:
+    from pydantic import ValidationError
+
+    states = []
+    for index, item in enumerate(accepted):
+        try:
+            states.append(domain.memory.parse_typed(item.extracted_state))
+        except (KeyError, TypeError, ValueError, ValidationError) as exc:
+            raise ValueError(
+                f"invalid accepted annotation {index} for source {item.source_content_hash}: {exc}"
+            ) from exc
+    if len({canonical_json(state) for state in states}) != 1:
         return None, "conflicting_accepted_annotations"
-    return domain.memory.parse_typed(accepted[0].extracted_state), None
+    return states[0], None
 
 
 @dataclass(frozen=True)
@@ -222,6 +229,7 @@ def score_memory(
     *,
     architecture: MemoryArchitecture | str = MemoryArchitecture.TYPED,
     corpus_version: str | None = None,
+    presentation_id: str | None = None,
     block_index: int | None = None,
     annotations: Sequence[Annotation] = (),
     writer: Any | None = None,
@@ -237,10 +245,15 @@ def score_memory(
     version = resolve_corpus_version(domain, corpus_version)
     case = _case(domain, case_id, version)
     kind = _architecture(architecture)
+    presentation = resolve_presentation(domain, presentation_id)
     identity = {
         "block_index": block_index,
         "corpus_version": version,
-        "resource_key": describe(domain, corpus_version=version).key,
+        "resource_key": describe(
+            domain,
+            corpus_version=version,
+            presentation_id=presentation.presentation_id,
+        ).key,
         **_writer_identity(writer, memory_id),
     }
     scored = payload
@@ -290,6 +303,7 @@ def apparent_authority(
     *,
     architecture: MemoryArchitecture | str = MemoryArchitecture.TYPED,
     corpus_version: str | None = None,
+    presentation_id: str | None = None,
     block_index: int | None = None,
     annotations: Sequence[Annotation] = (),
     writer: Any | None = None,
@@ -301,10 +315,15 @@ def apparent_authority(
     version = resolve_corpus_version(domain, corpus_version)
     case = _case(domain, case_id, version)
     kind = _architecture(architecture)
+    presentation = resolve_presentation(domain, presentation_id)
     identity = {
         "block_index": block_index,
         "corpus_version": version,
-        "resource_key": describe(domain, corpus_version=version).key,
+        "resource_key": describe(
+            domain,
+            corpus_version=version,
+            presentation_id=presentation.presentation_id,
+        ).key,
         **_writer_identity(writer, memory_id),
     }
     scored_from = "typed_memory"
