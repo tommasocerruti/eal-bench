@@ -97,16 +97,31 @@ authorization, `broadening` means it widened it, `contradiction` means it disagr
 `apparent_authority` is formation, P(F) in the paper. `analysis/failure_mechanisms.py` is the
 reference implementation of the same predicate.
 
-Free-text memory carries no deterministic label:
+Free-text memory has no deterministic label of its own. It is scoreable only through an
+accepted annotation, following the same acceptance and content-hash rules as
+`experiments/annotate_authorization_memories.py`.
 
 ```python
-outcome = score_memory("procurement", case_id, text, architecture="free_text")
-outcome.exact                    # None
-outcome.unscored_reason          # 'free_text_requires_annotation'
-outcome.estimable                # False
+from eal_bench.eval.preservation import Annotation
+
+score_memory("procurement", case_id, text, architecture="free_text").unscored_reason
+# 'missing_annotation'
+
+accepted = Annotation(extracted_state=state, source_content_hash=content_hash(text))
+outcome = score_memory(
+    "procurement", case_id, text, architecture="free_text", annotations=[accepted]
+)
+outcome.scored_from              # 'free_text_annotation'
 ```
 
-Report it as not estimable. Do not report it as zero.
+Only `accepted` annotations count, they must agree with each other, and the recorded hash must
+match the memory. Otherwise the reason is `annotation_not_accepted:<statuses>`,
+`conflicting_accepted_annotations` or `annotation_content_hash_mismatch`, and the result is not
+estimable. Never report it as zero.
+
+Every `PreservationOutcome` and `ApparentAuthority` records `block_index`, `corpus_version`,
+`resource_key` and `scored_from`, so intermediate, final and retained-memory results stay
+distinguishable.
 
 ### Producing memories
 
@@ -151,9 +166,10 @@ retained_prior_profile(["invalid_payload", "invalid_payload"], accepted_before=F
 a real rejected-update episode produced by the repository's offline writer, not a hand-written
 one, and verification replays it.
 
-This track has no Inspect task. The writer runs through LangMem with its own update and
-repair behavior, which Inspect cannot drive without replacing the protocol the benchmark
-measures. Scoring is available to any framework through `score_memory`.
+This track has no Inspect task yet. A custom Inspect solver can call the existing writer
+unchanged; the remaining work is connecting Inspect's selected model to the writer transport,
+which LangMem resolves through EAL's own route table. Scoring is already available to any
+framework through `score_memory`.
 
 ## Inspect
 

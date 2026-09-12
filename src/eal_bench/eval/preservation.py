@@ -16,10 +16,16 @@ from typing import Any
 
 from domains.base import AuthorizationMemoryDomain, MemoryArchitecture
 
-from .resources import load_domain, resolve_corpus_version, resolve_presentation
+from .resources import (
+    describe,
+    load_domain,
+    resolve_corpus_version,
+    resolve_presentation,
+)
 
 __all__ = [
     "FIDELITY_ERRORS",
+    "Annotation",
     "STATE_STATUSES",
     "ApparentAuthority",
     "PreservationOutcome",
@@ -45,7 +51,54 @@ FIDELITY_ERRORS = (
 
 STATE_STATUSES = ("accepted", "no_change", "retained_after_failed_update")
 
-_FREE_TEXT_UNSCORED = "free_text_requires_annotation"
+_FREE_TEXT_UNSCORED = "missing_annotation"
+
+
+@dataclass(frozen=True)
+class Annotation:
+    """A blinded free-text annotation, following the existing acceptance contract.
+
+    Only `accepted` annotations count, they must agree with each other, and the
+    recorded `source_content_hash` must match the memory that was annotated. See
+    `experiments/annotate_authorization_memories.py`.
+    """
+
+    extracted_state: Mapping[str, Any]
+    source_content_hash: str
+    status: str = "accepted"
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "extracted_state": dict(self.extracted_state),
+            "source_content_hash": self.source_content_hash,
+            "status": self.status,
+        }
+
+
+def _resolve_annotations(
+    domain: AuthorizationMemoryDomain,
+    payload: str,
+    annotations: Sequence[Annotation],
+) -> tuple[Any | None, str | None]:
+    """Mirror `analysis.memory_fidelity` acceptance and content-hash validation."""
+
+    from experiments.authorization_memory.persistence import canonical_json, content_hash
+
+    if not annotations:
+        return None, _FREE_TEXT_UNSCORED
+    accepted = [item for item in annotations if item.status == "accepted"]
+    if not accepted:
+        statuses = ",".join(sorted({item.status for item in annotations}))
+        return None, f"annotation_not_accepted:{statuses}"
+    digest = content_hash(payload)
+    if any(item.source_content_hash != digest for item in accepted):
+        return None, "annotation_content_hash_mismatch"
+    signatures = {
+        canonical_json(domain.memory.parse_typed(item.extracted_state)) for item in accepted
+    }
+    if len(signatures) != 1:
+        return None, "conflicting_accepted_annotations"
+    return domain.memory.parse_typed(accepted[0].extracted_state), None
 
 
 @dataclass(frozen=True)
@@ -59,6 +112,10 @@ class PreservationOutcome:
     undergrant_fields: int = 0
     scored_fields: int = 0
     unscored_reason: str | None = None
+    block_index: int | None = None
+    corpus_version: str | None = None
+    resource_key: str | None = None
+    scored_from: str = "typed_memory"
     fields: tuple[dict[str, Any], ...] = ()
 
     @property
@@ -76,6 +133,10 @@ class PreservationOutcome:
             "undergrant_fields": self.undergrant_fields,
             "scored_fields": self.scored_fields,
             "unscored_reason": self.unscored_reason,
+            "block_index": self.block_index,
+            "corpus_version": self.corpus_version,
+            "resource_key": self.resource_key,
+            "scored_from": self.scored_from,
         }
 
 
@@ -90,6 +151,10 @@ class ApparentAuthority:
     probes_formed: int = 0
     probe_ids: tuple[str, ...] = ()
     unscored_reason: str | None = None
+    block_index: int | None = None
+    corpus_version: str | None = None
+    resource_key: str | None = None
+    scored_from: str = "typed_memory"
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -100,6 +165,10 @@ class ApparentAuthority:
             "probes_formed": self.probes_formed,
             "probe_ids": list(self.probe_ids),
             "unscored_reason": self.unscored_reason,
+            "block_index": self.block_index,
+            "corpus_version": self.corpus_version,
+            "resource_key": self.resource_key,
+            "scored_from": self.scored_from,
         }
 
 
@@ -122,20 +191,40 @@ def score_memory(
     architecture: MemoryArchitecture | str = MemoryArchitecture.TYPED,
     corpus_version: str | None = None,
     block_index: int | None = None,
+    annotations: Sequence[Annotation] = (),
 ) -> PreservationOutcome:
+    """Score a memory against the canonical ledger.
+
+    Free text is scoreable only through accepted annotations. Without them the
+    result is not estimable, and the reason says why.
+    """
+
     domain = load_domain(domain_id)
     version = resolve_corpus_version(domain, corpus_version)
     case = _case(domain, case_id, version)
     kind = _architecture(architecture)
+    identity = {
+        "block_index": block_index,
+        "corpus_version": version,
+        "resource_key": describe(domain, corpus_version=version).key,
+    }
+    scored = payload
+    scored_from = "typed_memory"
     if kind is MemoryArchitecture.FREE_TEXT:
-        return PreservationOutcome(
-            domain_id=domain_id,
-            case_id=case_id,
-            architecture=kind.value,
-            exact=None,
-            unscored_reason=_FREE_TEXT_UNSCORED,
-        )
-    report = domain.fidelity.compare(case, payload, through_block_index=block_index)
+        state, reason = _resolve_annotations(domain, str(payload), annotations)
+        if state is None:
+            return PreservationOutcome(
+                domain_id=domain_id,
+                case_id=case_id,
+                architecture=kind.value,
+                exact=None,
+                unscored_reason=reason,
+                scored_from="free_text_unscored",
+                **identity,
+            )
+        scored = state
+        scored_from = "free_text_annotation"
+    report = domain.fidelity.compare(case, scored, through_block_index=block_index)
     errors: dict[str, int] = {}
     overgrant = 0
     undergrant = 0
@@ -153,7 +242,9 @@ def score_memory(
         overgrant_fields=overgrant,
         undergrant_fields=undergrant,
         scored_fields=len(report.fields),
+        scored_from=scored_from,
         fields=tuple(row.to_dict() for row in report.fields),
+        **identity,
     )
 
 
@@ -165,6 +256,7 @@ def apparent_authority(
     architecture: MemoryArchitecture | str = MemoryArchitecture.TYPED,
     corpus_version: str | None = None,
     block_index: int | None = None,
+    annotations: Sequence[Annotation] = (),
 ) -> ApparentAuthority:
     """Same predicate as `analysis/failure_mechanisms.py`, which is the reference."""
 
@@ -172,13 +264,25 @@ def apparent_authority(
     version = resolve_corpus_version(domain, corpus_version)
     case = _case(domain, case_id, version)
     kind = _architecture(architecture)
+    identity = {
+        "block_index": block_index,
+        "corpus_version": version,
+        "resource_key": describe(domain, corpus_version=version).key,
+    }
+    scored_from = "typed_memory"
     if kind is MemoryArchitecture.FREE_TEXT:
-        return ApparentAuthority(
-            domain_id=domain_id,
-            case_id=case_id,
-            formed=None,
-            unscored_reason=_FREE_TEXT_UNSCORED,
-        )
+        state, reason = _resolve_annotations(domain, str(payload), annotations)
+        if state is None:
+            return ApparentAuthority(
+                domain_id=domain_id,
+                case_id=case_id,
+                formed=None,
+                unscored_reason=reason,
+                scored_from="free_text_unscored",
+                **identity,
+            )
+        payload = state
+        scored_from = "free_text_annotation"
     remembered = domain.memory.parse_typed(payload)
     denied = 0
     formed: list[str] = []
@@ -199,6 +303,8 @@ def apparent_authority(
         probes_denied=denied,
         probes_formed=len(formed),
         probe_ids=tuple(formed),
+        scored_from=scored_from,
+        **identity,
     )
 
 
