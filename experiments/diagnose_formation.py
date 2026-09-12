@@ -1,10 +1,13 @@
 """Locate and explain the writer step that created each false permission.
 
-For every typed memory chain in the given runs, and every unauthorized request the final memory
-authorizes, find the first block where the memory diverges from the ledger on that request and
-stays diverged (deterministic). Then ask a judge model to read that block, the writer's plan and
-patches, and the memory before and after, and to name the cause. Writes one JSONL row per failure
-and prints a summary by cause.
+For every typed memory lineage in the given runs (base blocks followed by one closed-loop arm's write-back blocks),
+and every unauthorized request the final memory authorizes (the submitted request or the executor's operational
+alternative), find the first block where the memory diverges from the ledger on that request and stays diverged
+(deterministic). Then ask the judge models to read that block, the writer's plan and patches, and the memory before
+and after, and to name one cause. In closed-loop runs, also report every record whose cited sources are all the
+agent's own write-back lines: new records (born from actions) separately from existing records whose citations were
+replaced. Writes one JSONL row per failure under --out (use a fresh directory per label set; reruns append only rows
+not already present) and prints a summary by cause.
 """
 
 from __future__ import annotations
@@ -151,6 +154,27 @@ def candidate_requests(domain: Any, case: Any) -> list[tuple[Any, str, Any]]:
     return out
 
 
+def attempts_at(attempts: list[dict[str, Any]], mems: list[dict[str, Any]], block_index: int) -> list[dict[str, Any]]:
+    """The writer attempts that produced this lineage's memory at `block_index`: those whose parent is the lineage's
+    memory just before that block (attempts carry no chain id, and two arms share block indices)."""
+    prior = [m for m in mems if m["block_index"] < block_index]
+    parent = prior[-1]["memory_id"] if prior else None
+    case_id, condition = mems[0]["case_id"], mems[0]["condition_id"]
+    return sorted(
+        [a for a in attempts if a["case_id"] == case_id and a["condition_id"] == condition and a["block_index"] == block_index and a.get("parent_memory_id") == parent],
+        key=lambda a: a["attempt_index"],
+    )
+
+
+def written_for(written_back: list[dict[str, Any]], mems: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], str | None]:
+    """The write-back rows of this lineage's arm, and the arm name (None for single-arm and open-loop runs)."""
+    case_id, condition = mems[0]["case_id"], mems[0]["condition_id"]
+    arm_of = {w["loop_chain_id"]: w.get("arm") for w in written_back if w.get("loop_chain_id")}
+    arm = next((arm_of[m["chain_id"]] for m in mems if m["chain_id"] in arm_of), None)
+    rows_ = [w for w in written_back if w["case_id"] == case_id and w["condition_id"] == condition and (arm is None or w.get("arm") in (None, arm))]
+    return rows_, arm
+
+
 def judge_all(llm: LLM, targets: list[str], payload: dict[str, str], row: dict[str, Any], summary: collections.Counter) -> None:
     row["judges"] = {t: judge(llm, t, payload) for t in targets}
     votes = collections.Counter(v.get("cause", "other") for v in row["judges"].values())
@@ -175,8 +199,7 @@ def born_records(fh, domain, cases, presentation, chains, attempts, written_back
         case_id, condition = mems[0]["case_id"], mems[0]["condition_id"]
         case = cases[case_id]
         base_max = len(list(domain.corpus.blocks(case))) - 1
-        wb = [w for w in written_back if w["case_id"] == case_id and w["condition_id"] == condition and (w.get("loop_chain_id") in (None, chain_id))]
-        arm = next((w.get("arm") for w in wb if w.get("arm")), None)
+        wb, arm = written_for(written_back, mems)
         seen = set()
         for i, m in enumerate(mems):
             if m["block_index"] <= base_max:
@@ -195,7 +218,7 @@ def born_records(fh, domain, cases, presentation, chains, attempts, written_back
                 failure = "record_recited_from_action" if rid in prior_ids else "record_born_from_action"
                 if existing and (chain_id, failure, None, "submitted", rid) in existing:
                     continue
-                block_attempts = sorted([a for a in attempts if a["case_id"] == case_id and a["condition_id"] == condition and a["block_index"] == b], key=lambda a: a["attempt_index"])
+                block_attempts = attempts_at(attempts, mems, b)
                 plan = "\n---\n".join(f"attempt {a['attempt_index']} ({a['status']}): {args_of(a).get('planned_edits', '')}" for a in block_attempts) or "(no attempt recorded)"
                 row = {"run": None, "domain": domain.domain_id, "case_id": case_id, "condition_id": condition, "writer": m["writer"]["target_id"], "chain_id": chain_id, "arm": arm,
                        "failure": failure, "record_id": rid, "record": compact({"authorizations": [rec]}), "error_block": b, "loop_block": True,
@@ -246,6 +269,7 @@ def main(argv: list[str] | None = None) -> int:
             chains = canonical_chains(memories, rows(run / "memory_states.jsonl"))
             out_path = out_dir / f"{run.name.split('__')[-1]}.jsonl"
             existing = {row_key(r) for r in rows(out_path)}
+            reported_base: set[tuple] = set()  # a base-history failure is shared by every arm forked from that base; report it once
             written = 0
             with open(out_path, "a", encoding="utf-8") as fh:
                 for chain_id, mems in chains.items():
@@ -255,8 +279,7 @@ def main(argv: list[str] | None = None) -> int:
                     condition = mems[0]["condition_id"]
                     writer = mems[0]["writer"]["target_id"]
                     run_id = mems[0]["writer_run_id"]
-                    wb = [w for w in written_back if w["case_id"] == case_id and w["condition_id"] == condition and (w.get("loop_chain_id") in (None, chain_id))]
-                    arm = next((w.get("arm") for w in wb if w.get("arm")), None)
+                    wb, arm = written_for(written_back, mems)
                     policy = str(getattr(case, "policy", "") or "")
                     n_base = len(list(domain.corpus.blocks(case)))
                     base_max = n_base - 1
@@ -301,14 +324,20 @@ def main(argv: list[str] | None = None) -> int:
                                 break
                         if error_block is None:
                             continue
+                        row_arm = arm if error_block > base_max else None
+                        if error_block <= base_max:
+                            base_key = (case_id, condition, writer, run_id, probe.probe_id, kind, error_block)
+                            if base_key in reported_base:
+                                continue
+                            reported_base.add(base_key)
                         before = state_at(error_block - 1) if error_block > 0 else domain.memory.empty_typed()
                         after = state_at(error_block)
-                        block_attempts = sorted([a for a in attempts if a["case_id"] == case_id and a["condition_id"] == condition and a["block_index"] == error_block and a["writer"]["target_id"] == writer and a["writer_run_id"] == run_id], key=lambda a: a["attempt_index"])
+                        block_attempts = attempts_at(attempts, mems, error_block)
                         plan = "\n---\n".join(f"attempt {a['attempt_index']} ({a['status']}): {args_of(a).get('planned_edits', '')}" for a in block_attempts) or "(no attempt recorded)"
                         patches = json.dumps([args_of(a).get("patches") for a in block_attempts])[:6000]
                         truth = domain.memory.faithful_typed(case, through_block_index=min(error_block, base_max))
                         row = {
-                            "run": run.name, "domain": manifest["domain_id"], "case_id": case_id, "condition_id": condition, "writer": writer, "chain_id": chain_id, "arm": arm,
+                            "run": run.name, "domain": manifest["domain_id"], "case_id": case_id, "condition_id": condition, "writer": writer, "chain_id": chain_id, "arm": row_arm,
                             "probe_id": probe.probe_id, "request_kind": kind, "request": domain.executor.serialize_request(request), "error_block": error_block,
                             "failure": "false_authorization", "loop_block": error_block > base_max, "attempt_statuses": [a["status"] for a in block_attempts],
                         }

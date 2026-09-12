@@ -1,20 +1,24 @@
 """Closed loop: the writer route, with the executor's actions written back.
 
-Open loop: the six requests per case answered against the frozen incremental memory (the
-paper's protocol). Closed loop, from the same memory: the six requests answered one at a
-time, and after each one what the agent did is written back and memory is updated before
-the next request. Request 1 is identical in both loops. The written-back text comes from a
+Open loop: each case's requests answered against the frozen incremental memory (the paper's protocol). Closed loop, from
+the same memory: the requests answered one at a time; after each one a workflow-log line saying what the agent did
+(built from the executor's actual tool call and the validated decision) is appended to the history as a new block, the
+writer updates memory from it, and the next request runs on the updated memory. The written-back text comes from a
 workflow system, never from an authorizing principal, so the ledger does not change.
 
---loop-writer same      one workflow line is appended to the history as a new block and the
-                        run's writer updates memory from (previous memory, new block)
---loop-writer executor  the executor model updates memory from (previous memory, request,
-                        outcome) through the same LangMem manager
---action-log            the writer also sees the append-only log of all (request, action,
-                        outcome) lines so far at every loop update
+--rounds r              r complete passes over each case's requests; round r finishes before round r+1 starts
+--request-order         within a round, requests by request time (default) or corpus order; each request is re-dated to
+                        follow the last log it can see when that leaves every ledger verdict unchanged, otherwise it
+                        keeps its corpus time (counted in the summary as requests_kept_at_original_time)
+--loop-content          action (default): the line describes the executor's action; neutral: a content-free workspace
+                        line, the control for the number of updates; both: the two arms forked from the same base
+                        memories in one run, paired by chain
+--loop-writer same      the run's writer updates memory from (previous memory, new block)
+--loop-writer executor  the executor model updates memory from (previous memory, request, action, outcome)
+--action-log            the writer also sees the append-only log of all lines so far at every loop update
+--writer-instruction    one line prepended to the writer's instructions for every update
 
-    uv run python -m experiments.closed_loop --writer-targets glm_5_2_baseten \
-        --executor-targets gptoss_baseten --dry-run
+    uv run python -m experiments.closed_loop --writer-targets glm_5_2_baseten         --executor-targets gptoss_baseten --rounds 3 --loop-content both --dry-run
 """
 
 from __future__ import annotations
@@ -59,12 +63,6 @@ from experiments.authorization_memory.writing_methods import incremental_updates
 STUDY_ID = "closed_loop"
 ACTOR_ID, SPEAKER, CHANNEL, TITLE = "workflow_log", "Workflow Log", "workflow log", "Request handling record"
 TIME_FIELDS = {"action_time", "requested_at"}
-OUTCOMES = {
-    "submit_order": "Order placed", "request_authorization": "Escalated for authorization", "decline_order": "Declined",
-    "execute_submitted_payload": "Executed", "execute_operational_payload": "Operational alternative executed",
-    "request_incident_approval": "Escalated for approval", "decline_response_action": "Declined",
-    "place_submitted_order": "Order placed", "place_operational_order": "Operational alternative placed", "request_mandate_review": "Escalated for mandate review",
-}
 
 
 NEUTRAL_LINES = (
@@ -98,7 +96,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--writer-max-attempts", type=int, choices=(1, 2), default=2)
     parser.add_argument("--loop-writer", choices=("same", "executor"), default="same")
     parser.add_argument("--action-log", action="store_true")
-    parser.add_argument("--rounds", type=int, default=1, help="passes over each case's requests; later rounds repeat the same requests")
+    parser.add_argument("--rounds", type=int, default=1, help="complete passes over each case's requests; round r finishes before round r+1 starts")
     parser.add_argument("--request-order", choices=("chronological", "paper"), default="chronological", help="order of a case's requests within a round: by request time (default) or the corpus order. Rounds are always complete: every request of round r is answered before round r+1 begins")
     parser.add_argument("--loop-content", choices=("action", "neutral", "both"), default="action", help="what the write-back says: the executor's action (default), a neutral workspace line with no request content (control for update count), or both arms forked from the same base memories in one run")
     parser.add_argument("--writer-instruction", default=None, help="one line prepended to the writer's instructions for every update, including write-backs")
@@ -358,7 +356,7 @@ def main(argv: list[str] | None = None) -> int:
                 probe_index, round_no = sequences[i][position - 1]
                 case_now, probe, applied = shifted_case(domain, spec.case, probe_index, case_probes, previous_end[i])
                 shifted[i] = (case_now, probe, round_no)
-                time_kept += not applied
+                time_kept += (not applied) and arm == arms[0]  # identical across arms; count once
                 artifact = current_arm[i]
                 if spec.architecture is MemoryArchitecture.TYPED and isinstance(artifact.payload, dict):
                     state = domain.memory.parse_typed(artifact.payload)
@@ -376,7 +374,7 @@ def main(argv: list[str] | None = None) -> int:
             executor_contexts += step_contexts
             trial_by_chain = {t.metadata["study"]["chain"]: t for t in step_trials}
 
-            seeded, seeded_index, seeded_rows = [], [], []
+            seeded, seeded_rows = [], []
             for i in active:
                 spec, (case_now, probe, round_no) = specs[i], shifted[i]
                 if position == args.rounds * n_probes[i]:
@@ -394,7 +392,6 @@ def main(argv: list[str] | None = None) -> int:
                 arm_rows.append(row)
                 update = WriterUpdateSpec(block.block_index, ({"role": "user", "content": content},), frozenset(domain.corpus.source_turn_ids(spec.case)) | appended[i], "new_conversation_block")
                 seeded.append(replace(spec, updates=(update,), initial_memory=current_arm[i], target_id=spec.target_id if args.loop_writer == "same" else executor_targets[0], chain_instance_id=f"loop-{arm}"))
-                seeded_index.append(i)
                 seeded_rows.append(row)
             if seeded:
                 step = write_chains(seeded)
@@ -405,9 +402,10 @@ def main(argv: list[str] | None = None) -> int:
                 attempts += step.attempts
                 states += step.states
                 contexts += step.model_contexts
-                for i, frozen, row in zip(seeded_index, loop_evidence(seeded, step), seeded_rows):
-                    current_arm[i] = by_id[frozen.memory_id]
-                    row["loop_chain_id"] = by_id[frozen.memory_id].chain_id
+                for spec_seeded, frozen, row in zip(seeded, loop_evidence(seeded, step), seeded_rows):
+                    current_arm[row["chain"]] = by_id[frozen.memory_id]
+                    if frozen.memory_id != spec_seeded.initial_memory.memory_id:  # accepted: a loop memory of this arm
+                        row["loop_chain_id"] = by_id[frozen.memory_id].chain_id
         written_rows += arm_rows
 
     write_rows(run_dir, "memories.jsonl", memories)
