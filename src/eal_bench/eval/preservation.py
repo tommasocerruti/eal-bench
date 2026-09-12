@@ -199,18 +199,32 @@ def _architecture(value: MemoryArchitecture | str) -> MemoryArchitecture:
     return value if isinstance(value, MemoryArchitecture) else MemoryArchitecture(value)
 
 
-def _writer_identity(writer: Any | None, memory_id: str | None) -> dict[str, Any]:
+def _writer_identity(
+    writer: Any | None,
+    memory_id: str | None,
+    writer_seed: int | None = None,
+) -> dict[str, Any]:
     """Which writer produced this memory.
 
     Without it two writers that land on the same records serialize identically and
     a saved preservation result is no longer attributable.
+
+    `ModelProvenance` has no seed field; the writer seed is carried in
+    `effective_parameters`, or on the evidence, so read both.
     """
 
+    parameters = getattr(writer, "effective_parameters", None) or {}
+    resolved_seed = writer_seed
+    if resolved_seed is None:
+        resolved_seed = getattr(writer, "writer_seed", None)
+    if resolved_seed is None:
+        candidate = parameters.get("seed")
+        resolved_seed = candidate if isinstance(candidate, int) else None
     return {
         "writer_target": getattr(writer, "target_id", None),
         "writer_model": getattr(writer, "resolved_model", None)
         or getattr(writer, "requested_model", None),
-        "writer_seed": getattr(writer, "writer_seed", None),
+        "writer_seed": resolved_seed,
         "memory_id": memory_id,
     }
 
@@ -234,6 +248,7 @@ def score_memory(
     annotations: Sequence[Annotation] = (),
     writer: Any | None = None,
     memory_id: str | None = None,
+    writer_seed: int | None = None,
 ) -> PreservationOutcome:
     """Score a memory against the canonical ledger.
 
@@ -254,7 +269,7 @@ def score_memory(
             corpus_version=version,
             presentation_id=presentation.presentation_id,
         ).key,
-        **_writer_identity(writer, memory_id),
+        **_writer_identity(writer, memory_id, writer_seed),
     }
     scored = payload
     scored_from = "typed_memory"
@@ -308,6 +323,7 @@ def apparent_authority(
     annotations: Sequence[Annotation] = (),
     writer: Any | None = None,
     memory_id: str | None = None,
+    writer_seed: int | None = None,
 ) -> ApparentAuthority:
     """Same predicate as `analysis/failure_mechanisms.py`, which is the reference."""
 
@@ -324,7 +340,7 @@ def apparent_authority(
             corpus_version=version,
             presentation_id=presentation.presentation_id,
         ).key,
-        **_writer_identity(writer, memory_id),
+        **_writer_identity(writer, memory_id, writer_seed),
     }
     scored_from = "typed_memory"
     if kind is MemoryArchitecture.FREE_TEXT:

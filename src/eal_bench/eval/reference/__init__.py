@@ -1635,5 +1635,11 @@ def verify_writer_run() -> dict[str, Any]:
                 )
             if outcome.writer_target is None or outcome.memory_id != evidence.memory_id:
                 raise AssertionError(f"{condition_id}: the result lost the writer that produced it")
+            # The seed lives in effective_parameters, not on ModelProvenance.
+            if outcome.writer_seed != chain.writer_seed:
+                raise AssertionError(
+                    f"{condition_id}: the result lost the writer seed "
+                    f"({outcome.writer_seed} != {chain.writer_seed})"
+                )
         ran += 1
     return {"status": "passed", "conditions_run": ran}

@@ -130,6 +130,9 @@ score_memory(
 )
 ```
 
+The seed is read from the writer's `effective_parameters`, since `ModelProvenance` has no
+seed field. Pass `writer_seed=` to override it.
+
 Without them, two writers that land on the same records serialize identically. Pass
 `presentation_id` too when a domain ships more than one, or results written under different
 presentations share a resource key.
