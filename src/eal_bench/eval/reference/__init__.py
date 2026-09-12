@@ -14,7 +14,13 @@ from typing import Any
 
 from .. import resources as eval_resources
 
-__all__ = ["load_fixture", "verify", "verify_inspect", "verify_resources"]
+__all__ = [
+    "load_fixture",
+    "verify",
+    "verify_inspect",
+    "verify_inspect_eval",
+    "verify_resources",
+]
 
 _ABSENT = object()
 
@@ -413,6 +419,7 @@ def verify_controls() -> dict[str, Any]:
         "rows_checked": len(fixture["rows"]),
         "labels": sorted({row["label"] for row in fixture["rows"]}),
         "determinism": verify_controls_determinism(),
+        "runner_parity": verify_runner_parity(),
     }
 
 
@@ -532,4 +539,168 @@ def verify_inspect() -> dict[str, Any]:
         "rows_checked": len(fixture["rows"]),
         "task_built": task.name,
         "task_samples": len(task.dataset),
+        "end_to_end_eval": verify_inspect_eval(),
+    }
+
+
+def verify_runner_parity() -> dict[str, Any]:
+    """Control trials must equal what the experiment runner builds for the same conditions.
+
+    Rebuilds faithful evidence through `pipeline._build_evidence` and compares evidence
+    ids, model-visible context hashes and tool schemas.
+    """
+
+    from experiments.authorization_memory.conditions import ExecutorEvidence, get_condition
+    from experiments.authorization_memory.persistence import content_hash
+    from experiments.authorization_memory.pipeline import (
+        _build_evidence,
+        _executor_messages,
+        calibrate_capacity,
+    )
+    from experiments.authorization_memory.surfaces import model_visible_tools
+
+    from ..controls import CONTROL_CONDITIONS, build_control_trials
+
+    compared = 0
+    for domain_id in eval_resources.list_domains():
+        domain = eval_resources.load_domain(domain_id)
+        version = domain.corpus.default_version
+        presentation = eval_resources.resolve_presentation(domain)
+        cases = list(domain.corpus.load_cases(version))
+        capacity = calibrate_capacity(
+            domain, cases, corpus_version=version, presentation=presentation
+        ).tokens_for("primary")
+        # No writer condition is selected, so this makes no model call.
+        _, _, _, evidence, _ = _build_evidence(
+            None,
+            domain,
+            cases,
+            [get_condition(name) for name in CONTROL_CONDITIONS],
+            writer_task="writer",
+            writer_targets=(),
+            writer_runs=0,
+            writer_max_attempts=1,
+            capacity_tokens=capacity,
+            batch_size=None,
+            seed=0,
+            token_counter=None,
+            presentation=presentation,
+        )
+        expected: dict[tuple[str, str, str], tuple[str, str]] = {}
+        by_id = {domain.corpus.case_id(case): case for case in cases}
+        for item in evidence:
+            case = by_id[item.case_id]
+            for probe in domain.corpus.probes(case):
+                messages = _executor_messages(
+                    domain,
+                    case,
+                    probe,
+                    evidence_kind=ExecutorEvidence.MEMORY,
+                    memory=item.payload,
+                    presentation=presentation,
+                )
+                expected[(item.case_id, item.condition_id, probe.probe_id)] = (
+                    item.evidence_id,
+                    content_hash(messages),
+                )
+        tools_hash = content_hash(model_visible_tools(domain, presentation))
+        observed: dict[tuple[str, str, str], tuple[str, str]] = {}
+        for trial, truth in build_control_trials(domain_id, check_leakage=False):
+            if content_hash([dict(tool) for tool in trial.tools]) != tools_hash:
+                raise AssertionError(f"{domain_id}: tool schemas differ from the runner")
+            observed[(truth.case_id, truth.condition_id, truth.probe_id)] = (
+                truth.evidence.evidence_id,
+                content_hash([dict(message) for message in trial.messages]),
+            )
+        if set(observed) != set(expected):
+            raise AssertionError(f"{domain_id}: trial set differs from the runner")
+        differing = sorted(key for key in expected if expected[key] != observed[key])
+        if differing:
+            raise AssertionError(f"{domain_id}: {len(differing)} contexts differ from the runner")
+        compared += len(expected)
+    return {"status": "passed", "contexts_compared": compared}
+
+
+
+def verify_inspect_eval() -> dict[str, Any]:
+    """Run a real Inspect eval against the mock provider, with no credentials.
+
+    A scripted perfect executor must reach complete authorized use and zero
+    unauthorized submission through the Inspect solver, scorer and tool plumbing.
+    """
+
+    from ..controls import build_control_trials
+    from ..inspect_adapter import available, control_task
+
+    if not available():
+        return {"status": "skipped", "reason": "inspect-ai is not installed"}
+
+    import tempfile
+
+    from inspect_ai import eval as inspect_eval
+    from inspect_ai.model import (
+        ChatCompletionChoice,
+        ChatMessageAssistant,
+        ModelOutput,
+        get_model,
+    )
+    from inspect_ai.tool import ToolCall
+
+    domain_id = "procurement"
+    domain = eval_resources.load_domain(domain_id)
+    case_id = domain.corpus.case_id(domain.corpus.load_cases(domain.corpus.default_version)[0])
+    pairs = build_control_trials(domain_id, check_leakage=False, case_ids=[case_id])
+    by_request = {trial.messages[-1]["content"]: truth for trial, truth in pairs}
+    action = domain.action_tools[0]
+    decline = [name for name in domain.terminal_tools if name not in domain.action_tools][-1]
+
+    def scripted(messages: Any, tools: Any, tool_choice: Any, config: Any) -> Any:
+        del tools, tool_choice, config
+        truth = by_request[messages[-1].content]
+        name = action if truth.request_authorized else decline
+        arguments = domain.conformance.action_arguments(truth.probe.request, name)
+        return ModelOutput(
+            model="mockllm/model",
+            choices=[
+                ChatCompletionChoice(
+                    message=ChatMessageAssistant(
+                        content="",
+                        tool_calls=[ToolCall(id="1", function=name, arguments=dict(arguments))],
+                    ),
+                    stop_reason="tool_calls",
+                )
+            ],
+        )
+
+    # The log is read lazily from log_dir, so collect everything before cleanup.
+    with tempfile.TemporaryDirectory() as log_dir:
+        log = inspect_eval(
+            control_task(domain_id, check_leakage=False, case_ids=[case_id]),
+            model=get_model("mockllm/model", custom_outputs=scripted),
+            log_dir=log_dir,
+            display="none",
+        )[0]
+        status = log.status
+        samples = list(log.samples or ())
+        scorer_name = next(iter(samples[0].scores)) if samples else ""
+        rows = [dict(sample.scores[scorer_name].metadata) for sample in samples]
+    log_status, log_samples = status, samples
+    if log_status != "success":
+        raise AssertionError(f"Inspect eval failed: {log_status}")
+    if len(log_samples) != len(pairs):
+        raise AssertionError(f"Inspect scored {len(log_samples)} samples for {len(pairs)} trials")
+    authorized = [row for row in rows if row["request_authorized"]]
+    unauthorized = [row for row in rows if not row["request_authorized"]]
+    used = sum(1 for row in authorized if row["requested_action_taken"])
+    submitted = sum(1 for row in unauthorized if row["requested_action_taken"])
+    if used != len(authorized) or submitted != 0:
+        raise AssertionError(
+            f"scripted perfect executor scored {used}/{len(authorized)} authorized use "
+            f"and {submitted}/{len(unauthorized)} unauthorized submission"
+        )
+    return {
+        "status": "passed",
+        "samples": len(log_samples),
+        "authorized_use": f"{used}/{len(authorized)}",
+        "unauthorized_submission": f"{submitted}/{len(unauthorized)}",
     }
