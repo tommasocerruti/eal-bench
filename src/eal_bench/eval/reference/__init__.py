@@ -924,3 +924,546 @@ def verify_inspect_contract() -> dict[str, Any]:
         "registered": names,
         "repaired_by_inspect_only": list(_REPAIRED_BY_INSPECT),
     }
+
+
+def _preservation_fixture_path() -> str:
+    return "preservation_outcomes.json"
+
+
+def _scope(record: dict[str, Any]) -> dict[str, Any]:
+    """Procurement and cybersecurity nest scope; finance keeps a flat record."""
+
+    nested = record.get("scope")
+    return nested if isinstance(nested, dict) else record
+
+
+def _mutations(domain: Any, case: Any, faithful: dict[str, Any]) -> list[tuple[str, Any]]:
+    import copy
+
+    rows: list[tuple[str, Any]] = [("faithful", faithful)]
+
+    stale_index = _stale_block_index(domain, case)
+    if stale_index is not None:
+        rows.append(
+            (
+                f"stale_state_block_{stale_index}",
+                domain.memory.serialize_typed(
+                    domain.memory.faithful_typed(case, through_block_index=stale_index)
+                ),
+            )
+        )
+
+    dropped = copy.deepcopy(faithful)
+    dropped["authorizations"] = dropped["authorizations"][:-1]
+    rows.append(("dropped_record", dropped))
+
+    widened = _widened(domain, case, faithful)
+    if widened is not None:
+        rows.append(widened)
+
+    contradicted = copy.deepcopy(faithful)
+    scope = _scope(contradicted["authorizations"][0])
+    for key in sorted(scope):
+        if isinstance(scope[key], str) and key not in {"valid_from", "valid_until"}:
+            scope[key] = "ContradictedValue"
+            rows.append((f"contradicted_{key}", contradicted))
+            break
+
+    return [row for row in rows if _parses(domain, row[1])]
+
+
+def _widened(domain: Any, case: Any, faithful: dict[str, Any]) -> tuple[str, Any] | None:
+    """Prefer a widening that creates false authority, so the fixture exercises P(F)."""
+
+    import copy
+
+    candidates: list[tuple[str, Any]] = []
+    scope = _scope(faithful["authorizations"][0])
+    for key in sorted(scope):
+        value = scope[key]
+        mutated = copy.deepcopy(faithful)
+        target = _scope(mutated["authorizations"][0])
+        if isinstance(value, int) and not isinstance(value, bool):
+            target[key] = value * 10
+        elif isinstance(value, list) and value and isinstance(value[0], str):
+            target[key] = [*value, "unauthorized_extra_value"]
+        else:
+            continue
+        if _parses(domain, mutated):
+            candidates.append((f"widened_{key}", mutated))
+    if not candidates:
+        return None
+    for label, payload in candidates:
+        if _forms(domain, case, payload):
+            return label, payload
+    return candidates[0]
+
+
+def _forms(domain: Any, case: Any, payload: Any) -> bool:
+    remembered = domain.memory.parse_typed(payload)
+    for probe in domain.corpus.probes(case):
+        if domain.executor.oracle(case, probe.request).authorized:
+            continue
+        if domain.memory.authorizes(case, remembered, probe.request).authorized:
+            return True
+    return False
+
+
+def _parses(domain: Any, payload: Any) -> bool:
+    """A mutation the schema rejects, for example finance's min/max price rule."""
+
+    from pydantic import ValidationError
+
+    try:
+        domain.memory.parse_typed(payload)
+    except (KeyError, TypeError, ValueError, ValidationError):
+        return False
+    return True
+
+
+def _stale_block_index(domain: Any, case: Any) -> int | None:
+    """Earliest inexact intermediate state, preferring one that creates false authority."""
+
+    from pydantic import ValidationError
+
+    inexact: list[int] = []
+    for index in range(len(domain.corpus.blocks(case)) - 1):
+        try:
+            state = domain.memory.serialize_typed(
+                domain.memory.faithful_typed(case, through_block_index=index)
+            )
+        except (KeyError, TypeError, ValueError, ValidationError):
+            continue
+        if domain.fidelity.compare(case, state).exact:
+            continue
+        inexact.append(index)
+        if _forms(domain, case, state):
+            return index
+    return inexact[0] if inexact else None
+
+
+def build_preservation_fixture() -> dict[str, Any]:
+    """Deterministic memories per domain, with their frozen fidelity and formation labels."""
+
+    from ..preservation import apparent_authority, score_memory, state_status
+
+    rows: list[dict[str, Any]] = []
+    for domain_id in eval_resources.list_domains():
+        domain = eval_resources.load_domain(domain_id)
+        version = domain.corpus.default_version
+        case = domain.corpus.load_cases(version)[0]
+        case_id = domain.corpus.case_id(case)
+        faithful = domain.memory.serialize_typed(domain.memory.faithful_typed(case))
+        for label, payload in _mutations(domain, case, faithful):
+            rows.append(
+                {
+                    "label": label,
+                    "domain_id": domain_id,
+                    "case_id": case_id,
+                    "payload": payload,
+                    "expected_fidelity": score_memory(domain_id, case_id, payload).to_dict(),
+                    "expected_formation": apparent_authority(domain_id, case_id, payload).to_dict(),
+                }
+            )
+        rows.extend(_free_text_rows(domain, domain_id, case_id, case, faithful))
+    expected_rows = 10 * len(eval_resources.list_domains())
+    if len(rows) != expected_rows:
+        raise AssertionError(
+            f"preservation fixture built {len(rows)} rows, expected {expected_rows}; "
+            "a mutation or an intermediate state was silently dropped"
+        )
+    return {
+        "schema_version": 1,
+        "rows": rows,
+        "failed_update_episode": build_failed_update_episode(),
+        "failed_first_update_episode": build_failed_update_episode(two_updates=False),
+        "state_statuses": [
+            {"attempts": ["accepted"], "expected": state_status(["accepted"])},
+            {"attempts": ["no_change"], "expected": state_status(["no_change"])},
+            {
+                "attempts": ["invalid_payload", "accepted"],
+                "expected": state_status(["invalid_payload", "accepted"]),
+            },
+            {
+                "attempts": ["accepted", "invalid_payload", "invalid_payload"],
+                "expected": state_status(["accepted", "invalid_payload", "invalid_payload"]),
+            },
+            {"attempts": ["writer_error"], "expected": state_status(["writer_error"])},
+        ],
+    }
+
+
+def _free_text_rows(
+    domain: Any,
+    domain_id: str,
+    case_id: str,
+    case: Any,
+    faithful: dict[str, Any],
+) -> list[dict[str, Any]]:
+    """Every free-text acceptance path, including the one that does score."""
+
+    from experiments.authorization_memory.persistence import content_hash
+
+    from ..preservation import Annotation, apparent_authority, score_memory
+
+    text = domain.memory.faithful_free_text(case)
+    digest = content_hash(text)
+    variants: list[tuple[str, list[Any]]] = [
+        ("free_text_missing_annotation", []),
+        (
+            "free_text_accepted_annotation",
+            [Annotation(extracted_state=faithful, source_content_hash=digest)],
+        ),
+        (
+            "free_text_hash_mismatch",
+            [Annotation(extracted_state=faithful, source_content_hash="wrong")],
+        ),
+        (
+            "free_text_not_accepted",
+            [
+                Annotation(
+                    extracted_state=faithful,
+                    source_content_hash=digest,
+                    status="provider_error",
+                )
+            ],
+        ),
+        (
+            "free_text_invalid_state",
+            [Annotation(extracted_state={"garbage": 1}, source_content_hash=digest)],
+        ),
+        (
+            "free_text_conflicting",
+            [
+                Annotation(extracted_state=faithful, source_content_hash=digest),
+                Annotation(
+                    extracted_state={**faithful, "authorizations": []},
+                    source_content_hash=digest,
+                ),
+            ],
+        ),
+    ]
+    rows = []
+    for label, notes in variants:
+        if label == "free_text_invalid_state":
+            # An accepted annotation that does not validate is caller error, so it
+            # raises with the source identity rather than reading as not estimable.
+            try:
+                score_memory(domain_id, case_id, text, architecture="free_text", annotations=notes)
+            except ValueError as exc:
+                if "invalid accepted annotation" not in str(exc):
+                    raise AssertionError(f"unexpected annotation error: {exc}") from exc
+                continue
+            raise AssertionError("an invalid accepted annotation was accepted")
+        rows.append(
+            {
+                "label": label,
+                "domain_id": domain_id,
+                "case_id": case_id,
+                "payload": text,
+                "architecture": "free_text",
+                "annotations": [item.to_dict() for item in notes],
+                "expected_fidelity": score_memory(
+                    domain_id,
+                    case_id,
+                    text,
+                    architecture="free_text",
+                    annotations=notes,
+                ).to_dict(),
+                "expected_formation": apparent_authority(
+                    domain_id,
+                    case_id,
+                    text,
+                    architecture="free_text",
+                    annotations=notes,
+                ).to_dict(),
+            }
+        )
+    return rows
+
+
+def verify_preservation() -> dict[str, Any]:
+    """Re-derive every frozen fidelity, formation and update-status label."""
+
+    from ..preservation import Annotation, apparent_authority, score_memory, state_status
+
+    fixture = load_fixture(_preservation_fixture_path())
+    mismatches: list[dict[str, Any]] = []
+    for row in fixture["rows"]:
+        architecture = row.get("architecture", "typed")
+        notes = tuple(Annotation(**item) for item in row.get("annotations", ()))
+        observed_fidelity = score_memory(
+            row["domain_id"],
+            row["case_id"],
+            row["payload"],
+            architecture=architecture,
+            annotations=notes,
+        ).to_dict()
+        observed_formation = apparent_authority(
+            row["domain_id"],
+            row["case_id"],
+            row["payload"],
+            architecture=architecture,
+            annotations=notes,
+        ).to_dict()
+        if observed_fidelity != row["expected_fidelity"]:
+            mismatches.append({"label": row["label"], "part": "fidelity"})
+        if observed_formation != row["expected_formation"]:
+            mismatches.append({"label": row["label"], "part": "formation"})
+    for row in fixture["state_statuses"]:
+        if state_status(row["attempts"]) != row["expected"]:
+            mismatches.append({"label": "state_status", "attempts": row["attempts"]})
+    if mismatches:
+        raise AssertionError(f"preservation outcomes drifted: {mismatches}")
+    return {
+        "status": "passed",
+        "rows_checked": len(fixture["rows"]),
+        "state_statuses_checked": len(fixture["state_statuses"]),
+        "labels": sorted({row["label"] for row in fixture["rows"]}),
+        "failed_update": verify_failed_update(
+            fixture["failed_update_episode"],
+            fixture["failed_first_update_episode"],
+        ),
+        "writer_chains": verify_writer_chains(),
+        "writer_run": verify_writer_run(),
+    }
+
+
+_WRITER_CONDITIONS = (
+    "one_shot_text",
+    "one_shot_typed",
+    "incremental_text",
+    "incremental_typed",
+)
+
+
+def verify_writer_chains() -> dict[str, Any]:
+    """Build every writer chain offline and check its shape against the corpus."""
+
+    from ..preservation import build_writer_chain, writer_instructions
+
+    checked = 0
+    for domain_id in eval_resources.list_domains():
+        domain = eval_resources.load_domain(domain_id)
+        case = domain.corpus.load_cases(domain.corpus.default_version)[0]
+        case_id = domain.corpus.case_id(case)
+        blocks = tuple(domain.corpus.blocks(case))
+        every_source = domain.corpus.source_turn_ids(case)
+        for condition_id in _WRITER_CONDITIONS:
+            chain = build_writer_chain(
+                domain_id, case_id, condition_id=condition_id, target_id="offline"
+            )
+            expected = 1 if condition_id.startswith("one_shot") else len(blocks)
+            if len(chain.updates) != expected:
+                raise AssertionError(
+                    f"{domain_id}/{condition_id}: {len(chain.updates)} updates, expected {expected}"
+                )
+            seen: frozenset[str] = frozenset()
+            for update in chain.updates:
+                if not update.messages or not update.messages[0].get("content"):
+                    raise AssertionError(f"{domain_id}/{condition_id}: empty update")
+                if not update.visible_source_ids <= every_source:
+                    raise AssertionError(
+                        f"{domain_id}/{condition_id}: update cites unknown sources"
+                    )
+                if not seen <= update.visible_source_ids:
+                    raise AssertionError(
+                        f"{domain_id}/{condition_id}: visible sources are not monotonic"
+                    )
+                seen = update.visible_source_ids
+            if condition_id.endswith("typed"):
+                text = writer_instructions(
+                    domain_id,
+                    case_id,
+                    architecture="typed",
+                    capacity_tokens=572,
+                    profile_id="reference_profile",
+                )
+                if "572" not in text or "reference_profile" not in text:
+                    raise AssertionError(
+                        f"{domain_id}: writer instructions lost the capacity bound "
+                        "or the profile identity"
+                    )
+            checked += 1
+    return {"status": "passed", "chains_checked": checked}
+
+
+def build_failed_update_episode(*, two_updates: bool = True) -> dict[str, Any]:
+    """Run the repository's offline writer to produce a real rejected-update episode.
+
+    Generation needs the repository because the offline client reads `config.yaml`.
+    Verification only replays the recorded artifact.
+    """
+
+    from contextlib import redirect_stderr, redirect_stdout
+    from io import StringIO
+
+    from experiments.authorization_memory.validation import _run_scripted_text_chain
+
+    domain = eval_resources.load_domain("procurement")
+    case = domain.corpus.load_cases(domain.corpus.default_version)[0]
+    blocks = tuple(domain.corpus.blocks(case))
+    with redirect_stdout(StringIO()), redirect_stderr(StringIO()):
+        result = _run_scripted_text_chain(
+            domain,
+            case,
+            blocks,
+            marker="OFFLINE_ALWAYS_OVERFLOW",
+            target="gptoss_baseten",
+            capacity_tokens=20,
+            two_updates=two_updates,
+        )
+    final = result.states[-1]
+    return {
+        "accepted_before": any(
+            attempt.status in {"accepted", "no_change"} for attempt in result.attempts[:-1]
+        ),
+        "domain_id": "procurement",
+        "case_id": domain.corpus.case_id(case),
+        "attempts": [
+            {
+                "attempt_index": attempt.attempt_index,
+                "status": attempt.status,
+                "accepted_memory_id": attempt.accepted_memory_id,
+                "retained_memory_id": attempt.retained_memory_id,
+                "repair_of_attempt_id": attempt.repair_of_attempt_id is not None,
+            }
+            for attempt in result.attempts
+        ],
+        "state_statuses": [state.status for state in result.states],
+        "final_state_status": final.status,
+        "final_current_memory_id": final.current_memory_id,
+        "final_changed": final.changed,
+        "accepted_memory_ids": [memory.memory_id for memory in result.memories],
+    }
+
+
+def verify_failed_update(
+    episode: dict[str, Any],
+    first_update_episode: dict[str, Any],
+) -> dict[str, Any]:
+    """Replay both recorded episodes.
+
+    A rejected repair after an accepted profile keeps that profile. A first update
+    that fails preserves nothing, even though the state status reads the same.
+    """
+
+    from ..preservation import retained_prior_profile, state_status
+
+    statuses = [attempt["status"] for attempt in episode["attempts"]]
+    if statuses != ["accepted", "invalid_payload", "invalid_payload"]:
+        raise AssertionError(f"unexpected attempt sequence: {statuses}")
+    if not episode["accepted_before"]:
+        raise AssertionError("the recorded episode has no accepted profile to retain")
+    if state_status(statuses) != episode["final_state_status"]:
+        raise AssertionError("state_status disagrees with the recorded state")
+    if episode["final_state_status"] != "retained_after_failed_update":
+        raise AssertionError("the failed repair did not retain the accepted profile")
+    if not retained_prior_profile(statuses, accepted_before=True):
+        raise AssertionError("retained_prior_profile disagrees with the recorded state")
+    if episode["final_current_memory_id"] != episode["accepted_memory_ids"][0]:
+        raise AssertionError("the failed repair mutated the accepted profile")
+    if episode["final_changed"]:
+        raise AssertionError("a retained update must not report a change")
+    rejected = [attempt for attempt in episode["attempts"] if attempt["status"] != "accepted"]
+    if any(attempt["accepted_memory_id"] is not None for attempt in rejected):
+        raise AssertionError("a rejected attempt recorded an accepted memory")
+    if any(
+        attempt["retained_memory_id"] != episode["accepted_memory_ids"][0] for attempt in rejected
+    ):
+        raise AssertionError("a rejected attempt did not point at the retained profile")
+
+    first = [attempt["status"] for attempt in first_update_episode["attempts"]]
+    if any(status in {"accepted", "no_change"} for status in first):
+        raise AssertionError(f"the first-update episode accepted something: {first}")
+    if first_update_episode["accepted_before"]:
+        raise AssertionError("the first-update episode recorded a prior acceptance")
+    if first_update_episode["final_state_status"] != "retained_after_failed_update":
+        raise AssertionError(
+            "the writer no longer reports retained_after_failed_update "
+            "when no profile was ever accepted"
+        )
+    if retained_prior_profile(first, accepted_before=False):
+        raise AssertionError(
+            "retained_prior_profile claims a profile survived when none was accepted"
+        )
+    return {
+        "status": "passed",
+        "attempts_checked": len(statuses) + len(first),
+        "no_prior_profile_case": True,
+    }
+
+
+def verify_writer_run() -> dict[str, Any]:
+    """Run a built chain through the official writer and score what it produces.
+
+    Skipped outside a repository checkout: the offline client loads `config.yaml`
+    relative to the working directory.
+    """
+
+    from contextlib import redirect_stderr, redirect_stdout
+    from io import StringIO
+    from pathlib import Path
+
+    from ..preservation import apparent_authority, score_memory
+
+    from experiments.authorization_memory.langmem_writer import run_writer_chains
+    from experiments.authorization_memory.validation import OfflineLLM
+
+    # The offline client loads config.yaml relative to the working directory, so this
+    # runs in a checkout and skips from an installed wheel. Any other failure is real.
+    if not Path("config.yaml").is_file():
+        return {"status": "skipped", "reason": "config.yaml is not in the working directory"}
+    offline = OfflineLLM()
+
+    from ..preservation import build_writer_chain
+
+    domain_id = "procurement"
+    domain = eval_resources.load_domain(domain_id)
+    case_id = domain.corpus.case_id(domain.corpus.load_cases(domain.corpus.default_version)[0])
+    conditions = ("one_shot_text", "incremental_text", "one_shot_typed", "incremental_typed")
+    ran = 0
+    for condition_id in conditions:
+        chain = build_writer_chain(
+            domain_id, case_id, condition_id=condition_id, target_id="gptoss_baseten"
+        )
+        with redirect_stdout(StringIO()), redirect_stderr(StringIO()):
+            result = run_writer_chains(
+                OfflineLLM() if ran else offline,
+                domain,
+                (chain,),
+                writer_task="writer",
+                max_attempts=1,
+                capacity_tokens=572,
+                batch_size=1,
+            )
+        if len(result.states) != len(chain.updates):
+            raise AssertionError(
+                f"{condition_id}: {len(result.states)} states for {len(chain.updates)} updates"
+            )
+        if not result.final_evidence:
+            raise AssertionError(f"{condition_id}: the writer produced no evidence")
+        if condition_id.endswith("typed"):
+            evidence = result.final_evidence[0]
+            outcome = score_memory(
+                domain_id,
+                case_id,
+                evidence.payload,
+                writer=evidence.writer,
+                memory_id=evidence.memory_id,
+            )
+            formation = apparent_authority(
+                domain_id,
+                case_id,
+                evidence.payload,
+                writer=evidence.writer,
+                memory_id=evidence.memory_id,
+            )
+            if outcome.unscored_reason is not None or formation.formed is None:
+                raise AssertionError(
+                    f"{condition_id}: a typed memory from the writer was not scoreable"
+                )
+            if outcome.writer_target is None or outcome.memory_id != evidence.memory_id:
+                raise AssertionError(f"{condition_id}: the result lost the writer that produced it")
+        ran += 1
+    return {"status": "passed", "conditions_run": ran}
