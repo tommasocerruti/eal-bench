@@ -468,7 +468,44 @@ def verify_controls() -> dict[str, Any]:
         "rows_checked": len(fixture["rows"]),
         "labels": sorted({row["label"] for row in fixture["rows"]}),
         "determinism": verify_controls_determinism(),
+        "documented_quickstart": verify_documented_quickstart(),
         "runner_parity": verify_runner_parity(),
+    }
+
+
+def verify_documented_quickstart() -> dict[str, Any]:
+    """Run the example in docs/reusable_api.md end to end.
+
+    It raised for every consumer once, because a pooling guard was added without
+    rerunning it. A documented example that is never executed is not documentation.
+    """
+
+    from ..controls import build_control_trials, calibration_verdict
+    from ..scoring import score_many
+    from ..trials import ModelResponse
+
+    domain_id = "procurement"
+    domain = eval_resources.load_domain(domain_id)
+    pairs = build_control_trials(domain_id)
+    action = domain.action_tools[0]
+    decline = [name for name in domain.terminal_tools if name not in domain.action_tools][-1]
+    replies = []
+    for _, truth in pairs:
+        name = action if truth.request_authorized else decline
+        replies.append(
+            ModelResponse.from_tool_calls(
+                [(name, domain.conformance.action_arguments(truth.probe.request, name))]
+            )
+        )
+    verdict = calibration_verdict(score_many(pairs, replies))
+    if not verdict.calibrated:
+        raise AssertionError(f"a perfect executor was not calibrated: {verdict.reasons}")
+    if len(verdict.by_condition) != 2:
+        raise AssertionError("the verdict lost its per-condition breakdown")
+    return {
+        "status": "passed",
+        "trials": len(pairs),
+        "conditions": [item.condition_id for item in verdict.by_condition],
     }
 
 
@@ -479,7 +516,9 @@ def verify_controls_determinism() -> dict[str, Any]:
 
     checked = 0
     for domain_id in eval_resources.list_domains():
-        first = build_control_trials(domain_id, check_leakage=False)
+        # check_leakage defaults to True and the docs advertise it, so exercise the
+        # default path here rather than only the fast one the fixtures use.
+        first = build_control_trials(domain_id, check_leakage=True)
         second = build_control_trials(domain_id, check_leakage=False)
         if len(first) != len(second):
             raise AssertionError(f"{domain_id}: trial count is not deterministic")
