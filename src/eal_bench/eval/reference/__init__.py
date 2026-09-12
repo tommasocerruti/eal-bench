@@ -809,6 +809,18 @@ def verify_inspect_eval() -> dict[str, Any]:
             log_dir=log_dir,
             display="none",
         )[0]
+        # Reduced scores keep only the first epoch, which halved the denominators.
+        repeated = inspect_eval(
+            control_task(domain_id, check_leakage=False, case_ids=[case_id]),
+            model=get_model("mockllm/model", custom_outputs=scripted),
+            log_dir=log_dir,
+            display="none",
+            epochs=2,
+        )[0]
+        repeated_metrics = {
+            name: value.value for name, value in repeated.results.scores[0].metrics.items()
+        }
+        repeated_samples = len(repeated.samples or ())
         status = log.status
         samples = list(log.samples or ())
         scorer_name = next(iter(samples[0].scores)) if samples else ""
@@ -827,9 +839,16 @@ def verify_inspect_eval() -> dict[str, Any]:
             f"scripted perfect executor scored {used}/{len(authorized)} authorized use "
             f"and {submitted}/{len(unauthorized)} unauthorized submission"
         )
+    if repeated_metrics["n"] != float(repeated_samples):
+        raise AssertionError(
+            f"metrics saw {repeated_metrics['n']} of {repeated_samples} scored samples; "
+            "repeats are being dropped"
+        )
     return {
         "status": "passed",
         "samples": len(log_samples),
+        "epochs_2_samples": repeated_samples,
+        "epochs_2_metric_n": repeated_metrics["n"],
         "authorized_use": f"{used}/{len(authorized)}",
         "unauthorized_submission": f"{submitted}/{len(unauthorized)}",
     }
@@ -932,6 +951,8 @@ def verify_inspect_contract() -> dict[str, Any]:
             raise AssertionError(
                 f"Inspect no longer repairs {arguments!r}; the recorded divergence is stale"
             )
+    _verify_raw_argument_recovery()
+    _verify_undefined_rates()
     for arguments in _REJECTED_BY_BOTH:
         if repaired_without_parse_error(arguments):
             raise AssertionError(
@@ -941,4 +962,86 @@ def verify_inspect_contract() -> dict[str, Any]:
         "status": "passed",
         "registered": names,
         "repaired_by_inspect_only": list(_REPAIRED_BY_INSPECT),
+        "raw_arguments_recovered": True,
+        "undefined_rates_stay_undefined": True,
     }
+
+
+def _verify_raw_argument_recovery() -> None:
+    """A repaired argument string must score as the model emitted it."""
+
+    from inspect_ai.model import ChatCompletionChoice, ChatMessageAssistant, ModelOutput
+    from inspect_ai.tool import ToolCall
+
+    from ..inspect_adapter import _payload_tool_calls, response_from_inspect
+
+    original = '{"vendor": "Acme"}"'
+    recovered = _payload_tool_calls(
+        {
+            "choices": [
+                {
+                    "message": {
+                        "tool_calls": [
+                            {
+                                "id": "call_1",
+                                "function": {
+                                    "name": "submit_order",
+                                    "arguments": original,
+                                },
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    )
+    if [call["function"]["arguments"] for call in recovered] != [original]:
+        raise AssertionError("the raw provider payload no longer yields the arguments")
+    output = ModelOutput(
+        model="m",
+        choices=[
+            ChatCompletionChoice(
+                message=ChatMessageAssistant(
+                    content="",
+                    tool_calls=[
+                        ToolCall(
+                            id="call_1",
+                            function="submit_order",
+                            arguments={"vendor": "Acme"},
+                        )
+                    ],
+                ),
+                stop_reason="tool_calls",
+            )
+        ],
+    )
+    repaired = response_from_inspect(output).tool_calls[0].arguments
+    if repaired != {"vendor": "Acme"}:
+        raise AssertionError("Inspect stopped repairing the parsed arguments")
+    as_emitted = (
+        response_from_inspect(output, raw_arguments={"call_1": original}).tool_calls[0].arguments
+    )
+    if as_emitted != original:
+        raise AssertionError("recovery did not return the original argument string")
+
+
+def _verify_undefined_rates() -> None:
+    """A rate with no denominator was not measured and must not read as zero."""
+
+    from ..inspect_adapter import _rates
+
+    authorized_only = _rates(
+        [
+            {
+                "request_authorized": True,
+                "requested_action_taken": True,
+                "decision": "execute_requested",
+            }
+        ]
+    )
+    if authorized_only["unauthorized_submission"] is not None:
+        raise AssertionError("an unmeasured unauthorized-submission rate read as a number")
+    if authorized_only["authorized_use"] != 1.0:
+        raise AssertionError("a measured rate was lost")
+    if _rates([])["authorized_use"] is not None:
+        raise AssertionError("an empty population produced a rate")

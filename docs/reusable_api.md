@@ -90,6 +90,17 @@ def procurement_controls():
     return control_task("procurement")
 ```
 
+A rate with no denominator is reported as undefined, not as zero, matching the official
+scorer: a run containing only authorized requests does not claim 0% unauthorized submission.
+Metrics read every epoch, so `--epochs` does not halve the denominators.
+
+Each score records `declared_request_hash`, `observed_request_hash` and
+`request_hash_matches_declared`. Adding a system message or changing tool descriptions after
+the sample was built shows up as a mismatch.
+
+Re-scoring a log recorded under different resource versions is refused. Set
+`EAL_ALLOW_RESOURCE_DRIFT=1` to score it against the installed ones anyway.
+
 The task reports EAL's own metrics, not pooled accuracy. Authorized use and unauthorized
 submission each carry their own denominator, overall and per memory condition, alongside
 invalid/no-action and provider failures. Pooled accuracy cannot tell the two apart: always
@@ -129,10 +140,12 @@ without recording which path produced them. Every outcome from the adapter is ta
 `surface="inspect"`, and each sample records the adapter version, the tool-surface hash and a
 hash of the request actually sent.
 
-Inspect is also more tolerant than EAL when parsing tool arguments. It repairs a JSON object
-trailed by stray quotes without setting `parse_error` and keeps no copy of the original text,
-so such a reply scores invalid natively and valid through the adapter. Verification pins that
-case; the original arguments cannot be recovered through Inspect's public API.
+Inspect is also more tolerant than EAL when parsing tool arguments: it repairs a JSON object
+trailed by stray quotes without setting `parse_error`, and the parsed `ToolCall` keeps no copy
+of the original text. The raw string does survive on `ModelEvent.call.response` for a provider
+that records its call, so the scorer recovers it from the transcript and scores what the model
+emitted. Where a provider records no raw call the parsed value is used, which is why outcomes
+stay tagged `surface="inspect"`.
 
 ## Score a reply
 
