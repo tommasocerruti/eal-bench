@@ -2,6 +2,18 @@
 
 Follow-up experiments to the EAL-Bench paper. This note is self-contained: it explains the setup, then for each study the question, what was run, the result, and how it bears on the paper.
 
+## Status, 2026-09-12
+
+**Running now.** Every result below marked *earlier* is being replaced by these runs, all on the paper's three writers:
+
+1. Closed loop, corrected: action arm and neutral control forked from the same frozen memories, three complete rounds, GPT-OSS and DeepSeek V4 Pro as executors, all three domains, procurement at two seeds; plus the one-pass variants. Replaces Section 3.
+2. Generated histories on `generated_v2`, where only the stale restatements vary. Replaces Section 4.
+3. Finance memory-type grid. Fills the finance row of Section 1.
+4. The one-line mandate on the open loop, the closed loop with both executors, and `generated_v2`, all domains. Replaces Section 7.
+5. The judges on every new failure, and on the earlier open-loop groups again, with the four labels. Replaces Section 6.
+
+**When they finish.** Each section's tables are regenerated from the new runs, the *earlier* labels come off, the Reading and Takeaway paragraphs are rewritten from the new numbers, the coverage table is filled in, and `results/diagnosis/failures.csv` is rebuilt from the versioned judge output. Two follow-ups are recorded but not run: a rebuild frequency–safety–cost curve, and GLM 5.3 against the faithful executor baseline as a possible third executor.
+
 ## The setup in one page
 
 **The problem.** An agent that works for an organization keeps a persistent memory of who is allowed to do what. That memory is written by a model (the *writer*) that reads the organization's message history as it arrives. A second model (the *executor*) later handles requests, seeing only the memory, never the history. The paper's finding is that the writer routinely produces memory that grants permissions the history never granted or has since revoked, and the executor then acts on them. The paper calls this *endogenous authorization laundering*: the false authority is manufactured inside the agent's own memory, with no attacker.
@@ -150,9 +162,9 @@ Authorized use falls in every domain across rounds (procurement 88 → 67 → 60
 
 Overall 8.3% (GLM), 9.6% (Kimi), 7.7% (Nemotron), so generated cases are easier than the hand-written ones (about 25%). AU 97 to 100%.
 
-**Reading.** Stale restatements drive the failure with a clean dose response, and amendments launder far more than clean replacements. The gap between grant and change and explicit versus implied revocation showed no clear effect at the levels tried (gaps of one to three blocks; 108 cases).
+**Reading.** On this corpus, formation rose with the number of stale restatements and was higher for amendments than for clean replacements, while gap and explicit versus implied revocation showed no clear effect at the levels tried (gaps of one to three blocks; 108 cases). Because the stale count also changed the rest of the history in `generated_v1`, these are associations in the old corpus, not isolated effects; the `generated_v2` rerun is the controlled version.
 
-**Takeaway.** The trigger is people restating a superseded grant (0 / 5 / 21% at 0 / 2 / 4 restatements, the same for three writers), and amendments launder five to nine times more than clean revoke-and-replace. Gap and explicit versus implied revocation showed no effect at the levels tried. Supports the incremental-memory dynamics paragraph with a controlled dose-response; the practical advice is to prefer revoke-and-replace over amendment in authorization workflows.
+**Takeaway (provisional).** In the old corpus, formation went from 0% to about 5% to about 21% at 0, 2, and 4 stale restatements for all three writers, and amendments laundered several times more than revoke-and-replace. Whether these hold with everything else fixed is what the `generated_v2` rerun tests; until then this section supports the incremental-memory dynamics paragraph only as suggestive, and no workflow recommendation is drawn from it.
 
 ## 5. Additional writers
 

@@ -386,7 +386,7 @@ def main(argv: list[str] | None = None) -> int:
                     content += "\n\n<ACTION_LOG>\n" + "\n".join(logs[i]) + "\n</ACTION_LOG>"
                 previous_end[i] = block.ended_at
                 appended[i].add(turn.turn_id)
-                row = {"arm": arm, "chain": i, "loop_chain_id": None, "case_id": domain.corpus.case_id(spec.case), "condition_id": spec.condition_id, "position": position, "round": round_no, "block_index": block.block_index, "probe_id": probe.probe_id, "turn_id": turn.turn_id,
+                row = {"arm": arm, "chain": i, "loop_chain_id": None, "update_id": None, "attempt_ids": [], "profile_id": None, "case_id": domain.corpus.case_id(spec.case), "condition_id": spec.condition_id, "position": position, "round": round_no, "block_index": block.block_index, "probe_id": probe.probe_id, "turn_id": turn.turn_id,
                        "decision": trial.decision.value, "tool_name": trial.raw_tool_name, "request": domain.executor.serialize_request(probe.request),
                        "executed_request": domain.executor.serialize_request(executed) if executed is not None else None, "loop_content": arm, "writer_input": content}
                 arm_rows.append(row)
@@ -402,8 +402,14 @@ def main(argv: list[str] | None = None) -> int:
                 attempts += step.attempts
                 states += step.states
                 contexts += step.model_contexts
+                # One state row per (case, condition, block) inside one arm's step: it names this arm's update, its
+                # attempts, and the arm's profile (a stable function of the arm's chain), whether or not it was accepted.
+                state_of = {(st.case_id, st.condition_id, st.block_index): st for st in step.states}
                 for spec_seeded, frozen, row in zip(seeded, loop_evidence(seeded, step), seeded_rows):
                     current_arm[row["chain"]] = by_id[frozen.memory_id]
+                    st = state_of.get((row["case_id"], row["condition_id"], row["block_index"]))
+                    if st is not None:
+                        row["update_id"], row["attempt_ids"], row["profile_id"] = st.logical_update_id, list(st.attempt_ids), st.profile_id
                     if frozen.memory_id != spec_seeded.initial_memory.memory_id:  # accepted: a loop memory of this arm
                         row["loop_chain_id"] = by_id[frozen.memory_id].chain_id
         written_rows += arm_rows

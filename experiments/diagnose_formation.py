@@ -107,11 +107,16 @@ def row_key(r: dict[str, Any]) -> tuple:
     return (r.get("chain_id"), r.get("failure"), r.get("probe_id"), r.get("request_kind", "submitted"), r.get("record_id"))
 
 
-def canonical_chains(memories: list[dict[str, Any]], states: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
+def base_failure_key(r: dict[str, Any]) -> tuple:
+    return (r.get("case_id"), r.get("condition_id"), r.get("writer"), r.get("writer_run_id"), r.get("probe_id"), r.get("request_kind", "submitted"), r.get("error_block"))
+
+
+def canonical_chains(memories: list[dict[str, Any]], states: list[dict[str, Any]], written_back: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
     """One memory per block per lineage, following parent links. A block can carry several memory rows (one per
     writer attempt); memory_states.jsonl names the accepted one. A closed-loop run with two arms forks the loop from
-    the shared base, so a lineage is the base memories followed by one arm's loop memories, keyed by the arm's
-    chain id (the base chain id when there is a single arm)."""
+    the shared base, so a lineage is the base memories followed by one arm's loop memories, keyed by the arm's chain
+    id. An arm that never changed its memory has no loop memories of its own; it still gets a lineage (the base
+    memories, keyed `<base chain id>::<arm>`) so its failures are attributed to it rather than dropped."""
     by_id = {m["memory_id"]: m for m in memories}
     accepted = {st.get("current_memory_id") for st in states if st.get("current_memory_id") in by_id}
     canonical = [m for m in memories if m["memory_id"] in accepted or m.get("parent_memory_id") is None] if accepted else list(memories)
@@ -133,6 +138,22 @@ def canonical_chains(memories: list[dict[str, Any]], states: list[dict[str, Any]
 
     for root in children[None]:
         walk(root, [])
+    # arms present in the write-back log but without loop memories of their own
+    arms_by_case = collections.defaultdict(set)
+    for w in written_back:
+        if w.get("arm"):
+            arms_by_case[(w["case_id"], w["condition_id"])].add(w["arm"])
+    arm_of_chain = {w["loop_chain_id"]: w["arm"] for w in written_back if w.get("loop_chain_id")}
+    for chain_id, mems in list(chains.items()):
+        case_key = (mems[0]["case_id"], mems[0]["condition_id"])
+        if chain_id in arm_of_chain or not arms_by_case.get(case_key):
+            continue
+        base_root = mems[0]["chain_id"]
+        covered = {arm_of_chain[c] for c, ms in chains.items() if c in arm_of_chain and ms[0]["chain_id"] == base_root}
+        for arm in sorted(arms_by_case[case_key] - covered):
+            chains[f"{chain_id}::{arm}"] = list(mems)
+        if any(len(ms) > len(mems) for c, ms in chains.items() if c != chain_id and ms[0]["chain_id"] == base_root):
+            del chains[chain_id]  # the base alone is not a lineage when arms extend it
     return chains
 
 
@@ -154,9 +175,14 @@ def candidate_requests(domain: Any, case: Any) -> list[tuple[Any, str, Any]]:
     return out
 
 
-def attempts_at(attempts: list[dict[str, Any]], mems: list[dict[str, Any]], block_index: int) -> list[dict[str, Any]]:
-    """The writer attempts that produced this lineage's memory at `block_index`: those whose parent is the lineage's
-    memory just before that block (attempts carry no chain id, and two arms share block indices)."""
+def attempts_at(attempts: list[dict[str, Any]], mems: list[dict[str, Any]], block_index: int, wb: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """The writer attempts behind this lineage's update at `block_index`. For write-back blocks the arm's own row names
+    its attempt ids (both arms share the previous memory at the first write-back, so parent matching alone would mix
+    them); for base blocks, and for runs recorded before attempt ids were kept, match by the parent memory."""
+    named = [set(w.get("attempt_ids") or []) for w in wb if w.get("block_index") == block_index and w.get("attempt_ids")]
+    if named:
+        ids = set().union(*named)
+        return sorted([a for a in attempts if a["attempt_id"] in ids], key=lambda a: a["attempt_index"])
     prior = [m for m in mems if m["block_index"] < block_index]
     parent = prior[-1]["memory_id"] if prior else None
     case_id, condition = mems[0]["case_id"], mems[0]["condition_id"]
@@ -166,11 +192,11 @@ def attempts_at(attempts: list[dict[str, Any]], mems: list[dict[str, Any]], bloc
     )
 
 
-def written_for(written_back: list[dict[str, Any]], mems: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], str | None]:
+def written_for(written_back: list[dict[str, Any]], chain_id: str, mems: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], str | None]:
     """The write-back rows of this lineage's arm, and the arm name (None for single-arm and open-loop runs)."""
     case_id, condition = mems[0]["case_id"], mems[0]["condition_id"]
     arm_of = {w["loop_chain_id"]: w.get("arm") for w in written_back if w.get("loop_chain_id")}
-    arm = next((arm_of[m["chain_id"]] for m in mems if m["chain_id"] in arm_of), None)
+    arm = chain_id.split("::", 1)[1] if "::" in chain_id else next((arm_of[m["chain_id"]] for m in mems if m["chain_id"] in arm_of), None)
     rows_ = [w for w in written_back if w["case_id"] == case_id and w["condition_id"] == condition and (arm is None or w.get("arm") in (None, arm))]
     return rows_, arm
 
@@ -199,7 +225,7 @@ def born_records(fh, domain, cases, presentation, chains, attempts, written_back
         case_id, condition = mems[0]["case_id"], mems[0]["condition_id"]
         case = cases[case_id]
         base_max = len(list(domain.corpus.blocks(case))) - 1
-        wb, arm = written_for(written_back, mems)
+        wb, arm = written_for(written_back, chain_id, mems)
         seen = set()
         for i, m in enumerate(mems):
             if m["block_index"] <= base_max:
@@ -218,7 +244,7 @@ def born_records(fh, domain, cases, presentation, chains, attempts, written_back
                 failure = "record_recited_from_action" if rid in prior_ids else "record_born_from_action"
                 if existing and (chain_id, failure, None, "submitted", rid) in existing:
                     continue
-                block_attempts = attempts_at(attempts, mems, b)
+                block_attempts = attempts_at(attempts, mems, b, wb)
                 plan = "\n---\n".join(f"attempt {a['attempt_index']} ({a['status']}): {args_of(a).get('planned_edits', '')}" for a in block_attempts) or "(no attempt recorded)"
                 row = {"run": None, "domain": domain.domain_id, "case_id": case_id, "condition_id": condition, "writer": m["writer"]["target_id"], "chain_id": chain_id, "arm": arm,
                        "failure": failure, "record_id": rid, "record": compact({"authorizations": [rec]}), "error_block": b, "loop_block": True,
@@ -266,10 +292,13 @@ def main(argv: list[str] | None = None) -> int:
             memories = [m for m in rows(run / "memories.jsonl") if m["architecture"] == "typed"]
             attempts = rows(run / "memory_attempts.jsonl")
             written_back = rows(run / "written_back.jsonl")
-            chains = canonical_chains(memories, rows(run / "memory_states.jsonl"))
+            chains = canonical_chains(memories, rows(run / "memory_states.jsonl"), written_back)
             out_path = out_dir / f"{run.name.split('__')[-1]}.jsonl"
-            existing = {row_key(r) for r in rows(out_path)}
-            reported_base: set[tuple] = set()  # a base-history failure is shared by every arm forked from that base; report it once
+            saved = rows(out_path)
+            existing = {row_key(r) for r in saved}
+            # A base-history failure is shared by every arm forked from that base: report it once, including across
+            # resumed passes (saved rows carry the base key).
+            reported_base: set[tuple] = {base_failure_key(r) for r in saved if r.get("failure") == "false_authorization" and not r.get("loop_block")}
             written = 0
             with open(out_path, "a", encoding="utf-8") as fh:
                 for chain_id, mems in chains.items():
@@ -279,7 +308,7 @@ def main(argv: list[str] | None = None) -> int:
                     condition = mems[0]["condition_id"]
                     writer = mems[0]["writer"]["target_id"]
                     run_id = mems[0]["writer_run_id"]
-                    wb, arm = written_for(written_back, mems)
+                    wb, arm = written_for(written_back, chain_id, mems)
                     policy = str(getattr(case, "policy", "") or "")
                     n_base = len(list(domain.corpus.blocks(case)))
                     base_max = n_base - 1
@@ -332,12 +361,12 @@ def main(argv: list[str] | None = None) -> int:
                             reported_base.add(base_key)
                         before = state_at(error_block - 1) if error_block > 0 else domain.memory.empty_typed()
                         after = state_at(error_block)
-                        block_attempts = attempts_at(attempts, mems, error_block)
+                        block_attempts = attempts_at(attempts, mems, error_block, wb)
                         plan = "\n---\n".join(f"attempt {a['attempt_index']} ({a['status']}): {args_of(a).get('planned_edits', '')}" for a in block_attempts) or "(no attempt recorded)"
                         patches = json.dumps([args_of(a).get("patches") for a in block_attempts])[:6000]
                         truth = domain.memory.faithful_typed(case, through_block_index=min(error_block, base_max))
                         row = {
-                            "run": run.name, "domain": manifest["domain_id"], "case_id": case_id, "condition_id": condition, "writer": writer, "chain_id": chain_id, "arm": row_arm,
+                            "run": run.name, "domain": manifest["domain_id"], "case_id": case_id, "condition_id": condition, "writer": writer, "writer_run_id": run_id, "chain_id": chain_id, "arm": row_arm,
                             "probe_id": probe.probe_id, "request_kind": kind, "request": domain.executor.serialize_request(request), "error_block": error_block,
                             "failure": "false_authorization", "loop_block": error_block > base_max, "attempt_statuses": [a["status"] for a in block_attempts],
                         }
