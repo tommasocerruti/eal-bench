@@ -116,6 +116,10 @@ class PreservationOutcome:
     corpus_version: str | None = None
     resource_key: str | None = None
     scored_from: str = "typed_memory"
+    writer_target: str | None = None
+    writer_model: str | None = None
+    writer_seed: int | None = None
+    memory_id: str | None = None
     fields: tuple[dict[str, Any], ...] = ()
 
     @property
@@ -137,6 +141,10 @@ class PreservationOutcome:
             "corpus_version": self.corpus_version,
             "resource_key": self.resource_key,
             "scored_from": self.scored_from,
+            "writer_target": self.writer_target,
+            "writer_model": self.writer_model,
+            "writer_seed": self.writer_seed,
+            "memory_id": self.memory_id,
         }
 
 
@@ -155,6 +163,10 @@ class ApparentAuthority:
     corpus_version: str | None = None
     resource_key: str | None = None
     scored_from: str = "typed_memory"
+    writer_target: str | None = None
+    writer_model: str | None = None
+    writer_seed: int | None = None
+    memory_id: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -169,11 +181,31 @@ class ApparentAuthority:
             "corpus_version": self.corpus_version,
             "resource_key": self.resource_key,
             "scored_from": self.scored_from,
+            "writer_target": self.writer_target,
+            "writer_model": self.writer_model,
+            "writer_seed": self.writer_seed,
+            "memory_id": self.memory_id,
         }
 
 
 def _architecture(value: MemoryArchitecture | str) -> MemoryArchitecture:
     return value if isinstance(value, MemoryArchitecture) else MemoryArchitecture(value)
+
+
+def _writer_identity(writer: Any | None, memory_id: str | None) -> dict[str, Any]:
+    """Which writer produced this memory.
+
+    Without it two writers that land on the same records serialize identically and
+    a saved preservation result is no longer attributable.
+    """
+
+    return {
+        "writer_target": getattr(writer, "target_id", None),
+        "writer_model": getattr(writer, "resolved_model", None)
+        or getattr(writer, "requested_model", None),
+        "writer_seed": getattr(writer, "writer_seed", None),
+        "memory_id": memory_id,
+    }
 
 
 def _case(domain: AuthorizationMemoryDomain, case_id: str, corpus_version: str) -> Any:
@@ -192,6 +224,8 @@ def score_memory(
     corpus_version: str | None = None,
     block_index: int | None = None,
     annotations: Sequence[Annotation] = (),
+    writer: Any | None = None,
+    memory_id: str | None = None,
 ) -> PreservationOutcome:
     """Score a memory against the canonical ledger.
 
@@ -207,6 +241,7 @@ def score_memory(
         "block_index": block_index,
         "corpus_version": version,
         "resource_key": describe(domain, corpus_version=version).key,
+        **_writer_identity(writer, memory_id),
     }
     scored = payload
     scored_from = "typed_memory"
@@ -257,6 +292,8 @@ def apparent_authority(
     corpus_version: str | None = None,
     block_index: int | None = None,
     annotations: Sequence[Annotation] = (),
+    writer: Any | None = None,
+    memory_id: str | None = None,
 ) -> ApparentAuthority:
     """Same predicate as `analysis/failure_mechanisms.py`, which is the reference."""
 
@@ -268,6 +305,7 @@ def apparent_authority(
         "block_index": block_index,
         "corpus_version": version,
         "resource_key": describe(domain, corpus_version=version).key,
+        **_writer_identity(writer, memory_id),
     }
     scored_from = "typed_memory"
     if kind is MemoryArchitecture.FREE_TEXT:

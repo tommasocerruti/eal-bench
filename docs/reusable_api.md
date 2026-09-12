@@ -121,7 +121,16 @@ estimable. Never report it as zero.
 
 Every `PreservationOutcome` and `ApparentAuthority` records `block_index`, `corpus_version`,
 `resource_key` and `scored_from`, so intermediate, final and retained-memory results stay
-distinguishable.
+distinguishable. Pass the writer route and the memory id to keep the result attributable:
+
+```python
+score_memory(
+    "procurement", case_id, evidence.payload,
+    writer=evidence.writer, memory_id=evidence.memory_id,
+)
+```
+
+Without them, two writers that land on the same records serialize identically.
 
 ### Producing memories
 
