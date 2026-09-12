@@ -8,14 +8,27 @@ re-derives every recorded value.
 from __future__ import annotations
 
 import json
+from collections.abc import Mapping
 from importlib import resources
 from typing import Any
 
 from .. import resources as eval_resources
 
-__all__ = ["load_fixture", "verify", "verify_resources"]
+__all__ = ["load_fixture", "verify", "verify_inspect", "verify_resources"]
+
+_ABSENT = object()
 
 _PACKAGE = __name__
+
+
+def _differing_keys(observed: Mapping[str, Any], expected: Mapping[str, Any]) -> list[str]:
+    """Compare by key presence as well as value, so a new field is not read as None."""
+
+    return sorted(
+        key
+        for key in set(observed) | set(expected)
+        if observed.get(key, _ABSENT) != expected.get(key, _ABSENT)
+    )
 
 
 def load_fixture(name: str) -> Any:
@@ -36,12 +49,12 @@ def verify_resources() -> dict[str, Any]:
         observed = eval_resources.describe(domain).to_dict()
         checked += 1
         if observed != recorded:
-            differing = sorted(
-                key
-                for key in set(observed) | set(recorded)
-                if observed.get(key) != recorded.get(key)
+            mismatches.append(
+                {
+                    "domain_id": domain_id,
+                    "fields": _differing_keys(observed, recorded),
+                }
             )
-            mismatches.append({"domain_id": domain_id, "fields": differing})
     if mismatches:
         raise AssertionError(f"resource identity drifted: {mismatches}")
     return {
@@ -93,6 +106,8 @@ def _optional_track_checks() -> dict[str, Any]:
             }
             continue
         found[name] = import_module(qualified).verify_reference()
+    if found.get("controls", {}).get("status") != "skipped":
+        found["inspect"] = verify_inspect()
     return found
 
 
@@ -366,16 +381,11 @@ def verify_controls() -> dict[str, Any]:
             continue
         observed = score_response(truth, ModelResponse.from_dict(row["response"])).to_dict()
         if observed != row["expected"]:
-            differing = sorted(
-                key
-                for key in set(observed) | set(row["expected"])
-                if observed.get(key) != row["expected"].get(key)
-            )
             mismatches.append(
                 {
                     "label": row["label"],
                     "domain_id": domain_id,
-                    "fields": differing,
+                    "fields": _differing_keys(observed, row["expected"]),
                 }
             )
     if mismatches:
@@ -384,4 +394,124 @@ def verify_controls() -> dict[str, Any]:
         "status": "passed",
         "rows_checked": len(fixture["rows"]),
         "labels": sorted({row["label"] for row in fixture["rows"]}),
+        "determinism": verify_controls_determinism(),
+    }
+
+
+def verify_controls_determinism() -> dict[str, Any]:
+    """Two builds must produce identical trial ids and identical model-visible content."""
+
+    from ..controls import build_control_trials
+
+    checked = 0
+    for domain_id in eval_resources.list_domains():
+        first = build_control_trials(domain_id, check_leakage=False)
+        second = build_control_trials(domain_id, check_leakage=False)
+        if len(first) != len(second):
+            raise AssertionError(f"{domain_id}: trial count is not deterministic")
+        for (trial_a, truth_a), (trial_b, truth_b) in zip(first, second):
+            if trial_a.trial_id != trial_b.trial_id:
+                raise AssertionError(f"{domain_id}: trial ids are not deterministic")
+            if trial_a.to_dict() != trial_b.to_dict():
+                raise AssertionError(
+                    f"{domain_id}: trial {trial_a.trial_id} content is not deterministic"
+                )
+            if truth_a.to_dict() != truth_b.to_dict():
+                raise AssertionError(
+                    f"{domain_id}: truth for {trial_a.trial_id} is not deterministic"
+                )
+        if len({trial.trial_id for trial, _ in first}) != len(first):
+            raise AssertionError(f"{domain_id}: trial ids are not unique")
+        checked += len(first)
+    return {"status": "passed", "trials_checked": checked}
+
+
+def _inspect_output(response: dict[str, Any]) -> Any:
+    from inspect_ai.model import ChatCompletionChoice, ChatMessageAssistant, ModelOutput
+    from inspect_ai.tool import ToolCall
+
+    if response.get("error"):
+        return ModelOutput(model=response.get("model") or "offline", error=response["error"])
+    calls = []
+    for index, call in enumerate(response.get("tool_calls", ())):
+        arguments = call.get("arguments")
+        if isinstance(arguments, dict):
+            calls.append(ToolCall(id=str(index), function=call["name"], arguments=arguments))
+            continue
+        # Inspect never hands a raw string through; unparseable arguments arrive as
+        # an empty dict plus parse_error.
+        parsed, parse_error = _parse_arguments(arguments)
+        calls.append(
+            ToolCall(
+                id=str(index),
+                function=call["name"],
+                arguments=parsed,
+                parse_error=parse_error,
+            )
+        )
+    return ModelOutput(
+        model=response.get("model") or "offline",
+        choices=[
+            ChatCompletionChoice(
+                message=ChatMessageAssistant(
+                    content=response.get("text") or "", tool_calls=calls or None
+                ),
+                stop_reason=response.get("finish_reason") or "stop",
+            )
+        ],
+    )
+
+
+def _parse_arguments(arguments: Any) -> tuple[dict[str, Any], str | None]:
+    if arguments is None:
+        return {}, None
+    try:
+        decoded = json.loads(arguments)
+    except (TypeError, ValueError):
+        return {}, str(arguments)
+    if isinstance(decoded, dict):
+        return decoded, None
+    return {}, str(arguments)
+
+
+def verify_inspect() -> dict[str, Any]:
+    """The Inspect path must reach the same outcome as the direct scorer."""
+
+    from ..controls import build_control_trials
+    from ..inspect_adapter import available, control_task, response_from_inspect
+    from ..scoring import score_response
+
+    if not available():
+        return {"status": "skipped", "reason": "inspect-ai is not installed"}
+
+    fixture = load_fixture(_controls_fixture_path())
+    truths: dict[str, Any] = {}
+    mismatches: list[dict[str, Any]] = []
+    for row in fixture["rows"]:
+        domain_id = row["domain_id"]
+        if domain_id not in truths:
+            truths[domain_id] = {
+                truth.trial_id: truth
+                for _, truth in build_control_trials(domain_id, check_leakage=False)
+            }
+        truth = truths[domain_id][row["trial_id"]]
+        observed = score_response(
+            truth, response_from_inspect(_inspect_output(row["response"]))
+        ).to_dict()
+        if observed != row["expected"]:
+            mismatches.append(
+                {
+                    "label": row["label"],
+                    "domain_id": domain_id,
+                    "fields": _differing_keys(observed, row["expected"]),
+                }
+            )
+    if mismatches:
+        raise AssertionError(f"Inspect path disagrees with the scorer: {mismatches}")
+    task = control_task("procurement", check_leakage=False)
+    return {
+        "status": "passed",
+        "rows_checked": len(fixture["rows"]),
+        "task_built": task.name,
+        "task_samples": len(task.dataset),
     }

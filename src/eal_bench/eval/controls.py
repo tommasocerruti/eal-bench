@@ -168,6 +168,7 @@ def build_control_trials(
                             evidence=evidence,
                             presentation=presentation,
                             presentation_hash=resources.presentation_hash,
+                            resources=resources,
                         ),
                     )
                 )
