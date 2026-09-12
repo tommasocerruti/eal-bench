@@ -1248,6 +1248,7 @@ def build_preservation_fixture() -> dict[str, Any]:
         "schema_version": 1,
         "rows": rows,
         "failed_update_episode": build_failed_update_episode(),
+        "failed_first_update_episode": build_failed_update_episode(two_updates=False),
         "state_statuses": [
             {"attempts": ["accepted"], "expected": state_status(["accepted"])},
             {"attempts": ["no_change"], "expected": state_status(["no_change"])},
@@ -1299,7 +1300,10 @@ def verify_preservation() -> dict[str, Any]:
         "rows_checked": len(fixture["rows"]),
         "state_statuses_checked": len(fixture["state_statuses"]),
         "labels": sorted({row["label"] for row in fixture["rows"]}),
-        "failed_update": verify_failed_update(fixture["failed_update_episode"]),
+        "failed_update": verify_failed_update(
+            fixture["failed_update_episode"],
+            fixture["failed_first_update_episode"],
+        ),
         "writer_chains": verify_writer_chains(),
         "writer_run": verify_writer_run(),
     }
@@ -1364,7 +1368,7 @@ def verify_writer_chains() -> dict[str, Any]:
     return {"status": "passed", "chains_checked": checked}
 
 
-def build_failed_update_episode() -> dict[str, Any]:
+def build_failed_update_episode(*, two_updates: bool = True) -> dict[str, Any]:
     """Run the repository's offline writer to produce a real rejected-update episode.
 
     Generation needs the repository because the offline client reads `config.yaml`.
@@ -1387,10 +1391,13 @@ def build_failed_update_episode() -> dict[str, Any]:
             marker="OFFLINE_ALWAYS_OVERFLOW",
             target="gptoss_baseten",
             capacity_tokens=20,
-            two_updates=True,
+            two_updates=two_updates,
         )
     final = result.states[-1]
     return {
+        "accepted_before": any(
+            attempt.status in {"accepted", "no_change"} for attempt in result.attempts[:-1]
+        ),
         "domain_id": "procurement",
         "case_id": domain.corpus.case_id(case),
         "attempts": [
@@ -1411,19 +1418,28 @@ def build_failed_update_episode() -> dict[str, Any]:
     }
 
 
-def verify_failed_update(episode: dict[str, Any]) -> dict[str, Any]:
-    """Replay the recorded episode. A rejected update must keep the accepted profile."""
+def verify_failed_update(
+    episode: dict[str, Any],
+    first_update_episode: dict[str, Any],
+) -> dict[str, Any]:
+    """Replay both recorded episodes.
+
+    A rejected repair after an accepted profile keeps that profile. A first update
+    that fails preserves nothing, even though the state status reads the same.
+    """
 
     from ..preservation import retained_prior_profile, state_status
 
     statuses = [attempt["status"] for attempt in episode["attempts"]]
     if statuses != ["accepted", "invalid_payload", "invalid_payload"]:
         raise AssertionError(f"unexpected attempt sequence: {statuses}")
+    if not episode["accepted_before"]:
+        raise AssertionError("the recorded episode has no accepted profile to retain")
     if state_status(statuses) != episode["final_state_status"]:
         raise AssertionError("state_status disagrees with the recorded state")
     if episode["final_state_status"] != "retained_after_failed_update":
         raise AssertionError("the failed repair did not retain the accepted profile")
-    if not retained_prior_profile(statuses):
+    if not retained_prior_profile(statuses, accepted_before=True):
         raise AssertionError("retained_prior_profile disagrees with the recorded state")
     if episode["final_current_memory_id"] != episode["accepted_memory_ids"][0]:
         raise AssertionError("the failed repair mutated the accepted profile")
@@ -1436,7 +1452,26 @@ def verify_failed_update(episode: dict[str, Any]) -> dict[str, Any]:
         attempt["retained_memory_id"] != episode["accepted_memory_ids"][0] for attempt in rejected
     ):
         raise AssertionError("a rejected attempt did not point at the retained profile")
-    return {"status": "passed", "attempts_checked": len(statuses)}
+
+    first = [attempt["status"] for attempt in first_update_episode["attempts"]]
+    if any(status in {"accepted", "no_change"} for status in first):
+        raise AssertionError(f"the first-update episode accepted something: {first}")
+    if first_update_episode["accepted_before"]:
+        raise AssertionError("the first-update episode recorded a prior acceptance")
+    if first_update_episode["final_state_status"] != "retained_after_failed_update":
+        raise AssertionError(
+            "the writer no longer reports retained_after_failed_update "
+            "when no profile was ever accepted"
+        )
+    if retained_prior_profile(first, accepted_before=False):
+        raise AssertionError(
+            "retained_prior_profile claims a profile survived when none was accepted"
+        )
+    return {
+        "status": "passed",
+        "attempts_checked": len(statuses) + len(first),
+        "no_prior_profile_case": True,
+    }
 
 
 def verify_writer_run() -> dict[str, Any]:

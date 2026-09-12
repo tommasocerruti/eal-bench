@@ -133,6 +133,18 @@ update status from the attempt sequence:
 ```python
 state_status(["accepted", "invalid_payload", "invalid_payload"])
 # 'retained_after_failed_update'
+
+retained_prior_profile(["accepted", "invalid_payload", "invalid_payload"], accepted_before=True)
+# True
+```
+
+`accepted_before` is required. The status alone cannot answer the question: when the first
+update fails, the writer synthesizes an empty profile and the state still reads
+`retained_after_failed_update` although nothing was preserved.
+
+```python
+retained_prior_profile(["invalid_payload", "invalid_payload"], accepted_before=False)
+# False
 ```
 
 `retained_prior_profile` answers the same question as a boolean. The reference artifacts carry
