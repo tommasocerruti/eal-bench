@@ -1180,9 +1180,13 @@ def _forms(domain: Any, case: Any, payload: Any) -> bool:
 
 
 def _parses(domain: Any, payload: Any) -> bool:
+    """A mutation the schema rejects, for example finance's min/max price rule."""
+
+    from pydantic import ValidationError
+
     try:
         domain.memory.parse_typed(payload)
-    except Exception:
+    except (KeyError, TypeError, ValueError, ValidationError):
         return False
     return True
 
@@ -1190,13 +1194,15 @@ def _parses(domain: Any, payload: Any) -> bool:
 def _stale_block_index(domain: Any, case: Any) -> int | None:
     """Earliest inexact intermediate state, preferring one that creates false authority."""
 
+    from pydantic import ValidationError
+
     inexact: list[int] = []
     for index in range(len(domain.corpus.blocks(case)) - 1):
         try:
             state = domain.memory.serialize_typed(
                 domain.memory.faithful_typed(case, through_block_index=index)
             )
-        except Exception:
+        except (KeyError, TypeError, ValueError, ValidationError):
             continue
         if domain.fidelity.compare(case, state).exact:
             continue
@@ -1230,6 +1236,12 @@ def build_preservation_fixture() -> dict[str, Any]:
                 }
             )
         rows.extend(_free_text_rows(domain, domain_id, case_id, case, faithful))
+    expected_rows = 10 * len(eval_resources.list_domains())
+    if len(rows) != expected_rows:
+        raise AssertionError(
+            f"preservation fixture built {len(rows)} rows, expected {expected_rows}; "
+            "a mutation or an intermediate state was silently dropped"
+        )
     return {
         "schema_version": 1,
         "rows": rows,
@@ -1547,16 +1559,18 @@ def verify_writer_run() -> dict[str, Any]:
 
     from contextlib import redirect_stderr, redirect_stdout
     from io import StringIO
+    from pathlib import Path
 
     from ..preservation import apparent_authority, score_memory
 
-    try:
-        from experiments.authorization_memory.langmem_writer import run_writer_chains
-        from experiments.authorization_memory.validation import OfflineLLM
+    from experiments.authorization_memory.langmem_writer import run_writer_chains
+    from experiments.authorization_memory.validation import OfflineLLM
 
-        offline = OfflineLLM()
-    except Exception as exc:
-        return {"status": "skipped", "reason": f"offline writer unavailable: {exc}"}
+    # The offline client loads config.yaml relative to the working directory, so this
+    # runs in a checkout and skips from an installed wheel. Any other failure is real.
+    if not Path("config.yaml").is_file():
+        return {"status": "skipped", "reason": "config.yaml is not in the working directory"}
+    offline = OfflineLLM()
 
     from ..preservation import build_writer_chain
 
@@ -1586,12 +1600,26 @@ def verify_writer_run() -> dict[str, Any]:
         if not result.final_evidence:
             raise AssertionError(f"{condition_id}: the writer produced no evidence")
         if condition_id.endswith("typed"):
-            payload = result.final_evidence[0].payload
-            outcome = score_memory(domain_id, case_id, payload)
-            formation = apparent_authority(domain_id, case_id, payload)
+            evidence = result.final_evidence[0]
+            outcome = score_memory(
+                domain_id,
+                case_id,
+                evidence.payload,
+                writer=evidence.writer,
+                memory_id=evidence.memory_id,
+            )
+            formation = apparent_authority(
+                domain_id,
+                case_id,
+                evidence.payload,
+                writer=evidence.writer,
+                memory_id=evidence.memory_id,
+            )
             if outcome.unscored_reason is not None or formation.formed is None:
                 raise AssertionError(
                     f"{condition_id}: a typed memory from the writer was not scoreable"
                 )
+            if outcome.writer_target is None or outcome.memory_id != evidence.memory_id:
+                raise AssertionError(f"{condition_id}: the result lost the writer that produced it")
         ran += 1
     return {"status": "passed", "conditions_run": ran}
