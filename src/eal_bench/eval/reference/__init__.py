@@ -370,8 +370,16 @@ def _verify_track_entry_points() -> list[str]:
     from ..trials import ModelResponse, Trial
 
     domain_id = "procurement"
-    case_id = build_control_trials(domain_id, check_leakage=False)[0][1].case_id
-    pairs = build_track("controls", domain_id, check_leakage=False, case_ids=[case_id])
+    case_id = build_control_trials(
+        domain_id, check_leakage=False, allow_uncalibrated_tokenizer=True
+    )[0][1].case_id
+    pairs = build_track(
+        "controls",
+        domain_id,
+        check_leakage=False,
+        case_ids=[case_id],
+        allow_uncalibrated_tokenizer=True,
+    )
     if not pairs:
         raise AssertionError("build_track returned no trials")
 
@@ -429,7 +437,9 @@ def build_controls_fixture() -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
     for domain_id in eval_resources.list_domains():
         domain = eval_resources.load_domain(domain_id)
-        pairs = build_control_trials(domain_id, check_leakage=False)
+        pairs = build_control_trials(
+            domain_id, check_leakage=False, allow_uncalibrated_tokenizer=True
+        )
         by_pair: dict[str, list[Any]] = {}
         for _, truth in pairs:
             by_pair.setdefault(truth.pair_id, []).append(truth)
@@ -511,7 +521,9 @@ def verify_controls() -> dict[str, Any]:
         if domain_id not in truths:
             truths[domain_id] = {
                 truth.trial_id: truth
-                for _, truth in build_control_trials(domain_id, check_leakage=False)
+                for _, truth in build_control_trials(
+                    domain_id, check_leakage=False, allow_uncalibrated_tokenizer=True
+                )
             }
         truth = truths[domain_id].get(row["trial_id"])
         if truth is None:
@@ -546,9 +558,22 @@ def verify_documented_quickstart() -> dict[str, Any]:
     rerunning it. A documented example that is never executed is not documentation.
     """
 
+    from experiments.authorization_memory.tokens import reference_tokenizer_name
+
     from ..controls import build_control_trials, calibration_verdict
     from ..scoring import score_many
     from ..trials import ModelResponse
+
+    # The example is run exactly as documented, with no extra arguments, so it
+    # legitimately refuses when the declared capacity's tokenizer is unavailable.
+    if reference_tokenizer_name() != eval_resources.CALIBRATION_TOKENIZER:
+        return {
+            "status": "skipped",
+            "reason": (
+                "the documented call enforces a capacity calibrated with "
+                f"{eval_resources.CALIBRATION_TOKENIZER}"
+            ),
+        }
 
     domain_id = "procurement"
     domain = eval_resources.load_domain(domain_id)
@@ -584,8 +609,12 @@ def verify_controls_determinism() -> dict[str, Any]:
     for domain_id in eval_resources.list_domains():
         # check_leakage defaults to True and the docs advertise it, so exercise the
         # default path here rather than only the fast one the fixtures use.
-        first = build_control_trials(domain_id, check_leakage=True)
-        second = build_control_trials(domain_id, check_leakage=False)
+        first = build_control_trials(
+            domain_id, check_leakage=True, allow_uncalibrated_tokenizer=True
+        )
+        second = build_control_trials(
+            domain_id, check_leakage=False, allow_uncalibrated_tokenizer=True
+        )
         if len(first) != len(second):
             raise AssertionError(f"{domain_id}: trial count is not deterministic")
         for (trial_a, truth_a), (trial_b, truth_b) in zip(first, second):
@@ -675,7 +704,9 @@ def verify_inspect() -> dict[str, Any]:
         if domain_id not in truths:
             truths[domain_id] = {
                 truth.trial_id: truth
-                for _, truth in build_control_trials(domain_id, check_leakage=False)
+                for _, truth in build_control_trials(
+                    domain_id, check_leakage=False, allow_uncalibrated_tokenizer=True
+                )
             }
         truth = truths[domain_id].get(row["trial_id"])
         if truth is None:
@@ -684,6 +715,7 @@ def verify_inspect() -> dict[str, Any]:
         observed = score_response(
             truth, response_from_inspect(_inspect_output(row["response"]))
         ).to_dict()
+        row_expected = _with_live_resource_key(row["expected"], domain_id)
         # Inspect never exposes the raw text of an unparseable tool call, so the
         # recorded argument string cannot survive the round trip. Every
         # decision-relevant field must still agree.
@@ -695,7 +727,7 @@ def verify_inspect() -> dict[str, Any]:
             )
             else set()
         )
-        expected = {k: v for k, v in row["expected"].items() if k not in ignore}
+        expected = {k: v for k, v in row_expected.items() if k not in ignore}
         observed = {k: v for k, v in observed.items() if k not in ignore}
         if observed != expected:
             mismatches.append(
@@ -707,7 +739,7 @@ def verify_inspect() -> dict[str, Any]:
             )
     if mismatches:
         raise AssertionError(f"Inspect path disagrees with the scorer: {mismatches}")
-    task = control_task("procurement", check_leakage=False)
+    task = control_task("procurement", check_leakage=False, allow_uncalibrated_tokenizer=True)
     return {
         "status": "passed",
         "rows_checked": len(fixture["rows"]),
@@ -742,7 +774,9 @@ def verify_runner_parity() -> dict[str, Any]:
         version = domain.corpus.default_version
         presentation = eval_resources.resolve_presentation(domain)
         cases = list(domain.corpus.load_cases(version))
-        capacity = capacity_tokens(domain, cases, version, presentation)
+        capacity = capacity_tokens(
+            domain, cases, version, presentation, allow_uncalibrated_tokenizer=True
+        )
         # No writer condition is selected, so this makes no model call.
         _, _, _, evidence, _ = _build_evidence(
             None,
@@ -778,7 +812,9 @@ def verify_runner_parity() -> dict[str, Any]:
                 )
         tools_hash = content_hash(model_visible_tools(domain, presentation))
         observed: dict[tuple[str, str, str], tuple[str, str]] = {}
-        for trial, truth in build_control_trials(domain_id, check_leakage=False):
+        for trial, truth in build_control_trials(
+            domain_id, check_leakage=False, allow_uncalibrated_tokenizer=True
+        ):
             if content_hash([dict(tool) for tool in trial.tools]) != tools_hash:
                 raise AssertionError(f"{domain_id}: tool schemas differ from the runner")
             observed[(truth.case_id, truth.condition_id, truth.probe_id)] = (
@@ -821,7 +857,9 @@ def verify_inspect_eval() -> dict[str, Any]:
     domain_id = "procurement"
     domain = eval_resources.load_domain(domain_id)
     case_id = domain.corpus.case_id(domain.corpus.load_cases(domain.corpus.default_version)[0])
-    pairs = build_control_trials(domain_id, check_leakage=False, case_ids=[case_id])
+    pairs = build_control_trials(
+        domain_id, check_leakage=False, allow_uncalibrated_tokenizer=True, case_ids=[case_id]
+    )
     by_request = {trial.messages[-1]["content"]: truth for trial, truth in pairs}
     if len(by_request) != len(pairs):
         raise AssertionError(
@@ -852,14 +890,24 @@ def verify_inspect_eval() -> dict[str, Any]:
     # The log is read lazily from log_dir, so collect everything before cleanup.
     with tempfile.TemporaryDirectory() as log_dir:
         log = inspect_eval(
-            control_task(domain_id, check_leakage=False, case_ids=[case_id]),
+            control_task(
+                domain_id,
+                check_leakage=False,
+                case_ids=[case_id],
+                allow_uncalibrated_tokenizer=True,
+            ),
             model=get_model("mockllm/model", custom_outputs=scripted),
             log_dir=log_dir,
             display="none",
         )[0]
         # Reduced scores keep only the first epoch, which halved the denominators.
         repeated = inspect_eval(
-            control_task(domain_id, check_leakage=False, case_ids=[case_id]),
+            control_task(
+                domain_id,
+                check_leakage=False,
+                case_ids=[case_id],
+                allow_uncalibrated_tokenizer=True,
+            ),
             model=get_model("mockllm/model", custom_outputs=scripted),
             log_dir=log_dir,
             display="none",
@@ -923,7 +971,9 @@ def verify_inspect_tool_surface() -> dict[str, Any]:
     allowed_top_level = {"additionalProperties"}
     surfaces: dict[str, Any] = {}
     for domain_id in eval_resources.list_domains():
-        trial = build_control_trials(domain_id, check_leakage=False)[0][0]
+        trial = build_control_trials(
+            domain_id, check_leakage=False, allow_uncalibrated_tokenizer=True
+        )[0][0]
         native = {tool["function"]["name"]: tool["function"]["parameters"] for tool in trial.tools}
         filled = set(missing_parameter_descriptions(list(trial.tools)))
         rendered = rendered_tool_surface(list(trial.tools))
@@ -1031,7 +1081,11 @@ def _verify_tool_surface_in_event_loop() -> None:
     from ..controls import build_control_trials
     from ..inspect_adapter import tool_surface
 
-    tools = list(build_control_trials("procurement", check_leakage=False)[0][0].tools)
+    tools = list(
+        build_control_trials("procurement", check_leakage=False, allow_uncalibrated_tokenizer=True)[
+            0
+        ][0].tools
+    )
 
     async def inside_loop() -> dict[str, Any]:
         return tool_surface(tools)

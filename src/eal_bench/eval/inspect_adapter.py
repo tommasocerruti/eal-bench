@@ -41,6 +41,7 @@ INSPECT_ADAPTER_VERSION = "eal_bench.eval.inspect_adapter/v1"
 INSTALL_HINT = 'install the Inspect extra: pip install "eal-bench[inspect]"'
 
 _GENERATION_ERROR_KEY = "eal_generation_error"
+ATTACHMENT_PROTOCOL = "attachment://"
 _TRUTH_CACHE: dict[tuple[str, str | None, str | None], dict[str, TrialTruth]] = {}
 
 
@@ -161,10 +162,12 @@ def tool_surface(tools: Sequence[dict[str, Any]]) -> dict[str, Any]:
 def _request_shape(
     messages: Sequence[Mapping[str, Any]],
     tools: Sequence[Mapping[str, Any]],
+    tool_choice: Any = None,
 ) -> dict[str, Any]:
     """One canonical shape, so a declared hash and an observed hash are comparable."""
 
     return {
+        "tool_choice": _tool_choice_key(tool_choice),
         "messages": [
             {"role": str(message["role"]), "content": str(message["content"])}
             for message in messages
@@ -183,6 +186,15 @@ def _request_shape(
     }
 
 
+def _tool_choice_key(tool_choice: Any) -> str:
+    """`auto` and a forced tool change model behavior, so they must hash apart."""
+
+    if tool_choice is None:
+        return "none_specified"
+    name = getattr(tool_choice, "name", None)
+    return f"function:{name}" if name else str(tool_choice)
+
+
 def _request_hash(trial: Trial, surface: Mapping[str, Any]) -> str:
     from experiments.authorization_memory.persistence import content_hash
 
@@ -190,7 +202,7 @@ def _request_hash(trial: Trial, surface: Mapping[str, Any]) -> str:
         {"name": name, "description": spec["description"], "parameters": spec["parameters"]}
         for name, spec in surface.items()
     ]
-    return content_hash(_request_shape(trial.messages, tools))
+    return content_hash(_request_shape(trial.messages, tools, trial.tool_choice))
 
 
 def to_samples(pairs: Sequence[tuple[Trial, TrialTruth]]) -> list[Any]:
@@ -274,6 +286,7 @@ def _truths_for(
                 corpus_version=corpus_version,
                 presentation_id=presentation_id,
                 check_leakage=False,
+                allow_uncalibrated_tokenizer=True,
             )
         }
     return _TRUTH_CACHE[key]
@@ -349,8 +362,14 @@ def raw_tool_arguments(state: Any) -> dict[str, str]:
             identifier = call.get("id")
             function = call.get("function") or {}
             arguments = function.get("arguments")
-            if isinstance(identifier, str) and isinstance(arguments, str):
-                raw[identifier] = arguments
+            if not isinstance(identifier, str) or not isinstance(arguments, str):
+                continue
+            if arguments.startswith(ATTACHMENT_PROTOCOL):
+                # A condensed saved log stores the payload elsewhere. Forwarding the
+                # reference made valid submissions score invalid, so fall back to the
+                # parsed arguments instead.
+                continue
+            raw[identifier] = arguments
     return raw
 
 
@@ -405,7 +424,7 @@ def _observed_request(state: Any) -> dict[str, Any]:
         for tool in (getattr(event, "tools", None) or [])
     ]
     declared = (state.metadata or {}).get("request_hash")
-    observed = content_hash(_request_shape(messages, tools))
+    observed = content_hash(_request_shape(messages, tools, getattr(event, "tool_choice", None)))
     return {
         "declared_request_hash": declared,
         "observed_request_hash": observed,
@@ -426,11 +445,15 @@ def _outcome_for_state(state: Any) -> TrialOutcome:
     return score_response(
         truth,
         response,
+        # The route is what was requested. Using the reply's model here gave a
+        # failed call a different identity from a successful one on the same route,
+        # which then tripped the executor pooling guard. response_model records
+        # what came back.
         executor=ModelProvenance(
             target_id=model,
             provider=model.split("/")[0] if model and "/" in model else None,
             requested_model=model,
-            resolved_model=response.model or model,
+            resolved_model=model,
         ),
         surface="inspect",
     )

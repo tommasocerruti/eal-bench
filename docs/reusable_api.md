@@ -95,8 +95,12 @@ scorer: a run containing only authorized requests does not claim 0% unauthorized
 Metrics read every epoch, so `--epochs` does not halve the denominators.
 
 Each score records `declared_request_hash`, `observed_request_hash` and
-`request_hash_matches_declared`. Adding a system message or changing tool descriptions after
-the sample was built shows up as a mismatch.
+`request_hash_matches_declared`. Adding a system message, changing tool descriptions or
+changing the tool choice after the sample was built shows up as a mismatch.
+
+The executor route recorded on an outcome is the route that was requested, so a failed call
+and a successful call on the same route share an identity and aggregate together. The model
+the provider actually returned is recorded separately in `response_model`.
 
 Re-scoring a log recorded under different resource versions is refused. Set
 `EAL_ALLOW_RESOURCE_DRIFT=1` to score it against the installed ones anyway.
@@ -144,8 +148,10 @@ Inspect is also more tolerant than EAL when parsing tool arguments: it repairs a
 trailed by stray quotes without setting `parse_error`, and the parsed `ToolCall` keeps no copy
 of the original text. The raw string does survive on `ModelEvent.call.response` for a provider
 that records its call, so the scorer recovers it from the transcript and scores what the model
-emitted. Where a provider records no raw call the parsed value is used, which is why outcomes
-stay tagged `surface="inspect"`.
+emitted. A condensed saved log stores the payload separately and yields an `attachment://`
+reference instead; that is never forwarded as arguments, because doing so scored valid
+submissions as invalid. Where the raw text is unavailable the parsed value is used, which is
+why outcomes stay tagged `surface="inspect"`.
 
 ## Score a reply
 

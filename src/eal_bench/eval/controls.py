@@ -29,6 +29,7 @@ from experiments.authorization_memory.surfaces import model_visible_tools
 from .metrics import TrackMetrics, aggregate, aggregate_by
 from .resources import (
     describe,
+    require_calibration_tokenizer,
     load_domain,
     resolve_corpus_version,
     resolve_presentation,
@@ -69,6 +70,8 @@ def capacity_tokens(
     cases: Sequence[Any],
     corpus_version: str,
     presentation: Any,
+    *,
+    allow_uncalibrated_tokenizer: bool = False,
 ) -> int:
     """Prefer the release's declared capacity, which `calibrate_capacity` also prefers.
 
@@ -78,6 +81,10 @@ def capacity_tokens(
 
     declared = domain.corpus.capacity_policy.calibrated_for(corpus_version, "primary")
     if declared is not None:
+        if not allow_uncalibrated_tokenizer:
+            require_calibration_tokenizer(
+                f"{domain.domain_id}/{corpus_version} capacity {declared}"
+            )
         return declared
     return calibrate_capacity(
         domain, cases, corpus_version=corpus_version, presentation=presentation
@@ -93,6 +100,7 @@ def build_control_trials(
     case_ids: Sequence[str] | None = None,
     seed: int = _DEFAULT_SEED,
     check_leakage: bool = True,
+    allow_uncalibrated_tokenizer: bool = False,
 ) -> list[tuple[Trial, TrialTruth]]:
     """Build one trial per case, condition and probe, using faithful memory."""
 
@@ -109,7 +117,13 @@ def build_control_trials(
         missing = wanted - {domain.corpus.case_id(case) for case in cases}
         if missing:
             raise ValueError(f"unknown case ids: {sorted(missing)}")
-    capacity = capacity_tokens(domain, cases, version, presentation)
+    capacity = capacity_tokens(
+        domain,
+        cases,
+        version,
+        presentation,
+        allow_uncalibrated_tokenizer=allow_uncalibrated_tokenizer,
+    )
 
     built: list[tuple[Trial, TrialTruth]] = []
     tools = model_visible_tools(domain, presentation)
