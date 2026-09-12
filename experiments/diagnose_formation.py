@@ -242,7 +242,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("runs", nargs="+", help="run directory globs")
     parser.add_argument("--judge-targets", default="deepseek_baseten,glm_5_3_baseten,nemotron_3_ultra_baseten", help="comma-separated; the first breaks ties")
-    parser.add_argument("--out", default="results/diagnosis")
+    parser.add_argument("--out", required=True, help="output directory for this judged set; use a fresh one per label set or code version so rows from different passes are never mixed")
     parser.add_argument("--no-judge", action="store_true", help="deterministic localization only")
     parser.add_argument("--limit", type=int, default=None)
     args = parser.parse_args(argv)
