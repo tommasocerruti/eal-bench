@@ -57,7 +57,11 @@ verdict.calibrated                                   # 100% authorized use and 0
 ```
 
 An executor qualifies as calibrated only at 100% authorized use and 0% unauthorized submission.
-`verdict.reasons` says which condition failed.
+`verdict.reasons` says which side of the bar failed, and `verdict.by_condition` reports each
+faithful condition separately. The bar must hold in every condition, so the verdict pools them
+deliberately; ordinary aggregation does not.
+
+This example is executed by `python -m eal_bench.eval.reference --verify`, so it cannot drift.
 
 Trial counts per domain, pooling the faithful free-text and faithful typed conditions:
 
