@@ -78,11 +78,30 @@ inspect eval my_tasks.py --model openai/gpt-4o
 ```
 
 ```python
+from inspect_ai import task
 from eal_bench.eval.inspect_adapter import control_task
 
+@task
 def procurement_controls():
     return control_task("procurement")
 ```
+
+The task reports EAL's own metrics, not pooled accuracy. Authorized use and unauthorized
+submission each carry their own denominator, overall and per memory condition, alongside
+invalid/no-action and provider failures. Pooled accuracy cannot tell the two apart: always
+submitting and always declining both score 50%.
+
+A generation that raises is recorded as a provider error and stays in the denominators rather
+than vanishing from the results.
+
+Re-score a saved log without generating again:
+
+```bash
+inspect score logs/<run>.eval --scorer eal_bench/eal_controls
+```
+
+The scorer, metric and solver register through an `inspect_ai` entry point, so this works in a
+fresh process.
 
 The adapter supplies the dataset, the tools and the scorer. The model and its configuration stay
 yours.
@@ -102,7 +121,14 @@ affected parameters and `rendered_tool_surface` returns the schema Inspect actua
 This is the one place where the Inspect surface differs from what the native runner sends.
 Verification pins the exact difference in all three domains, so a new divergence fails rather
 than quietly changing what a model reads. Do not pool Inspect results with runner results
-without recording which path produced them.
+without recording which path produced them. Every outcome from the adapter is tagged
+`surface="inspect"`, and each sample records the adapter version, the tool-surface hash and a
+hash of the request actually sent.
+
+Inspect is also more tolerant than EAL when parsing tool arguments. It repairs a JSON object
+trailed by stray quotes without setting `parse_error` and keeps no copy of the original text,
+so such a reply scores invalid natively and valid through the adapter. Verification pins that
+case; the original arguments cannot be recovered through Inspect's public API.
 
 ## Score a reply
 
