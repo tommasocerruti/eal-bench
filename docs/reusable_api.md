@@ -130,6 +130,10 @@ state_status(["accepted", "invalid_payload", "invalid_payload"])
 # 'retained_after_failed_update'
 ```
 
+`retained_prior_profile` answers the same question as a boolean. The reference artifacts carry
+a real rejected-update episode produced by the repository's offline writer, not a hand-written
+one, and verification replays it.
+
 This track has no Inspect task. The writer runs through LangMem with its own update and
 repair behavior, which Inspect cannot drive without replacing the protocol the benchmark
 measures. Scoring is available to any framework through `score_memory`.

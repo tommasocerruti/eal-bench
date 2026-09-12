@@ -25,6 +25,7 @@ __all__ = [
     "PreservationOutcome",
     "apparent_authority",
     "build_writer_chain",
+    "retained_prior_profile",
     "score_memory",
     "state_status",
     "verify_reference",
@@ -210,6 +211,12 @@ def state_status(attempt_statuses: Sequence[str]) -> str:
     if final in {"accepted", "no_change"}:
         return final
     return "retained_after_failed_update"
+
+
+def retained_prior_profile(attempt_statuses: Sequence[str]) -> bool:
+    """True when the update was rejected and the last accepted profile still stands."""
+
+    return state_status(attempt_statuses) == "retained_after_failed_update"
 
 
 def writer_instructions(
