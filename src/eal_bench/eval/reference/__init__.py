@@ -1059,21 +1059,7 @@ def build_preservation_fixture() -> dict[str, Any]:
                     "expected_formation": apparent_authority(domain_id, case_id, payload).to_dict(),
                 }
             )
-        rows.append(
-            {
-                "label": "free_text_not_estimable",
-                "domain_id": domain_id,
-                "case_id": case_id,
-                "payload": domain.memory.faithful_free_text(case),
-                "architecture": "free_text",
-                "expected_fidelity": score_memory(
-                    domain_id, case_id, "", architecture="free_text"
-                ).to_dict(),
-                "expected_formation": apparent_authority(
-                    domain_id, case_id, "", architecture="free_text"
-                ).to_dict(),
-            }
-        )
+        rows.extend(_free_text_rows(domain, domain_id, case_id, case, faithful))
     return {
         "schema_version": 1,
         "rows": rows,
@@ -1095,26 +1081,104 @@ def build_preservation_fixture() -> dict[str, Any]:
     }
 
 
+def _free_text_rows(
+    domain: Any,
+    domain_id: str,
+    case_id: str,
+    case: Any,
+    faithful: dict[str, Any],
+) -> list[dict[str, Any]]:
+    """Every free-text acceptance path, including the one that does score."""
+
+    from experiments.authorization_memory.persistence import content_hash
+
+    from ..preservation import Annotation, apparent_authority, score_memory
+
+    text = domain.memory.faithful_free_text(case)
+    digest = content_hash(text)
+    variants: list[tuple[str, list[Any]]] = [
+        ("free_text_missing_annotation", []),
+        (
+            "free_text_accepted_annotation",
+            [Annotation(extracted_state=faithful, source_content_hash=digest)],
+        ),
+        (
+            "free_text_hash_mismatch",
+            [Annotation(extracted_state=faithful, source_content_hash="wrong")],
+        ),
+        (
+            "free_text_not_accepted",
+            [
+                Annotation(
+                    extracted_state=faithful,
+                    source_content_hash=digest,
+                    status="provider_error",
+                )
+            ],
+        ),
+        (
+            "free_text_conflicting",
+            [
+                Annotation(extracted_state=faithful, source_content_hash=digest),
+                Annotation(
+                    extracted_state={**faithful, "authorizations": []},
+                    source_content_hash=digest,
+                ),
+            ],
+        ),
+    ]
+    rows = []
+    for label, notes in variants:
+        rows.append(
+            {
+                "label": label,
+                "domain_id": domain_id,
+                "case_id": case_id,
+                "payload": text,
+                "architecture": "free_text",
+                "annotations": [item.to_dict() for item in notes],
+                "expected_fidelity": score_memory(
+                    domain_id,
+                    case_id,
+                    text,
+                    architecture="free_text",
+                    annotations=notes,
+                ).to_dict(),
+                "expected_formation": apparent_authority(
+                    domain_id,
+                    case_id,
+                    text,
+                    architecture="free_text",
+                    annotations=notes,
+                ).to_dict(),
+            }
+        )
+    return rows
+
+
 def verify_preservation() -> dict[str, Any]:
     """Re-derive every frozen fidelity, formation and update-status label."""
 
-    from ..preservation import apparent_authority, score_memory, state_status
+    from ..preservation import Annotation, apparent_authority, score_memory, state_status
 
     fixture = load_fixture(_preservation_fixture_path())
     mismatches: list[dict[str, Any]] = []
     for row in fixture["rows"]:
         architecture = row.get("architecture", "typed")
+        notes = tuple(Annotation(**item) for item in row.get("annotations", ()))
         observed_fidelity = score_memory(
             row["domain_id"],
             row["case_id"],
             row["payload"],
             architecture=architecture,
+            annotations=notes,
         ).to_dict()
         observed_formation = apparent_authority(
             row["domain_id"],
             row["case_id"],
             row["payload"],
             architecture=architecture,
+            annotations=notes,
         ).to_dict()
         if observed_fidelity != row["expected_fidelity"]:
             mismatches.append({"label": row["label"], "part": "fidelity"})
