@@ -166,6 +166,18 @@ and an artifact inventory. Raw JSONL files are excluded from Git across all doma
 checks any originals present locally and reports missing files. Saved aggregates reproduce the
 published counts, while independent trial scoring and bootstrap reanalysis require the originals.
 
+## Use EAL from another project
+
+`eal_bench.eval` loads versioned trials, scores replies with the official scorer, and
+aggregates with explicit denominators, without the experiment runner and without EAL's
+provider configuration. An optional Inspect adapter is available through the `inspect` extra.
+
+```bash
+python -m eal_bench.eval.reference --verify
+```
+
+See the [reusable interface guide](docs/reusable_api.md).
+
 ## Extending EAL-Bench
 
 New domains define their own authorization state, histories, memory representation, requests,
