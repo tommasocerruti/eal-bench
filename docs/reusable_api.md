@@ -71,6 +71,30 @@ Counting follows [the shared result guide](../results/README.md).
 - Invalid, no-action and provider-error trials stay in those denominators.
 - Provider errors are also counted in their own column.
 
+## Pooling guard
+
+Aggregation refuses to mix resource versions, so a change of corpus, presentation or memory
+implementation cannot be averaged away by accident.
+
+```python
+aggregate(outcomes, track="controls")                        # MixedResourcesError
+aggregate(outcomes, track="controls", allow_mixed_resources=True)
+```
+
+`TrackMetrics.resource_key` records which identity the numbers belong to.
+
+## Use from another language
+
+```bash
+python -m eal_bench.eval domains
+python -m eal_bench.eval export --track controls --domain procurement --out trials.jsonl
+```
+
+`trials.jsonl` holds one trial per line with its messages, tools and resource versions. It
+never contains oracle state. Send each trial to your model, then score in Python with
+`score_response`, or write outcomes back with `write_outcomes` and read them with
+`read_outcomes`.
+
 ## Offline verification
 
 ```bash

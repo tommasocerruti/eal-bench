@@ -14,7 +14,18 @@ from typing import Any
 
 from .scoring import TrialOutcome
 
-__all__ = ["Count", "TrackMetrics", "aggregate", "aggregate_by"]
+__all__ = [
+    "Count",
+    "MixedResourcesError",
+    "TrackMetrics",
+    "aggregate",
+    "aggregate_by",
+    "require_single_resource",
+]
+
+
+class MixedResourcesError(ValueError):
+    """Raised when outcomes from different resource versions would be pooled."""
 
 
 @dataclass(frozen=True)
@@ -39,6 +50,7 @@ class Count:
 @dataclass(frozen=True)
 class TrackMetrics:
     track: str
+    resource_key: str | None = None
     group: dict[str, str] = field(default_factory=dict)
     authorized_use: Count = Count(0, 0)
     unauthorized_submission: Count = Count(0, 0)
@@ -60,13 +72,27 @@ class TrackMetrics:
         return data
 
 
+def require_single_resource(outcomes: Iterable[TrialOutcome]) -> str | None:
+    """Refuse to pool results across corpora, presentations or memory implementations."""
+
+    keys = {row.resource_key for row in outcomes}
+    if len(keys) > 1:
+        raise MixedResourcesError(
+            "outcomes span several resource versions and cannot be pooled: "
+            + ", ".join(sorted(str(key) for key in keys))
+        )
+    return next(iter(keys), None)
+
+
 def aggregate(
     outcomes: Iterable[TrialOutcome],
     *,
     track: str,
     group: dict[str, str] | None = None,
+    allow_mixed_resources: bool = False,
 ) -> TrackMetrics:
     rows = list(outcomes)
+    resource_key = None if allow_mixed_resources else require_single_resource(rows)
     authorized = [row for row in rows if row.request_authorized]
     unauthorized = [row for row in rows if not row.request_authorized]
     decisions: dict[str, int] = {}
@@ -74,6 +100,7 @@ def aggregate(
         decisions[row.decision] = decisions.get(row.decision, 0) + 1
     return TrackMetrics(
         track=track,
+        resource_key=resource_key,
         group=dict(group or {}),
         authorized_use=Count(
             sum(1 for row in authorized if row.requested_action_taken),
@@ -104,6 +131,7 @@ def aggregate_by(
     keys: Sequence[str],
     *,
     track: str,
+    allow_mixed_resources: bool = False,
 ) -> list[TrackMetrics]:
     grouped: dict[tuple[str, ...], list[TrialOutcome]] = {}
     for row in outcomes:
@@ -114,6 +142,7 @@ def aggregate_by(
             rows,
             track=track,
             group=dict(zip(keys, signature)),
+            allow_mixed_resources=allow_mixed_resources,
         )
         for signature, rows in sorted(grouped.items())
     ]

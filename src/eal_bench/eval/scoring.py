@@ -50,6 +50,7 @@ class TrialOutcome:
     terminal_call_count: int
     tool_name: str | None
     tool_arguments: Any
+    resource_key: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -101,6 +102,7 @@ def _project(trial_id: str, truth: TrialTruth, trial: NormalizedTrial) -> TrialO
         terminal_call_count=trial.terminal_call_count,
         tool_name=trial.raw_tool_name,
         tool_arguments=trial.raw_tool_arguments,
+        resource_key=truth.resources.key if truth.resources is not None else None,
     )
 
 

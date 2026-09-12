@@ -42,6 +42,14 @@ class ResourceVersions:
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 
+    @property
+    def key(self) -> str:
+        """Stable identity. Results with different keys must not be pooled."""
+
+        from experiments.authorization_memory.persistence import content_hash
+
+        return content_hash(self.to_dict())
+
 
 def load_domain(domain_id: str) -> AuthorizationMemoryDomain:
     return get_domain(domain_id)

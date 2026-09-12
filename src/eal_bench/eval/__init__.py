@@ -7,7 +7,15 @@ credentials. Tracks are reported separately and are never combined into one scor
 
 from __future__ import annotations
 
-from .metrics import Count, TrackMetrics, aggregate, aggregate_by
+from .export import read_outcomes, write_outcomes, write_trials
+from .metrics import (
+    Count,
+    MixedResourcesError,
+    TrackMetrics,
+    aggregate,
+    aggregate_by,
+    require_single_resource,
+)
 from .resources import (
     PROTOCOL_ID,
     SCORER_ID,
@@ -23,6 +31,7 @@ __all__ = [
     "PROTOCOL_ID",
     "SCORER_ID",
     "Count",
+    "MixedResourcesError",
     "ModelResponse",
     "ResourceVersions",
     "ToolCall",
@@ -35,6 +44,10 @@ __all__ = [
     "describe",
     "list_domains",
     "load_domain",
+    "read_outcomes",
+    "require_single_resource",
     "score_many",
     "score_response",
+    "write_outcomes",
+    "write_trials",
 ]

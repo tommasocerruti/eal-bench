@@ -33,6 +33,16 @@ class Trial:
             "resources": self.resources.to_dict(),
         }
 
+    @classmethod
+    def from_dict(cls, row: Mapping[str, Any]) -> Trial:
+        return cls(
+            trial_id=str(row["trial_id"]),
+            messages=tuple(dict(message) for message in row["messages"]),
+            tools=tuple(dict(tool) for tool in row["tools"]),
+            tool_choice=str(row.get("tool_choice", "auto")),
+            resources=ResourceVersions(**row["resources"]),
+        )
+
 
 @dataclass(frozen=True)
 class TrialTruth:
@@ -51,6 +61,7 @@ class TrialTruth:
     evidence: Any = field(repr=False, default=None)
     presentation: Any = field(repr=False, default=None)
     presentation_hash: str = ""
+    resources: ResourceVersions | None = None
 
     def to_dict(self) -> dict[str, Any]:
         """Scalar fields only. The object handles are deliberately omitted."""
@@ -65,6 +76,7 @@ class TrialTruth:
             "request_authorized": self.request_authorized,
             "oracle_reason": self.oracle_reason,
             "seed": self.seed,
+            "resource_key": self.resources.key if self.resources is not None else None,
         }
 
 
