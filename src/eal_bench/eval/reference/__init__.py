@@ -281,7 +281,74 @@ def verify_api_contracts() -> dict[str, Any]:
         raise AssertionError("explicit pooling lost the surface record")
     checked.append("pooling guards")
 
+    checked.extend(_verify_track_entry_points())
     return {"status": "passed", "entry_points": checked}
+
+
+def _verify_track_entry_points() -> list[str]:
+    """Entry points that need a track, so they cannot be checked by the core alone."""
+
+    import tempfile
+    from pathlib import Path
+
+    try:
+        from ..controls import build_control_trials
+    except ImportError:
+        return []
+
+    import json as _json
+
+    from experiments.authorization_memory.schemas import ModelProvenance
+
+    from ..export import EXPORT_SCHEMA_VERSION, build_track, write_trials
+    from ..scoring import score_many
+    from ..trials import ModelResponse, Trial
+
+    domain_id = "procurement"
+    case_id = build_control_trials(domain_id, check_leakage=False)[0][1].case_id
+    pairs = build_track("controls", domain_id, check_leakage=False, case_ids=[case_id])
+    if not pairs:
+        raise AssertionError("build_track returned no trials")
+
+    with tempfile.TemporaryDirectory() as directory:
+        path = Path(directory) / "trials.jsonl"
+        if write_trials(path, pairs) != len(pairs):
+            raise AssertionError("write_trials reported the wrong row count")
+        rows = [
+            _json.loads(line)
+            for line in path.read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        ]
+        if len(rows) != len(pairs):
+            raise AssertionError("write_trials lost a trial")
+        for row in rows:
+            if row.pop("schema_version", None) != EXPORT_SCHEMA_VERSION:
+                raise AssertionError("an exported trial carries the wrong schema version")
+            # Oracle state must never reach the file a model is sent.
+            serialized = _json.dumps(row)
+            for leaked in ("request_authorized", "oracle_reason", "pair_id"):
+                if leaked in serialized:
+                    raise AssertionError(f"exported trial leaks {leaked}")
+        restored = [Trial.from_dict(row) for row in rows]
+        if [trial.trial_id for trial in restored] != [trial.trial_id for trial, _ in pairs]:
+            raise AssertionError("exported trials did not round trip")
+
+    route = ModelProvenance(
+        target_id="gptoss_baseten",
+        provider="baseten",
+        requested_model="gptoss",
+        resolved_model="openai/gpt-oss-120b",
+    )
+    outcomes = score_many(
+        pairs,
+        [ModelResponse(text="", finish_reason="stop")] * len(pairs),
+        executor=route,
+    )
+    if any(row.executor_model != "openai/gpt-oss-120b" for row in outcomes):
+        raise AssertionError("score_many dropped the executor route")
+    if any(row.surface != "native" for row in outcomes):
+        raise AssertionError("score_many mislabelled the request surface")
+    return ["build_track", "write_trials", "score_many(executor=)"]
 
 
 def _controls_fixture_path() -> str:
