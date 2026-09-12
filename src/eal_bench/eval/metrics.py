@@ -225,24 +225,22 @@ def aggregate_by(
     *,
     track: str,
     allow_mixed_resources: bool = False,
-    allow_mixed_conditions: bool | None = None,
-    allow_mixed_surfaces: bool | None = None,
-    allow_mixed_executors: bool | None = None,
+    allow_mixed_conditions: bool = False,
+    allow_mixed_surfaces: bool = False,
+    allow_mixed_executors: bool = False,
 ) -> list[TrackMetrics]:
-    """Group before aggregating.
+    """Group, then validate every guard inside each group.
 
-    A guard is relaxed only for a dimension being grouped on, since grouping already
-    separates it. Grouping by condition does not make it safe to sum two surfaces.
+    Grouping on a dimension satisfies its guard naturally. Grouping on one executor
+    field does not license pooling the rest of the route.
     """
 
-    if allow_mixed_conditions is None:
-        allow_mixed_conditions = "condition_id" in keys
-    if allow_mixed_surfaces is None:
-        allow_mixed_surfaces = "surface" in keys
-    if allow_mixed_executors is None:
-        allow_mixed_executors = bool(
-            {"executor_model", "executor_target", "executor_provider"} & set(keys)
-        )
+    # Each group is validated on its own. Grouping by one executor field does not
+    # make the rest of the route safe to pool: grouping by model would otherwise
+    # combine two providers serving it.
+    allow_mixed_conditions = bool(allow_mixed_conditions)
+    allow_mixed_surfaces = bool(allow_mixed_surfaces)
+    allow_mixed_executors = bool(allow_mixed_executors)
     grouped: dict[tuple[str, ...], list[TrialOutcome]] = {}
     for row in outcomes:
         signature = tuple(str(getattr(row, key)) for key in keys)

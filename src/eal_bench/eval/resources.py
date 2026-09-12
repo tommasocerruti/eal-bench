@@ -16,8 +16,11 @@ PROTOCOL_ID = "eal_bench.eval/v1"
 SCORER_ID = "eal_bench.eval.scoring/v1"
 
 __all__ = [
+    "CALIBRATION_TOKENIZER",
     "PROTOCOL_ID",
     "SCORER_ID",
+    "UncalibratedTokenizerError",
+    "require_calibration_tokenizer",
     "ResourceVersions",
     "list_domains",
     "load_domain",
@@ -52,6 +55,33 @@ class ResourceVersions:
         from experiments.authorization_memory.persistence import content_hash
 
         return content_hash(self.to_dict())
+
+
+CALIBRATION_TOKENIZER = "cl100k_base"
+
+
+class UncalibratedTokenizerError(RuntimeError):
+    """Raised when a declared capacity would be enforced with the wrong tokenizer."""
+
+
+def require_calibration_tokenizer(context: str) -> None:
+    """A declared capacity is only meaningful under the tokenizer that produced it.
+
+    The released capacities were calibrated with cl100k_base. Counting with the
+    regex fallback accepts memories that the bound should reject, so refuse rather
+    than enforce an unsound limit.
+    """
+
+    from experiments.authorization_memory.tokens import reference_tokenizer_name
+
+    active = reference_tokenizer_name()
+    if active == CALIBRATION_TOKENIZER:
+        return
+    raise UncalibratedTokenizerError(
+        f"{context} uses a capacity calibrated with {CALIBRATION_TOKENIZER}, but the "
+        f"active reference tokenizer is {active!r}. Warm the tiktoken cache, or pass "
+        "allow_uncalibrated_tokenizer=True to build without enforcing that bound."
+    )
 
 
 def load_domain(domain_id: str) -> AuthorizationMemoryDomain:

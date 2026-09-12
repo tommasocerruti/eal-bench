@@ -284,6 +284,25 @@ def verify_api_contracts() -> dict[str, Any]:
     if len({count_reference_tokens("a stable payload") for _ in range(3)}) != 1:
         raise AssertionError("the reference token count is not stable")
     checked.append("reference tokenizer policy")
+
+    # The capacity guard must fire whenever the active tokenizer is not the one the
+    # declared bound was calibrated with.
+    from ..resources import (
+        CALIBRATION_TOKENIZER,
+        UncalibratedTokenizerError,
+        require_calibration_tokenizer,
+    )
+
+    if reference_tokenizer_name() == CALIBRATION_TOKENIZER:
+        require_calibration_tokenizer("contract check")
+    else:
+        try:
+            require_calibration_tokenizer("contract check")
+        except UncalibratedTokenizerError:
+            pass
+        else:
+            raise AssertionError("the capacity guard did not fire under an uncalibrated tokenizer")
+    checked.append("capacity tokenizer guard")
     if sorted(pooled.surfaces) != ["inspect", "native"]:
         raise AssertionError("explicit pooling lost the surface record")
     checked.append("pooling guards")

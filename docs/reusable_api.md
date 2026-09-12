@@ -91,6 +91,10 @@ target together, so two providers serving the same model stay distinct. Pass
 `allow_mixed_resources=True`, `allow_mixed_conditions=True`, `allow_mixed_surfaces=True` or
 `allow_mixed_executors=True` to opt in deliberately. The paper pools two executors on purpose;
 that is an opt-in, not a default.
+
+`aggregate_by` validates every guard inside each group. Grouping on one executor field does
+not license pooling the rest of the route, so grouping by model still refuses to combine two
+providers serving it.
 `TrackMetrics` records `resource_key`, `condition_id`, `executors` and `surfaces`, so a number
 always says which identity it belongs to.
 
@@ -117,6 +121,11 @@ the adapter. Results from different surfaces should not be pooled.
 The reference token counter is `cl100k_base`, which tiktoken downloads on first use. An
 installation with a cold cache and no network falls back to a regex counter, which produces
 different counts.
+
+Enforcing a declared capacity under the fallback would accept a memory the bound should
+reject, so `require_calibration_tokenizer` raises `UncalibratedTokenizerError` rather than
+enforce an unsound limit. Warm the tiktoken cache, or pass `allow_uncalibrated_tokenizer=True`
+to build trials without enforcing that bound.
 
 The policy is resolved once per process, so the counter and the name it reports can never
 disagree, and the active tokenizer is part of `ResourceVersions`. A run counted with the
