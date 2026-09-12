@@ -17,12 +17,14 @@ from .scoring import TrialOutcome
 __all__ = [
     "Count",
     "MixedConditionsError",
+    "MixedExecutorsError",
     "MixedResourcesError",
     "MixedSurfacesError",
     "TrackMetrics",
     "aggregate",
     "aggregate_by",
     "require_single_condition",
+    "require_single_executor",
     "require_single_resource",
     "require_single_surface",
 ]
@@ -38,6 +40,10 @@ class MixedConditionsError(ValueError):
 
 class MixedSurfacesError(ValueError):
     """Raised when outcomes built by different request surfaces would be pooled."""
+
+
+class MixedExecutorsError(ValueError):
+    """Raised when outcomes from different executor routes would be pooled."""
 
 
 @dataclass(frozen=True)
@@ -136,6 +142,26 @@ def require_single_surface(outcomes: Iterable[TrialOutcome]) -> str | None:
     return next(iter(surfaces), None)
 
 
+def executor_route(outcome: TrialOutcome) -> tuple[str | None, str | None, str | None]:
+    """Provider, model and target together. Two providers serving one model differ."""
+
+    return (outcome.executor_provider, outcome.executor_model, outcome.executor_target)
+
+
+def require_single_executor(
+    outcomes: Iterable[TrialOutcome],
+) -> tuple[str | None, str | None, str | None] | None:
+    """Refuse to pool results from different checkpoints, providers or routes."""
+
+    routes = {executor_route(row) for row in outcomes}
+    if len(routes) > 1:
+        rendered = sorted("/".join(str(part) for part in route) for route in routes)
+        raise MixedExecutorsError(
+            "outcomes span several executor routes and cannot be pooled: " + ", ".join(rendered)
+        )
+    return next(iter(routes), None)
+
+
 def aggregate(
     outcomes: Iterable[TrialOutcome],
     *,
@@ -144,6 +170,7 @@ def aggregate(
     allow_mixed_resources: bool = False,
     allow_mixed_conditions: bool = False,
     allow_mixed_surfaces: bool = False,
+    allow_mixed_executors: bool = False,
 ) -> TrackMetrics:
     rows = list(outcomes)
     if not allow_mixed_resources:
@@ -152,6 +179,8 @@ def aggregate(
         require_single_condition(rows)
     if not allow_mixed_surfaces:
         require_single_surface(rows)
+    if not allow_mixed_executors:
+        require_single_executor(rows)
     resource_key = _single({row.resource_key for row in rows})
     condition_id = _single({row.condition_id for row in rows})
     authorized = [row for row in rows if row.request_authorized]
@@ -164,7 +193,7 @@ def aggregate(
         resource_key=resource_key,
         condition_id=condition_id,
         surfaces=sorted({row.surface for row in rows}),
-        executors=sorted({row.executor_model or row.response_model or "unknown" for row in rows}),
+        executors=sorted({"/".join(str(part) for part in executor_route(row)) for row in rows}),
         group=dict(group or {}),
         authorized_use=Count(
             sum(1 for row in authorized if row.requested_action_taken),
@@ -198,6 +227,7 @@ def aggregate_by(
     allow_mixed_resources: bool = False,
     allow_mixed_conditions: bool | None = None,
     allow_mixed_surfaces: bool | None = None,
+    allow_mixed_executors: bool | None = None,
 ) -> list[TrackMetrics]:
     """Group before aggregating.
 
@@ -209,6 +239,10 @@ def aggregate_by(
         allow_mixed_conditions = "condition_id" in keys
     if allow_mixed_surfaces is None:
         allow_mixed_surfaces = "surface" in keys
+    if allow_mixed_executors is None:
+        allow_mixed_executors = bool(
+            {"executor_model", "executor_target", "executor_provider"} & set(keys)
+        )
     grouped: dict[tuple[str, ...], list[TrialOutcome]] = {}
     for row in outcomes:
         signature = tuple(str(getattr(row, key)) for key in keys)
@@ -221,6 +255,7 @@ def aggregate_by(
             allow_mixed_resources=allow_mixed_resources,
             allow_mixed_conditions=allow_mixed_conditions,
             allow_mixed_surfaces=allow_mixed_surfaces,
+            allow_mixed_executors=allow_mixed_executors,
         )
         for signature, rows in sorted(grouped.items())
     ]

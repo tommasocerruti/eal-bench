@@ -86,8 +86,11 @@ aggregate_by(outcomes, ("condition_id",), track="controls")   # one row per cond
 ```
 
 Aggregation also refuses to mix request surfaces, because the Inspect adapter does not send
-byte-identical tools. Pass `allow_mixed_resources=True`, `allow_mixed_conditions=True` or
-`allow_mixed_surfaces=True` to opt in deliberately.
+byte-identical tools, and refuses to mix executor routes. A route is provider, model and
+target together, so two providers serving the same model stay distinct. Pass
+`allow_mixed_resources=True`, `allow_mixed_conditions=True`, `allow_mixed_surfaces=True` or
+`allow_mixed_executors=True` to opt in deliberately. The paper pools two executors on purpose;
+that is an opt-in, not a default.
 `TrackMetrics` records `resource_key`, `condition_id`, `executors` and `surfaces`, so a number
 always says which identity it belongs to.
 
@@ -113,8 +116,12 @@ the adapter. Results from different surfaces should not be pooled.
 
 The reference token counter is `cl100k_base`, which tiktoken downloads on first use. An
 installation with a cold cache and no network falls back to a regex counter, which produces
-different counts. `verify()` reports `reference_tokenizer` so the two are never confused. Warm
-the tiktoken cache if you need counts identical to the published runs.
+different counts.
+
+The policy is resolved once per process, so the counter and the name it reports can never
+disagree. `verify()` reports `reference_tokenizer`. The declared capacities were calibrated
+with `cl100k_base`, so enforcing them against the fallback would accept an oversized memory;
+warm the tiktoken cache before any run that enforces capacity.
 
 ## Use from another language
 

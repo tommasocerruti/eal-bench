@@ -147,6 +147,7 @@ def verify_api_contracts() -> dict[str, Any]:
     )
     from ..metrics import (
         MixedConditionsError,
+        MixedExecutorsError,
         MixedResourcesError,
         MixedSurfacesError,
         aggregate,
@@ -244,6 +245,12 @@ def verify_api_contracts() -> dict[str, Any]:
         (MixedResourcesError, _sample_outcome(resource_key="resource_b")),
         (MixedConditionsError, _sample_outcome(condition_id="faithful_typed")),
         (MixedSurfacesError, _sample_outcome(surface="inspect")),
+        (MixedExecutorsError, _sample_outcome(executor_model="openai/gpt-oss-20b")),
+        # Two providers serving one model are different routes.
+        (
+            MixedExecutorsError,
+            _sample_outcome(executor_provider="openrouter", executor_target="gptoss_openrouter"),
+        ),
     ]
     for error, other in guards:
         try:
@@ -256,6 +263,17 @@ def verify_api_contracts() -> dict[str, Any]:
         track="controls",
         allow_mixed_surfaces=True,
     )
+    # A consistent tokenizer policy: the name and the count come from one resolution.
+    from experiments.authorization_memory.tokens import (
+        count_reference_tokens,
+        reference_tokenizer_name,
+    )
+
+    if len({reference_tokenizer_name() for _ in range(3)}) != 1:
+        raise AssertionError("the reference tokenizer name is not stable")
+    if len({count_reference_tokens("a stable payload") for _ in range(3)}) != 1:
+        raise AssertionError("the reference token count is not stable")
+    checked.append("reference tokenizer policy")
     if sorted(pooled.surfaces) != ["inspect", "native"]:
         raise AssertionError("explicit pooling lost the surface record")
     checked.append("pooling guards")

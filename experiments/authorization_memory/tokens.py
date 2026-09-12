@@ -3,67 +3,47 @@ from __future__ import annotations
 import re
 from collections.abc import Callable
 from functools import lru_cache
-from typing import Any
 
 
 TokenCounter = Callable[[str], int]
 _FALLBACK_TOKEN_PATTERN = re.compile(r"\w+|[^\w\s]", re.UNICODE)
 
 
-_ENCODER: Any | None = None
-
-
-def _reference_encoder() -> Any | None:
-    """The cl100k encoder, or None when it cannot be loaded.
+@lru_cache(maxsize=1)
+def _reference_policy() -> tuple[str, TokenCounter]:
+    """Resolve the counting policy once, so the name and the count always agree.
 
     tiktoken downloads the encoding on first use, so an offline install with a cold
-    cache fails here. Fall back to the regex counter rather than raising; callers
-    record `reference_tokenizer_name`, so the two are never confused. A load failure
-    is not cached, because a cached failure would silently change token counts for
-    the rest of a run that was calibrated with cl100k.
+    cache falls back to the regex counter. Resolving per call let one call succeed
+    and another fail, which saved a regex count under a cl100k label.
     """
 
-    global _ENCODER
-    if _ENCODER is not None:
-        return _ENCODER
-    if not _tiktoken_available():
-        return None
-    try:
-        _ENCODER = tiktoken.get_encoding("cl100k_base")
-    except Exception:
-        return None
-    return _ENCODER
-
-
-@lru_cache(maxsize=1)
-def _tiktoken_available() -> bool:
-    global tiktoken
     try:
         import tiktoken
     except ImportError:
-        return False
-    return True
+        return "regex_fallback_v1", _regex_count
+    try:
+        encoder = tiktoken.get_encoding("cl100k_base")
+    except Exception:
+        return "regex_fallback_v1", _regex_count
+    return "cl100k_base", lambda text: len(encoder.encode(text))
+
+
+def _regex_count(text: str) -> int:
+    return len(_FALLBACK_TOKEN_PATTERN.findall(text))
 
 
 def reference_tokenizer_name(counter: TokenCounter | None = None) -> str:
     if counter is not None:
         return "injected"
-    return "cl100k_base" if _reference_encoder() is not None else "regex_fallback_v1"
+    return _reference_policy()[0]
 
 
 def count_reference_tokens(
     text: str,
     counter: TokenCounter | None = None,
 ) -> int:
-    count = (
-        counter(text)
-        if counter is not None
-        else (
-            len(_reference_encoder().encode(text))
-            if _reference_encoder() is not None
-            else len(_FALLBACK_TOKEN_PATTERN.findall(text))
-        )
-    )
+    count = counter(text) if counter is not None else _reference_policy()[1](text)
     if not isinstance(count, int) or isinstance(count, bool) or count < 0:
         raise ValueError("token counter must return a non-negative integer")
     return count
