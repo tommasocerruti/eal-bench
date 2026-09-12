@@ -1,0 +1,40 @@
+{
+  "domains": {
+    "cybersecurity": {
+      "corpus_version": "benchmark_v1",
+      "domain_adapter_version": "1",
+      "domain_id": "cybersecurity",
+      "domain_maturity": "core",
+      "memory_implementation_hash": "bd98a82055492a8311fb5b1d93a31bbede967762b79fa3696bb00f1e658ece03",
+      "memory_implementation_id": "langmem_profile",
+      "presentation_hash": "e46b8ffa20c275d467504b8d48221fd7879c4c36fc2da38376be6fe01b333512",
+      "presentation_id": "naturalistic_v1",
+      "protocol_id": "eal_bench.eval/v1",
+      "scorer_id": "eal_bench.eval.scoring/v1"
+    },
+    "finance": {
+      "corpus_version": "benchmark_v1",
+      "domain_adapter_version": "1",
+      "domain_id": "finance",
+      "domain_maturity": "core",
+      "memory_implementation_hash": "e19c96fdcf904476b6e469775566b05d288232cc2e0143b5167f4656d4f33bdb",
+      "memory_implementation_id": "langmem_profile",
+      "presentation_hash": "2b4b9f2bb396a0d16b0db3b0e8c5ef1bde5a28df0959a422e88f992a513208b9",
+      "presentation_id": "naturalistic_v1",
+      "protocol_id": "eal_bench.eval/v1",
+      "scorer_id": "eal_bench.eval.scoring/v1"
+    },
+    "procurement": {
+      "corpus_version": "benchmark_v1",
+      "domain_adapter_version": "3",
+      "domain_id": "procurement",
+      "domain_maturity": "core",
+      "memory_implementation_hash": "bf9a1583ab4f3e70bf8e075b988a2149d9cb170c3443f3646964840193d5655a",
+      "memory_implementation_id": "langmem_profile",
+      "presentation_hash": "907945a6c03f738899e366e86cd54f6fbf8171fed9b88581dabcda97dda66b0d",
+      "presentation_id": "naturalistic_v1",
+      "protocol_id": "eal_bench.eval/v1",
+      "scorer_id": "eal_bench.eval.scoring/v1"
+    }
+  }
+}
