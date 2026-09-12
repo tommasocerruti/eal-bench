@@ -96,8 +96,13 @@ exercised without credentials.
 
 Inspect rejects a tool parameter that has no description, and some EAL parameters have none.
 Those are filled with the parameter name, which adds no meaning the key does not already
-carry. `missing_parameter_descriptions` lists exactly which parameters are affected. This is
-the one place where the Inspect surface differs from what the native runner sends.
+carry, and Inspect adds `additionalProperties`. `missing_parameter_descriptions` lists the
+affected parameters and `rendered_tool_surface` returns the schema Inspect actually sends.
+
+This is the one place where the Inspect surface differs from what the native runner sends.
+Verification pins the exact difference in all three domains, so a new divergence fails rather
+than quietly changing what a model reads. Do not pool Inspect results with runner results
+without recording which path produced them.
 
 ## Score a reply
 
