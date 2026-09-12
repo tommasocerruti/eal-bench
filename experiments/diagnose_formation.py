@@ -105,23 +105,31 @@ def row_key(r: dict[str, Any]) -> tuple:
 
 
 def canonical_chains(memories: list[dict[str, Any]], states: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
-    """One memory per (chain, block): the memory the run recorded as current after that block, when the state log has it.
-
-    A block can carry several memory rows (one per writer attempt); memory_states.jsonl names the accepted one."""
+    """One memory per block per lineage, following parent links. A block can carry several memory rows (one per
+    writer attempt); memory_states.jsonl names the accepted one. A closed-loop run with two arms forks the loop from
+    the shared base, so a lineage is the base memories followed by one arm's loop memories, keyed by the arm's
+    chain id (the base chain id when there is a single arm)."""
     by_id = {m["memory_id"]: m for m in memories}
-    canon: dict[tuple[str, int], dict[str, Any]] = {}
-    for st in states:
-        m = by_id.get(st.get("current_memory_id"))
-        if m is not None:
-            canon[(m["chain_id"], st["block_index"])] = m
-    chains: dict[str, list[dict[str, Any]]] = collections.defaultdict(list)
-    seen: set[tuple[str, int]] = set()
-    for m in memories:
-        key = (m["chain_id"], m["block_index"])
-        if key in seen:
-            continue
-        chains[m["chain_id"]].append(canon.get(key, m))
-        seen.add(key)
+    accepted = {st.get("current_memory_id") for st in states if st.get("current_memory_id") in by_id}
+    canonical = [m for m in memories if m["memory_id"] in accepted or m.get("parent_memory_id") is None] if accepted else list(memories)
+    canon_ids = {m["memory_id"] for m in canonical}
+    children: dict[str | None, list[dict[str, Any]]] = collections.defaultdict(list)
+    for m in canonical:
+        parent = m.get("parent_memory_id")
+        children[parent if parent in canon_ids else None].append(m)
+    chains: dict[str, list[dict[str, Any]]] = {}
+
+    def walk(m: dict[str, Any], path: list[dict[str, Any]]) -> None:
+        path = path + [m]
+        kids = children.get(m["memory_id"], [])
+        if not kids:
+            chains[m["chain_id"]] = sorted(path, key=lambda x: x["block_index"])
+            return
+        for kid in kids:
+            walk(kid, path)
+
+    for root in children[None]:
+        walk(root, [])
     return chains
 
 
@@ -167,7 +175,8 @@ def born_records(fh, domain, cases, presentation, chains, attempts, written_back
         case_id, condition = mems[0]["case_id"], mems[0]["condition_id"]
         case = cases[case_id]
         base_max = len(list(domain.corpus.blocks(case))) - 1
-        wb = [w for w in written_back if w["case_id"] == case_id and w["condition_id"] == condition]
+        wb = [w for w in written_back if w["case_id"] == case_id and w["condition_id"] == condition and (w.get("loop_chain_id") in (None, chain_id))]
+        arm = next((w.get("arm") for w in wb if w.get("arm")), None)
         seen = set()
         for i, m in enumerate(mems):
             if m["block_index"] <= base_max:
@@ -188,7 +197,7 @@ def born_records(fh, domain, cases, presentation, chains, attempts, written_back
                     continue
                 block_attempts = sorted([a for a in attempts if a["case_id"] == case_id and a["condition_id"] == condition and a["block_index"] == b], key=lambda a: a["attempt_index"])
                 plan = "\n---\n".join(f"attempt {a['attempt_index']} ({a['status']}): {args_of(a).get('planned_edits', '')}" for a in block_attempts) or "(no attempt recorded)"
-                row = {"run": None, "domain": domain.domain_id, "case_id": case_id, "condition_id": condition, "writer": m["writer"]["target_id"], "chain_id": chain_id,
+                row = {"run": None, "domain": domain.domain_id, "case_id": case_id, "condition_id": condition, "writer": m["writer"]["target_id"], "chain_id": chain_id, "arm": arm,
                        "failure": failure, "record_id": rid, "record": compact({"authorizations": [rec]}), "error_block": b, "loop_block": True,
                        "attempt_statuses": [a["status"] for a in block_attempts]}
                 if llm is not None:
@@ -246,7 +255,8 @@ def main(argv: list[str] | None = None) -> int:
                     condition = mems[0]["condition_id"]
                     writer = mems[0]["writer"]["target_id"]
                     run_id = mems[0]["writer_run_id"]
-                    wb = [w for w in written_back if w["case_id"] == case_id and w["condition_id"] == condition]
+                    wb = [w for w in written_back if w["case_id"] == case_id and w["condition_id"] == condition and (w.get("loop_chain_id") in (None, chain_id))]
+                    arm = next((w.get("arm") for w in wb if w.get("arm")), None)
                     policy = str(getattr(case, "policy", "") or "")
                     n_base = len(list(domain.corpus.blocks(case)))
                     base_max = n_base - 1
@@ -298,7 +308,7 @@ def main(argv: list[str] | None = None) -> int:
                         patches = json.dumps([args_of(a).get("patches") for a in block_attempts])[:6000]
                         truth = domain.memory.faithful_typed(case, through_block_index=min(error_block, base_max))
                         row = {
-                            "run": run.name, "domain": manifest["domain_id"], "case_id": case_id, "condition_id": condition, "writer": writer, "chain_id": chain_id,
+                            "run": run.name, "domain": manifest["domain_id"], "case_id": case_id, "condition_id": condition, "writer": writer, "chain_id": chain_id, "arm": arm,
                             "probe_id": probe.probe_id, "request_kind": kind, "request": domain.executor.serialize_request(request), "error_block": error_block,
                             "failure": "false_authorization", "loop_block": error_block > base_max, "attempt_statuses": [a["status"] for a in block_attempts],
                         }
