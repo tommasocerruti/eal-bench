@@ -192,8 +192,17 @@ def verify_api_contracts() -> dict[str, Any]:
         raise AssertionError("from_openai lost the tool call")
     if reply.model != "openai/gpt-oss-120b" or reply.finish_reason != "tool_calls":
         raise AssertionError("from_openai lost the response model or finish reason")
-    if ModelResponse.from_openai(TimeoutError("slow")).error is None:
-        raise AssertionError("from_openai did not record a raised exception")
+    failure = ModelResponse.from_openai(TimeoutError("slow"))
+    if failure.error is None or failure.error_type != "TimeoutError":
+        raise AssertionError("from_openai lost the exception class")
+    # The runner records "<ExceptionClass>: <message>"; this path must match it.
+    from ..scoring import _provider_payload
+
+    rebuilt = _provider_payload(failure)
+    if f"{type(rebuilt).__name__}: {rebuilt}" != "TimeoutError: slow":
+        raise AssertionError(
+            f"provider error is not runner-comparable: {type(rebuilt).__name__}: {rebuilt}"
+        )
     checked.append("ModelResponse.from_openai")
 
     # Trial serialization round trip.

@@ -196,9 +196,19 @@ def aggregate_by(
     *,
     track: str,
     allow_mixed_resources: bool = False,
-    allow_mixed_conditions: bool = True,
-    allow_mixed_surfaces: bool = True,
+    allow_mixed_conditions: bool | None = None,
+    allow_mixed_surfaces: bool | None = None,
 ) -> list[TrackMetrics]:
+    """Group before aggregating.
+
+    A guard is relaxed only for a dimension being grouped on, since grouping already
+    separates it. Grouping by condition does not make it safe to sum two surfaces.
+    """
+
+    if allow_mixed_conditions is None:
+        allow_mixed_conditions = "condition_id" in keys
+    if allow_mixed_surfaces is None:
+        allow_mixed_surfaces = "surface" in keys
     grouped: dict[tuple[str, ...], list[TrialOutcome]] = {}
     for row in outcomes:
         signature = tuple(str(getattr(row, key)) for key in keys)

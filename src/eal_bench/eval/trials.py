@@ -94,6 +94,7 @@ class ModelResponse:
     text: str = ""
     finish_reason: str | None = None
     error: str | None = None
+    error_type: str | None = None
     model: str | None = None
 
     @classmethod
@@ -113,8 +114,8 @@ class ModelResponse:
         )
 
     @classmethod
-    def provider_error(cls, detail: str) -> ModelResponse:
-        return cls(error=detail)
+    def provider_error(cls, detail: str, error_type: str = "ProviderError") -> ModelResponse:
+        return cls(error=detail, error_type=error_type)
 
     @classmethod
     def from_openai(cls, completion: Any) -> ModelResponse:
@@ -134,7 +135,7 @@ class ModelResponse:
         )
 
         if isinstance(completion, BaseException):
-            return cls.provider_error(f"{type(completion).__name__}: {completion}")
+            return cls.provider_error(str(completion), error_type=type(completion).__name__)
         return cls.from_tool_calls(
             [_tool_name_arguments(call) for call in _response_tool_calls(completion)],
             text=_response_text(completion),
@@ -150,6 +151,7 @@ class ModelResponse:
             "text": self.text,
             "finish_reason": self.finish_reason,
             "error": self.error,
+            "error_type": self.error_type,
             "model": self.model,
         }
 
@@ -163,5 +165,6 @@ class ModelResponse:
             text=str(row.get("text", "")),
             finish_reason=row.get("finish_reason"),
             error=row.get("error"),
+            error_type=row.get("error_type"),
             model=row.get("model"),
         )

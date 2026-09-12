@@ -63,7 +63,10 @@ class TrialOutcome:
 
 def _provider_payload(response: ModelResponse) -> dict[str, Any] | Exception:
     if response.error is not None:
-        return RuntimeError(response.error)
+        # The runner records "<ExceptionClass>: <message>". Rebuild a type with the
+        # original name so provider-error rows stay comparable and groupable.
+        name = response.error_type or "ProviderError"
+        return type(name, (RuntimeError,), {})(response.error)
     return {
         "model": response.model,
         "choices": [
