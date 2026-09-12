@@ -27,6 +27,24 @@ _ABSENT = object()
 _PACKAGE = __name__
 
 
+def _expected_resource_key(domain_id: str) -> str:
+    """The key for the active tokenizer.
+
+    Fixtures are recorded under cl100k_base. The tokenizer is part of the resource
+    identity on purpose, so an offline install has a different key; substitute the
+    live one and let verify_resources police the rest of the identity.
+    """
+
+    return eval_resources.describe(eval_resources.load_domain(domain_id)).key
+
+
+def _with_live_resource_key(row: Mapping[str, Any], domain_id: str) -> dict[str, Any]:
+    updated = dict(row)
+    if "resource_key" in updated:
+        updated["resource_key"] = _expected_resource_key(domain_id)
+    return updated
+
+
 def _differing_keys(observed: Mapping[str, Any], expected: Mapping[str, Any]) -> list[str]:
     """Compare by key presence as well as value, so a new field is not read as None."""
 
@@ -60,9 +78,7 @@ def verify_resources() -> dict[str, Any]:
         # the regex fallback, which is a different identity on purpose, so compare the
         # rest and require the field to name whichever tokenizer is active.
         if observed.get("reference_tokenizer") != reference_tokenizer_name():
-            mismatches.append(
-                {"domain_id": domain_id, "fields": ["reference_tokenizer"]}
-            )
+            mismatches.append({"domain_id": domain_id, "fields": ["reference_tokenizer"]})
         comparable = {k: v for k, v in observed.items() if k != "reference_tokenizer"}
         expected_row = {k: v for k, v in recorded.items() if k != "reference_tokenizer"}
         if comparable != expected_row:
@@ -502,12 +518,13 @@ def verify_controls() -> dict[str, Any]:
             mismatches.append({"label": row["label"], "reason": "trial_id not built"})
             continue
         observed = score_response(truth, ModelResponse.from_dict(row["response"])).to_dict()
-        if observed != row["expected"]:
+        expected_row = _with_live_resource_key(row["expected"], domain_id)
+        if observed != expected_row:
             mismatches.append(
                 {
                     "label": row["label"],
                     "domain_id": domain_id,
-                    "fields": _differing_keys(observed, row["expected"]),
+                    "fields": _differing_keys(observed, expected_row),
                 }
             )
     if mismatches:
