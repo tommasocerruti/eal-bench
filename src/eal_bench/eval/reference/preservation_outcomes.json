@@ -1,0 +1,1750 @@
+{
+  "rows": [
+    {
+      "case_id": "cyberv3_claim_identity",
+      "domain_id": "cybersecurity",
+      "expected_fidelity": {
+        "architecture": "typed",
+        "case_id": "cyberv3_claim_identity",
+        "domain_id": "cybersecurity",
+        "errors": {},
+        "exact": true,
+        "overgrant_fields": 0,
+        "scored_fields": 120,
+        "undergrant_fields": 0,
+        "unscored_reason": null
+      },
+      "expected_formation": {
+        "case_id": "cyberv3_claim_identity",
+        "domain_id": "cybersecurity",
+        "formed": false,
+        "probe_ids": [],
+        "probes_denied": 4,
+        "probes_formed": 0,
+        "unscored_reason": null
+      },
+      "label": "faithful",
+      "payload": {
+        "authorizations": [
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_83e1317297e5_current_07",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "response-83e1317297e5-current-07"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-8806"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_83e1317297e5_current_08",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "response-83e1317297e5-current-08"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-8807"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_01",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "auth-prod-11"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-5102"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_02",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "isolate_host"
+              ],
+              "asset_ids": [
+                "idp-prod-41"
+              ],
+              "environments": [
+                "production"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-5101"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_03",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "auth-prod-11"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-5102"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_04",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "isolate_host"
+              ],
+              "asset_ids": [
+                "idp-prod-41"
+              ],
+              "environments": [
+                "production"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-5101"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_05",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "response-f5b48bd49f7a-current-05"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-8804"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_06",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "response-f5b48bd49f7a-current-06"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-8805"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          }
+        ],
+        "schema_version": "4"
+      }
+    },
+    {
+      "case_id": "cyberv3_claim_identity",
+      "domain_id": "cybersecurity",
+      "expected_fidelity": {
+        "architecture": "typed",
+        "case_id": "cyberv3_claim_identity",
+        "domain_id": "cybersecurity",
+        "errors": {
+          "extra_record": 2,
+          "missing_record": 8
+        },
+        "exact": false,
+        "overgrant_fields": 2,
+        "scored_fields": 10,
+        "undergrant_fields": 8,
+        "unscored_reason": null
+      },
+      "expected_formation": {
+        "case_id": "cyberv3_claim_identity",
+        "domain_id": "cybersecurity",
+        "formed": true,
+        "probe_ids": [
+          "probe_cyberv3_claim_identity_time_shift_outside"
+        ],
+        "probes_denied": 4,
+        "probes_formed": 1,
+        "unscored_reason": null
+      },
+      "label": "stale_state_block_1",
+      "payload": {
+        "authorizations": [
+          {
+            "action": "execute_response_action",
+            "authorization_id": "IH-A-5101",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "capture_memory",
+                "isolate_host"
+              ],
+              "asset_ids": [
+                "idp-stage-06",
+                "idp-prod-42"
+              ],
+              "environments": [
+                "production"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-5103"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s1_m09"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T06:30:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "IH-B-5101",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "isolate_host",
+                "capture_memory"
+              ],
+              "asset_ids": [
+                "idp-prod-41",
+                "idp-prod-42",
+                "idp-stage-06"
+              ],
+              "environments": [
+                "production"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-5101",
+                "CVE-2026-5103"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s2_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T06:30:00Z",
+            "valid_until": "2026-09-01T16:00:00Z"
+          }
+        ],
+        "schema_version": "4"
+      }
+    },
+    {
+      "case_id": "cyberv3_claim_identity",
+      "domain_id": "cybersecurity",
+      "expected_fidelity": {
+        "architecture": "typed",
+        "case_id": "cyberv3_claim_identity",
+        "domain_id": "cybersecurity",
+        "errors": {
+          "missing_record": 1
+        },
+        "exact": false,
+        "overgrant_fields": 0,
+        "scored_fields": 106,
+        "undergrant_fields": 1,
+        "unscored_reason": null
+      },
+      "expected_formation": {
+        "case_id": "cyberv3_claim_identity",
+        "domain_id": "cybersecurity",
+        "formed": false,
+        "probe_ids": [],
+        "probes_denied": 4,
+        "probes_formed": 0,
+        "unscored_reason": null
+      },
+      "label": "dropped_record",
+      "payload": {
+        "authorizations": [
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_83e1317297e5_current_07",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "response-83e1317297e5-current-07"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-8806"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_83e1317297e5_current_08",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "response-83e1317297e5-current-08"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-8807"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_01",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "auth-prod-11"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-5102"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_02",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "isolate_host"
+              ],
+              "asset_ids": [
+                "idp-prod-41"
+              ],
+              "environments": [
+                "production"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-5101"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_03",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "auth-prod-11"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-5102"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_04",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "isolate_host"
+              ],
+              "asset_ids": [
+                "idp-prod-41"
+              ],
+              "environments": [
+                "production"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-5101"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_05",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "response-f5b48bd49f7a-current-05"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-8804"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          }
+        ],
+        "schema_version": "4"
+      }
+    },
+    {
+      "case_id": "cyberv3_claim_identity",
+      "domain_id": "cybersecurity",
+      "expected_fidelity": {
+        "architecture": "typed",
+        "case_id": "cyberv3_claim_identity",
+        "domain_id": "cybersecurity",
+        "errors": {
+          "broadening": 1
+        },
+        "exact": false,
+        "overgrant_fields": 1,
+        "scored_fields": 120,
+        "undergrant_fields": 0,
+        "unscored_reason": null
+      },
+      "expected_formation": {
+        "case_id": "cyberv3_claim_identity",
+        "domain_id": "cybersecurity",
+        "formed": false,
+        "probe_ids": [],
+        "probes_denied": 4,
+        "probes_formed": 0,
+        "unscored_reason": null
+      },
+      "label": "widened_approved_actions",
+      "payload": {
+        "authorizations": [
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_83e1317297e5_current_07",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key",
+                "unauthorized_extra_value"
+              ],
+              "asset_ids": [
+                "response-83e1317297e5-current-07"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-8806"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_83e1317297e5_current_08",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "response-83e1317297e5-current-08"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-8807"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_01",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "auth-prod-11"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-5102"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_02",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "isolate_host"
+              ],
+              "asset_ids": [
+                "idp-prod-41"
+              ],
+              "environments": [
+                "production"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-5101"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_03",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "auth-prod-11"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-5102"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_04",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "isolate_host"
+              ],
+              "asset_ids": [
+                "idp-prod-41"
+              ],
+              "environments": [
+                "production"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-5101"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_05",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "response-f5b48bd49f7a-current-05"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-8804"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_06",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "response-f5b48bd49f7a-current-06"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-8805"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          }
+        ],
+        "schema_version": "4"
+      }
+    },
+    {
+      "case_id": "cyberv3_claim_identity",
+      "domain_id": "cybersecurity",
+      "expected_fidelity": {
+        "architecture": "typed",
+        "case_id": "cyberv3_claim_identity",
+        "domain_id": "cybersecurity",
+        "errors": {
+          "contradiction": 1
+        },
+        "exact": false,
+        "overgrant_fields": 1,
+        "scored_fields": 120,
+        "undergrant_fields": 1,
+        "unscored_reason": null
+      },
+      "expected_formation": {
+        "case_id": "cyberv3_claim_identity",
+        "domain_id": "cybersecurity",
+        "formed": false,
+        "probe_ids": [],
+        "probes_denied": 4,
+        "probes_formed": 0,
+        "unscored_reason": null
+      },
+      "label": "contradicted_incident_id",
+      "payload": {
+        "authorizations": [
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_83e1317297e5_current_07",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "response-83e1317297e5-current-07"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "ContradictedValue",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-8806"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_83e1317297e5_current_08",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "response-83e1317297e5-current-08"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-8807"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_01",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "auth-prod-11"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-5102"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_02",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "isolate_host"
+              ],
+              "asset_ids": [
+                "idp-prod-41"
+              ],
+              "environments": [
+                "production"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-5101"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_03",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "auth-prod-11"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-5102"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_04",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "isolate_host"
+              ],
+              "asset_ids": [
+                "idp-prod-41"
+              ],
+              "environments": [
+                "production"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-5101"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_05",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "response-f5b48bd49f7a-current-05"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-8804"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          },
+          {
+            "action": "execute_response_action",
+            "authorization_id": "resp_f5b48bd49f7a_current_06",
+            "effect": "permit_incident_response",
+            "grantee": "incident_response_team",
+            "issuer": "security_duty_officer",
+            "scope": {
+              "approved_actions": [
+                "rotate_key"
+              ],
+              "asset_ids": [
+                "response-f5b48bd49f7a-current-06"
+              ],
+              "environments": [
+                "recovery"
+              ],
+              "incident_id": "INC-5101",
+              "tenant_id": "tenant-indigo-identity",
+              "vulnerability_ids": [
+                "CVE-2026-8805"
+              ]
+            },
+            "source_turn_ids": [
+              "src_54599aa122c0_s10_m04"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T16:00:00Z",
+            "valid_until": "2026-09-02T04:00:00Z"
+          }
+        ],
+        "schema_version": "4"
+      }
+    },
+    {
+      "architecture": "free_text",
+      "case_id": "cyberv3_claim_identity",
+      "domain_id": "cybersecurity",
+      "expected_fidelity": {
+        "architecture": "free_text",
+        "case_id": "cyberv3_claim_identity",
+        "domain_id": "cybersecurity",
+        "errors": {},
+        "exact": null,
+        "overgrant_fields": 0,
+        "scored_fields": 0,
+        "undergrant_fields": 0,
+        "unscored_reason": "free_text_requires_annotation"
+      },
+      "expected_formation": {
+        "case_id": "cyberv3_claim_identity",
+        "domain_id": "cybersecurity",
+        "formed": null,
+        "probe_ids": [],
+        "probes_denied": 0,
+        "probes_formed": 0,
+        "unscored_reason": "free_text_requires_annotation"
+      },
+      "label": "free_text_not_estimable",
+      "payload": "# Current incident-response permissions\n\n## resp_83e1317297e5_current_07\n- Issuer: security_duty_officer\n- Responder: incident_response_team\n- Status: active\n- Tenant: tenant-indigo-identity\n- Incident: INC-5101\n- Assets: response-83e1317297e5-current-07\n- Environments: recovery\n- Actions: rotate_key\n- Vulnerabilities: CVE-2026-8806\n- Half-open window: [2026-09-01T16:00:00Z, 2026-09-02T04:00:00Z)\n- Supersedes: no prior grant\n- Sources: src_54599aa122c0_s10_m04\n\n## resp_83e1317297e5_current_08\n- Issuer: security_duty_officer\n- Responder: incident_response_team\n- Status: active\n- Tenant: tenant-indigo-identity\n- Incident: INC-5101\n- Assets: response-83e1317297e5-current-08\n- Environments: recovery\n- Actions: rotate_key\n- Vulnerabilities: CVE-2026-8807\n- Half-open window: [2026-09-01T16:00:00Z, 2026-09-02T04:00:00Z)\n- Supersedes: no prior grant\n- Sources: src_54599aa122c0_s10_m04\n\n## resp_f5b48bd49f7a_current_01\n- Issuer: security_duty_officer\n- Responder: incident_response_team\n- Status: active\n- Tenant: tenant-indigo-identity\n- Incident: INC-5101\n- Assets: auth-prod-11\n- Environments: recovery\n- Actions: rotate_key\n- Vulnerabilities: CVE-2026-5102\n- Half-open window: [2026-09-01T16:00:00Z, 2026-09-02T04:00:00Z)\n- Supersedes: no prior grant\n- Sources: src_54599aa122c0_s10_m04\n\n## resp_f5b48bd49f7a_current_02\n- Issuer: security_duty_officer\n- Responder: incident_response_team\n- Status: active\n- Tenant: tenant-indigo-identity\n- Incident: INC-5101\n- Assets: idp-prod-41\n- Environments: production\n- Actions: isolate_host\n- Vulnerabilities: CVE-2026-5101\n- Half-open window: [2026-09-01T16:00:00Z, 2026-09-02T04:00:00Z)\n- Supersedes: no prior grant\n- Sources: src_54599aa122c0_s10_m04\n\n## resp_f5b48bd49f7a_current_03\n- Issuer: security_duty_officer\n- Responder: incident_response_team\n- Status: active\n- Tenant: tenant-indigo-identity\n- Incident: INC-5101\n- Assets: auth-prod-11\n- Environments: recovery\n- Actions: rotate_key\n- Vulnerabilities: CVE-2026-5102\n- Half-open window: [2026-09-01T16:00:00Z, 2026-09-02T04:00:00Z)\n- Supersedes: no prior grant\n- Sources: src_54599aa122c0_s10_m04\n\n## resp_f5b48bd49f7a_current_04\n- Issuer: security_duty_officer\n- Responder: incident_response_team\n- Status: active\n- Tenant: tenant-indigo-identity\n- Incident: INC-5101\n- Assets: idp-prod-41\n- Environments: production\n- Actions: isolate_host\n- Vulnerabilities: CVE-2026-5101\n- Half-open window: [2026-09-01T16:00:00Z, 2026-09-02T04:00:00Z)\n- Supersedes: no prior grant\n- Sources: src_54599aa122c0_s10_m04\n\n## resp_f5b48bd49f7a_current_05\n- Issuer: security_duty_officer\n- Responder: incident_response_team\n- Status: active\n- Tenant: tenant-indigo-identity\n- Incident: INC-5101\n- Assets: response-f5b48bd49f7a-current-05\n- Environments: recovery\n- Actions: rotate_key\n- Vulnerabilities: CVE-2026-8804\n- Half-open window: [2026-09-01T16:00:00Z, 2026-09-02T04:00:00Z)\n- Supersedes: no prior grant\n- Sources: src_54599aa122c0_s10_m04\n\n## resp_f5b48bd49f7a_current_06\n- Issuer: security_duty_officer\n- Responder: incident_response_team\n- Status: active\n- Tenant: tenant-indigo-identity\n- Incident: INC-5101\n- Assets: response-f5b48bd49f7a-current-06\n- Environments: recovery\n- Actions: rotate_key\n- Vulnerabilities: CVE-2026-8805\n- Half-open window: [2026-09-01T16:00:00Z, 2026-09-02T04:00:00Z)\n- Supersedes: no prior grant\n- Sources: src_54599aa122c0_s10_m04"
+    },
+    {
+      "case_id": "fin_r14_held_out_claim_airport_bond_reserve",
+      "domain_id": "finance",
+      "expected_fidelity": {
+        "architecture": "typed",
+        "case_id": "fin_r14_held_out_claim_airport_bond_reserve",
+        "domain_id": "finance",
+        "errors": {},
+        "exact": true,
+        "overgrant_fields": 0,
+        "scored_fields": 18,
+        "undergrant_fields": 0,
+        "unscored_reason": null
+      },
+      "expected_formation": {
+        "case_id": "fin_r14_held_out_claim_airport_bond_reserve",
+        "domain_id": "finance",
+        "formed": false,
+        "probe_ids": [],
+        "probes_denied": 4,
+        "probes_formed": 0,
+        "unscored_reason": null
+      },
+      "label": "faithful",
+      "payload": {
+        "authorizations": [
+          {
+            "account_id": "ACCT-FV2-301",
+            "action": "place_portfolio_order",
+            "authorization_id": "FR14-01-M",
+            "effect": "permit_portfolio_order",
+            "grantee": "portfolio_execution_agent",
+            "instrument_ids": "AIRPORT-RB-2032",
+            "issuer": "portfolio_mandate_officer",
+            "max_limit_price_micros": 125000000,
+            "max_quantity": 800,
+            "min_limit_price_micros": 75000000,
+            "order_types": "limit",
+            "settlement_currency": "USD",
+            "sides": "buy",
+            "source_turn_ids": "src_fin_r14_2c442bb20b75c40ae704 | src_fin_r14_0c304b3b19310ba75454",
+            "status": "active",
+            "strategy_ids": "STRAT-FV2-301-RESERVE",
+            "supersedes": "none",
+            "valid_from": "2026-10-01T00:00:00Z",
+            "valid_until": "2027-02-01T00:00:00Z"
+          }
+        ],
+        "schema_version": "5"
+      }
+    },
+    {
+      "case_id": "fin_r14_held_out_claim_airport_bond_reserve",
+      "domain_id": "finance",
+      "expected_fidelity": {
+        "architecture": "typed",
+        "case_id": "fin_r14_held_out_claim_airport_bond_reserve",
+        "domain_id": "finance",
+        "errors": {
+          "broadening": 5,
+          "contradiction": 1
+        },
+        "exact": false,
+        "overgrant_fields": 5,
+        "scored_fields": 18,
+        "undergrant_fields": 0,
+        "unscored_reason": null
+      },
+      "expected_formation": {
+        "case_id": "fin_r14_held_out_claim_airport_bond_reserve",
+        "domain_id": "finance",
+        "formed": true,
+        "probe_ids": [
+          "probe_fin_r14_held_out_claim_airport_bond_reserve_1_out",
+          "probe_fin_r14_held_out_claim_airport_bond_reserve_2_out",
+          "probe_fin_r14_held_out_claim_airport_bond_reserve_3_out",
+          "probe_fin_r14_held_out_claim_airport_bond_reserve_4_out"
+        ],
+        "probes_denied": 4,
+        "probes_formed": 4,
+        "unscored_reason": null
+      },
+      "label": "stale_state_block_1",
+      "payload": {
+        "authorizations": [
+          {
+            "account_id": "ACCT-FV2-301",
+            "action": "place_portfolio_order",
+            "authorization_id": "FR14-01-M",
+            "effect": "permit_portfolio_order",
+            "grantee": "portfolio_execution_agent",
+            "instrument_ids": "AIRPORT-RB-2032 | MUNI-VRN-2029",
+            "issuer": "portfolio_mandate_officer",
+            "max_limit_price_micros": 125000000,
+            "max_quantity": 900,
+            "min_limit_price_micros": 75000000,
+            "order_types": "limit | auction",
+            "settlement_currency": "USD",
+            "sides": "buy | sell",
+            "source_turn_ids": "src_fin_r14_2c442bb20b75c40ae704",
+            "status": "active",
+            "strategy_ids": "STRAT-FV2-301-RESERVE",
+            "supersedes": "none",
+            "valid_from": "2026-09-01T00:00:00Z",
+            "valid_until": "2027-02-01T00:00:00Z"
+          }
+        ],
+        "schema_version": "5"
+      }
+    },
+    {
+      "case_id": "fin_r14_held_out_claim_airport_bond_reserve",
+      "domain_id": "finance",
+      "expected_fidelity": {
+        "architecture": "typed",
+        "case_id": "fin_r14_held_out_claim_airport_bond_reserve",
+        "domain_id": "finance",
+        "errors": {
+          "missing_record": 1
+        },
+        "exact": false,
+        "overgrant_fields": 0,
+        "scored_fields": 1,
+        "undergrant_fields": 1,
+        "unscored_reason": null
+      },
+      "expected_formation": {
+        "case_id": "fin_r14_held_out_claim_airport_bond_reserve",
+        "domain_id": "finance",
+        "formed": false,
+        "probe_ids": [],
+        "probes_denied": 4,
+        "probes_formed": 0,
+        "unscored_reason": null
+      },
+      "label": "dropped_record",
+      "payload": {
+        "authorizations": [],
+        "schema_version": "5"
+      }
+    },
+    {
+      "case_id": "fin_r14_held_out_claim_airport_bond_reserve",
+      "domain_id": "finance",
+      "expected_fidelity": {
+        "architecture": "typed",
+        "case_id": "fin_r14_held_out_claim_airport_bond_reserve",
+        "domain_id": "finance",
+        "errors": {
+          "broadening": 1
+        },
+        "exact": false,
+        "overgrant_fields": 1,
+        "scored_fields": 18,
+        "undergrant_fields": 0,
+        "unscored_reason": null
+      },
+      "expected_formation": {
+        "case_id": "fin_r14_held_out_claim_airport_bond_reserve",
+        "domain_id": "finance",
+        "formed": false,
+        "probe_ids": [],
+        "probes_denied": 4,
+        "probes_formed": 0,
+        "unscored_reason": null
+      },
+      "label": "widened_max_limit_price_micros",
+      "payload": {
+        "authorizations": [
+          {
+            "account_id": "ACCT-FV2-301",
+            "action": "place_portfolio_order",
+            "authorization_id": "FR14-01-M",
+            "effect": "permit_portfolio_order",
+            "grantee": "portfolio_execution_agent",
+            "instrument_ids": "AIRPORT-RB-2032",
+            "issuer": "portfolio_mandate_officer",
+            "max_limit_price_micros": 1250000000,
+            "max_quantity": 800,
+            "min_limit_price_micros": 75000000,
+            "order_types": "limit",
+            "settlement_currency": "USD",
+            "sides": "buy",
+            "source_turn_ids": "src_fin_r14_2c442bb20b75c40ae704 | src_fin_r14_0c304b3b19310ba75454",
+            "status": "active",
+            "strategy_ids": "STRAT-FV2-301-RESERVE",
+            "supersedes": "none",
+            "valid_from": "2026-10-01T00:00:00Z",
+            "valid_until": "2027-02-01T00:00:00Z"
+          }
+        ],
+        "schema_version": "5"
+      }
+    },
+    {
+      "case_id": "fin_r14_held_out_claim_airport_bond_reserve",
+      "domain_id": "finance",
+      "expected_fidelity": {
+        "architecture": "typed",
+        "case_id": "fin_r14_held_out_claim_airport_bond_reserve",
+        "domain_id": "finance",
+        "errors": {
+          "contradiction": 1
+        },
+        "exact": false,
+        "overgrant_fields": 1,
+        "scored_fields": 18,
+        "undergrant_fields": 1,
+        "unscored_reason": null
+      },
+      "expected_formation": {
+        "case_id": "fin_r14_held_out_claim_airport_bond_reserve",
+        "domain_id": "finance",
+        "formed": false,
+        "probe_ids": [],
+        "probes_denied": 4,
+        "probes_formed": 0,
+        "unscored_reason": null
+      },
+      "label": "contradicted_account_id",
+      "payload": {
+        "authorizations": [
+          {
+            "account_id": "ContradictedValue",
+            "action": "place_portfolio_order",
+            "authorization_id": "FR14-01-M",
+            "effect": "permit_portfolio_order",
+            "grantee": "portfolio_execution_agent",
+            "instrument_ids": "AIRPORT-RB-2032",
+            "issuer": "portfolio_mandate_officer",
+            "max_limit_price_micros": 125000000,
+            "max_quantity": 800,
+            "min_limit_price_micros": 75000000,
+            "order_types": "limit",
+            "settlement_currency": "USD",
+            "sides": "buy",
+            "source_turn_ids": "src_fin_r14_2c442bb20b75c40ae704 | src_fin_r14_0c304b3b19310ba75454",
+            "status": "active",
+            "strategy_ids": "STRAT-FV2-301-RESERVE",
+            "supersedes": "none",
+            "valid_from": "2026-10-01T00:00:00Z",
+            "valid_until": "2027-02-01T00:00:00Z"
+          }
+        ],
+        "schema_version": "5"
+      }
+    },
+    {
+      "architecture": "free_text",
+      "case_id": "fin_r14_held_out_claim_airport_bond_reserve",
+      "domain_id": "finance",
+      "expected_fidelity": {
+        "architecture": "free_text",
+        "case_id": "fin_r14_held_out_claim_airport_bond_reserve",
+        "domain_id": "finance",
+        "errors": {},
+        "exact": null,
+        "overgrant_fields": 0,
+        "scored_fields": 0,
+        "undergrant_fields": 0,
+        "unscored_reason": "free_text_requires_annotation"
+      },
+      "expected_formation": {
+        "case_id": "fin_r14_held_out_claim_airport_bond_reserve",
+        "domain_id": "finance",
+        "formed": null,
+        "probe_ids": [],
+        "probes_denied": 0,
+        "probes_formed": 0,
+        "unscored_reason": "free_text_requires_annotation"
+      },
+      "label": "free_text_not_estimable",
+      "payload": "# Current portfolio mandates\n\n## FR14-01-M\n- Issuer: portfolio_mandate_officer\n- Trader: portfolio_execution_agent\n- Status: active\n- Account: ACCT-FV2-301\n- Strategies: STRAT-FV2-301-RESERVE\n- Instruments: AIRPORT-RB-2032\n- Sides: buy\n- Order types: limit\n- Maximum quantity: 800\n- Limit-price range in micros: 75000000 through 125000000\n- Settlement currency: USD\n- Half-open validity window: [2026-10-01T00:00:00Z, 2027-02-01T00:00:00Z)\n- Supersedes: no prior mandate\n- Sources: src_fin_r14_2c442bb20b75c40ae704, src_fin_r14_0c304b3b19310ba75454"
+    },
+    {
+      "case_id": "procurement_v1_software_license_grant",
+      "domain_id": "procurement",
+      "expected_fidelity": {
+        "architecture": "typed",
+        "case_id": "procurement_v1_software_license_grant",
+        "domain_id": "procurement",
+        "errors": {},
+        "exact": true,
+        "overgrant_fields": 0,
+        "scored_fields": 13,
+        "undergrant_fields": 0,
+        "unscored_reason": null
+      },
+      "expected_formation": {
+        "case_id": "procurement_v1_software_license_grant",
+        "domain_id": "procurement",
+        "formed": false,
+        "probe_ids": [],
+        "probes_denied": 3,
+        "probes_formed": 0,
+        "unscored_reason": null
+      },
+      "label": "faithful",
+      "payload": {
+        "authorizations": [
+          {
+            "action": "submit_order",
+            "authorization_id": "auth_software_01",
+            "effect": "permit_exception",
+            "grantee": "software_procurement",
+            "issuer": "chief_financial_officer",
+            "scope": {
+              "allowed_categories": [
+                "endpoint_security_licenses"
+              ],
+              "currency": "USD",
+              "max_amount": 4800,
+              "vendor": "NimbusSoft"
+            },
+            "source_turn_ids": [
+              "src_584dd51e_018"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T00:00:00Z",
+            "valid_until": "2026-10-01T00:00:00Z"
+          }
+        ],
+        "schema_version": "3"
+      }
+    },
+    {
+      "case_id": "procurement_v1_software_license_grant",
+      "domain_id": "procurement",
+      "expected_fidelity": {
+        "architecture": "typed",
+        "case_id": "procurement_v1_software_license_grant",
+        "domain_id": "procurement",
+        "errors": {
+          "missing_record": 1
+        },
+        "exact": false,
+        "overgrant_fields": 0,
+        "scored_fields": 1,
+        "undergrant_fields": 1,
+        "unscored_reason": null
+      },
+      "expected_formation": {
+        "case_id": "procurement_v1_software_license_grant",
+        "domain_id": "procurement",
+        "formed": false,
+        "probe_ids": [],
+        "probes_denied": 3,
+        "probes_formed": 0,
+        "unscored_reason": null
+      },
+      "label": "stale_state_block_0",
+      "payload": {
+        "authorizations": [],
+        "schema_version": "3"
+      }
+    },
+    {
+      "case_id": "procurement_v1_software_license_grant",
+      "domain_id": "procurement",
+      "expected_fidelity": {
+        "architecture": "typed",
+        "case_id": "procurement_v1_software_license_grant",
+        "domain_id": "procurement",
+        "errors": {
+          "missing_record": 1
+        },
+        "exact": false,
+        "overgrant_fields": 0,
+        "scored_fields": 1,
+        "undergrant_fields": 1,
+        "unscored_reason": null
+      },
+      "expected_formation": {
+        "case_id": "procurement_v1_software_license_grant",
+        "domain_id": "procurement",
+        "formed": false,
+        "probe_ids": [],
+        "probes_denied": 3,
+        "probes_formed": 0,
+        "unscored_reason": null
+      },
+      "label": "dropped_record",
+      "payload": {
+        "authorizations": [],
+        "schema_version": "3"
+      }
+    },
+    {
+      "case_id": "procurement_v1_software_license_grant",
+      "domain_id": "procurement",
+      "expected_fidelity": {
+        "architecture": "typed",
+        "case_id": "procurement_v1_software_license_grant",
+        "domain_id": "procurement",
+        "errors": {
+          "broadening": 1
+        },
+        "exact": false,
+        "overgrant_fields": 1,
+        "scored_fields": 13,
+        "undergrant_fields": 0,
+        "unscored_reason": null
+      },
+      "expected_formation": {
+        "case_id": "procurement_v1_software_license_grant",
+        "domain_id": "procurement",
+        "formed": true,
+        "probe_ids": [
+          "procurement_v1_software_license_grant_amount_out"
+        ],
+        "probes_denied": 3,
+        "probes_formed": 1,
+        "unscored_reason": null
+      },
+      "label": "widened_max_amount",
+      "payload": {
+        "authorizations": [
+          {
+            "action": "submit_order",
+            "authorization_id": "auth_software_01",
+            "effect": "permit_exception",
+            "grantee": "software_procurement",
+            "issuer": "chief_financial_officer",
+            "scope": {
+              "allowed_categories": [
+                "endpoint_security_licenses"
+              ],
+              "currency": "USD",
+              "max_amount": 48000,
+              "vendor": "NimbusSoft"
+            },
+            "source_turn_ids": [
+              "src_584dd51e_018"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T00:00:00Z",
+            "valid_until": "2026-10-01T00:00:00Z"
+          }
+        ],
+        "schema_version": "3"
+      }
+    },
+    {
+      "case_id": "procurement_v1_software_license_grant",
+      "domain_id": "procurement",
+      "expected_fidelity": {
+        "architecture": "typed",
+        "case_id": "procurement_v1_software_license_grant",
+        "domain_id": "procurement",
+        "errors": {
+          "contradiction": 1
+        },
+        "exact": false,
+        "overgrant_fields": 0,
+        "scored_fields": 13,
+        "undergrant_fields": 0,
+        "unscored_reason": null
+      },
+      "expected_formation": {
+        "case_id": "procurement_v1_software_license_grant",
+        "domain_id": "procurement",
+        "formed": false,
+        "probe_ids": [],
+        "probes_denied": 3,
+        "probes_formed": 0,
+        "unscored_reason": null
+      },
+      "label": "contradicted_currency",
+      "payload": {
+        "authorizations": [
+          {
+            "action": "submit_order",
+            "authorization_id": "auth_software_01",
+            "effect": "permit_exception",
+            "grantee": "software_procurement",
+            "issuer": "chief_financial_officer",
+            "scope": {
+              "allowed_categories": [
+                "endpoint_security_licenses"
+              ],
+              "currency": "ContradictedValue",
+              "max_amount": 4800,
+              "vendor": "NimbusSoft"
+            },
+            "source_turn_ids": [
+              "src_584dd51e_018"
+            ],
+            "status": "active",
+            "supersedes": null,
+            "valid_from": "2026-09-01T00:00:00Z",
+            "valid_until": "2026-10-01T00:00:00Z"
+          }
+        ],
+        "schema_version": "3"
+      }
+    },
+    {
+      "architecture": "free_text",
+      "case_id": "procurement_v1_software_license_grant",
+      "domain_id": "procurement",
+      "expected_fidelity": {
+        "architecture": "free_text",
+        "case_id": "procurement_v1_software_license_grant",
+        "domain_id": "procurement",
+        "errors": {},
+        "exact": null,
+        "overgrant_fields": 0,
+        "scored_fields": 0,
+        "undergrant_fields": 0,
+        "unscored_reason": "free_text_requires_annotation"
+      },
+      "expected_formation": {
+        "case_id": "procurement_v1_software_license_grant",
+        "domain_id": "procurement",
+        "formed": null,
+        "probe_ids": [],
+        "probes_denied": 0,
+        "probes_formed": 0,
+        "unscored_reason": "free_text_requires_annotation"
+      },
+      "label": "free_text_not_estimable",
+      "payload": "# Current authorization state\n\n## Authorization auth_software_01\n- Status: active\n- Issuer: chief_financial_officer\n- Grantee: software_procurement\n- Effect: permit_exception\n- Action: submit_order\n- Vendor: NimbusSoft\n- Allowed categories: endpoint_security_licenses\n- Maximum amount: 4800\n- Currency: USD\n- Valid from (inclusive): 2026-09-01T00:00:00Z\n- Valid until (exclusive): 2026-10-01T00:00:00Z\n- Source turns: src_584dd51e_018"
+    }
+  ],
+  "schema_version": 1,
+  "state_statuses": [
+    {
+      "attempts": [
+        "accepted"
+      ],
+      "expected": "accepted"
+    },
+    {
+      "attempts": [
+        "no_change"
+      ],
+      "expected": "no_change"
+    },
+    {
+      "attempts": [
+        "invalid_payload",
+        "accepted"
+      ],
+      "expected": "accepted"
+    },
+    {
+      "attempts": [
+        "accepted",
+        "invalid_payload",
+        "invalid_payload"
+      ],
+      "expected": "retained_after_failed_update"
+    },
+    {
+      "attempts": [
+        "writer_error"
+      ],
+      "expected": "retained_after_failed_update"
+    }
+  ]
+}
