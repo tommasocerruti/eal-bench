@@ -203,7 +203,11 @@ def apparent_authority(
 
 
 def state_status(attempt_statuses: Sequence[str]) -> str:
-    """Derive a logical update status, matching `MemoryObservation.from_memory_state`."""
+    """Derive a logical update status, matching `MemoryObservation.from_memory_state`.
+
+    `retained_after_failed_update` does not imply a profile was preserved. Use
+    `retained_prior_profile` with the chain's acceptance history for that.
+    """
 
     if not attempt_statuses:
         raise ValueError("a logical update needs at least one attempt")
@@ -213,10 +217,19 @@ def state_status(attempt_statuses: Sequence[str]) -> str:
     return "retained_after_failed_update"
 
 
-def retained_prior_profile(attempt_statuses: Sequence[str]) -> bool:
-    """True when the update was rejected and the last accepted profile still stands."""
+def retained_prior_profile(
+    attempt_statuses: Sequence[str],
+    *,
+    accepted_before: bool,
+) -> bool:
+    """True when a rejected update left a previously accepted profile standing.
 
-    return state_status(attempt_statuses) == "retained_after_failed_update"
+    `accepted_before` is required because the status alone cannot tell. When the
+    first logical update fails, the writer synthesizes an empty profile and the
+    state still reads `retained_after_failed_update`, with nothing preserved.
+    """
+
+    return accepted_before and state_status(attempt_statuses) == ("retained_after_failed_update")
 
 
 def writer_instructions(
