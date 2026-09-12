@@ -12,11 +12,21 @@ _FALLBACK_TOKEN_PATTERN = re.compile(r"\w+|[^\w\s]", re.UNICODE)
 
 @lru_cache(maxsize=1)
 def _reference_encoder() -> Any | None:
+    """The cl100k encoder, or None when it cannot be loaded.
+
+    tiktoken downloads the encoding on first use, so an offline install with a cold
+    cache fails here. Fall back to the regex counter rather than raising; callers
+    record `reference_tokenizer_name`, so the two are never confused.
+    """
+
     try:
         import tiktoken
     except ImportError:
         return None
-    return tiktoken.get_encoding("cl100k_base")
+    try:
+        return tiktoken.get_encoding("cl100k_base")
+    except Exception:
+        return None
 
 
 def reference_tokenizer_name(counter: TokenCounter | None = None) -> str:

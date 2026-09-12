@@ -74,17 +74,45 @@ Counting follows [the shared result guide](../results/README.md).
 - Invalid, no-action and provider-error trials stay in those denominators.
 - Provider errors are also counted in their own column.
 
-## Pooling guard
+## Pooling guards
 
-Aggregation refuses to mix resource versions, so a change of corpus, presentation or memory
-implementation cannot be averaged away by accident.
+Aggregation refuses to mix resource versions, and refuses to mix memory conditions. Faithful
+text and faithful typed share a resource version but are different treatments, so the resource
+guard alone does not keep them apart.
 
 ```python
-aggregate(outcomes, track="controls")                        # MixedResourcesError
-aggregate(outcomes, track="controls", allow_mixed_resources=True)
+aggregate(outcomes, track="controls")                  # MixedResourcesError or MixedConditionsError
+aggregate_by(outcomes, ("condition_id",), track="controls")   # one row per condition
 ```
 
-`TrackMetrics.resource_key` records which identity the numbers belong to.
+Pass `allow_mixed_resources=True` or `allow_mixed_conditions=True` to opt in deliberately.
+`TrackMetrics` records `resource_key`, `condition_id`, `executors` and `surfaces`, so a number
+always says which identity it belongs to.
+
+## Attribution
+
+`TrialOutcome` carries `executor_target`, `executor_provider`, `executor_model`,
+`response_model` and `surface`. Pass the route you used so an exported result stays
+attributable; without it two checkpoints serialize identically.
+
+```python
+from experiments.authorization_memory.schemas import ModelProvenance
+
+score_response(truth, reply, executor=ModelProvenance(
+    target_id="gptoss_baseten", provider="baseten",
+    requested_model="gptoss", resolved_model="openai/gpt-oss-120b",
+))
+```
+
+`surface` names the path that built the request, `"native"` by default and `"inspect"` through
+the adapter. Results from different surfaces should not be pooled.
+
+## Offline tokenizer
+
+The reference token counter is `cl100k_base`, which tiktoken downloads on first use. An
+installation with a cold cache and no network falls back to a regex counter, which produces
+different counts. `verify()` reports `reference_tokenizer` so the two are never confused. Warm
+the tiktoken cache if you need counts identical to the published runs.
 
 ## Use from another language
 

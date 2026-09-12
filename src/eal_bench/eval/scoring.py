@@ -51,6 +51,11 @@ class TrialOutcome:
     tool_name: str | None
     tool_arguments: Any
     resource_key: str | None = None
+    executor_target: str | None = None
+    executor_provider: str | None = None
+    executor_model: str | None = None
+    response_model: str | None = None
+    surface: str = "native"
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -81,7 +86,12 @@ def _provider_payload(response: ModelResponse) -> dict[str, Any] | Exception:
     }
 
 
-def _project(trial_id: str, truth: TrialTruth, trial: NormalizedTrial) -> TrialOutcome:
+def _project(
+    trial_id: str,
+    truth: TrialTruth,
+    trial: NormalizedTrial,
+    surface: str,
+) -> TrialOutcome:
     return TrialOutcome(
         trial_id=trial_id,
         domain_id=trial.domain_id,
@@ -103,10 +113,29 @@ def _project(trial_id: str, truth: TrialTruth, trial: NormalizedTrial) -> TrialO
         tool_name=trial.raw_tool_name,
         tool_arguments=trial.raw_tool_arguments,
         resource_key=truth.resources.key if truth.resources is not None else None,
+        executor_target=trial.executor.target_id,
+        executor_provider=trial.executor.provider,
+        executor_model=trial.executor.resolved_model,
+        response_model=trial.executor.response_model,
+        surface=surface,
     )
 
 
-def score_response(truth: TrialTruth, response: ModelResponse) -> TrialOutcome:
+def score_response(
+    truth: TrialTruth,
+    response: ModelResponse,
+    *,
+    executor: ModelProvenance | None = None,
+    surface: str = "native",
+) -> TrialOutcome:
+    """Score one reply.
+
+    `executor` records which route produced it. Without it, two checkpoints
+    serialize identically and an exported result is no longer attributable.
+    `surface` names the path that built the request, so results from different
+    input surfaces are not pooled.
+    """
+
     if truth.case is None or truth.probe is None or truth.evidence is None:
         raise ValueError(
             f"trial {truth.trial_id!r} carries no scoring handles; "
@@ -119,7 +148,7 @@ def score_response(truth: TrialTruth, response: ModelResponse) -> TrialOutcome:
         truth.probe,
         truth.evidence,
         _provider_payload(response),
-        _UNROUTED_EXECUTOR,
+        executor or _UNROUTED_EXECUTOR,
         executor_run_id=0,
         seed=truth.seed,
         trial_id=truth.trial_id,
@@ -128,13 +157,19 @@ def score_response(truth: TrialTruth, response: ModelResponse) -> TrialOutcome:
         presentation=truth.presentation,
         presentation_hash=truth.presentation_hash,
     )
-    return _project(truth.trial_id, truth, normalized)
+    return _project(truth.trial_id, truth, normalized, surface)
 
 
 def score_many(
     pairs: list[tuple[Trial, TrialTruth]],
     responses: list[ModelResponse],
+    *,
+    executor: ModelProvenance | None = None,
+    surface: str = "native",
 ) -> list[TrialOutcome]:
     if len(pairs) != len(responses):
         raise ValueError(f"got {len(responses)} responses for {len(pairs)} trials")
-    return [score_response(truth, response) for (_, truth), response in zip(pairs, responses)]
+    return [
+        score_response(truth, response, executor=executor, surface=surface)
+        for (_, truth), response in zip(pairs, responses)
+    ]

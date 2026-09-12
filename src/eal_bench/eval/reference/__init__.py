@@ -53,11 +53,16 @@ def verify_resources() -> dict[str, Any]:
 
 
 def verify() -> dict[str, Any]:
+    from experiments.authorization_memory.tokens import reference_tokenizer_name
+
     checks: dict[str, Any] = {"resources": verify_resources()}
     checks.update(_optional_track_checks())
     return {
         "status": "passed",
         "network_request_made": False,
+        # cl100k_base needs a download on first use. An offline install falls back to
+        # the regex counter, which changes token counts, so name it in the output.
+        "reference_tokenizer": reference_tokenizer_name(),
         "checks": checks,
     }
 
