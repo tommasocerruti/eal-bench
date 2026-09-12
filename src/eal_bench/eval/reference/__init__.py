@@ -1301,6 +1301,7 @@ def verify_preservation() -> dict[str, Any]:
         "labels": sorted({row["label"] for row in fixture["rows"]}),
         "failed_update": verify_failed_update(fixture["failed_update_episode"]),
         "writer_chains": verify_writer_chains(),
+        "writer_run": verify_writer_run(),
     }
 
 
@@ -1436,3 +1437,62 @@ def verify_failed_update(episode: dict[str, Any]) -> dict[str, Any]:
     ):
         raise AssertionError("a rejected attempt did not point at the retained profile")
     return {"status": "passed", "attempts_checked": len(statuses)}
+
+
+def verify_writer_run() -> dict[str, Any]:
+    """Run a built chain through the official writer and score what it produces.
+
+    Skipped outside a repository checkout: the offline client loads `config.yaml`
+    relative to the working directory.
+    """
+
+    from contextlib import redirect_stderr, redirect_stdout
+    from io import StringIO
+
+    from ..preservation import apparent_authority, score_memory
+
+    try:
+        from experiments.authorization_memory.langmem_writer import run_writer_chains
+        from experiments.authorization_memory.validation import OfflineLLM
+
+        offline = OfflineLLM()
+    except Exception as exc:
+        return {"status": "skipped", "reason": f"offline writer unavailable: {exc}"}
+
+    from ..preservation import build_writer_chain
+
+    domain_id = "procurement"
+    domain = eval_resources.load_domain(domain_id)
+    case_id = domain.corpus.case_id(domain.corpus.load_cases(domain.corpus.default_version)[0])
+    conditions = ("one_shot_text", "incremental_text", "one_shot_typed", "incremental_typed")
+    ran = 0
+    for condition_id in conditions:
+        chain = build_writer_chain(
+            domain_id, case_id, condition_id=condition_id, target_id="gptoss_baseten"
+        )
+        with redirect_stdout(StringIO()), redirect_stderr(StringIO()):
+            result = run_writer_chains(
+                OfflineLLM() if ran else offline,
+                domain,
+                (chain,),
+                writer_task="writer",
+                max_attempts=1,
+                capacity_tokens=572,
+                batch_size=1,
+            )
+        if len(result.states) != len(chain.updates):
+            raise AssertionError(
+                f"{condition_id}: {len(result.states)} states for {len(chain.updates)} updates"
+            )
+        if not result.final_evidence:
+            raise AssertionError(f"{condition_id}: the writer produced no evidence")
+        if condition_id.endswith("typed"):
+            payload = result.final_evidence[0].payload
+            outcome = score_memory(domain_id, case_id, payload)
+            formation = apparent_authority(domain_id, case_id, payload)
+            if outcome.unscored_reason is not None or formation.formed is None:
+                raise AssertionError(
+                    f"{condition_id}: a typed memory from the writer was not scoreable"
+                )
+        ran += 1
+    return {"status": "passed", "conditions_run": ran}

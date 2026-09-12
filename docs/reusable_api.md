@@ -122,6 +122,11 @@ chain = build_writer_chain(
 writer_instructions("procurement", case_id, capacity_tokens=572)   # the exact text
 ```
 
+Verification runs all four conditions through the official writer with the repository's
+offline client, then scores what comes out, so the chain is known to be runnable rather than
+only correctly shaped. That check is skipped outside a repository checkout, because the
+offline client reads `config.yaml` from the working directory.
+
 A rejected update keeps the previous accepted profile. `state_status` derives the logical
 update status from the attempt sequence:
 
