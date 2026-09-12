@@ -85,7 +85,9 @@ aggregate(outcomes, track="controls")                  # MixedResourcesError or 
 aggregate_by(outcomes, ("condition_id",), track="controls")   # one row per condition
 ```
 
-Pass `allow_mixed_resources=True` or `allow_mixed_conditions=True` to opt in deliberately.
+Aggregation also refuses to mix request surfaces, because the Inspect adapter does not send
+byte-identical tools. Pass `allow_mixed_resources=True`, `allow_mixed_conditions=True` or
+`allow_mixed_surfaces=True` to opt in deliberately.
 `TrackMetrics` records `resource_key`, `condition_id`, `executors` and `surfaces`, so a number
 always says which identity it belongs to.
 
@@ -124,7 +126,8 @@ python -m eal_bench.eval export --track controls --domain procurement --out tria
 `trials.jsonl` holds one trial per line with its messages, tools and resource versions. It
 never contains oracle state. Send each trial to your model, then score in Python with
 `score_response`, or write outcomes back with `write_outcomes` and read them with
-`read_outcomes`.
+`read_outcomes`. Both files carry a `schema_version`, and reading rejects a version it does not
+know rather than silently constructing a wrong row.
 
 ## Offline verification
 

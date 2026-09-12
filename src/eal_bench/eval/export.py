@@ -14,8 +14,16 @@ from typing import Any
 from .scoring import TrialOutcome
 from .trials import Trial, TrialTruth
 
-__all__ = ["TRACKS", "build_track", "read_outcomes", "write_outcomes", "write_trials"]
+__all__ = [
+    "EXPORT_SCHEMA_VERSION",
+    "TRACKS",
+    "build_track",
+    "read_outcomes",
+    "write_outcomes",
+    "write_trials",
+]
 
+EXPORT_SCHEMA_VERSION = 1
 TRACKS = ("controls",)
 
 
@@ -34,7 +42,8 @@ def write_trials(path: str | Path, pairs: Sequence[tuple[Trial, TrialTruth]]) ->
     target.parent.mkdir(parents=True, exist_ok=True)
     with target.open("w", encoding="utf-8") as handle:
         for trial, _ in pairs:
-            handle.write(json.dumps(trial.to_dict(), ensure_ascii=False, sort_keys=True))
+            row = {"schema_version": EXPORT_SCHEMA_VERSION, **trial.to_dict()}
+            handle.write(json.dumps(row, ensure_ascii=False, sort_keys=True))
             handle.write("\n")
     return len(pairs)
 
@@ -45,7 +54,8 @@ def write_outcomes(path: str | Path, outcomes: Iterable[TrialOutcome]) -> int:
     written = 0
     with target.open("w", encoding="utf-8") as handle:
         for outcome in outcomes:
-            handle.write(json.dumps(outcome.to_dict(), ensure_ascii=False, sort_keys=True))
+            row = {"schema_version": EXPORT_SCHEMA_VERSION, **outcome.to_dict()}
+            handle.write(json.dumps(row, ensure_ascii=False, sort_keys=True))
             handle.write("\n")
             written += 1
     return written
@@ -54,8 +64,15 @@ def write_outcomes(path: str | Path, outcomes: Iterable[TrialOutcome]) -> int:
 def read_outcomes(path: str | Path) -> list[TrialOutcome]:
     rows = []
     with Path(path).open(encoding="utf-8") as handle:
-        for line in handle:
+        for number, line in enumerate(handle, start=1):
             line = line.strip()
-            if line:
-                rows.append(TrialOutcome(**json.loads(line)))
+            if not line:
+                continue
+            record = json.loads(line)
+            version = record.pop("schema_version", None)
+            if version != EXPORT_SCHEMA_VERSION:
+                raise ValueError(
+                    f"{path}:{number}: outcome schema {version!r}, expected {EXPORT_SCHEMA_VERSION}"
+                )
+            rows.append(TrialOutcome(**record))
     return rows

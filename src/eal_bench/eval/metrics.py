@@ -18,11 +18,13 @@ __all__ = [
     "Count",
     "MixedConditionsError",
     "MixedResourcesError",
+    "MixedSurfacesError",
     "TrackMetrics",
     "aggregate",
     "aggregate_by",
     "require_single_condition",
     "require_single_resource",
+    "require_single_surface",
 ]
 
 
@@ -32,6 +34,10 @@ class MixedResourcesError(ValueError):
 
 class MixedConditionsError(ValueError):
     """Raised when outcomes from different memory conditions would be pooled."""
+
+
+class MixedSurfacesError(ValueError):
+    """Raised when outcomes built by different request surfaces would be pooled."""
 
 
 @dataclass(frozen=True)
@@ -114,6 +120,22 @@ def require_single_condition(outcomes: Iterable[TrialOutcome]) -> str | None:
     return next(iter(conditions), None)
 
 
+def require_single_surface(outcomes: Iterable[TrialOutcome]) -> str | None:
+    """Refuse to pool results built by different request surfaces.
+
+    The Inspect adapter does not send byte-identical tools, so its results are a
+    different treatment even at the same resource version.
+    """
+
+    surfaces = {row.surface for row in outcomes}
+    if len(surfaces) > 1:
+        raise MixedSurfacesError(
+            "outcomes span several request surfaces and cannot be pooled: "
+            + ", ".join(sorted(str(name) for name in surfaces))
+        )
+    return next(iter(surfaces), None)
+
+
 def aggregate(
     outcomes: Iterable[TrialOutcome],
     *,
@@ -121,12 +143,15 @@ def aggregate(
     group: dict[str, str] | None = None,
     allow_mixed_resources: bool = False,
     allow_mixed_conditions: bool = False,
+    allow_mixed_surfaces: bool = False,
 ) -> TrackMetrics:
     rows = list(outcomes)
     if not allow_mixed_resources:
         require_single_resource(rows)
     if not allow_mixed_conditions:
         require_single_condition(rows)
+    if not allow_mixed_surfaces:
+        require_single_surface(rows)
     resource_key = _single({row.resource_key for row in rows})
     condition_id = _single({row.condition_id for row in rows})
     authorized = [row for row in rows if row.request_authorized]
@@ -172,6 +197,7 @@ def aggregate_by(
     track: str,
     allow_mixed_resources: bool = False,
     allow_mixed_conditions: bool = True,
+    allow_mixed_surfaces: bool = True,
 ) -> list[TrackMetrics]:
     grouped: dict[tuple[str, ...], list[TrialOutcome]] = {}
     for row in outcomes:
@@ -184,6 +210,7 @@ def aggregate_by(
             group=dict(zip(keys, signature)),
             allow_mixed_resources=allow_mixed_resources,
             allow_mixed_conditions=allow_mixed_conditions,
+            allow_mixed_surfaces=allow_mixed_surfaces,
         )
         for signature, rows in sorted(grouped.items())
     ]
