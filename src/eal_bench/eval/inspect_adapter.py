@@ -18,6 +18,7 @@ __all__ = [
     "available",
     "control_task",
     "missing_parameter_descriptions",
+    "rendered_tool_surface",
     "response_from_inspect",
     "score_inspect_state",
     "to_samples",
@@ -98,6 +99,22 @@ def _described_parameters(schema: dict[str, Any]) -> dict[str, Any]:
         properties[name] = filled
     described["properties"] = properties
     return described
+
+
+def rendered_tool_surface(tools: Sequence[dict[str, Any]]) -> dict[str, Any]:
+    """The parameter schema Inspect actually sends, after conversion.
+
+    Inspect re-derives tool info from the converted definitions, so this can differ
+    from the schema the native runner sends. Use it to audit that difference.
+    """
+
+    _require_inspect()
+    import asyncio
+
+    from inspect_ai.tool._tool_def import tool_defs
+
+    infos = asyncio.run(tool_defs([item.as_tool() for item in to_tool_defs(tools)]))
+    return {info.name: info.parameters.model_dump(exclude_none=True) for info in infos}
 
 
 def to_samples(pairs: Sequence[tuple[Trial, TrialTruth]]) -> list[Any]:

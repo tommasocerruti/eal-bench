@@ -470,15 +470,19 @@ def _inspect_output(response: dict[str, Any]) -> Any:
 
 
 def _parse_arguments(arguments: Any) -> tuple[dict[str, Any], str | None]:
+    """Reproduce the parse_error text Inspect itself would produce."""
+
+    from inspect_ai.model._call_tools import tool_parse_error_message
+
     if arguments is None:
         return {}, None
     try:
         decoded = json.loads(arguments)
-    except (TypeError, ValueError):
-        return {}, str(arguments)
+    except (TypeError, ValueError) as exc:
+        return {}, tool_parse_error_message(str(arguments), exc)
     if isinstance(decoded, dict):
         return decoded, None
-    return {}, str(arguments)
+    return {}, tool_parse_error_message(str(arguments), ValueError("not an object"))
 
 
 def verify_inspect() -> dict[str, Any]:
@@ -501,16 +505,32 @@ def verify_inspect() -> dict[str, Any]:
                 truth.trial_id: truth
                 for _, truth in build_control_trials(domain_id, check_leakage=False)
             }
-        truth = truths[domain_id][row["trial_id"]]
+        truth = truths[domain_id].get(row["trial_id"])
+        if truth is None:
+            mismatches.append({"label": row["label"], "reason": "trial_id not built"})
+            continue
         observed = score_response(
             truth, response_from_inspect(_inspect_output(row["response"]))
         ).to_dict()
-        if observed != row["expected"]:
+        # Inspect never exposes the raw text of an unparseable tool call, so the
+        # recorded argument string cannot survive the round trip. Every
+        # decision-relevant field must still agree.
+        ignore = (
+            {"tool_arguments"}
+            if any(
+                not isinstance(call.get("arguments"), dict)
+                for call in row["response"].get("tool_calls", ())
+            )
+            else set()
+        )
+        expected = {k: v for k, v in row["expected"].items() if k not in ignore}
+        observed = {k: v for k, v in observed.items() if k not in ignore}
+        if observed != expected:
             mismatches.append(
                 {
                     "label": row["label"],
                     "domain_id": domain_id,
-                    "fields": _differing_keys(observed, row["expected"]),
+                    "fields": _differing_keys(observed, expected),
                 }
             )
     if mismatches:
@@ -522,6 +542,7 @@ def verify_inspect() -> dict[str, Any]:
         "task_built": task.name,
         "task_samples": len(task.dataset),
         "end_to_end_eval": verify_inspect_eval(),
+        "tool_surface": verify_inspect_tool_surface(),
     }
 
 
@@ -603,7 +624,6 @@ def verify_runner_parity() -> dict[str, Any]:
     return {"status": "passed", "contexts_compared": compared}
 
 
-
 def verify_inspect_eval() -> dict[str, Any]:
     """Run a real Inspect eval against the mock provider, with no credentials.
 
@@ -633,6 +653,11 @@ def verify_inspect_eval() -> dict[str, Any]:
     case_id = domain.corpus.case_id(domain.corpus.load_cases(domain.corpus.default_version)[0])
     pairs = build_control_trials(domain_id, check_leakage=False, case_ids=[case_id])
     by_request = {trial.messages[-1]["content"]: truth for trial, truth in pairs}
+    if len(by_request) != len(pairs):
+        raise AssertionError(
+            f"{len(pairs)} trials collapse to {len(by_request)} distinct requests; "
+            "the scripted model would answer one trial from another's truth"
+        )
     action = domain.action_tools[0]
     decline = [name for name in domain.terminal_tools if name not in domain.action_tools][-1]
 
@@ -685,4 +710,57 @@ def verify_inspect_eval() -> dict[str, Any]:
         "samples": len(log_samples),
         "authorized_use": f"{used}/{len(authorized)}",
         "unauthorized_submission": f"{submitted}/{len(unauthorized)}",
+    }
+
+
+def verify_inspect_tool_surface() -> dict[str, Any]:
+    """Pin the difference between the Inspect tool surface and the runner's.
+
+    Inspect requires a description on every parameter and adds
+    `additionalProperties`. That difference is acceptable but must stay known, so
+    any new divergence fails here rather than silently changing what a model sees.
+    """
+
+    from ..controls import build_control_trials
+    from ..inspect_adapter import (
+        available,
+        missing_parameter_descriptions,
+        rendered_tool_surface,
+    )
+
+    if not available():
+        return {"status": "skipped", "reason": "inspect-ai is not installed"}
+
+    allowed_top_level = {"additionalProperties"}
+    surfaces: dict[str, Any] = {}
+    for domain_id in eval_resources.list_domains():
+        trial = build_control_trials(domain_id, check_leakage=False)[0][0]
+        native = {tool["function"]["name"]: tool["function"]["parameters"] for tool in trial.tools}
+        filled = set(missing_parameter_descriptions(list(trial.tools)))
+        rendered = rendered_tool_surface(list(trial.tools))
+        for name, schema in rendered.items():
+            source = native[name]
+            added = set(schema) - set(source)
+            if added - allowed_top_level:
+                raise AssertionError(f"{domain_id}/{name}: Inspect added {sorted(added)}")
+            for parameter, spec in schema["properties"].items():
+                expected = source["properties"][parameter]
+                changed = {
+                    key for key in set(spec) | set(expected) if spec.get(key) != expected.get(key)
+                }
+                if not changed:
+                    continue
+                if changed != {"description"} or f"{name}.{parameter}" not in filled:
+                    raise AssertionError(
+                        f"{domain_id}/{name}.{parameter}: unexpected change {sorted(changed)}"
+                    )
+                if spec["description"] != parameter:
+                    raise AssertionError(
+                        f"{domain_id}/{name}.{parameter}: unexpected filled description"
+                    )
+        surfaces[domain_id] = sorted(filled)
+    return {
+        "status": "passed",
+        "added_schema_keys": sorted(allowed_top_level),
+        "filled_descriptions": surfaces,
     }
