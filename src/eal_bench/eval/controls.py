@@ -40,6 +40,7 @@ __all__ = [
     "CONTROL_CONDITIONS",
     "CalibrationVerdict",
     "build_control_trials",
+    "capacity_tokens",
     "calibration_verdict",
     "verify_reference",
 ]
@@ -61,6 +62,26 @@ def _faithful_payload(
         domain.memory.payload_schema_id,
         str(payload.get("schema_version", "3")),
     )
+
+
+def capacity_tokens(
+    domain: AuthorizationMemoryDomain,
+    cases: Sequence[Any],
+    corpus_version: str,
+    presentation: Any,
+) -> int:
+    """Prefer the release's declared capacity, which `calibrate_capacity` also prefers.
+
+    Computing it instead requires the reference tokenizer, which an offline install
+    may not have.
+    """
+
+    declared = domain.corpus.capacity_policy.calibrated_for(corpus_version, "primary")
+    if declared is not None:
+        return declared
+    return calibrate_capacity(
+        domain, cases, corpus_version=corpus_version, presentation=presentation
+    ).tokens_for("primary")
 
 
 def build_control_trials(
@@ -88,9 +109,7 @@ def build_control_trials(
         missing = wanted - {domain.corpus.case_id(case) for case in cases}
         if missing:
             raise ValueError(f"unknown case ids: {sorted(missing)}")
-    capacity = calibrate_capacity(
-        domain, cases, corpus_version=version, presentation=presentation
-    ).tokens_for("primary")
+    capacity = capacity_tokens(domain, cases, version, presentation)
 
     built: list[tuple[Trial, TrialTruth]] = []
     tools = model_visible_tools(domain, presentation)
