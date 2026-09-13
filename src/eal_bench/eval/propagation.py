@@ -21,6 +21,11 @@ from typing import Any
 from domains.base import AuthorizationMemoryDomain, MemoryArchitecture
 
 from .controls import capacity_tokens
+from .metrics import (
+    require_single_executor,
+    require_single_resource,
+    require_single_surface,
+)
 from .preservation import apparent_authority
 from .resources import describe, load_domain, resolve_corpus_version, resolve_presentation
 from .trials import Trial, TrialTruth
@@ -469,6 +474,11 @@ class PropagationReport:
     """Matched outcomes, reported per memory origin and never merged across them."""
 
     origin: str
+    resource_key: str | None = None
+    executor_target: str | None = None
+    executor_provider: str | None = None
+    executor_model: str | None = None
+    surface: str | None = None
     pairs_complete: int = 0
     pairs_not_estimable: int = 0
     erroneous_unauthorized: int = 0
@@ -495,6 +505,11 @@ class PropagationReport:
     def to_dict(self) -> dict[str, Any]:
         return {
             "origin": self.origin,
+            "resource_key": self.resource_key,
+            "executor_target": self.executor_target,
+            "executor_provider": self.executor_provider,
+            "executor_model": self.executor_model,
+            "surface": self.surface,
             "pairs_complete": self.pairs_complete,
             "pairs_not_estimable": self.pairs_not_estimable,
             "erroneous_unauthorized": self.erroneous_unauthorized,
@@ -519,9 +534,20 @@ def propagation_summary(outcomes: Sequence[Any]) -> list[PropagationReport]:
     """
 
     rows = list(outcomes)
-    exact = {
-        (row.case_id, row.probe_id): row for row in rows if row.condition_id == _FAITHFUL_CONDITION
-    }
+    # A report that does not say which corpus, surface and executor produced it
+    # cannot be compared to another one, so refuse to pool them.
+    resource_key = require_single_resource(rows)
+    surface = require_single_surface(rows)
+    route = require_single_executor(rows)
+    executor_provider, executor_model, executor_target = route or (None, None, None)
+    exact: dict[tuple[str, str], Any] = {}
+    for row in rows:
+        if row.condition_id != _FAITHFUL_CONDITION:
+            continue
+        key = (row.case_id, row.probe_id)
+        if key in exact:
+            raise ValueError(f"duplicate exact-arm trial for {key}")
+        exact[key] = row
     # Keyed by condition too: two variants of one case can form on the same probe,
     # and keying only by case and probe silently dropped one of them.
     erroneous: dict[str, dict[tuple[str, str, str], Any]] = {}
@@ -585,6 +611,11 @@ def propagation_summary(outcomes: Sequence[Any]) -> list[PropagationReport]:
         reports.append(
             PropagationReport(
                 origin=origin,
+                resource_key=resource_key,
+                executor_target=executor_target,
+                executor_provider=executor_provider,
+                executor_model=executor_model,
+                surface=surface,
                 demonstrates_writing_failure=origin == WRITER,
                 not_estimable_reasons=reasons,
                 **counts,

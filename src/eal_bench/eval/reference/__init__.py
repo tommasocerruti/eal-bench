@@ -8,7 +8,7 @@ re-derives every recorded value.
 from __future__ import annotations
 
 import json
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from importlib import resources
 from typing import Any
 
@@ -748,6 +748,7 @@ def verify_inspect() -> dict[str, Any]:
         "end_to_end_eval": verify_inspect_eval(),
         "tool_surface": verify_inspect_tool_surface(),
         "contract": verify_inspect_contract(),
+        "tracks": verify_inspect_tracks(),
     }
 
 
@@ -947,6 +948,121 @@ def verify_inspect_eval() -> dict[str, Any]:
         "epochs_2_metric_n": repeated_metrics["n"],
         "authorized_use": f"{used}/{len(authorized)}",
         "unauthorized_submission": f"{submitted}/{len(unauthorized)}",
+    }
+
+
+def _scripted_perfect_executor(domain: Any, pairs: Any) -> Any:
+    """A mock provider that answers each request correctly.
+
+    Keyed by the whole final message, because the memory block shares that message
+    with the request and is what separates the arms. The matched-arm invariant is
+    checked separately on the case and probe, where it actually holds.
+    """
+
+    from inspect_ai.model import ChatCompletionChoice, ChatMessageAssistant, ModelOutput
+    from inspect_ai.tool import ToolCall
+
+    action = domain.action_tools[0]
+    decline = [name for name in domain.terminal_tools if name not in domain.action_tools][-1]
+    by_request: dict[str, Any] = {}
+    by_probe: dict[tuple[str, str], Any] = {}
+    for trial, truth in pairs:
+        by_request[trial.messages[-1]["content"]] = truth
+        seen = by_probe.setdefault((truth.case_id, truth.probe_id), truth)
+        if seen.request_authorized != truth.request_authorized:
+            raise AssertionError(f"arms of {truth.case_id}/{truth.probe_id} disagree on authority")
+
+    def scripted(messages: Any, tools: Any, tool_choice: Any, config: Any) -> Any:
+        del tools, tool_choice, config
+        truth = by_request[messages[-1].content]
+        name = action if truth.request_authorized else decline
+        arguments = domain.conformance.action_arguments(truth.probe.request, name)
+        return ModelOutput(
+            model="mockllm/model",
+            choices=[
+                ChatCompletionChoice(
+                    message=ChatMessageAssistant(
+                        content="",
+                        tool_calls=[ToolCall(id="1", function=name, arguments=dict(arguments))],
+                    ),
+                    stop_reason="tool_calls",
+                )
+            ],
+        )
+
+    return scripted
+
+
+def _run_mock_eval(task: Any, scripted: Any) -> list[dict[str, Any]]:
+    """Run one Inspect task against the mock provider and return the scored rows."""
+
+    import tempfile
+
+    from inspect_ai import eval as inspect_eval
+    from inspect_ai.model import get_model
+
+    with tempfile.TemporaryDirectory() as log_dir:
+        log = inspect_eval(
+            task,
+            model=get_model("mockllm/model", custom_outputs=scripted),
+            log_dir=log_dir,
+            display="none",
+        )[0]
+        if log.status != "success":
+            raise AssertionError(f"Inspect eval of {task.name} failed: {log.status}")
+        samples = list(log.samples or ())
+        if not samples:
+            raise AssertionError(f"Inspect eval of {task.name} scored no samples")
+        scorer_name = next(iter(samples[0].scores))
+        return [dict(sample.scores[scorer_name].metadata) for sample in samples]
+
+
+def _outcomes_from_scores(rows: Sequence[Mapping[str, Any]]) -> list[Any]:
+    """Rebuild outcomes from score metadata, which also carries request-hash fields."""
+
+    from ..scoring import TrialOutcome
+
+    fields = set(TrialOutcome.__dataclass_fields__)
+    return [TrialOutcome(**{k: v for k, v in row.items() if k in fields}) for row in rows]
+
+
+def verify_inspect_tracks() -> dict[str, Any]:
+    """Run the propagation Inspect task, not only build it.
+
+    Five defects in the first adapter survived review because the task was written
+    and never executed, so every task exported here is evaluated against the mock
+    provider before it ships.
+    """
+
+    from ..inspect_adapter import available, propagation_task
+    from ..propagation import build_propagation_trials, propagation_summary
+
+    if not available():
+        return {"status": "skipped", "reason": "inspect-ai is not installed"}
+
+    domain_id = "procurement"
+    domain = eval_resources.load_domain(domain_id)
+    case_id = _first_case_id(domain_id)
+    build = dict(case_ids=[case_id], check_leakage=False, allow_uncalibrated_tokenizer=True)
+
+    pairs = build_propagation_trials(domain_id, **build)
+    rows = _run_mock_eval(
+        propagation_task(domain_id, **build), _scripted_perfect_executor(domain, pairs)
+    )
+    reports = propagation_summary(_outcomes_from_scores(rows))
+    if not reports:
+        raise AssertionError("the propagation task produced no comparable pairs")
+    for report in reports:
+        if not report.pairs_complete:
+            raise AssertionError(f"origin {report.origin} produced no complete pair")
+        if report.erroneous_unauthorized or report.exact_unauthorized:
+            raise AssertionError(f"a perfect executor submitted on origin {report.origin}")
+        if report.resource_key is None or report.surface != "inspect":
+            raise AssertionError(f"origin {report.origin} lost its provenance: {report.to_dict()}")
+    return {
+        "status": "passed",
+        "propagation_samples": len(rows),
+        "propagation_origins": [report.origin for report in reports],
     }
 
 
@@ -1807,12 +1923,13 @@ def verify_propagation() -> dict[str, Any]:
         propagation_summary,
     )
     from ..scoring import score_response
+    from ..metrics import MixedResourcesError
     from ..trials import ModelResponse
 
     fixture = load_fixture(_propagation_fixture_path())
     truths: dict[str, dict[str, Any]] = {}
     mismatches: list[dict[str, Any]] = []
-    outcomes = []
+    outcomes: dict[str, list[Any]] = {}
     for row in fixture["rows"]:
         domain_id = row["domain_id"]
         if domain_id not in truths:
@@ -1838,31 +1955,49 @@ def verify_propagation() -> dict[str, Any]:
                     "fields": _differing_keys(observed, expected),
                 }
             )
-        outcomes.append(score_response(truth, ModelResponse.from_dict(row["response"])))
+        outcomes.setdefault(domain_id, []).append(
+            score_response(truth, ModelResponse.from_dict(row["response"]))
+        )
     if mismatches:
         raise AssertionError(f"propagation outcomes drifted: {mismatches}")
 
-    reports = propagation_summary(outcomes)
-    if not reports:
-        raise AssertionError("the matched comparison produced no report")
-    for report in reports:
-        if report.origin == ALTERED and report.demonstrates_writing_failure:
-            raise AssertionError("an altered memory was labelled a writing failure")
-        if report.origin == WRITER and not report.demonstrates_writing_failure:
-            raise AssertionError("a writer memory was not labelled a writing failure")
-        if report.pairs_complete and report.exact_rate != 0.0:
-            raise AssertionError(
-                f"{report.origin}: exact memory still produced unauthorized action"
-            )
-        if report.pairs_complete and report.erroneous_rate != 1.0:
-            raise AssertionError(
-                f"{report.origin}: the scripted executor did not act on every erroneous memory"
-            )
+    # Summarized per domain: three corpora are three resource versions, and
+    # pooling them would report one rate over incomparable evidence.
+    reports: dict[str, list[dict[str, Any]]] = {}
+    for domain_id in sorted(outcomes):
+        domain_reports = propagation_summary(outcomes[domain_id])
+        if not domain_reports:
+            raise AssertionError(f"{domain_id}: the matched comparison produced no report")
+        for report in domain_reports:
+            if report.origin == ALTERED and report.demonstrates_writing_failure:
+                raise AssertionError("an altered memory was labelled a writing failure")
+            if report.origin == WRITER and not report.demonstrates_writing_failure:
+                raise AssertionError("a writer memory was not labelled a writing failure")
+            if report.pairs_complete and report.exact_rate != 0.0:
+                raise AssertionError(
+                    f"{domain_id}/{report.origin}: exact memory still produced unauthorized action"
+                )
+            if report.pairs_complete and report.erroneous_rate != 1.0:
+                raise AssertionError(
+                    f"{domain_id}/{report.origin}: the scripted executor did not act on "
+                    "every erroneous memory"
+                )
+            if report.resource_key is None:
+                raise AssertionError(f"{domain_id}/{report.origin}: the report lost its resources")
+        reports[domain_id] = [report.to_dict() for report in domain_reports]
+
+    pooled = [row for rows in outcomes.values() for row in rows]
+    try:
+        propagation_summary(pooled)
+    except MixedResourcesError:
+        pass
+    else:
+        raise AssertionError("three corpora were pooled into one propagation report")
 
     return {
         "status": "passed",
         "rows_checked": len(fixture["rows"]),
-        "reports": [report.to_dict() for report in reports],
+        "reports": reports,
         "recipe_coverage": _propagation_recipe_coverage(),
     }
 

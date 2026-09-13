@@ -28,7 +28,9 @@ analysis = [
     "numpy>=1.26",
 ]
 inspect = [
-    "inspect-ai>=0.3",
+    # 0.3.241 is the first release where `@metric` takes `scores`, which the
+    # unreduced EAL metric needs. A lower floor installed and failed at import.
+    "inspect-ai>=0.3.241",
 ]
 
 # Lets `inspect score` and `inspect eval` resolve EAL's registered scorer, metric
