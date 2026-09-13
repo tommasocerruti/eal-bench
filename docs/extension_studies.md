@@ -302,6 +302,7 @@ Authorized use with the rule: 100% in the procurement open loop, 99 to 100% on t
 - Closed loop, first implementation: the write-back described the submitted request even when the executor ran the alternative; later rounds reused corpus timestamps while logs moved forward; the neutral control did not exist. Fixed as described in Section 3.
 - Generated corpus `generated_v1`: the stale count entered the random seed, so every other draw changed with it. Replaced by `generated_v2`.
 - Fidelity comparison (procurement, finance): a remembered `valid_from`/`valid_until` written without a timezone offset made the comparison with the offset-aware canonical value raise instead of scoring; Inkling writes such timestamps. Offset-less timestamps are now read as UTC (the corpus's zone) and equal instants count as exact. Paper-writer runs never hit it.
+- Runtime leakage gate, cybersecurity paper route: the corpus names its blocks `session-N` internally while the visible turn ids end in `_sN_mM`; DeepSeek V4.1 Flash summarizes turns as "session-N messages", which the gate matched as a hidden identifier and aborted the run after the writer phase. Nothing hidden was shown to the writer. `experiments.run --exempt-hidden-identifier '^session-\d+$'` declares those block names derivable and is recorded in the manifest; used only for that writer in that domain. GLM 5.2 wrote the same phrase in a cybersecurity mandate run, which the extension path does not gate.
 - Reasoning writers: see Section 5.
 
 ## 9. Examples worth reading
