@@ -41,6 +41,7 @@ INSPECT_ADAPTER_VERSION = "eal_bench.eval.inspect_adapter/v1"
 INSTALL_HINT = 'install the Inspect extra: pip install "eal-bench[inspect]"'
 
 _GENERATION_ERROR_KEY = "eal_generation_error"
+_RAW_ARGUMENTS_KEY = "eal_raw_tool_arguments"
 ATTACHMENT_PROTOCOL = "attachment://"
 _TRUTH_CACHE: dict[tuple[str, str | None, str | None], dict[str, TrialTruth]] = {}
 
@@ -355,9 +356,12 @@ def raw_tool_arguments(state: Any) -> dict[str, str]:
     there and score what the model actually emitted.
     """
 
-    events = [event for event in _model_events(state) if getattr(event, "call", None) is not None]
-    raw: dict[str, str] = {}
+    events, attachments = _model_transcript(state)
+    recorded = (getattr(state, "metadata", None) or {}).get(_RAW_ARGUMENTS_KEY, {})
+    raw = dict(recorded)
     for event in events:
+        if getattr(event, "call", None) is None:
+            continue
         for call in _payload_tool_calls(event.call.response):
             identifier = call.get("id")
             function = call.get("function") or {}
@@ -365,24 +369,37 @@ def raw_tool_arguments(state: Any) -> dict[str, str]:
             if not isinstance(identifier, str) or not isinstance(arguments, str):
                 continue
             if arguments.startswith(ATTACHMENT_PROTOCOL):
-                # A condensed saved log stores the payload elsewhere. Forwarding the
-                # reference made valid submissions score invalid, so fall back to the
-                # parsed arguments instead.
-                continue
+                arguments = attachments.get(arguments[len(ATTACHMENT_PROTOCOL):])
+                if arguments is None:
+                    arguments = raw.get(identifier)
+                if not isinstance(arguments, str):
+                    raise ValueError(
+                        "Original tool arguments are in an unresolved Inspect attachment. "
+                        "Load the saved log with resolve_attachments='full' before re-scoring."
+                    )
             raw[identifier] = arguments
     return raw
 
 
 def _model_events(state: Any) -> list[Any]:
-    from inspect_ai.log._transcript import ModelEvent, transcript
+    return _model_transcript(state)[0]
+
+
+def _model_transcript(state: Any) -> tuple[list[Any], Mapping[str, str]]:
+    from inspect_ai.event import ModelEvent
+    from inspect_ai.log import transcript
 
     try:
-        events = list(transcript().events)
+        current = transcript()
+        events = list(current.events)
+        attachments = getattr(current, "attachments", {})
     except Exception:
         events = []
+        attachments = {}
     if not events:
         events = list(getattr(state, "events", None) or [])
-    return [event for event in events if isinstance(event, ModelEvent)]
+        attachments = getattr(state, "attachments", None) or {}
+    return [event for event in events if isinstance(event, ModelEvent)], attachments
 
 
 def _payload_tool_calls(response: Any) -> list[dict[str, Any]]:
@@ -538,10 +555,14 @@ if available():
 
         async def solve(state: TaskState, generate: Generate) -> TaskState:
             try:
-                return await generate(state, tool_calls="none")
+                state = await generate(state, tool_calls="none")
             except Exception as exc:
                 state.metadata[_GENERATION_ERROR_KEY] = f"{type(exc).__name__}: {exc}"
                 return state
+            # Re-scoring may restore condensed events without their attachments.
+            # Keep the original strings in evaluator metadata while they are available.
+            state.metadata[_RAW_ARGUMENTS_KEY] = raw_tool_arguments(state)
+            return state
 
         return solve
 

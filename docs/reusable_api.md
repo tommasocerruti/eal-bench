@@ -262,10 +262,22 @@ Inspect is also more tolerant than EAL when parsing tool arguments: it repairs a
 trailed by stray quotes without setting `parse_error`, and the parsed `ToolCall` keeps no copy
 of the original text. The raw string does survive on `ModelEvent.call.response` for a provider
 that records its call, so the scorer recovers it from the transcript and scores what the model
-emitted. A condensed saved log stores the payload separately and yields an `attachment://`
-reference instead; that is never forwarded as arguments, because doing so scored valid
-submissions as invalid. Where the raw text is unavailable the parsed value is used, which is
-why outcomes stay tagged `surface="inspect"`.
+emitted. The adapter resolves `attachment://` references from the transcript and saves the
+original argument strings in evaluator-only sample metadata. This also preserves them for
+`inspect score` when Inspect restores events without their attachments. Providers that do
+not record a raw call still use the parsed value; outcomes stay tagged `surface="inspect"`.
+
+For older logs without the saved strings, an unresolved attachment raises an error. Load
+those logs with full attachment resolution before re-scoring:
+
+```python
+from inspect_ai import score
+from inspect_ai.log import read_eval_log
+from eal_bench.eval.inspect_adapter import eal_controls_scorer
+
+log = read_eval_log("logs/run.eval", resolve_attachments="full")
+rescored = score(log, eal_controls_scorer(), model="mockllm/model", action="overwrite")
+```
 
 ## Score a reply
 
@@ -353,6 +365,8 @@ Enforcing a declared capacity under the fallback would accept a memory the bound
 reject, so `require_calibration_tokenizer` raises `UncalibratedTokenizerError` rather than
 enforce an unsound limit. Warm the tiktoken cache, or pass `allow_uncalibrated_tokenizer=True`
 to build trials without enforcing that bound.
+
+Writer runs that enforce capacity perform the same check before invoking LangMem.
 
 The policy is resolved once per process, so the counter and the name it reports can never
 disagree, and the active tokenizer is part of `ResourceVersions`. A run counted with the
