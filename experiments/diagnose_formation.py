@@ -211,7 +211,7 @@ def judge_all(llm: LLM, targets: list[str], payload: dict[str, str], row: dict[s
     summary[row["consensus_cause"]] += 1
 
 
-def born_records(fh, domain, cases, presentation, chains, attempts, written_back, llm, target, summary, existing=None) -> int:
+def born_records(fh, domain, cases, presentation, chains, attempts, written_back, llm, target, summary, existing=None, run_name=None) -> int:
     """Closed loop: a record whose every cited source is one of the agent's own written-back lines."""
 
     def loop_ids(record):
@@ -246,7 +246,7 @@ def born_records(fh, domain, cases, presentation, chains, attempts, written_back
                     continue
                 block_attempts = attempts_at(attempts, mems, b, wb)
                 plan = "\n---\n".join(f"attempt {a['attempt_index']} ({a['status']}): {args_of(a).get('planned_edits', '')}" for a in block_attempts) or "(no attempt recorded)"
-                row = {"run": None, "domain": domain.domain_id, "case_id": case_id, "condition_id": condition, "writer": m["writer"]["target_id"], "chain_id": chain_id, "arm": arm,
+                row = {"run": run_name, "domain": domain.domain_id, "case_id": case_id, "condition_id": condition, "writer": m["writer"]["target_id"], "chain_id": chain_id, "arm": arm,
                        "failure": failure, "record_id": rid, "record": compact({"authorizations": [rec]}), "error_block": b, "loop_block": True,
                        "attempt_statuses": [a["status"] for a in block_attempts]}
                 if llm is not None:
@@ -387,7 +387,7 @@ def main(argv: list[str] | None = None) -> int:
                     if args.limit and n_rows >= args.limit:
                         break
                 if written_back:
-                    written += born_records(fh, domain, cases, presentation, chains, attempts, written_back, llm, targets, summary, existing)
+                    written += born_records(fh, domain, cases, presentation, chains, attempts, written_back, llm, targets, summary, existing, run_name=run.name)
             print(f"{run.name.split('__')[-1]}: {written} new failures ({len(existing)} already judged) -> {out_path}")
     print("\nby cause:", dict(summary.most_common()))
     return 0
