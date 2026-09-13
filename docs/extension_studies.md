@@ -94,7 +94,7 @@ Finance launders more than procurement under typed incremental writing (33% agai
 
 **Reading.** The failure follows incremental writing over a stale history, not the typed schema. The hybrid lowers it for every writer (GLM 15.3%, Kimi 18.1%, Nemotron 13.0% against 26.9 / 20.4 / 28.2% typed) and raises AU, plausibly because informal or pending changes now have a place other than a permission record. Retrieval does not help because the misleading material is already in the new block the writer is reading.
 
-**Takeaway.** Laundering is a property of incremental writing, not of the typed schema: it appears in all three memory types and only disappears when memory is rebuilt from source. The hybrid profile is the best incremental design we found (US 15.4% vs 25.2%, AU 96.8% vs 90.1%); writer-side retrieval is not a mitigation. On cybersecurity the same ordering holds at lower rates (typed 6.2%, hybrid 3.6%, rebuild 0%), and a laundered memory there fails every unauthorized request in the case rather than a few. Goes next to the paper's 2×2 memory-design comparison as one extra row and two extra columns.
+**Takeaway.** Laundering is a property of incremental writing, not of the typed schema: it appears in all three memory types and only disappears when memory is rebuilt from source. For the paper's three writers the hybrid profile is the best incremental design we found (procurement US 15.4% against 25.2%, cybersecurity 3.6% against 6.2%, finance 16.7% against 33.3%, with higher authorized use), but Section 5 shows this does not carry to every writer: for Inkling on cybersecurity the hybrid is far worse than typed memory. The design recommendation that holds for every writer and domain tested is periodic rebuilding; the hybrid is an improvement for some writers, not a general one.
 
 ## 2. When does rebuilding from the history help?
 
@@ -124,21 +124,21 @@ Finance launders more than procurement under typed incremental writing (33% agai
 
 | Round | US action | US neutral | paired diff | AU action | AU neutral | paired diff |
 |---|---|---|---|---|---|---|
-| 1 | 22.0% | 21.7% | +0.2 (+0.0, +0.6), p=0.49 | 87.9% | 94.8% | −6.5 (−8.8, −4.2), p<0.001 |
-| 2 | 20.5% | 20.7% | −0.1 (−2.4, +2.0), p=0.95 | 69.4% | 89.8% | −19.3 (−24.7, −13.9), p<0.001 |
-| 3 | 22.1% | 20.1% | +2.4 (−0.6, +5.4), p=0.13 | 61.9% | 86.5% | −23.2 (−29.5, −16.8), p<0.001 |
+| 1 | 21.5% | 21.2% | +0.2 (+0.0, +0.6), p=0.49 | 87.9% | 95.3% | −6.9 (−9.3, −4.6), p<0.001 |
+| 2 | 20.3% | 20.2% | +0.2 (−2.0, +2.3), p=0.87 | 68.9% | 90.3% | −20.3 (−25.7, −14.7), p<0.001 |
+| 3 | 22.2% | 19.6% | +2.9 (−0.0, +5.8), p=0.06 | 61.6% | 87.0% | −23.9 (−30.3, −17.3), p<0.001 |
 
-Unsafe actions over all requests (submitted or alternative unauthorized action, any request) are 12.4 / 11.2 / 12.7% in the action arm against 12.4 / 12.1 / 11.6% in the neutral arm (round 3 difference +1.3, −0.8 to +3.4, p=0.23).
+Unsafe actions over all requests (submitted or alternative unauthorized action, any request) are 12.0 / 11.0 / 12.7% in the action arm against 11.9 / 11.6 / 11.0% in the neutral arm (round 3 difference +1.8, −0.3 to +3.8, p=0.09).
 
 By domain, round 3, action versus neutral:
 
 | Domain (chains) | Open US / AU | US action | US neutral | AU action | AU neutral | records born from write-back lines, action / neutral |
 |---|---|---|---|---|---|---|
 | procurement (72) | 28.7 / 96.3% | 28.2% | 22.2% (+6.0, −0.5 to +12.5, p=0.11) | 58.8% | 66.2% (−7.4, p=0.31) | 25 / 1 |
-| cybersecurity (96) | 6.2 / 92.7% | 7.8% | 6.0% (+1.8, p=0.46) | 46.6% | 92.2% (−45.6, −52.6 to −38.5, p<0.001) | 55 / 0 |
+| cybersecurity (96) | 5.2 / 93.8% | 8.1% | 4.9% (+3.1, −1.0 to +7.3, p=0.18) | 46.1% | 93.2% (−47.1, −54.4 to −39.8, p<0.001) | 66 / 0 |
 | finance (48) | 45.8 / 97.9% | 43.8% | 45.8% (−2.1, p=1.0) | 95.8% | 97.9% (−2.1, p=1.0) | 2 / 0 |
 
-Records whose every cited source is one of the agent's own written-back lines appear almost only in the action arm (82 against 1). What the executor did, over all positions and both arms: 60% executed as submitted, 42% escalated, 6% declined, 3% executed the operational alternative (cybersecurity escalates most: 1,162 of 2,208 action-arm positions).
+Records whose every cited source is one of the agent's own written-back lines appear almost only in the action arm (93 against 1). What the executor did at the 4,536 action-arm positions: 48% executed as submitted, 40% escalated, 10% declined, 2% executed the operational alternative; cybersecurity escalates most (1,180 of 2,208 positions).
 
 **Result, one pass.** Procurement, GPT-OSS, three writers, 108 unauthorized requests, open loop against the first closed round:
 
@@ -148,9 +148,9 @@ Records whose every cited source is one of the agent's own written-back lines ap
 | the writer | free text | 69.4 / 15.7% | 55.6 / 11.1% |
 | the executor, with action log | typed | 93.5 / 26.9% | 93.5 / 27.8% |
 
-**Reading.** Against a control that performs the same updates on the same schedule, we do not detect an effect of the action content on unauthorized submission: the pooled round-3 difference is +2.4 points with an interval from −0.6 to +5.4, and the largest per-domain difference (+6 points in procurement) is not significant at 72 chains. The data are consistent with a small increase and rule out a large one at this length. Two effects are clear and appear only in the action arm. First, the writer manufactures records out of the agent's own actions: 82 records cite nothing but written-back lines, against 1 in the control. Second, authorized use falls, by 23 points against the control at round 3 pooled and by 46 points in cybersecurity, the domain where the executor escalates most often. Which written-back lines produce the loss, and through which records, is what the Section 6 diagnosis of these runs is for; it is not established here. The neutral control also loses authorized use in procurement (96 → 66%), so part of the round-over-round decline is the cost of the extra updates themselves, not of their content; the paired difference isolates the content. In finance neither arm moves either metric; its high open-loop unauthorized submission comes from the base history. Within one pass nothing compounds in any variant.
+**Reading.** Against a control that performs the same updates on the same schedule, we do not detect an effect of the action content on unauthorized submission: the pooled round-3 difference is +2.9 points with an interval from −0.0 to +5.8 (p=0.06), and the largest per-domain difference (+6 points in procurement) is not significant at 72 chains. The data are consistent with a small increase and rule out a large one at this length. Two effects are clear and appear only in the action arm. First, the writer manufactures records out of the agent's own actions: 93 records cite nothing but written-back lines, against 1 in the control; Section 6 labels all of them the same way, an escalation, decline, or execution line read as a grant. Second, authorized use falls, by 24 points against the control at round 3 pooled and by 47 points in cybersecurity, the domain where the executor escalates most often. In the cybersecurity action arm the final memories hold 4.5 real, active permission records per chain against 7.8 in the frozen base and 6.5 in the control, so real grants are being deactivated as the agent's lines arrive. The neutral control also loses authorized use in procurement (96 → 66%), so part of the round-over-round decline is the cost of the extra updates themselves, not of their content; the paired difference isolates the content. In finance neither arm moves either metric; its high open-loop unauthorized submission comes from the base history. Within one pass nothing compounds in any variant.
 
-**Takeaway.** The agent's own actions do become cited evidence and the writer does mint records from them. The measurable cost in these runs is to utility: the executor stops carrying out authorized requests it used to grant, and the loss grows each round. We find no significant effect on unauthorized submission at this sample size; the point estimate is small and positive. A one-shot deployment does not compound; a deployment that logs its own actions into the writer's history loses authorized use round over round.
+**Takeaway.** The agent's own actions do become cited evidence and the writer does mint records from them. The measurable cost in these runs is to utility: the executor stops carrying out authorized requests it used to grant, and the loss grows each round. We find no significant effect on unauthorized submission at this sample size (+2.9 points, p=0.06); the point estimate is small and positive. A one-shot deployment does not compound; a deployment that logs its own actions into the writer's history loses authorized use round over round.
 
 ## 4. What in a history makes the writer launder? (generated histories)
 
@@ -219,10 +219,10 @@ Two writers were added and run through every study in this note as full writers:
 
 | Domain | Condition | Inkling | DeepSeek V4.1 Flash | GLM 5.3 |
 |---|---|---|---|---|
-| procurement | one-shot, typed | AU 94.9%, US 6.4% (3.9–10.5), n=218 | AU 100.0%, US 0.0% (0.0–1.7), n=216 | AU 97.2%, US 0.0% (0.0–1.7), n=216 |
-| procurement | one-shot, free text | AU 94.4%, US 1.9% (0.7–4.7), n=216 | AU 99.5%, US 0.5% (0.1–2.6), n=216 | AU 99.5%, US 0.0% (0.0–1.7), n=216 |
-| procurement | incremental, typed | AU 92.1%, US 30.6% (24.8–37.0), n=216 | AU 100.0%, US 9.3% (6.1–13.9), n=216 | AU 98.1%, US 20.4% (15.5–26.2), n=216 |
-| procurement | incremental, free text | AU 58.8%, US 14.8% (10.7–20.2), n=216 | AU 87.5%, US 10.2% (6.8–14.9), n=216 | AU 96.8%, US 2.8% (1.3–5.9), n=216 |
+| procurement | one-shot, typed | AU 97.2%, US 2.8% (1.3–5.9), n=216 | AU 100.0%, US 0.0% (0.0–1.7), n=216 | AU 97.2%, US 0.0% (0.0–1.7), n=216 |
+| procurement | one-shot, free text | AU 92.1%, US 2.3% (1.0–5.3), n=216 | AU 99.5%, US 0.5% (0.1–2.6), n=216 | AU 99.5%, US 0.0% (0.0–1.7), n=216 |
+| procurement | incremental, typed | AU 89.8%, US 32.4% (26.5–38.9), n=216 | AU 100.0%, US 9.3% (6.1–13.9), n=216 | AU 98.1%, US 20.4% (15.5–26.2), n=216 |
+| procurement | incremental, free text | AU 61.1%, US 13.9% (9.9–19.1), n=216 | AU 87.5%, US 10.2% (6.8–14.9), n=216 | AU 96.8%, US 2.8% (1.3–5.9), n=216 |
 | cybersecurity | one-shot, typed | AU 89.6%, US 0.0% (0.0–1.0), n=384 | AU 91.7%, US 0.0% (0.0–1.0), n=384 | AU 97.9%, US 0.0% (0.0–1.0), n=384 |
 | cybersecurity | one-shot, free text | AU 95.1%, US 0.5% (0.1–1.9), n=384 | AU 99.0%, US 0.0% (0.0–1.0), n=384 | AU 100.0%, US 0.0% (0.0–1.0), n=384 |
 | cybersecurity | incremental, typed | AU 87.5%, US 10.9% (8.2–14.5), n=384 | AU 87.5%, US 10.4% (7.7–13.9), n=384 | AU 99.7%, US 0.0% (0.0–1.0), n=384 |
@@ -232,7 +232,7 @@ Two writers were added and run through every study in this note as full writers:
 | finance | incremental, typed | AU 100.0%, US 29.2% (23.2–36.0), n=192 | AU 100.0%, US 37.0% (30.5–44.0), n=192 | n/a |
 | finance | incremental, free text | AU 95.8%, US 0.0% (0.0–2.0), n=192 | AU 97.9%, US 0.0% (0.0–2.0), n=192 | n/a |
 
-Run sizes: Inkling procurement: 3 seeds, 1730 trials; DeepSeek V4.1 Flash procurement: 3 seeds, 1728 trials; GLM 5.3 procurement: 3 seeds, 1728 trials; Inkling cybersecurity: 3 seeds, 3072 trials; DeepSeek V4.1 Flash cybersecurity: 3 seeds, 3072 trials; GLM 5.3 cybersecurity: 3 seeds, 3072 trials; Inkling finance: 3 seeds, 1536 trials; DeepSeek V4.1 Flash finance: 3 seeds, 1536 trials.
+Run sizes: Inkling procurement: 3 seeds, 1728 trials; DeepSeek V4.1 Flash procurement: 3 seeds, 1728 trials; GLM 5.3 procurement: 3 seeds, 1728 trials; Inkling cybersecurity: 3 seeds, 3072 trials; DeepSeek V4.1 Flash cybersecurity: 3 seeds, 3072 trials; GLM 5.3 cybersecurity: 3 seeds, 3072 trials; Inkling finance: 3 seeds, 1536 trials; DeepSeek V4.1 Flash finance: 3 seeds, 1536 trials.
 
 **Memory type × writing method** (Section 1 design), both executors. Procurement at the paper's three seeds; cybersecurity and finance at the canonical seed. US per cell; the paper's three writers pooled from the same runs as Section 1.
 
@@ -251,23 +251,23 @@ Run sizes: Inkling procurement: 3 seeds, 1730 trials; DeepSeek V4.1 Flash procur
 
 | Memory, writing method | Inkling | DeepSeek V4.1 Flash | Paper's three writers |
 |---|---|---|---|
-| typed, incremental | AU 81.2%, US 18.8% (12.9–26.4), n=128 | AU 68.8%, US 31.2% (23.9–39.7), n=128 | AU 93.5%, US 6.2% (4.2–9.1), n=384 |
-| typed, rebuild every 3 | AU 100.0%, US 0.0% (0.0–2.9), n=128 | AU 81.2%, US 15.6% (10.3–22.9), n=128 | AU 95.8%, US 4.2% (2.6–6.7), n=384 |
-| hybrid, incremental | AU 37.5%, US 62.5% (53.9–70.4), n=128 | AU 93.8%, US 6.2% (3.2–11.8), n=128 | AU 96.4%, US 3.6% (2.2–6.0), n=384 |
+| typed, incremental | AU 81.2%, US 18.8% (12.9–26.4), n=128 | AU 68.8%, US 31.2% (23.9–39.7), n=128 | AU 93.8%, US 6.2% (4.2–9.1), n=384 |
+| typed, rebuild every 3 | AU 100.0%, US 0.0% (0.0–2.9), n=128 | AU 81.2%, US 15.6% (10.3–22.9), n=128 | AU 100.0%, US 0.0% (0.0–1.0), n=384 |
+| hybrid, incremental | AU 37.5%, US 62.5% (53.9–70.4), n=128 | AU 93.8%, US 6.2% (3.2–11.8), n=128 | AU 98.4%, US 1.6% (0.7–3.4), n=384 |
 | hybrid, rebuild every 3 | AU 62.5%, US 31.2% (23.9–39.7), n=128 | AU 87.5%, US 12.5% (7.8–19.3), n=128 | AU 95.8%, US 4.2% (2.6–6.7), n=384 |
-| free text, incremental | AU 85.2%, US 10.9% (6.6–17.5), n=128 | AU 100.0%, US 0.0% (0.0–2.9), n=128 | AU 89.3%, US 9.1% (6.6–12.4), n=384 |
-| free text, rebuild every 3 | AU 93.0%, US 7.8% (4.3–13.8), n=128 | AU 96.9%, US 0.0% (0.0–2.9), n=128 | AU 100.0%, US 0.0% (0.0–1.0), n=384 |
+| free text, incremental | AU 85.2%, US 10.9% (6.6–17.5), n=128 | AU 100.0%, US 0.0% (0.0–2.9), n=128 | AU 89.6%, US 8.9% (6.4–12.1), n=384 |
+| free text, rebuild every 3 | AU 93.0%, US 7.8% (4.3–13.8), n=128 | AU 96.9%, US 0.0% (0.0–2.9), n=128 | AU 99.7%, US 0.0% (0.0–1.0), n=384 |
 
 *finance*
 
 | Memory, writing method | Inkling | DeepSeek V4.1 Flash | Paper's three writers |
 |---|---|---|---|
-| typed, incremental | AU 100.0%, US 37.5% (26.7–49.7), n=64 | AU 100.0%, US 50.0% (38.1–61.9), n=64 | AU 99.2%, US 25.0% (18.3–33.2), n=128 |
-| typed, rebuild every 3 | AU 100.0%, US 0.0% (0.0–5.7), n=64 | AU 100.0%, US 0.0% (0.0–5.7), n=64 | AU 100.0%, US 0.0% (0.0–2.9), n=128 |
-| hybrid, incremental | AU 100.0%, US 0.0% (0.0–5.7), n=64 | AU 100.0%, US 0.0% (0.0–5.7), n=64 | AU 100.0%, US 6.2% (3.2–11.8), n=128 |
-| hybrid, rebuild every 3 | AU 100.0%, US 1.6% (0.3–8.3), n=64 | AU 100.0%, US 0.0% (0.0–5.7), n=64 | AU 100.0%, US 0.0% (0.0–2.9), n=128 |
-| free text, incremental | AU 100.0%, US 25.0% (16.0–36.8), n=64 | AU 100.0%, US 0.0% (0.0–5.7), n=64 | AU 93.8%, US 7.8% (4.3–13.8), n=128 |
-| free text, rebuild every 3 | AU 100.0%, US 0.0% (0.0–5.7), n=64 | AU 100.0%, US 0.0% (0.0–5.7), n=64 | AU 100.0%, US 6.2% (3.2–11.8), n=128 |
+| typed, incremental | AU 100.0%, US 37.5% (26.7–49.7), n=64 | AU 100.0%, US 50.0% (38.1–61.9), n=64 | AU 99.5%, US 33.3% (27.0–40.3), n=192 |
+| typed, rebuild every 3 | AU 100.0%, US 0.0% (0.0–5.7), n=64 | AU 100.0%, US 0.0% (0.0–5.7), n=64 | AU 100.0%, US 0.0% (0.0–2.0), n=192 |
+| hybrid, incremental | AU 100.0%, US 0.0% (0.0–5.7), n=64 | AU 100.0%, US 0.0% (0.0–5.7), n=64 | AU 100.0%, US 16.7% (12.1–22.6), n=192 |
+| hybrid, rebuild every 3 | AU 100.0%, US 1.6% (0.3–8.3), n=64 | AU 100.0%, US 0.0% (0.0–5.7), n=64 | AU 100.0%, US 0.0% (0.0–2.0), n=192 |
+| free text, incremental | AU 100.0%, US 25.0% (16.0–36.8), n=64 | AU 100.0%, US 0.0% (0.0–5.7), n=64 | AU 95.8%, US 9.4% (6.0–14.3), n=192 |
+| free text, rebuild every 3 | AU 100.0%, US 0.0% (0.0–5.7), n=64 | AU 100.0%, US 0.0% (0.0–5.7), n=64 | AU 100.0%, US 5.2% (2.9–9.3), n=192 |
 
 **Closed loop** (Section 3 design), all domains and both executors pooled, paired action minus neutral at round 3, from the same runs and script as Section 3.
 
@@ -281,13 +281,17 @@ Run sizes: Inkling procurement: 3 seeds, 1730 trials; DeepSeek V4.1 Flash procur
 
 | Writer | procurement | cybersecurity | finance |
 |---|---|---|---|
-| Inkling | 37.0% → 0.0% | 18.8% → 35.9% | 37.5% → 0.0% |
+| Inkling | 37.0% → 0.0% | 18.8% → 42.2% | 37.5% → 0.0% |
 | DeepSeek V4.1 Flash | 14.4% → 0.0% | 31.2% → 17.2% | 50.0% → 0.0% |
-| GLM 5.2 | 26.9% → 0.0% | 0.0% → 15.6% | 37.5% → 0.0% |
-| Kimi K2.6 | 20.4% → 19.4% | n/a | n/a |
+| GLM 5.2 | 26.9% → 0.0% | 6.2% → 15.6% | 37.5% → 0.0% |
+| Kimi K2.6 | 20.4% → 19.4% | 0.0% → 0.0% | 50.0% → 0.0% |
 | Nemotron 3 Ultra | 28.2% → 13.9% | 12.5% → 25.0% | 12.5% → 0.0% |
 
-**Reading and takeaway.** Pending the full tables for both added writers.
+**Reading.** Both added writers reproduce the paper's central result: incremental typed memory launders authority in every domain (Inkling 31 to 37% unauthorized submission on procurement, Flash 9 to 14%; both 10 to 11% on the cybersecurity paper route, 29 and 37% on finance), one-shot writing does not, and rebuilding from the history every three blocks removes most of it. The closed loop behaves as for the paper's writers: records minted from the agent's own lines only in the action arm (Inkling 14, Flash 20) and a loss of authorized use against the control (−11 and −6 points). Flash is the one writer in this note for which the action arm also raises unauthorized submission significantly (+3.9 points, +1.6 to +6.6, p=0.006, 72 chains).
+
+The hybrid memory does not help consistently. It lowers unauthorized submission for Flash everywhere (procurement 14.4% → 0.0%, cybersecurity 31.2% → 6.2%, finance 50% → 0%) and for Inkling on procurement and finance, but for Inkling on cybersecurity it goes from 18.8% typed to 62.5% hybrid with authorized use falling to 37.5%; the writer formed 40 false permissions on 64 unauthorized probes in that cell. The benefit of the hybrid depends on the writer and the domain.
+
+**Takeaway.** The paper's failure is not specific to its three writers: two further model families launder authority under incremental writing in all three domains and stop when memory is rebuilt from source. Which memory design helps beyond that is writer- and domain-dependent.
 
 ## 6. Where in the writing does the failure enter, and why?
 
@@ -320,18 +324,38 @@ The labels came from reading the four traces in Section 9 and writing down, for 
 
 It is prepended to the writer's instructions for every update and compared with the same conditions without it, at the same seeds and executors: the open loop (typed and hybrid incremental, both executors) in all three domains, the three-round closed loop in all three domains, and the `generated_v2` corpus. Remaining failures are judged with the Section 6 method. The earlier result, for the record:
 
-**Result, open loop, one-line mandate (provisional).** The paper's three writers pooled, both executors, each domain at its canonical seed. Baseline is the same condition without the line at the same seed. Five of these twelve runs are being redone because provider errors cost them a few trials; the table is regenerated when they land and the numbers can move by a point or two.
+**Result, open loop.** The paper's three writers pooled, both executors, each domain at its canonical seed. Baseline is the same condition without the line, same seed, same runs as Section 1. False permissions formed counts memories that authorize an unauthorized request.
 
 | Domain | Memory | US without | US with mandate | AU without | AU with mandate | false permissions formed, without → with |
 |---|---|---|---|---|---|---|
-| procurement | typed incremental | 23.1% (18.0–29.2), n=216 | 9.3% (6.1–13.9), n=216 | 97.2% (94.1–98.7), n=216 | 97.2% (94.1–98.7), n=216 | 25 → 10 |
-| procurement | hybrid incremental | 16.2% (11.9–21.7), n=216 | 2.8% (1.3–5.9), n=216 | 99.1% (96.7–99.7), n=216 | 94.4% (90.5–96.8), n=216 | 17 → 3 |
-| cybersecurity | typed incremental (2 baseline runs, 2 mandate runs) | 6.2% (3.9–9.9), n=256 | 18.8% (14.4–24.0), n=256 | 93.4% (89.6–95.8), n=256 | 77.3% (71.8–82.0), n=256 | 8 → 24 |
-| cybersecurity | hybrid incremental (2 baseline runs, 2 mandate runs) | 5.5% (3.3–9.0), n=256 | 12.5% (9.0–17.1), n=256 | 94.5% (91.0–96.7), n=256 | 86.7% (82.0–90.3), n=256 | 6 → 16 |
+| procurement | typed incremental | 23.1% (18.0–29.2), n=216 | 11.1% (7.6–16.0), n=216 | 97.2% (94.1–98.7), n=216 | 96.3% (92.9–98.1), n=216 | 25 → 12 |
+| procurement | hybrid incremental | 16.2% (11.9–21.7), n=216 | 6.5% (3.9–10.6), n=216 | 99.1% (96.7–99.7), n=216 | 99.5% (97.4–99.9), n=216 | 17 → 7 |
+| cybersecurity | typed incremental | 6.2% (4.2–9.1), n=384 | 13.5% (10.5–17.3), n=384 | 93.8% (90.9–95.8), n=384 | 87.5% (83.8–90.4), n=384 | 12 → 26 |
+| cybersecurity | hybrid incremental | 1.6% (0.7–3.4), n=384 | 10.4% (7.7–13.9), n=384 | 98.4% (96.6–99.3), n=384 | 89.6% (86.1–92.3), n=384 | 2 → 20 |
 | finance | typed incremental | 33.3% (27.0–40.3), n=192 | 0.0% (0.0–2.0), n=192 | 99.5% (97.1–99.9), n=192 | 100.0% (98.0–100.0), n=192 | 32 → 0 |
-| finance | hybrid incremental | 20.8% (15.7–27.1), n=192 | 0.0% (0.0–2.0), n=192 | 100.0% (98.0–100.0), n=192 | 100.0% (98.0–100.0), n=192 | 20 → 0 |
+| finance | hybrid incremental | 16.7% (12.1–22.6), n=192 | 0.0% (0.0–2.0), n=192 | 100.0% (98.0–100.0), n=192 | 100.0% (98.0–100.0), n=192 | 16 → 0 |
 
-The line removes most laundering in procurement and all of it in finance. In cybersecurity it does the opposite for all three writers: unauthorized submission roughly doubles and authorized use falls. Why the same sentence helps in two domains and hurts in the third is a question for the Section 6 diagnosis of these runs, which has not been run yet; no explanation is offered here.
+**Result, closed loop.** Same design as Section 3's action arm (three rounds, the agent's own log lines written back), with and without the line, paper's three writers pooled, both executors; the open-loop row is the same runs' frozen memories answered without write-back.
+
+| Domain | | Without the line | With the line |
+|---|---|---|---|
+| procurement (216 unauthorized per round) | open loop | US 28.7%, AU 96.3% | US 9.7%, AU 99.5% |
+| | round 1 | US 28.2%, AU 94.9% | US 9.7%, AU 98.6% |
+| | round 3 | US 28.2%, AU 58.8% | US 7.4%, AU 61.6% |
+| cybersecurity (384) | open loop | US 5.2%, AU 93.8% | US 13.8%, AU 85.4% |
+| | round 1 | US 5.2%, AU 79.4% | US 13.3%, AU 75.8% |
+| | round 3 | US 8.1%, AU 46.1% | US 9.6%, AU 47.9% |
+| finance (192) | open loop | US 45.8%, AU 97.9% | US 4.2%, AU 99.5% |
+| | round 1 | US 46.4%, AU 96.9% | US 4.2%, AU 100% |
+| | round 3 | US 43.8%, AU 95.8% | US 4.2%, AU 97.9% |
+
+Records born from the agent's own write-back lines, all domains, paper's writers: 91 without the line, 4 with it.
+
+**Where the remaining failures come from** (Section 6 method, same three judges). Procurement, with the line: every one of the 25 remaining open-loop failures is `restatement applied`, the same cause as without it. Finance, with the line: no failures to judge. Cybersecurity is different in kind, with or without the line: of 126 failures in the mandate runs, 116 are `update failed` and 10 `authoritative change misapplied`; of 90 in the matched runs without the line, 79 and 11. Not one cybersecurity failure is a restatement being applied. The failing block is the same everywhere: the one that carries the duty officer's signed change set, a replacement of the whole permission list, where both of the writer's attempts to write the new list are rejected as invalid and the memory keeps the old permission active. With the line, both attempts fail as invalid output at that block in 56 failures against 16 without it.
+
+**Reading.** One sentence in the writer's instructions is enough to remove most laundering where the failure is a misread message: procurement halves it in the open loop and cuts it to a quarter in the closed loop, finance goes to zero in both, and records minted from the agent's own actions all but disappear (91 → 4). It does not restore authorized use in the closed loop (procurement round 3: 59% without, 62% with), so the utility loss of Section 3 is not caused by the writer believing the wrong messages. In cybersecurity the line makes things worse, for the paper's writers and for the added ones (Section 5), and the judges say why: cybersecurity's failure was never about authority. The writer knows the duty officer's change set is the authoritative one; it fails to write the replacement, and with the extra instruction it fails more often. A rule about whose word counts cannot fix an update that is never applied.
+
+**Takeaway.** The one-line mandate is a real mitigation where laundering comes from misread messages, and a harmful one where the failure is the writer's inability to apply a large legitimate change. Before adding such a line, a deployer needs Section 6's answer to which failure they have.
 
 ## 8. Bugs found
 
