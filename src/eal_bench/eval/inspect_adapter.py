@@ -207,7 +207,11 @@ def _request_hash(trial: Trial, surface: Mapping[str, Any]) -> str:
     return content_hash(_request_shape(trial.messages, tools, trial.tool_choice))
 
 
-def to_samples(pairs: Sequence[tuple[Trial, TrialTruth]], track: str = "controls") -> list[Any]:
+def to_samples(
+    pairs: Sequence[tuple[Trial, TrialTruth]],
+    track: str = "controls",
+    variants: str = "generated",
+) -> list[Any]:
     """One Inspect sample per trial. Truth stays in metadata, never in the input."""
 
     _require_inspect()
@@ -231,6 +235,7 @@ def to_samples(pairs: Sequence[tuple[Trial, TrialTruth]], track: str = "controls
                 "presentation_id": trial.resources.presentation_id,
                 "inspect_adapter_version": INSPECT_ADAPTER_VERSION,
                 "eal_track": track,
+                "eal_variants": variants,
                 "tool_surface_hash": surface_hash,
                 "request_hash": _request_hash(trial, surface),
             },
@@ -273,6 +278,14 @@ def response_from_inspect(
         finish_reason=output.stop_reason,
         model=str(getattr(output, "model", "") or "") or None,
     )
+
+
+_SUPPLIED_TRUTHS: dict[str, TrialTruth] = {}
+
+
+def _register_supplied_truths(pairs: Sequence[tuple[Trial, TrialTruth]]) -> None:
+    for _, truth in pairs:
+        _SUPPLIED_TRUTHS[truth.trial_id] = truth
 
 
 def _truths_for(
@@ -355,12 +368,20 @@ def _truth_for_state(state: Any) -> TrialTruth:
         str(metadata.get("eal_track") or "controls"),
     )
     trial_id = str(state.sample_id)
-    if trial_id not in truths:
+    if trial_id in truths:
+        return truths[trial_id]
+    if trial_id in _SUPPLIED_TRUTHS:
+        return _SUPPLIED_TRUTHS[trial_id]
+    if (metadata.get("eal_variants") or "generated") != "generated":
         raise ValueError(
-            f"sample {trial_id!r} no longer builds for domain {domain_id!r}; "
-            "the corpus or presentation has changed"
+            f"sample {trial_id!r} used caller-supplied memories, which cannot be "
+            "rebuilt from the repository. Re-score in the process that built the "
+            "task, or score directly with eal_bench.eval.score_response."
         )
-    return truths[trial_id]
+    raise ValueError(
+        f"sample {trial_id!r} no longer builds for domain {domain_id!r}; "
+        "the corpus or presentation has changed"
+    )
 
 
 def raw_tool_arguments(state: Any) -> dict[str, str]:
@@ -621,9 +642,19 @@ def propagation_task(
     )
     if not pairs:
         raise ValueError(f"no propagation trials for domain {domain_id!r}")
+    # Caller-supplied memories cannot be rebuilt from the repository, so register
+    # them for the scorer. This survives `inspect score` in the same process; a
+    # different process gets a clear error rather than a confusing "no longer
+    # builds".
+    if build_kwargs.get("variants") is not None:
+        _register_supplied_truths(pairs)
     tools = to_tool_defs(list(pairs[0][0].tools))
     return Task(
-        dataset=to_samples(pairs, track="propagation"),
+        dataset=to_samples(
+            pairs,
+            track="propagation",
+            variants=("supplied" if build_kwargs.get("variants") is not None else "generated"),
+        ),
         solver=[use_tools(tools, tool_choice="auto"), eal_generate()],
         scorer=eal_controls_scorer(),
         name=f"eal_propagation_{domain_id}",

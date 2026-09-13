@@ -1767,15 +1767,18 @@ def build_propagation_fixture() -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
     for domain_id in eval_resources.list_domains():
         domain = eval_resources.load_domain(domain_id)
+        first_case = domain.corpus.case_id(
+            domain.corpus.load_cases(domain.corpus.default_version)[0]
+        )
         pairs = build_propagation_trials(
-            domain_id, check_leakage=False, allow_uncalibrated_tokenizer=True
+            domain_id,
+            case_ids=[first_case],
+            check_leakage=False,
+            allow_uncalibrated_tokenizer=True,
         )
         action = domain.action_tools[0]
         decline = [name for name in domain.terminal_tools if name not in domain.action_tools][-1]
-        first_case = pairs[0][1].case_id
         for trial, truth in pairs:
-            if truth.case_id != first_case:
-                continue
             # An executor that acts on whatever its memory grants.
             grants = not truth.condition_id.startswith("faithful")
             name = action if grants else decline
@@ -1800,7 +1803,6 @@ def verify_propagation() -> dict[str, Any]:
     from ..propagation import (
         ALTERED,
         WRITER,
-        altered_memories,
         build_propagation_trials,
         propagation_summary,
     )
@@ -1817,7 +1819,10 @@ def verify_propagation() -> dict[str, Any]:
             truths[domain_id] = {
                 truth.trial_id: truth
                 for _, truth in build_propagation_trials(
-                    domain_id, check_leakage=False, allow_uncalibrated_tokenizer=True
+                    domain_id,
+                    case_ids=[_first_case_id(domain_id)],
+                    check_leakage=False,
+                    allow_uncalibrated_tokenizer=True,
                 )
             }
         truth = truths[domain_id].get(row["trial_id"])
@@ -1854,16 +1859,47 @@ def verify_propagation() -> dict[str, Any]:
                 f"{report.origin}: the scripted executor did not act on every erroneous memory"
             )
 
-    # Formation is decided from the memory alone, before any executor runs.
-    forming = altered_memories("procurement")
-    if not forming or any(not item.forms_false_authority for item in forming):
-        raise AssertionError("altered_memories returned a non-forming variant")
-    if any(item.demonstrates_writing_failure for item in forming):
-        raise AssertionError("an altered memory claimed to demonstrate a writing failure")
-
     return {
         "status": "passed",
         "rows_checked": len(fixture["rows"]),
         "reports": [report.to_dict() for report in reports],
-        "forming_variants_checked": len(forming),
+        "recipe_coverage": _propagation_recipe_coverage(),
     }
+
+
+def _first_case_id(domain_id: str) -> str:
+    domain = eval_resources.load_domain(domain_id)
+    return domain.corpus.case_id(domain.corpus.load_cases(domain.corpus.default_version)[0])
+
+
+def _propagation_recipe_coverage() -> dict[str, dict[str, int]]:
+    """How many forming variants each recipe family contributes, per domain.
+
+    A recipe that forms nothing adds nothing to the diagnostic, and that was
+    invisible while non-forming variants were simply dropped. Widening formed on
+    procurement alone until it drew its values from the actual requests.
+    """
+
+    from ..propagation import altered_memories
+
+    coverage: dict[str, dict[str, int]] = {}
+    for domain_id in eval_resources.list_domains():
+        counts: dict[str, int] = {}
+        for item in altered_memories(domain_id, case_ids=[_first_case_id(domain_id)]):
+            if not item.forms_false_authority:
+                raise AssertionError("altered_memories returned a non-forming variant")
+            if item.demonstrates_writing_failure:
+                raise AssertionError("an altered memory claimed a writing failure")
+            family = item.recipe.split("_record_")[0].rsplit("_block_", 1)[0]
+            counts[family] = counts.get(family, 0) + 1
+        # Widening formed on procurement alone until it drew its values from the
+        # actual requests, and that was invisible because non-forming variants are
+        # dropped. Whether a given case has a forming stale state is a property of
+        # that case, so only widening is asserted; the rest is reported.
+        if not any(name.startswith("widened") for name in counts):
+            raise AssertionError(
+                f"{domain_id}: no widened variant forms, so that recipe adds "
+                "nothing to the diagnostic"
+            )
+        coverage[domain_id] = dict(sorted(counts.items()))
+    return coverage

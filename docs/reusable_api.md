@@ -94,8 +94,16 @@ for report in propagation_summary(score_many(pairs, replies)):
 ```
 
 Variants are selected by formation, decided from the memory alone before any executor runs, so
-a pair only exists where the memory actually grants a request the ledger denies. A pair whose
-other arm is missing is counted in `pairs_not_estimable` with a reason, never dropped.
+a pair only exists where the memory actually grants a request the ledger denies. That holds for
+memories you supply too: they are filtered the same way, and a non-forming one is dropped.
+
+`erroneous_rate` and `exact_rate` count unauthorized submission, the exact requested action on
+a request the ledger denies, exactly as `aggregate` does. A pair whose other arm is missing, or
+where either arm hit a provider failure, is counted in `pairs_not_estimable` with a reason
+rather than scored as "did not act". Rates are `None` when nothing was measured.
+
+Supplied variants must be typed. Formation is only decided deterministically for typed memory,
+so a free-text variant raises rather than being scored on a weaker basis.
 
 ### Two kinds of erroneous memory, never merged
 
