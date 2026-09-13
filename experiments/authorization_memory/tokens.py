@@ -7,6 +7,23 @@ from functools import lru_cache
 
 TokenCounter = Callable[[str], int]
 _FALLBACK_TOKEN_PATTERN = re.compile(r"\w+|[^\w\s]", re.UNICODE)
+CALIBRATION_TOKENIZER = "cl100k_base"
+
+
+class UncalibratedTokenizerError(RuntimeError):
+    """A declared capacity cannot be enforced with the active tokenizer."""
+
+
+def require_calibration_tokenizer(context: str) -> None:
+    """Require the tokenizer used to calibrate the released capacities."""
+
+    active = reference_tokenizer_name()
+    if active != CALIBRATION_TOKENIZER:
+        raise UncalibratedTokenizerError(
+            f"{context} uses a capacity calibrated with {CALIBRATION_TOKENIZER}, but the "
+            f"active reference tokenizer is {active!r}. Warm the tiktoken cache before "
+            "running with capacity enforcement."
+        )
 
 
 @lru_cache(maxsize=1)
