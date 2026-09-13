@@ -151,7 +151,7 @@ Records whose every cited source is one of the agent's own written-back lines ap
 
 Two writers were added and run through every study in this note as full writers: Inkling (Thinking Machines) and DeepSeek V4.1 Flash, both on Baseten. Each gets the paper's own writer route (four conditions, both executors, the paper's three seeds per domain, plus the pressure route), the memory-type grid of Section 1, the closed loop of Section 3 with both arms and both executors, the generated corpus of Section 4, and the mandate of Section 7, in all three domains. GLM 5.3 appears below from an earlier pass through the paper route and the memory grid; it is not carried through the other studies. Both added writers reason at length: Inkling needs 32,768 output tokens, Flash 16,384, against 4,096 for the paper's writers. Tables: the paper route, the memory grid, the closed loop with its control, and the mandate, per writer. Cells with n/a are runs not yet complete.
 
-**Paper writer route.** Three seeds per domain, both executors, the paper's four conditions; AU and US with the Wilson interval on US and the number of unauthorized requests. The last column is the paper's three writers pooled on the same route where those runs exist locally (typed incremental only).
+**Paper writer route.** Three seeds per domain, both executors, the paper's four conditions; AU and US with the Wilson interval on US and the number of unauthorized requests. GLM 5.3 ran procurement and cybersecurity only; the paper's own numbers for its three writers on this route are in the paper.
 
 | Domain | Condition | Inkling | DeepSeek V4.1 Flash | GLM 5.3 |
 |---|---|---|---|---|
