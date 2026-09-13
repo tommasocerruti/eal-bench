@@ -117,7 +117,7 @@ def verify() -> dict[str, Any]:
     }
 
 
-_TRACK_MODULES = ("controls", "preservation")
+_TRACK_MODULES = ("controls", "preservation", "propagation")
 
 
 def _optional_track_checks() -> dict[str, Any]:
@@ -1747,3 +1747,123 @@ def verify_writer_run() -> dict[str, Any]:
                 )
         ran += 1
     return {"status": "passed", "conditions_run": ran}
+
+
+def _propagation_fixture_path() -> str:
+    return "propagation_outcomes.json"
+
+
+def build_propagation_fixture() -> dict[str, Any]:
+    """Recorded replies for one matched replay per domain, both arms.
+
+    The erroneous arm grants the request and the exact arm does not, which is the
+    comparison the track exists to make.
+    """
+
+    from ..propagation import build_propagation_trials
+    from ..scoring import score_response
+    from ..trials import ModelResponse
+
+    rows: list[dict[str, Any]] = []
+    for domain_id in eval_resources.list_domains():
+        domain = eval_resources.load_domain(domain_id)
+        pairs = build_propagation_trials(
+            domain_id, check_leakage=False, allow_uncalibrated_tokenizer=True
+        )
+        action = domain.action_tools[0]
+        decline = [name for name in domain.terminal_tools if name not in domain.action_tools][-1]
+        first_case = pairs[0][1].case_id
+        for trial, truth in pairs:
+            if truth.case_id != first_case:
+                continue
+            # An executor that acts on whatever its memory grants.
+            grants = not truth.condition_id.startswith("faithful")
+            name = action if grants else decline
+            response = ModelResponse.from_tool_calls(
+                [(name, domain.conformance.action_arguments(truth.probe.request, name))]
+            )
+            rows.append(
+                {
+                    "domain_id": domain_id,
+                    "trial_id": trial.trial_id,
+                    "condition_id": truth.condition_id,
+                    "response": response.to_dict(),
+                    "expected": score_response(truth, response).to_dict(),
+                }
+            )
+    return {"schema_version": 1, "rows": rows}
+
+
+def verify_propagation() -> dict[str, Any]:
+    """Re-score every recorded reply and re-derive the matched comparison."""
+
+    from ..propagation import (
+        ALTERED,
+        WRITER,
+        altered_memories,
+        build_propagation_trials,
+        propagation_summary,
+    )
+    from ..scoring import score_response
+    from ..trials import ModelResponse
+
+    fixture = load_fixture(_propagation_fixture_path())
+    truths: dict[str, dict[str, Any]] = {}
+    mismatches: list[dict[str, Any]] = []
+    outcomes = []
+    for row in fixture["rows"]:
+        domain_id = row["domain_id"]
+        if domain_id not in truths:
+            truths[domain_id] = {
+                truth.trial_id: truth
+                for _, truth in build_propagation_trials(
+                    domain_id, check_leakage=False, allow_uncalibrated_tokenizer=True
+                )
+            }
+        truth = truths[domain_id].get(row["trial_id"])
+        if truth is None:
+            mismatches.append({"trial_id": row["trial_id"], "reason": "not built"})
+            continue
+        observed = score_response(truth, ModelResponse.from_dict(row["response"])).to_dict()
+        expected = _with_live_resource_key(row["expected"], domain_id)
+        if observed != expected:
+            mismatches.append(
+                {
+                    "trial_id": row["trial_id"],
+                    "fields": _differing_keys(observed, expected),
+                }
+            )
+        outcomes.append(score_response(truth, ModelResponse.from_dict(row["response"])))
+    if mismatches:
+        raise AssertionError(f"propagation outcomes drifted: {mismatches}")
+
+    reports = propagation_summary(outcomes)
+    if not reports:
+        raise AssertionError("the matched comparison produced no report")
+    for report in reports:
+        if report.origin == ALTERED and report.demonstrates_writing_failure:
+            raise AssertionError("an altered memory was labelled a writing failure")
+        if report.origin == WRITER and not report.demonstrates_writing_failure:
+            raise AssertionError("a writer memory was not labelled a writing failure")
+        if report.pairs_complete and report.exact_rate != 0.0:
+            raise AssertionError(
+                f"{report.origin}: exact memory still produced unauthorized action"
+            )
+        if report.pairs_complete and report.erroneous_rate != 1.0:
+            raise AssertionError(
+                f"{report.origin}: the scripted executor did not act on every erroneous memory"
+            )
+
+    # Formation is decided from the memory alone, before any executor runs.
+    forming = altered_memories("procurement")
+    if not forming or any(not item.forms_false_authority for item in forming):
+        raise AssertionError("altered_memories returned a non-forming variant")
+    if any(item.demonstrates_writing_failure for item in forming):
+        raise AssertionError("an altered memory claimed to demonstrate a writing failure")
+
+    return {
+        "status": "passed",
+        "rows_checked": len(fixture["rows"]),
+        "reports": [report.to_dict() for report in reports],
+        "forming_variants_checked": len(forming),
+    }

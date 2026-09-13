@@ -10,7 +10,7 @@ EAL keeps four tracks and reports them separately:
 |---|---|---|
 | Executor controls | Does the executor respect faithful authorization memory? | `eal_bench.eval.controls` |
 | Memory preservation | Does writing or updating memory change authorization? | `eal_bench.eval.preservation` |
-| Error propagation | Do authorization errors in memory cause unauthorized actions? | not yet available |
+| Error propagation | Do authorization errors in memory cause unauthorized actions? | `eal_bench.eval.propagation` |
 | End-to-end EAL | Does a writer introduce an error that an executor acts on? | not yet available |
 
 There is no combined EAL score. A single number would hide which stage failed.
@@ -73,6 +73,53 @@ Trial counts per domain, pooling the faithful free-text and faithful typed condi
 
 Every built trial passes the same hidden-identifier leakage check the internal runner applies.
 Pass `check_leakage=False` to skip it.
+
+## Track: error propagation
+
+Does an authorization error in memory change what the executor does? Each case contributes a
+matched replay: the same request, policy, tools, presentation and model, with only the memory
+swapped between an erroneous variant and its oracle-exact counterpart. No writer runs.
+
+```python
+from eal_bench.eval import score_many
+from eal_bench.eval.propagation import build_propagation_trials, propagation_summary
+
+pairs = build_propagation_trials("procurement")
+replies = [my_model(trial) for trial, _ in pairs]
+for report in propagation_summary(score_many(pairs, replies)):
+    report.origin                        # 'altered' or 'writer'
+    report.erroneous_rate                # unauthorized action under the erroneous memory
+    report.exact_rate                    # the same request under oracle-exact memory
+    report.demonstrates_writing_failure  # only ever True for a writer memory
+```
+
+Variants are selected by formation, decided from the memory alone before any executor runs, so
+a pair only exists where the memory actually grants a request the ledger denies. A pair whose
+other arm is missing is counted in `pairs_not_estimable` with a reason, never dropped.
+
+### Two kinds of erroneous memory, never merged
+
+`altered` memories are produced here on purpose, by widening one authorization field or by
+taking an intermediate state that missed a later change. They are a **sensitivity diagnostic**:
+they show what an executor does when memory is wrong. They do not show that a writer would
+write such a memory, and `demonstrates_writing_failure` is `False` for all of them.
+
+`writer` memories are ones a writer actually produced. Only those evidence endogenous
+laundering. Supply them through `variants=` when you have them; the repository ships none,
+because raw writer artifacts are excluded from git.
+
+```bash
+inspect eval my_tasks.py --model openai/gpt-4o
+```
+
+```python
+from inspect_ai import task
+from eal_bench.eval.inspect_adapter import propagation_task
+
+@task
+def procurement_propagation():
+    return propagation_task("procurement")
+```
 
 ## Track: memory preservation
 

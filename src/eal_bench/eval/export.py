@@ -24,7 +24,7 @@ __all__ = [
 ]
 
 EXPORT_SCHEMA_VERSION = 1
-TRACKS = ("controls",)
+TRACKS = ("controls", "propagation")
 
 
 def build_track(track: str, domain_id: str, **kwargs: Any) -> list[tuple[Trial, TrialTruth]]:
@@ -32,6 +32,10 @@ def build_track(track: str, domain_id: str, **kwargs: Any) -> list[tuple[Trial, 
         from .controls import build_control_trials
 
         return build_control_trials(domain_id, **kwargs)
+    if track == "propagation":
+        from .propagation import build_propagation_trials
+
+        return build_propagation_trials(domain_id, **kwargs)
     raise ValueError(f"unknown track {track!r}; available: {', '.join(TRACKS)}")
 
 
