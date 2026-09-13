@@ -25,7 +25,7 @@ All studies run on the paper's three writers (GLM 5.2, Kimi K2.6, Nemotron 3 Ult
 | 1. memory type × writing method | three seeds (typed, hybrid), one seed (full grid with retrieval) | one seed (typed, free text, hybrid × incremental, rebuild) | one seed (typed, free text, hybrid × incremental, rebuild); table pending |
 | 2. rebuild timing | yes | no | no |
 | 3. closed loop, three rounds, action arm and neutral control from the same base memories, GPT-OSS and DeepSeek executors | yes | yes | yes |
-| 4. generated histories | `generated_v2`, three writers; table pending | no | no |
+| 4. generated histories | `generated_v2`, three writers and both added writers, with and without the mandate | no | no |
 | 5. additional writers (Inkling, DeepSeek V4.1 Flash) | every study in this note | every study in this note | every study in this note |
 | 6. root-cause diagnosis (four labels, versioned output) | every failure in 1, 3, 4, 5 and 7 | every failure in 1, 3, 5 and 7 | every failure in 1, 3 and 7 |
 | 7. one-line mandate | open loop, closed loop, generated corpus | open loop, closed loop | open loop, closed loop |
@@ -145,7 +145,58 @@ Records whose every cited source is one of the agent's own written-back lines ap
 
 **What we ran.** `domains/procurement/generate_cases.py` builds 108 procurement cases in the existing format (corpus `generated_v2`, validated with the same linter as the paper's corpora) from four themes, crossing: **gap** (blocks between the grant and its change: 1, 2, 3), **lifecycle** (amendment of the grant versus revoke-and-replace), **stale restatements** after the change (0, 2, 4 messages that repeat the old figure), and whether the revocation is **explicit or implied**. Within a group (same theme, lifecycle, gap, implicit flag, and index) the three stale levels share every turn, the padding, the dates, and the probes, and differ only in the spliced restatements, so the stale-restatement comparison changes one thing at a time; this holds for all 36 groups. Typed incremental memory, the paper's three writers and the two added writers, GPT-OSS executor, with and without the Section 7 mandate.
 
-**Result.** Pending: the runs are complete and the table is generated after the integrity reruns finish.
+**Result, the paper's three writers pooled.** GPT-OSS executor; 324 unauthorized requests per stale level (108 memories). P(F) is the share of unauthorized requests the final memory authorizes; an exact memory matches the ledger on every record.
+
+By stale restatements after the change:
+
+| stale | memories | P(F) | exact memories | US | AU |
+|---|---|---|---|---|---|
+| 0 | 108 | 0.0% (0.0–1.2), 0/324 | 15/108 | 0.0% (0.0–1.2) | 100.0% |
+| 2 | 108 | 15.4% (11.9–19.8), 50/324 | 7/108 | 16.7% (13.0–21.1) | 99.1% |
+| 4 | 108 | 10.8% (7.9–14.7), 35/324 | 9/108 | 10.8% (7.9–14.7) | 99.1% |
+
+By lifecycle and by gap:
+
+| lifecycle | memories | P(F) | exact memories | US | AU |
+|---|---|---|---|---|---|
+| amendment | 108 | 17.3% (13.6–21.8), 56/324 | 26/108 | 17.6% (13.8–22.1) | 99.1% |
+| revoke-and-replace | 216 | 4.5% (3.1–6.4), 29/648 | 5/216 | 4.9% (3.5–6.9) | 99.5% |
+
+| gap | memories | P(F) | exact memories | US | AU |
+|---|---|---|---|---|---|
+| 1 | 108 | 9.9% (7.1–13.6), 32/324 | 9/108 | 10.8% (7.9–14.7) | 99.1% |
+| 2 | 108 | 8.6% (6.0–12.2), 28/324 | 12/108 | 8.6% (6.0–12.2) | 100.0% |
+| 3 | 108 | 7.7% (5.3–11.1), 25/324 | 10/108 | 8.0% (5.5–11.5) | 99.1% |
+
+With the Section 7 mandate prepended to the writer's instructions, same corpus and writers:
+
+| stale | memories | P(F) | exact memories | US | AU |
+|---|---|---|---|---|---|
+| 0 | 108 | 0.0% (0.0–1.2), 0/324 | 34/108 | 0.0% (0.0–1.2) | 100.0% |
+| 2 | 108 | 3.7% (2.1–6.4), 12/324 | 23/108 | 3.7% (2.1–6.4) | 100.0% |
+| 4 | 108 | 2.5% (1.3–4.8), 8/324 | 31/108 | 2.8% (1.5–5.2) | 100.0% |
+
+**Added writers, same corpus** (one run each, 108 unauthorized requests per stale level):
+
+Inkling:
+
+| stale | memories | P(F) | exact memories | US | AU |
+|---|---|---|---|---|---|
+| 0 | 36 | 3.7% (1.4–9.1), 4/108 | 0/36 | 5.6% (2.6–11.6) | 100.0% |
+| 2 | 36 | 17.6% (11.6–25.8), 19/108 | 0/36 | 22.2% (15.4–30.9) | 97.2% |
+| 4 | 36 | 14.8% (9.3–22.7), 16/108 | 0/36 | 17.6% (11.6–25.8) | 94.4% |
+
+DeepSeek V4.1 Flash:
+
+| stale | memories | P(F) | exact memories | US | AU |
+|---|---|---|---|---|---|
+| 0 | 36 | 0.0% (0.0–3.4), 0/108 | 17/36 | 0.0% (0.0–3.4) | 100.0% |
+| 2 | 36 | 13.9% (8.6–21.7), 15/108 | 6/36 | 13.9% (8.6–21.7) | 100.0% |
+| 4 | 36 | 7.4% (3.8–13.9), 8/108 | 7/36 | 7.4% (3.8–13.9) | 100.0% |
+
+**Reading.** With everything but the restatements held fixed, the paper's writers form no false permission on any case with zero stale restatements and form them on 15% of the unauthorized requests once two restatements follow the change. Four restatements are not worse than two (10.8% against 15.4%; the intervals overlap), so the effect is the presence of restatements, not their number, at these levels. Amendments launder about four times more than clean revoke-and-replace histories (17.3% against 4.5%), and the gap between the grant and its change makes no difference at one to three blocks. Both added writers show the same shape: nothing or almost nothing at zero restatements, 14 to 18% at two, less at four, and amendments well above revoke-and-replace. The mandate cuts the paper's writers to 3.7% and 2.5% at two and four restatements and the added writers to zero; it also roughly triples the number of exact memories (72 against 26 of 108 amendment memories). Authorized use is at or near 100% throughout, so on this corpus the failure is laundering, not caution.
+
+**Takeaway.** The generated corpus isolates the trigger: a later message that restates the old permission after it was changed. One such message is enough; more do not add. Histories that amend a grant in place launder several times more than histories that revoke and replace it.
 
 ## 5. Additional writers
 
