@@ -25,6 +25,7 @@ __all__ = [
     "available",
     "control_task",
     "eal_controls_scorer",
+    "end_to_end_executor_task",
     "propagation_task",
     "eal_generate",
     "eal_metrics",
@@ -299,14 +300,20 @@ def _truths_for(
 ) -> dict[str, TrialTruth]:
     """Rebuild the track's trials so a saved log can be re-scored without generating."""
 
+    # `end_to_end` replays writer memories that are not in the repository, so
+    # there is nothing to rebuild; its truths come from the supplied registry.
+    if track == "end_to_end":
+        return {}
     key = (domain_id, corpus_version, presentation_id, track)
     if key not in _TRUTH_CACHE:
         if track == "propagation":
             from .propagation import build_propagation_trials
 
             builder = build_propagation_trials
-        else:
+        elif track == "controls":
             builder = build_control_trials
+        else:
+            raise ValueError(f"unknown EAL track {track!r}")
         _TRUTH_CACHE[key] = {
             truth.trial_id: truth
             for _, truth in builder(
@@ -619,6 +626,54 @@ else:
 
     def eal_generate() -> Any:
         _require_inspect()
+
+
+def end_to_end_executor_task(
+    domain_id: str,
+    memories: Sequence[Any],
+    *,
+    corpus_version: str | None = None,
+    presentation_id: str | None = None,
+    **build_kwargs: Any,
+) -> Any:
+    """Inspect task for the executor half of the end-to-end track.
+
+    The writer half runs through LangMem with EAL's own route table, so only the
+    replay is driven by Inspect. Memories come from `link_written_memories`, are
+    never rebuildable from the repository, and are registered for in-process
+    re-scoring.
+    """
+
+    _require_inspect()
+    from inspect_ai import Task
+    from inspect_ai.solver import use_tools
+
+    from .end_to_end import executor_trials_for_memories
+
+    pairs = executor_trials_for_memories(
+        domain_id,
+        memories,
+        corpus_version=corpus_version,
+        presentation_id=presentation_id,
+        **build_kwargs,
+    )
+    if not pairs:
+        raise ValueError(
+            f"no end-to-end trials for {domain_id!r}; no supplied memory formed false authority"
+        )
+    _register_supplied_truths(pairs)
+    tools = to_tool_defs(list(pairs[0][0].tools))
+    return Task(
+        dataset=to_samples(pairs, track="end_to_end", variants="supplied"),
+        solver=[use_tools(tools, tool_choice="auto"), eal_generate()],
+        scorer=eal_controls_scorer(),
+        name=f"eal_end_to_end_{domain_id}",
+        metadata={
+            "inspect_adapter_version": INSPECT_ADAPTER_VERSION,
+            "eal_surface": "inspect",
+            "eal_track": "end_to_end",
+        },
+    )
 
 
 def propagation_task(
