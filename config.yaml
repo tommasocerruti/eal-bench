@@ -122,6 +122,12 @@ model_targets:
     model: deepseek-ai/DeepSeek-V4-Flash-0731
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
+  deepseek_v4_1_flash_baseten:
+    provider: baseten
+    model: deepseek-ai/DeepSeek-V4.1-Flash
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+    rate_limit: {rpm: 45}   # per process; several drivers share this endpoint (about 100 rpm total)
   glm_5_3_flash_baseten:
     provider: baseten
     model: zai-org/GLM-5.3-Flash
@@ -132,6 +138,7 @@ model_targets:
     model: thinkingmachines/inkling
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
+    rate_limit: {rpm: 45}   # per process; several drivers share this endpoint (about 100 rpm total)
     request_parameters:
       max_tokens: 32768   # reasons inside the completion; 4096 truncates its PatchDoc calls
 
