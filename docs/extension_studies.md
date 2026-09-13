@@ -4,7 +4,7 @@ Follow-up experiments to the EAL-Bench paper. This note is self-contained: it ex
 
 ## Status, 2026-09-12
 
-All studies run on the paper's three writers (GLM 5.2, Kimi K2.6, Nemotron 3 Ultra) and, since this evening, on two added writers (Inkling and DeepSeek V4.1 Flash) through every study, all on Baseten. Sections 3 and 7 carry results from the new runs. Sections 1 (finance row), 4, 5 and 6 are regenerated once the last runs and the judge pass finish; until then their result tables are marked pending. Experiments considered and not run, or deferred, are listed in the appendix at the end.
+All studies run on the paper's three writers (GLM 5.2, Kimi K2.6, Nemotron 3 Ultra) and on two added writers (Inkling and DeepSeek V4.1 Flash) through every study, all on Baseten. Every result table in Sections 1 to 5 and 7 is from the final runs. Section 6's result table is written when the last judge groups finish. Experiments considered and not run, or deferred, are listed in the appendix at the end.
 
 ## The setup in one page
 
@@ -92,7 +92,7 @@ The same grid on finance, one seed, three writers, both executors; 192 unauthori
 
 Finance launders more than procurement under typed incremental writing (33% against 25%) with no loss of authorized use, and the ordering is the same: the hybrid halves it, rebuilding every three blocks removes it for typed and hybrid memory, and free text launders least among the incremental methods while giving up some authorized use.
 
-**Reading.** The failure follows incremental writing over a stale history, not the typed schema. The hybrid lowers it for every writer (GLM 15.3%, Kimi 18.1%, Nemotron 13.0% against 26.9 / 20.4 / 28.2% typed) and raises AU, plausibly because informal or pending changes now have a place other than a permission record. Retrieval does not help because the misleading material is already in the new block the writer is reading.
+**Reading.** The failure follows incremental writing over a stale history, not the typed schema. For each of the paper's three writers the hybrid lowers it (GLM 15.3%, Kimi 18.1%, Nemotron 13.0% against 26.9 / 20.4 / 28.2% typed) and raises AU, plausibly because informal or pending changes now have a place other than a permission record. Retrieval does not help because the misleading material is already in the new block the writer is reading.
 
 **Takeaway.** Laundering is a property of incremental writing, not of the typed schema: it appears in all three memory types and only disappears when memory is rebuilt from source. For the paper's three writers the hybrid profile is the best incremental design we found (procurement US 15.4% against 25.2%, cybersecurity 3.6% against 6.2%, finance 16.7% against 33.3%, with higher authorized use), but Section 5 shows this does not carry to every writer: for Inkling on cybersecurity the hybrid is far worse than typed memory. The design recommendation that holds for every writer and domain tested is periodic rebuilding; the hybrid is an improvement for some writers, not a general one.
 
