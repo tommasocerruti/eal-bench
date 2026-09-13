@@ -282,7 +282,20 @@ That paragraph lists the kinds of message that caused the failures we had alread
 
 It is prepended to the writer's instructions for every update and compared with the same conditions without it, at the same seeds and executors: the open loop (typed and hybrid incremental, both executors) in all three domains, the three-round closed loop in all three domains, and the `generated_v2` corpus. Remaining failures are judged with the Section 6 method. The earlier result, for the record:
 
-Nothing else changed: same writer prompt otherwise, same memory, executor, requests, and scoring. The paper's three writers. Four settings: procurement open loop (typed and hybrid, incremental, both executors), the procurement three-round closed loop, and two the rule was not written against, the generated corpus of Section 4 and the cybersecurity three-round closed loop. Every remaining failure was diagnosed with the Section 6 judges.
+**Result, open loop, one-line mandate (provisional).** The paper's three writers pooled, both executors, each domain at its canonical seed. Baseline is the same condition without the line at the same seed. Five of these twelve runs are being redone because provider errors cost them a few trials; the table is regenerated when they land and the numbers can move by a point or two.
+
+| Domain | Memory | US without | US with mandate | AU without | AU with mandate | false permissions formed, without → with |
+|---|---|---|---|---|---|---|
+| procurement | typed incremental | 23.1% (18.0–29.2), n=216 | 9.3% (6.1–13.9), n=216 | 97.2% (94.1–98.7), n=216 | 97.2% (94.1–98.7), n=216 | 25 → 10 |
+| procurement | hybrid incremental | 16.2% (11.9–21.7), n=216 | 2.8% (1.3–5.9), n=216 | 99.1% (96.7–99.7), n=216 | 94.4% (90.5–96.8), n=216 | 17 → 3 |
+| cybersecurity | typed incremental (2 baseline runs, 2 mandate runs) | 6.2% (3.9–9.9), n=256 | 18.8% (14.4–24.0), n=256 | 93.4% (89.6–95.8), n=256 | 77.3% (71.8–82.0), n=256 | 8 → 24 |
+| cybersecurity | hybrid incremental (2 baseline runs, 2 mandate runs) | 5.5% (3.3–9.0), n=256 | 12.5% (9.0–17.1), n=256 | 94.5% (91.0–96.7), n=256 | 86.7% (82.0–90.3), n=256 | 6 → 16 |
+| finance | typed incremental | 33.3% (27.0–40.3), n=192 | 0.0% (0.0–2.0), n=192 | 99.5% (97.1–99.9), n=192 | 100.0% (98.0–100.0), n=192 | 32 → 0 |
+| finance | hybrid incremental | 20.8% (15.7–27.1), n=192 | 0.0% (0.0–2.0), n=192 | 100.0% (98.0–100.0), n=192 | 100.0% (98.0–100.0), n=192 | 20 → 0 |
+
+The line removes most laundering in procurement and all of it in finance. In cybersecurity it does the opposite for all three writers: unauthorized submission roughly doubles and authorized use falls. Why the same sentence helps in two domains and hurts in the third is a question for the Section 6 diagnosis of these runs, which has not been run yet; no explanation is offered here.
+
+**Earlier paragraph (to be removed):** Nothing else changed: same writer prompt otherwise, same memory, executor, requests, and scoring. The paper's three writers. Four settings: procurement open loop (typed and hybrid, incremental, both executors), the procurement three-round closed loop, and two the rule was not written against, the generated corpus of Section 4 and the cybersecurity three-round closed loop. Every remaining failure was diagnosed with the Section 6 judges.
 
 **Result.**
 
