@@ -40,7 +40,7 @@ model_targets:
     model: deepseek
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
-    rate_limit: {rpm: 30}   # per process; several drivers share this endpoint (about 100 rpm total)
+    rate_limit: {rpm: 22}   # per process; several drivers share this endpoint (about 100 rpm total)
   glm_baseten:
     provider: baseten
     model: glm
@@ -63,7 +63,7 @@ model_targets:
     model: gptoss
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
-    rate_limit: {rpm: 25}   # per process; several drivers share this endpoint (about 100 rpm total)
+    rate_limit: {rpm: 18}   # per process; several drivers share this endpoint (about 100 rpm total)
   nemotron_baseten:
     provider: baseten
     model: nemotron
