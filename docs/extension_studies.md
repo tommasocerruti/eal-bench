@@ -21,6 +21,21 @@ Every study in this note ran on the paper's three writers (GLM 5.2, Kimi K2.6, N
 
 **What this suggests for the paper.** The results section reads as a list because it moves from phenomenon to generality to mitigation without a mechanism in between. A structure that follows the story: (i) formation and propagation, as now; (ii) *mechanism*: trigger (generated corpus) and cause (diagnosis), one subsection, one table each; (iii) *dynamics*: the closed loop with its control, one figure; (iv) *mitigations matched to mechanism*: gate, event sourcing, rebuild, and the one-line mandate on one frontier, with the domain where the mandate fails as the illustration of why matching matters; (v) generality across writers, compressed to one table with the two added writers in it. Sections 2 (rebuild timing, one seed) and the writer-side compute result are appendix material under this structure.
 
+**Where each study belongs.** The added writers are not a study: Inkling and DeepSeek V4.1 Flash go into every table of the paper as writers six and seven, on the same routes, seeds, and executors as the other five. The paper's procurement-only secondary studies (evaluation cues, writer-side inference scaling) are being run for them with the paper's own commands; the two provenance mitigations (source-authority gate, bounded event sourcing) and the capacity ablation depend on tooling outside this repository and need the same treatment there.
+
+| Study | In the paper | Why |
+|---|---|---|
+| 1. memory design: patch versus rebuild | main text, inside the memory-design results, as a third design axis (rebuild every k blocks) with the three-domain table | the one design lever that holds for every writer and domain |
+| 1. hybrid schema, retrieval | appendix | writer-dependent (hybrid) or null (retrieval) |
+| 2. rebuild timing | appendix, one paragraph | one seed, one domain, six-block cases |
+| 3. closed loop with control | main text, a dynamics subsection with one figure (three rounds, two arms, three metrics) | paired, 216 chains, two clear effects and one null |
+| 3. one-pass variants (free text; executor writes back) | appendix | small, negative |
+| 4. generated histories | main text, the mechanism subsection (trigger) | controlled corpus; the paper otherwise has no cause for incremental failures |
+| 6. diagnosis | main text, the mechanism subsection (cause), one table; per-judge and agreement tables in the appendix | explains the domain pattern and predicts which mitigation works; needs the human validation check first |
+| 7. one-line mandate | main text, on the mitigation frontier with the gate and event sourcing; cybersecurity as the mismatch case | near-zero utility cost where matched, harmful where not |
+| GLM 5.3 as a writer | not in the paper | ran only the paper route and the grid; adds nothing the seven writers do not show |
+| GLM 5.3 as an executor | not in the paper | baseline only |
+
 **How far each claim is supported.** Strength is judged by design (paired or controlled), size, and seeds; "single seed" means the canonical seed of each domain.
 
 | Claim | Evidence | Strength | How it is stated |
