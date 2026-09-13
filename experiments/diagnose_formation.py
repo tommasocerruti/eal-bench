@@ -144,16 +144,25 @@ def canonical_chains(memories: list[dict[str, Any]], states: list[dict[str, Any]
         if w.get("arm"):
             arms_by_case[(w["case_id"], w["condition_id"])].add(w["arm"])
     arm_of_chain = {w["loop_chain_id"]: w["arm"] for w in written_back if w.get("loop_chain_id")}
-    for chain_id, mems in list(chains.items()):
-        case_key = (mems[0]["case_id"], mems[0]["condition_id"])
-        if chain_id in arm_of_chain or not arms_by_case.get(case_key):
+    loop_chain_ids = set(arm_of_chain)
+    # Every lineage found by walking the tree ends at a leaf. Group them by base root; the shared base prefix of a
+    # lineage is its memories that belong to no loop chain. An arm with no accepted loop memory has no leaf of its own
+    # (when the other arm changed the memory, the base leaf is not a leaf either), so it is given the base prefix.
+    by_root: dict[str, list[str]] = collections.defaultdict(list)
+    for chain_id, mems in chains.items():
+        by_root[mems[0]["chain_id"]].append(chain_id)
+    for base_root, chain_ids in by_root.items():
+        sample = chains[chain_ids[0]]
+        case_key = (sample[0]["case_id"], sample[0]["condition_id"])
+        arms = arms_by_case.get(case_key)
+        if not arms:
             continue
-        base_root = mems[0]["chain_id"]
-        covered = {arm_of_chain[c] for c, ms in chains.items() if c in arm_of_chain and ms[0]["chain_id"] == base_root}
-        for arm in sorted(arms_by_case[case_key] - covered):
-            chains[f"{chain_id}::{arm}"] = list(mems)
-        if any(len(ms) > len(mems) for c, ms in chains.items() if c != chain_id and ms[0]["chain_id"] == base_root):
-            del chains[chain_id]  # the base alone is not a lineage when arms extend it
+        base_prefix = [m for m in sample if m["chain_id"] not in loop_chain_ids]
+        covered = {arm_of_chain[c] for c in chain_ids if c in arm_of_chain}
+        for arm in sorted(arms - covered):
+            chains[f"{base_root}::{arm}"] = list(base_prefix)
+        if base_root in chains and len(chain_ids) > 1:
+            del chains[base_root]  # the base alone is not a lineage when arms extend it
     return chains
 
 

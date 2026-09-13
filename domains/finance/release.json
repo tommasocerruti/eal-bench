@@ -64,7 +64,7 @@
     "freeze_status": "frozen"
   },
   "implementation": {
-    "adapter.py": "1dcd3852d36fde0072acc7131674cedcf9f7b855ed005ac3bedd26c1ceffe938",
+    "adapter.py": "292e07f5701fe355ab9608e2dca97a4e18abf60bb692f753a93e64ab4954f911",
     "build_redesign_final_precommit.py": "ac216b880861e36f43079bdd9ec673527fd84688b5e1f06f5b25f9799b5a013e",
     "capacity.py": "10a6db8f2280b4b89ba7482164730f54ebb11b5ade4aeca1af64b32689ab416c",
     "compile_redesign.py": "c51b4e324789bff1f1c1b541db311100b241d3de7a2cc6716b88a9a02229e256",
