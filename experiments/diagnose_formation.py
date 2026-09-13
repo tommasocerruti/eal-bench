@@ -113,10 +113,117 @@ def judge(llm: LLM, target: str, payload: dict[str, str]) -> dict[str, Any]:
 
 
 async def _judge_concurrently(llm: LLM, targets: list[str], payload: dict[str, str]) -> list[dict[str, Any]]:
-    """The three judges are independent models on separate endpoints; ask them at the same time."""
+    """The judges are independent models on separate endpoints; ask them at the same time."""
     messages = judge_messages(payload)
     resps = await asyncio.gather(*(llm.acomplete("judge", messages, target=t, max_tokens=8000, temperature=0.0) for t in targets))
     return [parse_verdict(r) for r in resps]
+
+
+def row_key(r: dict[str, Any]) -> tuple:
+    return (r.get("chain_id"), r.get("failure"), r.get("probe_id"), r.get("request_kind", "submitted"), r.get("record_id"))
+
+
+def base_failure_key(r: dict[str, Any]) -> tuple:
+    return (r.get("case_id"), r.get("condition_id"), r.get("writer"), r.get("writer_run_id"), r.get("probe_id"), r.get("request_kind", "submitted"), r.get("error_block"))
+
+
+def canonical_chains(memories: list[dict[str, Any]], states: list[dict[str, Any]], written_back: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
+    """One memory per block per lineage, following parent links. A block can carry several memory rows (one per
+    writer attempt); memory_states.jsonl names the accepted one. A closed-loop run with two arms forks the loop from
+    the shared base, so a lineage is the base memories followed by one arm's loop memories, keyed by the arm's chain
+    id. An arm that never changed its memory has no loop memories of its own; it still gets a lineage (the base
+    memories, keyed `<base chain id>::<arm>`) so its failures are attributed to it rather than dropped."""
+    by_id = {m["memory_id"]: m for m in memories}
+    accepted = {st.get("current_memory_id") for st in states if st.get("current_memory_id") in by_id}
+    canonical = [m for m in memories if m["memory_id"] in accepted or m.get("parent_memory_id") is None] if accepted else list(memories)
+    canon_ids = {m["memory_id"] for m in canonical}
+    children: dict[str | None, list[dict[str, Any]]] = collections.defaultdict(list)
+    for m in canonical:
+        parent = m.get("parent_memory_id")
+        children[parent if parent in canon_ids else None].append(m)
+    chains: dict[str, list[dict[str, Any]]] = {}
+
+    def walk(m: dict[str, Any], path: list[dict[str, Any]]) -> None:
+        path = path + [m]
+        kids = children.get(m["memory_id"], [])
+        if not kids:
+            chains[m["chain_id"]] = sorted(path, key=lambda x: x["block_index"])
+            return
+        for kid in kids:
+            walk(kid, path)
+
+    for root in children[None]:
+        walk(root, [])
+    # arms present in the write-back log but without loop memories of their own
+    arms_by_case = collections.defaultdict(set)
+    for w in written_back:
+        if w.get("arm"):
+            arms_by_case[(w["case_id"], w["condition_id"])].add(w["arm"])
+    arm_of_chain = {w["loop_chain_id"]: w["arm"] for w in written_back if w.get("loop_chain_id")}
+    loop_chain_ids = set(arm_of_chain)
+    # Every lineage found by walking the tree ends at a leaf. Group them by base root; the shared base prefix of a
+    # lineage is its memories that belong to no loop chain. An arm with no accepted loop memory has no leaf of its own
+    # (when the other arm changed the memory, the base leaf is not a leaf either), so it is given the base prefix.
+    by_root: dict[str, list[str]] = collections.defaultdict(list)
+    for chain_id, mems in chains.items():
+        by_root[mems[0]["chain_id"]].append(chain_id)
+    for base_root, chain_ids in by_root.items():
+        sample = chains[chain_ids[0]]
+        case_key = (sample[0]["case_id"], sample[0]["condition_id"])
+        arms = arms_by_case.get(case_key)
+        if not arms:
+            continue
+        base_prefix = [m for m in sample if m["chain_id"] not in loop_chain_ids]
+        covered = {arm_of_chain[c] for c in chain_ids if c in arm_of_chain}
+        for arm in sorted(arms - covered):
+            chains[f"{base_root}::{arm}"] = list(base_prefix)
+        if base_root in chains and len(chain_ids) > 1:
+            del chains[base_root]  # the base alone is not a lineage when arms extend it
+    return chains
+
+
+def candidate_requests(domain: Any, case: Any) -> list[tuple[Any, str, Any]]:
+    """(probe, kind, request): each probe's submitted request plus, when the domain defines an operational alternative
+    for the probe, that alternative (the executor may execute it instead of the submitted request)."""
+    probes = list(domain.corpus.probes(case))
+    out = [(probe, "submitted", probe.request) for probe in probes]  # submitted requests first: an alternative that equals another probe's request is attributed to that probe
+    challenge = getattr(domain, "challenge", None)
+    if challenge is not None and challenge.applies(case):
+        for probe in probes:
+            try:
+                ctx = challenge.context(case, probe)
+            except Exception:
+                continue
+            for course in ctx.courses:
+                if course.request is not None and course.request != probe.request:
+                    out.append((probe, "alternative", course.request))
+    return out
+
+
+def attempts_at(attempts: list[dict[str, Any]], mems: list[dict[str, Any]], block_index: int, wb: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """The writer attempts behind this lineage's update at `block_index`. For write-back blocks the arm's own row names
+    its attempt ids (both arms share the previous memory at the first write-back, so parent matching alone would mix
+    them); for base blocks, and for runs recorded before attempt ids were kept, match by the parent memory."""
+    named = [set(w.get("attempt_ids") or []) for w in wb if w.get("block_index") == block_index and w.get("attempt_ids")]
+    if named:
+        ids = set().union(*named)
+        return sorted([a for a in attempts if a["attempt_id"] in ids], key=lambda a: a["attempt_index"])
+    prior = [m for m in mems if m["block_index"] < block_index]
+    parent = prior[-1]["memory_id"] if prior else None
+    case_id, condition = mems[0]["case_id"], mems[0]["condition_id"]
+    return sorted(
+        [a for a in attempts if a["case_id"] == case_id and a["condition_id"] == condition and a["block_index"] == block_index and a.get("parent_memory_id") == parent],
+        key=lambda a: a["attempt_index"],
+    )
+
+
+def written_for(written_back: list[dict[str, Any]], chain_id: str, mems: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], str | None]:
+    """The write-back rows of this lineage's arm, and the arm name (None for single-arm and open-loop runs)."""
+    case_id, condition = mems[0]["case_id"], mems[0]["condition_id"]
+    arm_of = {w["loop_chain_id"]: w.get("arm") for w in written_back if w.get("loop_chain_id")}
+    arm = chain_id.split("::", 1)[1] if "::" in chain_id else next((arm_of[m["chain_id"]] for m in mems if m["chain_id"] in arm_of), None)
+    rows_ = [w for w in written_back if w["case_id"] == case_id and w["condition_id"] == condition and (arm is None or w.get("arm") in (None, arm))]
+    return rows_, arm
 
 
 def judge_all(llm: LLM, targets: list[str], payload: dict[str, str], row: dict[str, Any], summary: collections.Counter) -> None:
