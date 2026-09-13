@@ -101,7 +101,8 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--loop-content", choices=("action", "neutral", "both"), default="action", help="what the write-back says: the executor's action (default), a neutral workspace line with no request content (control for update count), or both arms forked from the same base memories in one run")
     parser.add_argument("--writer-instruction", default=None, help="one line prepended to the writer's instructions for every update, including write-backs")
     parser.add_argument("--seed", type=int, default=None)
-    parser.add_argument("--batch-size", type=int, default=None)
+    parser.add_argument("--batch-size", type=int, default=None, help="concurrent executor calls")
+    parser.add_argument("--writer-batch-size", type=int, default=None, help="concurrent writer updates (default: --batch-size); the writer and executor endpoints have separate rate limits")
     parser.add_argument("--estimated-cost-usd", type=float, default=None)
     parser.add_argument("--tag", default=None)
     parser.add_argument("--dry-run", action="store_true")
@@ -306,7 +307,7 @@ def main(argv: list[str] | None = None) -> int:
         # models, and a second event loop in the same call inherits its pooled connections
         # and hangs to the timeout on the first batch.
         parts = [
-            run_writer_chains(llm, domain, [s for s in chain_specs if s.condition_id == cond], writer_task="writer", max_attempts=args.writer_max_attempts, capacity_tokens=capacity_tokens, batch_size=args.batch_size)
+            run_writer_chains(llm, domain, [s for s in chain_specs if s.condition_id == cond], writer_task="writer", max_attempts=args.writer_max_attempts, capacity_tokens=capacity_tokens, batch_size=args.writer_batch_size or args.batch_size)
             for cond in dict.fromkeys(s.condition_id for s in chain_specs)
         ]
         return WriterRunArtifacts(*(tuple(x for part in parts for x in getattr(part, name)) for name in ("memories", "attempts", "states", "final_evidence", "model_contexts")))

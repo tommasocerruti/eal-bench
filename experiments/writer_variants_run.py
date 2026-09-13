@@ -63,7 +63,8 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--writer-runs", type=int, default=1)
     parser.add_argument("--writer-max-attempts", type=int, choices=(1, 2), default=2)
     parser.add_argument("--seed", type=int, default=None)
-    parser.add_argument("--batch-size", type=int, default=None)
+    parser.add_argument("--batch-size", type=int, default=None, help="concurrent executor calls")
+    parser.add_argument("--writer-batch-size", type=int, default=None, help="concurrent writer updates (default: --batch-size); the writer and executor endpoints have separate rate limits")
     parser.add_argument("--estimated-cost-usd", type=float, default=None)
     parser.add_argument("--tag", default=None)
     parser.add_argument("--writer-instruction", default=None, help="one line prepended to the writer's instructions; condition ids get the --instruction-tag suffix")
@@ -150,7 +151,7 @@ def main(argv: list[str] | None = None) -> int:
 
     memories, attempts, states, contexts, evidence, jobs, formation_rows = [], [], [], [], {}, [], []
     for condition_id, domain, specs in groups:
-        written = run_writer_chains(llm, domain, specs, writer_task="writer", max_attempts=args.writer_max_attempts, capacity_tokens=capacity_tokens, batch_size=args.batch_size)
+        written = run_writer_chains(llm, domain, specs, writer_task="writer", max_attempts=args.writer_max_attempts, capacity_tokens=capacity_tokens, batch_size=args.writer_batch_size or args.batch_size)
         memories += written.memories
         attempts += written.attempts
         states += written.states
