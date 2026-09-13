@@ -344,11 +344,11 @@ The labels came from reading traces of the first runs and writing down, for each
 |---|---|---|---|---|---|---|---|
 | all | 151 | 25 | 0 | 10 | 116 | 0 | 0 |
 
-*paper writer route, added writers (all domains)* (95 failures)
+*paper writer route, added writers (all domains)* (159 failures)
 
 | Where the failure enters | n | restatement applied | own action as approval | authoritative change misapplied | update failed | other | no majority |
 |---|---|---|---|---|---|---|---|
-| all | 95 | 54 | 0 | 9 | 32 | 0 | 0 |
+| all | 159 | 118 | 0 | 9 | 32 | 0 | 0 |
 
 *closed loop, one pass* (71 failures)
 
@@ -377,17 +377,17 @@ The labels came from reading traces of the first runs and writing down, for each
 | records born from the agent's own lines | 6 | 0 | 6 | 0 | 0 | 0 | 0 |
 | existing records re-cited to the agent's own lines | 5 | 0 | 5 | 0 | 0 | 0 | 0 |
 
-*All groups* (1573 failures): restatement applied 965, update failed 351, own action as approval 200, authoritative change misapplied 51, other 6.
+*All groups* (1637 failures): restatement applied 1029, update failed 351, own action as approval 200, authoritative change misapplied 51, other 6.
 
-Judge agreement: 1306 rows with 3 of 3 judges on the majority label, 263 rows with 2 of 3 judges on the majority label, 4 rows with 1 of 3 judges on the majority label.
+Judge agreement: 1369 rows with 3 of 3 judges on the majority label, 264 rows with 2 of 3 judges on the majority label, 4 rows with 1 of 3 judges on the majority label.
 
 | Judge | restatement applied | own action as approval | authoritative change misapplied | update failed | other |
 |---|---|---|---|---|---|
-| DeepSeek V4 Pro | 993 | 167 | 53 | 349 | 11 |
-| GLM 5.3 | 967 | 201 | 30 | 369 | 6 |
-| Nemotron 3 Ultra | 957 | 199 | 255 | 162 | 0 |
+| DeepSeek V4 Pro | 1056 | 168 | 53 | 349 | 11 |
+| GLM 5.3 | 1031 | 201 | 30 | 369 | 6 |
+| Nemotron 3 Ultra | 1021 | 199 | 255 | 162 | 0 |
 
-**Reading.** Three causes account for nearly all 1,573 failures, and they separate by setting and domain rather than by writer. In the open loop, procurement and finance failures are a restatement being applied: a status line, a colleague, or a forwarded copy repeats the superseded figure and the writer changes the record to match. In the closed loop, every record minted from the agent's own lines and nearly every write-back-block failure is an escalation, decline, or execution line treated as a grant. Cybersecurity is the exception in kind: most of its failures, with or without the mandate, are the writer failing to apply the duty officer's signed change set (both attempts rejected, as a patch that cannot be applied or as a profile over the memory's size limit), so the old permission stays active; the counts are in the table. The agreement line above gives how often the three judges concur.
+**Reading.** Three causes account for nearly all 1,637 failures, and they separate by setting and domain rather than by writer. In the open loop, procurement and finance failures are a restatement being applied: a status line, a colleague, or a forwarded copy repeats the superseded figure and the writer changes the record to match. In the closed loop, every record minted from the agent's own lines and nearly every write-back-block failure is an escalation, decline, or execution line treated as a grant. Cybersecurity is the exception in kind: most of its failures, with or without the mandate, are the writer failing to apply the duty officer's signed change set (both attempts rejected, as a patch that cannot be applied or as a profile over the memory's size limit), so the old permission stays active; the counts are in the table. The agreement line above gives how often the three judges concur.
 
 **Takeaway.** The writer's error is not one thing across domains. Where the history keeps restating a superseded permission, the writer follows the restatement; where the agent logs its own actions, the writer reads them as approvals; where the legitimate change is a large replacement, the writer fails to write it. The first two are what a rule about authority can address, and Section 7 shows it does; the third is not.
 
