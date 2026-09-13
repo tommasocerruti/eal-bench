@@ -252,6 +252,8 @@ reject, so `require_calibration_tokenizer` raises `UncalibratedTokenizerError` r
 enforce an unsound limit. Warm the tiktoken cache, or pass `allow_uncalibrated_tokenizer=True`
 to build trials without enforcing that bound.
 
+Writer runs that enforce capacity perform the same check before invoking LangMem.
+
 The policy is resolved once per process, so the counter and the name it reports can never
 disagree, and the active tokenizer is part of `ResourceVersions`. A run counted with the
 fallback therefore has a different `resource_key` and the pooling guard refuses to combine it
