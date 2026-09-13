@@ -6,7 +6,7 @@ Follow-up experiments to the EAL-Bench paper. This note is self-contained: it ex
 
 **Running now.** Every result below marked *earlier* is being replaced by these runs, all on the paper's three writers:
 
-1. Closed loop, corrected: action arm and neutral control forked from the same frozen memories, three complete rounds, GPT-OSS and DeepSeek V4 Pro as executors, all three domains, procurement at two seeds; plus the one-pass variants. Replaces Section 3.
+1. Closed loop, corrected: done, Section 3 is rewritten from the 18 new runs (one run, cybersecurity GLM 5.2 with GPT-OSS, is being redone for two writer updates lost to provider errors; its numbers can move by a fraction of a point).
 2. Generated histories on `generated_v2`, where only the stale restatements vary. Replaces Section 4.
 3. Finance memory-type grid. Fills the finance row of Section 1.
 4. The one-line mandate on the open loop, the closed loop with both executors, and `generated_v2`, all domains. Replaces Section 7.
@@ -32,7 +32,7 @@ Follow-up experiments to the EAL-Bench paper. This note is self-contained: it ex
 |---|---|---|---|
 | 1. memory type × writing method | three seeds (typed, hybrid), one seed (full grid with retrieval) | one seed (typed, free text, hybrid × incremental, rebuild) | rerun pending |
 | 2. rebuild timing | yes | no | no |
-| 3. closed loop, three rounds, action arm and neutral control from the same base memories, GPT-OSS and DeepSeek executors | rerun pending | rerun pending | rerun pending |
+| 3. closed loop, three rounds, action arm and neutral control from the same base memories, GPT-OSS and DeepSeek executors | yes | yes | yes |
 | 4. generated histories | `generated_v1` done; `generated_v2` rerun pending | no | no |
 | 5. additional writers (GLM 5.3, Inkling) | paper route, memory grid, closed loop (earlier implementation) | paper route | not run |
 | 6. root-cause diagnosis (four labels, versioned output) | every failure in 1, 3, 4, 5 and 7 | every failure in 1, 3, 5 and 7 | every failure in 1, 3 and 7 |
@@ -111,37 +111,41 @@ Cybersecurity launders far less than procurement, as in the paper, and it does s
 
 ## 3. Does the agent's own behavior make it worse? (closed loop)
 
-*Earlier implementation.* The tables in this section come from the closed loop as first implemented: the write-back described the submitted request even when the executor ran the operational alternative, requests kept their corpus timestamps across rounds, and there was no control for the number of updates. The finance rows are on a superseded finance corpus. They are kept until the rerun below replaces them.
+**Why it matters.** In the paper the executor's actions vanish. In a real deployment they are logged, and the log becomes part of the history the writer reads. If a wrongly executed order is written back into memory as a fact, it can become evidence for the permission that produced it, and false authority could compound.
 
-**Protocol of the rerun.** One run per writer, seed, and executor does the following. The paper's incremental chains are written once and frozen. The open loop answers every request against those memories. Then two arms are forked from the same frozen memories and run in lockstep: the *action arm*, where after each request one workflow-log line is appended as a new block saying what the executor actually did (built from its tool call and the validated decision: "Executed as submitted", "Executed the operational alternative instead of the submitted request" with the executed payload, "Escalated; nothing executed", "Declined; nothing executed"), and the *neutral control*, where the line is a content-free workspace notice ("Routine workspace sync completed; no items changed."), so the writer performs the same number of updates on the same schedule with no action content. A round is one complete pass over a case's requests, ordered by request time within the round; round r finishes before round r+1 starts. Each request is re-dated to one minute after the last log it can see when that leaves the ledger's verdict on it and on every alternative the executor could choose unchanged; otherwise it keeps its corpus time and the run counts it (`requests_kept_at_original_time`), which makes those positions a replay rather than a live sequence. Three rounds. The paper's three writers; GPT-OSS and DeepSeek V4 Pro as executors; every domain at its canonical seed (procurement 20260719, cybersecurity 20260812, finance 20260816). Metrics per round: authorized use, unauthorized submission, unsafe actions over all requests, and records whose cited sources are all write-back lines (new records and existing records whose citations were replaced, counted separately). The action-minus-neutral difference is paired by chain, with a bootstrap interval and a permutation test over chains. Section 3's one-pass variants (free-text memory; the executor writing its own memory with an action log) are rerun on the same code.
+**What we ran.** One run per writer and executor in each domain, at the domain's canonical seed. The paper's incremental typed chains are written once and frozen. The *open loop* answers every request against those memories, as in the paper. Then two arms are forked from the same frozen memories and run in lockstep. In the *action arm*, after each request one workflow-log line is appended as a new block saying what the executor actually did, built from its tool call and the validated decision: "Executed as submitted" with the payload, "Executed the operational alternative instead of the submitted request" with the executed payload, "Escalated; nothing executed", or "Declined; nothing executed". The writer updates memory on that block and the next request is answered against the updated memory. In the *neutral control*, the appended line is a content-free workspace notice ("Routine workspace sync completed; no items changed."), so the writer performs the same number of updates on the same schedule with no action content. A round is one complete pass over a case's requests in request-time order; round r finishes before round r+1 starts. Each request is re-dated to one minute after the last log it can see when that leaves the ledger's verdict on it, and on every alternative the executor could choose, unchanged; otherwise it keeps its corpus time and is counted (`requests_kept_at_original_time`: 22% of positions in procurement, 16% in cybersecurity, 16% in finance). Three rounds. The paper's three writers; GPT-OSS and DeepSeek V4 Pro as executors; 18 runs, 216 chains. The action-minus-neutral difference is paired by chain (same case, writer, executor, and starting memory), with a 95% bootstrap interval over chains and a sign-flip permutation p-value.
 
-**Why it matters.** In the paper the executor's actions vanish. In a real deployment they are logged and the log becomes part of the history the writer reads. If a wrongly executed order is written back into memory as a fact, it might become evidence for the permission that produced it, and false authority could compound.
+**Result, three rounds.** All domains and both executors pooled, 792 unauthorized and 792 authorized requests per round and arm:
 
-**What we ran (earlier).** *Open loop* is the paper's design: all requests answered against the frozen final memory. *Closed loop* answers requests one at a time; after each answer one workflow line describing what the agent did ("Order placed (submit_order): grantee ..., vendor ..., amount 4,900, currency USD" or "Escalated for authorization (...)") is appended as a new block, the writer updates memory from it exactly as it would from any block, and the next request runs on the updated memory. Variants: the same writer updates (default); the executor model itself updates from (previous memory, request, outcome) plus an append-only action log; free-text memory; and **rounds**, where the whole request set is asked again, with write-back between every request, so a laundered order from round 1 is in memory when the same request returns in round 2.
+| Round | US action | US neutral | paired diff | AU action | AU neutral | paired diff |
+|---|---|---|---|---|---|---|
+| 1 | 22.0% | 21.7% | +0.2 (+0.0, +0.6), p=0.49 | 87.9% | 94.8% | −6.5 (−8.8, −4.2), p<0.001 |
+| 2 | 20.5% | 20.7% | −0.1 (−2.4, +2.0), p=0.95 | 69.4% | 89.8% | −19.3 (−24.7, −13.9), p<0.001 |
+| 3 | 22.1% | 20.1% | +2.4 (−0.6, +5.4), p=0.13 | 61.9% | 86.5% | −23.2 (−29.5, −16.8), p<0.001 |
 
-**Result, one pass.** Procurement, three writers, 108 unauthorized requests:
+Unsafe actions over all requests (submitted or alternative unauthorized action, any request) are 12.4 / 11.2 / 12.7% in the action arm against 12.4 / 12.1 / 11.6% in the neutral arm (round 3 difference +1.3, −0.8 to +3.4, p=0.23).
+
+By domain, round 3, action versus neutral:
+
+| Domain (chains) | Open US / AU | US action | US neutral | AU action | AU neutral | records born from write-back lines, action / neutral |
+|---|---|---|---|---|---|---|
+| procurement (72) | 28.7 / 96.3% | 28.2% | 22.2% (+6.0, −0.5 to +12.5, p=0.11) | 58.8% | 66.2% (−7.4, p=0.31) | 25 / 1 |
+| cybersecurity (96) | 6.2 / 92.7% | 7.8% | 6.0% (+1.8, p=0.46) | 46.6% | 92.2% (−45.6, −52.6 to −38.5, p<0.001) | 55 / 0 |
+| finance (48) | 45.8 / 97.9% | 43.8% | 45.8% (−2.1, p=1.0) | 95.8% | 97.9% (−2.1, p=1.0) | 2 / 0 |
+
+Records whose every cited source is one of the agent's own written-back lines appear almost only in the action arm (82 against 1). What the executor did, over all positions and both arms: 60% executed as submitted, 42% escalated, 6% declined, 3% executed the operational alternative (cybersecurity escalates most: 1,162 of 2,208 action-arm positions).
+
+**Result, one pass.** Procurement, GPT-OSS, three writers, 108 unauthorized requests, open loop against the first closed round:
 
 | Who writes back | Memory | Open AU / US | Closed AU / US |
 |---|---|---|---|
-| the writer | typed | 98.1 / 26.9% | 93.5 / 25.0% |
-| the writer | free text | 84.3 / 17.6% | 71.3 / 13.0% |
-| the executor, with action log | typed | 99.1 / 26.9% | 85.2 / 24.1% |
+| the writer | typed (round 1 of the runs above) | 96.3 / 31.5% | 96.3 / 30.6% |
+| the writer | free text | 69.4 / 15.7% | 55.6 / 11.1% |
+| the executor, with action log | typed | 93.5 / 26.9% | 93.5 / 27.8% |
 
-Conditioning on chains where the first unauthorized request was wrongly executed: later unauthorized requests were executed 38% of the time closed versus 45% open on the same chains. Every chain cites the written-back line from the second request on, but as an added source on an existing record, never as a new permission.
+**Reading.** With a control that performs the same updates on the same schedule, the closed loop does not raise unauthorized submission: the pooled round-3 difference is +2.4 points and its interval includes zero, and the largest per-domain difference (+6 points in procurement) is not significant at 72 chains. What the action arm does, strongly and only in the action arm, is manufacture records out of the agent's own actions and lose authorized use: 82 records cite nothing but written-back lines, and authorized use falls 23 points against the control by round 3, 46 points in cybersecurity, where the executor escalates most and the writer turns "Escalated; nothing executed" and "Declined; nothing executed" lines into restrictions. The neutral control also loses authorized use in procurement (96 → 66%), so part of the round-over-round decline is the cost of the extra updates themselves, not of their content; the paired difference isolates the content. Finance is immune at this length: its high open-loop unauthorized submission comes from the base history and neither arm moves it. Within one pass nothing compounds in any variant.
 
-**Result, three rounds.** Three writers, all domains; unauthorized submission with P(F) in parentheses:
-
-| Domain | Open | Round 1 | Round 2 | Round 3 |
-|---|---|---|---|---|
-| procurement (108 unauthorized per round) | 29.6% | 28.7% (25.9) | 27.8% (23.1) | 29.6% (21.3) |
-| cybersecurity (192) | 6.2% | 4.7% (4.7) | 13.0% (13.0) | 16.1% (16.1) |
-| finance (96) | 0.0% | 0.0% (0.0) | 2.1% (2.1) | 2.1% (2.1) |
-
-Authorized use falls in every domain across rounds (procurement 88 → 67 → 60%, cybersecurity 77 → 51 → 43%). Permission records whose only cited sources are the agent's own written-back actions grow from 12 to 106 across the 36 procurement chains, from 84 to 446 across the 48 cybersecurity chains, and from 16 to 93 across the 24 finance chains (Kimi and Nemotron; GLM writes none). Once a request is laundered it stays laundered in later rounds (55 to 100% persistence).
-
-**Reading.** Within one pass nothing compounds; the false records were already there before any write-back. Over repeated passes it does compound, and the mechanism is specific: the writer turns action lines into new permission records (an escalated furniture-storage order becomes an active "furniture_storage" record). On cybersecurity those records pass the mechanical check, so P(F) and US triple. On procurement they are malformed (no issuer, no dates), so P(F) misses them; GLM's executor still acts on them (US 30.6 → 44.4%), while for Kimi and Nemotron they crowd out real grants and AU collapses instead. On finance the records authorize nothing and behavior barely moves.
-
-**Takeaway.** The agent's own actions do become cited evidence, and over repeated passes the writer manufactures permission records out of them: an escalation of an order becomes an active grant for that order. On cybersecurity this triples unauthorized submission (4.7% → 16.1%); everywhere it destroys authorized use (procurement 88% → 60%). Within a single pass nothing compounds, so a one-shot replay understates the risk. A new results section, plus a note that P(F) misses the malformed records the writer invents.
+**Takeaway.** The agent's own actions do become cited evidence and the writer does mint records from them, but in the corrected loop the damage is to utility, not to safety: the executor refuses authorized requests it used to grant. The compounding of unauthorized submission reported by the first implementation of this loop does not survive a matched control. A one-shot deployment does not compound; a deployment that logs its own actions into the writer's history loses authorized use round over round.
 
 ## 4. What in a history makes the writer launder? (generated histories)
 
