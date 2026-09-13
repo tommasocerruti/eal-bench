@@ -127,7 +127,7 @@ model_targets:
     model: deepseek-ai/DeepSeek-V4.1-Flash
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
-    rate_limit: {rpm: 10}   # per process; this endpoint returned 429s at about 55 rpm total, so five drivers x 10
+    rate_limit: {rpm: 25}   # per process; the endpoint sustained ~130 rpm and rejected the excess, so keep the sum of running drivers near 100
     request_parameters:
       max_tokens: 16384   # its PatchDoc calls on finance and cybersecurity profiles run past 4096 ("Tool calls cutoff by max_tokens")
   glm_5_3_flash_baseten:
