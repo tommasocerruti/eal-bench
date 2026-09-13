@@ -51,19 +51,19 @@ model_targets:
     model: zai-org/GLM-5.2
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
-    rate_limit: {rpm: 35}   # per process; several drivers share this endpoint (about 100 rpm total)
+    rate_limit: {rpm: 45}   # per process; several drivers share this endpoint (about 100 rpm total)
   kimi_baseten:
     provider: baseten
     model: moonshotai/Kimi-K2.6
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
-    rate_limit: {rpm: 35}   # per process; several drivers share this endpoint (about 100 rpm total)
+    rate_limit: {rpm: 45}   # per process; several drivers share this endpoint (about 100 rpm total)
   gptoss_baseten:
     provider: baseten
     model: gptoss
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
-    rate_limit: {rpm: 18}   # per process; several drivers share this endpoint (about 100 rpm total)
+    rate_limit: {rpm: 25}   # per process; several drivers share this endpoint (about 100 rpm total)
   nemotron_baseten:
     provider: baseten
     model: nemotron
@@ -74,7 +74,7 @@ model_targets:
     model: nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
-    rate_limit: {rpm: 35}   # per process; several drivers share this endpoint (about 100 rpm total)
+    rate_limit: {rpm: 45}   # per process; several drivers share this endpoint (about 100 rpm total)
   gptoss_openrouter:
     provider: openrouter
     model: openai/gpt-oss-120b
