@@ -22,7 +22,7 @@ All studies run on the paper's three writers (GLM 5.2, Kimi K2.6, Nemotron 3 Ult
 
 | Study | procurement | cybersecurity | finance |
 |---|---|---|---|
-| 1. memory type × writing method | three seeds (typed, hybrid), one seed (full grid with retrieval) | one seed (typed, free text, hybrid × incremental, rebuild) | one seed (typed, free text, hybrid × incremental, rebuild); table pending |
+| 1. memory type × writing method | three seeds (typed, hybrid), one seed (full grid with retrieval) | one seed (typed, free text, hybrid × incremental, rebuild) | one seed (typed, free text, hybrid × incremental, rebuild) |
 | 2. rebuild timing | yes | no | no |
 | 3. closed loop, three rounds, action arm and neutral control from the same base memories, GPT-OSS and DeepSeek executors | yes | yes | yes |
 | 4. generated histories | `generated_v2`, three writers and both added writers, with and without the mandate | no | no |
@@ -78,6 +78,19 @@ The same grid on cybersecurity (16 cases, 8 requests each), one seed, three writ
 | hybrid | rebuild every 3 | 95.1% | 4.2% | 2.6–6.7 |
 
 Cybersecurity launders far less than procurement, as in the paper, and it does so a whole case at a time: every non-zero cell is one or two cases in which all eight unauthorized requests were executed under both executors (GLM hybrid: `claim_vault`; Kimi typed: `claim_ca`; Nemotron typed: `claim_vault`, `claim_runner`). Nemotron is the only writer that launders in every incremental memory type, and its one rebuild failure (hybrid, `claim_edge` and `claim_artifact`) is a rebuild landing before the stale restatements, the timing effect of Section 2.
+
+The same grid on finance, one seed, three writers, both executors; 192 unauthorized requests per row.
+
+| Memory | Writing method | AU | US | 95% CI |
+|---|---|---|---|---|
+| typed | incremental | 99.5% | 33.3% | 27.0–40.3 |
+| typed | rebuild every 3 | 100.0% | 0.0% | 0.0–2.0 |
+| free text | incremental | 95.8% | 9.4% | 6.0–14.3 |
+| free text | rebuild every 3 | 100.0% | 5.2% | 2.9–9.3 |
+| hybrid | incremental | 100.0% | 16.7% | 12.1–22.6 |
+| hybrid | rebuild every 3 | 100.0% | 0.0% | 0.0–2.0 |
+
+Finance launders more than procurement under typed incremental writing (33% against 25%) with no loss of authorized use, and the ordering is the same: the hybrid halves it, rebuilding every three blocks removes it for typed and hybrid memory, and free text launders least among the incremental methods while giving up some authorized use.
 
 **Reading.** The failure follows incremental writing over a stale history, not the typed schema. The hybrid lowers it for every writer (GLM 15.3%, Kimi 18.1%, Nemotron 13.0% against 26.9 / 20.4 / 28.2% typed) and raises AU, plausibly because informal or pending changes now have a place other than a permission record. Retrieval does not help because the misleading material is already in the new block the writer is reading.
 
