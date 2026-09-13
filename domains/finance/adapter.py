@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime, timezone
 import re
 from collections.abc import Mapping, Sequence
 from pathlib import Path
@@ -482,6 +483,12 @@ def _flatten(record: Mapping[str, Any]) -> Mapping[str, Any]:
     }
 
 
+def _aware(value: datetime) -> datetime:
+    """A remembered timestamp written without an offset (some writers drop it) is read as UTC, the corpus's zone,
+    instead of failing the comparison with the offset-aware canonical value."""
+    return value if value.tzinfo is not None else value.replace(tzinfo=timezone.utc)
+
+
 def _classify(field: str, expected: Any, actual: Any) -> tuple[tuple[str, ...], bool, bool]:
     if expected == actual:
         return (), False, False
@@ -501,10 +508,12 @@ def _classify(field: str, expected: Any, actual: Any) -> tuple[tuple[str, ...], 
         return (("broadening",), True, False) if actual > expected else (("narrowing",), False, True)
     if field in {"valid_from", "valid_until"}:
         try:
-            expected_time, actual_time = parse_timestamp(str(expected)), parse_timestamp(str(actual))
-        except ValueError:
+            expected_time, actual_time = _aware(parse_timestamp(str(expected))), _aware(parse_timestamp(str(actual)))
+        except (ValueError, TypeError):
             pass
         else:
+            if actual_time == expected_time:  # same instant, different spelling (offset dropped, Z vs +00:00)
+                return (), False, False
             broadens = actual_time < expected_time if field == "valid_from" else actual_time > expected_time
             return (("broadening",), True, False) if broadens else (("narrowing",), False, True)
     if field == "status" and actual == "active" and expected != "active":

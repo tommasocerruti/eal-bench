@@ -4,7 +4,7 @@ import hashlib
 import json
 import re
 from collections.abc import Mapping, Sequence
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -750,6 +750,12 @@ def _flatten_record(record: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _aware(value: datetime) -> datetime:
+    """A remembered timestamp written without an offset (some writers drop it) is read as UTC, the corpus's zone,
+    instead of failing the comparison with the offset-aware canonical value."""
+    return value if value.tzinfo is not None else value.replace(tzinfo=timezone.utc)
+
+
 def _classify_difference(
     field: str, canonical: Any, remembered: Any
 ) -> tuple[tuple[str, ...], bool, bool]:
@@ -771,11 +777,13 @@ def _classify_difference(
         )
     if field in {"valid_from", "valid_until"}:
         try:
-            expected_time = datetime.fromisoformat(canonical.replace("Z", "+00:00"))
-            actual_time = datetime.fromisoformat(remembered.replace("Z", "+00:00"))
-        except (AttributeError, ValueError):
+            expected_time = _aware(datetime.fromisoformat(canonical.replace("Z", "+00:00")))
+            actual_time = _aware(datetime.fromisoformat(remembered.replace("Z", "+00:00")))
+        except (AttributeError, ValueError, TypeError):
             pass
         else:
+            if actual_time == expected_time:  # same instant, different spelling (offset dropped, Z vs +00:00)
+                return (), False, False
             broadens = (
                 actual_time < expected_time
                 if field == "valid_from"

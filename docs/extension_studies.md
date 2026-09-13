@@ -301,6 +301,7 @@ Authorized use with the rule: 100% in the procurement open loop, 99 to 100% on t
 - Diagnosis localizer (Section 6): the first version took the last memory row per block, but the paper's writer route stores one row per writer attempt, and it stopped at the last block that had a row, so a final update rejected on both attempts went unlocalized. Fixed to read the run's state log and to cover every base block; the earlier 637 rows were unchanged by the fix, which only added rows.
 - Closed loop, first implementation: the write-back described the submitted request even when the executor ran the alternative; later rounds reused corpus timestamps while logs moved forward; the neutral control did not exist. Fixed as described in Section 3.
 - Generated corpus `generated_v1`: the stale count entered the random seed, so every other draw changed with it. Replaced by `generated_v2`.
+- Fidelity comparison (procurement, finance): a remembered `valid_from`/`valid_until` written without a timezone offset made the comparison with the offset-aware canonical value raise instead of scoring; Inkling writes such timestamps. Offset-less timestamps are now read as UTC (the corpus's zone) and equal instants count as exact. Paper-writer runs never hit it.
 - Reasoning writers: see Section 5.
 
 ## 9. Examples worth reading
