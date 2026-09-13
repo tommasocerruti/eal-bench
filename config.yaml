@@ -128,6 +128,8 @@ model_targets:
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
     rate_limit: {rpm: 45}   # per process; several drivers share this endpoint (about 100 rpm total)
+    request_parameters:
+      max_tokens: 16384   # its PatchDoc calls on finance and cybersecurity profiles run past 4096 ("Tool calls cutoff by max_tokens")
   glm_5_3_flash_baseten:
     provider: baseten
     model: zai-org/GLM-5.3-Flash
