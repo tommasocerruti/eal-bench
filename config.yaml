@@ -13,7 +13,7 @@ defaults:
   log_path: logs/calls.jsonl
   batch_size: 20          # llm.batch() runs this many calls in parallel per wave
   max_concurrency: 20     # hard cap on calls in flight per provider/target route
-  max_retries: 8          # direct client: max task attempts incl. initial (exponential backoff, 30 s cap); SDK retries separate.
+  max_retries: 10         # direct client: max task attempts incl. initial (exponential backoff, 30 s cap); SDK retries separate.
                           # 8 so that a burst of 429s under several concurrent drivers is retried instead of reaching the trial.
 
 providers:
@@ -63,7 +63,7 @@ model_targets:
     model: gptoss
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
-    rate_limit: {rpm: 18}   # per process; several drivers share this endpoint (about 100 rpm total)
+    rate_limit: {rpm: 15}   # per process; several drivers share this endpoint (about 100 rpm total)
   nemotron_baseten:
     provider: baseten
     model: nemotron
