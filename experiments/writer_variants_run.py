@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import shutil
 import sys
 from collections import Counter, defaultdict
@@ -73,6 +74,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--writer-instruction", default=None, help="one line prepended to the writer's instructions; condition ids get the --instruction-tag suffix")
     parser.add_argument("--instruction-tag", default="instructed")
     parser.add_argument("--source-run", default=None, help="executor-only replay: reuse the frozen memories of a completed run of this study and run only the executor stage with --executor-targets; the writer stage is skipped and the writer-side files are copied")
+    parser.add_argument("--capacity-scale", type=float, default=None, help="multiply the calibrated primary memory capacity (tokens) by this factor; recorded in the manifest as capacity_scale. Used to test whether a failure that is a rejected oversize update disappears when the profile fits")
     parser.add_argument("--dry-run", action="store_true")
     return parser
 
@@ -173,6 +175,8 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit("live runs require --estimated-cost-usd")
     seed = args.seed if args.seed is not None else base.canonical_seed
     capacity_tokens = calibrate_capacity(base, cases, corpus_version=corpus_version, presentation=presentation).tokens_for("primary")
+    if args.capacity_scale:
+        capacity_tokens = math.ceil(capacity_tokens * args.capacity_scale)
     hybrid = hybrid_domain(base)
 
     groups = []  # (condition_id, writing domain, chain specs)
@@ -227,7 +231,7 @@ def main(argv: list[str] | None = None) -> int:
         study=STUDY_ID, domain=base, options=vars(args), presentation=presentation,
         implementation_files=[Path(__file__), Path("experiments/authorization_memory/hybrid_memory.py"), Path("experiments/authorization_memory/writing_methods.py"), Path("experiments/authorization_memory/langmem_writer.py")],
     )
-    manifest.update(corpus_version=corpus_version, capacity_tokens=capacity_tokens, conditions=[g[0] for g in groups], planned={"writer_updates": writer_updates, "executor_calls": executor_calls}, status="running")
+    manifest.update(corpus_version=corpus_version, capacity_tokens=capacity_tokens, capacity_scale=args.capacity_scale, conditions=[g[0] for g in groups], planned={"writer_updates": writer_updates, "executor_calls": executor_calls}, status="running")
     write_manifest(run_dir, manifest)
 
     memories, attempts, states, contexts, evidence, jobs, formation_rows = [], [], [], [], {}, [], []

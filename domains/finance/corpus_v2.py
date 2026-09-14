@@ -64,7 +64,7 @@ def provenance(version: str, case_count: int) -> Mapping[str, Any]:
     from experiments.authorization_memory.persistence import content_hash, file_hash
 
     paths = source_files(version)
-    hashes = {str(path.relative_to(PACKAGE_DIR)): file_hash(path) for path in paths}
+    hashes = {path.relative_to(PACKAGE_DIR).as_posix(): file_hash(path) for path in paths}
     split = "claim" if version == HELD_OUT_VERSION else "development"
     return {
         "corpus_version": version,

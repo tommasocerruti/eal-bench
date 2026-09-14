@@ -86,10 +86,10 @@ def corpus_provenance(version: str) -> Mapping[str, Any]:
         "corpus_version": version,
         "source_format": "cybersecurity_source_v1",
         "source_sha256": content_hash(
-            {str(path.relative_to(Path(__file__).parent)): file_hash(path) for path in paths}
+            {path.relative_to(Path(__file__).parent).as_posix(): file_hash(path) for path in paths}
         ),
         "source_files": {
-            str(path.relative_to(Path(__file__).parent)): file_hash(path) for path in paths
+            path.relative_to(Path(__file__).parent).as_posix(): file_hash(path) for path in paths
         },
         "generator_version": "cybersecurity_final_signed_snapshot_v1",
         "case_count": len(load_cases(version)),
