@@ -998,6 +998,13 @@ def _manifest(
     memory_implementation_hash = implementation[
         "memory_implementation_hash"
     ]
+    if plan.study_id == "source_authority":
+        source_hashes = {
+            item.memory_implementation_hash for item in plan.source_evidence
+        }
+        memory_implementation_hash = (
+            next(iter(source_hashes)) if len(source_hashes) == 1 else None
+        )
     writer_framework = implementation if writer_active else None
     writer_profiles = _writer_call_profiles(
         domain,

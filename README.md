@@ -61,6 +61,7 @@ blocks. Final memories are frozen and hashed before executor evaluation.
 | `pressure` | Replay a writer run under authority-invariant operational pressure |
 | `writer_ttc` | Compare writer-side candidate sampling and selection strategies |
 | `evaluation_cue` | Measure the effect of evaluation framing |
+| `source_authority` | Compare saved typed memories before and after cited-source authority gating |
 
 Model targets are provider-specific and are never silently pooled or substituted. List the
 configured routes and resolved model names with:
@@ -139,6 +140,9 @@ uv run python -m experiments.run \
 
 Use `--study controls` for faithful controls. Pressure replays require a completed writer run
 through `--source-run results/<domain>/<run-id>`.
+
+The [mitigation guide](experiments/mitigations/README.md) explains how to apply source-authority
+gating to frozen writer memories and evaluate the paired memories with a configured executor.
 
 ## Outputs
 

@@ -496,8 +496,10 @@ def _implementation_files(
         root / "experiments" / "run.py",
         root / "domains" / "__init__.py",
         root / "domains" / "base.py",
+        root / "domains" / "source_authority.py",
     }
     paths.update((root / "experiments" / "authorization_memory").glob("*.py"))
+    paths.update((root / "experiments" / "mitigations").rglob("*.py"))
     paths.update((root / "src" / "eal_bench" / "llm").glob("*.py"))
     paths.update(
         (root / "domains" / domain.domain_id).glob("**/*.py")
