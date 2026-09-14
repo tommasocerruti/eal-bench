@@ -46,14 +46,14 @@ Paired difference at round 3, own actions minus control, all domains and five wr
 | Finance | Typed incremental | paper's five writers, 3 seeds | 51.0 | 98.3 |
 | Finance | Source-authority gate | paper's five writers, 3 seeds | 1.7 | 29.2 |
 | Finance | Bounded event sourcing | paper's five writers, 3 seeds | 6.9 | 13.3 |
-| Finance | Typed incremental | Baseten five writers, 3 seeds | 34.6 | 99.9 |
-| Finance | One-line mandate | Baseten five writers, 3 seeds | 1.0 | 99.0 |
+| Finance | Typed incremental | Baseten five writers, 3 seeds | 31.7 | 99.9 |
+| Finance | One-line mandate | Baseten five writers, 3 seeds | 1.7 | 99.2 |
 | Finance | Rebuild every 3 blocks | Baseten five writers, canonical seed | 0.0 | 100.0 |
 | Pooled | Typed incremental | paper's five writers, 3 seeds | 25.3 | 93.3 |
 | Pooled | Source-authority gate | paper's five writers, 3 seeds | 7.3 | 53.8 |
 | Pooled | Bounded event sourcing | paper's five writers, 3 seeds | 9.0 | 64.7 |
-| Pooled | Typed incremental | Baseten five writers, 3 seeds | 19.9 | 91.5 |
-| Pooled | One-line mandate | Baseten five writers, 3 seeds | 12.8 | 88.2 |
+| Pooled | Typed incremental | Baseten five writers, 3 seeds | 19.6 | 91.7 |
+| Pooled | One-line mandate | Baseten five writers, 3 seeds | 12.6 | 88.6 |
 | Pooled | Rebuild every 3 blocks | Baseten five writers, procurement 3 seeds, others canonical | 4.2 | 96.5 |
 
 ### Table: formation and propagation, with rebuild as the one design change that helps

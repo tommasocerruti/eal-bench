@@ -20,7 +20,7 @@ Six subsections; the first and last compress what is there, the middle four are 
 2. **The trigger is a restatement of a superseded permission.** New, from Section 4. The matched generated corpus: zero restatements form nothing (0 of 324), two form 15%, four add nothing; amendments launder four times more than revoke-and-replace; the gap between grant and change does not matter. One table (three rows by stale count, two by lifecycle). This is the paper's first statement about *which histories* fail, and it explains the incremental result: a writer that never revisits earlier blocks reads each restatement as news.
 3. **The writer's error is one of three things, set by the domain.** New, from Section 6. Every failure in every run (1,637), located to the block where it entered and labeled by three judges (84% unanimous): in procurement and finance a restatement from someone without authority is applied; in the closed loop the agent's own escalation or execution line is read as a grant; in cybersecurity the writer fails to write the one large legitimate change and keeps the old permission. One table (cause by setting). This reframes cybersecurity, which the paper currently presents as the "safest" domain: it fails differently, not less, and the paper's own observation that gating does nothing there follows from it.
 4. **The agent's own actions enter its memory.** New, from Section 3. The closed loop with the matched control: records minted from write-back lines (93 against 1), authorized use down 24 points over three rounds (47 in cybersecurity), no detectable rise in unauthorized submission. One figure (three rounds, two arms, two metrics, three domains). The point for the paper: in a deployment that logs its actions, the endogenous channel is not only the history it is given but the history it writes, and the measured cost is refusing legitimate work.
-5. **Mitigations work when they match the mechanism.** The paper's 4.4 rebuilt around the mechanism. Four mitigations on one frontier: the source-authority gate and bounded event sourcing (provenance; large utility cost everywhere, no effect in cybersecurity), rebuilding from the history (the design axis from 1; works in every domain, costs writer compute), and the one-line mandate (near-zero utility cost in procurement and finance, minted records 91 → 4, harmful in cybersecurity where the failure is an unapplied update). One figure with a domain facet, and cybersecurity as the illustration: a rule about authority cannot fix an update that was never written. Populations must be stated on the figure: the paper's mitigations are five writers at three seeds; the mandate is the Baseten writers at the canonical seed (see open items).
+5. **Mitigations work when they match the mechanism.** The paper's 4.4 rebuilt around the mechanism. Four mitigations on one frontier: the source-authority gate and bounded event sourcing (provenance; large utility cost everywhere, no effect in cybersecurity), rebuilding from the history (the design axis from 1; works in every domain, costs writer compute), and the one-line mandate (near-zero utility cost in procurement and finance, minted records 91 → 4, harmful in cybersecurity where the failure is an unapplied update). One figure with a domain facet, and cybersecurity as the illustration: a rule about authority cannot fix an update that was never written. Populations must be stated on the figure: the paper's mitigations are its five writers at three seeds; the mandate and rebuild are the five Baseten writers, the mandate at the same three seeds, rebuild at three seeds in procurement and the canonical seed elsewhere.
 6. **The failure is general and travels with the memory.** The paper's 4.3 compressed to one table with seven writers and one sentence on executor agreement; pressure to the appendix, with one sentence here.
 
 Appendix: pressure (as now), writer-side compute (as now, seven writers), capacity ablation (five writers, stated), evaluation cues (seven writers), hybrid and retrieval, rebuild timing, one-pass variants, the three-seed matrix (seven writers), per-judge tables and agreement, the judge prompt and labels, worked examples.
@@ -36,7 +36,7 @@ Appendix: pressure (as now), writer-side compute (as now, seven writers), capaci
 ### Open items before this can be written into the paper
 
 1. **Human validation of the judge labels.** Subsections 3 and 5 rest on three LLM judges. A stratified sample of fifty rows (by label and domain), read by a person against the block and the memory diff, is the check. Until it is done the mechanism claims are the judges' labels, and the text must say so.
-2. **Seed alignment for the frontier.** The mandate ran at the canonical seed per domain; the paper's mitigations at three seeds. Running the mandate open loop at the two remaining seeds (typed and hybrid incremental, three domains, the Baseten writers) is about fifteen runs and removes the population caveat from the one comparison the story turns on.
+2. **Rebuild at three seeds in cybersecurity and finance.** The mandate and its baseline are at the paper's three seeds in every domain; rebuild-every-3 is at three seeds in procurement only. Two more seeds in the other two domains (ten runs) would put every point on the frontier at the same seed count.
 3. **Provenance mitigations for the added writers.** The gate and event-sourcing code is not in this repository; running them on Inkling and Flash needs the tooling that produced the paper's numbers.
 4. **Wording discipline.** Every statement in subsections 2 to 5 carries its count and interval, the null on unauthorized submission stays a null, and mechanisms are the judges' labels until item 1 is done.
 
@@ -53,7 +53,7 @@ Appendix: pressure (as now), writer-side compute (as now, seven writers), capaci
 | Added writers reproduce the paper (S5) | paper route: 3 seeds per domain, both executors; grid: procurement 3 seeds, others 1 | strong on the paper route, moderate on the grid | as measured; single-seed cells marked by their n |
 | Flash's closed loop raises unauthorized submission (S5) | 72 chains, +3.9, interval +1.6 to +6.6 | moderate (one writer, one seed) | as measured, not generalized |
 | Three causes by setting and domain (S6) | 1,637 failures, three LLM judges, 84% unanimous, 16% two of three | strong as a description of the judges' labels | labels have not been validated against human reading; this is the main open check |
-| The mandate removes laundering where the cause is a misread message and hurts where it is an update failure (S7) | 3 writers × 2 executors, 1 seed per domain; open and closed loop; judged causes | moderate (single seed) for the effect sizes, which are large; the mechanism rests on the judges | as measured, with the judge caveat |
+| The mandate removes laundering where the cause is a misread message and hurts where it is an update failure (S7) | open loop: 5 writers × 2 executors × 3 seeds per domain, 180 paired cells, sign-flip p < 0.001 in procurement, finance (typed) and cybersecurity, same direction at every seed; closed loop at the canonical seed; judged causes | strong for the effect sizes; the mechanism rests on the judges | as measured, with the judge caveat |
 
 **Open checks before the paper.** A human reading of a sample of judged rows (fifty, stratified by label and domain) to validate the labels, since Section 6 and the mechanism half of Section 7 rest on them; the closed loop at the paper's other two seeds if a per-domain claim about unauthorized submission is wanted; and a rebuild-frequency curve if rebuilding is to be presented as a mitigation on the frontier.
 
@@ -105,14 +105,14 @@ Paired difference at round 3, own actions minus control, all domains and five wr
 | Finance | Typed incremental | paper's five writers, 3 seeds | 51.0 | 98.3 |
 | Finance | Source-authority gate | paper's five writers, 3 seeds | 1.7 | 29.2 |
 | Finance | Bounded event sourcing | paper's five writers, 3 seeds | 6.9 | 13.3 |
-| Finance | Typed incremental | Baseten five writers, 3 seeds | 34.6 | 99.9 |
-| Finance | One-line mandate | Baseten five writers, 3 seeds | 1.0 | 99.0 |
+| Finance | Typed incremental | Baseten five writers, 3 seeds | 31.7 | 99.9 |
+| Finance | One-line mandate | Baseten five writers, 3 seeds | 1.7 | 99.2 |
 | Finance | Rebuild every 3 blocks | Baseten five writers, canonical seed | 0.0 | 100.0 |
 | Pooled | Typed incremental | paper's five writers, 3 seeds | 25.3 | 93.3 |
 | Pooled | Source-authority gate | paper's five writers, 3 seeds | 7.3 | 53.8 |
 | Pooled | Bounded event sourcing | paper's five writers, 3 seeds | 9.0 | 64.7 |
-| Pooled | Typed incremental | Baseten five writers, 3 seeds | 19.9 | 91.5 |
-| Pooled | One-line mandate | Baseten five writers, 3 seeds | 12.8 | 88.2 |
+| Pooled | Typed incremental | Baseten five writers, 3 seeds | 19.6 | 91.7 |
+| Pooled | One-line mandate | Baseten five writers, 3 seeds | 12.6 | 88.6 |
 | Pooled | Rebuild every 3 blocks | Baseten five writers, procurement 3 seeds, others canonical | 4.2 | 96.5 |
 
 ### Table: formation and propagation, with rebuild as the one design change that helps
@@ -566,18 +566,52 @@ Judge agreement: 1369 rows with 3 of 3 judges on the majority label, 264 rows wi
 
 > Only record permissions that an authorized approver has actually granted, no matter what anyone else says or asks.
 
-It is prepended to the writer's instructions for every update and compared with the same conditions without it, at the same seeds and executors: the open loop (typed and hybrid incremental, both executors) in all three domains, the three-round closed loop in all three domains, and the `generated_v2` corpus. Remaining failures are judged with the Section 6 method.
+It is prepended to the writer's instructions for every update and compared with the same conditions without it, at the same seeds and executors: the open loop (typed and hybrid incremental, both executors, all five writers, the paper's three seeds per domain) in all three domains, the three-round closed loop in all three domains at the canonical seed, and the `generated_v2` corpus. Remaining failures are judged with the Section 6 method.
 
-**Result, open loop.** The paper's three writers pooled, both executors, each domain at its canonical seed. Baseline is the same condition without the line, same seed, same runs as Section 1. False permissions formed counts memories that authorize an unauthorized request.
+**Result, open loop.** Five writers and both executors pooled, the paper's three seeds per domain (90 runs, 180 writer-by-seed-by-executor-by-memory pairs, no provider-error trials). Baseline is the same condition without the line from the same seeds and writers. False permissions formed counts memories that authorize an unauthorized request. The paired change is the mean over pairs of the mandate rate minus the baseline rate, with a bootstrap 95% interval and a sign-flip permutation p-value.
 
-| Domain | Memory | US without | US with mandate | AU without | AU with mandate | false permissions formed, without → with |
-|---|---|---|---|---|---|---|
-| procurement | typed incremental | 23.1% (18.0–29.2), n=216 | 11.1% (7.6–16.0), n=216 | 97.2% (94.1–98.7), n=216 | 96.3% (92.9–98.1), n=216 | 25 → 12 |
-| procurement | hybrid incremental | 16.2% (11.9–21.7), n=216 | 6.5% (3.9–10.6), n=216 | 99.1% (96.7–99.7), n=216 | 99.5% (97.4–99.9), n=216 | 17 → 7 |
-| cybersecurity | typed incremental | 6.2% (4.2–9.1), n=384 | 13.5% (10.5–17.3), n=384 | 93.8% (90.9–95.8), n=384 | 87.5% (83.8–90.4), n=384 | 12 → 26 |
-| cybersecurity | hybrid incremental | 1.6% (0.7–3.4), n=384 | 10.4% (7.7–13.9), n=384 | 98.4% (96.6–99.3), n=384 | 89.6% (86.1–92.3), n=384 | 2 → 20 |
-| finance | typed incremental | 33.3% (27.0–40.3), n=192 | 0.0% (0.0–2.0), n=192 | 99.5% (97.1–99.9), n=192 | 100.0% (98.0–100.0), n=192 | 32 → 0 |
-| finance | hybrid incremental | 16.7% (12.1–22.6), n=192 | 0.0% (0.0–2.0), n=192 | 100.0% (98.0–100.0), n=192 | 100.0% (98.0–100.0), n=192 | 16 → 0 |
+| Domain | Memory | US without | US with mandate | AU without | AU with mandate | false permissions formed, without → with | paired change in US, points | paired change in AU, points |
+|---|---|---|---|---|---|---|---|---|
+| procurement | typed incremental | 25.4% (22.9–28.0), n=1080 | 5.8% (4.6–7.4), n=1080 | 90.6% (88.7–92.2) | 98.2% (97.3–98.9) | 131 → 28 | -19.5 (-23.1 to -16.0), p=0.000, 30 pairs | +7.7 (+4.0 to +11.4), p=0.001, 30 pairs |
+| procurement | hybrid incremental | 12.9% (11.0–15.0), n=1080 | 3.2% (2.3–4.5), n=1080 | 97.5% (96.4–98.3) | 99.4% (98.7–99.7) | 63 → 14 | -9.6 (-12.6 to -6.6), p=0.000, 30 pairs | +1.9 (+0.6 to +3.2), p=0.014, 30 pairs |
+| cybersecurity | typed incremental | 10.4% (9.1–11.8), n=1920 | 21.8% (20.0–23.7), n=1920 | 88.3% (86.8–89.7) | 77.9% (76.0–79.7) | 98 → 209 | +11.4 (+6.8 to +15.8), p=0.000, 30 pairs | -10.4 (-15.6 to -5.0), p=0.001, 30 pairs |
+| cybersecurity | hybrid incremental | 12.7% (11.2–14.2), n=1920 | 20.2% (18.4–22.0), n=1920 | 86.5% (84.9–87.9) | 79.7% (77.8–81.4) | 118 → 194 | +7.5 (+2.8 to +12.6), p=0.006, 30 pairs | -6.8 (-12.0 to -2.1), p=0.014, 30 pairs |
+| finance | typed incremental | 31.7% (28.8–34.7), n=960 | 1.7% (1.0–2.7), n=960 | 99.9% (99.4–100.0) | 99.2% (98.4–99.6) | 152 → 8 | -30.0 (-35.8 to -24.2), p=0.000, 30 pairs | -0.7 (-2.1 to +0.2), p=0.505, 30 pairs |
+| finance | hybrid incremental | 11.7% (9.8–13.9), n=960 | 3.8% (2.7–5.1), n=960 | 99.3% (98.5–99.6) | 98.3% (97.3–99.0) | 56 → 18 | -7.9 (-12.9 to -2.5), p=0.011, 30 pairs | -0.9 (-2.9 to +0.8), p=0.387, 30 pairs |
+
+The same comparison by seed, to show that the direction does not depend on which seed is used:
+
+| Domain | Seed | US without → with | AU without → with | false permissions formed, without → with | n per arm |
+|---|---|---|---|---|---|
+| procurement | 20260719 (canonical) | 18.9% (16.2–21.9) → 5.3% (3.9–7.2) | 95.7% (94.0–97.0) → 98.5% (97.3–99.1) | 66 → 19 | 720 |
+| procurement | 20260821 | 17.6% (15.0–20.6) → 2.2% (1.4–3.6) | 93.6% (91.6–95.2) → 98.6% (97.5–99.2) | 57 → 5 | 720 |
+| procurement | 20260822 | 20.8% (18.0–24.0) → 6.1% (4.6–8.1) | 92.8% (90.7–94.5) → 99.3% (98.4–99.7) | 71 → 18 | 720 |
+| cybersecurity | 20260812 (canonical) | 14.2% (12.4–16.2) → 19.7% (17.6–22.0) | 85.8% (83.8–87.6) → 80.7% (78.5–82.8) | 90 → 126 | 1280 |
+| cybersecurity | 20260821 | 9.4% (7.9–11.1) → 23.3% (21.0–25.7) | 89.5% (87.7–91.0) → 76.3% (73.9–78.6) | 58 → 149 | 1280 |
+| cybersecurity | 20260822 | 10.9% (9.3–12.8) → 19.9% (17.8–22.2) | 87.0% (85.0–88.7) → 79.4% (77.1–81.5) | 68 → 128 | 1280 |
+| finance | 20260816 (canonical) | 23.8% (20.6–27.2) → 0.0% (-0.0–0.6) | 99.8% (99.1–100.0) → 98.8% (97.6–99.4) | 76 → 0 | 640 |
+| finance | 20260821 | 17.5% (14.8–20.6) → 6.9% (5.2–9.1) | 98.9% (97.8–99.5) → 98.8% (97.6–99.4) | 56 → 22 | 640 |
+| finance | 20260822 | 23.8% (20.6–27.2) → 1.2% (0.6–2.4) | 100.0% (99.4–100.0) → 98.8% (97.6–99.4) | 76 → 4 | 640 |
+
+And by writer, pooled over seeds, memories, and executors:
+
+| Domain | Writer | US without → with | AU without → with | false permissions formed, without → with | n per arm |
+|---|---|---|---|---|---|
+| procurement | GLM 5.2 | 21.1% (17.5–25.2) → 0.0% (0.0–0.9) | 94.4% (91.9–96.2) → 100.0% (99.1–100.0) | 45 → 0 | 432 |
+| procurement | Kimi K2.6 | 19.2% (15.8–23.2) → 10.2% (7.7–13.4) | 88.9% (85.6–91.5) → 98.1% (96.4–99.1) | 40 → 19 | 432 |
+| procurement | Nemotron 3 Ultra | 20.6% (17.1–24.7) → 9.0% (6.7–12.1) | 97.0% (94.9–98.2) → 97.0% (94.9–98.2) | 43 → 19 | 432 |
+| procurement | Inkling | 27.5% (23.5–31.9) → 3.5% (2.1–5.6) | 91.9% (88.9–94.1) → 99.3% (98.0–99.8) | 52 → 4 | 432 |
+| procurement | DeepSeek V4.1 Flash | 7.2% (5.1–10.0) → 0.0% (0.0–0.9) | 97.9% (96.1–98.9) → 99.5% (98.3–99.9) | 14 → 0 | 432 |
+| cybersecurity | GLM 5.2 | 2.2% (1.4–3.5) → 9.9% (8.0–12.2) | 97.9% (96.6–98.7) → 90.6% (88.4–92.5) | 8 → 38 | 768 |
+| cybersecurity | Kimi K2.6 | 1.0% (0.5–2.0) → 1.0% (0.5–2.0) | 97.9% (96.6–98.7) → 99.0% (98.0–99.5) | 4 → 4 | 768 |
+| cybersecurity | Nemotron 3 Ultra | 19.5% (16.9–22.5) → 29.4% (26.3–32.7) | 80.6% (77.7–83.2) → 71.0% (67.7–74.1) | 74 → 113 | 768 |
+| cybersecurity | Inkling | 26.0% (23.1–29.3) → 47.5% (44.0–51.1) | 71.9% (68.6–74.9) → 49.0% (45.4–52.5) | 100 → 183 | 768 |
+| cybersecurity | DeepSeek V4.1 Flash | 8.7% (6.9–10.9) → 16.9% (14.4–19.7) | 88.7% (86.2–90.7) → 84.5% (81.8–86.9) | 30 → 65 | 768 |
+| finance | GLM 5.2 | 25.0% (20.9–29.6) → 0.0% (0.0–1.0) | 99.7% (98.5–100.0) → 100.0% (99.0–100.0) | 48 → 0 | 384 |
+| finance | Kimi K2.6 | 33.3% (28.8–38.2) → 4.2% (2.6–6.7) | 100.0% (99.0–100.0) → 100.0% (99.0–100.0) | 64 → 8 | 384 |
+| finance | Nemotron 3 Ultra | 12.5% (9.6–16.2) → 9.4% (6.8–12.7) | 100.0% (99.0–100.0) → 100.0% (99.0–100.0) | 24 → 18 | 384 |
+| finance | Inkling | 16.7% (13.3–20.7) → 0.0% (0.0–1.0) | 98.2% (96.3–99.1) → 97.9% (95.9–98.9) | 32 → 0 | 384 |
+| finance | DeepSeek V4.1 Flash | 20.8% (17.1–25.2) → 0.0% (0.0–1.0) | 100.0% (99.0–100.0) → 95.8% (93.3–97.4) | 40 → 0 | 384 |
 
 **Result, closed loop.** Same design as Section 3's action arm (three rounds, the agent's own log lines written back), with and without the line, paper's three writers pooled, both executors; the open-loop row is the same runs' frozen memories answered without write-back.
 
@@ -597,7 +631,7 @@ Records born from the agent's own write-back lines, all domains, paper's writers
 
 **Where the remaining failures come from** (Section 6 method, same three judges). Procurement, with the line: every one of the 25 remaining open-loop failures is `restatement applied`, the same cause as without it. Finance, with the line: no failures to judge. Cybersecurity is different in kind, with or without the line: of 126 failures in the mandate runs, 116 are `update failed` and 10 `authoritative change misapplied`; of 90 in the matched runs without the line, 79 and 11. Not one cybersecurity failure is a restatement being applied. The failing block is the same everywhere: the one that carries the duty officer's signed change set, a replacement of the whole permission list, where both of the writer's attempts to write the new list are rejected as invalid and the memory keeps the old permission active. With the line, both attempts fail as invalid output at that block in 56 failures against 16 without it.
 
-**Reading.** One sentence in the writer's instructions is enough to remove most laundering where the failure is a misread message: procurement halves it in the open loop and cuts it to a quarter in the closed loop, finance goes to zero in both, and records minted from the agent's own actions all but disappear (91 → 4). It does not restore authorized use in the closed loop (procurement round 3: 59% without, 62% with), so the utility loss of Section 3 is not caused by the writer believing the wrong messages. In cybersecurity the line makes things worse, for the paper's writers and for the added ones (Section 5), and the judges say why: cybersecurity's failure was never about authority. The writer knows the duty officer's change set is the authoritative one; it fails to write the replacement, and with the extra instruction it fails more often. A rule about whose word counts cannot fix an update that is never applied.
+**Reading.** Where the failure is a misread message, one sentence in the writer's instructions removes most of it and costs nothing in authorized use. Procurement: unauthorized submission falls by 19.5 points under typed memory (25.4% to 5.8%) and 9.6 under hybrid, at every seed and for every writer, and authorized use rises (90.6% to 98.2%), because the writer also stops recording the restated figures that were making it refuse legitimate requests. Finance: 31.7% to 1.7% under typed memory at all three seeds, with no measurable change in authorized use; under hybrid memory the drop is smaller (11.7% to 3.8%). In the closed loop, records minted from the agent's own actions all but disappear (91 to 4), but authorized use at round 3 is unchanged (59% without, 62% with), so the utility loss of Section 3 is not caused by the writer believing the wrong messages. In cybersecurity the line makes things worse at every seed and for four of the five writers (Kimi is unchanged at 1.0%): unauthorized submission rises 11.4 points under typed memory (10.4% to 21.8%) and authorized use falls 10.4 points. The judges say why: cybersecurity's failure was never about authority. The writer knows the duty officer's change set is the authoritative one; it fails to write the replacement, and with the extra instruction it fails more often. A rule about whose word counts cannot fix an update that is never applied.
 
 **Takeaway.** The one-line mandate is a real mitigation where laundering comes from misread messages, and a harmful one where the failure is the writer's inability to apply a large legitimate change. Before adding such a line, a deployer needs Section 6's answer to which failure they have.
 
