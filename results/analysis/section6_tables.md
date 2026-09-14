@@ -1,4 +1,4 @@
-*open loop, procurement memory grid (paper's three seeds; added writers)* (328 failures)
+*open loop, procurement memory grid (paper's three seeds; all five writers)* (328 failures)
 
 | Where the failure enters | n | restatement applied | own action as approval | authoritative change misapplied | update failed | other | no majority |
 |---|---|---|---|---|---|---|---|
@@ -16,17 +16,23 @@
 |---|---|---|---|---|---|---|---|
 | all | 76 | 76 | 0 | 0 | 0 | 0 | 0 |
 
+*open loop, cybersecurity and finance typed and hybrid incremental at the paper's other two seeds (mandate baselines)* (258 failures)
+
+| Where the failure enters | n | restatement applied | own action as approval | authoritative change misapplied | update failed | other | no majority |
+|---|---|---|---|---|---|---|---|
+| all | 258 | 128 | 0 | 15 | 115 | 0 | 0 |
+
 *open loop, generated corpus (with and without the mandate)* (167 failures)
 
 | Where the failure enters | n | restatement applied | own action as approval | authoritative change misapplied | update failed | other | no majority |
 |---|---|---|---|---|---|---|---|
 | all | 167 | 164 | 0 | 0 | 0 | 3 | 0 |
 
-*open loop, mandate (all domains)* (151 failures)
+*open loop, mandate (all domains, three seeds)* (506 failures)
 
 | Where the failure enters | n | restatement applied | own action as approval | authoritative change misapplied | update failed | other | no majority |
 |---|---|---|---|---|---|---|---|
-| all | 151 | 25 | 0 | 10 | 116 | 0 | 0 |
+| all | 506 | 97 | 0 | 38 | 371 | 0 | 0 |
 
 *paper writer route, added writers (all domains)* (159 failures)
 
@@ -61,12 +67,12 @@
 | records born from the agent's own lines | 6 | 0 | 6 | 0 | 0 | 0 | 0 |
 | existing records re-cited to the agent's own lines | 5 | 0 | 5 | 0 | 0 | 0 | 0 |
 
-*All groups* (1637 failures): restatement applied 1029, update failed 351, own action as approval 200, authoritative change misapplied 51, other 6.
+*All groups* (2250 failures): restatement applied 1229, update failed 721, own action as approval 200, authoritative change misapplied 94, other 6.
 
-Judge agreement: 1369 rows with 3 of 3 judges on the majority label, 264 rows with 2 of 3 judges on the majority label, 4 rows with 1 of 3 judges on the majority label.
+Judge agreement: 1784 rows with 3 of 3 judges on the majority label, 462 rows with 2 of 3 judges on the majority label, 4 rows with 1 of 3 judges on the majority label.
 
 | Judge | restatement applied | own action as approval | authoritative change misapplied | update failed | other |
 |---|---|---|---|---|---|
-| DeepSeek V4 Pro | 1056 | 168 | 53 | 349 | 11 |
-| GLM 5.3 | 1031 | 201 | 30 | 369 | 6 |
-| Nemotron 3 Ultra | 1021 | 199 | 255 | 162 | 0 |
+| DeepSeek V4 Pro | 1251 | 170 | 98 | 717 | 14 |
+| GLM 5.3 | 1231 | 201 | 50 | 762 | 6 |
+| Nemotron 3 Ultra | 1221 | 199 | 466 | 364 | 0 |

@@ -18,7 +18,7 @@ Six subsections; the first and last compress what is there, the middle four are 
 
 1. **False authority forms in incremental memory and propagates to action.** The paper's 4.1 and 4.2 merged: the four-condition table across domains, formation tracking submission, exact repair. Seven writers throughout (the added two are in every cell). One table, one figure. Add one column or one sentence from Section 1: rebuilding from the history every few blocks is the one design change that removes most of it in every domain; hybrid and retrieval do not, and go to the appendix.
 2. **The trigger is a restatement of a superseded permission.** New, from Section 4. The matched generated corpus: zero restatements form nothing (0 of 324), two form 15%, four add nothing; amendments launder four times more than revoke-and-replace; the gap between grant and change does not matter. One table (three rows by stale count, two by lifecycle). This is the paper's first statement about *which histories* fail, and it explains the incremental result: a writer that never revisits earlier blocks reads each restatement as news.
-3. **The writer's error is one of three things, set by the domain.** New, from Section 6. Every failure in every run (1,637), located to the block where it entered and labeled by three judges (84% unanimous): in procurement and finance a restatement from someone without authority is applied; in the closed loop the agent's own escalation or execution line is read as a grant; in cybersecurity the writer fails to write the one large legitimate change and keeps the old permission. One table (cause by setting). This reframes cybersecurity, which the paper currently presents as the "safest" domain: it fails differently, not less, and the paper's own observation that gating does nothing there follows from it.
+3. **The writer's error is one of three things, set by the domain.** New, from Section 6. Every failure in every run (2,250), located to the block where it entered and labeled by three judges (79% unanimous): in procurement and finance a restatement from someone without authority is applied; in the closed loop the agent's own escalation or execution line is read as a grant; in cybersecurity the writer fails to write the one large legitimate change and keeps the old permission. One table (cause by setting). This reframes cybersecurity, which the paper currently presents as the "safest" domain: it fails differently, not less, and the paper's own observation that gating does nothing there follows from it.
 4. **The agent's own actions enter its memory.** New, from Section 3. The closed loop with the matched control: records minted from write-back lines (93 against 1), authorized use down 24 points over three rounds (47 in cybersecurity), no detectable rise in unauthorized submission. One figure (three rounds, two arms, two metrics, three domains). The point for the paper: in a deployment that logs its actions, the endogenous channel is not only the history it is given but the history it writes, and the measured cost is refusing legitimate work.
 5. **Mitigations work when they match the mechanism.** The paper's 4.4 rebuilt around the mechanism. Four mitigations on one frontier: the source-authority gate and bounded event sourcing (provenance; large utility cost everywhere, no effect in cybersecurity), rebuilding from the history (the design axis from 1; works in every domain, costs writer compute), and the one-line mandate (near-zero utility cost in procurement and finance, minted records 91 → 4, harmful in cybersecurity where the failure is an unapplied update). One figure with a domain facet, and cybersecurity as the illustration: a rule about authority cannot fix an update that was never written. Populations must be stated on the figure: the paper's mitigations are its five writers at three seeds; the mandate and rebuild are the five Baseten writers, the mandate at the same three seeds, rebuild at three seeds in procurement and the canonical seed elsewhere.
 6. **The failure is general and travels with the memory.** The paper's 4.3 compressed to one table with seven writers and one sentence on executor agreement; pressure to the appendix, with one sentence here.
@@ -52,7 +52,7 @@ Appendix: pressure (as now), writer-side compute (as now, seven writers), capaci
 | Restatements are the trigger; amendments launder more; gap does not matter (S4) | 108 matched groups, 3 writers, GPT-OSS; 324 requests per level | strong for 0 vs 2, and amendment vs replacement; null for gap and for 2 vs 4 | as measured |
 | Added writers reproduce the paper (S5) | paper route: 3 seeds per domain, both executors; grid: procurement 3 seeds, others 1 | strong on the paper route, moderate on the grid | as measured; single-seed cells marked by their n |
 | Flash's closed loop raises unauthorized submission (S5) | 72 chains, +3.9, interval +1.6 to +6.6 | moderate (one writer, one seed) | as measured, not generalized |
-| Three causes by setting and domain (S6) | 1,637 failures, three LLM judges, 84% unanimous, 16% two of three | strong as a description of the judges' labels | labels have not been validated against human reading; this is the main open check |
+| Three causes by setting and domain (S6) | 2,250 failures, three LLM judges, 79% unanimous, 21% two of three | strong as a description of the judges' labels | labels have not been validated against human reading; this is the main open check |
 | The mandate removes laundering where the cause is a misread message and hurts where it is an update failure (S7) | open loop: 5 writers × 2 executors × 3 seeds per domain, 180 paired cells, sign-flip p < 0.001 in procurement, finance (typed) and cybersecurity, same direction at every seed; closed loop at the canonical seed; judged causes | strong for the effect sizes; the mechanism rests on the judges | as measured, with the judge caveat |
 
 **Open checks before the paper.** A human reading of a sample of judged rows (fifty, stratified by label and domain) to validate the labels, since Section 6 and the mechanism half of Section 7 rest on them; the closed loop at the paper's other two seeds if a per-domain claim about unauthorized submission is wanted; and a rebuild-frequency curve if rebuilding is to be presented as a mitigation on the frontier.
@@ -146,13 +146,13 @@ Every failure in every run of this note. Rows group failures by where they occur
 | Setting | failures | restatement applied | own action as approval | authoritative change misapplied | update failed | other |
 |---|---|---|---|---|---|---|
 | Open loop, procurement | 549 | 545 | 0 | 1 | 0 | 3 |
-| Open loop, finance | 140 | 140 | 0 | 0 | 0 | 0 |
-| Open loop, cybersecurity | 177 | 0 | 0 | 22 | 155 | 0 |
+| Open loop, finance | 272 | 268 | 0 | 4 | 0 | 0 |
+| Open loop, cybersecurity | 303 | 0 | 0 | 33 | 270 | 0 |
 | Closed loop, shared history blocks | 309 | 274 | 0 | 6 | 29 | 0 |
 | Closed loop, the agent's own write-back lines | 192 | 1 | 186 | 2 | 0 | 3 |
-| With the mandate, procurement and finance | 81 | 69 | 8 | 4 | 0 | 0 |
-| With the mandate, cybersecurity | 189 | 0 | 6 | 16 | 167 | 0 |
-| **All** | **1637** | **1029** | **200** | **51** | **351** | **6** |
+| With the mandate, procurement and finance | 159 | 141 | 8 | 6 | 4 | 0 |
+| With the mandate, cybersecurity | 466 | 0 | 6 | 42 | 418 | 0 |
+| **All** | **2250** | **1229** | **200** | **94** | **721** | **6** |
 
 ### Table: generality (the paper's writer table with two added rows)
 
@@ -481,7 +481,7 @@ The labels came from reading traces of the first runs and writing down, for each
 
 **Result.** Every failure in every run of this note, by where it enters and the judges' majority label. In the closed-loop groups, failures in the shared history blocks are counted once per base memory; failures in write-back blocks belong to one arm; records born from the agent's own lines are the records Section 3 counts.
 
-*open loop, procurement memory grid (paper's three seeds; added writers)* (328 failures)
+*open loop, procurement memory grid (paper's three seeds; all five writers)* (328 failures)
 
 | Where the failure enters | n | restatement applied | own action as approval | authoritative change misapplied | update failed | other | no majority |
 |---|---|---|---|---|---|---|---|
@@ -499,17 +499,23 @@ The labels came from reading traces of the first runs and writing down, for each
 |---|---|---|---|---|---|---|---|
 | all | 76 | 76 | 0 | 0 | 0 | 0 | 0 |
 
+*open loop, cybersecurity and finance typed and hybrid incremental at the paper's other two seeds (mandate baselines)* (258 failures)
+
+| Where the failure enters | n | restatement applied | own action as approval | authoritative change misapplied | update failed | other | no majority |
+|---|---|---|---|---|---|---|---|
+| all | 258 | 128 | 0 | 15 | 115 | 0 | 0 |
+
 *open loop, generated corpus (with and without the mandate)* (167 failures)
 
 | Where the failure enters | n | restatement applied | own action as approval | authoritative change misapplied | update failed | other | no majority |
 |---|---|---|---|---|---|---|---|
 | all | 167 | 164 | 0 | 0 | 0 | 3 | 0 |
 
-*open loop, mandate (all domains)* (151 failures)
+*open loop, mandate (all domains, three seeds)* (506 failures)
 
 | Where the failure enters | n | restatement applied | own action as approval | authoritative change misapplied | update failed | other | no majority |
 |---|---|---|---|---|---|---|---|
-| all | 151 | 25 | 0 | 10 | 116 | 0 | 0 |
+| all | 506 | 97 | 0 | 38 | 371 | 0 | 0 |
 
 *paper writer route, added writers (all domains)* (159 failures)
 
@@ -544,17 +550,17 @@ The labels came from reading traces of the first runs and writing down, for each
 | records born from the agent's own lines | 6 | 0 | 6 | 0 | 0 | 0 | 0 |
 | existing records re-cited to the agent's own lines | 5 | 0 | 5 | 0 | 0 | 0 | 0 |
 
-*All groups* (1637 failures): restatement applied 1029, update failed 351, own action as approval 200, authoritative change misapplied 51, other 6.
+*All groups* (2250 failures): restatement applied 1229, update failed 721, own action as approval 200, authoritative change misapplied 94, other 6.
 
-Judge agreement: 1369 rows with 3 of 3 judges on the majority label, 264 rows with 2 of 3 judges on the majority label, 4 rows with 1 of 3 judges on the majority label.
+Judge agreement: 1784 rows with 3 of 3 judges on the majority label, 462 rows with 2 of 3 judges on the majority label, 4 rows with 1 of 3 judges on the majority label.
 
 | Judge | restatement applied | own action as approval | authoritative change misapplied | update failed | other |
 |---|---|---|---|---|---|
-| DeepSeek V4 Pro | 1056 | 168 | 53 | 349 | 11 |
-| GLM 5.3 | 1031 | 201 | 30 | 369 | 6 |
-| Nemotron 3 Ultra | 1021 | 199 | 255 | 162 | 0 |
+| DeepSeek V4 Pro | 1251 | 170 | 98 | 717 | 14 |
+| GLM 5.3 | 1231 | 201 | 50 | 762 | 6 |
+| Nemotron 3 Ultra | 1221 | 199 | 466 | 364 | 0 |
 
-**Reading.** Three causes account for nearly all 1,637 failures, and they separate by setting and domain rather than by writer. In the open loop, procurement and finance failures are a restatement being applied: a status line, a colleague, or a forwarded copy repeats the superseded figure and the writer changes the record to match. In the closed loop, every record minted from the agent's own lines and nearly every write-back-block failure is an escalation, decline, or execution line treated as a grant. Cybersecurity is the exception in kind: most of its failures, with or without the mandate, are the writer failing to apply the duty officer's signed change set (both attempts rejected, as a patch that cannot be applied or as a profile over the memory's size limit), so the old permission stays active; the counts are in the table. The agreement line above gives how often the three judges concur.
+**Reading.** Three causes account for nearly all 2,250 failures, and they separate by setting and domain rather than by writer. In the open loop, procurement and finance failures are a restatement being applied: a status line, a colleague, or a forwarded copy repeats the superseded figure and the writer changes the record to match. In the closed loop, every record minted from the agent's own lines and nearly every write-back-block failure is an escalation, decline, or execution line treated as a grant. Cybersecurity is the exception in kind: most of its failures, with or without the mandate, are the writer failing to apply the duty officer's signed change set (both attempts rejected, as a patch that cannot be applied or as a profile over the memory's size limit), so the old permission stays active; the counts are in the table. The agreement line above gives how often the three judges concur.
 
 **Takeaway.** The writer's error is not one thing across domains. Where the history keeps restating a superseded permission, the writer follows the restatement; where the agent logs its own actions, the writer reads them as approvals; where the legitimate change is a large replacement, the writer fails to write it. The first two are what a rule about authority can address, and Section 7 shows it does; the third is not.
 
@@ -629,7 +635,7 @@ And by writer, pooled over seeds, memories, and executors:
 
 Records born from the agent's own write-back lines, all domains, paper's writers: 91 without the line, 4 with it.
 
-**Where the remaining failures come from** (Section 6 method, same three judges). Procurement, with the line: every one of the 25 remaining open-loop failures is `restatement applied`, the same cause as without it. Finance, with the line: no failures to judge. Cybersecurity is different in kind, with or without the line: of 126 failures in the mandate runs, 116 are `update failed` and 10 `authoritative change misapplied`; of 90 in the matched runs without the line, 79 and 11. Not one cybersecurity failure is a restatement being applied. The failing block is the same everywhere: the one that carries the duty officer's signed change set, a replacement of the whole permission list, where both of the writer's attempts to write the new list are rejected as invalid and the memory keeps the old permission active. With the line, both attempts fail as invalid output at that block in 56 failures against 16 without it.
+**Where the remaining failures come from** (Section 6 method, same three judges; all five writers, three seeds). Procurement, with the line: all 77 remaining open-loop failures are `restatement applied`, the same cause as without it. Finance, with the line: 26 failures, 20 `restatement applied`, 4 `update failed`, 2 `authoritative change misapplied`. Cybersecurity is different in kind, with or without the line: of 403 failures in the mandate runs, 367 are `update failed` and 36 `authoritative change misapplied`; of 216 in the same writers' and seeds' runs without the line, 194 and 22. Not one cybersecurity failure is a restatement being applied. The failing block is the same everywhere: the one that carries the duty officer's signed change set, a replacement of the whole permission list. In 212 of the 216 baseline failures and 376 of the 403 mandate failures, both of the writer's attempts to write the new list are rejected as invalid output (a patch that cannot be applied, or a profile over the memory's size limit) and the memory keeps the old permission active. The line does not change how a cybersecurity failure looks; it nearly doubles how often one happens.
 
 **Reading.** Where the failure is a misread message, one sentence in the writer's instructions removes most of it and costs nothing in authorized use. Procurement: unauthorized submission falls by 19.5 points under typed memory (25.4% to 5.8%) and 9.6 under hybrid, at every seed and for every writer, and authorized use rises (90.6% to 98.2%), because the writer also stops recording the restated figures that were making it refuse legitimate requests. Finance: 31.7% to 1.7% under typed memory at all three seeds, with no measurable change in authorized use; under hybrid memory the drop is smaller (11.7% to 3.8%). In the closed loop, records minted from the agent's own actions all but disappear (91 to 4), but authorized use at round 3 is unchanged (59% without, 62% with), so the utility loss of Section 3 is not caused by the writer believing the wrong messages. In cybersecurity the line makes things worse at every seed and for four of the five writers (Kimi is unchanged at 1.0%): unauthorized submission rises 11.4 points under typed memory (10.4% to 21.8%) and authorized use falls 10.4 points. The judges say why: cybersecurity's failure was never about authority. The writer knows the duty officer's change set is the authoritative one; it fails to write the replacement, and with the extra instruction it fails more often. A rule about whose word counts cannot fix an update that is never applied.
 

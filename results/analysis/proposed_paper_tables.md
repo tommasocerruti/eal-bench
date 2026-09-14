@@ -87,13 +87,13 @@ Every failure in every run of this note. Rows group failures by where they occur
 | Setting | failures | restatement applied | own action as approval | authoritative change misapplied | update failed | other |
 |---|---|---|---|---|---|---|
 | Open loop, procurement | 549 | 545 | 0 | 1 | 0 | 3 |
-| Open loop, finance | 140 | 140 | 0 | 0 | 0 | 0 |
-| Open loop, cybersecurity | 177 | 0 | 0 | 22 | 155 | 0 |
+| Open loop, finance | 272 | 268 | 0 | 4 | 0 | 0 |
+| Open loop, cybersecurity | 303 | 0 | 0 | 33 | 270 | 0 |
 | Closed loop, shared history blocks | 309 | 274 | 0 | 6 | 29 | 0 |
 | Closed loop, the agent's own write-back lines | 192 | 1 | 186 | 2 | 0 | 3 |
-| With the mandate, procurement and finance | 81 | 69 | 8 | 4 | 0 | 0 |
-| With the mandate, cybersecurity | 189 | 0 | 6 | 16 | 167 | 0 |
-| **All** | **1637** | **1029** | **200** | **51** | **351** | **6** |
+| With the mandate, procurement and finance | 159 | 141 | 8 | 6 | 4 | 0 |
+| With the mandate, cybersecurity | 466 | 0 | 6 | 42 | 418 | 0 |
+| **All** | **2250** | **1229** | **200** | **94** | **721** | **6** |
 
 ### Table: generality (the paper's writer table with two added rows)
 
