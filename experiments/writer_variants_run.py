@@ -81,27 +81,42 @@ def _replay(args: argparse.Namespace, base: Any, presentation: Any, presentation
     """Executor-only replay of a completed run: same frozen memories, same probes, new executor targets."""
     source = Path(args.source_run).expanduser().resolve()
     source_manifest = json.loads((source / "manifest.json").read_text(encoding="utf-8"))
-    if source_manifest.get("status") != "completed" or source_manifest.get("study") != STUDY_ID:
-        raise SystemExit(f"source run must be a completed {STUDY_ID} run: {source}")
+    source_study = source_manifest.get("study")
+    if source_manifest.get("status") != "completed" or source_study not in (STUDY_ID, "writer"):
+        raise SystemExit(f"source run must be a completed {STUDY_ID} or writer-route run: {source}")
     if source_manifest.get("domain_id") != base.domain_id:
         raise SystemExit(f"source run is for domain {source_manifest.get('domain_id')!r}, not {base.domain_id!r}")
     if not args.dry_run and not args.estimated_cost_usd:
         raise SystemExit("live runs require --estimated-cost-usd")
-    corpus_version = source_manifest["corpus_version"]
+    corpus_version = source_manifest.get("corpus_version") or source_manifest.get("options", {}).get("corpus_version") or base.corpus.default_version
     cases = {base.corpus.case_id(c): c for c in base.corpus.load_cases(corpus_version)}
     wanted = set(_split(args.case_ids)) if args.case_ids else None
     evidence = [frozen_evidence_from_dict(json.loads(line)) for line in (source / "evidence.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+    if source_study == "writer":
+        # The paper's writer route also freezes repair candidates and witness memories; replay only the memories whose
+        # executor trials the route itself scored as the final generated memory of each condition.
+        final_ids = set()
+        for line in (source / "trials.jsonl").read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            study_meta = json.loads(line).get("metadata", {}).get("study", {})
+            if study_meta.get("route") == "writer" and study_meta.get("evidence_role") == "generated_final":
+                final_ids.add(json.loads(line)["evidence_id"])
+        evidence = [e for e in evidence if e.evidence_id in final_ids]
     if wanted is not None:
         evidence = [e for e in evidence if e.case_id in wanted]
+    if not evidence:
+        raise SystemExit("no frozen memories to replay")
     mismatched = sorted({e.presentation_hash for e in evidence} - {presentation_hash})
     if mismatched:
         raise SystemExit(f"source memories were written under a different presentation: {mismatched}")
-    seed = args.seed if args.seed is not None else source_manifest.get("options", {}).get("seed") or base.canonical_seed
+    seed = args.seed if args.seed is not None else source_manifest.get("options", {}).get("seed") or evidence[0].writer_seed or base.canonical_seed
+    conditions = sorted({e.condition_id for e in evidence})
     targets = _split(args.executor_targets)
     jobs = []
     for frozen in evidence:
         jobs += jobs_for_evidence(base, cases[frozen.case_id], frozen, route=STUDY_ID, metadata={"writer_target_id": frozen.writer.target_id if frozen.writer else None})
-    print(f"replay of {source.name}: conditions={source_manifest.get('conditions')} memories={len(evidence)} executor calls={len(jobs) * len(targets)}")
+    print(f"replay of {source.name}: conditions={conditions} memories={len(evidence)} executor calls={len(jobs) * len(targets)}")
     if args.dry_run:
         return 0
     run_dir = create_run_dir(base.domain_id, f"authorization-memory-{STUDY_ID}", tag=args.tag, root=Path("results"))
@@ -110,7 +125,7 @@ def _replay(args: argparse.Namespace, base: Any, presentation: Any, presentation
         study=STUDY_ID, domain=base, options={**vars(args), "replay_of": str(source), "source_options": source_manifest.get("options", {})}, presentation=presentation,
         implementation_files=[Path(__file__), Path("experiments/authorization_memory/hybrid_memory.py"), Path("experiments/authorization_memory/writing_methods.py"), Path("experiments/authorization_memory/langmem_writer.py")],
     )
-    manifest.update(corpus_version=corpus_version, capacity_tokens=source_manifest.get("capacity_tokens"), conditions=source_manifest.get("conditions"), replay_of=str(source), planned={"writer_updates": 0, "executor_calls": len(jobs) * len(targets)}, status="running")
+    manifest.update(corpus_version=corpus_version, capacity_tokens=source_manifest.get("capacity_tokens"), conditions=conditions, replay_of=str(source), source_study=source_study, planned={"writer_updates": 0, "executor_calls": len(jobs) * len(targets)}, status="running")
     write_manifest(run_dir, manifest)
     trials, executor_contexts = run_executor_jobs(llm, base, jobs, study_id=STUDY_ID, executor_task="executor", executor_targets=targets, executor_runs=1, batch_size=args.batch_size, seed=seed, presentation=presentation)
     for name in ("memories.jsonl", "memory_attempts.jsonl", "memory_states.jsonl", "formation.jsonl"):
