@@ -231,6 +231,9 @@ def to_samples(
             metadata={
                 "resources": trial.resources.to_dict(),
                 "truth": truth.to_dict(),
+                # Carries the frozen memory, so a saved log built from supplied
+                # memories re-scores in a process that never saw them.
+                "truth_portable": truth.to_portable(),
                 "corpus_version": trial.resources.corpus_version,
                 "presentation_id": trial.resources.presentation_id,
                 "inspect_adapter_version": INSPECT_ADAPTER_VERSION,
@@ -372,11 +375,14 @@ def _truth_for_state(state: Any) -> TrialTruth:
         return truths[trial_id]
     if trial_id in _SUPPLIED_TRUTHS:
         return _SUPPLIED_TRUTHS[trial_id]
+    portable = metadata.get("truth_portable")
+    if isinstance(portable, Mapping):
+        return TrialTruth.from_portable(portable)
     if (metadata.get("eal_variants") or "generated") != "generated":
         raise ValueError(
-            f"sample {trial_id!r} used caller-supplied memories, which cannot be "
-            "rebuilt from the repository. Re-score in the process that built the "
-            "task, or score directly with eal_bench.eval.score_response."
+            f"sample {trial_id!r} used caller-supplied memories and was written "
+            "before the log carried a portable truth. Re-score in the process that "
+            "built the task, or score directly with eal_bench.eval.score_response."
         )
     raise ValueError(
         f"sample {trial_id!r} no longer builds for domain {domain_id!r}; "
@@ -406,7 +412,7 @@ def raw_tool_arguments(state: Any) -> dict[str, str]:
             if not isinstance(identifier, str) or not isinstance(arguments, str):
                 continue
             if arguments.startswith(ATTACHMENT_PROTOCOL):
-                arguments = attachments.get(arguments[len(ATTACHMENT_PROTOCOL):])
+                arguments = attachments.get(arguments[len(ATTACHMENT_PROTOCOL) :])
                 if arguments is None:
                     arguments = raw.get(identifier)
                 if not isinstance(arguments, str):

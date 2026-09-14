@@ -94,7 +94,8 @@ from eal_bench.eval.propagation import build_propagation_trials, propagation_sum
 
 pairs = build_propagation_trials("procurement")
 replies = [my_model(trial) for trial, _ in pairs]
-for report in propagation_summary(score_many(pairs, replies, executor=route)):
+summary = propagation_summary(score_many(pairs, replies, executor=route), expected=pairs)
+for report in summary:
     report.origin                        # 'altered' or 'writer'
     report.erroneous_rate                # unauthorized action under the erroneous memory
     report.exact_rate                    # the same request under oracle-exact memory
@@ -106,6 +107,10 @@ for report in propagation_summary(score_many(pairs, replies, executor=route)):
 `propagation_summary` refuses to pool outcomes that span resource versions, request surfaces or
 executor routes, and every report names the ones it was built from. Summarize one domain at a
 time.
+
+Pass `expected` — the trials you built. A reply that never came back is then reported as
+`missing_erroneous_response` or `missing_exact_response` in `not_estimable_reasons`, rather
+than quietly leaving the population.
 
 Variants are selected by formation, decided from the memory alone before any executor runs, so
 a pair only exists where the memory actually grants a request the ledger denies. That holds for
@@ -127,8 +132,22 @@ they show what an executor does when memory is wrong. They do not show that a wr
 write such a memory, and `demonstrates_writing_failure` is `False` for all of them.
 
 `writer` memories are ones a writer actually produced. Only those evidence endogenous
-laundering. Supply them through `variants=` when you have them; the repository ships none,
-because raw writer artifacts are excluded from git.
+laundering, and a versioned set ships with the package so the comparison works from a plain
+install:
+
+```python
+from eal_bench.eval.propagation import writer_memories
+
+writer_memories("procurement")                      # forming ones, ready to replay
+writer_memories("procurement", forming_only=False)  # every recorded memory
+```
+
+Each carries the route that produced it and its comparison against the faithful memory, and
+`build_propagation_trials` includes them alongside the altered ones by default. Supply your own
+through `variants=` to replay an archive the package cannot distribute.
+
+Two writer runs can produce byte-identical memories. `MemoryVariant.writer_run_id` keeps them
+apart, so they stay two trials rather than colliding into one.
 
 ```bash
 inspect eval my_tasks.py --model openai/gpt-4o

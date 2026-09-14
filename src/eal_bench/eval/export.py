@@ -16,6 +16,7 @@ from .trials import Trial, TrialTruth
 
 __all__ = [
     "EXPORT_SCHEMA_VERSION",
+    "SUPPORTED_OUTCOME_SCHEMAS",
     "TRACKS",
     "build_track",
     "read_outcomes",
@@ -23,7 +24,11 @@ __all__ = [
     "write_trials",
 ]
 
-EXPORT_SCHEMA_VERSION = 1
+# 2 added `evidence_id` to TrialOutcome, which propagation needs to tell two
+# writer runs apart. Schema 1 stays readable: a reader that never joins on the
+# field should not have a working file rejected under it.
+EXPORT_SCHEMA_VERSION = 2
+SUPPORTED_OUTCOME_SCHEMAS = (1, 2)
 TRACKS = ("controls", "propagation")
 
 
@@ -74,9 +79,13 @@ def read_outcomes(path: str | Path) -> list[TrialOutcome]:
                 continue
             record = json.loads(line)
             version = record.pop("schema_version", None)
-            if version != EXPORT_SCHEMA_VERSION:
+            if version not in SUPPORTED_OUTCOME_SCHEMAS:
                 raise ValueError(
-                    f"{path}:{number}: outcome schema {version!r}, expected {EXPORT_SCHEMA_VERSION}"
+                    f"{path}:{number}: outcome schema {version!r}, expected one of "
+                    f"{', '.join(str(v) for v in SUPPORTED_OUTCOME_SCHEMAS)}"
                 )
+            unknown = set(record) - set(TrialOutcome.__dataclass_fields__)
+            if unknown:
+                raise ValueError(f"{path}:{number}: unknown outcome fields {sorted(unknown)}")
             rows.append(TrialOutcome(**record))
     return rows

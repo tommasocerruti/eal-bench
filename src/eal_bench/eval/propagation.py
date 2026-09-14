@@ -39,6 +39,8 @@ __all__ = [
     "altered_memories",
     "build_propagation_trials",
     "propagation_summary",
+    "writer_memories",
+    "writer_memory_manifest",
 ]
 
 EXACT = "exact"
@@ -62,6 +64,11 @@ class MemoryVariant:
     architecture: str = MemoryArchitecture.TYPED.value
     forms_false_authority: bool | None = None
     formed_probe_ids: tuple[str, ...] = ()
+    # Two writer runs can produce byte-identical memories. Without the run, both
+    # hash to one evidence id, the trials collide and the summary loses an arm.
+    writer_run_id: int = 0
+    writer_seed: int | None = None
+    writer: Any | None = None
 
     @property
     def demonstrates_writing_failure(self) -> bool:
@@ -79,6 +86,10 @@ class MemoryVariant:
             "forms_false_authority": self.forms_false_authority,
             "formed_probe_ids": list(self.formed_probe_ids),
             "demonstrates_writing_failure": self.demonstrates_writing_failure,
+            "writer_run_id": self.writer_run_id,
+            "writer_seed": self.writer_seed,
+            "writer_target": getattr(self.writer, "target_id", None),
+            "writer_model": getattr(self.writer, "resolved_model", None),
         }
 
 
@@ -204,6 +215,78 @@ def _stale_states(domain: AuthorizationMemoryDomain, case: Any) -> list[tuple[st
             continue
         variants.append((f"stale_state_block_{index}", state))
     return variants
+
+
+WRITER_MEMORY_SCHEMA = 1
+
+
+def writer_memory_manifest() -> Mapping[str, Any]:
+    """The shipped set of memories a real writer produced, as recorded."""
+
+    from importlib.resources import files
+
+    import json
+
+    source = files("eal_bench.eval.reference").joinpath("writer_memories.json")
+    manifest = json.loads(source.read_text(encoding="utf-8"))
+    version = manifest.get("schema_version")
+    if version != WRITER_MEMORY_SCHEMA:
+        raise ValueError(
+            f"writer memory manifest schema {version!r}, expected {WRITER_MEMORY_SCHEMA}"
+        )
+    return manifest
+
+
+def writer_memories(
+    domain_id: str,
+    *,
+    corpus_version: str | None = None,
+    case_ids: Sequence[str] | None = None,
+    forming_only: bool = True,
+) -> list[MemoryVariant]:
+    """Memories a real writer actually produced, shipped with the package.
+
+    These are the only variants that evidence endogenous laundering, so #23's
+    comparison needs them present after a plain install rather than supplied from
+    an archive the repository cannot distribute. Each one carries the writer route
+    that produced it and its comparison against the faithful memory.
+    """
+
+    from experiments.authorization_memory.schemas import ModelProvenance
+
+    domain = load_domain(domain_id)
+    version = resolve_corpus_version(domain, corpus_version)
+    manifest = writer_memory_manifest()
+    # Provenance is per memory: no single writer produced every one of them, and
+    # which model wrote a memory is part of what the comparison reports.
+    writers = {name: ModelProvenance(**dict(row)) for name, row in manifest["writers"].items()}
+    wanted = None if case_ids is None else set(case_ids)
+
+    out = []
+    for row in manifest["memories"]:
+        if row["domain_id"] != domain_id or row["corpus_version"] != version:
+            continue
+        if wanted is not None and row["case_id"] not in wanted:
+            continue
+        comparison = row["faithful_comparison"]
+        if forming_only and not comparison["forms_false_authority"]:
+            continue
+        out.append(
+            MemoryVariant(
+                variant_id=row["variant_id"],
+                origin=WRITER,
+                case_id=row["case_id"],
+                recipe=row["condition_id"],
+                payload=row["payload"],
+                architecture=row["architecture"],
+                forms_false_authority=comparison["forms_false_authority"],
+                formed_probe_ids=tuple(comparison["formed_probe_ids"]),
+                writer_run_id=int(row.get("writer_run_id") or 0),
+                writer_seed=row.get("writer_seed"),
+                writer=writers[row["writer"]],
+            )
+        )
+    return out
 
 
 def altered_memories(
@@ -364,7 +447,11 @@ def build_propagation_trials(
     )
     by_id = {domain.corpus.case_id(case): case for case in cases}
     if variants is None:
+        # Both origins by default: the shipped writer memories are what make the
+        # laundering comparison available from a plain install, and altered ones
+        # are the sensitivity diagnostic beside them.
         chosen = altered_memories(domain_id, corpus_version=version, case_ids=case_ids)
+        chosen += writer_memories(domain_id, corpus_version=version, case_ids=case_ids)
     else:
         chosen = _normalize_variants(domain_id, version, list(variants), by_id, case_ids)
     tools = model_visible_tools(domain, presentation)
@@ -383,9 +470,9 @@ def build_propagation_trials(
             payload=dict(memory.payload),
             payload_schema_id=domain.memory.payload_schema_id,
             payload_schema_version=str(memory.payload.get("schema_version", "3")),
-            writer=None,
-            run_id=0,
-            writer_seed=None,
+            writer=memory.writer,
+            run_id=memory.writer_run_id,
+            writer_seed=memory.writer_seed,
             block_index=_last_block_index(domain, case),
             previous=None,
             capacity_tokens=capacity,
@@ -393,7 +480,7 @@ def build_propagation_trials(
             presentation_id=presentation.presentation_id,
             presentation_hash=resources.presentation_hash,
         )
-        evidence = _evidence_from_artifact(artifact, memory_run_id=0)
+        evidence = _evidence_from_artifact(artifact, memory_run_id=memory.writer_run_id)
         rows = []
         for probe in probes:
             messages = _executor_messages(
@@ -525,12 +612,21 @@ class PropagationReport:
         }
 
 
-def propagation_summary(outcomes: Sequence[Any]) -> list[PropagationReport]:
+def propagation_summary(
+    outcomes: Sequence[Any],
+    *,
+    expected: Sequence[tuple[Trial, TrialTruth]] | None = None,
+) -> list[PropagationReport]:
     """Compare the two arms of each replay, per memory origin.
 
     A pair with a missing arm is counted as not estimable rather than dropped, so
     the denominator always says how many comparisons were actually available.
     Origins are never merged: an altered memory cannot evidence a writing failure.
+
+    Pass `expected`, the trials from `build_propagation_trials`, so a reply that
+    never came back is reported as unavailable. Without it the population is
+    whatever the caller happened to return, and a dropped erroneous arm silently
+    leaves the counts instead of showing up as a missing comparison.
     """
 
     rows = list(outcomes)
@@ -550,15 +646,29 @@ def propagation_summary(outcomes: Sequence[Any]) -> list[PropagationReport]:
         exact[key] = row
     # Keyed by condition too: two variants of one case can form on the same probe,
     # and keying only by case and probe silently dropped one of them.
-    erroneous: dict[str, dict[tuple[str, str, str], Any]] = {}
+    erroneous: dict[str, dict[tuple[Any, str, str, str], Any]] = {}
     for row in rows:
         if row.condition_id == _FAITHFUL_CONDITION:
             continue
         origin = str(row.condition_id).split(":", 1)[0]
-        key = (row.condition_id, row.case_id, row.probe_id)
+        key = (row.evidence_id, row.condition_id, row.case_id, row.probe_id)
         if key in erroneous.get(origin, {}):
             raise ValueError(f"duplicate propagation trial for {key}")
         erroneous.setdefault(origin, {})[key] = row
+
+    # Every expected arm that produced no reply is a missing comparison, not an
+    # absent one. Registered as None so the pair still reaches the denominator.
+    missing_exact: set[tuple[str, str]] = set()
+    if expected is not None:
+        for _, truth in expected:
+            if truth.condition_id == _FAITHFUL_CONDITION:
+                if (truth.case_id, truth.probe_id) not in exact:
+                    missing_exact.add((truth.case_id, truth.probe_id))
+                continue
+            origin = str(truth.condition_id).split(":", 1)[0]
+            evidence_id = getattr(truth.evidence, "evidence_id", None)
+            key = (evidence_id, truth.condition_id, truth.case_id, truth.probe_id)
+            erroneous.setdefault(origin, {}).setdefault(key, None)
 
     reports = []
     for origin in sorted(erroneous):
@@ -576,11 +686,24 @@ def propagation_summary(outcomes: Sequence[Any]) -> list[PropagationReport]:
             0,
         )
         reasons: dict[str, int] = {}
-        for key, error_row in sorted(erroneous[origin].items()):
-            exact_row = exact.get((key[1], key[2]))
+        for key, error_row in sorted(erroneous[origin].items(), key=lambda kv: str(kv[0])):
+            if error_row is None:
+                counts["pairs_not_estimable"] += 1
+                reasons["missing_erroneous_response"] = (
+                    reasons.get("missing_erroneous_response", 0) + 1
+                )
+                continue
+            exact_row = exact.get((key[2], key[3]))
             if exact_row is None:
                 counts["pairs_not_estimable"] += 1
-                reasons["missing_exact_arm"] = reasons.get("missing_exact_arm", 0) + 1
+                # Distinguish an arm that was never built from one that was built
+                # and produced no reply; only the second is a lost measurement.
+                reason = (
+                    "missing_exact_response"
+                    if (key[2], key[3]) in missing_exact
+                    else "missing_exact_arm"
+                )
+                reasons[reason] = reasons.get(reason, 0) + 1
                 continue
             # A provider failure measured nothing, so the pair is not estimable
             # rather than a clean "did not act".

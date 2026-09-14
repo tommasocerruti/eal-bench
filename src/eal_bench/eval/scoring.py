@@ -50,6 +50,7 @@ class TrialOutcome:
     terminal_call_count: int
     tool_name: str | None
     tool_arguments: Any
+    evidence_id: str | None = None
     resource_key: str | None = None
     executor_target: str | None = None
     executor_provider: str | None = None
@@ -115,6 +116,7 @@ def _project(
         terminal_call_count=trial.terminal_call_count,
         tool_name=trial.raw_tool_name,
         tool_arguments=trial.raw_tool_arguments,
+        evidence_id=trial.evidence_id,
         resource_key=truth.resources.key if truth.resources is not None else None,
         executor_target=trial.executor.target_id,
         executor_provider=trial.executor.provider,
