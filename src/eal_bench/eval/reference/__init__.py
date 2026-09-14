@@ -2708,26 +2708,29 @@ def verify_attribution_denominators() -> dict[str, Any]:
 
 
 def verify_end_to_end_chain() -> dict[str, Any]:
-    """Run the writer offline, link every memory, and compose the report.
+    """Run the writer offline, link every memory, replay it, and compose the report.
 
-    Skipped outside a repository checkout, because the offline client loads
-    config.yaml from the working directory.
+    The complete path an installed consumer follows, with no credentials and no
+    checkout: the route table falls back to the copy in the wheel, so this runs
+    from a plain install rather than reporting a skip.
     """
 
     from contextlib import redirect_stderr, redirect_stdout
     from io import StringIO
-    from pathlib import Path
 
     from domains import get_domain
     from experiments.authorization_memory.langmem_writer import run_writer_chains
     from experiments.authorization_memory.validation import OfflineLLM
 
-    from ..end_to_end import end_to_end_report, link_written_memories, plan_end_to_end
+    from ..end_to_end import (
+        attribution_rows,
+        end_to_end_report,
+        executor_trials_for_memories,
+        link_written_memories,
+        plan_end_to_end,
+    )
     from ..scoring import score_many
     from ..trials import ModelResponse
-
-    if not Path("config.yaml").is_file():
-        return {"status": "skipped", "reason": "config.yaml is not in the working directory"}
 
     domain_id = "procurement"
     domain = eval_resources.load_domain(domain_id)
@@ -2753,11 +2756,19 @@ def verify_end_to_end_chain() -> dict[str, Any]:
             max_attempts=1,
             capacity_tokens=plan.capacity_tokens,
             batch_size=2,
+            # An offline install has the regex fallback, not the tokenizer the
+            # released capacities were calibrated with, so the bound cannot be
+            # enforced soundly here. This example demonstrates the write, replay
+            # and score path; capacity calibration is checked separately.
+            enforce_capacity=False,
         )
     memories = link_written_memories(domain_id, artifacts)
     if len(memories) != len(plan.writer_chains):
         raise AssertionError(f"{len(memories)} memories for {len(plan.writer_chains)} chains")
     annotated = _verify_annotated_free_text(domain_id, artifacts, memories)
+    scored_memories = link_written_memories(
+        domain_id, artifacts, annotations=_free_text_annotations(domain_id, memories)
+    )
     for memory in memories:
         if not memory.evidence_id or not memory.content_hash:
             raise AssertionError(f"{memory.condition_id}: lost the artifact linkage")
@@ -2789,19 +2800,97 @@ def verify_end_to_end_chain() -> dict[str, Any]:
             for _, truth in plan.baseline_trials
         ],
     )
-    report = end_to_end_report(domain_id, memories, [], baseline)
+    # Replay every memory over every request, free text included: that is the
+    # default population, and the annotated free-text arms must not be refused.
+    replay_pairs = executor_trials_for_memories(
+        domain_id, scored_memories, check_leakage=False, allow_uncalibrated_tokenizer=True
+    )
+    architectures = {
+        truth.condition_id: memory.architecture
+        for memory in scored_memories
+        for _, truth in replay_pairs
+        if truth.condition_id == memory.condition_id
+    }
+    if "free_text" not in set(architectures.values()):
+        raise AssertionError("free-text memories were dropped from the replay")
+    replay = score_many(
+        replay_pairs,
+        [
+            ModelResponse.from_tool_calls(
+                [
+                    (
+                        action if truth.request_authorized else decline,
+                        domain.conformance.action_arguments(
+                            truth.probe.request,
+                            action if truth.request_authorized else decline,
+                        ),
+                    )
+                ]
+            )
+            for _, truth in replay_pairs
+        ],
+    )
+    report = end_to_end_report(domain_id, scored_memories, replay, baseline, expected=replay_pairs)
     if not report.baseline_calibrated:
         raise AssertionError("a perfect executor was not calibrated on the baseline")
     if report.attributed:
-        raise AssertionError("attribution without any executor replay")
+        raise AssertionError("a perfect executor was attributed a memory-induced failure")
+    if not report.by_condition:
+        raise AssertionError("the report pooled every writer condition")
+    if report.executor_target is not None and report.surface != "native":
+        raise AssertionError(f"the report lost its executor identity: {report.to_dict()}")
+
+    # A dropped reply must be reported, not silently absent.
+    complete = attribution_rows(scored_memories, replay, expected=replay_pairs)
+    dropped = next(row for row in replay if row.condition_id != "exact_repair")
+    truncated = attribution_rows(
+        scored_memories, [row for row in replay if row is not dropped], expected=replay_pairs
+    )
+    if not any("missing_written_response" in row["reasons"] for row in truncated):
+        raise AssertionError("a missing written-arm reply left no trace")
+    if len(truncated) != len(complete):
+        raise AssertionError(
+            f"a missing reply changed the population: {len(truncated)} of {len(complete)}"
+        )
+    if any(row["estimable"] for row in truncated if "missing_written_response" in row["reasons"]):
+        raise AssertionError("a request with no reply was still counted as measured")
+
     return {
         "status": "passed",
         "writer_chains": len(plan.writer_chains),
         "memories_linked": len(memories),
         "baseline_trials": len(plan.baseline_trials),
+        "replay_trials": len(replay_pairs),
         "annotated_free_text": annotated,
         "report": report.to_dict(),
     }
+
+
+def _free_text_annotations(domain_id: str, memories: Sequence[Any]) -> dict[str, list[Any]]:
+    """Accepted annotations for every free-text memory, keyed by evidence id."""
+
+    from experiments.authorization_memory.persistence import content_hash
+
+    from ..preservation import Annotation
+
+    domain = eval_resources.load_domain(domain_id)
+    by_case = {
+        domain.corpus.case_id(case): case
+        for case in domain.corpus.load_cases(domain.corpus.default_version)
+    }
+    out: dict[str, list[Any]] = {}
+    for memory in memories:
+        if memory.architecture != "free_text":
+            continue
+        out[memory.evidence_id] = [
+            Annotation(
+                extracted_state=domain.memory.serialize_typed(
+                    domain.memory.faithful_typed(by_case[memory.case_id])
+                ),
+                source_content_hash=content_hash(memory.evidence.payload),
+            )
+        ]
+    return out
 
 
 def _verify_annotated_free_text(
