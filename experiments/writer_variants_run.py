@@ -14,9 +14,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
+from typing import Any
 
 from domains import get_domain
 from domains.base import MemoryArchitecture
@@ -36,6 +38,7 @@ from experiments.authorization_memory.hybrid_memory import hybrid_domain
 from experiments.authorization_memory.langmem_writer import WriterChainSpec, run_writer_chains
 from experiments.authorization_memory.persistence import content_hash, create_run_dir
 from experiments.authorization_memory.pipeline import calibrate_capacity, run_executor_jobs, validate_executor_job_surfaces
+from experiments.authorization_memory.schemas import frozen_evidence_from_dict
 from experiments.authorization_memory.writing_methods import incremental_updates, method_suffix, parse_method
 
 
@@ -58,7 +61,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--case-ids", default="")
     parser.add_argument("--memory-types", default="typed,free_text,hybrid")
     parser.add_argument("--writing-methods", default="incremental")
-    parser.add_argument("--writer-targets", required=True)
+    parser.add_argument("--writer-targets", default="", help="required unless --source-run replays a finished run's memories")
     parser.add_argument("--executor-targets", required=True)
     parser.add_argument("--writer-runs", type=int, default=1)
     parser.add_argument("--writer-max-attempts", type=int, choices=(1, 2), default=2)
@@ -69,8 +72,67 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--tag", default=None)
     parser.add_argument("--writer-instruction", default=None, help="one line prepended to the writer's instructions; condition ids get the --instruction-tag suffix")
     parser.add_argument("--instruction-tag", default="instructed")
+    parser.add_argument("--source-run", default=None, help="executor-only replay: reuse the frozen memories of a completed run of this study and run only the executor stage with --executor-targets; the writer stage is skipped and the writer-side files are copied")
     parser.add_argument("--dry-run", action="store_true")
     return parser
+
+
+def _replay(args: argparse.Namespace, base: Any, presentation: Any, presentation_hash: str) -> int:
+    """Executor-only replay of a completed run: same frozen memories, same probes, new executor targets."""
+    source = Path(args.source_run).expanduser().resolve()
+    source_manifest = json.loads((source / "manifest.json").read_text(encoding="utf-8"))
+    if source_manifest.get("status") != "completed" or source_manifest.get("study") != STUDY_ID:
+        raise SystemExit(f"source run must be a completed {STUDY_ID} run: {source}")
+    if source_manifest.get("domain_id") != base.domain_id:
+        raise SystemExit(f"source run is for domain {source_manifest.get('domain_id')!r}, not {base.domain_id!r}")
+    if not args.dry_run and not args.estimated_cost_usd:
+        raise SystemExit("live runs require --estimated-cost-usd")
+    corpus_version = source_manifest["corpus_version"]
+    cases = {base.corpus.case_id(c): c for c in base.corpus.load_cases(corpus_version)}
+    wanted = set(_split(args.case_ids)) if args.case_ids else None
+    evidence = [frozen_evidence_from_dict(json.loads(line)) for line in (source / "evidence.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+    if wanted is not None:
+        evidence = [e for e in evidence if e.case_id in wanted]
+    mismatched = sorted({e.presentation_hash for e in evidence} - {presentation_hash})
+    if mismatched:
+        raise SystemExit(f"source memories were written under a different presentation: {mismatched}")
+    seed = args.seed if args.seed is not None else source_manifest.get("options", {}).get("seed") or base.canonical_seed
+    targets = _split(args.executor_targets)
+    jobs = []
+    for frozen in evidence:
+        jobs += jobs_for_evidence(base, cases[frozen.case_id], frozen, route=STUDY_ID, metadata={"writer_target_id": frozen.writer.target_id if frozen.writer else None})
+    print(f"replay of {source.name}: conditions={source_manifest.get('conditions')} memories={len(evidence)} executor calls={len(jobs) * len(targets)}")
+    if args.dry_run:
+        return 0
+    run_dir = create_run_dir(base.domain_id, f"authorization-memory-{STUDY_ID}", tag=args.tag, root=Path("results"))
+    llm = build_llm(run_dir)
+    manifest = base_manifest(
+        study=STUDY_ID, domain=base, options={**vars(args), "replay_of": str(source), "source_options": source_manifest.get("options", {})}, presentation=presentation,
+        implementation_files=[Path(__file__), Path("experiments/authorization_memory/hybrid_memory.py"), Path("experiments/authorization_memory/writing_methods.py"), Path("experiments/authorization_memory/langmem_writer.py")],
+    )
+    manifest.update(corpus_version=corpus_version, capacity_tokens=source_manifest.get("capacity_tokens"), conditions=source_manifest.get("conditions"), replay_of=str(source), planned={"writer_updates": 0, "executor_calls": len(jobs) * len(targets)}, status="running")
+    write_manifest(run_dir, manifest)
+    trials, executor_contexts = run_executor_jobs(llm, base, jobs, study_id=STUDY_ID, executor_task="executor", executor_targets=targets, executor_runs=1, batch_size=args.batch_size, seed=seed, presentation=presentation)
+    for name in ("memories.jsonl", "memory_attempts.jsonl", "memory_states.jsonl", "formation.jsonl"):
+        if (source / name).is_file():
+            shutil.copyfile(source / name, run_dir / name)
+    write_rows(run_dir, "evidence.jsonl", evidence)
+    write_rows(run_dir, "trials.jsonl", trials)
+    write_rows(run_dir, "model_contexts.jsonl", executor_contexts)
+    source_summary = source_manifest.get("summary", {})
+    summary = {
+        "behavior_by_condition": behavior_by(trials, lambda t: t.condition_id),
+        "behavior_by_condition_executor": behavior_by(trials, lambda t: f"{t.condition_id}|{t.executor.target_id}"),
+        "formation_by_condition": source_summary.get("formation_by_condition", {}),
+        "writer_attempt_status": source_summary.get("writer_attempt_status", {}),
+    }
+    counts = dict(source_manifest.get("counts", {}))
+    counts["trials"] = len(trials)
+    manifest.update(status="completed", counts=counts, summary=summary)
+    write_manifest(run_dir, manifest)
+    print(f"run written to {run_dir}")
+    print(json.dumps(summary["behavior_by_condition"], indent=1))
+    return 0
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -79,6 +141,10 @@ def main(argv: list[str] | None = None) -> int:
     corpus_version = args.corpus_version or base.corpus.default_version
     presentation = base.get_presentation()
     presentation_hash = content_hash(presentation.to_dict())
+    if args.source_run:
+        return _replay(args, base, presentation, presentation_hash)
+    if not args.writer_targets:
+        raise SystemExit("--writer-targets is required unless --source-run is given")
     cases = list(base.corpus.load_cases(corpus_version))
     if args.case_ids:
         wanted = set(_split(args.case_ids))
