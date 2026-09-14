@@ -357,6 +357,130 @@ class FidelityReport:
         }
 
 
+@dataclass(frozen=True)
+class SourceAuthorityMetadata:
+    """Immutable source-side authority metadata for one visible turn."""
+
+    source_turn_id: str
+    principal_id: str
+    authority_class: str
+    authorization_capable: bool
+    source_type: str | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "source_turn_id": self.source_turn_id,
+            "principal_id": self.principal_id,
+            "authority_class": self.authority_class,
+            "authorization_capable": self.authorization_capable,
+            "source_type": self.source_type,
+        }
+
+
+@runtime_checkable
+class CitedSourceAuthorityAdapter(Protocol):
+    def resolve(
+        self,
+        case: Any,
+        through_block_index: int | None = None,
+    ) -> Mapping[str, SourceAuthorityMetadata]: ...
+
+    def record_source_turn_ids(
+        self,
+        record: Mapping[str, Any],
+    ) -> tuple[str, ...]: ...
+
+
+SourcePrincipalResolver = Callable[[Any], str]
+CapablePrincipalResolver = Callable[[Any], Sequence[str]]
+RecordSourceResolver = Callable[[Mapping[str, Any]], Sequence[str]]
+SourceClassResolver = Callable[[Any], str | None]
+
+
+@dataclass(frozen=True)
+class CitedSourceAuthoritySpec:
+    principal_id: SourcePrincipalResolver
+    authorization_capable_principals: CapablePrincipalResolver
+    record_source_turn_ids: RecordSourceResolver
+    authority_class: SourceClassResolver | None = None
+    source_type: SourceClassResolver | None = None
+
+
+class ImmutablePrincipalSourceAuthorityAdapter(CitedSourceAuthorityAdapter):
+    """Resolve authority from immutable turn identity and class metadata only."""
+
+    def __init__(self, spec: CitedSourceAuthoritySpec) -> None:
+        self.spec = spec
+
+    def resolve(
+        self,
+        case: Any,
+        through_block_index: int | None = None,
+    ) -> Mapping[str, SourceAuthorityMetadata]:
+        capable_values = tuple(self.spec.authorization_capable_principals(case))
+        if not capable_values or any(
+            not isinstance(value, str) or not value.strip()
+            for value in capable_values
+        ):
+            raise ValueError(
+                "authorization-capable principals must be nonempty strings"
+            )
+        capable = frozenset(capable_values)
+        resolved: dict[str, SourceAuthorityMetadata] = {}
+        seen: set[str] = set()
+        for block in case.blocks:
+            block_index = int(block.block_index)
+            for turn in block.turns:
+                source_turn_id = str(turn.turn_id)
+                if source_turn_id in seen:
+                    raise ValueError(f"duplicate source turn ID: {source_turn_id}")
+                seen.add(source_turn_id)
+                if (
+                    through_block_index is not None
+                    and block_index > through_block_index
+                ):
+                    continue
+                principal_id = self.spec.principal_id(turn)
+                authority_class = (
+                    self.spec.authority_class(turn)
+                    if self.spec.authority_class is not None
+                    else principal_id
+                )
+                source_type = (
+                    self.spec.source_type(turn)
+                    if self.spec.source_type is not None
+                    else None
+                )
+                if not isinstance(principal_id, str) or not principal_id.strip():
+                    raise ValueError(
+                        f"{source_turn_id}: principal ID must be nonempty"
+                    )
+                if not isinstance(authority_class, str) or not authority_class.strip():
+                    raise ValueError(
+                        f"{source_turn_id}: authority class must be nonempty"
+                    )
+                if source_type is not None and (
+                    not isinstance(source_type, str) or not source_type.strip()
+                ):
+                    raise ValueError(
+                        f"{source_turn_id}: source type must be a nonempty string"
+                    )
+                resolved[source_turn_id] = SourceAuthorityMetadata(
+                    source_turn_id=source_turn_id,
+                    principal_id=principal_id,
+                    authority_class=authority_class,
+                    authorization_capable=principal_id in capable,
+                    source_type=source_type,
+                )
+        return resolved
+
+    def record_source_turn_ids(
+        self,
+        record: Mapping[str, Any],
+    ) -> tuple[str, ...]:
+        return tuple(self.spec.record_source_turn_ids(record))
+
+
 @runtime_checkable
 class CorpusAdapter(Protocol):
     versions: tuple[str, ...]
@@ -497,7 +621,7 @@ StudyRunner = Callable[
     ["AuthorizationMemoryDomain", Sequence[Any], Mapping[str, Any]], Path | str
 ]
 StudyOfflineValidator = Callable[
-    ["AuthorizationMemoryDomain", Sequence[Any], Mapping[str, Any]], None
+    ["AuthorizationMemoryDomain", Sequence[Any], Mapping[str, Any]], Mapping[str, Any] | None
 ]
 DomainOfflineCheck = Callable[
     ["AuthorizationMemoryDomain", Sequence[Any], Mapping[str, Any]], Any
@@ -550,13 +674,13 @@ class StudyProfile:
         domain: AuthorizationMemoryDomain,
         cases: Sequence[Any],
         options: Mapping[str, Any],
-    ) -> None:
+    ) -> Mapping[str, Any] | None:
         self.validate_options(options)
         if self.offline_validator is None:
             raise NotImplementedError(
                 f"study {self.study_id!r} does not provide offline validation"
             )
-        self.offline_validator(domain, cases, options)
+        return self.offline_validator(domain, cases, options)
 
 
 @dataclass(frozen=True)
@@ -584,6 +708,8 @@ class AuthorizationMemoryDomain:
         default_factory=dict
     )
     challenge: ChallengeAdapter | None = None
+    cited_source_authority: CitedSourceAuthorityAdapter | None = None
+    event_sourcing: Any | None = None
 
     def __post_init__(self) -> None:
         self.validate()

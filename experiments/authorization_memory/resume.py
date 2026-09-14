@@ -297,6 +297,7 @@ def prepare_provider_error_resume(
     )
     _require_equal(manifest.get("domain_id"), domain.domain_id, "domain")
     _require_equal(manifest.get("study"), plan.study_id, "study")
+    _validate_mitigation_plan_metadata(manifest, plan)
     _require_equal(
         manifest.get("corpus_version"), options.get("corpus_version"), "corpus version"
     )
@@ -429,6 +430,7 @@ def validate_executor_only_resume(
 
     _require_equal(manifest.get("domain_id"), domain.domain_id, "domain")
     _require_equal(manifest.get("study"), plan.study_id, "study")
+    _validate_mitigation_plan_metadata(manifest, plan)
     _require_equal(
         manifest.get("corpus_version"),
         str(options.get("corpus_version") or ""),
@@ -1411,6 +1413,15 @@ def _targets(value: Any) -> tuple[str, ...]:
     if isinstance(value, str):
         return tuple(item.strip() for item in value.split(",") if item.strip())
     return tuple(str(item) for item in value)
+
+
+def _validate_mitigation_plan_metadata(
+    manifest: Mapping[str, Any], plan: StudyPlan
+) -> None:
+    if plan.study_id != "source_authority":
+        return
+    for key, expected in plan.metadata.items():
+        _require_equal(manifest.get(key), jsonable(expected), f"frozen {key}")
 
 
 def _require_equal(actual: Any, expected: Any, label: str) -> None:

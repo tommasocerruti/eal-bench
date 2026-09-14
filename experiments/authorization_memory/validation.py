@@ -1233,12 +1233,13 @@ def validate_shared_domain_boundaries(
     root = repository_root or Path(__file__).resolve().parents[2]
     shared_roots = (
         root / "experiments" / "authorization_memory",
+        root / "experiments" / "mitigations",
         root / "analysis",
     )
     checked = 0
     violations: list[str] = []
     for shared_root in shared_roots:
-        for path in sorted(shared_root.glob("*.py")):
+        for path in sorted(shared_root.rglob("*.py")):
             checked += 1
             tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
             for node in ast.walk(tree):
@@ -1248,7 +1249,11 @@ def validate_shared_domain_boundaries(
                 elif isinstance(node, ast.Import):
                     modules.extend(alias.name for alias in node.names)
                 for module in modules:
-                    if module.startswith("domains.") and module != "domains.base":
+                    if module.startswith("domains.") and module not in {
+                        "domains.base",
+                        "domains.source_authority",
+                        "domains.event_sourcing",
+                    }:
                         violations.append(
                             f"{path.relative_to(root)}:{node.lineno}:{module}"
                         )

@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
@@ -47,6 +48,7 @@ from experiments.authorization_memory.validation import (
     validate_langmem_writer_behaviors,
     validate_shared_domain_boundaries,
 )
+from experiments.mitigations import MITIGATION_STUDIES, mitigation_study_profile
 from experiments.replication_release_compatibility import (
     authorize_completed_release_replication,
     compatibility_validation_options,
@@ -262,6 +264,7 @@ def _domain_listing() -> list[dict[str, Any]]:
             "presentations": list(domain.presentation_ids),
             "studies": [
                 *domain.study_ids,
+                *MITIGATION_STUDIES,
                 *((AWARENESS_STUDY_ID,) if domain.awareness_protocols else ()),
             ],
             "awareness_protocols": [
@@ -312,6 +315,7 @@ def _study_listing(domain_id: str) -> dict[str, Any]:
     domain = get_domain(domain_id)
     profiles = [
         *domain.studies.values(),
+        *(mitigation_study_profile(study_id) for study_id in MITIGATION_STUDIES),
         *(
             (shared_study_profile(domain),)
             if domain.awareness_protocols
@@ -375,6 +379,8 @@ def _default_target(task_name: str) -> str:
 def _study_profile(domain: Any, study_id: str) -> Any:
     if study_id == AWARENESS_STUDY_ID:
         return shared_study_profile(domain)
+    if study_id in MITIGATION_STUDIES:
+        return mitigation_study_profile(study_id)
     return domain.get_study(study_id)
 
 
@@ -399,12 +405,14 @@ def _validate(args: argparse.Namespace) -> None:
             requested_cases,
         )
         if profile.offline_validator is not None:
-            profile.validate_offline(domain, cases, options)
+            report = profile.validate_offline(domain, cases, options)
             result = {
                 "status": "passed",
                 "domain_id": domain_id,
                 "study_id": profile.study_id,
             }
+            if isinstance(report, Mapping):
+                result["study_validation"] = dict(report)
         elif profile.builder is not None:
             plan = profile.build_jobs(domain, cases, options)
             result = validate_study_plan(
@@ -553,9 +561,12 @@ def _route_options(
         for value in (args.source_run or ())
         if str(value).strip()
     )
-    if profile.study_id != "evaluation_cue" and len(source_runs) > 1:
+    if (
+        profile.study_id not in {"evaluation_cue", *MITIGATION_STUDIES}
+        and len(source_runs) > 1
+    ):
         raise ValueError(
-            "repeatable --source-run is supported only by --study evaluation_cue"
+            "repeatable --source-run requires evaluation_cue or a mitigation study"
         )
     if profile.study_id != "evaluation_cue":
         forbidden_cue = sorted(
@@ -580,24 +591,29 @@ def _route_options(
         raise ValueError(
             "--writer-route-timeout-seconds applies only to writer studies"
         )
-    pressure_source = _pressure_source_manifest(args, profile)
+    source_manifest = _source_manifest(args, profile)
     corpus_version = args.corpus_version or (
-        str(pressure_source.get("corpus_version") or "")
-        if pressure_source is not None
+        str(source_manifest.get("corpus_version") or "")
+        if source_manifest is not None
         else ""
     ) or domain.corpus.default_version
+    seed = args.seed if args.seed is not None else domain.canonical_seed
+    if profile.study_id == "event_sourcing" and source_manifest is not None and args.seed is None:
+        seed = source_manifest.get("seed")
+        if type(seed) is not int or seed < 0:
+            raise ValueError("event-sourcing source manifest has an invalid seed")
     options = {
         **vars(args),
         "source_run": source_runs[0] if source_runs else "",
         "source_runs": source_runs,
         "corpus_version": corpus_version,
-        "seed": args.seed if args.seed is not None else domain.canonical_seed,
+        "seed": seed,
         "command": "python -m experiments.run " + " ".join(sys.argv[1:]),
     }
     if profile.category == "behavioral":
         source_presentation = (
-            pressure_source.get("presentation")
-            if pressure_source is not None
+            source_manifest.get("presentation")
+            if source_manifest is not None
             else None
         )
         source_presentation_id = (
@@ -610,22 +626,29 @@ def _route_options(
             or source_presentation_id
             or domain.default_presentation_id
         ).presentation_id
-    if pressure_source is not None:
-        source_case_ids = pressure_source.get("case_ids")
+    if source_manifest is not None:
+        source_case_ids = source_manifest.get("case_ids")
         if not isinstance(source_case_ids, list) or not all(
             isinstance(case_id, str) and case_id
             for case_id in source_case_ids
         ):
             raise ValueError(
-                "pressure source manifest has invalid case_ids"
+                "source manifest has invalid case_ids"
             )
         options["_source_case_ids"] = tuple(source_case_ids)
-    if profile.study_id == "controls":
+    if profile.study_id == "source_authority":
+        if args.writer_targets:
+            raise ValueError("source_authority reuses saved memories; omit --writer-targets")
         options["writer_targets"] = ()
         options["executor_targets"] = _csv(args.executor_targets) or (
             _default_target(args.executor_task),
         )
-    elif profile.study_id in {"writer", "writer_ttc"}:
+    elif profile.study_id == "controls":
+        options["writer_targets"] = ()
+        options["executor_targets"] = _csv(args.executor_targets) or (
+            _default_target(args.executor_task),
+        )
+    elif profile.study_id in {"writer", "writer_ttc", "event_sourcing"}:
         options["writer_targets"] = _csv(args.writer_targets) or (
             _default_target(args.writer_task),
         )
@@ -709,26 +732,29 @@ def _route_options(
     return options
 
 
-def _pressure_source_manifest(
+def _source_manifest(
     args: argparse.Namespace,
     profile: Any,
 ) -> dict[str, Any] | None:
-    if profile.study_id != "pressure":
+    if profile.study_id not in {"pressure", *MITIGATION_STUDIES}:
         return None
     source_values = tuple(args.source_run or ())
-    if len(source_values) > 1:
+    if profile.study_id == "pressure" and len(source_values) > 1:
         raise ValueError("pressure accepts exactly one --source-run")
     source_value = str(source_values[0] if source_values else "").strip()
     if not source_value:
         return None
-    manifest_path = Path(source_value).expanduser().resolve() / "manifest.json"
+    source_path = Path(source_value).expanduser().resolve()
+    manifest_path = (
+        source_path if source_path.name == "manifest.json" else source_path / "manifest.json"
+    )
     if not manifest_path.is_file():
         raise ValueError(
-            f"pressure source run has no manifest: {manifest_path}"
+            f"source run has no manifest: {manifest_path}"
         )
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     if not isinstance(manifest, dict):
-        raise ValueError("pressure source manifest is not an object")
+        raise ValueError("source manifest is not an object")
     return manifest
 
 
