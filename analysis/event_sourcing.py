@@ -934,7 +934,25 @@ def analyze(
     residual = _residual_replay(event_runs, event_trials, oracle_trials)
     resource = _stratified_resources(event_runs, baseline_runs)
     usage = _actual_usage(event_runs)
-    diagnostics = {run["manifest_hash"]: _diagnostics([run]) for run in event_runs}
+    diagnostics = {
+        f"{run['manifest_hash']}|{target}": _diagnostics(
+            [
+                {
+                    **run,
+                    "rows": {
+                        **run["rows"],
+                        "event_diagnostics": [
+                            row
+                            for row in run["rows"]["event_diagnostics"]
+                            if row["target_id"] == target
+                        ],
+                    },
+                }
+            ]
+        )
+        for run in event_runs
+        for target in run["manifest"]["writer"]["targets"]
+    }
 
     output = output.expanduser().resolve()
     output.mkdir(parents=True, exist_ok=True)
