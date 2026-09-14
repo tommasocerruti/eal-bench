@@ -621,7 +621,7 @@ StudyRunner = Callable[
     ["AuthorizationMemoryDomain", Sequence[Any], Mapping[str, Any]], Path | str
 ]
 StudyOfflineValidator = Callable[
-    ["AuthorizationMemoryDomain", Sequence[Any], Mapping[str, Any]], None
+    ["AuthorizationMemoryDomain", Sequence[Any], Mapping[str, Any]], Mapping[str, Any] | None
 ]
 DomainOfflineCheck = Callable[
     ["AuthorizationMemoryDomain", Sequence[Any], Mapping[str, Any]], Any
@@ -674,13 +674,13 @@ class StudyProfile:
         domain: AuthorizationMemoryDomain,
         cases: Sequence[Any],
         options: Mapping[str, Any],
-    ) -> None:
+    ) -> Mapping[str, Any] | None:
         self.validate_options(options)
         if self.offline_validator is None:
             raise NotImplementedError(
                 f"study {self.study_id!r} does not provide offline validation"
             )
-        self.offline_validator(domain, cases, options)
+        return self.offline_validator(domain, cases, options)
 
 
 @dataclass(frozen=True)
@@ -709,6 +709,7 @@ class AuthorizationMemoryDomain:
     )
     challenge: ChallengeAdapter | None = None
     cited_source_authority: CitedSourceAuthorityAdapter | None = None
+    event_sourcing: Any | None = None
 
     def __post_init__(self) -> None:
         self.validate()

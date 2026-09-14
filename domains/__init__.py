@@ -6,27 +6,54 @@ from collections.abc import Callable
 from functools import lru_cache
 
 from .base import AuthorizationMemoryDomain
+from .event_sourcing import EventSourcingSpec
 
 
 DomainFactory = Callable[[], AuthorizationMemoryDomain]
 
 
+def _with_event_sourcing(
+    domain: AuthorizationMemoryDomain, spec: EventSourcingSpec
+) -> AuthorizationMemoryDomain:
+    # Complete construction before exposing the frozen domain through the registry.
+    object.__setattr__(domain, "event_sourcing", spec)
+    return domain
+
+
 def _procurement() -> AuthorizationMemoryDomain:
     from .procurement import ProcurementDomain
 
-    return ProcurementDomain()
+    domain = ProcurementDomain()
+    return _with_event_sourcing(
+        domain,
+        EventSourcingSpec(
+            retain_inactive_records=True,
+            replacement_target_field="authorization_id",
+            order_by_effective_at=True,
+            nested_scope_fields=("vendor", "allowed_categories", "max_amount", "currency"),
+        ),
+    )
 
 
 def _cybersecurity() -> AuthorizationMemoryDomain:
     from .cybersecurity import create_domain
 
-    return create_domain()
+    domain = create_domain()
+    return _with_event_sourcing(domain, EventSourcingSpec())
 
 
 def _finance() -> AuthorizationMemoryDomain:
     from .finance import create_domain
 
-    return create_domain()
+    domain = create_domain()
+    return _with_event_sourcing(
+        domain,
+        EventSourcingSpec(
+            source_id_separator=" | ",
+            empty_supersedes="none",
+            flattened_scope_list_fields=("strategy_ids", "instrument_ids", "sides", "order_types"),
+        ),
+    )
 
 
 DOMAINS: dict[str, DomainFactory] = {
@@ -51,9 +78,7 @@ def list_domains(*, maturity: str | None = None) -> tuple[str, ...]:
     if maturity is None:
         return domain_ids
     return tuple(
-        domain_id
-        for domain_id in domain_ids
-        if get_domain(domain_id).maturity == maturity
+        domain_id for domain_id in domain_ids if get_domain(domain_id).maturity == maturity
     )
 
 

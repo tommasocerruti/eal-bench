@@ -497,6 +497,7 @@ def _implementation_files(
         root / "domains" / "__init__.py",
         root / "domains" / "base.py",
         root / "domains" / "source_authority.py",
+        root / "domains" / "event_sourcing.py",
     }
     paths.update((root / "experiments" / "authorization_memory").glob("*.py"))
     paths.update((root / "experiments" / "mitigations").rglob("*.py"))

@@ -1252,6 +1252,7 @@ def validate_shared_domain_boundaries(
                     if module.startswith("domains.") and module not in {
                         "domains.base",
                         "domains.source_authority",
+                        "domains.event_sourcing",
                     }:
                         violations.append(
                             f"{path.relative_to(root)}:{node.lineno}:{module}"

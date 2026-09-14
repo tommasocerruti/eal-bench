@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
@@ -392,12 +393,14 @@ def _validate(args: argparse.Namespace) -> None:
             requested_cases,
         )
         if profile.offline_validator is not None:
-            profile.validate_offline(domain, cases, options)
+            report = profile.validate_offline(domain, cases, options)
             result = {
                 "status": "passed",
                 "domain_id": domain_id,
                 "study_id": profile.study_id,
             }
+            if isinstance(report, Mapping):
+                result["study_validation"] = dict(report)
         elif profile.builder is not None:
             plan = profile.build_jobs(domain, cases, options)
             result = validate_study_plan(
@@ -582,12 +585,17 @@ def _route_options(
         if source_manifest is not None
         else ""
     ) or domain.corpus.default_version
+    seed = args.seed if args.seed is not None else domain.canonical_seed
+    if profile.study_id == "event_sourcing" and source_manifest is not None and args.seed is None:
+        seed = source_manifest.get("seed")
+        if type(seed) is not int or seed < 0:
+            raise ValueError("event-sourcing source manifest has an invalid seed")
     options = {
         **vars(args),
         "source_run": source_runs[0] if source_runs else "",
         "source_runs": source_runs,
         "corpus_version": corpus_version,
-        "seed": args.seed if args.seed is not None else domain.canonical_seed,
+        "seed": seed,
         "command": "python -m experiments.run " + " ".join(sys.argv[1:]),
     }
     if profile.category == "behavioral":
@@ -628,7 +636,7 @@ def _route_options(
         options["executor_targets"] = _csv(args.executor_targets) or (
             _default_target(args.executor_task),
         )
-    elif profile.study_id in {"writer", "writer_ttc"}:
+    elif profile.study_id in {"writer", "writer_ttc", "event_sourcing"}:
         options["writer_targets"] = _csv(args.writer_targets) or (
             _default_target(args.writer_task),
         )
