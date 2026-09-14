@@ -41,8 +41,15 @@ def rows_of(group):
             r = json.loads(l)
             if r.get("run") and r["run"] != live[tag]:
                 continue
+            r["run"] = r.get("run") or live[tag]  # early rows did not record their run; the file is named by its tag
             out.append(r)
     return out
+
+
+def update_key(r):
+    """One memory update: a chain at a block (in a write-back block, of one arm). Several requests can be authorized by
+    the same update, so distinct updates are fewer than judged rows."""
+    return (r["run"], r.get("chain_id"), r.get("arm") if r.get("loop_block") else "", r.get("error_block"))
 
 
 def table(rows, split_loop):
@@ -52,8 +59,11 @@ def table(rows, split_loop):
         n = len(rs)
         if not n:
             return
+        updates = len({update_key(r) for r in rs})
+        requests = sum(1 for r in rs if r["failure"] == "false_authorization")
+        records = n - requests
         cells = [str(c.get(k, 0)) for k in CAUSES] + [str(c.get("no consensus", 0))]
-        lines.append(f"| {name} | {n} | " + " | ".join(cells) + " |")
+        lines.append(f"| {name} | {updates} | {requests} | {records} | " + " | ".join(cells) + " |")
     if split_loop:
         emit("history blocks (shared by both arms)", [r for r in rows if r["failure"] == "false_authorization" and not r.get("loop_block")])
         emit("write-back blocks, false permissions", [r for r in rows if r["failure"] == "false_authorization" and r.get("loop_block")])
@@ -65,8 +75,8 @@ def table(rows, split_loop):
 
 
 out = []
-header = "| Where the failure enters | n | " + " | ".join(LABEL[c] for c in CAUSES) + " | no majority |"
-sep = "|---|---|" + "---|" * (len(CAUSES) + 1)
+header = "| Where the failure enters | distinct updates | requests | records | " + " | ".join(LABEL[c] for c in CAUSES) + " | no majority |"
+sep = "|---|---|---|---|" + "---|" * (len(CAUSES) + 1)
 grand = []
 per_judge = collections.defaultdict(collections.Counter)
 agree = collections.Counter()
@@ -75,7 +85,7 @@ for g, title in GROUPS:
     if not rows:
         continue
     grand += rows
-    out.append(f"*{title}* ({len(rows)} failures)\n")
+    out.append(f"*{title}* ({len(rows)} failures from {len({update_key(r) for r in rows})} memory updates)\n")
     out.append(header)
     out.append(sep)
     out += table(rows, split_loop=g.startswith("loop") or g == "onepass")
@@ -86,7 +96,12 @@ for g, title in GROUPS:
             per_judge[j][(v or {}).get("cause") or "none"] += 1
 if grand:
     c = collections.Counter(r.get("consensus_cause") or "no consensus" for r in grand)
-    out.append(f"*All groups* ({len(grand)} failures): " + ", ".join(f"{LABEL.get(k, k)} {v}" for k, v in c.most_common()) + ".\n")
+    ups = collections.defaultdict(set)
+    for r in grand:
+        ups[update_key(r)].add(r.get("consensus_cause") or "no consensus")
+    uc = collections.Counter(next(iter(v)) if len(v) == 1 else "mixed" for v in ups.values())
+    n_req = sum(1 for r in grand if r["failure"] == "false_authorization")
+    out.append(f"*All groups* ({len(grand)} failures: {n_req} requests and {len(grand) - n_req} records, from {len(ups)} distinct memory updates). By row: " + ", ".join(f"{LABEL.get(k, k)} {v}" for k, v in c.most_common()) + ". By update: " + ", ".join(f"{LABEL.get(k, k)} {v}" for k, v in uc.most_common()) + " (an update is 'mixed' when its rows carry different labels).\n")
     out.append("Judge agreement: " + ", ".join(f"{agree[k]} rows with {k} of 3 judges on the majority label" for k in sorted(agree, key=lambda x: -(x or 0))) + ".\n")
     out.append("| Judge | " + " | ".join(LABEL[c] for c in CAUSES) + " |")
     out.append("|---|" + "---|" * len(CAUSES))

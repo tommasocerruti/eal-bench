@@ -9,7 +9,7 @@ Drafts of what would go into the main text under the structure above, built from
 
 *Caption draft.* Three rounds in which the executor's log lines are written back into the history (blue, filled circles) against a control that receives the same number of updates on the same schedule with neutral content (vermillion, hollow squares), forked from the same frozen memory (the open-loop point). Top: authorized use. Bottom: unauthorized submission. Five writers, both executors, canonical seed per domain; 360 chains. Error bars are 95% bootstrap intervals over chains.
 
-*Reading it.* Authorized use falls in the action arm in procurement and cybersecurity and does not move in finance; the control stays flat in cybersecurity and finance but also loses ground in procurement, so part of the procurement drop is the cost of any repeated update. Unauthorized submission is flat in both arms in every domain at this scale. The top panels start at 30%, as the paper's compute figure does; the bottom panels start at 0.
+*Reading it.* Authorized use falls in the action arm in procurement and cybersecurity and does not move in finance; the control stays flat in cybersecurity and finance but also loses ground in procurement, so part of the procurement drop is the cost of any repeated update. Unauthorized submission moves little in either arm in any domain; paired over five writers the action arm is +2.2 points at round 3 (interval +0.2 to +4.2), a small and uncertain increase. The top panels start at 30%, as the paper's compute figure does; the bottom panels start at 0.
 
 | Domain | chains | AU open loop | AU round 3, own actions | AU round 3, control | US open loop | US round 3, own actions | US round 3, control |
 |---|---|---|---|---|---|---|---|
@@ -68,7 +68,7 @@ Adds one row pair to the paper's condition table. Same runs for both conditions,
 
 ### Table: the trigger (generated corpus)
 
-Three writers (GLM 5.2, Kimi K2.6, Nemotron 3 Ultra), GPT-OSS as executor, 108 matched groups; 324 unauthorized requests per row.
+Three writers (GLM 5.2, Kimi K2.6, Nemotron 3 Ultra), GPT-OSS as executor; 324 unauthorized requests per row. The stale-level rows are matched: within each of the 108 groups the three levels share every turn but the spliced restatements. The lifecycle rows are an observed difference on the same corpus: a case with a different lifecycle is drawn from a different base history (dates, limits, filler), and only revoke-and-replace has implicit-revocation variants, so that difference is not attributed to the lifecycle alone.
 
 | stale | memories | P(F) | exact memories | US | AU |
 |---|---|---|---|---|---|
@@ -82,18 +82,18 @@ Three writers (GLM 5.2, Kimi K2.6, Nemotron 3 Ultra), GPT-OSS as executor, 108 m
 
 ### Table: the cause, by setting (three LLM judges, majority label)
 
-Every failure in every run of this note. Rows group failures by where they occur; the mandate rows include open- and closed-loop runs with the line. Labels are the judges' and have not been checked by a human.
+Every failure in every run of this note. Rows group failures by where they occur; the mandate rows include open- and closed-loop runs with the line. Memory updates are distinct writer updates (one update can authorize several requests or mint more than one record); the label columns count failures. Labels are the judges' and have not been checked by a person (open item 1).
 
-| Setting | failures | restatement applied | own action as approval | authoritative change misapplied | update failed | other |
-|---|---|---|---|---|---|---|
-| Open loop, procurement | 549 | 545 | 0 | 1 | 0 | 3 |
-| Open loop, finance | 272 | 268 | 0 | 4 | 0 | 0 |
-| Open loop, cybersecurity | 303 | 0 | 0 | 33 | 270 | 0 |
-| Closed loop, shared history blocks | 309 | 274 | 0 | 6 | 29 | 0 |
-| Closed loop, the agent's own write-back lines | 192 | 1 | 186 | 2 | 0 | 3 |
-| With the mandate, procurement and finance | 159 | 141 | 8 | 6 | 4 | 0 |
-| With the mandate, cybersecurity | 466 | 0 | 6 | 42 | 418 | 0 |
-| **All** | **2250** | **1229** | **200** | **94** | **721** | **6** |
+| Setting | memory updates | failures (requests or records) | restatement applied | own action as approval | authoritative change misapplied | update failed | other |
+|---|---|---|---|---|---|---|---|
+| Open loop, procurement | 260 | 549 | 545 | 0 | 1 | 0 | 3 |
+| Open loop, finance | 68 | 272 | 268 | 0 | 4 | 0 | 0 |
+| Open loop, cybersecurity | 78 | 303 | 0 | 0 | 33 | 270 | 0 |
+| Closed loop, shared history blocks | 108 | 309 | 274 | 0 | 6 | 29 | 0 |
+| Closed loop, the agent's own write-back lines | 162 | 192 | 1 | 186 | 2 | 0 | 3 |
+| With the mandate, procurement and finance | 67 | 159 | 141 | 8 | 6 | 4 | 0 |
+| With the mandate, cybersecurity | 131 | 466 | 0 | 6 | 42 | 418 | 0 |
+| **All** | **861** | **2250** | **1229** | **200** | **94** | **721** | **6** |
 
 ### Table: generality (the paper's writer table with two added rows)
 

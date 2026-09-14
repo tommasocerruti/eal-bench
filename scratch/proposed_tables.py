@@ -95,16 +95,19 @@ def table_causes():
 
     order = ["Open loop, procurement", "Open loop, finance", "Open loop, cybersecurity", "Closed loop, shared history blocks", "Closed loop, the agent's own write-back lines", "With the mandate, procurement and finance", "With the mandate, cybersecurity"]
     counts = collections.defaultdict(collections.Counter)
+    updates = collections.defaultdict(set)
     for r in rows:
         counts[setting(r)][r["consensus_cause"] or "no majority"] += 1
-    out = ["| Setting | failures | " + " | ".join(nice[l] for l in labels) + " |", "|---|---|" + "---|" * len(labels)]
+        updates[setting(r)].add((r["run_tag"], r["chain_id"], r["arm"] if r["loop_block"] == "True" else "", r["error_block"]))
+    out = ["| Setting | memory updates | failures (requests or records) | " + " | ".join(nice[l] for l in labels) + " |", "|---|---|---|" + "---|" * len(labels)]
     for s in order:
         c = counts[s]
-        out.append(f"| {s} | {sum(c.values())} | " + " | ".join(str(c[l]) for l in labels) + " |")
+        out.append(f"| {s} | {len(updates[s])} | {sum(c.values())} | " + " | ".join(str(c[l]) for l in labels) + " |")
     tot = collections.Counter()
     for c in counts.values():
         tot.update(c)
-    out.append(f"| **All** | **{sum(tot.values())}** | " + " | ".join(f"**{tot[l]}**" for l in labels) + " |")
+    all_updates = set().union(*updates.values())
+    out.append(f"| **All** | **{len(all_updates)}** | **{sum(tot.values())}** | " + " | ".join(f"**{tot[l]}**" for l in labels) + " |")
     return out
 
 
@@ -179,7 +182,7 @@ def build():
     s.append("")
     s.append("*Caption draft.* Three rounds in which the executor's log lines are written back into the history (blue, filled circles) against a control that receives the same number of updates on the same schedule with neutral content (vermillion, hollow squares), forked from the same frozen memory (the open-loop point). Top: authorized use. Bottom: unauthorized submission. Five writers, both executors, canonical seed per domain; 360 chains. Error bars are 95% bootstrap intervals over chains.")
     s.append("")
-    s.append("*Reading it.* Authorized use falls in the action arm in procurement and cybersecurity and does not move in finance; the control stays flat in cybersecurity and finance but also loses ground in procurement, so part of the procurement drop is the cost of any repeated update. Unauthorized submission is flat in both arms in every domain at this scale. The top panels start at 30%, as the paper's compute figure does; the bottom panels start at 0.")
+    s.append("*Reading it.* Authorized use falls in the action arm in procurement and cybersecurity and does not move in finance; the control stays flat in cybersecurity and finance but also loses ground in procurement, so part of the procurement drop is the cost of any repeated update. Unauthorized submission moves little in either arm in any domain; paired over five writers the action arm is +2.2 points at round 3 (interval +0.2 to +4.2), a small and uncertain increase. The top panels start at 30%, as the paper's compute figure does; the bottom panels start at 0.")
     s.append("")
     s += table_closed_loop()
     s.append("")
@@ -203,13 +206,13 @@ def build():
     s.append("")
     s.append("### Table: the trigger (generated corpus)")
     s.append("")
-    s.append("Three writers (GLM 5.2, Kimi K2.6, Nemotron 3 Ultra), GPT-OSS as executor, 108 matched groups; 324 unauthorized requests per row.")
+    s.append("Three writers (GLM 5.2, Kimi K2.6, Nemotron 3 Ultra), GPT-OSS as executor; 324 unauthorized requests per row. The stale-level rows are matched: within each of the 108 groups the three levels share every turn but the spliced restatements. The lifecycle rows are an observed difference on the same corpus: a case with a different lifecycle is drawn from a different base history (dates, limits, filler), and only revoke-and-replace has implicit-revocation variants, so that difference is not attributed to the lifecycle alone.")
     s.append("")
     s += table_trigger()
     s.append("")
     s.append("### Table: the cause, by setting (three LLM judges, majority label)")
     s.append("")
-    s.append("Every failure in every run of this note. Rows group failures by where they occur; the mandate rows include open- and closed-loop runs with the line. Labels are the judges' and have not been checked by a human.")
+    s.append("Every failure in every run of this note. Rows group failures by where they occur; the mandate rows include open- and closed-loop runs with the line. Memory updates are distinct writer updates (one update can authorize several requests or mint more than one record); the label columns count failures. Labels are the judges' and have not been checked by a person (open item 1).")
     s.append("")
     s += table_causes()
     s.append("")
