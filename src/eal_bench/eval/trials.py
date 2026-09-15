@@ -79,6 +79,91 @@ class TrialTruth:
             "resource_key": self.resources.key if self.resources is not None else None,
         }
 
+    def to_portable(self) -> dict[str, Any]:
+        """Everything needed to rebuild this truth in another process.
+
+        Cases, probes and presentations ship in the package and are reloaded by
+        id. A supplied memory does not, so the frozen evidence travels with the
+        log; without it a saved run of caller-supplied memories could only be
+        re-scored in the process that built it.
+        """
+
+        from dataclasses import asdict, is_dataclass
+
+        evidence = self.evidence
+        if evidence is not None and is_dataclass(evidence):
+            payload = asdict(evidence)
+            architecture = payload.get("architecture")
+            payload["architecture"] = getattr(architecture, "value", architecture)
+        else:
+            payload = None
+        return {
+            **self.to_dict(),
+            "presentation_id": getattr(self.presentation, "presentation_id", None),
+            "presentation_hash": self.presentation_hash,
+            "evidence": payload,
+            "resources": self.resources.to_dict() if self.resources is not None else None,
+        }
+
+    @classmethod
+    def from_portable(cls, row: Mapping[str, Any]) -> TrialTruth:
+        """Rebuild a truth from `to_portable`, reloading what the package ships."""
+
+        from experiments.authorization_memory.schemas import (
+            FrozenEvidence,
+            MemoryArchitecture,
+            ModelProvenance,
+        )
+
+        from .resources import load_domain, resolve_presentation
+
+        domain = load_domain(str(row["domain_id"]))
+        resources = row.get("resources")
+        version = (resources or {}).get("corpus_version") or domain.corpus.default_version
+        case = next(
+            (
+                candidate
+                for candidate in domain.corpus.load_cases(version)
+                if domain.corpus.case_id(candidate) == row["case_id"]
+            ),
+            None,
+        )
+        if case is None:
+            raise ValueError(f"case {row['case_id']!r} is absent from {row['domain_id']}/{version}")
+        probe = next((p for p in domain.corpus.probes(case) if p.probe_id == row["probe_id"]), None)
+        if probe is None:
+            raise ValueError(f"probe {row['probe_id']!r} is absent from case {row['case_id']!r}")
+
+        evidence = None
+        if row.get("evidence") is not None:
+            fields = dict(row["evidence"])
+            architecture = fields.get("architecture")
+            if architecture is not None:
+                fields["architecture"] = MemoryArchitecture(architecture)
+            writer = fields.get("writer")
+            if isinstance(writer, Mapping):
+                fields["writer"] = ModelProvenance(**writer)
+            evidence = FrozenEvidence(**fields)
+
+        return cls(
+            trial_id=str(row["trial_id"]),
+            domain_id=str(row["domain_id"]),
+            case_id=str(row["case_id"]),
+            probe_id=str(row["probe_id"]),
+            pair_id=str(row["pair_id"]),
+            dimension=str(row["dimension"]),
+            condition_id=str(row["condition_id"]),
+            request_authorized=bool(row["request_authorized"]),
+            oracle_reason=str(row["oracle_reason"]),
+            seed=int(row["seed"]),
+            case=case,
+            probe=probe,
+            evidence=evidence,
+            presentation=resolve_presentation(domain, row.get("presentation_id")),
+            presentation_hash=str(row.get("presentation_hash") or ""),
+            resources=ResourceVersions(**resources) if resources else None,
+        )
+
 
 @dataclass(frozen=True)
 class ToolCall:

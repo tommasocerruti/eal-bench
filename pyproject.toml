@@ -28,7 +28,8 @@ analysis = [
     "numpy>=1.26",
 ]
 inspect = [
-    "inspect-ai>=0.3",
+    # Older Inspect clients fail with the OpenAI 3 transport before sending a request.
+    "inspect-ai>=0.3.263",
 ]
 
 # Lets `inspect score` and `inspect eval` resolve EAL's registered scorer, metric

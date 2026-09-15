@@ -25,6 +25,7 @@ __all__ = [
     "available",
     "control_task",
     "eal_controls_scorer",
+    "propagation_task",
     "eal_generate",
     "eal_metrics",
     "missing_parameter_descriptions",
@@ -43,7 +44,7 @@ INSTALL_HINT = 'install the Inspect extra: pip install "eal-bench[inspect]"'
 _GENERATION_ERROR_KEY = "eal_generation_error"
 _RAW_ARGUMENTS_KEY = "eal_raw_tool_arguments"
 ATTACHMENT_PROTOCOL = "attachment://"
-_TRUTH_CACHE: dict[tuple[str, str | None, str | None], dict[str, TrialTruth]] = {}
+_TRUTH_CACHE: dict[tuple[str, str | None, str | None, str], dict[str, TrialTruth]] = {}
 
 
 def available() -> bool:
@@ -206,7 +207,11 @@ def _request_hash(trial: Trial, surface: Mapping[str, Any]) -> str:
     return content_hash(_request_shape(trial.messages, tools, trial.tool_choice))
 
 
-def to_samples(pairs: Sequence[tuple[Trial, TrialTruth]]) -> list[Any]:
+def to_samples(
+    pairs: Sequence[tuple[Trial, TrialTruth]],
+    track: str = "controls",
+    variants: str = "generated",
+) -> list[Any]:
     """One Inspect sample per trial. Truth stays in metadata, never in the input."""
 
     _require_inspect()
@@ -226,9 +231,14 @@ def to_samples(pairs: Sequence[tuple[Trial, TrialTruth]]) -> list[Any]:
             metadata={
                 "resources": trial.resources.to_dict(),
                 "truth": truth.to_dict(),
+                # Carries the frozen memory, so a saved log built from supplied
+                # memories re-scores in a process that never saw them.
+                "truth_portable": truth.to_portable(),
                 "corpus_version": trial.resources.corpus_version,
                 "presentation_id": trial.resources.presentation_id,
                 "inspect_adapter_version": INSPECT_ADAPTER_VERSION,
+                "eal_track": track,
+                "eal_variants": variants,
                 "tool_surface_hash": surface_hash,
                 "request_hash": _request_hash(trial, surface),
             },
@@ -273,16 +283,33 @@ def response_from_inspect(
     )
 
 
+_SUPPLIED_TRUTHS: dict[str, TrialTruth] = {}
+
+
+def _register_supplied_truths(pairs: Sequence[tuple[Trial, TrialTruth]]) -> None:
+    for _, truth in pairs:
+        _SUPPLIED_TRUTHS[truth.trial_id] = truth
+
+
 def _truths_for(
     domain_id: str,
     corpus_version: str | None,
     presentation_id: str | None,
+    track: str = "controls",
 ) -> dict[str, TrialTruth]:
-    key = (domain_id, corpus_version, presentation_id)
+    """Rebuild the track's trials so a saved log can be re-scored without generating."""
+
+    key = (domain_id, corpus_version, presentation_id, track)
     if key not in _TRUTH_CACHE:
+        if track == "propagation":
+            from .propagation import build_propagation_trials
+
+            builder = build_propagation_trials
+        else:
+            builder = build_control_trials
         _TRUTH_CACHE[key] = {
             truth.trial_id: truth
-            for _, truth in build_control_trials(
+            for _, truth in builder(
                 domain_id,
                 corpus_version=corpus_version,
                 presentation_id=presentation_id,
@@ -337,14 +364,30 @@ def _truth_for_state(state: Any) -> TrialTruth:
             "it was not produced by eal_bench.eval.inspect_adapter"
         )
     _require_matching_resources(metadata, domain_id)
-    truths = _truths_for(domain_id, metadata.get("corpus_version"), metadata.get("presentation_id"))
+    truths = _truths_for(
+        domain_id,
+        metadata.get("corpus_version"),
+        metadata.get("presentation_id"),
+        str(metadata.get("eal_track") or "controls"),
+    )
     trial_id = str(state.sample_id)
-    if trial_id not in truths:
+    if trial_id in truths:
+        return truths[trial_id]
+    if trial_id in _SUPPLIED_TRUTHS:
+        return _SUPPLIED_TRUTHS[trial_id]
+    portable = metadata.get("truth_portable")
+    if isinstance(portable, Mapping):
+        return TrialTruth.from_portable(portable)
+    if (metadata.get("eal_variants") or "generated") != "generated":
         raise ValueError(
-            f"sample {trial_id!r} no longer builds for domain {domain_id!r}; "
-            "the corpus or presentation has changed"
+            f"sample {trial_id!r} used caller-supplied memories and was written "
+            "before the log carried a portable truth. Re-score in the process that "
+            "built the task, or score directly with eal_bench.eval.score_response."
         )
-    return truths[trial_id]
+    raise ValueError(
+        f"sample {trial_id!r} no longer builds for domain {domain_id!r}; "
+        "the corpus or presentation has changed"
+    )
 
 
 def raw_tool_arguments(state: Any) -> dict[str, str]:
@@ -369,7 +412,7 @@ def raw_tool_arguments(state: Any) -> dict[str, str]:
             if not isinstance(identifier, str) or not isinstance(arguments, str):
                 continue
             if arguments.startswith(ATTACHMENT_PROTOCOL):
-                arguments = attachments.get(arguments[len(ATTACHMENT_PROTOCOL):])
+                arguments = attachments.get(arguments[len(ATTACHMENT_PROTOCOL) :])
                 if arguments is None:
                     arguments = raw.get(identifier)
                 if not isinstance(arguments, str):
@@ -576,6 +619,57 @@ else:
 
     def eal_generate() -> Any:
         _require_inspect()
+
+
+def propagation_task(
+    domain_id: str,
+    *,
+    corpus_version: str | None = None,
+    presentation_id: str | None = None,
+    **build_kwargs: Any,
+) -> Any:
+    """Inspect task for the error-propagation track.
+
+    Matched replays over frozen memories. No writer runs, and the scorer is the
+    one the controls track uses.
+    """
+
+    _require_inspect()
+    from inspect_ai import Task
+    from inspect_ai.solver import use_tools
+
+    from .propagation import build_propagation_trials
+
+    pairs = build_propagation_trials(
+        domain_id,
+        corpus_version=corpus_version,
+        presentation_id=presentation_id,
+        **build_kwargs,
+    )
+    if not pairs:
+        raise ValueError(f"no propagation trials for domain {domain_id!r}")
+    # Caller-supplied memories cannot be rebuilt from the repository, so register
+    # them for the scorer. This survives `inspect score` in the same process; a
+    # different process gets a clear error rather than a confusing "no longer
+    # builds".
+    if build_kwargs.get("variants") is not None:
+        _register_supplied_truths(pairs)
+    tools = to_tool_defs(list(pairs[0][0].tools))
+    return Task(
+        dataset=to_samples(
+            pairs,
+            track="propagation",
+            variants=("supplied" if build_kwargs.get("variants") is not None else "generated"),
+        ),
+        solver=[use_tools(tools, tool_choice="auto"), eal_generate()],
+        scorer=eal_controls_scorer(),
+        name=f"eal_propagation_{domain_id}",
+        metadata={
+            "inspect_adapter_version": INSPECT_ADAPTER_VERSION,
+            "eal_surface": "inspect",
+            "eal_track": "propagation",
+        },
+    )
 
 
 def control_task(

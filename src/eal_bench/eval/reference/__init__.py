@@ -8,7 +8,7 @@ re-derives every recorded value.
 from __future__ import annotations
 
 import json
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from importlib import resources
 from typing import Any
 
@@ -105,6 +105,7 @@ def verify() -> dict[str, Any]:
     checks: dict[str, Any] = {
         "resources": verify_resources(),
         "api_contracts": verify_api_contracts(),
+        "writer_memories": verify_writer_memories(),
     }
     checks.update(_optional_track_checks())
     return {
@@ -117,7 +118,7 @@ def verify() -> dict[str, Any]:
     }
 
 
-_TRACK_MODULES = ("controls", "preservation")
+_TRACK_MODULES = ("controls", "preservation", "propagation")
 
 
 def _optional_track_checks() -> dict[str, Any]:
@@ -748,6 +749,8 @@ def verify_inspect() -> dict[str, Any]:
         "end_to_end_eval": verify_inspect_eval(),
         "tool_surface": verify_inspect_tool_surface(),
         "contract": verify_inspect_contract(),
+        "tracks": verify_inspect_tracks(),
+        "supplied_truth_roundtrip": verify_supplied_truth_roundtrip(),
     }
 
 
@@ -948,6 +951,376 @@ def verify_inspect_eval() -> dict[str, Any]:
         "authorized_use": f"{used}/{len(authorized)}",
         "unauthorized_submission": f"{submitted}/{len(unauthorized)}",
     }
+
+
+def _scripted_perfect_executor(domain: Any, pairs: Any) -> Any:
+    """A mock provider that answers each request correctly.
+
+    Keyed by the whole final message, because the memory block shares that message
+    with the request and is what separates the arms. The matched-arm invariant is
+    checked separately on the case and probe, where it actually holds.
+    """
+
+    from inspect_ai.model import ChatCompletionChoice, ChatMessageAssistant, ModelOutput
+    from inspect_ai.tool import ToolCall
+
+    action = domain.action_tools[0]
+    decline = [name for name in domain.terminal_tools if name not in domain.action_tools][-1]
+    by_request: dict[str, Any] = {}
+    by_probe: dict[tuple[str, str], Any] = {}
+    for trial, truth in pairs:
+        by_request[trial.messages[-1]["content"]] = truth
+        seen = by_probe.setdefault((truth.case_id, truth.probe_id), truth)
+        if seen.request_authorized != truth.request_authorized:
+            raise AssertionError(f"arms of {truth.case_id}/{truth.probe_id} disagree on authority")
+
+    def scripted(messages: Any, tools: Any, tool_choice: Any, config: Any) -> Any:
+        del tools, tool_choice, config
+        truth = by_request[messages[-1].content]
+        name = action if truth.request_authorized else decline
+        arguments = domain.conformance.action_arguments(truth.probe.request, name)
+        return ModelOutput(
+            model="mockllm/model",
+            choices=[
+                ChatCompletionChoice(
+                    message=ChatMessageAssistant(
+                        content="",
+                        tool_calls=[ToolCall(id="1", function=name, arguments=dict(arguments))],
+                    ),
+                    stop_reason="tool_calls",
+                )
+            ],
+        )
+
+    return scripted
+
+
+def _run_mock_eval(task: Any, scripted: Any) -> list[dict[str, Any]]:
+    """Run one Inspect task against the mock provider and return the scored rows."""
+
+    import tempfile
+
+    from inspect_ai import eval as inspect_eval
+    from inspect_ai.model import get_model
+
+    with tempfile.TemporaryDirectory() as log_dir:
+        log = inspect_eval(
+            task,
+            model=get_model("mockllm/model", custom_outputs=scripted),
+            log_dir=log_dir,
+            display="none",
+        )[0]
+        if log.status != "success":
+            raise AssertionError(f"Inspect eval of {task.name} failed: {log.status}")
+        samples = list(log.samples or ())
+        if not samples:
+            raise AssertionError(f"Inspect eval of {task.name} scored no samples")
+        scorer_name = next(iter(samples[0].scores))
+        return [dict(sample.scores[scorer_name].metadata) for sample in samples]
+
+
+def _outcomes_from_scores(rows: Sequence[Mapping[str, Any]]) -> list[Any]:
+    """Rebuild outcomes from score metadata, which also carries request-hash fields."""
+
+    from ..scoring import TrialOutcome
+
+    fields = set(TrialOutcome.__dataclass_fields__)
+    return [TrialOutcome(**{k: v for k, v in row.items() if k in fields}) for row in rows]
+
+
+def verify_inspect_tracks() -> dict[str, Any]:
+    """Run the propagation Inspect task, not only build it.
+
+    Five defects in the first adapter survived review because the task was written
+    and never executed, so every task exported here is evaluated against the mock
+    provider before it ships.
+    """
+
+    from ..inspect_adapter import available, propagation_task
+    from ..propagation import build_propagation_trials, propagation_summary
+
+    if not available():
+        return {"status": "skipped", "reason": "inspect-ai is not installed"}
+
+    domain_id = "procurement"
+    domain = eval_resources.load_domain(domain_id)
+    case_id = _first_case_id(domain_id)
+    build = dict(case_ids=[case_id], check_leakage=False, allow_uncalibrated_tokenizer=True)
+
+    pairs = build_propagation_trials(domain_id, **build)
+    rows = _run_mock_eval(
+        propagation_task(domain_id, **build), _scripted_perfect_executor(domain, pairs)
+    )
+    reports = propagation_summary(_outcomes_from_scores(rows))
+    if not reports:
+        raise AssertionError("the propagation task produced no comparable pairs")
+    for report in reports:
+        if not report.pairs_complete:
+            raise AssertionError(f"origin {report.origin} produced no complete pair")
+        if report.erroneous_unauthorized or report.exact_unauthorized:
+            raise AssertionError(f"a perfect executor submitted on origin {report.origin}")
+        if report.resource_key is None or report.surface != "inspect":
+            raise AssertionError(f"origin {report.origin} lost its provenance: {report.to_dict()}")
+    return {
+        "status": "passed",
+        "propagation_samples": len(rows),
+        "propagation_origins": [report.origin for report in reports],
+    }
+
+
+def verify_supplied_truth_roundtrip() -> dict[str, Any]:
+    """A supplied memory must re-score after the building process is gone.
+
+    The in-process registry cannot survive `inspect score` in a new interpreter,
+    so the portable truth is what makes a saved log of caller-supplied memories
+    re-scorable at all. Cleared here to prove the registry is not doing the work.
+    """
+
+    from ..inspect_adapter import _SUPPLIED_TRUTHS, _TRUTH_CACHE, available, propagation_task
+    from ..propagation import build_propagation_trials
+    from ..scoring import score_response
+    from ..trials import ModelResponse, TrialTruth
+
+    if not available():
+        return {"status": "skipped", "reason": "inspect-ai is not installed"}
+
+    domain_id = "procurement"
+    case_id = _first_case_id(domain_id)
+    build = dict(case_ids=[case_id], check_leakage=False, allow_uncalibrated_tokenizer=True)
+    pairs = build_propagation_trials(domain_id, **build)
+    # One variant per memory, not per probe: several probes share a memory, and
+    # replaying the same one twice is now correctly refused.
+    variants = []
+    seen = set()
+    for _, truth in pairs:
+        if truth.condition_id == "faithful_typed" or truth.condition_id in seen:
+            continue
+        seen.add(truth.condition_id)
+        variants.append(_variant_from_truth(truth))
+    task = propagation_task(domain_id, variants=variants, **build)
+
+    # Everything the building process kept in memory, gone.
+    saved_supplied = dict(_SUPPLIED_TRUTHS)
+    saved_cache = dict(_TRUTH_CACHE)
+    _SUPPLIED_TRUTHS.clear()
+    _TRUTH_CACHE.clear()
+    try:
+        checked = 0
+        for sample in task.dataset:
+            portable = (sample.metadata or {}).get("truth_portable")
+            if not isinstance(portable, Mapping):
+                raise AssertionError(f"sample {sample.id!r} carries no portable truth")
+            rebuilt = TrialTruth.from_portable(portable)
+            if rebuilt.case is None or rebuilt.probe is None or rebuilt.evidence is None:
+                raise AssertionError(f"sample {sample.id!r} rebuilt without scoring handles")
+            # Scoring is the real contract: the handles must be usable, not present.
+            outcome = score_response(rebuilt, ModelResponse.from_tool_calls([]))
+            if outcome.trial_id != sample.id:
+                raise AssertionError(f"rebuilt truth scored as {outcome.trial_id!r}")
+            checked += 1
+    finally:
+        _SUPPLIED_TRUTHS.update(saved_supplied)
+        _TRUTH_CACHE.update(saved_cache)
+    if not checked:
+        raise AssertionError("the supplied-memory task produced no samples")
+    return {"status": "passed", "samples_rescored": checked}
+
+
+def _variant_from_truth(truth: Any) -> Any:
+    """A caller-supplied variant standing in for one the repository cannot ship."""
+
+    from ..propagation import ALTERED, MemoryVariant
+
+    return MemoryVariant(
+        variant_id=f"supplied_{truth.condition_id}_{truth.case_id}",
+        origin=ALTERED,
+        case_id=truth.case_id,
+        recipe=str(truth.condition_id).split(":", 1)[-1],
+        payload=dict(truth.evidence.payload),
+    )
+
+
+def verify_writer_memories() -> dict[str, Any]:
+    """The shipped writer memories must still say what they were recorded saying.
+
+    They are the only variants that evidence endogenous laundering, so a corpus
+    or scorer change that silently moves their formation label would quietly
+    change what the track measures. Re-derived here rather than trusted.
+    """
+
+    from ..preservation import apparent_authority, score_memory
+    from ..propagation import WRITER, writer_memories, writer_memory_manifest
+
+    manifest = writer_memory_manifest()
+    rows = manifest["memories"]
+    if not rows:
+        raise AssertionError("the shipped writer memory set is empty")
+
+    drifted = []
+    for row in rows:
+        recorded = row["faithful_comparison"]
+        common = dict(
+            architecture=row["architecture"],
+            corpus_version=row["corpus_version"],
+            writer_seed=row.get("writer_seed"),
+        )
+        scored = score_memory(row["domain_id"], row["case_id"], row["payload"], **common)
+        formed = apparent_authority(row["domain_id"], row["case_id"], row["payload"], **common)
+        observed = {
+            "exact": scored.exact,
+            "errors": dict(scored.errors),
+            "forms_false_authority": formed.formed,
+            "formed_probe_ids": list(formed.probe_ids),
+        }
+        expected = {k: recorded[k] for k in observed}
+        if observed != expected:
+            drifted.append(
+                {"variant_id": row["variant_id"], "fields": _differing_keys(observed, expected)}
+            )
+    if drifted:
+        raise AssertionError(f"shipped writer memories no longer re-derive: {drifted}")
+
+    per_domain = {}
+    for domain_id in eval_resources.list_domains():
+        forming = writer_memories(domain_id)
+        every = writer_memories(domain_id, forming_only=False)
+        per_domain[domain_id] = {"memories": len(every), "forming": len(forming)}
+        if any(variant.origin != WRITER for variant in every):
+            raise AssertionError(f"{domain_id}: a shipped memory is not writer origin")
+        if any(not variant.demonstrates_writing_failure for variant in every):
+            raise AssertionError(f"{domain_id}: a writer memory denies being a writing failure")
+        if any(variant.writer is None for variant in every):
+            raise AssertionError(f"{domain_id}: a shipped memory lost its writer provenance")
+    if not any(counts["forming"] for counts in per_domain.values()):
+        raise AssertionError("no shipped writer memory forms false authority")
+    return {
+        "status": "passed",
+        "writers": sorted(manifest["writers"]),
+        "per_domain": per_domain,
+        "run_identity": verify_writer_run_identity(),
+        "writing_failure_report": verify_writer_origin_reports(),
+    }
+
+
+def verify_writer_origin_reports() -> dict[str, Any]:
+    """A shipped writer memory must reach a report that claims a writing failure.
+
+    This is the whole point of shipping them: an altered memory can never carry
+    `demonstrates_writing_failure`, so without a writer memory in the package the
+    laundering comparison is unavailable after a plain install.
+    """
+
+    from ..propagation import (
+        ALTERED,
+        WRITER,
+        build_propagation_trials,
+        propagation_summary,
+        writer_memories,
+    )
+    from ..scoring import score_response
+    from ..trials import ModelResponse
+
+    out = {}
+    for domain_id in eval_resources.list_domains():
+        forming = writer_memories(domain_id)
+        if not forming:
+            raise AssertionError(f"{domain_id}: no forming writer memory ships")
+        domain = eval_resources.load_domain(domain_id)
+        case_id = forming[0].case_id
+        pairs = build_propagation_trials(
+            domain_id,
+            case_ids=[case_id],
+            check_leakage=False,
+            allow_uncalibrated_tokenizer=True,
+        )
+        action = domain.action_tools[0]
+        decline = [n for n in domain.terminal_tools if n not in domain.action_tools][-1]
+        # Acts behind every erroneous memory, declines behind the exact one: the
+        # shape that separates the two arms.
+        outcomes = [
+            score_response(
+                truth,
+                ModelResponse.from_tool_calls(
+                    [
+                        (
+                            decline if truth.condition_id == "faithful_typed" else action,
+                            domain.conformance.action_arguments(
+                                truth.probe.request,
+                                decline if truth.condition_id == "faithful_typed" else action,
+                            ),
+                        )
+                    ]
+                ),
+            )
+            for _, truth in pairs
+        ]
+        reports = {r.origin: r for r in propagation_summary(outcomes, expected=pairs)}
+        if WRITER not in reports:
+            raise AssertionError(f"{domain_id}/{case_id}: no writer-origin report")
+        if not reports[WRITER].demonstrates_writing_failure:
+            raise AssertionError(f"{domain_id}: a writer memory denied being a writing failure")
+        if ALTERED in reports and reports[ALTERED].demonstrates_writing_failure:
+            raise AssertionError(f"{domain_id}: an altered memory claimed a writing failure")
+        writer_report = reports[WRITER]
+        if not writer_report.pairs_complete:
+            raise AssertionError(f"{domain_id}: the writer origin produced no complete pair")
+        if writer_report.exact_rate != 0.0 or writer_report.erroneous_rate != 1.0:
+            raise AssertionError(
+                f"{domain_id}: writer arms did not separate "
+                f"({writer_report.erroneous_rate} against {writer_report.exact_rate})"
+            )
+        out[domain_id] = {
+            "case_id": case_id,
+            "origins": sorted(reports),
+            "writer_pairs": writer_report.pairs_complete,
+        }
+    return {"status": "passed", "per_domain": out}
+
+
+def verify_writer_run_identity() -> dict[str, Any]:
+    """Keep independent writer runs distinct and reject duplicate entries."""
+
+    from dataclasses import replace
+
+    from ..propagation import build_propagation_trials, writer_memories
+
+    for domain_id in eval_resources.list_domains():
+        forming = writer_memories(domain_id)
+        if not forming:
+            continue
+        original = forming[0]
+        twin = replace(original, variant_id=f"{original.variant_id}_rerun", writer_run_id=99)
+        another_writer = replace(
+            original,
+            variant_id=f"{original.variant_id}_other_writer",
+            writer=replace(original.writer, target_id="reference_other_writer"),
+        )
+        options = dict(
+            case_ids=[original.case_id],
+            check_leakage=False,
+            allow_uncalibrated_tokenizer=True,
+        )
+        for other in (twin, another_writer):
+            pairs = build_propagation_trials(domain_id, variants=[original, other], **options)
+            ids = [trial.trial_id for trial, _ in pairs]
+            if len(ids) != len(set(ids)):
+                raise AssertionError(f"{domain_id}: independent writer runs collided")
+            written = [t for _, t in pairs if t.condition_id != "faithful_typed"]
+            evidence_ids = {t.evidence.evidence_id for t in written}
+            if len(evidence_ids) != 2:
+                raise AssertionError(
+                    f"{domain_id}: two writer runs produced {len(evidence_ids)} evidence ids"
+                )
+        duplicate = replace(original, variant_id=f"{original.variant_id}_duplicate")
+        try:
+            build_propagation_trials(domain_id, variants=[original, duplicate], **options)
+        except ValueError as exc:
+            if "same memory" not in str(exc):
+                raise
+        else:
+            raise AssertionError("a duplicate memory entry was accepted")
+        return {"status": "passed", "domain": domain_id, "trials": len(ids)}
+    raise AssertionError("no forming writer memory to check run identity against")
 
 
 def verify_inspect_tool_surface() -> dict[str, Any]:
@@ -1747,3 +2120,203 @@ def verify_writer_run() -> dict[str, Any]:
                 )
         ran += 1
     return {"status": "passed", "conditions_run": ran}
+
+
+def _propagation_fixture_path() -> str:
+    return "propagation_outcomes.json"
+
+
+def build_propagation_fixture() -> dict[str, Any]:
+    """Recorded replies for one matched replay per domain, both arms.
+
+    The erroneous arm grants the request and the exact arm does not, which is the
+    comparison the track exists to make.
+    """
+
+    from ..propagation import build_propagation_trials
+    from ..scoring import score_response
+    from ..trials import ModelResponse
+
+    rows: list[dict[str, Any]] = []
+    for domain_id in eval_resources.list_domains():
+        domain = eval_resources.load_domain(domain_id)
+        first_case = domain.corpus.case_id(
+            domain.corpus.load_cases(domain.corpus.default_version)[0]
+        )
+        pairs = build_propagation_trials(
+            domain_id,
+            case_ids=[first_case],
+            check_leakage=False,
+            allow_uncalibrated_tokenizer=True,
+        )
+        action = domain.action_tools[0]
+        decline = [name for name in domain.terminal_tools if name not in domain.action_tools][-1]
+        for trial, truth in pairs:
+            # An executor that acts on whatever its memory grants.
+            grants = not truth.condition_id.startswith("faithful")
+            name = action if grants else decline
+            response = ModelResponse.from_tool_calls(
+                [(name, domain.conformance.action_arguments(truth.probe.request, name))]
+            )
+            rows.append(
+                {
+                    "domain_id": domain_id,
+                    "trial_id": trial.trial_id,
+                    "condition_id": truth.condition_id,
+                    "response": response.to_dict(),
+                    "expected": score_response(truth, response).to_dict(),
+                }
+            )
+    return {"schema_version": 1, "rows": rows}
+
+
+def verify_propagation() -> dict[str, Any]:
+    """Re-score every recorded reply and re-derive the matched comparison."""
+
+    from ..propagation import (
+        ALTERED,
+        WRITER,
+        build_propagation_trials,
+        propagation_summary,
+    )
+    from ..scoring import score_response
+    from ..metrics import MixedResourcesError
+    from ..trials import ModelResponse
+
+    fixture = load_fixture(_propagation_fixture_path())
+    truths: dict[str, dict[str, Any]] = {}
+    mismatches: list[dict[str, Any]] = []
+    outcomes: dict[str, list[Any]] = {}
+    for row in fixture["rows"]:
+        domain_id = row["domain_id"]
+        if domain_id not in truths:
+            truths[domain_id] = {
+                truth.trial_id: truth
+                for _, truth in build_propagation_trials(
+                    domain_id,
+                    case_ids=[_first_case_id(domain_id)],
+                    check_leakage=False,
+                    allow_uncalibrated_tokenizer=True,
+                )
+            }
+        truth = truths[domain_id].get(row["trial_id"])
+        if truth is None:
+            mismatches.append({"trial_id": row["trial_id"], "reason": "not built"})
+            continue
+        observed = score_response(truth, ModelResponse.from_dict(row["response"])).to_dict()
+        expected = _with_live_resource_key(row["expected"], domain_id)
+        if observed != expected:
+            mismatches.append(
+                {
+                    "trial_id": row["trial_id"],
+                    "fields": _differing_keys(observed, expected),
+                }
+            )
+        outcomes.setdefault(domain_id, []).append(
+            score_response(truth, ModelResponse.from_dict(row["response"]))
+        )
+    if mismatches:
+        raise AssertionError(f"propagation outcomes drifted: {mismatches}")
+
+    # Summarized per domain: three corpora are three resource versions, and
+    # pooling them would report one rate over incomparable evidence.
+    reports: dict[str, list[dict[str, Any]]] = {}
+    for domain_id in sorted(outcomes):
+        domain_reports = propagation_summary(outcomes[domain_id])
+        if not domain_reports:
+            raise AssertionError(f"{domain_id}: the matched comparison produced no report")
+        for report in domain_reports:
+            if report.origin == ALTERED and report.demonstrates_writing_failure:
+                raise AssertionError("an altered memory was labelled a writing failure")
+            if report.origin == WRITER and not report.demonstrates_writing_failure:
+                raise AssertionError("a writer memory was not labelled a writing failure")
+            # Each rate is checked against its own denominator, and a rate with
+            # no denominator was not measured rather than being zero.
+            if report.unauthorized_pairs:
+                if report.exact_rate != 0.0:
+                    raise AssertionError(
+                        f"{domain_id}/{report.origin}: exact memory still produced "
+                        "unauthorized action"
+                    )
+                if report.erroneous_rate != 1.0:
+                    raise AssertionError(
+                        f"{domain_id}/{report.origin}: the scripted executor did not act "
+                        "on every erroneous memory"
+                    )
+            elif report.erroneous_rate is not None or report.exact_rate is not None:
+                raise AssertionError(
+                    f"{domain_id}/{report.origin}: an unmeasured submission rate is a number"
+                )
+            if report.authorized_pairs:
+                # The recorded reply performs the action on an authorized request,
+                # so legitimate use is complete on both arms.
+                if report.erroneous_authorized_use_rate != 1.0:
+                    raise AssertionError(
+                        f"{domain_id}/{report.origin}: the erroneous memory suppressed "
+                        f"legitimate use ({report.erroneous_authorized_use} of "
+                        f"{report.authorized_pairs})"
+                    )
+                if report.exact_authorized_use_rate != 1.0:
+                    raise AssertionError(
+                        f"{domain_id}/{report.origin}: exact memory suppressed legitimate use"
+                    )
+            elif report.erroneous_authorized_use_rate is not None:
+                raise AssertionError(
+                    f"{domain_id}/{report.origin}: an unmeasured legitimate-use rate is a number"
+                )
+            if report.resource_key is None:
+                raise AssertionError(f"{domain_id}/{report.origin}: the report lost its resources")
+        reports[domain_id] = [report.to_dict() for report in domain_reports]
+
+    pooled = [row for rows in outcomes.values() for row in rows]
+    try:
+        propagation_summary(pooled)
+    except MixedResourcesError:
+        pass
+    else:
+        raise AssertionError("three corpora were pooled into one propagation report")
+
+    return {
+        "status": "passed",
+        "rows_checked": len(fixture["rows"]),
+        "reports": reports,
+        "recipe_coverage": _propagation_recipe_coverage(),
+    }
+
+
+def _first_case_id(domain_id: str) -> str:
+    domain = eval_resources.load_domain(domain_id)
+    return domain.corpus.case_id(domain.corpus.load_cases(domain.corpus.default_version)[0])
+
+
+def _propagation_recipe_coverage() -> dict[str, dict[str, int]]:
+    """How many forming variants each recipe family contributes, per domain.
+
+    A recipe that forms nothing adds nothing to the diagnostic, and that was
+    invisible while non-forming variants were simply dropped. Widening formed on
+    procurement alone until it drew its values from the actual requests.
+    """
+
+    from ..propagation import altered_memories
+
+    coverage: dict[str, dict[str, int]] = {}
+    for domain_id in eval_resources.list_domains():
+        counts: dict[str, int] = {}
+        for item in altered_memories(domain_id, case_ids=[_first_case_id(domain_id)]):
+            if not item.forms_false_authority:
+                raise AssertionError("altered_memories returned a non-forming variant")
+            if item.demonstrates_writing_failure:
+                raise AssertionError("an altered memory claimed a writing failure")
+            family = item.recipe.split("_record_")[0].rsplit("_block_", 1)[0]
+            counts[family] = counts.get(family, 0) + 1
+        # Widening formed on procurement alone until it drew its values from the
+        # actual requests, and that was invisible because non-forming variants are
+        # dropped. Whether a given case has a forming stale state is a property of
+        # that case, so only widening is asserted; the rest is reported.
+        if not any(name.startswith("widened") for name in counts):
+            raise AssertionError(
+                f"{domain_id}: no widened variant forms, so that recipe adds "
+                "nothing to the diagnostic"
+            )
+        coverage[domain_id] = dict(sorted(counts.items()))
+    return coverage
