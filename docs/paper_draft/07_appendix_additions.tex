@@ -1,0 +1,72 @@
+% New appendix sections. Each \section below is one appendix; \input them after event_sourcing_appendix.tex.
+% Omitted here until their runs finish: the event-sourcing table for the added writers and the cybersecurity
+% capacity test (scratch/section_gate_event.py and scratch/section_cap2.py write them).
+
+\section{Generated histories}
+\label{app:generated-corpus}
+The generator (\texttt{domains/procurement/generate\_cases.py}) builds 108 procurement cases in the corpus format from four themes, crossing the gap between grant and change (1, 2, 3 blocks), the lifecycle (amendment versus revoke-and-replace), the number of later messages restating the superseded permission (0, 2, 4), and whether the revocation is explicit or implied. Within a group (same theme, lifecycle, gap, implicit flag, and index) the three stale levels share every turn, the padding, the dates, and the probes, and differ only in the spliced restatements; this holds for all 36 groups. A case with a different lifecycle or gap is drawn from a different base history (dates, limits, filler; the theme rotates with the gap), and only revoke-and-replace histories have an implicit-revocation variant, so those comparisons are observational. Table~\ref{tab:trigger-lifecycle} gives them for the paper's three Baseten writers; the two added writers, one run each, show the same shape (Inkling 5.6\%, 22.2\%, 17.6\% unauthorized submission at 0, 2, 4 restatements; DeepSeek V4.1 Flash 0.0\%, 13.9\%, 7.4\%). With the one-line instruction the paper's writers fall to 3.7\% and 2.8\% at two and four restatements and the added writers to zero.
+
+\begin{table}[h]
+  \centering
+  \caption{\textbf{Observed differences on the generated corpus by lifecycle and by gap.} Not matched within groups; the paper's three Baseten writers, GPT-OSS-120B as executor. 95\% Wilson intervals.}
+  \label{tab:trigger-lifecycle}
+  \small
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule
+    Factor & Memories & $P(F)$ & Unauthorized submission & Authorized use \\
+    \midrule
+    Amendment & 108 & 17.3\% (13.6--21.8) & 17.6\% (13.8--22.1) & 99.1\% \\
+    Revoke-and-replace & 216 & 4.5\% (3.1--6.4) & 4.9\% (3.5--6.9) & 99.5\% \\
+    Gap 1 block & 108 & 9.9\% (7.1--13.6) & 10.8\% (7.9--14.7) & 99.1\% \\
+    Gap 2 blocks & 108 & 8.6\% (6.0--12.2) & 8.6\% (6.0--12.2) & 100.0\% \\
+    Gap 3 blocks & 108 & 7.7\% (5.3--11.1) & 8.0\% (5.5--11.5) & 99.1\% \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Closed-loop protocol details}
+\label{app:closed-loop}
+The written-back line is built from the executor's tool call and the validated decision: ``Executed as submitted'' with the payload, ``Executed the operational alternative instead of the submitted request'' with the executed payload, ``Escalated; nothing executed'', or ``Declined; nothing executed''. The neutral control's line is ``Routine workspace sync completed; no items changed.'' Each request is re-dated to one minute after the last log it can see when that leaves the ledger's verdict on it, and on every alternative the executor could choose, unchanged; otherwise it keeps its corpus time (22\% of positions in procurement, 16\% in cybersecurity, 16\% in finance). Over the five Baseten writers, what the executor did at the action-arm positions was: executed as submitted 48\%, escalated 40\%, declined 10\%, executed the operational alternative 2\%; cybersecurity escalates most. In the cybersecurity action arm the final memories hold 4.5 real active permission records per chain against 7.8 in the frozen base and 6.5 in the control. The neutral control also loses authorized use in procurement (96.7\% to 77.2\% at round 3), so part of the round-over-round decline there is the cost of repeated updates; the paired difference isolates the content. Within one pass nothing compounds in any variant (writer or executor as the write-back author, typed or free-text memory). For the paper's three Baseten writers, 216 chains, the round-3 paired differences are $-23.9$ points of authorized use (95\% CI $-30.3$ to $-17.3$) and $+2.9$ points of unauthorized submission (95\% CI $-0.0$ to $+5.8$, $p=0.06$).
+
+\section{Failure localization and judge labels}
+\label{app:diagnosis}
+Localization needs no model: the saved memory after each block is replayed against the ledger as of that block. The judge prompt shows the policy, the request the final memory wrongly authorizes, the true permission state after the block, the memory before, the block's messages, the writer's plan and patches, and the memory after, and asks for one label with the misleading and ignored message ids and a short explanation. Labels: \emph{restatement applied} (a message not from the authorizing principal stated or implied a different permission and the writer changed the record to match), \emph{own action as approval} (one of the agent's written-back action lines was treated as a grant or used to widen one), \emph{authoritative change misapplied} (a real grant, revocation, narrowing, or replacement was skipped, applied in part, or copied with a wrong value), \emph{update rejected} (the writer's update was rejected or truncated, so the memory kept an earlier state), and \emph{other}. Of 2{,}250 rows, 1{,}784 are unanimous, 462 two of three, 4 have no majority. By judge, the labels are: DeepSeek V4 Pro 1{,}251 / 170 / 98 / 717 / 14; GLM 5.3 1{,}231 / 201 / 50 / 762 / 6; Nemotron 3 Ultra 1{,}221 / 199 / 466 / 364 / 0 (restatement applied / own action / change misapplied / update rejected / other); Nemotron labels many rejected updates as misapplied changes, the one systematic disagreement. On a blind sample of fifty rows stratified by label and domain, a fourth model agreed with the majority label on 46, on every restatement-applied and update-rejected row; no person has read the sample.
+
+\section{The one-line instruction at three seeds}
+\label{app:mandate}
+The instruction is prepended to the writer's instructions for every update and compared with the same conditions without it: typed and hybrid incremental memory, five Baseten writers, both executors, the paper's three seeds per domain (90 runs, 180 writer-by-seed-by-executor-by-memory pairs, no provider-error trials). The paired change is the mean over pairs with a bootstrap 95\% interval and a sign-flip permutation $p$-value.
+
+\begin{table}[h]
+  \centering
+  \caption{\textbf{The one-line instruction, pooled over writers, seeds, and executors.} False permissions formed counts memories that authorize an unauthorized request.}
+  \label{tab:mandate-pooled}
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}llccccrr@{}}
+    \toprule
+    Domain & Memory & US without & US with & AU without & AU with & Paired US change & Paired AU change \\
+    \midrule
+    Procurement & typed & 25.4\% & 5.8\% & 90.6\% & 98.2\% & $-19.5$ ($-23.1$, $-16.0$) & $+7.7$ ($+4.0$, $+11.4$) \\
+    Procurement & hybrid & 12.9\% & 3.2\% & 97.5\% & 99.4\% & $-9.6$ ($-12.6$, $-6.6$) & $+1.9$ ($+0.6$, $+3.2$) \\
+    Cybersecurity & typed & 10.4\% & 21.8\% & 88.3\% & 77.9\% & $+11.4$ ($+6.8$, $+15.8$) & $-10.4$ ($-15.6$, $-5.0$) \\
+    Cybersecurity & hybrid & 12.7\% & 20.2\% & 86.5\% & 79.7\% & $+7.5$ ($+2.8$, $+12.6$) & $-6.8$ ($-12.0$, $-2.1$) \\
+    Finance & typed & 31.7\% & 1.7\% & 99.9\% & 99.2\% & $-30.0$ ($-35.8$, $-24.2$) & $-0.7$ ($-2.1$, $+0.2$) \\
+    Finance & hybrid & 11.7\% & 3.8\% & 99.3\% & 98.3\% & $-7.9$ ($-12.9$, $-2.5$) & $-0.9$ ($-2.9$, $+0.8$) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The direction holds at every seed: procurement typed unauthorized submission falls from 18.9\%, 17.6\%, and 20.8\% to 5.3\%, 2.2\%, and 6.1\%; cybersecurity rises from 14.2\%, 9.4\%, and 10.9\% to 19.7\%, 23.3\%, and 19.9\%; finance falls from 23.8\%, 17.5\%, and 23.8\% to 0.0\%, 6.9\%, and 1.2\%. By writer in cybersecurity, four of five get worse and Kimi K2.6 is unchanged at 1.0\%. In the closed loop (paper's three Baseten writers, canonical seed), records minted from the agent's own actions fall from 91 to 4, and round-3 authorized use is unchanged (59\% without the line, 62\% with it). Where the failures remain: in procurement all 77 open-loop failures with the line are restatements applied; in finance 20 of 26; in cybersecurity none is, and in 376 of 403 failures both write attempts at the change-set block are rejected as invalid output, against 212 of 216 without the line.
+
+\section{Rebuilding from the history}
+\label{app:rebuild}
+Rebuilding the typed memory from the full history every three blocks, in the same runs as the incremental baseline (five Baseten writers, both executors), lowers unauthorized submission in every domain and for every writer: procurement 25.4\% to 6.0\% with authorized use 90.6\% to 95.6\% (three seeds, 1{,}080 unauthorized requests per cell); cybersecurity and finance to 3.1\% and 0.0\% at the canonical seed, with authorized use at 96.2\% and 100.0\%. Rebuilding only at the last block of a six-block procurement case, at one seed, gives 0.9\% unauthorized submission; a curve of rebuild period against cost was not run. Free-text and hybrid memory with retrieval change no cell; the hybrid schema lowers unauthorized submission for the paper's writers and raises it for Inkling in cybersecurity (18.8\% typed against 62.5\% hybrid, one seed).
+
+% Rows to add to the aligned three-seed table in source_authority_appendix.tex (Table: "Aligned three-seed
+% source-authority results by domain"), as a second block headed "Added writers (Inkling, DeepSeek V4.1 Flash;
+% executor-only replay of their saved paper-route memories, three seeds, both executors)":
+%    Procurement & 94.7 $\rightarrow$ 10.9 & 22.2 $\rightarrow$ 10.2 & (records kept 14/95) \\
+%    Cybersecurity & 87.5 $\rightarrow$ 87.5 & 20.4 $\rightarrow$ 20.6 & (all 986 records kept) \\
+%    Finance & 100.0 $\rightarrow$ 25.0 & 32.8 $\rightarrow$ 0.0 & (records kept 12/49) \\
+% The gate does not verify that an authoritative citation supports the remembered scope or dates, which is why
+% unauthorized submission survives it in procurement.

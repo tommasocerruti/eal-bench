@@ -103,7 +103,8 @@ def ours() -> tuple[dict[str, dict[str, tuple[float, float]]], list[dict[str, An
                 for tgt in (dom, "pooled"):
                     add(acc[tgt]["ours_baseline"], bm, "incremental_typed")
                     add(acc[tgt]["mandate"], mm, "incremental_typed__mandate")
-                    if add(acc[tgt]["rebuild"], bm, "incremental_typed__rebuild3"):
+                    rm = bm if "incremental_typed__rebuild3" in bm["summary"]["behavior_by_condition"] else latest_completed(f"results/{dom}/*__rebuild3-s{seed}-{dom}-{w}")
+                    if rm is not None and add(acc[tgt]["rebuild"], rm, "incremental_typed__rebuild3"):
                         runs["rebuild"].add(f"{dom}:{seed}:{w}")
                 runs["ours_baseline"].add(f"{dom}:{seed}:{w}")
                 runs["mandate"].add(f"{dom}:{seed}:{w}")
