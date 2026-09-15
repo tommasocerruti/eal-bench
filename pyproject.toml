@@ -27,13 +27,30 @@ analysis = [
     "matplotlib>=3.8",
     "numpy>=1.26",
 ]
+inspect = [
+    # Older Inspect clients fail with the OpenAI 3 transport before sending a request.
+    "inspect-ai>=0.3.263",
+]
+
+# Lets `inspect score` and `inspect eval` resolve EAL's registered scorer, metric
+# and solver without importing the task file first.
+[project.entry-points.inspect_ai]
+eal_bench = "eal_bench.eval.inspect_adapter"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/eal_bench"]
+# `domains` and `experiments` carry the corpora, the writer protocol and the official
+# scorer that `eal_bench.eval` reuses. `analysis` ships because two `experiments`
+# modules import it at module level.
+packages = ["src/eal_bench", "domains", "experiments", "analysis"]
+exclude = [
+    "domains/finance/data/finance_redesign_dev_*.json",
+    "domains/finance/archive/**",
+    "domains/*/reviews/*.jsonl",
+]
 
 [tool.ruff]
 line-length = 100

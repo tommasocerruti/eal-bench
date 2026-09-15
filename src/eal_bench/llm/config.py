@@ -159,6 +159,28 @@ class Config:
         )
 
 
+def _packaged_config(requested: Path) -> Path | None:
+    """The route table shipped in the wheel, used when the caller has no copy.
+
+    Only for the default name: an explicit path that does not exist is still an
+    error. This is what lets an offline example run the writer outside a
+    checkout. It names routes and the environment variables their keys come
+    from; it holds no credentials.
+    """
+
+    if requested.name != "config.yaml" or requested.parent != Path("."):
+        return None
+    from importlib.resources import files
+
+    try:
+        candidate = files("eal_bench").joinpath("config.yaml")
+        if candidate.is_file():
+            return Path(str(candidate))
+    except (ModuleNotFoundError, FileNotFoundError, TypeError):
+        return None
+    return None
+
+
 def load_config(
     path: str | os.PathLike = "config.yaml",
     *,
@@ -170,7 +192,10 @@ def load_config(
 
     cfg_path = Path(path)
     if not cfg_path.exists():
-        raise ConfigError(f"Config file not found: {cfg_path}")
+        packaged = _packaged_config(cfg_path)
+        if packaged is None:
+            raise ConfigError(f"Config file not found: {cfg_path}")
+        cfg_path = packaged
 
     raw = yaml.safe_load(cfg_path.read_text()) or {}
     defaults = raw.get("defaults", {}) or {}

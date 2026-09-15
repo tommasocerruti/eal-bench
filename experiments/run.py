@@ -10,6 +10,7 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
+from eal_bench.eval.reference import verify as verify_reusable_eval_reference
 from eal_bench.llm import load_config
 
 from domains import get_domain, list_domains
@@ -519,6 +520,7 @@ def _validate(args: argparse.Namespace) -> None:
                         "core_gates": validate_core_gate_fixture(),
                         "smoke_bundles": validate_smoke_bundles(),
                     },
+                    "reusable_eval_reference": verify_reusable_eval_reference(),
                 },
                 indent=2,
                 sort_keys=True,
