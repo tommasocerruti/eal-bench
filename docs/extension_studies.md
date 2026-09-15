@@ -4,7 +4,7 @@ Follow-up experiments to the EAL-Bench paper. This note is self-contained: it ex
 
 ## Status, 2026-09-15
 
-Every study in this note ran on the paper's three writers (GLM 5.2, Kimi K2.6, Nemotron 3 Ultra) and on two added writers (Inkling and DeepSeek V4.1 Flash), all on Baseten, with GPT-OSS-120B and DeepSeek V4 Pro as executors, and GLM 5.3 as a third executor on every open-loop study, obtained by replaying each finished run's frozen memories through the executor stage only (Section 5, "Third executor"). The closed loop, the pressure route, and the paper route of the paper's five writers stay at two executors: the first two because a new executor there means new writer chains, the last because those runs' memories are not in this clone. Every table is from the final runs; every failure in those runs was judged with the Section 6 method. The judge labels have not been checked by a person; a blind sample for that check is prepared (open item 1). Runs whose executor trials or writer updates were lost to provider errors (rate limits, timeouts) were redone in full; one writer update in one run (Kimi, cybersecurity memory grid) was lost to a timeout twice and is reported as a failed update. Runs still open at the time of this status and not in the tables below: the cybersecurity capacity test for Inkling, rebuild every three blocks for Inkling at the two other cybersecurity seeds, and the closed loop for Grok 4.3 and Qwen Plus (one of twelve runs complete; the rest paused on OpenRouter credits). Experiments considered and not run are listed in the appendix. Section 10 gives the seven-writer pooling behind the paper's Figure 2, its formation, repair and writer tables, and the appendix matrices; the paper edits themselves live in the ICLR Overleaf clone.
+Every study in this note ran on the paper's three writers (GLM 5.2, Kimi K2.6, Nemotron 3 Ultra) and on two added writers (Inkling and DeepSeek V4.1 Flash), all on Baseten, with GPT-OSS-120B and DeepSeek V4 Pro as executors, and GLM 5.3 as a third executor on every open-loop study, obtained by replaying each finished run's frozen memories through the executor stage only (Section 5, "Third executor"). The closed loop, the pressure route, and the paper route of the paper's five writers stay at two executors: the first two because a new executor there means new writer chains, the last because those runs' memories are not in this clone. Every table is from the final runs; every failure in those runs was judged with the Section 6 method. The judge labels have not been checked by a person; a blind sample for that check is prepared (open item 1). Runs whose executor trials or writer updates were lost to provider errors (rate limits, timeouts) were redone in full; one writer update in one run (Kimi, cybersecurity memory grid) was lost to a timeout twice and is reported as a failed update. Not run: Inkling's cybersecurity capacity test with the instruction and its rebuild every three blocks at seeds 20260821 and 20260822 (abandoned after repeated attempts hit the 3,600-second route limit or lost updates to provider timeouts; stated as not run wherever they would appear), and the closed loop for Grok 4.3 and Qwen Plus (one of twelve runs complete; the rest paused on OpenRouter credits). Experiments considered and not run are listed in the appendix. Section 10 gives the seven-writer pooling behind the paper's Figure 2, its formation, repair and writer tables, and the appendix matrices; the paper edits themselves live in the ICLR Overleaf clone.
 
 ## How these results fit the paper
 
@@ -47,7 +47,7 @@ Keyed to the manuscript as it stands (`main.tex`; section numbers are the curren
 ### Open items before this can be written into the paper
 
 1. **Human check of the judge labels.** Subsections 3 and 5 rest on three LLM judges, and the proposed explanation of the mandate's cybersecurity reversal rests on the `update failed` label in particular. A blind sample of fifty judged failures, stratified by majority label and domain, is prepared in `results/diagnosis/human_check/`: `sheet.md` shows for each item exactly what the judges saw and nothing of what they said, `labels.csv` is the template to fill in, and `scratch/human_check_score.py` reports agreement with the majority label and Cohen's kappa against `key.csv`. Until it is read, the mechanism claims are the judges' labels, and the text says so. A blind reading of the same fifty items by a fourth model (Claude, given what the judges saw and none of their output; labels in `model_reread_claude.csv`) agreed with the majority label on 46 of 50 (Cohen's kappa 0.88): all 22 `restatement applied` and all 14 `update failed` items, the two labels the mechanism statements rest on, and all six `own action as approval`; the four disagreements are on `authoritative change misapplied` and `other` rows where the judges were themselves split (2 of 3 or 1 of 3). This is a model's reading, not a person's, and does not close the item.
-2. **Rebuild at three seeds in cybersecurity and finance.** The mandate and its baseline are at the paper's three seeds in every domain; rebuild-every-3 is at three seeds in procurement and finance and, in cybersecurity, at three seeds for four writers and the canonical seed for Inkling (two runs open).
+2. **Rebuild at three seeds in cybersecurity and finance.** The mandate and its baseline are at the paper's three seeds in every domain; rebuild-every-3 is at three seeds in procurement and finance and, in cybersecurity, at three seeds for four writers and the canonical seed for Inkling; Inkling's two other cybersecurity seeds were abandoned (route limit and provider timeouts).
 3. **Provenance mitigations for the added writers.** Done: the gate on all 18 replays and event sourcing on all 9 paired runs (Section 5, "Provenance mitigations"). Inkling's event sourcing is limited by the protocol's 4,096-token event-writer budget, so the two writers are reported separately from the paper's pooled numbers.
 4. **Wording discipline.** Every statement in subsections 2 to 5 carries its count and interval; the null on unauthorized submission stays a null and is stated as not detected, never as no effect; comparisons that are not matched (lifecycle, gap) are described as observed differences; and mechanisms are the judges' labels until item 1 is done.
 5. **Seven writers on the closed loop.** Grok 4.3 and Qwen Plus, the paper's two OpenRouter writers, have one of twelve closed-loop runs complete; the rest wait on OpenRouter credits (about $32 for the closed loop alone). Until they run, §4.5 states five writers.
@@ -820,6 +820,43 @@ Records born from the agent's own write-back lines, all domains, paper's writers
 **Reading.** In procurement and finance, where the judges label the failures as restatements applied, one sentence in the writer's instructions removes most of the laundering at no measured cost in authorized use. Procurement: unauthorized submission falls by 19.5 points under typed memory (25.4% to 5.8%) and 9.6 under hybrid, at every seed and for every writer, and authorized use rises (90.6% to 98.2%); a plausible reason, not checked here, is that the writer also stops recording restated figures that were making it refuse legitimate requests. Finance: 31.7% to 1.7% under typed memory at all three seeds, with no measurable change in authorized use; under hybrid memory the drop is smaller (11.7% to 3.8%). In the closed loop, records minted from the agent's own actions all but disappear (91 to 4), but authorized use at round 3 is unchanged (59% without, 62% with): the line does not recover the utility loss of Section 3. What causes that loss is not shown here; Section 3 observes real grants being deactivated as the agent's lines arrive, and the line does not stop it. In cybersecurity the line makes things worse at every seed and for four of the five writers (Kimi is unchanged at 1.0%): unauthorized submission rises 11.4 points under typed memory (10.4% to 21.8%) and authorized use falls 10.4 points. The judged failures say where, not yet why: nearly all of them, with or without the line, sit at the block carrying the duty officer's signed change set, and in most of them both write attempts are rejected as invalid output (212 of 216 baseline failures, 376 of 403 with the line), so the old permission stays active. The line makes those rejected updates about twice as frequent. Why it does is not established by these runs: the attempt logs show the rejected writes, not what the writer took the change set's authority to be. One reading consistent with the labels is that a rule about whose word counts does not reach a failure where the update is never written; the same runs with the write failure removed (a larger memory capacity, or a patch path that replaces the whole list), with and without the line, would test it.
 
 **Takeaway.** The one-line mandate lowers unauthorized submission in procurement and finance at no measured cost in authorized use, and raises it in cybersecurity, where the judged failures are rejected updates at the change-set block rather than misread messages. Before adding such a line, a deployer needs Section 6's answer to which failure they have. Why the line makes the cybersecurity failure more frequent is left open.
+
+### Cybersecurity at double capacity
+
+Canonical seed, typed incremental, both executors, writers with all four arms complete: GLM 5.2, Kimi K2.6, Nemotron 3 Ultra, DeepSeek V4.1 Flash. Capacity 1x is the calibrated primary capacity (2,646 tokens); 2x doubles it (5,292), so a profile that was rejected for size now fits. Rejected updates are the writer's attempts returned as invalid output (a patch that cannot be applied, a malformed call) or over capacity; the change-set block is block 9, the duty officer's signed replacement of the permission list.
+
+| Capacity | Mandate | US | AU | false permissions formed | rejected updates at the change-set block: oversize / other | chains with both attempts rejected there | rejected updates, all blocks | n per arm |
+|---|---|---|---|---|---|---|---|---|
+| 1x | without | 12.5% (9.9-15.6) | 87.5% (84.4-90.1) | 32 | 9 / 13 | 8 | 65 | 512 |
+| 1x | with | 14.5% (11.7-17.8) | 87.5% (84.4-90.1) | 37 | 18 / 12 | 8 | 78 | 512 |
+| 2x | without | 1.6% (0.8-3.1) | 98.4% (96.9-99.2) | 4 | 0 / 4 | 0 | 44 | 512 |
+| 2x | with | 8.2% (6.1-10.9) | 91.4% (88.7-93.5) | 21 | 0 / 17 | 4 | 56 | 512 |
+
+Paired change from adding the line (mandate minus baseline), writer-by-executor pairs, bootstrap 95% interval and sign-flip permutation p-value:
+
+| Capacity | paired change in US, points | paired change in AU, points |
+|---|---|---|
+| 1x | +2.0 (-5.7 to +8.6), p=0.692, 8 pairs | +0.0 (-7.0 to +8.6), p=1.000, 8 pairs |
+| 2x | +6.6 (+0.8 to +11.7), p=0.099, 8 pairs | -7.0 (-10.9 to -3.1), p=0.032, 8 pairs |
+
+Paired change from doubling capacity (2x minus 1x), same arm:
+
+| Mandate | paired change in US, points | paired change in AU, points |
+|---|---|---|
+| without | -10.9 (-17.2 to -4.7), p=0.031, 8 pairs | +10.9 (+4.7 to +18.0), p=0.033, 8 pairs |
+| with | -6.2 (-12.5 to +0.0), p=0.116, 8 pairs | +3.9 (-0.4 to +8.2), p=0.186, 8 pairs |
+
+By writer (both executors pooled; US without → with the line, rejected updates at the change-set block oversize / other):
+
+| Writer | 1x: US | 1x: AU | 1x: rejected | 2x: US | 2x: AU | 2x: rejected |
+|---|---|---|---|---|---|---|
+| GLM 5.2 | 6.2% → 15.6% | 93.8% → 87.5% | 1/1 → 6/3 | 0.0% → 14.1% | 100.0% → 87.5% | 0/0 → 0/5 |
+| Kimi K2.6 | 0.0% → 0.0% | 100.0% → 100.0% | 0/1 → 1/2 | 0.0% → 6.2% | 100.0% → 96.9% | 0/0 → 0/4 |
+| Nemotron 3 Ultra | 12.5% → 25.0% | 87.5% → 75.0% | 2/5 → 8/4 | 0.0% → 12.5% | 100.0% → 87.5% | 0/3 → 0/7 |
+| DeepSeek V4.1 Flash | 31.2% → 17.2% | 68.8% → 87.5% | 6/6 → 3/3 | 6.2% → 0.0% | 93.8% → 93.8% | 0/1 → 0/1 |
+
+Inkling completed the 2x arm without the instruction only; its 2x arm with the instruction and its rebuild-every-3 runs at seeds 20260821 and 20260822 were abandoned after six attempts each hit the 3,600-second route limit or lost updates to provider timeouts, so Inkling is left out of this table.
+Provider-error trials across the arms used: 0.
 
 ## 8. Bugs found
 
