@@ -4,7 +4,7 @@ Follow-up experiments to the EAL-Bench paper. This note is self-contained: it ex
 
 ## Status, 2026-09-15
 
-Every study in this note ran on the paper's three writers (GLM 5.2, Kimi K2.6, Nemotron 3 Ultra) and on two added writers (Inkling and DeepSeek V4.1 Flash), all on Baseten, with GPT-OSS-120B and DeepSeek V4 Pro as executors, and GLM 5.3 as a third executor on every open-loop study, obtained by replaying each finished run's frozen memories through the executor stage only (Section 5, "Third executor"). The closed loop, the pressure route, and the paper route of the paper's five writers stay at two executors: the first two because a new executor there means new writer chains, the last because those runs' memories are not in this clone. Every table is from the final runs; every failure in those runs was judged with the Section 6 method. The judge labels have not been checked by a person; a blind sample for that check is prepared (open item 1). Runs whose executor trials or writer updates were lost to provider errors (rate limits, timeouts) were redone in full; one writer update in one run (Kimi, cybersecurity memory grid) was lost to a timeout twice and is reported as a failed update. Runs still open at the time of this status and not in the tables below: bounded event sourcing for the added writers in procurement (one of three seeds complete; cybersecurity and finance are complete), the cybersecurity capacity test for Inkling, rebuild every three blocks for Inkling at the two other cybersecurity seeds, and the closed loop for Grok 4.3 and Qwen Plus (one of twelve runs complete; the rest paused on OpenRouter credits). Experiments considered and not run are listed in the appendix. Section 10 gives the seven-writer pooling behind the paper's Figure 2, its formation, repair and writer tables, and the appendix matrices; the paper edits themselves live in the ICLR Overleaf clone.
+Every study in this note ran on the paper's three writers (GLM 5.2, Kimi K2.6, Nemotron 3 Ultra) and on two added writers (Inkling and DeepSeek V4.1 Flash), all on Baseten, with GPT-OSS-120B and DeepSeek V4 Pro as executors, and GLM 5.3 as a third executor on every open-loop study, obtained by replaying each finished run's frozen memories through the executor stage only (Section 5, "Third executor"). The closed loop, the pressure route, and the paper route of the paper's five writers stay at two executors: the first two because a new executor there means new writer chains, the last because those runs' memories are not in this clone. Every table is from the final runs; every failure in those runs was judged with the Section 6 method. The judge labels have not been checked by a person; a blind sample for that check is prepared (open item 1). Runs whose executor trials or writer updates were lost to provider errors (rate limits, timeouts) were redone in full; one writer update in one run (Kimi, cybersecurity memory grid) was lost to a timeout twice and is reported as a failed update. Runs still open at the time of this status and not in the tables below: the cybersecurity capacity test for Inkling, rebuild every three blocks for Inkling at the two other cybersecurity seeds, and the closed loop for Grok 4.3 and Qwen Plus (one of twelve runs complete; the rest paused on OpenRouter credits). Experiments considered and not run are listed in the appendix. Section 10 gives the seven-writer pooling behind the paper's Figure 2, its formation, repair and writer tables, and the appendix matrices; the paper edits themselves live in the ICLR Overleaf clone.
 
 ## How these results fit the paper
 
@@ -48,7 +48,7 @@ Keyed to the manuscript as it stands (`main.tex`; section numbers are the curren
 
 1. **Human check of the judge labels.** Subsections 3 and 5 rest on three LLM judges, and the proposed explanation of the mandate's cybersecurity reversal rests on the `update failed` label in particular. A blind sample of fifty judged failures, stratified by majority label and domain, is prepared in `results/diagnosis/human_check/`: `sheet.md` shows for each item exactly what the judges saw and nothing of what they said, `labels.csv` is the template to fill in, and `scratch/human_check_score.py` reports agreement with the majority label and Cohen's kappa against `key.csv`. Until it is read, the mechanism claims are the judges' labels, and the text says so. A blind reading of the same fifty items by a fourth model (Claude, given what the judges saw and none of their output; labels in `model_reread_claude.csv`) agreed with the majority label on 46 of 50 (Cohen's kappa 0.88): all 22 `restatement applied` and all 14 `update failed` items, the two labels the mechanism statements rest on, and all six `own action as approval`; the four disagreements are on `authoritative change misapplied` and `other` rows where the judges were themselves split (2 of 3 or 1 of 3). This is a model's reading, not a person's, and does not close the item.
 2. **Rebuild at three seeds in cybersecurity and finance.** The mandate and its baseline are at the paper's three seeds in every domain; rebuild-every-3 is at three seeds in procurement and finance and, in cybersecurity, at three seeds for four writers and the canonical seed for Inkling (two runs open).
-3. **Provenance mitigations for the added writers.** Done for the gate (all 18 replays) and for event sourcing in cybersecurity and finance (Section 5, "Provenance mitigations"); event sourcing in procurement has one of three seeds. Inkling's event sourcing is limited by the protocol's 4,096-token event-writer budget, so the two writers are reported separately from the paper's pooled numbers.
+3. **Provenance mitigations for the added writers.** Done: the gate on all 18 replays and event sourcing on all 9 paired runs (Section 5, "Provenance mitigations"). Inkling's event sourcing is limited by the protocol's 4,096-token event-writer budget, so the two writers are reported separately from the paper's pooled numbers.
 4. **Wording discipline.** Every statement in subsections 2 to 5 carries its count and interval; the null on unauthorized submission stays a null and is stated as not detected, never as no effect; comparisons that are not matched (lifecycle, gap) are described as observed differences; and mechanisms are the judges' labels until item 1 is done.
 5. **Seven writers on the closed loop.** Grok 4.3 and Qwen Plus, the paper's two OpenRouter writers, have one of twelve closed-loop runs complete; the rest wait on OpenRouter credits (about $32 for the closed loop alone). Until they run, §4.5 states five writers.
 
@@ -494,31 +494,31 @@ The gate keeps a record only if every source it cites is a message from a princi
 | finance | DeepSeek V4.1 Flash | 3 | 14 / 24 | 10 / 25 | 36.5% (30.0-43.5) | 0.0% (0.0-2.0) | 100.0% (98.0-100.0) | 41.7% (34.9-48.7) | 192 |
 | pooled | both | 18 | 103 / 216 | 1012 / 1130 | 18.9% (17.0-20.9) | 7.3% (6.1-8.6) | 92.5% (91.1-93.7) | 51.5% (49.0-53.9) | 1584 |
 
-**Bounded event sourcing (7 of 9 paired runs complete).**
+**Bounded event sourcing (9 of 9 paired runs complete).**
 
 At each update the event writer sees the compact previous typed state and the new block and emits event deltas; a deterministic reducer applies accepted deltas, and a failed update keeps the previous state. The paired baseline is the writer's own saved incremental typed memory from the same seed; both arms are answered by both executors. The event writer runs at the paper's protocol budget of 4,096 completion tokens.
 
 | Domain | Writer | US typed incremental | US event-sourced | AU typed incremental | AU event-sourced | n per arm |
 |---|---|---|---|---|---|---|
-| procurement | both | 16.0% (10.9-22.8) | 2.8% (1.1-6.9) | 95.1% (90.3-97.6) | 91.7% (86.0-95.2) | 144 |
-| procurement | Inkling | 31.9% (22.3-43.4) | 0.0% (0.0-5.1) | 90.3% (81.3-95.2) | 83.3% (73.1-90.2) | 72 |
-| procurement | DeepSeek V4.1 Flash | 0.0% (0.0-5.1) | 5.6% (2.2-13.4) | 100.0% (94.9-100.0) | 100.0% (94.9-100.0) | 72 |
+| procurement | both | 21.1% (17.5-25.2) | 2.8% (1.6-4.8) | 94.7% (92.1-96.4) | 94.2% (91.6-96.0) | 432 |
+| procurement | Inkling | 32.9% (27.0-39.4) | 0.0% (0.0-1.7) | 89.4% (84.5-92.8) | 88.9% (84.0-92.4) | 216 |
+| procurement | DeepSeek V4.1 Flash | 9.3% (6.1-13.9) | 5.6% (3.2-9.5) | 100.0% (98.3-100.0) | 99.5% (97.4-99.9) | 216 |
 | cybersecurity | both | 10.7% (8.7-13.1) | 39.3% (35.9-42.8) | 87.5% (85.0-89.7) | 50.0% (46.5-53.5) | 768 |
 | cybersecurity | Inkling | 10.9% (8.2-14.5) | 75.5% (71.0-79.6) | 87.5% (83.8-90.4) | 0.0% (0.0-1.0) | 384 |
 | cybersecurity | DeepSeek V4.1 Flash | 10.4% (7.7-13.9) | 3.1% (1.8-5.4) | 87.5% (83.8-90.4) | 100.0% (99.0-100.0) | 384 |
 | finance | both | 32.6% (28.1-37.4) | 0.0% (0.0-1.0) | 99.7% (98.5-100.0) | 37.5% (32.8-42.4) | 384 |
 | finance | Inkling | 29.2% (23.2-36.0) | 0.0% (0.0-2.0) | 100.0% (98.0-100.0) | 8.3% (5.2-13.1) | 192 |
 | finance | DeepSeek V4.1 Flash | 35.9% (29.5-42.9) | 0.0% (0.0-2.0) | 99.5% (97.1-99.9) | 66.7% (59.7-73.0) | 192 |
-| pooled | both | 17.7% (15.8-19.9) | 23.6% (21.4-26.0) | 92.0% (90.4-93.3) | 50.9% (48.2-53.6) | 1296 |
+| pooled | both | 18.8% (17.0-20.8) | 19.8% (17.9-21.9) | 92.4% (91.0-93.6) | 59.0% (56.6-61.4) | 1584 |
 
 Event-writer updates by outcome, and event-writer calls that used the full 4,096-token completion budget (a reasoning-in-completion writer is cut off there):
 
 | Writer | accepted | structurally invalid | other | calls at the 4,096 cap |
 |---|---|---|---|---|
-| Inkling | 762 | 627 | 0 | 261 / 1391 |
-| DeepSeek V4.1 Flash | 965 | 83 | 0 | 0 / 1048 |
+| Inkling | 892 | 658 | 0 | 262 / 1552 |
+| DeepSeek V4.1 Flash | 1097 | 90 | 0 | 0 / 1187 |
 
-Authorized use and unauthorized submission use the paper's definitions (the requested action taken on authorized, respectively unauthorized, requests), counted from each replay's own trials per arm. The gate's `original` arm is a fresh replay of the saved memory, so it differs from the paper-route numbers of the same memories by sampling only. Procurement event sourcing is reported on the one complete seed and is not in the paper.
+Authorized use and unauthorized submission use the paper's definitions (the requested action taken on authorized, respectively unauthorized, requests), counted from each replay's own trials per arm. The gate's `original` arm is a fresh replay of the saved memory, so it differs from the paper-route numbers of the same memories by sampling only. Inkling's event arm is limited by the protocol's 4,096-token event-writer budget on the longer cybersecurity and finance histories and is never pooled with Flash.
 
 ### Third executor: GLM 5.3
 
