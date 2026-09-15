@@ -93,6 +93,19 @@ def verify_files(path: Path, manifest: Mapping[str, Any]) -> dict[str, Any]:
     return verified
 
 
+def _portable_provenance(provenance: Any) -> Any:
+    if not isinstance(provenance, Mapping):
+        return provenance
+    # Dropped from the comparison: the per-file hashes and their digest (verified by _verify_corpus_files, which requires
+    # the corpus data files to match and reports changed code files), and the release-manifest hashes, which change whenever
+    # a domain's implementation hashes are refreshed without any change to the corpus.
+    out = {k: v for k, v in provenance.items() if k not in ("source_files", "source_sha256", "release_hash")}
+    release = out.get("release")
+    if isinstance(release, Mapping):
+        out["release"] = {k: v for k, v in release.items() if k != "release_manifest_sha256"}
+    return out
+
+
 def load_writer_source(
     path: Path,
     domain: AuthorizationMemoryDomain,
@@ -118,7 +131,12 @@ def load_writer_source(
         "memory_implementation_id": "langmem_profile",
     }
     for field, value in expected.items():
-        if manifest.get(field) != value:
+        recorded = manifest.get(field)
+        if field == "corpus_provenance":
+            # Manifests written on Windows carry the corpus file names with backslashes and a source hash computed over
+            # those names; compare on portable names and leave the per-file hashes to _verify_corpus_files below.
+            recorded, value = _portable_provenance(recorded), _portable_provenance(value)
+        if recorded != value:
             raise ValueError(f"{path}: incompatible source {field}")
     case_by_id = {domain.corpus.case_id(case): case for case in cases}
     source_cases = manifest.get("case_ids")

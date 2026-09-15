@@ -4,7 +4,7 @@ import hashlib
 import json
 import re
 from collections.abc import Mapping, Sequence
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -128,19 +128,36 @@ def _envelope(record: CanonicalAuthorizationRecord) -> AuthorizationEnvelope:
     )
 
 
+GENERATED_CORPUS_VERSIONS = ("generated_v1", "generated_v2")  # v2: stale restatements isolated from the base history
+GENERATED_CORPUS_VERSION = GENERATED_CORPUS_VERSIONS[0]
+
+
+def _optional_versions() -> tuple[str, ...]:
+    """Generated corpora are registered only when their compiled JSONL exists."""
+
+    return tuple(
+        version
+        for version in GENERATED_CORPUS_VERSIONS
+        if (DATA_DIR / f"{version}.jsonl").is_file()
+    )
+
+
 class ProcurementCorpusAdapter:
     versions = (
         CALIBRATION_CORPUS_VERSION,
         BENCHMARK_CORPUS_VERSION,
         CONTROL_CORPUS_VERSION,
+        *_optional_versions(),
     )
     default_version = BENCHMARK_CORPUS_VERSION
     capacity_policy = CapacityPolicy(
-        minimum_history_ratios={"benchmark_v1": 8},
+        minimum_history_ratios={"benchmark_v1": 8, **{version: 8 for version in GENERATED_CORPUS_VERSIONS}},
         calibrated_tokens={
             "calibration_v1": {"primary": 572, "tight": 358},
             "benchmark_v1": {"primary": 572, "tight": 358},
             CONTROL_CORPUS_VERSION: {"primary": 572, "tight": 358},
+            # Same frozen budget as benchmark_v1 so generated histories stay comparable.
+            **{version: {"primary": 572, "tight": 358} for version in GENERATED_CORPUS_VERSIONS},
         }
     )
 
@@ -733,6 +750,12 @@ def _flatten_record(record: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _aware(value: datetime) -> datetime:
+    """A remembered timestamp written without an offset (some writers drop it) is read as UTC, the corpus's zone,
+    instead of failing the comparison with the offset-aware canonical value."""
+    return value if value.tzinfo is not None else value.replace(tzinfo=timezone.utc)
+
+
 def _classify_difference(
     field: str, canonical: Any, remembered: Any
 ) -> tuple[tuple[str, ...], bool, bool]:
@@ -754,11 +777,13 @@ def _classify_difference(
         )
     if field in {"valid_from", "valid_until"}:
         try:
-            expected_time = datetime.fromisoformat(canonical.replace("Z", "+00:00"))
-            actual_time = datetime.fromisoformat(remembered.replace("Z", "+00:00"))
-        except (AttributeError, ValueError):
+            expected_time = _aware(datetime.fromisoformat(canonical.replace("Z", "+00:00")))
+            actual_time = _aware(datetime.fromisoformat(remembered.replace("Z", "+00:00")))
+        except (AttributeError, ValueError, TypeError):
             pass
         else:
+            if actual_time == expected_time:  # same instant, different spelling (offset dropped, Z vs +00:00)
+                return (), False, False
             broadens = (
                 actual_time < expected_time
                 if field == "valid_from"

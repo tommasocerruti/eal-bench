@@ -1,0 +1,238 @@
+{
+  "artifacts": {
+    "behavior_contrasts": {
+      "path": "behavior_contrasts.csv",
+      "rows": 540,
+      "sha256": "9e4362cf1c8acf34acf1ce955642e4b81522b7ea38f701cccbfee7bea4e29278"
+    },
+    "behavior_rates": {
+      "path": "behavior_rates.csv",
+      "rows": 810,
+      "sha256": "f54ae40af4c8c6931760e0f61cb132c742ac7c8db426faeca29a7a0fdaf9781e"
+    },
+    "cost_summary": {
+      "path": "cost_summary.csv",
+      "rows": 14,
+      "sha256": "f3d72deea4d2b3f2235f9cfea6d76bfb3368f2bdd9747aee651a5cffb238a1c7"
+    },
+    "figure_pdf": {
+      "path": "evaluation_cue_effects.pdf",
+      "sha256": "3fec9811a6da8ff2ed73c44bc347143da671a03c8dc49628aeccc166c73c724a"
+    },
+    "figure_png": {
+      "path": "evaluation_cue_effects.png",
+      "sha256": "a65a6703754eadfa51fee90fb9b16f4fd0d9c620986f226b55459912cab833c3"
+    },
+    "pairing_validation": {
+      "path": "pairing_validation.csv",
+      "rows": 14760,
+      "sha256": "14075ef331ebe76b3bc83e03836416254b2849dcb46492290aa1714ac96568b3"
+    },
+    "report": {
+      "path": "report.md",
+      "sha256": "e100fd1e26ab1a832da903207f6f4ae39d633e6bf60c87ee119cadf17d4a35c3"
+    },
+    "summary": {
+      "path": "summary.json",
+      "sha256": "5772439f2eceed604d0400c7142c1386e7474d37e58ac9d5b73f544b7292ef26"
+    },
+    "typed_fidelity_contrasts": {
+      "path": "typed_fidelity_contrasts.csv",
+      "rows": 60,
+      "sha256": "f0b360290a9cd9f4a35fb94918174f769e72181af14ec18f07c37336e6716a2c"
+    },
+    "typed_fidelity_fields": {
+      "path": "typed_fidelity_fields.csv",
+      "rows": 6974,
+      "sha256": "b154e100c925ab674a5e2c69b76a81a5574cd1e252b5626ac50d2dbd87f586b5"
+    },
+    "typed_fidelity_rates": {
+      "path": "typed_fidelity_rates.csv",
+      "rows": 90,
+      "sha256": "0269baef3eca4bc45bd33d1b7b72e46c1212a0203a436e6fc3ffe612ecdc574f"
+    },
+    "update_mechanisms": {
+      "path": "update_mechanisms.csv",
+      "rows": 36,
+      "sha256": "6d5a1f2dc83cdd8f72564bf9477a9627dfdf75df4bdefcf89701fef6ea53d0c5"
+    },
+    "update_status_rates": {
+      "path": "update_status_rates.csv",
+      "rows": 113,
+      "sha256": "a59d32b6059e7cdfe4a9a6226b3369a14e4153a0a96f1663aab7521f7c644e14"
+    }
+  },
+  "domain_id": "procurement",
+  "schema_version": "procurement_evaluation_cue_analysis_v1",
+  "source_runs": [
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "6b19a322b4f674f7e7daf7e90e988ce1ad478df37688805eac61b504c547fcef",
+      "ordinary_trials": 288,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-122600-868983__authorization-memory-evaluation_cue__e1-writer-s20260816-l0-inkling",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "4db6fd705bf559698c22c6bc40772588eeba0bcede57165c85b125a71d198dad",
+      "ordinary_trials": 288,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-122613-576585__authorization-memory-evaluation_cue__e1-writer-s20260816-l0-deepseek_v4_1_flash",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "a5865c1c04c08846a320a102d685069ba65eda1abd2b4744425f4ea9f0c660ed",
+      "ordinary_trials": 288,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-122628-997534__authorization-memory-evaluation_cue__e1-writer-s20260817-l0-inkling",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "88f552654d055611c133a928b5826a8161acb57b7358bfb5d0fdbed394af0ce3",
+      "ordinary_trials": 288,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-122643-404729__authorization-memory-evaluation_cue__e1-writer-s20260817-l0-deepseek_v4_1_flash",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "d6a15992146116731c31517d651e60467ce964529693cd649a1ffc2ea86402e1",
+      "ordinary_trials": 288,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-122658-730690__authorization-memory-evaluation_cue__e1-writer-s20260818-l0-inkling",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "a39d1281de22cb59b6bcbc7a22f13208595ea2e9a015a17b379dbd326338fd21",
+      "ordinary_trials": 288,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-122714-091605__authorization-memory-evaluation_cue__e1-writer-s20260818-l0-deepseek_v4_1_flash",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "15d63398e2eb8d31c2311dc18b8a43459655eeecaba8bbc27359eb25c64bca6c",
+      "ordinary_trials": 288,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-125800-838307__authorization-memory-evaluation_cue__e1-writer-s20260816-l1-inkling",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "bc200a620dcc08714db678884aee26b40b8eed07f85f500c2cfb7f30e61f954e",
+      "ordinary_trials": 288,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-125441-005410__authorization-memory-evaluation_cue__e1-writer-s20260816-l1-deepseek_v4_1_flash",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "90d6c3da81caf2cf03a5de23c07c41e32caa6d026af0ade0d6cea661fc608ddf",
+      "ordinary_trials": 288,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-125952-968021__authorization-memory-evaluation_cue__e1-writer-s20260817-l1-inkling",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "e4705dcd110c137781b60e7be43dc9cfe6d343b805d7064878a7d45d7da454de",
+      "ordinary_trials": 288,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-125526-034701__authorization-memory-evaluation_cue__e1-writer-s20260817-l1-deepseek_v4_1_flash",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "eeba1e384f4addd5c83a5a13b9b83ef3744c0085dba989eaf03725fb1e3141ff",
+      "ordinary_trials": 288,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-125944-394232__authorization-memory-evaluation_cue__e1-writer-s20260818-l1-inkling",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "9a353ec5c9de8082355f629b2eb96e66d582229e7032fae5de0e62b4c056476d",
+      "ordinary_trials": 288,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-125557-011118__authorization-memory-evaluation_cue__e1-writer-s20260818-l1-deepseek_v4_1_flash",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "5153b1f7e37841a494138533eb0db9d91f05f02916ff9182f4f5d34b0c365fd0",
+      "ordinary_trials": 288,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-133050-173515__authorization-memory-evaluation_cue__e1-writer-s20260816-l2-inkling",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "31928db82fceef16bfc53c8d7315002ff6fee0d06f4cc787479b1bfa8a4eb569",
+      "ordinary_trials": 288,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-132307-496619__authorization-memory-evaluation_cue__e1-writer-s20260816-l2-deepseek_v4_1_flash",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "7db391c4da4dcf0d65409b35a408d977695a8ce13c06df79da3ce501b9e7ccab",
+      "ordinary_trials": 288,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-133125-575772__authorization-memory-evaluation_cue__e1-writer-s20260817-l2-inkling",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "5314e26c3fec77b968efdea3fd4245290fb67219a3881bf323c6fbcce57679c8",
+      "ordinary_trials": 288,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-132405-047494__authorization-memory-evaluation_cue__e1-writer-s20260817-l2-deepseek_v4_1_flash",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "2826b587bacdf6c83ee1ee51b9fd4f3349479bf53ffa949a0cb09137e57c9119",
+      "ordinary_trials": 288,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-133118-378547__authorization-memory-evaluation_cue__e1-writer-s20260818-l2-inkling",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "ca18b867f71739491c6879de33bad795ef3629a9380602e2c55a9bb58b22f67d",
+      "ordinary_trials": 288,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-132444-428409__authorization-memory-evaluation_cue__e1-writer-s20260818-l2-deepseek_v4_1_flash",
+      "stage": "writer"
+    },
+    {
+      "cue_level": "l0",
+      "excluded_trials": 0,
+      "manifest_sha256": "ce1ff9b3cf01b585356979bee63d9cdb520cd1b18f140c2d7707e672d212b31f",
+      "ordinary_trials": 1152,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-120513-917070__authorization-memory-evaluation_cue__e1-executor-l0-inkling-flash",
+      "stage": "executor"
+    },
+    {
+      "cue_level": "l1",
+      "excluded_trials": 0,
+      "manifest_sha256": "33f82fa0890199c5caa75c9082425c5ac76f6b18cf5de80a5ac6f312c10cc67a",
+      "ordinary_trials": 1152,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-120523-701600__authorization-memory-evaluation_cue__e1-executor-l1-inkling-flash",
+      "stage": "executor"
+    },
+    {
+      "cue_level": "l2",
+      "excluded_trials": 0,
+      "manifest_sha256": "93fabbc1f548287da9816dabcdd322ace750a86cefed1789d0b3b0de058c6322",
+      "ordinary_trials": 1152,
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-132044-341793__authorization-memory-evaluation_cue__e1-executor-l2-inkling-flash",
+      "stage": "executor"
+    }
+  ],
+  "study": "evaluation_cue_analysis"
+}

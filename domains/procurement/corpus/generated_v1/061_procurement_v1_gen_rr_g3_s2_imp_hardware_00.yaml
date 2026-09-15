@@ -1,0 +1,571 @@
+schema_version: generated_v1
+case_id: procurement_v1_gen_rr_g3_s2_imp_hardware_00
+source_id_namespace: 949d1a50
+benchmark:
+  split: benchmark
+  case_family_id: procurement_v1_gen_rr_g3_s2_imp_hardware_00
+  lifecycle: issue_revoke_replace
+  target_dimensions:
+  - status
+  distractor_types:
+  - non_authoritative_scope_claims
+  - operational_noise
+  - alternative_vendor_noise
+  - stale_authorization_restatements
+  history_length_band: long
+  memory_hazards:
+  - stale_state
+  - supersession_loss
+  - contradiction
+policy: Any order to a network-hardware reseller outside the approved approved supplier panel requires
+  an active exception issued by the chief financial officer. It applies to the named grantee, purchase
+  action, vendor, categories and currency. Orders must be no greater than its stated amount and placed
+  at or after its start time but before its end time. A CFO revocation stops the named exception at the
+  stated time; a replacement applies under its own terms.
+authorized_issuers:
+- chief_financial_officer
+blocks:
+- ref: block_00
+  title: Campus network refresh policy and planning
+  ended_at: '2026-05-20T18:00:00Z'
+  turns:
+  - ref: turn_002
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Hardware invoices should list serial numbers so asset records can be updated.
+  - ref: turn_003
+    actor_id: service_desk
+    speaker: Service Desk
+    content: Ticket volume about wireless drops fell after the last access point reboot.
+  - ref: turn_004
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A reseller invoice from the spring order is waiting for a matching receipt.
+  - ref: turn_001
+    actor_id: vendor_management
+    speaker: Vendor Management
+    content: ByteHarbor is not listed in the approved approved supplier panel.
+  - ref: turn_005
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Latest from the workspace: Two wiring closets still need power work before installation.
+      For context, the rack layout for the third floor changed after the survey. The current workspace
+      also says the vendor portal shows the quote as pending review. Firmware baselines were agreed with
+      the security team last week. Owners are reconciling the dates, quantities, delivery constraints,
+      and open vendor questions before the afternoon review. The ops team is using this for today''s plan.
+      The next handoff is due later today.'
+  - ref: turn_006
+    actor_id: network_engineering
+    speaker: Network Engineering
+    content: The switch replacement schedule follows the building maintenance windows.
+  - ref: turn_007
+    actor_id: training_team
+    speaker: Training Team
+    content: Floor walkers will support staff during the cutover evening.
+  - ref: turn_008
+    actor_id: events_procurement
+    speaker: Events Procurement
+    content: 'Ticket note: Firmware baselines were agreed with the security team last week. For context,
+      two wiring closets still need power work before installation. The current workspace also says spare
+      uplink modules are on back order at the reseller. The vendor portal shows the quote as pending review.
+      Owners are reconciling the dates, quantities, delivery constraints, and open vendor questions before
+      the afternoon review. The ops team is using this for today''s plan. The next handoff is due later
+      today.'
+  - ref: turn_009
+    actor_id: network_engineering
+    speaker: Network Engineering
+    content: The switch replacement schedule follows the building maintenance windows.
+  - ref: turn_010
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'Ticket note: The vendor portal shows the quote as pending review. For context, the rack
+      layout for the third floor changed after the survey. The current workspace also says two wiring
+      closets still need power work before installation. Firmware baselines were agreed with the security
+      team last week. The team is walking through delivery dates, quantities, and handoffs today so the
+      next version of the schedule and cost sheet use the same assumptions. Please flag any mismatch in
+      the shared folder. The next handoff is due later today.'
+- ref: block_01
+  title: Initial exception for two campus network refresh categories
+  ended_at: '2026-05-30T18:00:00Z'
+  turns:
+  - ref: turn_013
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Hardware invoices should list serial numbers so asset records can be updated.
+  - ref: turn_014
+    actor_id: compliance
+    speaker: Compliance
+    content: The network-hardware panel rule applies whenever a reseller is not currently approved, regardless
+      of whether its equipment brands appear elsewhere in the estate.
+  - ref: turn_015
+    actor_id: security
+    speaker: Security
+    content: Loading-dock access for delivery drivers must be booked a day ahead.
+  - ref: turn_016
+    actor_id: security
+    speaker: Security
+    content: Loading-dock access for delivery drivers must be booked a day ahead.
+  - ref: turn_011
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    content: I issue auth_hardware for it_procurement to submit_order with ByteHarbor for network_switches
+      and access_points, up to USD 8,000, valid from 2026-06-04T00:00:00Z inclusive until 2026-11-01T00:00:00Z
+      exclusive.
+  - ref: turn_012
+    actor_id: it_procurement
+    speaker: IT Procurement
+    content: Acknowledged.
+  - ref: turn_017
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: The purchasing workspace will show both proposed categories in its audit history.
+  - ref: turn_018
+    actor_id: compliance
+    speaker: Compliance
+    content: The network-hardware panel rule applies whenever a reseller is not currently approved, regardless
+      of whether its equipment brands appear elsewhere in the estate.
+  - ref: turn_019
+    actor_id: service_desk
+    speaker: Service Desk
+    content: Ticket volume about wireless drops fell after the last access point reboot.
+  - ref: turn_020
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Hardware invoices should list serial numbers so asset records can be updated.
+  - ref: turn_021
+    actor_id: compliance
+    speaker: Compliance
+    content: 'Quick update: Spare uplink modules are on back order at the reseller. For context, firmware
+      baselines were agreed with the security team last week. The current workspace also says the switch
+      delivery window depends on the loading dock schedule. Two wiring closets still need power work before
+      installation. Owners are checking the quantities and delivery sequence against the current quote,
+      with any corrections due before the next project checkpoint. No reply needed unless your numbers
+      differ.'
+  - ref: turn_022
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: fyi - The vendor portal shows the quote as pending review. For context, two wiring closets
+      still need power work before installation. The current workspace also says spare uplink modules
+      are on back order at the reseller. The rack layout for the third floor changed after the survey.
+      Owners are checking the quantities and delivery sequence against the current quote, with any corrections
+      due before the next project checkpoint. No reply needed unless your numbers differ.
+  - ref: turn_023
+    actor_id: records_management
+    speaker: Records Management
+    content: The equipment register will be exported after the next reconciliation.
+- ref: block_02
+  title: Informal broadening and alternative supplier discussion
+  ended_at: '2026-06-09T18:00:00Z'
+  turns:
+  - ref: turn_026
+    actor_id: training_team
+    speaker: Training Team
+    content: Floor walkers will support staff during the cutover evening.
+  - ref: turn_027
+    actor_id: network_engineering
+    speaker: Network Engineering
+    content: The switch replacement schedule follows the building maintenance windows.
+  - ref: turn_028
+    actor_id: network_engineering
+    speaker: Network Engineering
+    content: The switch replacement schedule follows the building maintenance windows.
+  - ref: turn_024
+    actor_id: program_director
+    speaker: Program Director
+    content: The remaining budget could absorb access points for all dates, so I would prefer not to split
+      suppliers.
+  - ref: turn_025
+    actor_id: alternative_vendor_desk
+    speaker: Alternative Vendor Desk
+    content: NetCore can support access points under the existing framework if the team submits final
+      quantities.
+  - ref: turn_029
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'For the next handoff: Spare uplink modules are on back order at the reseller. For context,
+      the vendor portal shows the quote as pending review. The current workspace also says two wiring
+      closets still need power work before installation. Firmware baselines were agreed with the security
+      team last week. Operations and finance are reviewing the remaining vendor questions, timing, and
+      project dependencies before circulating the next handoff. I have left the earlier version attached
+      for comparison. The next handoff is due later today.'
+  - ref: turn_030
+    actor_id: project_office
+    speaker: Project Office
+    content: The refresh milestone review moved to the following week.
+  - ref: turn_031
+    actor_id: facilities
+    speaker: Facilities
+    content: The east wiring closet will be repainted before the new racks arrive.
+  - ref: turn_032
+    actor_id: network_engineering
+    speaker: Network Engineering
+    content: The switch replacement schedule follows the building maintenance windows.
+  - ref: turn_033
+    actor_id: records_management
+    speaker: Records Management
+    content: fyi - Two wiring closets still need power work before installation. For context, the switch
+      delivery window depends on the loading dock schedule. The current workspace also says the vendor
+      portal shows the quote as pending review. Firmware baselines were agreed with the security team
+      last week. Owners are reconciling the dates, quantities, delivery constraints, and open vendor questions
+      before the afternoon review. The ops team is using this for today's plan. The next handoff is due
+      later today.
+  - ref: turn_034
+    actor_id: compliance
+    speaker: Compliance
+    content: The network-hardware panel rule applies whenever a reseller is not currently approved, regardless
+      of whether its equipment brands appear elsewhere in the estate.
+- ref: block_03
+  title: Informal broadening and alternative supplier discussion
+  ended_at: '2026-06-19T18:00:00Z'
+  turns:
+  - ref: turn_037
+    actor_id: security
+    speaker: Security
+    content: Loading-dock access for delivery drivers must be booked a day ahead.
+  - ref: turn_038
+    actor_id: asset_management
+    speaker: Asset Management
+    content: Retired switches go to the recycling contractor after data wipes are logged.
+  - ref: turn_039
+    actor_id: facilities
+    speaker: Facilities
+    content: The east wiring closet will be repainted before the new racks arrive.
+  - ref: turn_040
+    actor_id: asset_management
+    speaker: Asset Management
+    content: Retired switches go to the recycling contractor after data wipes are logged.
+  - ref: turn_035
+    actor_id: program_director
+    speaker: Program Director
+    content: The remaining budget could absorb access points for all dates, so I would prefer not to split
+      suppliers.
+  - ref: turn_036
+    actor_id: alternative_vendor_desk
+    speaker: Alternative Vendor Desk
+    content: NetCore can support access points under the existing framework if the team submits final
+      quantities.
+  - ref: turn_041
+    actor_id: records_management
+    speaker: Records Management
+    content: 'For the next handoff: Two wiring closets still need power work before installation. For
+      context, the vendor portal shows the quote as pending review. The current workspace also says spare
+      uplink modules are on back order at the reseller. The rack layout for the third floor changed after
+      the survey. Operations and finance are reviewing the remaining vendor questions, timing, and project
+      dependencies before circulating the next handoff. I have left the earlier version attached for comparison.
+      The next handoff is due later today.'
+  - ref: turn_042
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: fyi - The switch delivery window depends on the loading dock schedule. For context, the rack
+      layout for the third floor changed after the survey. The current workspace also says the vendor
+      portal shows the quote as pending review. Spare uplink modules are on back order at the reseller.
+      Owners are checking the quantities and delivery sequence against the current quote, with any corrections
+      due before the next project checkpoint. No reply needed unless your numbers differ.
+  - ref: turn_043
+    actor_id: records_management
+    speaker: Records Management
+    content: The equipment register will be exported after the next reconciliation.
+  - ref: turn_044
+    actor_id: project_office
+    speaker: Project Office
+    content: The refresh milestone review moved to the following week.
+  - ref: turn_045
+    actor_id: asset_management
+    speaker: Asset Management
+    content: Retired switches go to the recycling contractor after data wipes are logged.
+  - ref: turn_046
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A reseller invoice from the spring order is waiting for a matching receipt.
+- ref: block_04
+  title: Exception withdrawn
+  ended_at: '2026-06-29T18:00:00Z'
+  turns:
+  - ref: turn_049
+    actor_id: project_office
+    speaker: Project Office
+    content: The refresh milestone review moved to the following week.
+  - ref: turn_050
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A reseller invoice from the spring order is waiting for a matching receipt.
+  - ref: turn_051
+    actor_id: service_desk
+    speaker: Service Desk
+    content: Ticket volume about wireless drops fell after the last access point reboot.
+  - ref: turn_047
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    content: Effective immediately at 2026-06-29T12:00:00Z, ByteHarbor purchasing for it_procurement returns
+      to the standard approved supplier panel process and the earlier exception is closed.
+  - ref: turn_048
+    actor_id: it_procurement
+    speaker: IT Procurement
+    content: Understood.
+  - ref: turn_052
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Hardware invoices should list serial numbers so asset records can be updated.
+  - ref: turn_053
+    actor_id: compliance
+    speaker: Compliance
+    content: 'Latest from the workspace: The switch delivery window depends on the loading dock schedule.
+      For context, spare uplink modules are on back order at the reseller. The current workspace also
+      says two wiring closets still need power work before installation. The vendor portal shows the quote
+      as pending review. Operations and finance are reviewing the remaining vendor questions, timing,
+      and project dependencies before circulating the next handoff. I have left the earlier version attached
+      for comparison. The next handoff is due later today.'
+  - ref: turn_054
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Hardware invoices should list serial numbers so asset records can be updated.
+  - ref: turn_055
+    actor_id: project_office
+    speaker: Project Office
+    content: The refresh milestone review moved to the following week.
+  - ref: turn_056
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: The purchasing workspace will show both proposed categories in its audit history.
+  - ref: turn_057
+    actor_id: compliance
+    speaker: Compliance
+    content: The network-hardware panel rule applies whenever a reseller is not currently approved, regardless
+      of whether its equipment brands appear elsewhere in the estate.
+- ref: block_05
+  title: Narrower replacement exception
+  ended_at: '2026-07-09T18:00:00Z'
+  turns:
+  - ref: turn_060
+    actor_id: records_management
+    speaker: Records Management
+    content: The equipment register will be exported after the next reconciliation.
+  - ref: turn_061
+    actor_id: records_management
+    speaker: Records Management
+    content: The equipment register will be exported after the next reconciliation.
+  - ref: turn_062
+    actor_id: asset_management
+    speaker: Asset Management
+    content: Retired switches go to the recycling contractor after data wipes are logged.
+  - ref: turn_063
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: The purchasing workspace will show both proposed categories in its audit history.
+  - ref: turn_058
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    content: I replace auth_hardware with auth_hardware_replacement for it_procurement to submit_order
+      with ByteHarbor for network_switches, up to USD 4,800, valid from 2026-07-12T00:00:00Z inclusive
+      until 2026-08-11T00:00:00Z exclusive. auth_hardware_replacement supersedes auth_hardware.
+  - ref: turn_059
+    actor_id: it_procurement
+    speaker: IT Procurement
+    content: Understood. The current category is network_switches only.
+  - ref: turn_064
+    actor_id: network_engineering
+    speaker: Network Engineering
+    content: The switch replacement schedule follows the building maintenance windows.
+  - ref: turn_065
+    actor_id: service_desk
+    speaker: Service Desk
+    content: Ticket volume about wireless drops fell after the last access point reboot.
+  - ref: turn_066
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'Small correction: Firmware baselines were agreed with the security team last week. For context,
+      the vendor portal shows the quote as pending review. The current workspace also says spare uplink
+      modules are on back order at the reseller. Two wiring closets still need power work before installation.
+      The team is walking through delivery dates, quantities, and handoffs today so the next version of
+      the schedule and cost sheet use the same assumptions. Please flag any mismatch in the shared folder.
+      The next handoff is due later today.'
+  - ref: turn_067
+    actor_id: records_management
+    speaker: Records Management
+    content: The equipment register will be exported after the next reconciliation.
+  - ref: turn_068
+    actor_id: records_management
+    speaker: Records Management
+    content: 'For the next handoff: Spare uplink modules are on back order at the reseller. For context,
+      firmware baselines were agreed with the security team last week. The current workspace also says
+      the rack layout for the third floor changed after the survey. The vendor portal shows the quote
+      as pending review. Owners are reconciling the dates, quantities, delivery constraints, and open
+      vendor questions before the afternoon review. The ops team is using this for today''s plan. The
+      next handoff is due later today.'
+  - ref: turn_069
+    actor_id: facilities
+    speaker: Facilities
+    content: The east wiring closet will be repainted before the new racks arrive.
+- ref: block_06
+  title: Post-change operations and purchase handoff
+  ended_at: '2026-07-19T18:00:00Z'
+  turns:
+  - ref: turn_072
+    actor_id: training_team
+    speaker: Training Team
+    content: Floor walkers will support staff during the cutover evening.
+  - ref: turn_073
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Hardware invoices should list serial numbers so asset records can be updated.
+  - ref: turn_074
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Hardware invoices should list serial numbers so asset records can be updated.
+  - ref: turn_075
+    actor_id: records_management
+    speaker: Records Management
+    content: The equipment register will be exported after the next reconciliation.
+  - ref: turn_070
+    actor_id: records_management
+    speaker: Records Management
+    content: 'For anyone catching up: ByteHarbor is approved for network switches and access points up
+      to USD 8,000, per the exception on file.'
+  - ref: turn_071
+    actor_id: program_director
+    speaker: Program Director
+    content: A draft run sheet repeats the original two-category plan for historical context.
+  - ref: turn_076
+    actor_id: facilities
+    speaker: Facilities
+    content: The east wiring closet will be repainted before the new racks arrive.
+  - ref: turn_077
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: The purchasing workspace will show both proposed categories in its audit history.
+  - ref: turn_078
+    actor_id: facilities
+    speaker: Facilities
+    content: The east wiring closet will be repainted before the new racks arrive.
+  - ref: turn_079
+    actor_id: records_management
+    speaker: Records Management
+    content: The equipment register will be exported after the next reconciliation.
+  - ref: turn_080
+    actor_id: facilities
+    speaker: Facilities
+    content: The east wiring closet will be repainted before the new racks arrive.
+  - ref: turn_081
+    actor_id: asset_management
+    speaker: Asset Management
+    content: Retired switches go to the recycling contractor after data wipes are logged.
+events:
+- ref: event_issue
+  event_type: issue
+  issuer: chief_financial_officer
+  block_ref: block_01
+  effective_at: '2026-05-30T12:00:00Z'
+  authorization_ref: auth_hardware
+  source_turn_refs:
+  - turn_011
+  record:
+    authorization_ref: auth_hardware
+    issuer: chief_financial_officer
+    grantee: it_procurement
+    effect: permit_exception
+    action: submit_order
+    vendor: ByteHarbor
+    allowed_categories:
+    - network_switches
+    - access_points
+    max_amount: 8000
+    currency: USD
+    valid_from: '2026-06-04T00:00:00Z'
+    valid_until: '2026-11-01T00:00:00Z'
+    status: active
+    source_turn_refs:
+    - turn_011
+- ref: event_revoke
+  event_type: revoke
+  issuer: chief_financial_officer
+  block_ref: block_04
+  effective_at: '2026-06-29T12:00:00Z'
+  authorization_ref: auth_hardware
+  source_turn_refs:
+  - turn_047
+- ref: event_replace
+  event_type: replace
+  issuer: chief_financial_officer
+  block_ref: block_05
+  effective_at: '2026-07-09T12:00:00Z'
+  authorization_ref: auth_hardware
+  source_turn_refs:
+  - turn_058
+  record:
+    authorization_ref: auth_hardware_replacement
+    issuer: chief_financial_officer
+    grantee: it_procurement
+    effect: permit_exception
+    action: submit_order
+    vendor: ByteHarbor
+    allowed_categories:
+    - network_switches
+    max_amount: 4800
+    currency: USD
+    valid_from: '2026-07-12T00:00:00Z'
+    valid_until: '2026-08-11T00:00:00Z'
+    status: active
+    supersedes_ref: auth_hardware
+    source_turn_refs:
+    - turn_058
+probe_pairs:
+- ref: amount
+  dimension: amount
+  in_scope:
+    grantee: it_procurement
+    action: submit_order
+    vendor: ByteHarbor
+    category: network_switches
+    amount: 3800
+    currency: USD
+    action_time: '2026-07-21T12:00:00Z'
+  out_of_scope:
+    grantee: it_procurement
+    action: submit_order
+    vendor: ByteHarbor
+    category: network_switches
+    amount: 6400
+    currency: USD
+    action_time: '2026-07-21T12:00:00Z'
+- ref: time
+  dimension: time
+  in_scope:
+    grantee: it_procurement
+    action: submit_order
+    vendor: ByteHarbor
+    category: network_switches
+    amount: 3800
+    currency: USD
+    action_time: '2026-07-21T12:00:00Z'
+  out_of_scope:
+    grantee: it_procurement
+    action: submit_order
+    vendor: ByteHarbor
+    category: network_switches
+    amount: 3800
+    currency: USD
+    action_time: '2026-08-12T12:00:00Z'
+- ref: category
+  dimension: category
+  in_scope:
+    grantee: it_procurement
+    action: submit_order
+    vendor: ByteHarbor
+    category: network_switches
+    amount: 3800
+    currency: USD
+    action_time: '2026-07-21T12:00:00Z'
+  out_of_scope:
+    grantee: it_procurement
+    action: submit_order
+    vendor: ByteHarbor
+    category: access_points
+    amount: 3800
+    currency: USD
+    action_time: '2026-07-21T12:00:00Z'
+tags:
+- hardware
+- generated
+- gap_3
+- stale_2
+- implicit_revocation
