@@ -3,41 +3,64 @@ from __future__ import annotations
 import re
 from collections.abc import Callable
 from functools import lru_cache
-from typing import Any
 
 
 TokenCounter = Callable[[str], int]
 _FALLBACK_TOKEN_PATTERN = re.compile(r"\w+|[^\w\s]", re.UNICODE)
+CALIBRATION_TOKENIZER = "cl100k_base"
+
+
+class UncalibratedTokenizerError(RuntimeError):
+    """A declared capacity cannot be enforced with the active tokenizer."""
+
+
+def require_calibration_tokenizer(context: str) -> None:
+    """Require the tokenizer used to calibrate the released capacities."""
+
+    active = reference_tokenizer_name()
+    if active != CALIBRATION_TOKENIZER:
+        raise UncalibratedTokenizerError(
+            f"{context} uses a capacity calibrated with {CALIBRATION_TOKENIZER}, but the "
+            f"active reference tokenizer is {active!r}. Warm the tiktoken cache before "
+            "running with capacity enforcement."
+        )
 
 
 @lru_cache(maxsize=1)
-def _reference_encoder() -> Any | None:
+def _reference_policy() -> tuple[str, TokenCounter]:
+    """Resolve the counting policy once, so the name and the count always agree.
+
+    tiktoken downloads the encoding on first use, so an offline install with a cold
+    cache falls back to the regex counter. Resolving per call let one call succeed
+    and another fail, which saved a regex count under a cl100k label.
+    """
+
     try:
         import tiktoken
     except ImportError:
-        return None
-    return tiktoken.get_encoding("cl100k_base")
+        return "regex_fallback_v1", _regex_count
+    try:
+        encoder = tiktoken.get_encoding("cl100k_base")
+    except Exception:
+        return "regex_fallback_v1", _regex_count
+    return "cl100k_base", lambda text: len(encoder.encode(text))
+
+
+def _regex_count(text: str) -> int:
+    return len(_FALLBACK_TOKEN_PATTERN.findall(text))
 
 
 def reference_tokenizer_name(counter: TokenCounter | None = None) -> str:
     if counter is not None:
         return "injected"
-    return "cl100k_base" if _reference_encoder() is not None else "regex_fallback_v1"
+    return _reference_policy()[0]
 
 
 def count_reference_tokens(
     text: str,
     counter: TokenCounter | None = None,
 ) -> int:
-    count = (
-        counter(text)
-        if counter is not None
-        else (
-            len(_reference_encoder().encode(text))
-            if _reference_encoder() is not None
-            else len(_FALLBACK_TOKEN_PATTERN.findall(text))
-        )
-    )
+    count = counter(text) if counter is not None else _reference_policy()[1](text)
     if not isinstance(count, int) or isinstance(count, bool) or count < 0:
         raise ValueError("token counter must return a non-negative integer")
     return count

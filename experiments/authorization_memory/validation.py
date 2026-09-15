@@ -1235,6 +1235,7 @@ def validate_shared_domain_boundaries(
         root / "experiments" / "authorization_memory",
         root / "experiments" / "mitigations",
         root / "analysis",
+        root / "src" / "eal_bench" / "eval",
     )
     checked = 0
     violations: list[str] = []

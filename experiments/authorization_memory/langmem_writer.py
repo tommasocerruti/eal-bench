@@ -32,7 +32,12 @@ from .schemas import (
     ModelContext,
     ModelProvenance,
 )
-from .tokens import TokenCounter, count_reference_tokens, reference_tokenizer_name
+from .tokens import (
+    TokenCounter,
+    count_reference_tokens,
+    reference_tokenizer_name,
+    require_calibration_tokenizer,
+)
 
 
 _MANAGER_CONFIG = {
@@ -360,6 +365,8 @@ def _run_writer_chains(
     for spec in specs:
         if not spec.updates:
             raise ValueError("every writer chain must contain at least one update")
+    if enforce_capacity and token_counter is None:
+        require_calibration_tokenizer("writer")
 
     memories: list[MemoryArtifact] = []
     attempts: list[MemoryAttempt] = []
