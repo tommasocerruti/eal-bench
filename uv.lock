@@ -727,7 +727,7 @@ inspect = [
 [package.metadata]
 requires-dist = [
     { name = "aiolimiter", specifier = ">=1.1" },
-    { name = "inspect-ai", marker = "extra == 'inspect'", specifier = ">=0.3.241" },
+    { name = "inspect-ai", marker = "extra == 'inspect'", specifier = ">=0.3.263" },
     { name = "jsonpatch", specifier = ">=1.33,<2" },
     { name = "langchain-core", specifier = ">=1.2,<2" },
     { name = "langchain-openai", specifier = ">=0.3.1,<2" },
