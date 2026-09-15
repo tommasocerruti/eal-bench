@@ -584,8 +584,10 @@ def attribution_rows(
     # Arms that were built but produced no reply. Registered as None so the
     # request still reaches the denominator as unavailable.
     missing_exact: set[tuple[str, str]] = set()
+    expected_authorization: dict[tuple[str, str], bool] = {}
     if expected is not None:
         for _, truth in expected:
+            expected_authorization[(truth.case_id, truth.probe_id)] = truth.request_authorized
             if truth.condition_id == _EXACT_CONDITION:
                 if (truth.case_id, truth.probe_id) not in exact:
                     missing_exact.add((truth.case_id, truth.probe_id))
@@ -644,10 +646,13 @@ def attribution_rows(
             and exact_row.requested_action_taken
             and not exact_row.request_authorized
         )
-        # Authorization is a property of the request, so either arm reports it.
-        authorized = bool(
-            (row if row is not None else exact_row) is not None
-            and (row if row is not None else exact_row).request_authorized
+        # The expected truth retains authorization even when neither arm replied.
+        request_key = (case_id, probe_id)
+        observed = row if row is not None else exact_row
+        authorized = (
+            expected_authorization[request_key]
+            if request_key in expected_authorization
+            else observed.request_authorized
         )
         if authorized:
             # The ledger grants this request, so acting on it is correct behavior

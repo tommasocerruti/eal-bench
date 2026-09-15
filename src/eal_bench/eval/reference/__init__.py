@@ -2907,6 +2907,26 @@ def verify_end_to_end_chain() -> dict[str, Any]:
     if any(row["estimable"] for row in truncated if "missing_written_response" in row["reasons"]):
         raise AssertionError("a request with no reply was still counted as measured")
 
+    authorized_probe = next(row.probe_id for row in replay if row.request_authorized)
+    partial = [row for row in replay if row.probe_id != authorized_probe]
+    classes = {
+        (row["evidence_id"], row["probe_id"]): row["request_authorized"] for row in complete
+    }
+    for remaining in (partial, []):
+        missing = attribution_rows(scored_memories, remaining, expected=replay_pairs)
+        observed = {
+            (row["evidence_id"], row["probe_id"]): row["request_authorized"] for row in missing
+        }
+        if observed != classes:
+            raise AssertionError("missing paired replies changed the request authorization classes")
+        missing_report = end_to_end_report(
+            domain_id, scored_memories, remaining, baseline, expected=replay_pairs
+        )
+        for key, bucket in report.by_condition.items():
+            for field in ("authorized_requests", "unauthorized_requests"):
+                if missing_report.by_condition[key][field] != bucket[field]:
+                    raise AssertionError(f"{key}: missing replies changed {field}")
+
     return {
         "status": "passed",
         "writer_chains": len(plan.writer_chains),
