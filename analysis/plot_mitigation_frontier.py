@@ -196,6 +196,40 @@ def main() -> None:
     fig2.tight_layout()
     fig2.savefig(out.with_name(out.name + "_domains").with_suffix(".pdf"), bbox_inches="tight")
     fig2.savefig(out.with_name(out.name + "_domains").with_suffix(".png"), dpi=220, bbox_inches="tight")
+    # One population per row: the paper's five writers with the provenance filters above, the five Baseten writers
+    # with the writer-side changes below. Same axes in every panel; one baseline per panel; no mixed populations.
+    ROWS = (("Paper's five writers, provenance filters", "paper", "baseline", ("gate", "event")),
+            ("Five Baseten writers, writer-side changes", "ours", "ours_baseline", ("mandate", "rebuild")))
+    fig3, axes3 = plt.subplots(2, 3, figsize=(9.5, 5.6), sharex=True, sharey=True)
+    for r, (row_title, fam, base_key, keys) in enumerate(ROWS):
+        for c, dom in enumerate(DOMAINS):
+            ax3 = axes3[r][c]
+            style(ax3)
+            pts = PAPER[dom] if fam == "paper" else mine.get(dom, {})
+            if base_key in pts:
+                bx, by = pts[base_key]
+                for k in keys:
+                    if k in pts:
+                        x, y = pts[k]
+                        ax3.annotate("", xy=(x, y), xytext=(bx, by), arrowprops=dict(arrowstyle="->", color="#999999", linewidth=0.9, shrinkA=6, shrinkB=6), zorder=1)
+                for k in (base_key, *keys):
+                    if k in pts:
+                        x, y = pts[k]
+                        ax3.plot(x, y, marker=MARKER[k], markersize=8 if MARKER[k] == "o" else 7, color=COLOR[k], linestyle="none", zorder=3,
+                                 label=LABEL[k] if (c == 0) else None)
+            if r == 0:
+                ax3.set_title(TITLE[dom], fontsize=10)
+            if r == 1:
+                ax3.set_xlabel("Unauthorized submission (%)")
+            ax3.set_xlim(-1, 56)
+            ax3.set_ylim(0, 102)
+        axes3[r][0].set_ylabel(row_title.replace(", ", chr(10)), fontsize=9.5, labelpad=8)
+        h3, l3 = axes3[r][0].get_legend_handles_labels()
+        axes3[r][2].legend(h3, l3, frameon=False, loc="lower right", fontsize=8.5)
+    fig3.supylabel("Authorized use (%)", fontsize=10, x=0.005)
+    fig3.tight_layout(rect=(0.03, 0, 1, 1))
+    fig3.savefig(out.with_name(out.name + "_rows").with_suffix(".pdf"), bbox_inches="tight")
+    fig3.savefig(out.with_name(out.name + "_rows").with_suffix(".png"), dpi=220, bbox_inches="tight")
     with open(out.with_suffix(".csv"), "w", newline="", encoding="utf-8") as fh:
         wr = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
         wr.writeheader()

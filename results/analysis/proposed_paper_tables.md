@@ -21,13 +21,11 @@ Paired difference at round 3, own actions minus control, all domains and five wr
 
 ### Figure: mitigations on one frontier
 
-![frontier by domain](../results/figures/mitigation_frontier_domains.png)
+![frontier by population and domain](../results/figures/mitigation_frontier_rows.png)
 
-![frontier pooled](../results/figures/mitigation_frontier.png)
+*Caption draft.* Unauthorized submission against authorized use under typed incremental memory, one population per row and one domain per column. Top: the paper's five writers at three seeds per domain, with the two provenance filters (source-authority gate, bounded event sourcing) from the paper's appendix tables. Bottom: the five Baseten writers at three seeds per domain, with the two writer-side changes (the one-line mandate, rebuilding from the history every three blocks). The circle is each row's own typed-incremental baseline; an arrow runs from it to each mitigation. Moving left means fewer unauthorized submissions, moving up more authorized use.
 
-*Caption draft.* Unauthorized submission against authorized use, typed incremental memory. Filled markers: the paper's population (five writers, three seeds per domain): baseline (circle), source-authority gate and bounded event sourcing (squares), from the paper's appendix tables. Hollow markers: the five Baseten writers, three seeds per domain: baseline (circle), the one-line mandate (diamond), and rebuild-from-history every three blocks (diamond; three seeds in procurement, canonical seed in cybersecurity and finance). Dashed lines join each mitigation to its own baseline.
-
-*Reading it.* The domain panels carry the result: in procurement and finance the mandate and rebuild move left with no loss of authorized use, where the gate and event sourcing move left and far down; in cybersecurity the mandate moves right and down while the gate does nothing and rebuild moves left and up. The pooled panel hides this: the mandate's cybersecurity harm nets against its gains elsewhere. If one panel has to go to the appendix, it should be the pooled one. The two baselines differ (19.9 against 25.3 pooled) because the populations differ; nothing is compared across the two families without saying so.
+*Reading it.* Read down each column. In procurement and finance the provenance filters move left and far down, the writer-side changes move left with no loss of authorized use. In cybersecurity the gate does nothing, event sourcing costs authorized use for a small gain, rebuild moves left and up, and the mandate moves right and down. The two rows are different populations with different baselines and are not compared with each other; each mitigation is read against the baseline in its own panel. The pooled single-panel version (`mitigation_frontier.pdf`) nets the cybersecurity reversal against the gains elsewhere and is not proposed for the paper.
 
 | Domain | Condition | Population | US | AU |
 |---|---|---|---|---|
@@ -42,7 +40,7 @@ Paired difference at round 3, own actions minus control, all domains and five wr
 | Cybersecurity | Bounded event sourcing | paper's five writers, 3 seeds | 9.1 | 76.4 |
 | Cybersecurity | Typed incremental | Baseten five writers, 3 seeds | 10.4 | 88.3 |
 | Cybersecurity | One-line mandate | Baseten five writers, 3 seeds | 21.8 | 77.9 |
-| Cybersecurity | Rebuild every 3 blocks | Baseten five writers, canonical seed | 3.1 | 96.2 |
+| Cybersecurity | Rebuild every 3 blocks | Baseten five writers, canonical seed | 6.0 | 93.0 |
 | Finance | Typed incremental | paper's five writers, 3 seeds | 51.0 | 98.3 |
 | Finance | Source-authority gate | paper's five writers, 3 seeds | 1.7 | 29.2 |
 | Finance | Bounded event sourcing | paper's five writers, 3 seeds | 6.9 | 13.3 |
@@ -54,7 +52,7 @@ Paired difference at round 3, own actions minus control, all domains and five wr
 | Pooled | Bounded event sourcing | paper's five writers, 3 seeds | 9.0 | 64.7 |
 | Pooled | Typed incremental | Baseten five writers, 3 seeds | 19.6 | 91.7 |
 | Pooled | One-line mandate | Baseten five writers, 3 seeds | 12.6 | 88.6 |
-| Pooled | Rebuild every 3 blocks | Baseten five writers, procurement 3 seeds, others canonical | 4.2 | 96.5 |
+| Pooled | Rebuild every 3 blocks | Baseten five writers, procurement 3 seeds, others canonical | 4.5 | 95.6 |
 
 ### Table: formation and propagation, with rebuild as the one design change that helps
 

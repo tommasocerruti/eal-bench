@@ -13,6 +13,6 @@ LaTeX for the manuscript changes planned in `docs/extension_studies.md` ("Overle
 | `06_results_generality_rows.tex` | two rows for `tab:writer-domain` in §4.3 | no |
 | `07_appendix_additions.tex` | new appendix sections; rows for `source_authority_appendix.tex` | the event-sourcing table for the added writers is omitted until those runs finish (`scratch/section_gate_event.py` writes it) |
 
-Figures to copy into the manuscript's `figures/`: `results/figures/closed_loop_control.pdf` and `results/figures/mitigation_frontier_domains.pdf` (both regenerated from this branch; the closed-loop figure by `analysis/plot_closed_loop_figure.py`).
+Figures to copy into the manuscript's `figures/`: `results/figures/closed_loop_control.pdf` and `results/figures/mitigation_frontier_rows.pdf` (both regenerated from this branch; the closed-loop figure by `analysis/plot_closed_loop_figure.py`).
 
 Order of work: regenerate figures and tables; restructure the Results headings (§4.3 and §4.5 move to the appendix; three new subsections); paste the new subsections; replace §4.4; edit the abstract, contributions, limitations and conclusion; then one pass over every population statement (the paper's five writers, the five Baseten writers, or seven). Model logos for the two new writer-table rows need files under `figures/ModelLogos/`; the rows use `LOGO.png` as a placeholder path.
