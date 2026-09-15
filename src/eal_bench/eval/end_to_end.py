@@ -223,11 +223,10 @@ def link_written_memories(
 
     domain = load_domain(domain_id)
     version = resolve_corpus_version(domain, corpus_version)
-    # Keyed by writer run: pooling runs gave every memory for a case and
-    # condition the interleaved statuses of every run.
-    statuses: dict[tuple[str, str, int], list[str]] = {}
+    # The profile identifies the writer chain even when targets share a run number.
+    statuses: dict[tuple[str, str, int, str | None], list[str]] = {}
     for state in getattr(artifacts, "states", ()):
-        key = (state.case_id, state.condition_id, state.writer_run_id)
+        key = (state.case_id, state.condition_id, state.writer_run_id, state.profile_id)
         statuses.setdefault(key, []).append(state.status)
 
     written = []
@@ -277,7 +276,13 @@ def link_written_memories(
                 writer_seed=outcome.writer_seed,
                 update_statuses=tuple(
                     statuses.get(
-                        (evidence.case_id, evidence.condition_id, evidence.memory_run_id), ()
+                        (
+                            evidence.case_id,
+                            evidence.condition_id,
+                            evidence.memory_run_id,
+                            evidence.profile_id,
+                        ),
+                        (),
                     )
                 ),
                 exact=outcome.exact,

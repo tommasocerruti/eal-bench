@@ -2731,6 +2731,7 @@ def verify_end_to_end_chain() -> dict[str, Any]:
     """
 
     from contextlib import redirect_stderr, redirect_stdout
+    from dataclasses import replace
     from io import StringIO
 
     from domains import get_domain
@@ -2761,6 +2762,30 @@ def verify_end_to_end_chain() -> dict[str, Any]:
         raise AssertionError(f"expected four writer chains, got {len(plan.writer_chains)}")
     if not plan.baseline_trials:
         raise AssertionError("the plan carries no faithful-memory baseline")
+
+    # Separate writers can share a case, condition and run number. Their update
+    # histories must still follow the profile that produced each frozen memory.
+    chain = plan.writer_chains[0]
+    other_writer = replace(chain, target_id="gptoss_openrouter")
+    with redirect_stdout(StringIO()), redirect_stderr(StringIO()):
+        two_writers = run_writer_chains(
+            OfflineLLM(),
+            get_domain(domain_id),
+            (chain, other_writer),
+            writer_task="writer",
+            max_attempts=1,
+            capacity_tokens=plan.capacity_tokens,
+            batch_size=2,
+            enforce_capacity=False,
+        )
+    for memory in link_written_memories(domain_id, two_writers):
+        own_statuses = tuple(
+            state.status
+            for state in two_writers.states
+            if state.profile_id == memory.evidence.profile_id
+        )
+        if not own_statuses or memory.update_statuses != own_statuses:
+            raise AssertionError("a frozen memory inherited another writer's update history")
 
     with redirect_stdout(StringIO()), redirect_stderr(StringIO()):
         artifacts = run_writer_chains(
@@ -2930,6 +2955,7 @@ def verify_end_to_end_chain() -> dict[str, Any]:
     return {
         "status": "passed",
         "writer_chains": len(plan.writer_chains),
+        "writer_status_lineage": "passed",
         "memories_linked": len(memories),
         "baseline_trials": len(plan.baseline_trials),
         "replay_trials": len(replay_pairs),
