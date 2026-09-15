@@ -96,16 +96,30 @@ plan = plan_end_to_end("procurement", writer_target="glm_5_2_baseten")
 artifacts = run_writer_chains(my_llm, domain, plan.writer_chains, ...)   # the official writer
 memories = link_written_memories("procurement", artifacts, annotations=my_annotations)
 trials = executor_trials_for_memories("procurement", memories)
-report = end_to_end_report("procurement", memories, my_outcomes, my_baseline_outcomes)
+report = end_to_end_report(
+    "procurement", memories, my_outcomes, my_baseline_outcomes, expected=trials
+)
 ```
 
-Two of the four default writer conditions are free text, which is scoreable only through
-accepted annotations. Pass them as `{memory_id: [Annotation, ...]}`; without them those
-memories are reported as not estimable rather than as zero.
+Pass `expected=trials`. A reply that never came back is then reported as
+`missing_written_response` and leaves the estimable denominator, rather than shrinking the
+population unannounced.
 
-`executor_trials_for_memories` replays typed memories only, and raises on anything else:
-formation is decided deterministically only there, so a free-text replay has no truth to
-compare against.
+### Free text replays too
+
+All four default writer conditions replay, typed and free text alike. What the executor did
+behind a memory is observable whether or not that memory can be scored.
+
+Formation is the part that needs a resolved state. Free text resolves one through accepted
+annotations, passed to `link_written_memories` as `{evidence_id: [Annotation, ...]}`. Without
+them the behavioral scores are still reported and attribution says `formation_not_estimable`,
+which is different from `memory_did_not_form_for_this_request`: the first is unmeasured, the
+second is measured and negative.
+
+By default every memory is replayed over every request, including memories that preserved
+authorization correctly — those are the comparison showing the executor was not going to act
+anyway. `formed_only=True` narrows to forming memories and their forming requests, and changes
+the denominators, so a rate computed under it is conditional.
 
 The plan carries the faithful-memory baseline as well as the writer chains. It is not optional:
 without it an unauthorized action cannot be told apart from an executor that would have taken
@@ -120,6 +134,12 @@ attributed only when all three hold:
    executor runs;
 2. the executor takes that action behind the written memory;
 3. the same executor does not take it behind oracle-exact memory.
+
+Counts never pool request classes. `written_authorized_use` and
+`written_unauthorized_submission` each carry their own denominator, with `exact_*`
+counterparts for the repair arm: an authorized request cannot be an unauthorized submission,
+and a denied one cannot be legitimate use. `by_condition` is keyed by writer and condition
+together, because two writers running one memory condition are two treatments.
 
 `attribution_rows` returns the chain per request with a `reasons` list whenever attribution is
 withheld, and `EndToEndReport.unattributed` counts those reasons. Preservation, executor
