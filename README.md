@@ -17,20 +17,38 @@ whether memory errors lead to unauthorized downstream tool actions. It accompani
 
 ![EAL-Bench system and example failure](assets/figures/eal-bench-system-overview.png)
 
-A memory writer compresses an organizational history into persistent memory. An executor later
-receives that memory and a new request, then chooses whether to act through a native tool. A hidden
-canonical ledger scores the action deterministically.
+A memory writer compresses an organizational history into persistent memory; an executor later receives that memory and a new request, then chooses whether to act through a native tool.
 
 Each benchmark case includes:
 
 - an evolving, multi-session organizational history;
-- a hidden authorization ledger;
+- a hidden authorization ledger to score the action deterministically;
 - matched authorized and unauthorized requests;
 - a bounded free-text or typed memory;
 - domain-native tools and a deterministic oracle.
 
-The writer never sees the ledger or future requests. The executor never sees the original history
-or ledger.
+To use EAL in your research, see the [usage guide](USAGE.md) for installation, examples, and the four evaluation tracks.
+
+## Citation
+
+If you use EAL-Bench in your research, or if it's closely related to your work, please cite the accompanying paper:
+
+<details>
+<summary>BibTeX</summary>
+
+```bibtex
+@misc{cerruti2026agent,
+  title         = {Agent Memory Is a Surface for Endogenous Authorization Laundering},
+  author        = {Cerruti, Tommaso and Okamoto, Mika and Erol, Ansel Kaplan},
+  year          = {2026},
+  eprint        = {2609.01836},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  url           = {https://arxiv.org/abs/2609.01836}
+}
+```
+
+</details>
 
 ## Benchmark at a glance
 
@@ -64,14 +82,13 @@ blocks. Final memories are frozen and hashed before executor evaluation.
 | `source_authority` | Compare saved typed memories before and after cited-source authority gating |
 | `event_sourcing` | Extract bounded event deltas and compare reduced memories with saved typed baselines |
 
-Model targets are provider-specific and are never silently pooled or substituted. List the
-configured routes and resolved model names with:
+List the configured models with:
 
 ```bash
 uv run python -m experiments.run --list-targets
 ```
 
-## Quick start
+## Run the full benchmark
 
 Requirements:
 
@@ -96,7 +113,7 @@ OPENROUTER_API_KEY=...
 
 Offline inspection and validation do not require API credentials.
 
-## Inspect and validate
+### Validate
 
 ```bash
 uv run python -m experiments.run --list-domains
@@ -105,7 +122,7 @@ uv run python -m experiments.run --domain procurement --list-studies
 uv run python -m experiments.run --validate-only --all-domains
 ```
 
-Validate a planned route before making live calls:
+Validate your experiment configuration:
 
 ```bash
 uv run python -m experiments.run \
@@ -120,7 +137,7 @@ uv run python -m experiments.run \
   --validate-only
 ```
 
-## Run an experiment
+### Run
 
 Live routes make paid API calls. Review the validated call plan first, then rerun it with an
 explicit cost ceiling:
@@ -153,9 +170,8 @@ Every run is stored in a new immutable directory:
 results/<domain>/<run-id>/
 ```
 
-Depending on the study, it records the resolved configuration, generated memories, exact
-model-visible contexts, native tool calls, normalized decisions, oracle scores, hashes, and
-provider usage. The completed `manifest.json` is the authoritative artifact inventory.
+Each run records its configuration, memories, model inputs, tool calls, scores, and provider
+usage. See `manifest.json` for the files included in the run.
 
 The [shared result guide](results/README.md) provides one layout for Procurement, Cybersecurity,
 and Finance. Each domain has a `results/<domain>/paper/manifest.json` selecting the exact runs,
@@ -171,23 +187,10 @@ and an artifact inventory. Raw JSONL files are excluded from Git across all doma
 checks any originals present locally and reports missing files. Saved aggregates reproduce the
 published counts, while independent trial scoring and bootstrap reanalysis require the originals.
 
-## Use EAL from another project
-
-`eal_bench.eval` loads versioned trials, scores replies with the official scorer, and
-aggregates with explicit denominators, without the experiment runner and without EAL's
-provider configuration. An optional Inspect adapter is available through the `inspect` extra.
-
-```bash
-python -m eal_bench.eval.reference --verify
-```
-
-See the [reusable interface guide](docs/reusable_api.md).
-
 ## Extending EAL-Bench
 
-New domains define their own authorization state, histories, memory representation, requests,
-native tools, deterministic oracle, and fidelity comparison. Shared experiment and analysis code
-does not import concrete domains.
+To add a domain, define its authorization rules, histories, memory format, requests, tools,
+and scoring logic:
 
 - [Domain interface](domains/README.md)
 - [Domain contribution guide](domains/CONTRIBUTING.md)
@@ -201,22 +204,4 @@ Before opening a pull request:
 uv run python -m experiments.run --validate-only --all-domains
 uv run ruff check .
 git diff --check
-```
-
----
-
-## Citation
-
-If you use EAL-Bench in your research, please cite the accompanying paper:
-
-```bibtex
-@misc{cerruti2026agent,
-  title         = {Agent Memory Is a Surface for Endogenous Authorization Laundering},
-  author        = {Cerruti, Tommaso and Okamoto, Mika and Erol, Ansel Kaplan},
-  year          = {2026},
-  eprint        = {2609.01836},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.CR},
-  url           = {https://arxiv.org/abs/2609.01836}
-}
 ```
