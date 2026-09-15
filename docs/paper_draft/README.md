@@ -2,6 +2,8 @@
 
 LaTeX for the manuscript changes planned in `docs/extension_studies.md` ("Overleaf integration plan"), written against the manuscript as of its last Overleaf commit (`main.tex`, section numbers as they stand). Nothing here is applied to the Overleaf project; each file says where its content goes. Every number is transcribed from the tables in `docs/extension_studies.md` and `results/analysis/`, which the scripts named there regenerate.
 
+Start with `DRAFT_results_rewrite.tex`: the Results section rewritten in full with the extension results woven in (paragraphs marked `[unchanged]` are the manuscript's current text), plus the abstract, contribution, limitation and conclusion edits and the appendix plan. The files below are the same material split by destination.
+
 | File | Goes to | Depends on runs still open |
 |---|---|---|
 | `00_abstract_intro_limitations_conclusion.tex` | abstract; §1 contributions; §4.6 Limitations; §5 Conclusion | no |
