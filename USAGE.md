@@ -14,7 +14,7 @@ Choose the evaluation track that matches your research question:
 Install EAL with Python 3.10 or newer and cache its tokenizer:
 
 ```bash
-pip install "eal-bench[inspect] @ git+https://github.com/tommasocerruti/eal-bench.git@1dfffc574fe5db4203aa934c6214b9117bd61ea9"
+pip install "eal-bench[inspect] @ git+https://github.com/tommasocerruti/eal-bench.git@c98cd7eed6ab17ab960b113f48ef6bc479f806a5"
 python -c "import tiktoken; tiktoken.get_encoding('cl100k_base')"
 ```
 
@@ -79,7 +79,7 @@ a rate with no eligible cases is undefined.
 
 For direct Python integration, use `build_control_trials()` and `score_response()` as described
 in the
-[full API reference](https://github.com/tommasocerruti/eal-bench/blob/1dfffc574fe5db4203aa934c6214b9117bd61ea9/docs/reusable_api.md#track-executor-controls).
+[full API reference](docs/reusable_api.md#track-executor-controls).
 Keep the ground truth used for scoring out of the model's input.
 
 ## 2. Memory preservation
@@ -120,7 +120,7 @@ Free-text memories require accepted structured annotations of the same memory. W
 annotations, the result remains unscored.
 
 See the
-[memory-preservation API](https://github.com/tommasocerruti/eal-bench/blob/1dfffc574fe5db4203aa934c6214b9117bd61ea9/docs/reusable_api.md#track-memory-preservation)
+[memory-preservation API](docs/reusable_api.md#track-memory-preservation)
 for text annotations, writer setup, and update handling.
 
 ## 3. Error propagation
@@ -171,8 +171,8 @@ and a denied request cannot be legitimate use, so `authorized_pairs` and `unauth
 are counted separately. A rate with no denominator is `None`: not measured, not zero.
 
 To replay your own archive, pass `variants=`. Give separate writer runs distinct
-`writer_run_id` values — two variants agreeing on case, treatment, payload and run are the same
-memory, and are refused rather than counted twice.
+`writer_run_id` values. Duplicate detection also includes the writer target, so different
+writers can use the same run number.
 
 ### Run through Inspect
 
