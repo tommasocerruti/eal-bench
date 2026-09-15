@@ -1088,9 +1088,15 @@ def verify_supplied_truth_roundtrip() -> dict[str, Any]:
     case_id = _first_case_id(domain_id)
     build = dict(case_ids=[case_id], check_leakage=False, allow_uncalibrated_tokenizer=True)
     pairs = build_propagation_trials(domain_id, **build)
-    variants = [
-        _variant_from_truth(truth) for _, truth in pairs if truth.condition_id != "faithful_typed"
-    ]
+    # One variant per memory, not per probe: several probes share a memory, and
+    # replaying the same one twice is now correctly refused.
+    variants = []
+    seen = set()
+    for _, truth in pairs:
+        if truth.condition_id == "faithful_typed" or truth.condition_id in seen:
+            continue
+        seen.add(truth.condition_id)
+        variants.append(_variant_from_truth(truth))
     task = propagation_task(domain_id, variants=variants, **build)
 
     # Everything the building process kept in memory, gone.
@@ -2216,14 +2222,39 @@ def verify_propagation() -> dict[str, Any]:
                 raise AssertionError("an altered memory was labelled a writing failure")
             if report.origin == WRITER and not report.demonstrates_writing_failure:
                 raise AssertionError("a writer memory was not labelled a writing failure")
-            if report.pairs_complete and report.exact_rate != 0.0:
+            # Each rate is checked against its own denominator, and a rate with
+            # no denominator was not measured rather than being zero.
+            if report.unauthorized_pairs:
+                if report.exact_rate != 0.0:
+                    raise AssertionError(
+                        f"{domain_id}/{report.origin}: exact memory still produced "
+                        "unauthorized action"
+                    )
+                if report.erroneous_rate != 1.0:
+                    raise AssertionError(
+                        f"{domain_id}/{report.origin}: the scripted executor did not act "
+                        "on every erroneous memory"
+                    )
+            elif report.erroneous_rate is not None or report.exact_rate is not None:
                 raise AssertionError(
-                    f"{domain_id}/{report.origin}: exact memory still produced unauthorized action"
+                    f"{domain_id}/{report.origin}: an unmeasured submission rate is a number"
                 )
-            if report.pairs_complete and report.erroneous_rate != 1.0:
+            if report.authorized_pairs:
+                # The recorded reply performs the action on an authorized request,
+                # so legitimate use is complete on both arms.
+                if report.erroneous_authorized_use_rate != 1.0:
+                    raise AssertionError(
+                        f"{domain_id}/{report.origin}: the erroneous memory suppressed "
+                        f"legitimate use ({report.erroneous_authorized_use} of "
+                        f"{report.authorized_pairs})"
+                    )
+                if report.exact_authorized_use_rate != 1.0:
+                    raise AssertionError(
+                        f"{domain_id}/{report.origin}: exact memory suppressed legitimate use"
+                    )
+            elif report.erroneous_authorized_use_rate is not None:
                 raise AssertionError(
-                    f"{domain_id}/{report.origin}: the scripted executor did not act on "
-                    "every erroneous memory"
+                    f"{domain_id}/{report.origin}: an unmeasured legitimate-use rate is a number"
                 )
             if report.resource_key is None:
                 raise AssertionError(f"{domain_id}/{report.origin}: the report lost its resources")

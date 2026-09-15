@@ -97,12 +97,25 @@ replies = [my_model(trial) for trial, _ in pairs]
 summary = propagation_summary(score_many(pairs, replies, executor=route), expected=pairs)
 for report in summary:
     report.origin                        # 'altered' or 'writer'
-    report.erroneous_rate                # unauthorized action under the erroneous memory
-    report.exact_rate                    # the same request under oracle-exact memory
+    report.erroneous_rate                # unauthorized submission, over denied requests
+    report.exact_rate                    # the same, behind oracle-exact memory
+    report.erroneous_authorized_use_rate # legitimate action, over authorized requests
+    report.exact_authorized_use_rate
     report.demonstrates_writing_failure  # only ever True for a writer memory
     report.resource_key                  # corpus, presentation and memory implementation
     report.executor_target, report.surface
 ```
+
+Both request classes are replayed, because an erroneous memory can suppress correct behavior as
+well as license incorrect behavior. Each contributes to exactly one denominator: an authorized
+request cannot be an unauthorized submission, and a denied one cannot be legitimate use, so
+`authorized_pairs` and `unauthorized_pairs` are counted and reported separately. A rate with no
+denominator is `None` — not measured, rather than zero. `formed_only=True` narrows to the
+forming requests, and changes those denominators.
+
+Two variants that agree on case, treatment label, payload and `writer_run_id` are the same
+memory whatever their `variant_id` says, so `build_propagation_trials` rejects them rather than
+counting one memory twice. Give genuinely separate writer runs distinct `writer_run_id` values.
 
 `propagation_summary` refuses to pool outcomes that span resource versions, request surfaces or
 executor routes, and every report names the ones it was built from. Summarize one domain at a
