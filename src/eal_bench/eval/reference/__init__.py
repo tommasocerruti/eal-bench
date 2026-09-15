@@ -1278,12 +1278,7 @@ def verify_writer_origin_reports() -> dict[str, Any]:
 
 
 def verify_writer_run_identity() -> dict[str, Any]:
-    """Two writer runs of one memory must stay two trials, not collide into one.
-
-    Separate runs can produce byte-identical memories. Without the run in the
-    identity both hash to one evidence id, the trial ids collide and the summary
-    raises on a duplicate instead of comparing two arms.
-    """
+    """Keep independent writer runs distinct and reject duplicate entries."""
 
     from dataclasses import replace
 
@@ -1295,22 +1290,35 @@ def verify_writer_run_identity() -> dict[str, Any]:
             continue
         original = forming[0]
         twin = replace(original, variant_id=f"{original.variant_id}_rerun", writer_run_id=99)
-        pairs = build_propagation_trials(
-            domain_id,
-            variants=[original, twin],
+        another_writer = replace(
+            original,
+            variant_id=f"{original.variant_id}_other_writer",
+            writer=replace(original.writer, target_id="reference_other_writer"),
+        )
+        options = dict(
             case_ids=[original.case_id],
             check_leakage=False,
             allow_uncalibrated_tokenizer=True,
         )
-        ids = [trial.trial_id for trial, _ in pairs]
-        if len(ids) != len(set(ids)):
-            raise AssertionError(f"{domain_id}: identical memories from two runs collided")
-        written = [t for _, t in pairs if t.condition_id != "faithful_typed"]
-        evidence_ids = {t.evidence.evidence_id for t in written}
-        if len(evidence_ids) != 2:
-            raise AssertionError(
-                f"{domain_id}: two writer runs produced {len(evidence_ids)} evidence ids"
-            )
+        for other in (twin, another_writer):
+            pairs = build_propagation_trials(domain_id, variants=[original, other], **options)
+            ids = [trial.trial_id for trial, _ in pairs]
+            if len(ids) != len(set(ids)):
+                raise AssertionError(f"{domain_id}: independent writer runs collided")
+            written = [t for _, t in pairs if t.condition_id != "faithful_typed"]
+            evidence_ids = {t.evidence.evidence_id for t in written}
+            if len(evidence_ids) != 2:
+                raise AssertionError(
+                    f"{domain_id}: two writer runs produced {len(evidence_ids)} evidence ids"
+                )
+        duplicate = replace(original, variant_id=f"{original.variant_id}_duplicate")
+        try:
+            build_propagation_trials(domain_id, variants=[original, duplicate], **options)
+        except ValueError as exc:
+            if "same memory" not in str(exc):
+                raise
+        else:
+            raise AssertionError("a duplicate memory entry was accepted")
         return {"status": "passed", "domain": domain_id, "trials": len(ids)}
     raise AssertionError("no forming writer memory to check run identity against")
 
