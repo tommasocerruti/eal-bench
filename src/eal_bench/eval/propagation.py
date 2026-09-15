@@ -562,28 +562,28 @@ def build_propagation_trials(
 def _reject_indistinguishable(variants: Sequence[MemoryVariant]) -> None:
     """Two variants that resolve to one memory would be counted twice.
 
-    Identity comes from the case, the treatment label, the writer run and the
-    payload. Variants that agree on all four are the same memory however their
-    `variant_id` differs, so they collide on evidence id and trial id. Caught
-    here, where the fix is obvious, rather than as a duplicate deep in the
-    summary.
+    Match the artifact's writer target and run identity, so independent writers
+    can produce identical payloads without being mistaken for duplicate entries.
     """
 
     from experiments.authorization_memory.persistence import content_hash
 
-    seen: dict[tuple[str, str, str, int], str] = {}
+    seen: dict[tuple[str, str, str, int, str | None], str] = {}
     for variant in variants:
+        writer_target = variant.writer.target_id if variant.writer is not None else "baseline"
         key = (
             variant.case_id,
             f"{variant.origin}:{variant.recipe}",
             content_hash(dict(variant.payload)),
             variant.writer_run_id,
+            writer_target,
         )
         first = seen.get(key)
         if first is not None:
             raise ValueError(
                 f"variants {first!r} and {variant.variant_id!r} are the same memory: "
-                f"same case, same {key[1]!r}, same payload, both writer_run_id="
+                f"same case, same {key[1]!r}, same payload, same writer target "
+                f"{writer_target!r}, both writer_run_id="
                 f"{variant.writer_run_id}. Replaying both would count one memory "
                 "twice. Give them distinct writer_run_id values if they are separate "
                 "writer runs, or supply only one."

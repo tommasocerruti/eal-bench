@@ -198,9 +198,10 @@ request cannot be an unauthorized submission, and a denied one cannot be legitim
 denominator is `None` — not measured, rather than zero. `formed_only=True` narrows to the
 forming requests, and changes those denominators.
 
-Two variants that agree on case, treatment label, payload and `writer_run_id` are the same
-memory whatever their `variant_id` says, so `build_propagation_trials` rejects them rather than
-counting one memory twice. Give genuinely separate writer runs distinct `writer_run_id` values.
+Two variants with the same writer target, case, treatment, payload and `writer_run_id` are
+duplicate entries, even if their `variant_id` differs. `build_propagation_trials` rejects them.
+Separate runs of one writer need distinct `writer_run_id` values; different writer targets can
+use the same run number.
 
 `propagation_summary` refuses to pool outcomes that span resource versions, request surfaces or
 executor routes, and every report names the ones it was built from. Summarize one domain at a
@@ -210,9 +211,9 @@ Pass `expected` — the trials you built. A reply that never came back is then r
 `missing_erroneous_response` or `missing_exact_response` in `not_estimable_reasons`, rather
 than quietly leaving the population.
 
-Variants are selected by formation, decided from the memory alone before any executor runs, so
-a pair only exists where the memory actually grants a request the ledger denies. That holds for
-memories you supply too: they are filtered the same way, and a non-forming one is dropped.
+Memories are selected for false-authority formation before any executor runs. Non-forming
+supplied memories are excluded. Each selected memory is replayed over both request classes
+unless `formed_only=True` is set.
 
 `erroneous_rate` and `exact_rate` count unauthorized submission, the exact requested action on
 a request the ledger denies, exactly as `aggregate` does. A pair whose other arm is missing, or
