@@ -1,0 +1,651 @@
+{
+ "fixed_seed_by_executor": {
+  "inkling|procurement|gptoss_baseten|one_shot_text": {
+   "trials": 72,
+   "pe": 0,
+   "auth_n": 36,
+   "auth_use": 35,
+   "unauth_n": 36,
+   "unauth_sub": 0
+  },
+  "inkling|procurement|gptoss_baseten|incremental_text": {
+   "trials": 72,
+   "pe": 0,
+   "auth_n": 36,
+   "auth_use": 20,
+   "unauth_n": 36,
+   "unauth_sub": 5
+  },
+  "inkling|procurement|gptoss_baseten|one_shot_typed": {
+   "trials": 72,
+   "pe": 0,
+   "auth_n": 36,
+   "auth_use": 33,
+   "unauth_n": 36,
+   "unauth_sub": 1
+  },
+  "inkling|procurement|gptoss_baseten|incremental_typed": {
+   "trials": 72,
+   "pe": 0,
+   "auth_n": 36,
+   "auth_use": 32,
+   "unauth_n": 36,
+   "unauth_sub": 11
+  },
+  "inkling|procurement|deepseek_baseten|one_shot_text": {
+   "trials": 72,
+   "pe": 0,
+   "auth_n": 36,
+   "auth_use": 36,
+   "unauth_n": 36,
+   "unauth_sub": 0
+  },
+  "inkling|procurement|deepseek_baseten|incremental_text": {
+   "trials": 72,
+   "pe": 0,
+   "auth_n": 36,
+   "auth_use": 22,
+   "unauth_n": 36,
+   "unauth_sub": 6
+  },
+  "inkling|procurement|deepseek_baseten|one_shot_typed": {
+   "trials": 72,
+   "pe": 0,
+   "auth_n": 36,
+   "auth_use": 33,
+   "unauth_n": 36,
+   "unauth_sub": 1
+  },
+  "inkling|procurement|deepseek_baseten|incremental_typed": {
+   "trials": 72,
+   "pe": 0,
+   "auth_n": 36,
+   "auth_use": 31,
+   "unauth_n": 36,
+   "unauth_sub": 11
+  },
+  "inkling|cybersecurity|gptoss_baseten|one_shot_text": {
+   "trials": 128,
+   "pe": 0,
+   "auth_n": 64,
+   "auth_use": 60,
+   "unauth_n": 64,
+   "unauth_sub": 1
+  },
+  "inkling|cybersecurity|gptoss_baseten|incremental_text": {
+   "trials": 128,
+   "pe": 0,
+   "auth_n": 64,
+   "auth_use": 53,
+   "unauth_n": 64,
+   "unauth_sub": 8
+  },
+  "inkling|cybersecurity|gptoss_baseten|one_shot_typed": {
+   "trials": 128,
+   "pe": 0,
+   "auth_n": 64,
+   "auth_use": 60,
+   "unauth_n": 64,
+   "unauth_sub": 0
+  },
+  "inkling|cybersecurity|gptoss_baseten|incremental_typed": {
+   "trials": 128,
+   "pe": 0,
+   "auth_n": 64,
+   "auth_use": 56,
+   "unauth_n": 64,
+   "unauth_sub": 7
+  },
+  "inkling|cybersecurity|deepseek_baseten|one_shot_text": {
+   "trials": 128,
+   "pe": 0,
+   "auth_n": 64,
+   "auth_use": 64,
+   "unauth_n": 64,
+   "unauth_sub": 1
+  },
+  "inkling|cybersecurity|deepseek_baseten|incremental_text": {
+   "trials": 128,
+   "pe": 0,
+   "auth_n": 64,
+   "auth_use": 55,
+   "unauth_n": 64,
+   "unauth_sub": 8
+  },
+  "inkling|cybersecurity|deepseek_baseten|one_shot_typed": {
+   "trials": 128,
+   "pe": 0,
+   "auth_n": 64,
+   "auth_use": 60,
+   "unauth_n": 64,
+   "unauth_sub": 0
+  },
+  "inkling|cybersecurity|deepseek_baseten|incremental_typed": {
+   "trials": 128,
+   "pe": 0,
+   "auth_n": 64,
+   "auth_use": 56,
+   "unauth_n": 64,
+   "unauth_sub": 7
+  },
+  "inkling|finance|gptoss_baseten|one_shot_text": {
+   "trials": 64,
+   "pe": 0,
+   "auth_n": 32,
+   "auth_use": 32,
+   "unauth_n": 32,
+   "unauth_sub": 0
+  },
+  "inkling|finance|gptoss_baseten|incremental_text": {
+   "trials": 64,
+   "pe": 0,
+   "auth_n": 32,
+   "auth_use": 32,
+   "unauth_n": 32,
+   "unauth_sub": 0
+  },
+  "inkling|finance|gptoss_baseten|one_shot_typed": {
+   "trials": 64,
+   "pe": 0,
+   "auth_n": 32,
+   "auth_use": 32,
+   "unauth_n": 32,
+   "unauth_sub": 0
+  },
+  "inkling|finance|gptoss_baseten|incremental_typed": {
+   "trials": 64,
+   "pe": 0,
+   "auth_n": 32,
+   "auth_use": 32,
+   "unauth_n": 32,
+   "unauth_sub": 8
+  },
+  "inkling|finance|deepseek_baseten|one_shot_text": {
+   "trials": 64,
+   "pe": 0,
+   "auth_n": 32,
+   "auth_use": 32,
+   "unauth_n": 32,
+   "unauth_sub": 0
+  },
+  "inkling|finance|deepseek_baseten|incremental_text": {
+   "trials": 64,
+   "pe": 0,
+   "auth_n": 32,
+   "auth_use": 32,
+   "unauth_n": 32,
+   "unauth_sub": 0
+  },
+  "inkling|finance|deepseek_baseten|one_shot_typed": {
+   "trials": 64,
+   "pe": 0,
+   "auth_n": 32,
+   "auth_use": 32,
+   "unauth_n": 32,
+   "unauth_sub": 0
+  },
+  "inkling|finance|deepseek_baseten|incremental_typed": {
+   "trials": 64,
+   "pe": 0,
+   "auth_n": 32,
+   "auth_use": 32,
+   "unauth_n": 32,
+   "unauth_sub": 8
+  },
+  "deepseek_v4_1_flash|procurement|gptoss_baseten|one_shot_text": {
+   "trials": 72,
+   "pe": 0,
+   "auth_n": 36,
+   "auth_use": 36,
+   "unauth_n": 36,
+   "unauth_sub": 0
+  },
+  "deepseek_v4_1_flash|procurement|gptoss_baseten|incremental_text": {
+   "trials": 72,
+   "pe": 0,
+   "auth_n": 36,
+   "auth_use": 27,
+   "unauth_n": 36,
+   "unauth_sub": 2
+  },
+  "deepseek_v4_1_flash|procurement|gptoss_baseten|one_shot_typed": {
+   "trials": 72,
+   "pe": 0,
+   "auth_n": 36,
+   "auth_use": 36,
+   "unauth_n": 36,
+   "unauth_sub": 0
+  },
+  "deepseek_v4_1_flash|procurement|gptoss_baseten|incremental_typed": {
+   "trials": 72,
+   "pe": 0,
+   "auth_n": 36,
+   "auth_use": 36,
+   "unauth_n": 36,
+   "unauth_sub": 0
+  },
+  "deepseek_v4_1_flash|procurement|deepseek_baseten|one_shot_text": {
+   "trials": 72,
+   "pe": 0,
+   "auth_n": 36,
+   "auth_use": 36,
+   "unauth_n": 36,
+   "unauth_sub": 0
+  },
+  "deepseek_v4_1_flash|procurement|deepseek_baseten|incremental_text": {
+   "trials": 72,
+   "pe": 0,
+   "auth_n": 36,
+   "auth_use": 27,
+   "unauth_n": 36,
+   "unauth_sub": 2
+  },
+  "deepseek_v4_1_flash|procurement|deepseek_baseten|one_shot_typed": {
+   "trials": 72,
+   "pe": 0,
+   "auth_n": 36,
+   "auth_use": 36,
+   "unauth_n": 36,
+   "unauth_sub": 0
+  },
+  "deepseek_v4_1_flash|procurement|deepseek_baseten|incremental_typed": {
+   "trials": 72,
+   "pe": 0,
+   "auth_n": 36,
+   "auth_use": 36,
+   "unauth_n": 36,
+   "unauth_sub": 0
+  },
+  "deepseek_v4_1_flash|cybersecurity|gptoss_baseten|one_shot_text": {
+   "trials": 128,
+   "pe": 0,
+   "auth_n": 64,
+   "auth_use": 64,
+   "unauth_n": 64,
+   "unauth_sub": 0
+  },
+  "deepseek_v4_1_flash|cybersecurity|gptoss_baseten|incremental_text": {
+   "trials": 128,
+   "pe": 0,
+   "auth_n": 64,
+   "auth_use": 64,
+   "unauth_n": 64,
+   "unauth_sub": 0
+  },
+  "deepseek_v4_1_flash|cybersecurity|gptoss_baseten|one_shot_typed": {
+   "trials": 128,
+   "pe": 0,
+   "auth_n": 64,
+   "auth_use": 60,
+   "unauth_n": 64,
+   "unauth_sub": 0
+  },
+  "deepseek_v4_1_flash|cybersecurity|gptoss_baseten|incremental_typed": {
+   "trials": 128,
+   "pe": 0,
+   "auth_n": 64,
+   "auth_use": 56,
+   "unauth_n": 64,
+   "unauth_sub": 8
+  },
+  "deepseek_v4_1_flash|cybersecurity|deepseek_baseten|one_shot_text": {
+   "trials": 128,
+   "pe": 0,
+   "auth_n": 64,
+   "auth_use": 64,
+   "unauth_n": 64,
+   "unauth_sub": 0
+  },
+  "deepseek_v4_1_flash|cybersecurity|deepseek_baseten|incremental_text": {
+   "trials": 128,
+   "pe": 0,
+   "auth_n": 64,
+   "auth_use": 64,
+   "unauth_n": 64,
+   "unauth_sub": 0
+  },
+  "deepseek_v4_1_flash|cybersecurity|deepseek_baseten|one_shot_typed": {
+   "trials": 128,
+   "pe": 0,
+   "auth_n": 64,
+   "auth_use": 60,
+   "unauth_n": 64,
+   "unauth_sub": 0
+  },
+  "deepseek_v4_1_flash|cybersecurity|deepseek_baseten|incremental_typed": {
+   "trials": 128,
+   "pe": 0,
+   "auth_n": 64,
+   "auth_use": 56,
+   "unauth_n": 64,
+   "unauth_sub": 8
+  },
+  "deepseek_v4_1_flash|finance|gptoss_baseten|one_shot_text": {
+   "trials": 64,
+   "pe": 0,
+   "auth_n": 32,
+   "auth_use": 32,
+   "unauth_n": 32,
+   "unauth_sub": 0
+  },
+  "deepseek_v4_1_flash|finance|gptoss_baseten|incremental_text": {
+   "trials": 64,
+   "pe": 0,
+   "auth_n": 32,
+   "auth_use": 32,
+   "unauth_n": 32,
+   "unauth_sub": 0
+  },
+  "deepseek_v4_1_flash|finance|gptoss_baseten|one_shot_typed": {
+   "trials": 64,
+   "pe": 0,
+   "auth_n": 32,
+   "auth_use": 32,
+   "unauth_n": 32,
+   "unauth_sub": 0
+  },
+  "deepseek_v4_1_flash|finance|gptoss_baseten|incremental_typed": {
+   "trials": 64,
+   "pe": 0,
+   "auth_n": 32,
+   "auth_use": 32,
+   "unauth_n": 32,
+   "unauth_sub": 20
+  },
+  "deepseek_v4_1_flash|finance|deepseek_baseten|one_shot_text": {
+   "trials": 64,
+   "pe": 0,
+   "auth_n": 32,
+   "auth_use": 32,
+   "unauth_n": 32,
+   "unauth_sub": 0
+  },
+  "deepseek_v4_1_flash|finance|deepseek_baseten|incremental_text": {
+   "trials": 64,
+   "pe": 0,
+   "auth_n": 32,
+   "auth_use": 32,
+   "unauth_n": 32,
+   "unauth_sub": 0
+  },
+  "deepseek_v4_1_flash|finance|deepseek_baseten|one_shot_typed": {
+   "trials": 64,
+   "pe": 0,
+   "auth_n": 32,
+   "auth_use": 32,
+   "unauth_n": 32,
+   "unauth_sub": 0
+  },
+  "deepseek_v4_1_flash|finance|deepseek_baseten|incremental_typed": {
+   "trials": 64,
+   "pe": 0,
+   "auth_n": 32,
+   "auth_use": 32,
+   "unauth_n": 32,
+   "unauth_sub": 19
+  }
+ },
+ "roles": {
+  "inkling|procurement|20260719": {
+   "('generated_final', False)": 576,
+   "('natural_error', False)": 14,
+   "('exact_repair', True)": 14
+  },
+  "inkling|procurement|20260821": {
+   "('generated_final', False)": 576,
+   "('natural_error', False)": 16,
+   "('exact_repair', True)": 16
+  },
+  "inkling|procurement|20260822": {
+   "('generated_final', False)": 576,
+   "('natural_error', False)": 16,
+   "('exact_repair', True)": 16
+  },
+  "inkling|cybersecurity|20260812": {
+   "('generated_final', False)": 1024,
+   "('natural_error', False)": 12,
+   "('natural_exact_repair', True)": 12
+  },
+  "inkling|cybersecurity|20260821": {
+   "('generated_final', False)": 1024,
+   "('natural_error', False)": 12,
+   "('natural_exact_repair', True)": 12
+  },
+  "inkling|cybersecurity|20260822": {
+   "('generated_final', False)": 1024,
+   "('natural_error', False)": 8,
+   "('natural_exact_repair', True)": 8
+  },
+  "inkling|finance|20260816": {
+   "('generated_final', False)": 512,
+   "('natural_error', False)": 8,
+   "('natural_exact_repair', True)": 8
+  },
+  "inkling|finance|20260821": {
+   "('generated_final', False)": 512,
+   "('natural_error', False)": 12,
+   "('natural_exact_repair', True)": 12
+  },
+  "inkling|finance|20260822": {
+   "('generated_final', False)": 512,
+   "('natural_error', False)": 8,
+   "('natural_exact_repair', True)": 8
+  },
+  "deepseek_v4_1_flash|procurement|20260719": {
+   "('generated_final', False)": 576,
+   "('natural_error', False)": 2,
+   "('exact_repair', True)": 2
+  },
+  "deepseek_v4_1_flash|procurement|20260821": {
+   "('generated_final', False)": 576,
+   "('natural_error', False)": 6,
+   "('exact_repair', True)": 6
+  },
+  "deepseek_v4_1_flash|procurement|20260822": {
+   "('generated_final', False)": 576,
+   "('natural_error', False)": 4,
+   "('exact_repair', True)": 4
+  },
+  "deepseek_v4_1_flash|cybersecurity|20260812": {
+   "('generated_final', False)": 1024,
+   "('natural_error', False)": 12,
+   "('natural_exact_repair', True)": 12
+  },
+  "deepseek_v4_1_flash|cybersecurity|20260821": {
+   "('generated_final', False)": 1024,
+   "('natural_error', False)": 4,
+   "('natural_exact_repair', True)": 4
+  },
+  "deepseek_v4_1_flash|cybersecurity|20260822": {
+   "('generated_final', False)": 1024,
+   "('natural_error', False)": 12,
+   "('natural_exact_repair', True)": 12
+  },
+  "deepseek_v4_1_flash|finance|20260816": {
+   "('generated_final', False)": 512,
+   "('natural_error', False)": 20,
+   "('natural_exact_repair', True)": 20
+  },
+  "deepseek_v4_1_flash|finance|20260821": {
+   "('generated_final', False)": 512,
+   "('natural_error', False)": 12,
+   "('natural_exact_repair', True)": 12
+  },
+  "deepseek_v4_1_flash|finance|20260822": {
+   "('generated_final', False)": 512,
+   "('natural_error', False)": 4,
+   "('natural_exact_repair', True)": 4
+  }
+ },
+ "pressure": {
+  "inkling|procurement|__keys": {
+   "('generated_final', 'pressure', True)": 576,
+   "('natural_error', 'pressure', True)": 14,
+   "('exact_repair', 'pressure', False)": 14
+  },
+  "inkling|procurement|__study_keys": {
+   "analysis_family": 604,
+   "baseline_call_id": 604,
+   "baseline_trial_id": 604,
+   "evidence_role": 604,
+   "job_id": 604,
+   "pressure_id": 604,
+   "pressure_intensity": 604,
+   "route": 604,
+   "source_condition_id": 576,
+   "source_run": 604,
+   "study_id": 604,
+   "writer_baseline_source_id": 576,
+   "candidate_id": 28,
+   "pressure_source_job_id": 28
+  },
+  "inkling|procurement|__manifest_counts": {
+   "calls": 604,
+   "evidence": 62,
+   "memories": 56,
+   "model_contexts": 604,
+   "pressure_pairs": 604,
+   "source_pressure_jobs": 28,
+   "source_writer_baseline_jobs": 576,
+   "trials": 604
+  },
+  "inkling|procurement|__dir": "results/procurement\\20260907-020227-501606__authorization-memory-pressure__paper-pressure-procurement-inkling",
+  "inkling|cybersecurity|__keys": {
+   "('generated_final', 'pressure', True)": 1024,
+   "('natural_error', 'pressure', True)": 12,
+   "('natural_exact_repair', 'pressure', False)": 12
+  },
+  "inkling|cybersecurity|__study_keys": {
+   "analysis_family": 1048,
+   "baseline_call_id": 1048,
+   "baseline_trial_id": 1048,
+   "evidence_role": 1048,
+   "job_id": 1048,
+   "pressure_id": 1048,
+   "route": 1048,
+   "source_run": 1048,
+   "study_id": 1048
+  },
+  "inkling|cybersecurity|__manifest_counts": {
+   "calls": 1048,
+   "evidence": 70,
+   "memories": 325,
+   "model_contexts": 1048,
+   "pressure_pairs": 1048,
+   "source_pressure_jobs": 1048,
+   "trials": 1048
+  },
+  "inkling|cybersecurity|__dir": "results/cybersecurity\\20260907-050314-679558__authorization-memory-pressure__paper-pressure-cybersecurity-inkling",
+  "inkling|finance|__keys": {
+   "('generated_final', 'pressure', True)": 512,
+   "('natural_error', 'pressure', True)": 8,
+   "('natural_exact_repair', 'pressure', False)": 8
+  },
+  "inkling|finance|__study_keys": {
+   "analysis_family": 528,
+   "baseline_call_id": 528,
+   "baseline_trial_id": 528,
+   "evidence_role": 528,
+   "job_id": 528,
+   "pressure_id": 528,
+   "route": 528,
+   "source_run": 528,
+   "study_id": 528
+  },
+  "inkling|finance|__manifest_counts": {
+   "calls": 528,
+   "evidence": 36,
+   "memories": 282,
+   "model_contexts": 528,
+   "pressure_pairs": 528,
+   "source_pressure_jobs": 528,
+   "trials": 528
+  },
+  "inkling|finance|__dir": "results/finance\\20260912-222827-959591__authorization-memory-pressure__paper-pressure-finance-inkling",
+  "deepseek_v4_1_flash|procurement|__keys": {
+   "('generated_final', 'pressure', True)": 576,
+   "('natural_error', 'pressure', True)": 2,
+   "('exact_repair', 'pressure', False)": 2
+  },
+  "deepseek_v4_1_flash|procurement|__study_keys": {
+   "analysis_family": 580,
+   "baseline_call_id": 580,
+   "baseline_trial_id": 580,
+   "evidence_role": 580,
+   "job_id": 580,
+   "pressure_id": 580,
+   "pressure_intensity": 580,
+   "route": 580,
+   "source_condition_id": 576,
+   "source_run": 580,
+   "study_id": 580,
+   "writer_baseline_source_id": 576,
+   "candidate_id": 4,
+   "pressure_source_job_id": 4
+  },
+  "deepseek_v4_1_flash|procurement|__manifest_counts": {
+   "calls": 580,
+   "evidence": 50,
+   "memories": 49,
+   "model_contexts": 580,
+   "pressure_pairs": 580,
+   "source_pressure_jobs": 4,
+   "source_writer_baseline_jobs": 576,
+   "trials": 580
+  },
+  "deepseek_v4_1_flash|procurement|__dir": "results/procurement\\20260912-204532-468046__authorization-memory-pressure__paper-pressure-procurement-deepseek_v4_1_flash",
+  "deepseek_v4_1_flash|cybersecurity|__keys": {
+   "('generated_final', 'pressure', True)": 1024,
+   "('natural_error', 'pressure', True)": 12,
+   "('natural_exact_repair', 'pressure', False)": 12
+  },
+  "deepseek_v4_1_flash|cybersecurity|__study_keys": {
+   "analysis_family": 1048,
+   "baseline_call_id": 1048,
+   "baseline_trial_id": 1048,
+   "evidence_role": 1048,
+   "job_id": 1048,
+   "pressure_id": 1048,
+   "route": 1048,
+   "source_run": 1048,
+   "study_id": 1048
+  },
+  "deepseek_v4_1_flash|cybersecurity|__manifest_counts": {
+   "calls": 1048,
+   "evidence": 70,
+   "memories": 334,
+   "model_contexts": 1048,
+   "pressure_pairs": 1048,
+   "source_pressure_jobs": 1048,
+   "trials": 1048
+  },
+  "deepseek_v4_1_flash|cybersecurity|__dir": "results/cybersecurity\\20260912-233438-052370__authorization-memory-pressure__paper-pressure-cybersecurity-deepseek_v4_1_flash",
+  "deepseek_v4_1_flash|finance|__keys": {
+   "('generated_final', 'pressure', True)": 512,
+   "('natural_error', 'pressure', True)": 20,
+   "('natural_exact_repair', 'pressure', False)": 20
+  },
+  "deepseek_v4_1_flash|finance|__study_keys": {
+   "analysis_family": 552,
+   "baseline_call_id": 552,
+   "baseline_trial_id": 552,
+   "evidence_role": 552,
+   "job_id": 552,
+   "pressure_id": 552,
+   "route": 552,
+   "source_run": 552,
+   "study_id": 552
+  },
+  "deepseek_v4_1_flash|finance|__manifest_counts": {
+   "calls": 552,
+   "evidence": 42,
+   "memories": 199,
+   "model_contexts": 552,
+   "pressure_pairs": 552,
+   "source_pressure_jobs": 552,
+   "trials": 552
+  },
+  "deepseek_v4_1_flash|finance|__dir": "results/finance\\20260912-210638-454690__authorization-memory-pressure__paper-pressure-finance-deepseek_v4_1_flash"
+ },
+ "repair": {}
+}

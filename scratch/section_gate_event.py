@@ -77,15 +77,27 @@ for dom in DOMAINS:
         s = summarize_run(Path(d))
         s = s["runs"][0] if "runs" in s else s
         gate_runs += 1
+        # Behavioral rates as in the paper: authorized use = requested action taken on authorized requests;
+        # unauthorized submission = requested action taken on unauthorized requests. Counted from the replay's
+        # own trials per arm (the summary's "unauthorized_actions" also counts unauthorized alternatives on
+        # authorized requests, which is a different quantity).
+        arm_counts = {"ORIGINAL": [0, 0, 0, 0], "GATED": [0, 0, 0, 0]}  # us_k, us_n, au_k, au_n
+        for line in open(Path(d) / "trials.jsonl", encoding="utf-8"):
+            t = json.loads(line)
+            if t.get("provider_error") is not None:
+                continue
+            c = arm_counts[t["metadata"]["study"]["variant"]]
+            if t["request_authorized"]:
+                c[3] += 1; c[2] += bool(t["requested_action_taken"])
+            else:
+                c[1] += 1; c[0] += bool(t["requested_action_taken"])
         for key in ((dom, "all"), (dom, w), ("pooled", "all")):
             g = gate[key]
             g["runs"] += 1
             for f in s["formation"]:
                 g["records_in"] += f["input_records"]; g["records_kept"] += f["retained_records"]; g["memories_changed"] += f["changed_memories"]; g["memories"] += f["memories"]
-            for st in s["strata"]:
-                for arm, acc in (("ORIGINAL", g["orig"]), ("GATED", g["gated"])):
-                    b = st[arm]
-                    acc.add(b["unauthorized_actions"], b["unauthorized_denominator"], b["authorized_successes"], b["authorized_denominator"])
+            for arm, acc in (("ORIGINAL", g["orig"]), ("GATED", g["gated"])):
+                acc.add(*arm_counts[arm])
 
 out += [f"### Source-authority gate ({gate_runs} of 18 executor-only replays complete)", "",
         "The gate keeps a record only if every source it cites is a message from a principal allowed to grant authorization; it does not check that the source supports the record's scope or dates. "
