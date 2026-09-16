@@ -1,0 +1,37 @@
+"""Figure 4: safety-utility frontier over all tested mitigations on one pooled population.
+Points: typed incremental baseline, source-authority gate, bounded event sourcing (six writers, three seeds, both executors),
+writer instruction and rebuild every three blocks (five writers, three seeds, both executors)."""
+import sys
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+
+OUT = sys.argv[1]
+PTS = {"baseline": (23.8, 93.4), "gate": (6.3, 54.4), "event": (8.0, 69.2), "instruction": (12.6, 88.6), "rebuild": (4.5, 95.6)}
+SPEC = {"baseline": ("o", "tab:blue", 8, "Typed incremental", (7, -16, "left")),
+        "gate": ("s", "tab:orange", 7, "Source-authority gate", (7, -14, "left")),
+        "event": ("s", "tab:green", 7, "Bounded event" + chr(10) + "sourcing", (7, -18, "left")),
+        "instruction": ("D", "tab:red", 6.5, "Writer instruction", (-8, -22, "right")),
+        "rebuild": ("D", "tab:purple", 6.5, "Rebuild every 3 blocks", (7, 4, "left"))}
+plt.rcParams.update({"font.family": "serif", "font.size": 10, "axes.labelsize": 10, "legend.fontsize": 8.5, "pdf.fonttype": 42, "ps.fonttype": 42,
+                     "savefig.facecolor": "white", "figure.facecolor": "white"})
+fig, ax = plt.subplots(figsize=(4.7, 3.5))
+ax.grid(True, color="#DDDDDD", linewidth=0.6); ax.set_axisbelow(True)
+for s in ("top", "right"):
+    ax.spines[s].set_visible(False)
+# the frontier through the non-dominated points of the three-way comparison, and the rebuild point that dominates it
+front = sorted([PTS[k] for k in ("gate", "event", "instruction", "baseline")])
+ax.plot([x for x, _ in front], [y for _, y in front], linestyle="--", color="#999999", linewidth=1.0, zorder=1)
+for k, (mk, col, ms, lab, (dx, dy, ha)) in SPEC.items():
+    x, y = PTS[k]
+    ax.plot(x, y, marker=mk, markersize=ms, color=col, linestyle="none", zorder=3)
+    ax.annotate(f"{lab}" + chr(10) + f"({x:.1f}, {y:.1f})", (x, y), textcoords="offset points", xytext=(dx, dy), ha=ha, fontsize=8, color="#222222")
+ax.set_xlim(0, 34); ax.set_ylim(45, 101)
+ax.set_xlabel("Unauthorized action rate (%)" + chr(10) + "[lower = more safety]")
+ax.set_ylabel("Legitimate action rate (%)" + chr(10) + "[higher = more utility]")
+handles = [plt.Line2D([], [], marker="o", color="#444444", linestyle="none", markersize=7, label="Baseline"),
+           plt.Line2D([], [], marker="s", color="#444444", linestyle="none", markersize=6, label="Origin checks"),
+           plt.Line2D([], [], marker="D", color="#444444", linestyle="none", markersize=5.5, label="Writer-side changes")]
+ax.legend(handles=handles, frameon=False, loc="lower right", fontsize=8, handlelength=1.2, borderaxespad=0.4)
+fig.savefig(OUT + ".pdf", bbox_inches="tight"); fig.savefig(OUT + ".png", dpi=200, bbox_inches="tight")
+print("fig4 ok")
