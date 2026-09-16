@@ -20,8 +20,8 @@ for ax, dom in zip(axes, DOMS):
     au = [100*S[f"{dom}|{c}"]["au_k"]/S[f"{dom}|{c}"]["au_n"] for c in CONDS] + [a for _, a in FIVE[dom]]
     us = [100*S[f"{dom}|{c}"]["us_k"]/S[f"{dom}|{c}"]["us_n"] for c in CONDS] + [u for u, _ in FIVE[dom]]
     x = range(7)
-    ax.bar([i - w/2 for i in x], au, w, color=blue, zorder=3, label="Authorized use")
-    ax.bar([i + w/2 for i in x], us, w, color=orange, zorder=3, label="Unauthorized submission")
+    ax.bar([i - w/2 for i in x], au, w, color=blue, zorder=3, label="Legitimate action rate")
+    ax.bar([i + w/2 for i in x], us, w, color=orange, zorder=3, label="Unauthorized action rate")
     for i, v in enumerate(us):
         ax.text(i + w/2, v + 1.5, f"{v:.1f}", ha="center", va="bottom", fontsize=5.2, color="#7a3f10")
     ax.set_xticks(list(x)); ax.set_xticklabels(LABELS, rotation=38, ha="right", rotation_mode="anchor", fontsize=6.6)

@@ -332,14 +332,14 @@ def _plot(
         color=BLUE,
         marker="o",
         linestyle="-",
-        label="Authorized use",
+        label="Legitimate action rate",
         zorder=4,
     )
-    _draw_intervals(ax_a_top, authorized, intervals["Authorized use"], BLUE)
+    _draw_intervals(ax_a_top, authorized, intervals["Legitimate action rate"], BLUE)
     ax_a_top.set_ylim(88, 101)
     ax_a_top.set_yticks((90, 95, 100))
     ax_a_top.yaxis.set_major_formatter(percent)
-    ax_a_top.set_ylabel("Authorized\nuse", labelpad=4)
+    ax_a_top.set_ylabel("Legitimate\naction rate", labelpad=4)
 
     ax_a_bottom.plot(
         K_VALUES,
@@ -349,19 +349,19 @@ def _plot(
         markerfacecolor="white",
         markeredgewidth=1.1,
         linestyle="--",
-        label="Targeted unauthorized submission",
+        label="Targeted unauthorized action rate",
         zorder=4,
     )
     _draw_intervals(
         ax_a_bottom,
         targeted,
-        intervals["Targeted unauthorized submission"],
+        intervals["Targeted unauthorized action rate"],
         VERMILLION,
     )
     ax_a_bottom.set_ylim(0, 20)
     ax_a_bottom.set_yticks((0, 10, 20))
     ax_a_bottom.yaxis.set_major_formatter(percent)
-    ax_a_bottom.set_ylabel("Unauthorized\nsubmission", labelpad=4)
+    ax_a_bottom.set_ylabel("Unauthorized\naction rate", labelpad=4)
     ax_a_bottom.legend(
         loc="upper right",
         frameon=False,
@@ -573,13 +573,13 @@ def main() -> None:
         size=(BOOTSTRAP_RESAMPLES, writer_count),
     )
     intervals = {
-        "Authorized use": _bootstrap_intervals(
+        "Legitimate action rate": _bootstrap_intervals(
             behavior_writer,
             "authorized_use_rate",
             "authorized_request_count",
             bootstrap_indices,
         ),
-        "Targeted unauthorized submission": _bootstrap_intervals(
+        "Targeted unauthorized action rate": _bootstrap_intervals(
             behavior_writer,
             "targeted_unauthorized_submission_rate",
             "unauthorized_request_count",
@@ -693,12 +693,12 @@ def main() -> None:
             (25.8, 24.2, 20.0, 18.3),
         ),
         _rounded_check(
-            "Authorized use",
+            "Legitimate action rate",
             [float(behavior[k]["authorized_use_rate"]) for k in K_VALUES],
             (94.2, 95.4, 96.5, 95.8),
         ),
         _rounded_check(
-            "Targeted unauthorized submission",
+            "Targeted unauthorized action rate",
             [
                 float(behavior[k]["targeted_unauthorized_submission_rate"])
                 for k in K_VALUES
@@ -778,7 +778,7 @@ def main() -> None:
             [
                 {
                     "panel": "A",
-                    "metric": "Authorized use",
+                    "metric": "Legitimate action rate",
                     "k": k,
                     "value": behavior[k]["authorized_use_rate"],
                     "unit": "proportion",
@@ -793,7 +793,7 @@ def main() -> None:
                 },
                 {
                     "panel": "A",
-                    "metric": "Targeted unauthorized submission",
+                    "metric": "Targeted unauthorized action rate",
                     "k": k,
                     "value": behavior[k]["targeted_unauthorized_submission_rate"],
                     "unit": "proportion",
@@ -979,7 +979,7 @@ def main() -> None:
     caption_path.write_text(
         """# Caption draft
 
-**Figure X | Writer-side test-time compute improves behavioral safety but exposes a selection bottleneck in Procurement.** Results pool five writers over the same frozen Procurement histories, with GPT-OSS-120B fixed as executor (log2-scaled k axis). **A,** Authorized use and targeted unauthorized submission are evaluated on authorized and unauthorized requests, respectively; vertically stacked axes show utility and safety without a dual-axis comparison. **B,** Exact-memory availability is the fraction of typed candidate pools containing at least one deterministically exact memory. Writer self-review and DeepSeek independent review are the fractions for which each blinded selector chose an exact existing candidate; at k=1 they coincide because only one candidate is available. **C,** Error introduction is the fraction of correct-origin incremental transitions that become erroneous; final-state error is the fraction of selected incremental typed trajectories ending in error. Persistence is the fraction of incorrect-origin transitions that remain erroneous, and self-repair is the fraction that become correct; persistence is 100% and self-repair is 0% at every k. Error bars are pointwise 95% paired writer-cluster bootstrap percentile intervals (10,000 resamples; five writers; the same resampled writers at each k). With only five writer clusters, the intervals summarize across-writer robustness rather than population-level inference.
+**Figure X | Writer-side test-time compute improves behavioral safety but exposes a selection bottleneck in Procurement.** Results pool five writers over the same frozen Procurement histories, with GPT-OSS-120B fixed as executor (log2-scaled k axis). **A,** Legitimate action rate and targeted unauthorized action rate are evaluated on authorized and unauthorized requests, respectively; vertically stacked axes show utility and safety without a dual-axis comparison. **B,** Exact-memory availability is the fraction of typed candidate pools containing at least one deterministically exact memory. Writer self-review and DeepSeek independent review are the fractions for which each blinded selector chose an exact existing candidate; at k=1 they coincide because only one candidate is available. **C,** Error introduction is the fraction of correct-origin incremental transitions that become erroneous; final-state error is the fraction of selected incremental typed trajectories ending in error. Persistence is the fraction of incorrect-origin transitions that remain erroneous, and self-repair is the fraction that become correct; persistence is 100% and self-repair is 0% at every k. Error bars are pointwise 95% paired writer-cluster bootstrap percentile intervals (10,000 resamples; five writers; the same resampled writers at each k). With only five writer clusters, the intervals summarize across-writer robustness rather than population-level inference.
 """,
         encoding="utf-8",
     )
@@ -1007,7 +1007,7 @@ The final audit pins the five-writer analysis manifest at `{_hash(analysis_dir /
 
 ## Pooling and denominators
 
-Panel A uses the already-pooled analysis rows, not a new recomputation: 1,440 executor trials per k, including 720 authorized and 720 unauthorized requests. Authorized use is conditioned on authorized requests; targeted unauthorized submission is conditioned on unauthorized requests.
+Panel A uses the already-pooled analysis rows, not a new recomputation: 1,440 executor trials per k, including 720 authorized and 720 unauthorized requests. Legitimate action rate is conditioned on authorized requests; targeted unauthorized action rate is conditioned on unauthorized requests.
 
 Panel B uses 120 typed candidate pools per k for full-fidelity exact-memory availability and selected exactness. DeepSeek's k=1 point is the same single available candidate by identity; k=2,4,8 use the independent-review analysis. Failed reviews retain the preregistered prior selection and remain in selected-outcome denominators.
 
@@ -1017,7 +1017,7 @@ Panel C pools 60 selected incremental typed trajectories per k. Error introducti
 
 Pointwise 95% percentile intervals use a paired writer-cluster bootstrap with 10,000 resamples and seed {BOOTSTRAP_SEED}. Each resample draws five writers with replacement, uses the same resampled writers at every k, and recomputes each pooled rate as the ratio of resampled numerator and denominator sums. This preserves pairing across the nested k pools. With only five writer clusters and 12 fixed histories per condition, the intervals are best read as a descriptive across-writer robustness check, not population-level inference.
 
-Panel A uses vertically stacked mini-axes because authorized use is near 95% while targeted unauthorized submission is below 14%; a single 0–100% scale would suppress the safety change, while a dual axis would make slopes hard to compare. Distinct markers and line styles preserve interpretation in grayscale. Panel B leaves the three selection curves unshaded so neither practical selector is visually privileged. Panel C plots only introduction and final-state error; persistence and self-repair are reported in the caption and machine-readable data. Every x-axis is base-2 logarithmic with labeled ticks only at k=1,2,4,8.
+Panel A uses vertically stacked mini-axes because legitimate action rate is near 95% while targeted unauthorized action rate is below 14%; a single 0–100% scale would suppress the safety change, while a dual axis would make slopes hard to compare. Distinct markers and line styles preserve interpretation in grayscale. Panel B leaves the three selection curves unshaded so neither practical selector is visually privileged. Panel C plots only introduction and final-state error; persistence and self-repair are reported in the caption and machine-readable data. Every x-axis is base-2 logarithmic with labeled ticks only at k=1,2,4,8.
 """,
         encoding="utf-8",
     )
