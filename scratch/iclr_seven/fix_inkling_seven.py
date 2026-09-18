@@ -40,7 +40,7 @@ analysed = len(list(pathlib.Path("results/analysis/event_sourcing").glob("event-
 ink_ok = all(f"{d}|unauthorized_submission" in EV.get("inkling_baseten", {}) for d in DOMS) and analysed == 9
 print("inkling event seeds analysed:", analysed, "-> seven writers" if ink_ok else "-> not yet")
 fig4 = json.load(open("scratch/iclr_seven/fig4_points.json", encoding="utf-8"))
-if ink_ok:
+if ink_ok and os.environ.get("SKIP_EVENTS") != "1":
     EVENT = {}; tote = [0] * 5
     for dom in DOMS:
         uo, ue, lo, le, n = event5[dom]

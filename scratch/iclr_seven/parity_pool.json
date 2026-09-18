@@ -1,8 +1,5 @@
 {
- "missing": [
-  "rebuild cybersecurity 20260821 inkling_baseten",
-  "rebuild cybersecurity 20260822 inkling_baseten"
- ],
+ "missing": [],
  "designs": {
   "procurement": {
    "typed": {
@@ -62,10 +59,10 @@
     "la_n": 2688
    },
    "rebuild": {
-    "ua": 6.167763157894737,
-    "la": 93.25657894736842,
-    "ua_n": 2432,
-    "la_n": 2432
+    "ua": 6.584821428571429,
+    "la": 92.70833333333333,
+    "ua_n": 2688,
+    "la_n": 2688
    },
    "instruction": {
     "ua": 20.386904761904763,
@@ -150,10 +147,10 @@
     "la_n": 5544
    },
    "rebuild": {
-    "ua": 4.633131618759456,
-    "la": 95.61270801815431,
-    "ua_n": 5288,
-    "la_n": 5288
+    "ua": 4.9062049062049065,
+    "la": 95.23809523809524,
+    "ua_n": 5544,
+    "la_n": 5544
    },
    "instruction": {
     "ua": 15.043290043290042,
@@ -182,7 +179,7 @@
   }
  },
  "runs_used": {
-  "rebuild": 61,
+  "rebuild": 63,
   "base": 63,
   "instruction": 63
  },
