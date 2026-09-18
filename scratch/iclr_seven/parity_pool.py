@@ -116,6 +116,8 @@ for d in sorted(glob.glob("results/analysis/event_sourcing/event-s*")):
         r = json.loads(l); sv = json.loads(r["stratum_value"]) if isinstance(r["stratum_value"], str) else r["stratum_value"]
         if r["metric"] not in ("authorized_use", "unauthorized_submission"):
             continue
+        if sv.get("target_id") == "inkling_baseten" and not d.endswith("-inkling"):
+            continue  # Inkling's first event arm exceeded its completion budget; only the reruns count
         a = ev[sv.get("target_id")][(dom, r["metric"])]
         a[0] += r["typed_incremental"]["numerator"]; a[1] += r["typed_incremental"]["denominator"]; a[2] += r["event_sourced"]["numerator"]; a[3] += r["event_sourced"]["denominator"]
 out["event_by_writer"] = {w: {f"{k[0]}|{k[1]}": v for k, v in per.items()} for w, per in ev.items()}

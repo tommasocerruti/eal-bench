@@ -640,40 +640,40 @@
   },
   "inkling_baseten": {
    "procurement|authorized_use": [
-    321,
-    360,
-    330,
-    360
+    193,
+    216,
+    210,
+    216
    ],
    "procurement|unauthorized_submission": [
-    117,
-    360,
-    7,
-    360
+    70,
+    216,
+    11,
+    216
    ],
    "cybersecurity|authorized_use": [
-    552,
-    640,
-    152,
-    640
+    336,
+    384,
+    232,
+    384
    ],
    "cybersecurity|unauthorized_submission": [
-    77,
-    640,
-    372,
-    640
+    43,
+    384,
+    126,
+    384
    ],
    "finance|authorized_use": [
-    256,
-    256,
-    56,
-    256
+    192,
+    192,
+    72,
+    192
    ],
    "finance|unauthorized_submission": [
-    72,
-    256,
+    56,
+    192,
     0,
-    256
+    192
    ]
   }
  },
