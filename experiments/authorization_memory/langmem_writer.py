@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import re
+import os
 import time
 import uuid
 from collections.abc import Mapping, Sequence
@@ -326,6 +327,9 @@ def run_writer_chains(
     route_timeout_seconds: float = _ROUTE_TIMEOUT_SECONDS,
     token_counter: TokenCounter | None = None,
 ) -> WriterRunArtifacts:
+    # Slow providers can need more than the canonical hour for one route; the override is recorded in the manifest.
+    if route_timeout_seconds == _ROUTE_TIMEOUT_SECONDS and os.environ.get("EAL_ROUTE_TIMEOUT_SECONDS"):
+        route_timeout_seconds = float(os.environ["EAL_ROUTE_TIMEOUT_SECONDS"])
     with ExitStack() as runner_stack:
         return _run_writer_chains(
             llm,

@@ -15,6 +15,12 @@ UA = {"without": [1.1, 17.2, 11.5], "with": [0.6, 2.2, 1.9]}  # unauthorized act
 EXACT = {"without": [32, 13, 16], "with": [56, 49, 54]}  # exact memories, of 180
 
 
+import os, json
+if os.path.exists("scratch/iclr_seven/restatement.json"):
+    _j = json.load(open("scratch/iclr_seven/restatement.json", encoding="utf-8")); N = _j["N"]; PF = _j["PF"]; UA = _j["UA"]; EXACT = _j["EXACT"]; M = _j["M"]
+else:
+    M = 180
+
 def wilson(k, n, z=1.96):
     p = k / n; d = 1 + z * z / n; c = (p + z * z / (2 * n)) / d
     h = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d
@@ -31,7 +37,7 @@ for arm, color, marker, ls in (("without", "#DD8452", "o", "-"), ("with", "#4C72
     ci = [wilson(k, N) for k in PF[arm]]
     axes[0].errorbar(list(x), y, yerr=[[max(0.0, y[i] - ci[i][0]) for i in x], [max(0.0, ci[i][1] - y[i]) for i in x]], color=color, marker=marker, linestyle=ls, capsize=2.5, linewidth=1.2, markersize=4.5, label=label, zorder=3)
     axes[1].plot(list(x), UA[arm], color=color, marker=marker, linestyle=ls, linewidth=1.2, markersize=4.5, label=label, zorder=3)
-    axes[2].plot(list(x), [100 * k / 180 for k in EXACT[arm]], color=color, marker=marker, linestyle=ls, linewidth=1.2, markersize=4.5, label=label, zorder=3)
+    axes[2].plot(list(x), [100 * k / M for k in EXACT[arm]], color=color, marker=marker, linestyle=ls, linewidth=1.2, markersize=4.5, label=label, zorder=3)
 axes[0].set_title("A  False-authority rate", loc="left", fontsize=8.5); axes[0].set_ylim(0, 22)
 axes[1].set_title("B  Unauthorized action rate", loc="left", fontsize=8.5); axes[1].set_ylim(0, 22)
 axes[2].set_title("C  Exact memories", loc="left", fontsize=8.5); axes[2].set_ylim(0, 40)

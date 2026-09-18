@@ -76,6 +76,10 @@ for r in rows(f"{INDEP}/selection_by_pool.csv"):
     ind_w[k][r["writer_target"]][0] += hit; ind_w[k][r["writer_target"]][1] += 1
 indep = [100 * ind[k][0] / ind[k][1] if ind[k][1] else None for k in K]
 indep_ci = [boot([(100 * a / b, b) for a, b in ind_w[k].values() if b]) if ind[k][1] else None for k in K]
+import os, json as _json
+if os.path.exists("scratch/iclr_seven/parity_pool.json"):
+    _ir = _json.load(open("scratch/iclr_seven/parity_pool.json", encoding="utf-8"))["independent_review_selected_exact"]
+    indep = [None] + [_ir[str(k)]["rate"] for k in (2, 4, 8)]; indep_ci = [None] * 4
 if indep[0] is None:  # k=1 has a single candidate, so selection equals availability
     indep[0] = avail[0]; indep_ci[0] = avail_ci[0]
 

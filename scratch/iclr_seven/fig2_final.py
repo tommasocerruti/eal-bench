@@ -10,6 +10,9 @@ CONDS = ["one_shot_text", "incremental_text", "one_shot_typed", "incremental_typ
 FIVE = {"procurement": [(12.9, 97.5), (6.0, 95.6), (5.8, 98.2)],
         "cybersecurity": [(12.7, 86.5), (6.0, 93.0), (21.8, 77.9)],
         "finance": [(11.7, 99.3), (0.0, 100.0), (1.7, 99.2)]}
+import os
+if os.path.exists("scratch/iclr_seven/fig2_designs.json"):
+    FIVE = {d: [tuple(x) for x in v] for d, v in json.load(open("scratch/iclr_seven/fig2_designs.json", encoding="utf-8")).items()}
 LABELS = ["Text one-shot", "Text incremental", "Typed one-shot", "Typed incremental", "Hybrid incremental", "Rebuild every 3 blocks", "Writer instruction"]
 blue, orange = "#4C72B0", "#DD8452"
 plt.rcParams.update({"font.family": "serif", "font.serif": ["Times New Roman", "STIXGeneral", "DejaVu Serif"], "mathtext.fontset": "stix",

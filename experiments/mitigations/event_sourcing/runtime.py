@@ -2,6 +2,11 @@
 
 from __future__ import annotations
 
+import os as _os
+# Completion budget of the event writer. The paper's protocol uses 4,096 tokens; writers that reason inside the
+# completion (Inkling) need more, set EAL_EVENT_WRITER_MAX_TOKENS when launching such a run.
+EVENT_WRITER_MAX_TOKENS = int(_os.environ.get("EAL_EVENT_WRITER_MAX_TOKENS", "4096"))
+
 import copy
 
 
@@ -499,7 +504,7 @@ def _invoke_attempts(
             tools=[tool],
             tool_choice=choice,
             temperature=1.0,
-            max_tokens=4096,
+            max_tokens=EVENT_WRITER_MAX_TOKENS,
             seed=attempts[0].trajectory.seed,
             batch_size=batch_size,
             return_exceptions=True,
@@ -608,7 +613,7 @@ def _attempt_provenance(
             writer_task,
             overrides={
                 "temperature": 1.0,
-                "max_tokens": 4096,
+                "max_tokens": EVENT_WRITER_MAX_TOKENS,
                 "seed": attempt.trajectory.seed,
                 "tool_choice": choice,
             },

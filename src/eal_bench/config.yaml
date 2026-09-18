@@ -100,12 +100,13 @@ model_targets:
     model: x-ai/grok-4.3
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
+    rate_limit: {rpm: 30}   # per process; three parallel streams, 90 rpm in all
   qwen_plus_0728_openrouter:
     provider: openrouter
     model: qwen/qwen-plus-2025-07-28
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
-    rate_limit: {rpm: 8}   # per process; the OpenRouter provider returned TooManyRequests at about 90 rpm across eight processes
+    rate_limit: {rpm: 8}   # per process; ten parallel streams, at most 80 rpm in all. The provider returned TooManyRequests at about 90 rpm across eight processes
   glm_5_3_baseten:
     provider: baseten
     model: zai-org/GLM-5.3
