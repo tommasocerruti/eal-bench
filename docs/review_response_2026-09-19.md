@@ -163,3 +163,29 @@ Both scripts call the same ledger function `domain.memory.authorizes` on a typed
 - McFadyen title: {LLM} protected in the bib entry.
 
 Not applied: the Figure 4 caption's "four strategies" (the baseline is one of the four points); it is your co-author's caption, so I left it. "the three mitigations and the baseline" would be exact.
+
+## Deeper findings and what was applied (2026-09-19, evening)
+
+### Item 3 (Table 10 versus Table 32): root cause found, Table 10 was wrong
+
+`analysis/failure_mechanisms.py` matches a trial to its apparent-authority row by `(state_id, probe_id)` only. State ids are content hashes that repeat across the seed runs of one writer, so when the 18 added-writer runs were passed to one `_build_rows` call (`pf_added2.py`), a trial in the seed-20260821 run could be matched to the apparent-authority row of the same state id in the seed-20260816 run. Only inflation is possible. Recounting one run per call (`pf_added_per_run.py`) gives the added writers 43/216, 41/384 and 64/192, which reproduces the event-analysis baseline row exactly. The direct check on the disputed memory (`authorizes` false at every block, executor acted on 0 of 32 disputed requests) agrees.
+
+Corrected seven-writer false authority: 196/756 (25.9%), 141/1,344 (10.5%), 305/672 (45.4%), pooled 642/2,772 (23.2%). The same collision also merged the per-state error lists (`state_errors[state_id]`), so the A.5 state counts changed: 4,419/7,770 (56.9%) semantic errors and 527/7,770 (6.8%) authority-gaining errors; 7,770 positions and 543/756 non-exact final states were unaffected. The original five-writer numbers (153/540, 100/960, 241/480) were never affected, because they come from the frozen counts.
+
+Applied: Table 10, A.5, Section 4.2 ("25.9% ... within one point"), abstract and contributions ("up to 45.4%"). Table 32 was already right. Propagation (99.0%, 1 of 390) comes from the repair witnesses, not from this matching, and is unchanged.
+
+### Item 4 (two typed-incremental baselines): one baseline now
+
+Both numbers were typed incremental memory over seven writers, three seeds and both executors; the writer route (Table 5) and the design runs that carry the instruction arm were separate samples of the same configuration, differing by at most 3 points. Nothing required two numbers. Table 33 now uses the Table 5 baseline for its typed rows (26.6, 10.5, 45.9; legitimate 96.2, 88.4, 98.8), and the paired changes are recomputed over writer-by-seed pairs with both executors pooled (21 pairs per row), because the frozen five-writer counts carry writer-by-seed cells only. Hybrid rows keep the design-run hybrid baseline at the same pairing unit. Section 4.6 now reads 10.5% to 20.4% for cybersecurity. Direction is still the same at every seed in every domain. Script: `table33_paper_baseline.py`.
+
+### Item 5 (B.6 factorial): three lifecycle variants
+
+108 = 4 themes x 3 restatement levels x 3 gaps x 3 lifecycles (amend in place 36, revoke and explicit replacement 36, revoke and implicit replacement 36). False authority by lifecycle: 140/756 (18.5%) amend, 61/756 (8.1%) explicit replacement, 36/756 (4.8%) implicit replacement; the printed 6.4% pools both replacement variants. B.6 now names the three variants and gives the split.
+
+### Item 21 (60.7% versus 93.3% semantic exactness)
+
+Both use the same notion (fidelity comparison with no field errors, source turn ids excluded). The 60.7% is the fixed-seed compute study, the 93.3% the three-seed writer route; the gap is a difference between the two run sets and stays flagged, with no wording change.
+
+### Rulings applied in this pass
+
+Items 1, 5, 6, 7, 8, 10, 13 ("All executors pass..."), 14, 15, 18, 20 as proposed; item 9 through captions (Table 34 four writers, capacity table five writers). Item 19 not applied: no Section 3.3 sentence and no new citations. Trustcall is the structured-extraction library inside LangMem that the memory writer uses; it appears only in the writer appendix. GLM 5.3 appears only in the appendix as the replay executor and one of three judges. Item 11 (Table 1 checks) and item 16 are untouched pending a ruling; across the seven writers the correlation between average baseline unauthorized and legitimate rates is -0.46.
