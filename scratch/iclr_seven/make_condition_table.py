@@ -10,7 +10,7 @@ S = json.load(open("scratch/iclr_seven/seven_summary.json", encoding="utf-8"))["
 D = json.load(open("scratch/iclr_seven/parity_pool.json", encoding="utf-8"))["designs"]
 DOMS = ["procurement", "cybersecurity", "finance"]
 CONDS = [("one_shot_text", "Text one-shot"), ("incremental_text", "Text incremental"), ("one_shot_typed", "Typed one-shot"), ("incremental_typed", "Typed incremental")]
-DESIGNS = [("hybrid", "Hybrid incremental"), ("rebuild", "Rebuild every 3 blocks"), ("instruction", "Writer instruction")]
+DESIGNS = [("rebuild", "Rebuild every 3 blocks"), ("instruction", "Writer instruction"), ("hybrid", "Hybrid incremental")]
 
 
 def rd(name):
