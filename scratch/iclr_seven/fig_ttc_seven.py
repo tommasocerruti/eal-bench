@@ -104,15 +104,15 @@ def draw(ax, y, ci, color, marker, label, ls="-"):
 
 plt.rcParams.update({"font.family": "DejaVu Sans", "mathtext.fontset": "dejavusans", "font.size": 9.5, "axes.labelsize": 9.8, "xtick.labelsize": 9.2, "ytick.labelsize": 9.2,
                      "axes.spines.top": False, "axes.spines.right": False, "savefig.bbox": "tight", "pdf.fonttype": 42})
-fig = plt.figure(figsize=(7.2, 2.5))
-gs = fig.add_gridspec(2, 3, height_ratios=[1, 1], hspace=0.12, wspace=0.62)
-a_top = fig.add_subplot(gs[0, 0]); a_bot = fig.add_subplot(gs[1, 0], sharex=a_top)
-b = fig.add_subplot(gs[:, 1]); c = fig.add_subplot(gs[:, 2])
-draw(a_top, au, au_ci, BLUE, "o", "Legitimate action rate")
-draw(a_bot, us, us_ci, ORANGE, "s", "Targeted unauthorized action rate", ls="--")
-a_top.set_ylim(88, 100); a_top.set_yticks([90, 95, 100]); a_bot.set_ylim(0, 20); a_bot.set_yticks([0, 10, 20])
-a_top.set_ylabel("Legitimate\naction rate"); a_bot.set_ylabel("Unauthorized\naction rate")
-a_top.tick_params(labelbottom=False); a_top.set_title(r"$\bf{A}$  Downstream behavior", loc="left", fontsize=10.5)
+fig = plt.figure(figsize=(7.2, 2.3))
+gs = fig.add_gridspec(1, 3, wspace=0.5)
+a = fig.add_subplot(gs[0, 0])
+b = fig.add_subplot(gs[0, 1]); c = fig.add_subplot(gs[0, 2])
+draw(a, au, au_ci, BLUE, "o", "Legitimate action rate")
+draw(a, us, us_ci, ORANGE, "s", "Unauthorized action rate", ls="--")
+a.set_ylim(0, 100); a.set_yticks([0, 20, 40, 60, 80, 100])
+a.set_ylabel("Rate")
+a.set_title(r"$\bf{A}$  Downstream behavior", loc="left", fontsize=10.5); a.legend(frameon=False, fontsize=9, loc="center left")
 draw(b, avail, avail_ci, BLUE, "o", "Available")
 draw(b, selfsel, self_ci, ORANGE, "s", "Self-review", ls="--")
 draw(b, indep, indep_ci, GRAY, "^", "Independent review", ls=":")
@@ -122,9 +122,9 @@ draw(c, final_err, final_ci, BLUE, "o", "Final-state error")
 draw(c, intro, intro_ci, ORANGE, "s", "Error introduction", ls="--")
 c.set_ylim(0, 100); c.set_ylabel("Error rate"); c.set_title(r"$\bf{C}$  Incremental typed memory", loc="left", fontsize=10.5)
 c.legend(frameon=False, fontsize=9, loc="upper right")
-for ax in (a_bot, b, c):
+for ax in (a, b, c):
     ax.set_xticks(range(len(K))); ax.set_xticklabels([f"k={k}" for k in K]); ax.set_xlabel("Writer candidates")
-for ax in (a_top, a_bot, b, c):
+for ax in (a, b, c):
     ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"{v:.0f}%"))
     ax.yaxis.grid(True, color="#dddddd", zorder=0); ax.set_axisbelow(True)
 fig.savefig(OUT + ".pdf"); fig.savefig(OUT + ".png", dpi=200)
