@@ -141,7 +141,7 @@ def main() -> None:
             series(ax_bot, rounds, us, arm, label)
         style_axis(ax_top, show_xlabel=False)
         style_axis(ax_bot, show_xlabel=True)
-        ax_top.set_title(f"{DOMAIN_TITLE[dom]} ({n_chains} chains)", pad=4)
+        ax_top.set_title(DOMAIN_TITLE[dom], pad=4)
         ax_top.set_ylim(30, 102)
         ax_top.set_yticks([40, 60, 80, 100])
         ax_bot.set_ylim(0, 50)
@@ -152,7 +152,7 @@ def main() -> None:
         ax_bot.set_xticklabels(["open loop" if r == 0 else f"round {r}" for r in rounds])
         ax_top.text(-0.22, 1.10, "ABC"[col], transform=ax_top.transAxes, fontsize=11, fontweight="bold")
         if col == 0:
-            ax_top.set_ylabel("Legitimate action rate")
+            ax_top.set_ylabel("Legitimate\naction rate")
             ax_bot.set_ylabel("Unauthorized\naction rate")
             ax_top.legend(frameon=False, loc="lower left", handlelength=1.8)
     out = Path(args.out)
