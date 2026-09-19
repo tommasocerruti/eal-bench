@@ -240,12 +240,12 @@ def _configure_matplotlib() -> Any:
         {
             "font.family": "DejaVu Sans",
             "mathtext.fontset": "dejavusans",
-            "font.size": 9.5,
-            "axes.titlesize": 10,
-            "axes.labelsize": 9,
-            "xtick.labelsize": 8.5,
-            "ytick.labelsize": 8.5,
-            "legend.fontsize": 9,
+            "font.size": 10,
+            "axes.titlesize": 11,
+            "axes.labelsize": 10.2,
+            "xtick.labelsize": 9.5,
+            "ytick.labelsize": 9.5,
+            "legend.fontsize": 9.5,
             "axes.linewidth": 0.7,
             "pdf.fonttype": 42,
             "ps.fonttype": 42,
@@ -411,11 +411,11 @@ def _plot_main(
     outer = fig.add_gridspec(
         1,
         3,
-        left=0.068,
+        left=0.075,
         right=0.992,
         bottom=0.20,
         top=0.82,
-        wspace=0.62,
+        wspace=0.7,
     )
     ax_a = fig.add_subplot(outer[0])
     panel_b = outer[1].subgridspec(2, 1, hspace=0.12)
@@ -433,39 +433,39 @@ def _plot_main(
 
     _style_distribution_axis(
         ax_a,
-        ylabel="Fewer authorization\nerrors (pp)",
+        ylabel="Fewer auth."+chr(10)+"errors (pp)",
         show_xlabels=True,
         values=[float(row["estimate_pp"]) for row in fidelity],
     )
     _draw_distribution(ax_a, fidelity)
-    ax_a.set_title(r"$\bf{A}$  Writer: memory fidelity", loc="left", fontsize=10, pad=8)
+    ax_a.set_title(r"$\bf{A}$  Writer: memory fidelity", loc="left", fontsize=11, pad=8)
 
     _style_distribution_axis(
         ax_b_top,
-        ylabel="Legitimate action\nrate (pp)",
+        ylabel="LA (pp)",
         show_xlabels=False,
         values=[float(row["estimate_pp"]) for row in writer_authorized],
     )
     _style_distribution_axis(
         ax_b_bottom,
-        ylabel="Fewer unauthorized\nactions (pp)",
+        ylabel="Fewer UA (pp)",
         show_xlabels=True,
         values=[float(row["estimate_pp"]) for row in writer_unauthorized],
     )
     _draw_distribution(ax_b_top, writer_authorized)
     _draw_distribution(ax_b_bottom, writer_unauthorized)
     ax_b_top.tick_params(axis="x", labelbottom=False)
-    ax_b_top.set_title(r"$\bf{B}$  Writer: downstream behavior", loc="left", fontsize=10, pad=8)
+    ax_b_top.set_title(r"$\bf{B}$  Writer: downstream behavior", loc="left", fontsize=11, pad=8)
 
     _style_distribution_axis(
         ax_c_top,
-        ylabel="Legitimate action\nrate (pp)",
+        ylabel="LA (pp)",
         show_xlabels=False,
         values=[float(row["estimate_pp"]) for row in executor_authorized],
     )
     _style_distribution_axis(
         ax_c_bottom,
-        ylabel="Fewer unauthorized\nactions (pp)",
+        ylabel="Fewer UA (pp)",
         show_xlabels=True,
         values=[float(row["estimate_pp"]) for row in executor_unauthorized],
     )
@@ -483,7 +483,7 @@ def _plot_main(
     bottom_legend = ax_c_bottom.get_legend()
     if bottom_legend is not None:
         bottom_legend.remove()
-    ax_c_top.set_title(r"$\bf{C}$  Executor: downstream behavior", loc="left", fontsize=10, pad=8)
+    ax_c_top.set_title(r"$\bf{C}$  Executor: downstream behavior", loc="left", fontsize=11, pad=8)
     fig.savefig(
         output_pdf,
         format="pdf",
@@ -537,7 +537,7 @@ def _style_forest_axis(
     ax.set_xlim(-bound, bound)
     ax.xaxis.set_major_locator(MaxNLocator(nbins=5, symmetric=True))
     ax.set_xlabel("Improvement (pp)")
-    ax.set_title(r"$\bf{" + letter + "}$  " + title, loc="left", fontsize=10, pad=8)
+    ax.set_title(r"$\bf{" + letter + "}$  " + title, loc="left", fontsize=11, pad=8)
 
 
 def _draw_forest(
@@ -726,14 +726,14 @@ def _plot_executor_behavior(
             _draw_forest(axes[row_index, column_index], rows)
             if column_index == 0:
                 axes[row_index, column_index].text(
-                    -0.63,
+                    -0.90,
                     0.5,
                     EXECUTOR_NAMES[executor],
                     transform=axes[row_index, column_index].transAxes,
                     rotation=90,
                     va="center",
                     ha="center",
-                    fontsize=9.5,
+                    fontsize=10.2,
                     fontweight="bold",
                 )
     fig.legend(

@@ -114,13 +114,13 @@ def main() -> None:
     rng = random.Random(BOOTSTRAP_SEED)
 
     plt.rcParams.update({
-        "font.family": "DejaVu Sans", "mathtext.fontset": "dejavusans", "font.size": 10, "axes.titlesize": 10.5, "axes.labelsize": 10,
+        "font.family": "DejaVu Sans", "mathtext.fontset": "dejavusans", "font.size": 10, "axes.titlesize": 11, "axes.labelsize": 10.2,
         "xtick.labelsize": 9.5, "ytick.labelsize": 9.5, "legend.fontsize": 9.5, "axes.linewidth": 0.7,
         "lines.linewidth": 1.3, "lines.markersize": 4.5, "pdf.fonttype": 42, "ps.fonttype": 42,
         "savefig.facecolor": "white", "figure.facecolor": "white",
     })
     fig = plt.figure(figsize=(7.5, 2.85))
-    outer = fig.add_gridspec(1, 3, wspace=0.34, left=0.085, right=0.99, top=0.88, bottom=0.24)
+    outer = fig.add_gridspec(1, 3, wspace=0.34, left=0.085, right=0.99, top=0.88, bottom=0.18)
     table_rows = []
     for col, dom in enumerate(DOMAINS):
         inner = outer[col].subgridspec(2, 1, height_ratios=[1.0, 1.0], hspace=0.12)
@@ -141,7 +141,9 @@ def main() -> None:
             series(ax_bot, rounds, us, arm, label)
         style_axis(ax_top, show_xlabel=False)
         style_axis(ax_bot, show_xlabel=True)
-        ax_top.set_title(r"$\bf{" + "ABC"[col] + "}$  " + DOMAIN_TITLE[dom], loc="left", fontsize=10.5, pad=4)
+        ax_top.set_title(r"$\bf{" + "ABC"[col] + "}$  " + DOMAIN_TITLE[dom], loc="left", fontsize=11, pad=4)
+        if col == 2:
+            ax_top.legend(frameon=False, loc="center", handlelength=1.8)
         ax_top.set_ylim(30, 102)
         ax_top.set_yticks([40, 60, 80, 100])
         ax_bot.set_ylim(0, 50)
@@ -154,7 +156,7 @@ def main() -> None:
         if col == 0:
             ax_top.set_ylabel("Legitimate\naction rate")
             ax_bot.set_ylabel("Unauthorized\naction rate")
-            fig.legend(*ax_top.get_legend_handles_labels(), frameon=False, loc="lower center", ncol=2, handlelength=1.8, bbox_to_anchor=(0.5, -0.02))
+            pass
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out.with_suffix(".pdf"), bbox_inches="tight")
