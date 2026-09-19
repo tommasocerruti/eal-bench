@@ -128,7 +128,7 @@ def main() -> None:
         ax_bot = fig.add_subplot(inner[1], sharex=ax_top)
         rounds = sorted({r for (_, r) in data[dom]})
         n_chains = len(data[dom].get(("action", 1), {}))
-        for arm, label in (("action", "Own actions written back"), ("neutral", "Neutral control")):
+        for arm, label in (("action", "Own log written back"), ("neutral", "Neutral control")):
             au, us = [], []
             for r in rounds:
                 chains = list(data[dom][(arm, r)].values())
@@ -142,8 +142,8 @@ def main() -> None:
         style_axis(ax_top, show_xlabel=False)
         style_axis(ax_bot, show_xlabel=True)
         ax_top.set_title(r"$\bf{" + "ABC"[col] + "}$  " + DOMAIN_TITLE[dom], loc="left", fontsize=11, pad=4)
-        if col == 2:
-            ax_top.legend(frameon=False, loc="center", handlelength=1.8)
+        if col == 0:
+            ax_bot.legend(frameon=False, loc="lower right", handlelength=1.6, fontsize=8.5, borderaxespad=0.3)
         ax_top.set_ylim(30, 102)
         ax_top.set_yticks([40, 60, 80, 100])
         ax_bot.set_ylim(0, 50)
