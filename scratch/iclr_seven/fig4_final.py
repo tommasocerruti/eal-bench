@@ -47,6 +47,6 @@ handles = [plt.Line2D([], [], marker="o", color="#444444", linestyle="none", mar
            plt.Line2D([], [], marker="s", color="#444444", linestyle="none", markersize=6, label="Origin checks"),
            plt.Line2D([], [], marker="D", color="#444444", linestyle="none", markersize=5.5, label="Writer-side changes"),
            plt.Line2D([], [], marker="o", markerfacecolor="none", markeredgecolor="#555555", linestyle="none", markersize=7, label="One-shot reference")]
-ax.legend(handles=handles, frameon=False, loc="lower right", fontsize=10, handlelength=1.2, borderaxespad=0.4)
+ax.legend(handles=handles, frameon=False, loc="center right", fontsize=10, handlelength=1.2, borderaxespad=0.4)
 fig.savefig(OUT + ".pdf", bbox_inches="tight"); fig.savefig(OUT + ".png", dpi=200, bbox_inches="tight")
 print("fig4 ok")
