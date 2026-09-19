@@ -50,7 +50,7 @@ def build_capacity_calibration(domain: Any) -> dict[str, Any]:
         for version in (CALIBRATION_VERSION, BENCHMARK_VERSION)
     }
     source_hashes = {
-        str(path.relative_to(PACKAGE_DIR)): file_hash(path)
+        path.relative_to(PACKAGE_DIR).as_posix(): file_hash(path)
         for path in domain.corpus.source_files(CALIBRATION_VERSION)
     }
     largest = max(row["largest_faithful_tokens"] for row in rows_by_version[CALIBRATION_VERSION])
@@ -58,7 +58,7 @@ def build_capacity_calibration(domain: Any) -> dict[str, Any]:
     compatibility = {}
     for version in (BENCHMARK_VERSION,):
         paths = domain.corpus.source_files(version)
-        hashes = {str(path.relative_to(PACKAGE_DIR)): file_hash(path) for path in paths}
+        hashes = {path.relative_to(PACKAGE_DIR).as_posix(): file_hash(path) for path in paths}
         rows = rows_by_version[version]
         compatibility[version] = {
             "source_sha256": content_hash(hashes),

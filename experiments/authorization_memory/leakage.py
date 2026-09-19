@@ -359,6 +359,22 @@ def _check_instruction_validity_gates(
             failures.append(f"{label}: {detail}")
 
 
+# Hidden identifiers a run has declared derivable from model-visible text, so that a writer coining the same word is
+# not a leak. Set per run from experiments.run --exempt-hidden-identifier (recorded in the manifest); empty by default.
+# Cybersecurity blocks are named "session-N" internally while the visible turn ids end in "_sN_mM", so a writer that
+# summarizes them as "session-N messages" trips the gate without having seen anything hidden.
+_EXEMPT_HIDDEN_IDENTIFIER_PATTERNS: tuple[re.Pattern[str], ...] = ()
+
+
+def set_exempt_hidden_identifier_patterns(patterns: Sequence[str]) -> None:
+    global _EXEMPT_HIDDEN_IDENTIFIER_PATTERNS
+    _EXEMPT_HIDDEN_IDENTIFIER_PATTERNS = tuple(re.compile(pattern) for pattern in patterns)
+
+
+def _exempt(identifier: str) -> bool:
+    return any(pattern.fullmatch(identifier) for pattern in _EXEMPT_HIDDEN_IDENTIFIER_PATTERNS)
+
+
 def _hidden_identifiers(
     domain: AuthorizationMemoryDomain,
     case: Any,
@@ -380,7 +396,7 @@ def _hidden_identifiers(
             value = getattr(request, field, None)
             if isinstance(value, str):
                 identifiers.add(value)
-    return frozenset(value for value in identifiers if value)
+    return frozenset(value for value in identifiers if value and not _exempt(value))
 
 
 def _check_surface(

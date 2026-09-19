@@ -39,7 +39,7 @@ def validate_release(domain: Any) -> dict[str, Any]:
             raise ValueError(f"Cybersecurity release hash differs for {path.name}")
 
     source_hashes = {
-        str(path.relative_to(PACKAGE_DIR)): file_hash(path)
+        path.relative_to(PACKAGE_DIR).as_posix(): file_hash(path)
         for path in domain.corpus.source_files("benchmark_v1")
     }
     claim = release["claim_corpus"]

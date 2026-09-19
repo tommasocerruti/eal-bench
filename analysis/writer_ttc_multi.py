@@ -20,6 +20,8 @@ EXPECTED_WRITERS = {
     "kimi_baseten",
     "glm_5_2_baseten",
 }
+# The two writers added after the first submission; the synthesis accepts the five alone or all seven.
+ADDED_WRITERS = {"inkling_baseten", "deepseek_v4_1_flash_baseten"}
 
 
 def _hash(path: Path) -> str:
@@ -494,8 +496,8 @@ def main() -> None:
         raise FileExistsError(f"output is not empty: {output}")
     analyses = [_load_analysis(path.resolve()) for path in args.analysis]
     writers = {analysis["summary"]["writer_target"] for analysis in analyses}
-    if writers != EXPECTED_WRITERS:
-        raise ValueError(f"expected exactly five writers, got {sorted(writers)}")
+    if writers != EXPECTED_WRITERS and writers != EXPECTED_WRITERS | ADDED_WRITERS:
+        raise ValueError(f"expected the five paper writers, or the five plus the two added writers, got {sorted(writers)}")
 
     writer_rows = _writer_rows(analyses)
     behavior_by_writer_condition = _condition_rows(analyses, "behavior")

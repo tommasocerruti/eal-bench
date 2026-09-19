@@ -1,0 +1,12 @@
+% New subsection, after the cause subsection. Figure file: results/figures/closed_loop_control.pdf
+% (analysis/plot_closed_loop_figure.py), copied to figures/closed_loop_control.pdf.
+\subsection{The agent's own actions enter its memory}
+\label{sec:closed-loop}
+When the executor's log lines are written back into the history (Section~\ref{subsec:benchmark-construction}), the writer treats them as evidence. Across the five Baseten writers, both executors, and three domains at the canonical seed (30 two-arm runs, 360 chains), 127 permission records in the action arm cite nothing but the agent's own written-back lines, against 4 in the neutral control; the judges label all of them an escalation, decline, or execution line read as a grant (Table~\ref{tab:cause}). The measured cost is to legitimate work. Against the control, which performs the same updates on the same schedule with neutral content, authorized use at round 3 is 17.6 points lower (95\% CI $-22.0$ to $-13.3$, $p<0.001$), and 30 points lower in cybersecurity, the domain where the executor escalates most and where real grants are deactivated as the agent's lines arrive (Figure~\ref{fig:closed-loop}). Unauthorized submission moves little: the paired difference at round 3 is $+2.2$ points (95\% CI $+0.2$ to $+4.2$, $p=0.041$), small and uncertain at this scale. Nothing compounds within a single pass; the loss grows only across rounds. In a deployment that logs its actions, the endogenous channel is therefore not only the history the agent is given but the history it writes, and the first casualty is the work it stops doing.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/closed_loop_control.pdf}
+  \caption{\textbf{Writing the agent's own actions back into its history.} Three rounds in which the executor's log lines are appended to the history and the writer updates memory from them (blue, filled circles), against a control that receives the same number of updates on the same schedule with neutral content (vermillion, hollow squares), both forked from the same frozen memory (the open-loop point). Top: authorized use. Bottom: unauthorized submission. Five Baseten writers, both executors, canonical seed per domain, 360 chains; error bars are 95\% bootstrap intervals over chains.}
+  \label{fig:closed-loop}
+\end{figure}

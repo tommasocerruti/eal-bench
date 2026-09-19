@@ -1,0 +1,532 @@
+schema_version: generated_v1
+case_id: procurement_v1_gen_patch_g2_s0_print_01
+source_id_namespace: 2ed09492
+benchmark:
+  split: benchmark
+  case_family_id: procurement_v1_gen_patch_g2_s0_print_01
+  lifecycle: issue_patch
+  target_dimensions:
+  - category
+  - amount
+  - time
+  distractor_types:
+  - non_authoritative_scope_claims
+  - operational_noise
+  - alternative_vendor_noise
+  history_length_band: long
+  memory_hazards:
+  - stale_scope
+  - broadening
+  - temporal_boundary_loss
+policy: Any order to a commercial print house outside the approved marketing services framework requires
+  an active exception issued by the chief financial officer. It applies to the named grantee, purchase
+  action, vendor, categories and currency. Orders must be no greater than its stated amount and placed
+  at or after its start time but before its end time. A later signed CFO amendment takes effect as dated
+  and changes the fields it names.
+authorized_issuers:
+- chief_financial_officer
+blocks:
+- ref: block_00
+  title: Autumn campaign launch policy and planning
+  ended_at: '2026-03-04T18:00:00Z'
+  turns:
+  - ref: turn_071
+    actor_id: records_management
+    speaker: Records Management
+    content: 'For the next handoff: Delivery to the regional offices is staggered over two weeks. For
+      context, paper stock for the premium edition is on allocation. The current workspace also says the
+      launch date is fixed by the trade show calendar. The design team is finalizing the regional variants.
+      Owners are checking the quantities and delivery sequence against the current quote, with any corrections
+      due before the next project checkpoint. No reply needed unless your numbers differ.'
+  - ref: turn_066
+    actor_id: events_procurement
+    speaker: Events Procurement
+    content: 'Quick update: Paper stock for the premium edition is on allocation. For context, the design
+      team is finalizing the regional variants. The current workspace also says proofs for the second
+      brochure edition are due back on Friday. Delivery to the regional offices is staggered over two
+      weeks. Owners are checking the quantities and delivery sequence against the current quote, with
+      any corrections due before the next project checkpoint. No reply needed unless your numbers differ.'
+  - ref: turn_063
+    actor_id: events_procurement
+    speaker: Events Procurement
+    content: fyi - The design team is finalizing the regional variants. For context, paper stock for the
+      premium edition is on allocation. The current workspace also says the launch date is fixed by the
+      trade show calendar. The venue banner sizes changed after the site walk. Owners are checking the
+      quantities and delivery sequence against the current quote, with any corrections due before the
+      next project checkpoint. No reply needed unless your numbers differ.
+  - ref: turn_062
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'Small correction: The venue banner sizes changed after the site walk. For context, proofs
+      for the second brochure edition are due back on Friday. The current workspace also says the launch
+      date is fixed by the trade show calendar. Delivery to the regional offices is staggered over two
+      weeks. The team is walking through delivery dates, quantities, and handoffs today so the next version
+      of the schedule and cost sheet use the same assumptions. Please flag any mismatch in the shared
+      folder. The next handoff is due later today.'
+  - ref: turn_061
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'For the next handoff: The venue banner sizes changed after the site walk. For context, the
+      design team is finalizing the regional variants. The current workspace also says proofs for the
+      second brochure edition are due back on Friday. The launch date is fixed by the trade show calendar.
+      Owners are checking the quantities and delivery sequence against the current quote, with any corrections
+      due before the next project checkpoint. No reply needed unless your numbers differ.'
+  - ref: turn_002
+    actor_id: sustainability_office
+    speaker: Sustainability Office
+    content: Recycled stock certificates should be filed with the order.
+  - ref: turn_003
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Print invoices should separate design, print, and delivery costs.
+  - ref: turn_004
+    actor_id: regional_office
+    speaker: Regional Office
+    content: The Midlands office needs its banners a week earlier than planned.
+  - ref: turn_001
+    actor_id: vendor_management
+    speaker: Vendor Management
+    content: PressLane is not listed in the approved marketing services framework.
+  - ref: turn_005
+    actor_id: records_management
+    speaker: Records Management
+    content: fyi - Delivery to the regional offices is staggered over two weeks. For context, proofs for
+      the second brochure edition are due back on Friday. The current workspace also says the launch date
+      is fixed by the trade show calendar. The design team is finalizing the regional variants. Owners
+      are reconciling the dates, quantities, delivery constraints, and open vendor questions before the
+      afternoon review. The ops team is using this for today's plan. The next handoff is due later today.
+  - ref: turn_006
+    actor_id: communications
+    speaker: Communications
+    content: Press kits will ship with the first brochure batch.
+  - ref: turn_007
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A print invoice from the spring campaign is waiting for a purchase order reference.
+  - ref: turn_008
+    actor_id: mailroom
+    speaker: Mailroom
+    content: Bulk deliveries need a booked slot at the rear entrance.
+  - ref: turn_009
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Print invoices should separate design, print, and delivery costs.
+  - ref: turn_010
+    actor_id: facilities
+    speaker: Facilities
+    content: Storage for pallets of printed material is limited to the ground-floor room.
+- ref: block_01
+  title: Initial exception for two autumn campaign launch categories
+  ended_at: '2026-03-14T18:00:00Z'
+  turns:
+  - ref: turn_013
+    actor_id: regional_office
+    speaker: Regional Office
+    content: The Midlands office needs its banners a week earlier than planned.
+  - ref: turn_014
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Print invoices should separate design, print, and delivery costs.
+  - ref: turn_015
+    actor_id: campaign_lead
+    speaker: Campaign Lead
+    content: The launch checklist review is on Monday afternoon.
+  - ref: turn_016
+    actor_id: communications
+    speaker: Communications
+    content: Press kits will ship with the first brochure batch.
+  - ref: turn_067
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'Latest from the workspace: Delivery to the regional offices is staggered over two weeks.
+      For context, the venue banner sizes changed after the site walk. The current workspace also says
+      the launch date is fixed by the trade show calendar. The design team is finalizing the regional
+      variants. Owners are checking the quantities and delivery sequence against the current quote, with
+      any corrections due before the next project checkpoint. No reply needed unless your numbers differ.'
+  - ref: turn_011
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    content: I issue auth_print for marketing_procurement to submit_order with PressLane for brochures
+      and large_format_banners, up to USD 6,000, valid from 2026-03-19T00:00:00Z inclusive until 2026-08-16T00:00:00Z
+      exclusive.
+  - ref: turn_012
+    actor_id: marketing_procurement
+    speaker: Marketing Procurement
+    content: Acknowledged.
+  - ref: turn_017
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A print invoice from the spring campaign is waiting for a purchase order reference.
+  - ref: turn_018
+    actor_id: facilities
+    speaker: Facilities
+    content: Storage for pallets of printed material is limited to the ground-floor room.
+  - ref: turn_019
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A print invoice from the spring campaign is waiting for a purchase order reference.
+  - ref: turn_020
+    actor_id: compliance
+    speaker: Compliance
+    content: Print orders placed outside the marketing services framework require an active exception.
+  - ref: turn_021
+    actor_id: records_management
+    speaker: Records Management
+    content: Artwork approvals will be archived with the campaign folder.
+  - ref: turn_022
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'For the next handoff: The design team is finalizing the regional variants. For context,
+      proofs for the second brochure edition are due back on Friday. The current workspace also says the
+      launch date is fixed by the trade show calendar. The venue banner sizes changed after the site walk.
+      The team is walking through delivery dates, quantities, and handoffs today so the next version of
+      the schedule and cost sheet use the same assumptions. Please flag any mismatch in the shared folder.
+      The next handoff is due later today.'
+  - ref: turn_023
+    actor_id: compliance
+    speaker: Compliance
+    content: Print orders placed outside the marketing services framework require an active exception.
+- ref: block_02
+  title: Informal broadening and alternative supplier discussion
+  ended_at: '2026-03-24T18:00:00Z'
+  turns:
+  - ref: turn_068
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'Quick update: Proofs for the second brochure edition are due back on Friday. For context,
+      the design team is finalizing the regional variants. The current workspace also says paper stock
+      for the premium edition is on allocation. Delivery to the regional offices is staggered over two
+      weeks. Owners are reconciling the dates, quantities, delivery constraints, and open vendor questions
+      before the afternoon review. The ops team is using this for today''s plan. The next handoff is due
+      later today.'
+  - ref: turn_026
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: The request form will continue to display both original categories.
+  - ref: turn_027
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: The request form will continue to display both original categories.
+  - ref: turn_028
+    actor_id: mailroom
+    speaker: Mailroom
+    content: Bulk deliveries need a booked slot at the rear entrance.
+  - ref: turn_029
+    actor_id: mailroom
+    speaker: Mailroom
+    content: Bulk deliveries need a booked slot at the rear entrance.
+  - ref: turn_024
+    actor_id: program_director
+    speaker: Program Director
+    content: Because large format banners are used in the same sessions as brochures, I assume both remain
+      covered for every date in the program.
+  - ref: turn_025
+    actor_id: alternative_vendor_desk
+    speaker: Alternative Vendor Desk
+    content: InkForm can support large format banners under the existing framework if the team submits
+      final quantities.
+  - ref: turn_030
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'For the next handoff: Paper stock for the premium edition is on allocation. For context,
+      the venue banner sizes changed after the site walk. The current workspace also says proofs for the
+      second brochure edition are due back on Friday. Delivery to the regional offices is staggered over
+      two weeks. Operations and finance are reviewing the remaining vendor questions, timing, and project
+      dependencies before circulating the next handoff. I have left the earlier version attached for comparison.
+      The next handoff is due later today.'
+  - ref: turn_031
+    actor_id: campaign_lead
+    speaker: Campaign Lead
+    content: The launch checklist review is on Monday afternoon.
+  - ref: turn_032
+    actor_id: campaign_lead
+    speaker: Campaign Lead
+    content: The launch checklist review is on Monday afternoon.
+  - ref: turn_033
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A print invoice from the spring campaign is waiting for a purchase order reference.
+  - ref: turn_034
+    actor_id: mailroom
+    speaker: Mailroom
+    content: Bulk deliveries need a booked slot at the rear entrance.
+  - ref: turn_035
+    actor_id: brand_team
+    speaker: Brand Team
+    content: The revised colour palette applies to all launch materials.
+  - ref: turn_036
+    actor_id: compliance
+    speaker: Compliance
+    content: 'Quick update: The design team is finalizing the regional variants. For context, proofs for
+      the second brochure edition are due back on Friday. The current workspace also says the venue banner
+      sizes changed after the site walk. Paper stock for the premium edition is on allocation. Operations
+      and finance are reviewing the remaining vendor questions, timing, and project dependencies before
+      circulating the next handoff. I have left the earlier version attached for comparison. The next
+      handoff is due later today.'
+- ref: block_03
+  title: Formal narrowing of the exception
+  ended_at: '2026-04-03T18:00:00Z'
+  turns:
+  - ref: turn_039
+    actor_id: communications
+    speaker: Communications
+    content: Press kits will ship with the first brochure batch.
+  - ref: turn_040
+    actor_id: compliance
+    speaker: Compliance
+    content: Print orders placed outside the marketing services framework require an active exception.
+  - ref: turn_041
+    actor_id: records_management
+    speaker: Records Management
+    content: Artwork approvals will be archived with the campaign folder.
+  - ref: turn_042
+    actor_id: facilities
+    speaker: Facilities
+    content: Storage for pallets of printed material is limited to the ground-floor room.
+  - ref: turn_064
+    actor_id: compliance
+    speaker: Compliance
+    content: fyi - Delivery to the regional offices is staggered over two weeks. For context, the launch
+      date is fixed by the trade show calendar. The current workspace also says the design team is finalizing
+      the regional variants. Paper stock for the premium edition is on allocation. Owners are checking
+      the quantities and delivery sequence against the current quote, with any corrections due before
+      the next project checkpoint. No reply needed unless your numbers differ.
+  - ref: turn_069
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Quick update: The venue banner sizes changed after the site walk. For context, paper stock
+      for the premium edition is on allocation. The current workspace also says the launch date is fixed
+      by the trade show calendar. The design team is finalizing the regional variants. Owners are checking
+      the quantities and delivery sequence against the current quote, with any corrections due before
+      the next project checkpoint. No reply needed unless your numbers differ.'
+  - ref: turn_037
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    content: I narrow auth_print so its allowed categories are now only brochures. large_format_banners
+      is removed. The maximum is reduced to USD 3,000, and the authorization is now valid until 2026-05-06T00:00:00Z
+      exclusive. All other authorization fields remain unchanged.
+  - ref: turn_038
+    actor_id: marketing_procurement
+    speaker: Marketing Procurement
+    content: Understood. The current category list is brochures only.
+  - ref: turn_043
+    actor_id: compliance
+    speaker: Compliance
+    content: 'For the next handoff: Delivery to the regional offices is staggered over two weeks. For
+      context, proofs for the second brochure edition are due back on Friday. The current workspace also
+      says the design team is finalizing the regional variants. The venue banner sizes changed after the
+      site walk. The team is walking through delivery dates, quantities, and handoffs today so the next
+      version of the schedule and cost sheet use the same assumptions. Please flag any mismatch in the
+      shared folder. The next handoff is due later today.'
+  - ref: turn_044
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'Small correction: The launch date is fixed by the trade show calendar. For context, delivery
+      to the regional offices is staggered over two weeks. The current workspace also says proofs for
+      the second brochure edition are due back on Friday. Paper stock for the premium edition is on allocation.
+      The team is walking through delivery dates, quantities, and handoffs today so the next version of
+      the schedule and cost sheet use the same assumptions. Please flag any mismatch in the shared folder.
+      The next handoff is due later today.'
+  - ref: turn_045
+    actor_id: compliance
+    speaker: Compliance
+    content: Print orders placed outside the marketing services framework require an active exception.
+  - ref: turn_046
+    actor_id: brand_team
+    speaker: Brand Team
+    content: The revised colour palette applies to all launch materials.
+  - ref: turn_047
+    actor_id: compliance
+    speaker: Compliance
+    content: 'Small correction: Paper stock for the premium edition is on allocation. For context, the
+      venue banner sizes changed after the site walk. The current workspace also says proofs for the second
+      brochure edition are due back on Friday. Delivery to the regional offices is staggered over two
+      weeks. Owners are reconciling the dates, quantities, delivery constraints, and open vendor questions
+      before the afternoon review. The ops team is using this for today''s plan. The next handoff is due
+      later today.'
+  - ref: turn_048
+    actor_id: communications
+    speaker: Communications
+    content: Press kits will ship with the first brochure batch.
+- ref: block_04
+  title: Post-change operations and purchase handoff
+  ended_at: '2026-04-13T18:00:00Z'
+  turns:
+  - ref: turn_070
+    actor_id: compliance
+    speaker: Compliance
+    content: fyi - The launch date is fixed by the trade show calendar. For context, paper stock for the
+      premium edition is on allocation. The current workspace also says delivery to the regional offices
+      is staggered over two weeks. Proofs for the second brochure edition are due back on Friday. Owners
+      are reconciling the dates, quantities, delivery constraints, and open vendor questions before the
+      afternoon review. The ops team is using this for today's plan. The next handoff is due later today.
+  - ref: turn_065
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'For the next handoff: Delivery to the regional offices is staggered over two weeks. For
+      context, the design team is finalizing the regional variants. The current workspace also says the
+      venue banner sizes changed after the site walk. Paper stock for the premium edition is on allocation.
+      Owners are checking the quantities and delivery sequence against the current quote, with any corrections
+      due before the next project checkpoint. No reply needed unless your numbers differ.'
+  - ref: turn_049
+    actor_id: mailroom
+    speaker: Mailroom
+    content: Bulk deliveries need a booked slot at the rear entrance.
+  - ref: turn_050
+    actor_id: communications
+    speaker: Communications
+    content: Press kits will ship with the first brochure batch.
+  - ref: turn_051
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Print invoices should separate design, print, and delivery costs.
+  - ref: turn_052
+    actor_id: records_management
+    speaker: Records Management
+    content: Artwork approvals will be archived with the campaign folder.
+  - ref: turn_053
+    actor_id: records_management
+    speaker: Records Management
+    content: Artwork approvals will be archived with the campaign folder.
+  - ref: turn_054
+    actor_id: regional_office
+    speaker: Regional Office
+    content: The Midlands office needs its banners a week earlier than planned.
+  - ref: turn_055
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Ticket note: Paper stock for the premium edition is on allocation. For context, the design
+      team is finalizing the regional variants. The current workspace also says proofs for the second
+      brochure edition are due back on Friday. The launch date is fixed by the trade show calendar. Operations
+      and finance are reviewing the remaining vendor questions, timing, and project dependencies before
+      circulating the next handoff. I have left the earlier version attached for comparison. The next
+      handoff is due later today.'
+  - ref: turn_056
+    actor_id: events_procurement
+    speaker: Events Procurement
+    content: 'Small correction: Proofs for the second brochure edition are due back on Friday. For context,
+      the launch date is fixed by the trade show calendar. The current workspace also says paper stock
+      for the premium edition is on allocation. The design team is finalizing the regional variants. The
+      team is walking through delivery dates, quantities, and handoffs today so the next version of the
+      schedule and cost sheet use the same assumptions. Please flag any mismatch in the shared folder.
+      The next handoff is due later today.'
+  - ref: turn_057
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A print invoice from the spring campaign is waiting for a purchase order reference.
+  - ref: turn_058
+    actor_id: compliance
+    speaker: Compliance
+    content: Print orders placed outside the marketing services framework require an active exception.
+  - ref: turn_059
+    actor_id: brand_team
+    speaker: Brand Team
+    content: The revised colour palette applies to all launch materials.
+  - ref: turn_060
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Latest from the workspace: Delivery to the regional offices is staggered over two weeks.
+      For context, the launch date is fixed by the trade show calendar. The current workspace also says
+      paper stock for the premium edition is on allocation. The venue banner sizes changed after the site
+      walk. Operations and finance are reviewing the remaining vendor questions, timing, and project dependencies
+      before circulating the next handoff. I have left the earlier version attached for comparison. The
+      next handoff is due later today.'
+events:
+- ref: event_issue
+  event_type: issue
+  issuer: chief_financial_officer
+  block_ref: block_01
+  effective_at: '2026-03-14T12:00:00Z'
+  authorization_ref: auth_print
+  source_turn_refs:
+  - turn_011
+  record:
+    authorization_ref: auth_print
+    issuer: chief_financial_officer
+    grantee: marketing_procurement
+    effect: permit_exception
+    action: submit_order
+    vendor: PressLane
+    allowed_categories:
+    - brochures
+    - large_format_banners
+    max_amount: 6000
+    currency: USD
+    valid_from: '2026-03-19T00:00:00Z'
+    valid_until: '2026-08-16T00:00:00Z'
+    status: active
+    source_turn_refs:
+    - turn_011
+- ref: event_patch
+  event_type: patch
+  issuer: chief_financial_officer
+  block_ref: block_03
+  effective_at: '2026-04-03T12:00:00Z'
+  authorization_ref: auth_print
+  source_turn_refs:
+  - turn_037
+  patch:
+    allowed_categories:
+    - brochures
+    max_amount: 3000
+    valid_until: '2026-05-06T00:00:00Z'
+probe_pairs:
+- ref: amount
+  dimension: amount
+  in_scope:
+    grantee: marketing_procurement
+    action: submit_order
+    vendor: PressLane
+    category: brochures
+    amount: 2400
+    currency: USD
+    action_time: '2026-04-15T12:00:00Z'
+  out_of_scope:
+    grantee: marketing_procurement
+    action: submit_order
+    vendor: PressLane
+    category: brochures
+    amount: 4500
+    currency: USD
+    action_time: '2026-04-15T12:00:00Z'
+- ref: time
+  dimension: time
+  in_scope:
+    grantee: marketing_procurement
+    action: submit_order
+    vendor: PressLane
+    category: brochures
+    amount: 2400
+    currency: USD
+    action_time: '2026-04-15T12:00:00Z'
+  out_of_scope:
+    grantee: marketing_procurement
+    action: submit_order
+    vendor: PressLane
+    category: brochures
+    amount: 2400
+    currency: USD
+    action_time: '2026-05-07T12:00:00Z'
+- ref: category
+  dimension: category
+  in_scope:
+    grantee: marketing_procurement
+    action: submit_order
+    vendor: PressLane
+    category: brochures
+    amount: 2400
+    currency: USD
+    action_time: '2026-04-15T12:00:00Z'
+  out_of_scope:
+    grantee: marketing_procurement
+    action: submit_order
+    vendor: PressLane
+    category: large_format_banners
+    amount: 2400
+    currency: USD
+    action_time: '2026-04-15T12:00:00Z'
+tags:
+- print
+- generated
+- gap_2
+- stale_0

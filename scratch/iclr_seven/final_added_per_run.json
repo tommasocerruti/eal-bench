@@ -1,0 +1,13 @@
+{
+ "agg": {
+  "final_memories": 216,
+  "final_not_exact": 155,
+  "final_status_not_exact": 0,
+  "final_status_n": 0
+ },
+ "status": {
+  "no_change": 634,
+  "accepted": 1534,
+  "retained_after_failed_update": 52
+ }
+}

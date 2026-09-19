@@ -13,7 +13,8 @@ defaults:
   log_path: logs/calls.jsonl
   batch_size: 20          # llm.batch() runs this many calls in parallel per wave
   max_concurrency: 20     # hard cap on calls in flight per provider/target route
-  max_retries: 3          # direct client: max task attempts incl. initial; SDK retries separate
+  max_retries: 10         # direct client: max task attempts incl. initial (exponential backoff, 30 s cap); SDK retries separate.
+                          # 8 so that a burst of 429s under several concurrent drivers is retried instead of reaching the trial.
 
 providers:
   openai:
@@ -39,6 +40,7 @@ model_targets:
     model: deepseek
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
+    rate_limit: {rpm: 15}   # per process; several drivers share this endpoint (about 100 rpm total)
   glm_baseten:
     provider: baseten
     model: glm
@@ -49,16 +51,19 @@ model_targets:
     model: zai-org/GLM-5.2
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
+    rate_limit: {rpm: 45}   # per process; several drivers share this endpoint (about 100 rpm total)
   kimi_baseten:
     provider: baseten
     model: moonshotai/Kimi-K2.6
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
+    rate_limit: {rpm: 45}   # per process; several drivers share this endpoint (about 100 rpm total)
   gptoss_baseten:
     provider: baseten
     model: gptoss
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
+    rate_limit: {rpm: 15}   # per process; several drivers share this endpoint (about 100 rpm total)
   nemotron_baseten:
     provider: baseten
     model: nemotron
@@ -69,6 +74,7 @@ model_targets:
     model: nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
+    rate_limit: {rpm: 45}   # per process; several drivers share this endpoint (about 100 rpm total)
   gptoss_openrouter:
     provider: openrouter
     model: openai/gpt-oss-120b
@@ -94,11 +100,53 @@ model_targets:
     model: x-ai/grok-4.3
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
+    rate_limit: {rpm: 30}   # per process; three parallel streams, 90 rpm in all
   qwen_plus_0728_openrouter:
     provider: openrouter
     model: qwen/qwen-plus-2025-07-28
     capabilities: [native_tools, forced_tool_choice, seed]
     max_concurrency: 20
+    rate_limit: {rpm: 8}   # per process; ten parallel streams, at most 80 rpm in all. The provider returned TooManyRequests at about 90 rpm across eight processes
+  glm_5_3_baseten:
+    provider: baseten
+    model: zai-org/GLM-5.3
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+    rate_limit: {rpm: 40}   # per process; executor baseline runs and the judges share this endpoint
+    request_parameters:
+      max_tokens: 32768   # reasons inside the completion; 4096 truncates its PatchDoc calls
+  kimi_k3_baseten:
+    provider: baseten
+    model: moonshotai/Kimi-K3
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+  deepseek_v4_flash_baseten:
+    provider: baseten
+    model: deepseek-ai/DeepSeek-V4-Flash-0731
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+  deepseek_v4_1_flash_baseten:
+    provider: baseten
+    model: deepseek-ai/DeepSeek-V4.1-Flash
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+    rate_limit: {rpm: 25}   # per process; the endpoint sustained ~130 rpm and rejected the excess, so keep the sum of running drivers near 100
+    request_parameters:
+      max_tokens: 16384   # its PatchDoc calls on finance and cybersecurity profiles run past 4096 ("Tool calls cutoff by max_tokens")
+  glm_5_3_flash_baseten:
+    provider: baseten
+    model: zai-org/GLM-5.3-Flash
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+  inkling_baseten:
+    provider: baseten
+    model: thinkingmachines/inkling
+    capabilities: [native_tools, forced_tool_choice, seed]
+    max_concurrency: 20
+    rate_limit: {rpm: 45}   # per process; several drivers share this endpoint (about 100 rpm total)
+    request_parameters:
+      max_tokens: 32768   # reasons inside the completion; 4096 truncates its PatchDoc calls
+
 tasks:
   # A task selects its default route by target ID. Calls can override it with
   # `target=`, including a target on a different provider.

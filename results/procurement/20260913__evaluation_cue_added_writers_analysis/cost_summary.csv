@@ -1,0 +1,15 @@
+calls,calls_missing_usage,cue_level,error_calls,estimated_cost_usd,historical_call_records_excluded,input_tokens,nonexecutor_replay_call_records_excluded,output_tokens,pricing_basis,provider_reported_cost_usd,rate_derived_cost_usd,stage,target_id,task,unpriced_calls
+0,0,l0,0,0.0,0,0,0,0,historical_l0_reused_at_zero_e1_cost,0.0,0.0,executor,reused,reused_baseline,0
+576,0,l1,0,3.271078199999997,,786492,,546719,frozen_e1_plan_2026-08-15,0.0,3.271078199999997,executor,deepseek_baseten,executor,0
+576,0,l1,0,0.16543480000000005,,599668,,210936,frozen_e1_plan_2026-08-15,0.0,0.16543480000000005,executor,gptoss_baseten,executor,0
+576,0,l2,0,3.076020720000003,,793980,,486924,frozen_e1_plan_2026-08-15,0.0,3.076020720000003,executor,deepseek_baseten,executor,0
+576,0,l2,0,0.16969659999999998,,607156,,217962,frozen_e1_plan_2026-08-15,0.0,0.16969659999999998,executor,gptoss_baseten,executor,0
+1728,0,l0,0,0.4918273000000001,,1798368,,623981,frozen_e1_plan_2026-08-15,0.0,0.4918273000000001,writer,gptoss_baseten,executor,0
+579,3,l0,3,0.0,,2517906,,380781,frozen_e1_plan_2026-08-15,0.0,0.0,writer,deepseek_v4_1_flash_baseten,writer,576
+648,6,l0,6,0.0,,2481468,,1485258,frozen_e1_plan_2026-08-15,0.0,0.0,writer,inkling_baseten,writer,642
+1728,0,l1,0,0.4890219,,1773774,,623289,frozen_e1_plan_2026-08-15,0.0,0.4890219,writer,gptoss_baseten,executor,0
+582,3,l1,3,0.0,,2551846,,376758,frozen_e1_plan_2026-08-15,0.0,0.0,writer,deepseek_v4_1_flash_baseten,writer,579
+665,6,l1,6,0.0,,2517550,,1461762,frozen_e1_plan_2026-08-15,0.0,0.0,writer,inkling_baseten,writer,659
+1728,0,l2,0,0.4883939999999999,,1787400,,619308,frozen_e1_plan_2026-08-15,0.0,0.4883939999999999,writer,gptoss_baseten,executor,0
+587,4,l2,4,0.0,,2565558,,388746,frozen_e1_plan_2026-08-15,0.0,0.0,writer,deepseek_v4_1_flash_baseten,writer,583
+636,5,l2,5,0.0,,2415279,,1296213,frozen_e1_plan_2026-08-15,0.0,0.0,writer,inkling_baseten,writer,631

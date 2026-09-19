@@ -1,0 +1,60 @@
+{
+  "analysis_module": "analysis.writer_ttc",
+  "created_at": "2026-08-15",
+  "files": {
+    "REPORT.md": {
+      "sha256": "1fd8ca316a8379768e0d890d253d322e9667255470503c9df61372a48eb513cf"
+    },
+    "behavior_by_condition.csv": {
+      "sha256": "80d1949bb7de142b467297a0e6607c7ccdf66e93fdbcbc0244aed8c0c8bf76f6"
+    },
+    "candidate_diversity_summary.csv": {
+      "sha256": "1725cfe53670091beb2c2371b09ee8cdc8916b2bf6cfb95ec0fcc9ad773497ca"
+    },
+    "cost_by_stage.csv": {
+      "sha256": "5da153e3ed3c66bb00c3e5bb2903e1cf5ddb0b3a0023a1cf989c01f497746f67"
+    },
+    "incremental_mechanisms.csv": {
+      "sha256": "de0a8ce3cb48ff01df3edaa8a298dc9548a3dadf39123e0cef3c444e2d81becb"
+    },
+    "nested_pool_validation.csv": {
+      "sha256": "5e87d705dbdd49d2c68c220adac21e5f8777665b5ff6b543ea3f4113f773c8f0"
+    },
+    "selection_scaling.csv": {
+      "sha256": "7e11551ba8ef1e736f9a55396e97eddc34d57be3f6e5d438b8943ff68c7415d3"
+    },
+    "summary.json": {
+      "sha256": "c6fdf96b59aa35c6ce0c7766f35cbe7fea66bf973cbc4f1f14d111a51b3d941f"
+    },
+    "typed_fidelity_by_condition.csv": {
+      "sha256": "aa0be362fd2dcf70f7b83c875e73400435b4ed8a0cd3339a291190d3594db2cb"
+    },
+    "typed_memory_observations.csv": {
+      "sha256": "2f962b92c42a6490a0f35bf04bf23f74440cfc44f7e8e719b411428b2ce7aaaa"
+    }
+  },
+  "model_calls": 0,
+  "schema_version": "procurement_writer_ttc_v3",
+  "sources": [
+    {
+      "k": 1,
+      "manifest_sha256": "89d09af2392cf1f112bb45337c83a597040c2597e6e80cefc72fdd55f2d3ede5",
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260912-182648-422469__authorization-memory-writer__paper-writer-s20260719-procurement-deepseek_v4_1_flash"
+    },
+    {
+      "k": 2,
+      "manifest_sha256": "95731bedc81eaaa1bd4408d936119bbfe518307c09b37a5d317c05637e9e7c7c",
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-120530-925993__authorization-memory-writer_ttc__procurement-v1-deepseek_v4_1_flash-ttc-k2"
+    },
+    {
+      "k": 4,
+      "manifest_sha256": "9d9a10db446efef20228af2379b1d006f9bd681059aaa5b27ad9760b29e8b43e",
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-123509-521578__authorization-memory-writer_ttc__procurement-v1-deepseek_v4_1_flash-ttc-k4"
+    },
+    {
+      "k": 8,
+      "manifest_sha256": "ebd415183e94a694bb630ff26d0ded58453f532f318619e7e1a7724333c36b8c",
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913-131641-538217__authorization-memory-writer_ttc__procurement-v1-deepseek_v4_1_flash-ttc-k8"
+    }
+  ]
+}
