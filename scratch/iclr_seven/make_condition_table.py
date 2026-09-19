@@ -32,6 +32,8 @@ for k, lab in DESIGNS:
     rows.append((lab, {d: (D[d][k]["ua"], D[d][k]["la"]) for d in DOMS}))
 for lab, v in rows:
     v["average"] = (sum(v[d][0] for d in DOMS) / 3, sum(v[d][1] for d in DOMS) / 3)
+rows = sorted(rows[:4], key=lambda r: r[1]["average"][0]) + sorted(rows[4:], key=lambda r: r[1]["average"][0])  # lowest average UA first within each block
+print("row order:", [lab for lab, _ in rows])
 cols = DOMS + ["average"]
 best_ua = {c: min(v[c][0] for _, v in rows) for c in cols}
 best_la = {c: max(v[c][1] for _, v in rows) for c in cols}
@@ -94,6 +96,9 @@ for name in ("extension_mitigations_appendix.tex", "extension_results_appendix.t
     if "fig:memory-design-across-domains" in tt:
         wr(name, tt.replace("Figure~" + B + "ref{fig:memory-design-across-domains}", "Table~" + B + "ref{tab:memory-design-across-domains}")); print("refs changed in", name)
 
+import sys
+if "--table-only" in sys.argv:
+    print("table only"); sys.exit(0)
 # Table 34: typed-incremental cells from Table 4
 t4 = {d: (100 * S[f"{d}|incremental_typed"]["us_k"] / S[f"{d}|incremental_typed"]["us_n"], 100 * S[f"{d}|incremental_typed"]["au_k"] / S[f"{d}|incremental_typed"]["au_n"]) for d in DOMS}
 pk = sum(S[f"{d}|incremental_typed"]["us_k"] for d in DOMS); pn = sum(S[f"{d}|incremental_typed"]["us_n"] for d in DOMS)
