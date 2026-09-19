@@ -32,8 +32,7 @@ for k, lab in DESIGNS:
     rows.append((lab, {d: (D[d][k]["ua"], D[d][k]["la"]) for d in DOMS}))
 for lab, v in rows:
     v["average"] = (sum(v[d][0] for d in DOMS) / 3, sum(v[d][1] for d in DOMS) / 3)
-rows = sorted(rows[:4], key=lambda r: r[1]["average"][0]) + sorted(rows[4:], key=lambda r: r[1]["average"][0])  # lowest average UA first within each block
-print("row order:", [lab for lab, _ in rows])
+print("row order:", [lab for lab, _ in rows])  # the paper's conventional order
 cols = DOMS + ["average"]
 best_ua = {c: min(v[c][0] for _, v in rows) for c in cols}
 best_la = {c: max(v[c][1] for _, v in rows) for c in cols}
