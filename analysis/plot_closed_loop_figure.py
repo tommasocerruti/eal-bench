@@ -114,13 +114,13 @@ def main() -> None:
     rng = random.Random(BOOTSTRAP_SEED)
 
     plt.rcParams.update({
-        "font.family": "DejaVu Sans", "font.size": 7.5, "axes.titlesize": 8.5, "axes.labelsize": 7.5,
-        "xtick.labelsize": 7, "ytick.labelsize": 7, "legend.fontsize": 6.7, "axes.linewidth": 0.7,
+        "font.family": "DejaVu Sans", "mathtext.fontset": "dejavusans", "font.size": 10, "axes.titlesize": 10.5, "axes.labelsize": 10,
+        "xtick.labelsize": 9.5, "ytick.labelsize": 9.5, "legend.fontsize": 9.5, "axes.linewidth": 0.7,
         "lines.linewidth": 1.3, "lines.markersize": 4.5, "pdf.fonttype": 42, "ps.fonttype": 42,
         "savefig.facecolor": "white", "figure.facecolor": "white",
     })
     fig = plt.figure(figsize=(7.5, 2.85))
-    outer = fig.add_gridspec(1, 3, wspace=0.32, left=0.075, right=0.99, top=0.86, bottom=0.17)
+    outer = fig.add_gridspec(1, 3, wspace=0.34, left=0.085, right=0.99, top=0.88, bottom=0.24)
     table_rows = []
     for col, dom in enumerate(DOMAINS):
         inner = outer[col].subgridspec(2, 1, height_ratios=[1.0, 1.0], hspace=0.12)
@@ -141,7 +141,7 @@ def main() -> None:
             series(ax_bot, rounds, us, arm, label)
         style_axis(ax_top, show_xlabel=False)
         style_axis(ax_bot, show_xlabel=True)
-        ax_top.set_title(r"$\bf{" + "ABC"[col] + "}$  " + DOMAIN_TITLE[dom], loc="left", fontsize=9, pad=4)
+        ax_top.set_title(r"$\bf{" + "ABC"[col] + "}$  " + DOMAIN_TITLE[dom], loc="left", fontsize=10.5, pad=4)
         ax_top.set_ylim(30, 102)
         ax_top.set_yticks([40, 60, 80, 100])
         ax_bot.set_ylim(0, 50)
@@ -149,12 +149,12 @@ def main() -> None:
         ax_top.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"{v:.0f}%"))
         ax_bot.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"{v:.0f}%"))
         ax_bot.set_xticks(rounds)
-        ax_bot.set_xticklabels(["open loop" if r == 0 else f"round {r}" for r in rounds])
+        ax_bot.set_xticklabels(["open" + chr(10) + "loop" if r == 0 else "round" + chr(10) + str(r) for r in rounds])
         pass
         if col == 0:
             ax_top.set_ylabel("Legitimate\naction rate")
             ax_bot.set_ylabel("Unauthorized\naction rate")
-            ax_top.legend(frameon=False, loc="lower left", handlelength=1.8)
+            fig.legend(*ax_top.get_legend_handles_labels(), frameon=False, loc="lower center", ncol=2, handlelength=1.8, bbox_to_anchor=(0.5, -0.02))
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out.with_suffix(".pdf"), bbox_inches="tight")

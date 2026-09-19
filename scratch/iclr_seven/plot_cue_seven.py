@@ -41,8 +41,8 @@ EXECUTOR_NAMES = {
     "deepseek_baseten": "DeepSeek V4 Pro",
 }
 CONTRAST_LABELS = {
-    "l1-l0": "Generic cue\nL1 - L0",
-    "l2-l1": "Specific increment\nL2 - L1",
+    "l1-l0": "Generic\nL1 - L0",
+    "l2-l1": "Specific\nL2 - L1",
 }
 BLUE = "#0072B2"
 VERMILLION = "#D55E00"
@@ -239,12 +239,13 @@ def _configure_matplotlib() -> Any:
     plt.rcParams.update(
         {
             "font.family": "DejaVu Sans",
-            "font.size": 7.5,
-            "axes.titlesize": 9.0,
-            "axes.labelsize": 7.7,
-            "xtick.labelsize": 7.0,
-            "ytick.labelsize": 7.0,
-            "legend.fontsize": 6.7,
+            "mathtext.fontset": "dejavusans",
+            "font.size": 9.5,
+            "axes.titlesize": 10,
+            "axes.labelsize": 9,
+            "xtick.labelsize": 8.5,
+            "ytick.labelsize": 8.5,
+            "legend.fontsize": 9,
             "axes.linewidth": 0.7,
             "pdf.fonttype": 42,
             "ps.fonttype": 42,
@@ -414,7 +415,7 @@ def _plot_main(
         right=0.992,
         bottom=0.20,
         top=0.82,
-        wspace=0.43,
+        wspace=0.62,
     )
     ax_a = fig.add_subplot(outer[0])
     panel_b = outer[1].subgridspec(2, 1, hspace=0.12)
@@ -432,12 +433,12 @@ def _plot_main(
 
     _style_distribution_axis(
         ax_a,
-        ylabel="Fewer authorization errors\n(percentage points)",
+        ylabel="Fewer authorization\nerrors (pp)",
         show_xlabels=True,
         values=[float(row["estimate_pp"]) for row in fidelity],
     )
     _draw_distribution(ax_a, fidelity)
-    ax_a.set_title(r"$\bf{A}$  Writer: memory fidelity", loc="left", fontsize=9, pad=8)
+    ax_a.set_title(r"$\bf{A}$  Writer: memory fidelity", loc="left", fontsize=10, pad=8)
 
     _style_distribution_axis(
         ax_b_top,
@@ -454,7 +455,7 @@ def _plot_main(
     _draw_distribution(ax_b_top, writer_authorized)
     _draw_distribution(ax_b_bottom, writer_unauthorized)
     ax_b_top.tick_params(axis="x", labelbottom=False)
-    ax_b_top.set_title(r"$\bf{B}$  Writer: downstream behavior", loc="left", fontsize=9, pad=8)
+    ax_b_top.set_title(r"$\bf{B}$  Writer: downstream behavior", loc="left", fontsize=10, pad=8)
 
     _style_distribution_axis(
         ax_c_top,
@@ -482,7 +483,7 @@ def _plot_main(
     bottom_legend = ax_c_bottom.get_legend()
     if bottom_legend is not None:
         bottom_legend.remove()
-    ax_c_top.set_title(r"$\bf{C}$  Executor: downstream behavior", loc="left", fontsize=9, pad=8)
+    ax_c_top.set_title(r"$\bf{C}$  Executor: downstream behavior", loc="left", fontsize=10, pad=8)
     fig.savefig(
         output_pdf,
         format="pdf",
@@ -535,8 +536,8 @@ def _style_forest_axis(
     bound = limit or _nice_symmetric_limit(rows)
     ax.set_xlim(-bound, bound)
     ax.xaxis.set_major_locator(MaxNLocator(nbins=5, symmetric=True))
-    ax.set_xlabel("Improvement (percentage points)")
-    ax.set_title(r"$\bf{" + letter + "}$  " + title, loc="left", fontsize=9, pad=8)
+    ax.set_xlabel("Improvement (pp)")
+    ax.set_title(r"$\bf{" + letter + "}$  " + title, loc="left", fontsize=10, pad=8)
 
 
 def _draw_forest(
@@ -616,7 +617,7 @@ def _plot_writer_fidelity(
         ("writer_exact_memory", "More exact memories"),
     )
     fig, axes = plt.subplots(1, 2, figsize=(7.5, 2.75))
-    fig.subplots_adjust(left=0.15, right=0.985, bottom=0.24, top=0.82, wspace=0.30)
+    fig.subplots_adjust(left=0.15, right=0.985, bottom=0.30, top=0.82, wspace=0.30)
     for index, (key, title) in enumerate(panels):
         rows = data[key]
         _style_forest_axis(
@@ -656,7 +657,7 @@ def _plot_writer_behavior(
         ("writer_paired_discrimination", "Paired discrimination"),
     )
     fig, axes = plt.subplots(1, 3, figsize=(7.5, 2.75))
-    fig.subplots_adjust(left=0.15, right=0.99, bottom=0.24, top=0.82, wspace=0.32)
+    fig.subplots_adjust(left=0.15, right=0.99, bottom=0.30, top=0.82, wspace=0.32)
     for index, (key, title) in enumerate(panels):
         rows = data[key]
         _style_forest_axis(
@@ -702,7 +703,7 @@ def _plot_executor_behavior(
     fig.subplots_adjust(
         left=0.15,
         right=0.99,
-        bottom=0.17,
+        bottom=0.20,
         top=0.86,
         hspace=0.52,
         wspace=0.32,
@@ -732,7 +733,7 @@ def _plot_executor_behavior(
                     rotation=90,
                     va="center",
                     ha="center",
-                    fontsize=8.0,
+                    fontsize=9.5,
                     fontweight="bold",
                 )
     fig.legend(

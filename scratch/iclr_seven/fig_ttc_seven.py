@@ -102,26 +102,26 @@ def draw(ax, y, ci, color, marker, label, ls="-"):
     ax.errorbar(list(x), y, yerr=[lo, hi], color=color, marker=marker, linestyle=ls, capsize=2.5, linewidth=1.2, markersize=4.5, label=label, zorder=3)
 
 
-plt.rcParams.update({"font.family": "serif", "font.serif": ["Times New Roman", "STIXGeneral", "DejaVu Serif"], "font.size": 8,
+plt.rcParams.update({"font.family": "DejaVu Sans", "mathtext.fontset": "dejavusans", "font.size": 9.5, "axes.labelsize": 9.5, "xtick.labelsize": 9, "ytick.labelsize": 9,
                      "axes.spines.top": False, "axes.spines.right": False, "savefig.bbox": "tight", "pdf.fonttype": 42})
 fig = plt.figure(figsize=(7.2, 2.5))
-gs = fig.add_gridspec(2, 3, height_ratios=[1, 1], hspace=0.12, wspace=0.42)
+gs = fig.add_gridspec(2, 3, height_ratios=[1, 1], hspace=0.12, wspace=0.55)
 a_top = fig.add_subplot(gs[0, 0]); a_bot = fig.add_subplot(gs[1, 0], sharex=a_top)
 b = fig.add_subplot(gs[:, 1]); c = fig.add_subplot(gs[:, 2])
 draw(a_top, au, au_ci, BLUE, "o", "Legitimate action rate")
 draw(a_bot, us, us_ci, ORANGE, "s", "Targeted unauthorized action rate", ls="--")
 a_top.set_ylim(88, 100); a_top.set_yticks([90, 95, 100]); a_bot.set_ylim(0, 20); a_bot.set_yticks([0, 10, 20])
 a_top.set_ylabel("Legitimate\naction rate"); a_bot.set_ylabel("Unauthorized\naction rate")
-a_top.tick_params(labelbottom=False); a_top.set_title(r"$\bf{A}$  Downstream behavior", loc="left", fontsize=9)
+a_top.tick_params(labelbottom=False); a_top.set_title(r"$\bf{A}$  Downstream behavior", loc="left", fontsize=10)
 draw(b, avail, avail_ci, BLUE, "o", "Exact memory in pool")
 draw(b, selfsel, self_ci, ORANGE, "s", "Writer self-review selects it", ls="--")
 draw(b, indep, indep_ci, GRAY, "^", "Independent review selects it", ls=":")
-b.set_ylim(0, 65); b.set_ylabel("Exact-memory rate"); b.set_title(r"$\bf{B}$  Generation vs. selection", loc="left", fontsize=9)
-b.legend(frameon=False, fontsize=6.8, loc="lower right")
+b.set_ylim(0, 75); b.set_ylabel("Exact-memory rate"); b.set_title(r"$\bf{B}$  Generation vs. selection", loc="left", fontsize=10)
+b.legend(frameon=False, fontsize=8, loc="upper left")
 draw(c, final_err, final_ci, BLUE, "o", "Final-state error")
 draw(c, intro, intro_ci, ORANGE, "s", "Error introduction", ls="--")
-c.set_ylim(0, 80); c.set_ylabel("Error rate"); c.set_title(r"$\bf{C}$  Incremental typed memory", loc="left", fontsize=9)
-c.legend(frameon=False, fontsize=6.8, loc="upper right")
+c.set_ylim(0, 100); c.set_ylabel("Error rate"); c.set_title(r"$\bf{C}$  Incremental typed memory", loc="left", fontsize=10)
+c.legend(frameon=False, fontsize=8, loc="upper right")
 for ax in (a_bot, b, c):
     ax.set_xticks(range(len(K))); ax.set_xticklabels([f"k={k}" for k in K]); ax.set_xlabel("Writer candidates")
 for ax in (a_top, a_bot, b, c):

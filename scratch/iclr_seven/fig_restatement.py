@@ -27,7 +27,7 @@ def wilson(k, n, z=1.96):
     return 100 * max(0.0, c - h), 100 * min(1.0, c + h)
 
 
-plt.rcParams.update({"font.family": "serif", "font.serif": ["Times New Roman", "STIXGeneral", "DejaVu Serif"], "font.size": 8,
+plt.rcParams.update({"font.family": "DejaVu Sans", "mathtext.fontset": "dejavusans", "font.size": 9.5, "axes.labelsize": 9.5, "xtick.labelsize": 9, "ytick.labelsize": 9,
                      "axes.spines.top": False, "axes.spines.right": False, "savefig.bbox": "tight", "pdf.fonttype": 42})
 fig, axes = plt.subplots(1, 3, figsize=(7.2, 2.2))
 x = range(3)
@@ -38,14 +38,14 @@ for arm, color, marker, ls in (("without", "#DD8452", "o", "-"), ("with", "#4C72
     axes[0].errorbar(list(x), y, yerr=[[max(0.0, y[i] - ci[i][0]) for i in x], [max(0.0, ci[i][1] - y[i]) for i in x]], color=color, marker=marker, linestyle=ls, capsize=2.5, linewidth=1.2, markersize=4.5, label=label, zorder=3)
     axes[1].plot(list(x), UA[arm], color=color, marker=marker, linestyle=ls, linewidth=1.2, markersize=4.5, label=label, zorder=3)
     axes[2].plot(list(x), [100 * k / M for k in EXACT[arm]], color=color, marker=marker, linestyle=ls, linewidth=1.2, markersize=4.5, label=label, zorder=3)
-axes[0].set_title(r"$\bf{A}$  False-authority rate", loc="left", fontsize=9); axes[0].set_ylim(0, 22)
-axes[1].set_title(r"$\bf{B}$  Unauthorized action rate", loc="left", fontsize=9); axes[1].set_ylim(0, 22)
-axes[2].set_title(r"$\bf{C}$  Exact memories", loc="left", fontsize=9); axes[2].set_ylim(0, 40)
+axes[0].set_title(r"$\bf{A}$  False-authority rate", loc="left", fontsize=10); axes[0].set_ylim(0, 22)
+axes[1].set_title(r"$\bf{B}$  Unauthorized action rate", loc="left", fontsize=10); axes[1].set_ylim(0, 22)
+axes[2].set_title(r"$\bf{C}$  Exact memories", loc="left", fontsize=10); axes[2].set_ylim(0, 40)
 for ax in axes:
-    ax.set_xticks(list(x)); ax.set_xticklabels(["0", "2", "4"]); ax.set_xlabel("Later restatements of the superseded permission")
+    ax.set_xticks(list(x)); ax.set_xticklabels(["0", "2", "4"]); ax.set_xlabel("Later restatements")
     ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"{v:.0f}%"))
     ax.yaxis.grid(True, color="#dddddd", zorder=0); ax.set_axisbelow(True); ax.set_xlim(-0.3, 2.3)
-axes[0].legend(frameon=False, fontsize=7, loc="upper left")
+axes[1].legend(frameon=False, fontsize=8, loc="upper left")
 fig.tight_layout(w_pad=1.5)
 fig.savefig(OUT + ".pdf"); fig.savefig(OUT + ".png", dpi=200)
 print("restatement figure ok")

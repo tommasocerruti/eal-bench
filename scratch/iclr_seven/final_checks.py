@@ -18,7 +18,7 @@ for i, l in enumerate(lines[:-1]):
         problems.append(f"hanging word: ...{prev[-30:]} -> {t}")
 text = " ".join(re.sub(r"^\s*\d{3,4}\s", "", l).strip() for l in lines)
 for m in re.finditer(r"(?:[.!?]|^)\s+((?:One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|Twelve)\b[^.]{0,50})", text):
-    if "active mandate" not in m.group(1) and "presented as control" not in m.group(1):  # verbatim finance prompt; co-author caption
+    if "active mandate" not in m.group(1) and "presented as" not in m.group(1):  # verbatim finance prompt; co-author caption
         problems.append("number-initial: " + m.group(1))
 for w in re.findall(r"\b(honest\w*|trigger\w*|provenance)\b", text, flags=re.I):
     if w.lower() not in ("triggers", "provenance"):  # verbatim prompt and the PPMF paper title

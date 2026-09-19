@@ -19,7 +19,7 @@ if os.path.exists("scratch/iclr_seven/mechanism.json"):
     ROWS = [(r[0], r[1]) for r in json.load(open("scratch/iclr_seven/mechanism.json", encoding="utf-8"))]
 LABELS = ["Restatement applied", "Own action read as approval", "Authoritative change misapplied", "Update rejected", "Other"]
 COLORS = ["#DD8452", "#C44E52", "#8172B3", "#4C72B0", "#BBBBBB"]
-plt.rcParams.update({"font.family": "serif", "font.serif": ["Times New Roman", "STIXGeneral", "DejaVu Serif"], "font.size": 8,
+plt.rcParams.update({"font.family": "DejaVu Sans", "mathtext.fontset": "dejavusans", "font.size": 8, "axes.labelsize": 8, "xtick.labelsize": 8, "ytick.labelsize": 8,
                      "axes.spines.top": False, "axes.spines.right": False, "savefig.bbox": "tight", "pdf.fonttype": 42})
 fig, ax = plt.subplots(figsize=(5.5, 2.6))
 names = [r[0] for r in ROWS][::-1]
@@ -31,11 +31,11 @@ for j, (lab, col) in enumerate(zip(LABELS, COLORS)):
     ax.barh(range(len(ROWS)), vals, left=left, color=col, label=lab, height=0.66, zorder=3)
     left = [l + v for l, v in zip(left, vals)]
 for i, t in enumerate(totals):
-    ax.text(101, i, f"n = {t:,}", va="center", ha="left", fontsize=7, color="#444444")
+    ax.text(101, i, f"n = {t:,}", va="center", ha="left", fontsize=8, color="#444444")
 ax.set_yticks(range(len(ROWS))); ax.set_yticklabels(names)
 ax.set_xlim(0, 118); ax.set_xticks([0, 25, 50, 75, 100]); ax.set_xticklabels([f"{v}%" for v in (0, 25, 50, 75, 100)])
 ax.set_xlabel("Share of judged failures (majority label of three judges)")
 ax.xaxis.grid(True, color="#dddddd", zorder=0); ax.set_axisbelow(True); ax.tick_params(axis="y", length=0)
-ax.legend(loc="upper center", bbox_to_anchor=(0.42, -0.24), ncol=3, frameon=False, fontsize=7, handlelength=1.2, columnspacing=1.4)
+ax.legend(loc="upper center", bbox_to_anchor=(0.42, -0.24), ncol=3, frameon=False, fontsize=8, handlelength=1.2, columnspacing=1.4)
 fig.savefig(OUT + ".pdf"); fig.savefig(OUT + ".png", dpi=200)
 print("mechanism figure ok")
