@@ -49,6 +49,14 @@ n = 0
 for dom, key in (("procurement", "Procurement"), ("cybersecurity", "Cybersecurity"), ("finance", "Finance"), ("pooled", "pooled")):
     vals = rows[key]
     for i, cond in enumerate(("typed", "hybrid", "rebuild", "instruction")):
+        if cond == "typed":  # Table 34's typed-incremental column is Table 4's cell
+            if dom == "pooled":
+                tk = sum(S[f"{d}|incremental_typed"]["us_k"] for d in ("procurement", "cybersecurity", "finance")); tn = sum(S[f"{d}|incremental_typed"]["us_n"] for d in ("procurement", "cybersecurity", "finance"))
+                lk = sum(S[f"{d}|incremental_typed"]["au_k"] for d in ("procurement", "cybersecurity", "finance")); ln = sum(S[f"{d}|incremental_typed"]["au_n"] for d in ("procurement", "cybersecurity", "finance"))
+                ua, la = 100 * tk / tn, 100 * lk / ln
+            else:
+                s = S[f"{dom}|incremental_typed"]; ua, la = 100 * s["us_k"] / s["us_n"], 100 * s["au_k"] / s["au_n"]
+            check(f"Table34 {dom} typed UA", ua, vals[0]); check(f"Table34 {dom} typed LA", la, vals[1]); n += 2; continue
         check(f"Table34 {dom} {cond} UA", D[dom][cond]["ua"], vals[2 * i]); check(f"Table34 {dom} {cond} LA", D[dom][cond]["la"], vals[2 * i + 1]); n += 2
 print("Fig2 bottom / Fig5 writer-side vs Table 34: checked", n, "cells")
 
@@ -61,8 +69,12 @@ check("Fig5 gate UA", P["gate"][0], m.group(4)); check("Fig5 gate LA", P["gate"]
 t30 = table_block(tex["event_sourcing_appendix.tex"], "tab:event-sourcing-full-behavior")
 m = re.search(B + B + r"textbf\{Pooled\} & " + B + B + r"textbf\{\d+/\d+ \(([0-9.]+)" + B + B + r"%\)\} & " + B + B + r"textbf\{\d+/\d+ \(([0-9.]+)" + B + B + r"%\)\} & " + B + B + r"textbf\{\d+/\d+ \(([0-9.]+)" + B + B + r"%\)\} & " + B + B + r"textbf\{\d+/\d+ \(([0-9.]+)" + B + B + r"%\)\}", t30)
 assert m, "event pooled row"
-check("Fig5 baseline UA", P["baseline"][0], m.group(1)); check("Fig5 event UA", P["event"][0], m.group(2)); check("Fig5 baseline LA", P["baseline"][1], m.group(3)); check("Fig5 event LA", P["event"][1], m.group(4))
-print("Fig5 origin checks vs Tables 27/30: checked 6 cells")
+check("Fig5 event UA", P["event"][0], m.group(2)); check("Fig5 event LA", P["event"][1], m.group(4))
+T4 = json.load(open("scratch/iclr_seven/table4_pooled.json", encoding="utf-8"))["typed_incremental_pooled"]
+tk = sum(S[f"{d}|incremental_typed"]["us_k"] for d in ("procurement", "cybersecurity", "finance")); tn = sum(S[f"{d}|incremental_typed"]["us_n"] for d in ("procurement", "cybersecurity", "finance"))
+lk = sum(S[f"{d}|incremental_typed"]["au_k"] for d in ("procurement", "cybersecurity", "finance")); ln = sum(S[f"{d}|incremental_typed"]["au_n"] for d in ("procurement", "cybersecurity", "finance"))
+check("Fig5 baseline UA vs Table 4", T4[0], 100 * tk / tn); check("Fig5 baseline LA vs Table 4", T4[1], 100 * lk / ln)
+print("Fig5 origin checks vs Tables 27/30 and baseline vs Table 4: checked 6 cells")
 
 # ---- Figure 3 (closed loop) vs Table 22
 cl = list(csv.DictReader(open("results/figures/closed_loop_control.csv", encoding="utf-8")))

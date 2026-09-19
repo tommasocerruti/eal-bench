@@ -11,6 +11,8 @@ PTS = {"baseline": (23.8, 93.4), "gate": (6.3, 54.4), "event": (8.0, 69.2), "ins
 import os, json
 if os.path.exists("scratch/iclr_seven/fig4_points.json"):
     PTS = {k: tuple(v) for k, v in json.load(open("scratch/iclr_seven/fig4_points.json", encoding="utf-8")).items()}
+if os.path.exists("scratch/iclr_seven/table4_pooled.json"):  # baseline = typed incremental memory of Table 4, pooled over domains
+    PTS["baseline"] = tuple(json.load(open("scratch/iclr_seven/table4_pooled.json", encoding="utf-8"))["typed_incremental_pooled"])
 SPEC = {"baseline": ("o", "tab:blue", 8, "Typed incremental", (7, -16, "left")),
         "gate": ("s", "tab:orange", 7, "Source-authority gate", (7, -14, "left")),
         "event": ("s", "tab:green", 7, "Bounded event" + chr(10) + "sourcing", (7, -18, "left")),
