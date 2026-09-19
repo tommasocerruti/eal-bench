@@ -37,7 +37,7 @@ ok = sum(SS[f"{d}|one_shot_typed"]["us_k"] for d in ("procurement", "cybersecuri
 ak = sum(SS[f"{d}|one_shot_typed"]["au_k"] for d in ("procurement", "cybersecurity", "finance")); an = sum(SS[f"{d}|one_shot_typed"]["au_n"] for d in ("procurement", "cybersecurity", "finance"))
 ox, oy = 100 * ok / on, 100 * ak / an
 ax.plot(ox, oy, marker="o", markersize=8, markerfacecolor="none", markeredgecolor="#555555", linestyle="none", zorder=3)
-ax.annotate("Typed one-shot", (ox, oy), textcoords="offset points", xytext=(-6, -16), ha="left", fontsize=8.5, color="#222222")
+ax.annotate("Typed one-shot", (ox, oy), textcoords="offset points", xytext=(7, -14), ha="left", fontsize=8.5, color="#222222")
 print("one-shot reference:", round(ox, 1), round(oy, 1))
 ax.set_xlim(0, 34); ax.set_ylim(45, 101)
 ax.tick_params(axis="both", labelsize=11)
@@ -47,6 +47,6 @@ handles = [plt.Line2D([], [], marker="o", color="#444444", linestyle="none", mar
            plt.Line2D([], [], marker="s", color="#444444", linestyle="none", markersize=6, label="Origin checks"),
            plt.Line2D([], [], marker="D", color="#444444", linestyle="none", markersize=5.5, label="Writer-side changes"),
            plt.Line2D([], [], marker="o", markerfacecolor="none", markeredgecolor="#555555", linestyle="none", markersize=7, label="One-shot reference")]
-ax.legend(handles=handles, frameon=False, loc="center right", fontsize=10, handlelength=1.2, borderaxespad=0.4)
+ax.legend(handles=handles, frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.30), ncol=4, fontsize=9, handlelength=1.2, columnspacing=1.2, handletextpad=0.5)
 fig.savefig(OUT + ".pdf", bbox_inches="tight"); fig.savefig(OUT + ".png", dpi=200, bbox_inches="tight")
 print("fig4 ok")
