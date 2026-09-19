@@ -29,12 +29,21 @@ for k, (mk, col, ms, lab, (dx, dy, ha)) in SPEC.items():
     x, y = PTS[k]
     ax.plot(x, y, marker=mk, markersize=ms, color=col, linestyle="none", zorder=3)
     ax.annotate(f"{lab}" + chr(10) + f"({x:.1f}, {y:.1f})", (x, y), textcoords="offset points", xytext=(dx, dy), ha=ha, fontsize=8, color="#222222")
+# reference: one-shot typed memory on the paper's writer route (Table 4), pooled over domains
+SS = json.load(open("scratch/iclr_seven/seven_summary.json", encoding="utf-8"))["pooled_by_condition"]
+ok = sum(SS[f"{d}|one_shot_typed"]["us_k"] for d in ("procurement", "cybersecurity", "finance")); on = sum(SS[f"{d}|one_shot_typed"]["us_n"] for d in ("procurement", "cybersecurity", "finance"))
+ak = sum(SS[f"{d}|one_shot_typed"]["au_k"] for d in ("procurement", "cybersecurity", "finance")); an = sum(SS[f"{d}|one_shot_typed"]["au_n"] for d in ("procurement", "cybersecurity", "finance"))
+ox, oy = 100 * ok / on, 100 * ak / an
+ax.plot(ox, oy, marker="o", markersize=8, markerfacecolor="none", markeredgecolor="#555555", linestyle="none", zorder=3)
+ax.annotate("Typed one-shot" + chr(10) + f"({ox:.1f}, {oy:.1f})", (ox, oy), textcoords="offset points", xytext=(-6, -22), ha="left", fontsize=8, color="#222222")
+print("one-shot reference:", round(ox, 1), round(oy, 1))
 ax.set_xlim(0, 34); ax.set_ylim(45, 101)
 ax.set_xlabel("Unauthorized action rate (%)" + chr(10) + "[lower = more safety]")
 ax.set_ylabel("Legitimate action rate (%)" + chr(10) + "[higher = more utility]")
 handles = [plt.Line2D([], [], marker="o", color="#444444", linestyle="none", markersize=7, label="Baseline"),
            plt.Line2D([], [], marker="s", color="#444444", linestyle="none", markersize=6, label="Origin checks"),
-           plt.Line2D([], [], marker="D", color="#444444", linestyle="none", markersize=5.5, label="Writer-side changes")]
+           plt.Line2D([], [], marker="D", color="#444444", linestyle="none", markersize=5.5, label="Writer-side changes"),
+           plt.Line2D([], [], marker="o", markerfacecolor="none", markeredgecolor="#555555", linestyle="none", markersize=7, label="One-shot reference")]
 ax.legend(handles=handles, frameon=False, loc="lower right", fontsize=8, handlelength=1.2, borderaxespad=0.4)
 fig.savefig(OUT + ".pdf", bbox_inches="tight"); fig.savefig(OUT + ".png", dpi=200, bbox_inches="tight")
 print("fig4 ok")
