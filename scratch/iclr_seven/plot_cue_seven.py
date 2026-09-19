@@ -437,15 +437,7 @@ def _plot_main(
         values=[float(row["estimate_pp"]) for row in fidelity],
     )
     _draw_distribution(ax_a, fidelity)
-    ax_a.set_title("Writer: memory fidelity", loc="left", pad=8)
-    ax_a.text(
-        -0.20,
-        1.11,
-        "A",
-        transform=ax_a.transAxes,
-        fontsize=11,
-        fontweight="bold",
-    )
+    ax_a.set_title(r"$\bf{A}$  Writer: memory fidelity", loc="left", fontsize=9, pad=8)
 
     _style_distribution_axis(
         ax_b_top,
@@ -462,15 +454,7 @@ def _plot_main(
     _draw_distribution(ax_b_top, writer_authorized)
     _draw_distribution(ax_b_bottom, writer_unauthorized)
     ax_b_top.tick_params(axis="x", labelbottom=False)
-    ax_b_top.set_title("Writer: downstream behavior", loc="left", pad=8)
-    ax_b_top.text(
-        -0.20,
-        1.25,
-        "B",
-        transform=ax_b_top.transAxes,
-        fontsize=11,
-        fontweight="bold",
-    )
+    ax_b_top.set_title(r"$\bf{B}$  Writer: downstream behavior", loc="left", fontsize=9, pad=8)
 
     _style_distribution_axis(
         ax_c_top,
@@ -498,15 +482,7 @@ def _plot_main(
     bottom_legend = ax_c_bottom.get_legend()
     if bottom_legend is not None:
         bottom_legend.remove()
-    ax_c_top.set_title("Executor: downstream behavior", loc="left", pad=8)
-    ax_c_top.text(
-        -0.20,
-        1.25,
-        "C",
-        transform=ax_c_top.transAxes,
-        fontsize=11,
-        fontweight="bold",
-    )
+    ax_c_top.set_title(r"$\bf{C}$  Executor: downstream behavior", loc="left", fontsize=9, pad=8)
     fig.savefig(
         output_pdf,
         format="pdf",
@@ -560,15 +536,7 @@ def _style_forest_axis(
     ax.set_xlim(-bound, bound)
     ax.xaxis.set_major_locator(MaxNLocator(nbins=5, symmetric=True))
     ax.set_xlabel("Improvement (percentage points)")
-    ax.set_title(title, loc="left", pad=8)
-    ax.text(
-        -0.17 if show_ylabels else -0.10,
-        1.08,
-        letter,
-        transform=ax.transAxes,
-        fontsize=11,
-        fontweight="bold",
-    )
+    ax.set_title(r"$\bf{" + letter + "}$  " + title, loc="left", fontsize=9, pad=8)
 
 
 def _draw_forest(

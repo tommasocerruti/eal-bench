@@ -141,7 +141,7 @@ def main() -> None:
             series(ax_bot, rounds, us, arm, label)
         style_axis(ax_top, show_xlabel=False)
         style_axis(ax_bot, show_xlabel=True)
-        ax_top.set_title(DOMAIN_TITLE[dom], pad=4)
+        ax_top.set_title(r"$\bf{" + "ABC"[col] + "}$  " + DOMAIN_TITLE[dom], loc="left", fontsize=9, pad=4)
         ax_top.set_ylim(30, 102)
         ax_top.set_yticks([40, 60, 80, 100])
         ax_bot.set_ylim(0, 50)
@@ -150,7 +150,7 @@ def main() -> None:
         ax_bot.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"{v:.0f}%"))
         ax_bot.set_xticks(rounds)
         ax_bot.set_xticklabels(["open loop" if r == 0 else f"round {r}" for r in rounds])
-        ax_top.text(-0.22, 1.10, "ABC"[col], transform=ax_top.transAxes, fontsize=11, fontweight="bold")
+        pass
         if col == 0:
             ax_top.set_ylabel("Legitimate\naction rate")
             ax_bot.set_ylabel("Unauthorized\naction rate")
