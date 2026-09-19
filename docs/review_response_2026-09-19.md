@@ -189,3 +189,15 @@ Both use the same notion (fidelity comparison with no field errors, source turn 
 ### Rulings applied in this pass
 
 Items 1, 5, 6, 7, 8, 10, 13 ("All executors pass..."), 14, 15, 18, 20 as proposed; item 9 through captions (Table 34 four writers, capacity table five writers). Item 19 not applied: no Section 3.3 sentence and no new citations. Trustcall is the structured-extraction library inside LangMem that the memory writer uses; it appears only in the writer appendix. GLM 5.3 appears only in the appendix as the replay executor and one of three judges. Item 11 (Table 1 checks) and item 16 are untouched pending a ruling; across the seven writers the correlation between average baseline unauthorized and legitimate rates is -0.46.
+
+### Item 21 resolved (2026-09-19, late): two definitions of "exact"
+
+`analysis/event_sourcing.py` marks a final state erroneous when any fidelity field differs, including `source_turn_ids` (the cited source turns); `analysis/writer_ttc.py` excludes `source_turn_ids`. Scoring the same writer-route baseline memories both ways (`final_state_defs.py`, added writers, three seeds):
+
+| Domain | Any field | Without citations | Citation-only |
+|---|---|---|---|
+| Procurement | 69/72 (95.8%) | 41/72 (56.9%) | 28 |
+| Cybersecurity | 49/96 (51.0%) | 49/96 (51.0%) | 0 |
+| Finance | 37/48 (77.1%) | 18/48 (37.5%) | 19 |
+
+So Table 32's 93.3% and B.1's 60.7% are the same quantity under two field sets, and cybersecurity's row is unaffected. Applied: one clause in the Table 32 caption naming the difference. Recomputing Table 32 without the citation field would need the five original writers' memories, which are not in the repository (their row comes from the frozen values), so the caption clause is the fix.
