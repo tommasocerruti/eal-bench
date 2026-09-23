@@ -29,8 +29,7 @@ Each benchmark case includes:
 
 To use EAL in your research, see the [usage guide](USAGE.md) for installation, examples, and the four evaluation tracks.
 
-For the additional memory designs, closed-loop runs, and archived extension figures, see
-the [extension reproduction guide](docs/reproducing_extensions.md).
+For the studies added in paper v2, see the [extensions overview](docs/extensions.md).
 
 ## Citation
 

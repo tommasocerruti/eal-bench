@@ -1,5 +1,8 @@
 # Reproducing the extension studies
 
+For a short introduction to the studies and folder layout, see the
+[extensions overview](extensions.md).
+
 The canonical runner now exposes `writer_variants` and `closed_loop`. These are aliases
 for the original engines: prompts, update schedules, seeds, scoring and selection rules
 are unchanged. The earlier module entry points remain available. Run from the repository
