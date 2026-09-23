@@ -1,0 +1,25 @@
+population,domain,condition,us,au,unauthorized_n,authorized_n
+baseten five writers,procurement,ours_baseline,25.4,90.6,1080,1080
+baseten five writers,procurement,mandate,5.8,98.2,1080,1080
+baseten five writers,procurement,rebuild,6.0,95.6,1080,1080
+baseten five writers,cybersecurity,ours_baseline,10.4,88.3,1920,1920
+baseten five writers,cybersecurity,mandate,21.8,77.9,1920,1920
+baseten five writers,cybersecurity,rebuild,6.0,93.0,1664,1664
+baseten five writers,finance,ours_baseline,31.7,99.9,960,960
+baseten five writers,finance,mandate,1.7,99.2,960,960
+baseten five writers,finance,rebuild,0.0,100.0,960,960
+baseten five writers,pooled,ours_baseline,19.6,91.7,3960,3960
+baseten five writers,pooled,mandate,12.6,88.6,3960,3960
+baseten five writers,pooled,rebuild,4.5,95.6,3704,3704
+paper five writers,procurement,baseline,28.9,96.8,,
+paper five writers,procurement,gate,6.8,13.6,,
+paper five writers,procurement,event,10.7,89.5,,
+paper five writers,cybersecurity,baseline,10.4,88.8,,
+paper five writers,cybersecurity,gate,10.4,88.8,,
+paper five writers,cybersecurity,event,9.1,76.4,,
+paper five writers,finance,baseline,51.0,98.3,,
+paper five writers,finance,gate,1.7,29.2,,
+paper five writers,finance,event,6.9,13.3,,
+paper five writers,pooled,baseline,25.3,93.3,,
+paper five writers,pooled,gate,7.3,53.8,,
+paper five writers,pooled,event,9.0,64.7,,

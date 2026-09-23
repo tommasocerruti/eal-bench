@@ -1,0 +1,14 @@
+{
+ "added": {
+  "positions": 2220,
+  "introduction": 189,
+  "persistence": 748,
+  "self_repair": 99
+ },
+ "seven": {
+  "positions": 7770,
+  "introduction": 776,
+  "persistence": 3617,
+  "self_repair": 306
+ }
+}

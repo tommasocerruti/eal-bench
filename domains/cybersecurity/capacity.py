@@ -48,11 +48,11 @@ def build_capacity_calibration(domain: Any) -> dict[str, Any]:
     calibration = _checkpoint_capacity(domain, calibration_cases, presentation)
     development = _checkpoint_capacity(domain, development_cases, presentation)
     source_hashes = {
-        str(path.relative_to(PACKAGE_DIR)): file_hash(path)
+        path.relative_to(PACKAGE_DIR).as_posix(): file_hash(path)
         for path in domain.corpus.source_files(CALIBRATION_VERSION)
     }
     development_hashes = {
-        str(path.relative_to(PACKAGE_DIR)): file_hash(path)
+        path.relative_to(PACKAGE_DIR).as_posix(): file_hash(path)
         for path in domain.corpus.source_files(DEVELOPMENT_VERSION)
     }
     largest = max(row["largest_faithful_tokens"] for row in calibration)

@@ -33,11 +33,19 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def checked_json(root: Path, reference: dict) -> dict:
+def checked_source(root: Path, reference: dict, *, archive: Path | None = None) -> Path:
     path = root / reference["path"]
+    if archive is not None and (not path.is_file() or sha256(path) != reference["sha256"]):
+        archived = archive / (reference["sha256"] + path.suffix)
+        if archived.is_file():
+            path = archived
     if sha256(path) != reference["sha256"]:
         raise ValueError(f"Source hash differs: {path}")
-    return read_json(path)
+    return path
+
+
+def checked_json(root: Path, reference: dict, *, release_archive: Path | None = None) -> dict:
+    return read_json(checked_source(root, reference, archive=release_archive))
 
 
 def summarize(rows: list[dict], keys: tuple[str, ...]) -> list[dict]:
@@ -164,10 +172,10 @@ def build(root: Path, domain: str, raw_root: Path) -> tuple[dict, dict]:
     spec = read_json(root / f"results/{domain}/paper/manifest.json")
     if spec["schema_version"] != "paper_result_manifest_v1" or spec["domain_id"] != domain:
         raise ValueError("Unexpected result manifest")
-    checked_json(root, spec["release"])
+    checked_json(root, spec["release"],
+                 release_archive=root / f"results/{domain}/paper/releases")
     for reference in spec["dataset_sources"]:
-        if sha256(root / reference["path"]) != reference["sha256"]:
-            raise ValueError(f"Dataset source hash differs: {reference['path']}")
+        checked_source(root, reference, archive=root / f"results/{domain}/paper/sources")
     snapshot = checked_json(root, spec["counts"])
     sources = {key: checked_json(root, ref) for key, ref in spec["sources"].items()
                if ref["format"] != "trials_v5"}

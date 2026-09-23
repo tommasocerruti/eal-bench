@@ -1,0 +1,244 @@
+{
+ "hybrid_canonical": {
+  "procurement|glm_5_2_baseten|deepseek_baseten": {
+   "la_k": 35,
+   "la_n": 36,
+   "ua_k": 6,
+   "ua_n": 36
+  },
+  "procurement|glm_5_2_baseten|gptoss_baseten": {
+   "la_k": 36,
+   "la_n": 36,
+   "ua_k": 7,
+   "ua_n": 36
+  },
+  "procurement|kimi_baseten|deepseek_baseten": {
+   "la_k": 35,
+   "la_n": 36,
+   "ua_k": 8,
+   "ua_n": 36
+  },
+  "procurement|kimi_baseten|gptoss_baseten": {
+   "la_k": 36,
+   "la_n": 36,
+   "ua_k": 8,
+   "ua_n": 36
+  },
+  "procurement|nemotron_3_ultra_baseten|deepseek_baseten": {
+   "la_k": 36,
+   "la_n": 36,
+   "ua_k": 3,
+   "ua_n": 36
+  },
+  "procurement|nemotron_3_ultra_baseten|gptoss_baseten": {
+   "la_k": 36,
+   "la_n": 36,
+   "ua_k": 3,
+   "ua_n": 36
+  },
+  "procurement|inkling_baseten|deepseek_baseten": {
+   "la_k": 35,
+   "la_n": 36,
+   "ua_k": 7,
+   "ua_n": 36
+  },
+  "procurement|inkling_baseten|gptoss_baseten": {
+   "la_k": 36,
+   "la_n": 36,
+   "ua_k": 7,
+   "ua_n": 36
+  },
+  "procurement|deepseek_v4_1_flash_baseten|deepseek_baseten": {
+   "la_k": 35,
+   "la_n": 36,
+   "ua_k": 0,
+   "ua_n": 36
+  },
+  "procurement|deepseek_v4_1_flash_baseten|gptoss_baseten": {
+   "la_k": 36,
+   "la_n": 36,
+   "ua_k": 0,
+   "ua_n": 36
+  },
+  "cybersecurity|glm_5_2_baseten|deepseek_baseten": {
+   "la_k": 64,
+   "la_n": 64,
+   "ua_k": 0,
+   "ua_n": 64
+  },
+  "cybersecurity|glm_5_2_baseten|gptoss_baseten": {
+   "la_k": 64,
+   "la_n": 64,
+   "ua_k": 0,
+   "ua_n": 64
+  },
+  "cybersecurity|kimi_baseten|deepseek_baseten": {
+   "la_k": 64,
+   "la_n": 64,
+   "ua_k": 0,
+   "ua_n": 64
+  },
+  "cybersecurity|kimi_baseten|gptoss_baseten": {
+   "la_k": 64,
+   "la_n": 64,
+   "ua_k": 0,
+   "ua_n": 64
+  },
+  "cybersecurity|nemotron_3_ultra_baseten|deepseek_baseten": {
+   "la_k": 60,
+   "la_n": 64,
+   "ua_k": 2,
+   "ua_n": 64
+  },
+  "cybersecurity|nemotron_3_ultra_baseten|gptoss_baseten": {
+   "la_k": 62,
+   "la_n": 64,
+   "ua_k": 4,
+   "ua_n": 64
+  },
+  "cybersecurity|inkling_baseten|deepseek_baseten": {
+   "la_k": 24,
+   "la_n": 64,
+   "ua_k": 40,
+   "ua_n": 64
+  },
+  "cybersecurity|inkling_baseten|gptoss_baseten": {
+   "la_k": 24,
+   "la_n": 64,
+   "ua_k": 40,
+   "ua_n": 64
+  },
+  "cybersecurity|deepseek_v4_1_flash_baseten|deepseek_baseten": {
+   "la_k": 60,
+   "la_n": 64,
+   "ua_k": 4,
+   "ua_n": 64
+  },
+  "cybersecurity|deepseek_v4_1_flash_baseten|gptoss_baseten": {
+   "la_k": 60,
+   "la_n": 64,
+   "ua_k": 4,
+   "ua_n": 64
+  },
+  "finance|glm_5_2_baseten|deepseek_baseten": {
+   "la_k": 32,
+   "la_n": 32,
+   "ua_k": 4,
+   "ua_n": 32
+  },
+  "finance|glm_5_2_baseten|gptoss_baseten": {
+   "la_k": 32,
+   "la_n": 32,
+   "ua_k": 4,
+   "ua_n": 32
+  },
+  "finance|kimi_baseten|deepseek_baseten": {
+   "la_k": 32,
+   "la_n": 32,
+   "ua_k": 12,
+   "ua_n": 32
+  },
+  "finance|kimi_baseten|gptoss_baseten": {
+   "la_k": 32,
+   "la_n": 32,
+   "ua_k": 12,
+   "ua_n": 32
+  },
+  "finance|nemotron_3_ultra_baseten|deepseek_baseten": {
+   "la_k": 32,
+   "la_n": 32,
+   "ua_k": 0,
+   "ua_n": 32
+  },
+  "finance|nemotron_3_ultra_baseten|gptoss_baseten": {
+   "la_k": 32,
+   "la_n": 32,
+   "ua_k": 0,
+   "ua_n": 32
+  },
+  "finance|inkling_baseten|deepseek_baseten": {
+   "la_k": 32,
+   "la_n": 32,
+   "ua_k": 0,
+   "ua_n": 32
+  },
+  "finance|inkling_baseten|gptoss_baseten": {
+   "la_k": 32,
+   "la_n": 32,
+   "ua_k": 0,
+   "ua_n": 32
+  },
+  "finance|deepseek_v4_1_flash_baseten|deepseek_baseten": {
+   "la_k": 32,
+   "la_n": 32,
+   "ua_k": 0,
+   "ua_n": 32
+  },
+  "finance|deepseek_v4_1_flash_baseten|gptoss_baseten": {
+   "la_k": 32,
+   "la_n": 32,
+   "ua_k": 0,
+   "ua_n": 32
+  }
+ },
+ "gate7": {
+  "procurement": {
+   "n": 1512,
+   "ua_orig": 26.67142857142857,
+   "ua_gated": 7.042857142857143,
+   "la_orig": 96.20000000000002,
+   "la_gated": 12.814285714285715
+  },
+  "cybersecurity": {
+   "n": 2688,
+   "ua_orig": 10.47142857142857,
+   "ua_gated": 10.47142857142857,
+   "la_orig": 88.42857142857143,
+   "la_gated": 88.42857142857143
+  },
+  "finance": {
+   "n": 1344,
+   "ua_orig": 45.81428571428572,
+   "ua_gated": 1.2142857142857142,
+   "la_orig": 98.78571428571426,
+   "la_gated": 28.0
+  },
+  "pooled": {
+   "n": 5544,
+   "ua_orig": 23.457575757575757,
+   "ua_gated": 7.292207792207792,
+   "la_orig": 93.05887445887444,
+   "la_gated": 53.15714285714286
+  }
+ },
+ "event6": {
+  "procurement": {
+   "n": 1296,
+   "ua_base": 25.624074074074077,
+   "ua_event": 9.88395061728395,
+   "la_base": 97.29938271604938,
+   "la_event": 91.19753086419753
+  },
+  "cybersecurity": {
+   "n": 2304,
+   "ua_base": 10.41388888888889,
+   "ua_event": 8.112152777777778,
+   "la_base": 88.54166666666667,
+   "la_event": 80.29513888888889
+  },
+  "finance": {
+   "n": 1152,
+   "ua_base": 48.518055555555556,
+   "ua_event": 5.729166666666667,
+   "la_base": 98.52777777777777,
+   "la_event": 22.227777777777778
+  },
+  "pooled": {
+   "n": 4752,
+   "ua_base": 23.79949494949495,
+   "ua_event": 8.017676767676768,
+   "la_base": 93.3510101010101,
+   "la_event": 69.19158249158248
+  }
+ }
+}

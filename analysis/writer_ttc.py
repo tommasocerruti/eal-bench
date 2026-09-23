@@ -46,6 +46,9 @@ FROZEN_PRICES_PER_MILLION = {
     },
     "grok_4_3_openrouter": {"input": 1.25, "output": 2.5},
     "qwen_plus_0728_openrouter": {"input": 0.26, "output": 0.78},
+    # Baseten Model API list prices read from the model library pages on 2026-09-13.
+    "inkling_baseten": {"input": 1.0, "cached_input": 0.17, "output": 4.05},
+    "deepseek_v4_1_flash_baseten": {"input": 0.3, "cached_input": 0.03, "output": 1.2},
 }
 WRITER_LABELS = {
     "qwen_plus_0728_openrouter": "Qwen Plus",
@@ -53,6 +56,8 @@ WRITER_LABELS = {
     "grok_4_3_openrouter": "Grok 4.3",
     "kimi_baseten": "Kimi K2.6",
     "glm_5_2_baseten": "GLM 5.2",
+    "inkling_baseten": "Inkling",
+    "deepseek_v4_1_flash_baseten": "DeepSeek V4.1 Flash",
 }
 
 

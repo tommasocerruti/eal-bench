@@ -1,0 +1,71 @@
+{
+  "analysis_module": "analysis.writer_ttc_multi",
+  "created_at": "2026-08-15",
+  "files": {
+    "REPORT.md": {
+      "sha256": "49ddf5927cf8d23d5a6aded1594fdfaa281ab1d2b71f0f5726fdc3340cf455f6"
+    },
+    "behavior_by_writer_condition.csv": {
+      "sha256": "a7370a1489e97c321ba454a8837c63af5addbe2f8a1f7bc2d51305655aca5b2c"
+    },
+    "incremental_mechanisms_by_writer.csv": {
+      "sha256": "a07e6e89293dfcea11bf464d9d15e0881f864f7deed894590ca754fa023fa804"
+    },
+    "pooled_behavior_by_condition.csv": {
+      "sha256": "4e71d39571c1e022c92a85adb57d281547a44e07227a66a44112f49254d5b104"
+    },
+    "pooled_incremental_mechanisms.csv": {
+      "sha256": "5364e8689bda2170602ac17277110bebe67a38234d9a80486cf5b66eebff89f7"
+    },
+    "pooled_selection_scaling.csv": {
+      "sha256": "3c6659ca3b0e24d675abfe2643d3c1ec6d9bb6105c0c676dc5e2e253cdeb445d"
+    },
+    "pooled_typed_fidelity_by_condition.csv": {
+      "sha256": "7b02630c15a356bb44d711c919357bcfc80b7db873815be2b7d24af7bf6380cd"
+    },
+    "selection_by_writer.csv": {
+      "sha256": "d6be1d1348ca10ac05538d821f8e1dc78f0197d8b7c2fda6cf6d5552e8dbffa0"
+    },
+    "summary.json": {
+      "sha256": "cc5126a6e42a46b7891ffd6cd65ef011eb8b0e2c602d8a1dbf3ae511c4f0f6eb"
+    },
+    "typed_fidelity_by_writer_condition.csv": {
+      "sha256": "7916628e78104acd263816d4f3a6bcc0d6eb0d68f9793f60e20bcd8f879e3538"
+    },
+    "writer_scaling.csv": {
+      "sha256": "3b0aa3502bae6bd7f466ad90cb4fb2af8ae44b522ce12440255e76ffeb1c32c5"
+    }
+  },
+  "model_calls": 0,
+  "schema_version": "procurement_writer_ttc_multi_v2",
+  "sources": [
+    {
+      "manifest_sha256": "26591692ab3737131d019c2338457bc3ce437490a9953a3589cb43b445b64d03",
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260815__qwen_writer_ttc_k8_analysis"
+    },
+    {
+      "manifest_sha256": "827097e5e43e20f9915fc19e616c3b11a606b3bd3a2d12abc00b22b887988617",
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260815__nemotron_writer_ttc_k8_analysis"
+    },
+    {
+      "manifest_sha256": "213ff6c43df583dbd526190520d6a973cb76a90003565544e8aa866111025b13",
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260815__grok_writer_ttc_k8_analysis"
+    },
+    {
+      "manifest_sha256": "4e0d07123af4e5b2ea2b93fa1b52019fdd5e3067d96a68ac6cee621d6cc15454",
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260815__kimi_writer_ttc_k8_analysis"
+    },
+    {
+      "manifest_sha256": "ee96edc31f1fcd22c870ed7c855bd2a4630bac4ca58caf159ea7ed0734e57551",
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260815__glm_writer_ttc_k8_analysis"
+    },
+    {
+      "manifest_sha256": "3600d743ff41da6643c53f2f643855bee959f616d1988e92104ee52c0e7bbc67",
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913__flash_writer_ttc_k8_analysis"
+    },
+    {
+      "manifest_sha256": "9d126c7825b89d4892fb61fe2b8cb8130f8accc2903193c83b09920666a37e62",
+      "path": "C:\\Users\\mikad\\Documents\\GitHub\\eal-bench\\results\\procurement\\20260913__inkling_writer_ttc_k8_analysis"
+    }
+  ]
+}

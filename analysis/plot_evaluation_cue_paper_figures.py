@@ -445,13 +445,13 @@ def _plot_main(
 
     _style_distribution_axis(
         ax_b_top,
-        ylabel="Authorized use\nchange (pp)",
+        ylabel="Legitimate action rate\nchange (pp)",
         show_xlabels=False,
         values=[float(row["estimate_pp"]) for row in writer_authorized],
     )
     _style_distribution_axis(
         ax_b_bottom,
-        ylabel="Fewer unauthorized\nsubmissions (pp)",
+        ylabel="Fewer unauthorized\nactions (pp)",
         show_xlabels=True,
         values=[float(row["estimate_pp"]) for row in writer_unauthorized],
     )
@@ -470,13 +470,13 @@ def _plot_main(
 
     _style_distribution_axis(
         ax_c_top,
-        ylabel="Authorized use\nchange (pp)",
+        ylabel="Legitimate action rate\nchange (pp)",
         show_xlabels=False,
         values=[float(row["estimate_pp"]) for row in executor_authorized],
     )
     _style_distribution_axis(
         ax_c_bottom,
-        ylabel="Fewer unauthorized\nsubmissions (pp)",
+        ylabel="Fewer unauthorized\nactions (pp)",
         show_xlabels=True,
         values=[float(row["estimate_pp"]) for row in executor_unauthorized],
     )
@@ -679,8 +679,8 @@ def _plot_writer_behavior(
     data: Mapping[str, Sequence[Mapping[str, Any]]],
 ) -> None:
     panels = (
-        ("writer_authorized_use", "Authorized use"),
-        ("writer_unauthorized_submission", "Fewer unauthorized submissions"),
+        ("writer_authorized_use", "Legitimate action rate"),
+        ("writer_unauthorized_submission", "Fewer unauthorized actions"),
         ("writer_paired_discrimination", "Paired discrimination"),
     )
     fig, axes = plt.subplots(1, 3, figsize=(7.5, 2.75))
@@ -719,8 +719,8 @@ def _plot_executor_behavior(
     data: Mapping[str, Sequence[Mapping[str, Any]]],
 ) -> None:
     metrics = (
-        ("executor_authorized_use", "Authorized use"),
-        ("executor_unauthorized_submission", "Fewer unauthorized submissions"),
+        ("executor_authorized_use", "Legitimate action rate"),
+        ("executor_unauthorized_submission", "Fewer unauthorized actions"),
         ("executor_paired_discrimination", "Paired discrimination"),
     )
     column_limits = {
@@ -797,7 +797,7 @@ def _write_captions(path: Path) -> None:
         "writer-memory/executor combination (C). Blue circles show the generic "
         "evaluation cue (L1-L0); orange points show the additional effect of "
         "authorization-specific framing (L2-L1). Positive values indicate improved "
-        "memory fidelity, higher authorized use, or fewer targeted unauthorized "
+        "memory fidelity, higher legitimate action rate, or fewer targeted unauthorized "
         "submissions. Short red horizontal lines are unweighted means across tested "
         "targets; white diamonds are target medians, thick gray segments are "
         "interquartile ranges, and thin gray segments span the tested targets. These "
@@ -813,8 +813,8 @@ def _write_captions(path: Path) -> None:
         "## Appendix: writer downstream behavior\n\n"
         "**Target-specific downstream effects of writer evaluation cues.** Points show "
         "paired risk differences and whiskers show 95% paired case-cluster bootstrap "
-        "intervals. Positive values indicate higher authorized use, fewer targeted "
-        "unauthorized submissions, or higher paired discrimination.\n\n"
+        "intervals. Positive values indicate higher legitimate action rate, fewer targeted "
+        "unauthorized actions, or higher paired discrimination.\n\n"
         "## Appendix: executor downstream behavior\n\n"
         "**Target-specific downstream effects of executor evaluation cues.** Frozen "
         "memories from each writer are shown separately for GPT-OSS-120B and DeepSeek "

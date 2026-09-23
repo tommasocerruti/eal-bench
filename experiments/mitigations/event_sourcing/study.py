@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import os as _os
+
+
 import copy
 
 
@@ -87,6 +90,11 @@ from .validation import (
     validate_event_sourcing_offline,
     validate_options,
 )
+
+
+# Completion budget of the event writer. The paper's protocol uses 4,096 tokens; writers that reason inside the
+# completion (Inkling) need more, set EAL_EVENT_WRITER_MAX_TOKENS when launching such a run.
+EVENT_WRITER_MAX_TOKENS = int(_os.environ.get("EAL_EVENT_WRITER_MAX_TOKENS", "4096"))
 
 
 def shared_study_profile() -> StudyProfile:
@@ -363,7 +371,7 @@ def _event_manifest(
                 writer_task,
                 overrides={
                     "temperature": 1.0,
-                    "max_tokens": 4096,
+                    "max_tokens": EVENT_WRITER_MAX_TOKENS,
                     "seed": writer_seed,
                     "tool_choice": writer_choice,
                 },
@@ -412,14 +420,14 @@ def _event_manifest(
             "reference_index": {"fields": [], "tokens": 0},
             "cumulative_event_log_model_visible": False,
             "raw_block_boundaries_unchanged": True,
-            "writer_output_limit": 4096,
+            "writer_output_limit": EVENT_WRITER_MAX_TOKENS,
         },
         "writer": {
             "task": writer_task,
             "targets": list(writer_targets),
             "seed": writer_seed,
             "temperature": 1.0,
-            "max_tokens": 4096,
+            "max_tokens": EVENT_WRITER_MAX_TOKENS,
             "max_structural_attempts": 2,
             "target_routes": [
                 target_route_manifest(

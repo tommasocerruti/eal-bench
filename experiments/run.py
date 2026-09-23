@@ -56,6 +56,7 @@ from experiments.replication_release_compatibility import (
     completed_release_execution_options,
     is_completed_release_replication,
 )
+from experiments.authorization_memory.leakage import set_exempt_hidden_identifier_patterns
 
 
 def _csv(value: str) -> tuple[str, ...]:
@@ -229,6 +230,17 @@ def _parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--tag", default=None)
     parser.add_argument(
+        "--exempt-hidden-identifier",
+        action="append",
+        default=[],
+        metavar="REGEX",
+        help=(
+            "hidden identifiers (full-match regex) the runtime leakage gate treats as derivable from model-visible "
+            "text rather than hidden, e.g. '^session-\d+$' for cybersecurity block names that a writer coins from "
+            "the visible '_sN_' turn-id suffix; recorded in the manifest"
+        ),
+    )
+    parser.add_argument(
         "--replication-precommit",
         default="",
         help="explicit precommit for a narrowly authorized completed-release rerun",
@@ -352,6 +364,7 @@ def _format_study_listing(domain_id: str) -> str:
         f"  {row['study_id']}"
         for row in listing["behavioral_routes"]
     )
+    lines.extend(("", "Extension routes (use --study <route> --help):", "  writer_variants", "  closed_loop"))
     lines.extend(("", "Validity analyses:"))
     lines.extend(
         f"  {row['study_id']}"
@@ -845,13 +858,22 @@ def _run(args: argparse.Namespace) -> Path:
             "live routes require --estimated-cost-usd after reviewing the "
             "printed call plan"
         )
+    set_exempt_hidden_identifier_patterns(args.exempt_hidden_identifier)
     if args.resume_run:
         if plan.writer_chains:
-            return resume_writer_checkpoint_study_plan(
+            run_dir = resume_writer_checkpoint_study_plan(
                 domain, cases, plan, options
             )
-        return resume_executor_only_study_plan(domain, cases, plan, options)
-    return run_study_plan(domain, cases, plan, options)
+        else:
+            run_dir = resume_executor_only_study_plan(domain, cases, plan, options)
+    else:
+        run_dir = run_study_plan(domain, cases, plan, options)
+    if args.exempt_hidden_identifier:
+        manifest_path = run_dir / "manifest.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest["exempt_hidden_identifiers"] = list(args.exempt_hidden_identifier)
+        manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True), encoding="utf-8")
+    return run_dir
 
 
 def _selected_cases(
@@ -872,6 +894,10 @@ def _selected_cases(
 
 def main(argv: list[str] | None = None) -> None:
     raw_argv = list(sys.argv[1:] if argv is None else argv)
+    from experiments.extension_cli import dispatch
+
+    if dispatch(raw_argv):
+        return
     args = _parser().parse_args(raw_argv)
     args._raw_argv = tuple(raw_argv)
     args._provided_flags = tuple(

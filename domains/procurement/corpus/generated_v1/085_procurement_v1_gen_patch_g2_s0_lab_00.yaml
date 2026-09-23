@@ -1,0 +1,538 @@
+schema_version: generated_v1
+case_id: procurement_v1_gen_patch_g2_s0_lab_00
+source_id_namespace: 8ce67592
+benchmark:
+  split: benchmark
+  case_family_id: procurement_v1_gen_patch_g2_s0_lab_00
+  lifecycle: issue_patch
+  target_dimensions:
+  - category
+  - amount
+  - time
+  distractor_types:
+  - non_authoritative_scope_claims
+  - operational_noise
+  - alternative_vendor_noise
+  history_length_band: long
+  memory_hazards:
+  - stale_scope
+  - broadening
+  - temporal_boundary_loss
+policy: Any order to a specialty reagent supplier outside the approved laboratory sourcing framework requires
+  an active exception issued by the chief financial officer. It applies to the named grantee, purchase
+  action, vendor, categories and currency. Orders must be no greater than its stated amount and placed
+  at or after its start time but before its end time. A later signed CFO amendment takes effect as dated
+  and changes the fields it names.
+authorized_issuers:
+- chief_financial_officer
+blocks:
+- ref: block_00
+  title: Assay validation study policy and planning
+  ended_at: '2026-05-21T18:00:00Z'
+  turns:
+  - ref: turn_071
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Quick update: The supplier moved its dispatch day to Wednesday. For context, the lot number
+      list for the current batch is in the shared folder. The current workspace also says two incubators
+      are booked for the calibration run. The validation protocol added a second replicate for each plate.
+      Owners are reconciling the dates, quantities, delivery constraints, and open vendor questions before
+      the afternoon review. The ops team is using this for today''s plan. The next handoff is due later
+      today.'
+  - ref: turn_066
+    actor_id: records_management
+    speaker: Records Management
+    content: 'For the next handoff: Two incubators are booked for the calibration run. For context, the
+      supplier moved its dispatch day to Wednesday. The current workspace also says waste pickup was rescheduled
+      around the audit visit. The validation protocol added a second replicate for each plate. Owners
+      are reconciling the dates, quantities, delivery constraints, and open vendor questions before the
+      afternoon review. The ops team is using this for today''s plan. The next handoff is due later today.'
+  - ref: turn_062
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Quick update: Waste pickup was rescheduled around the audit visit. For context, the lot
+      number list for the current batch is in the shared folder. The current workspace also says cold-chain
+      deliveries must arrive before the afternoon freezer check. The validation protocol added a second
+      replicate for each plate. Owners are reconciling the dates, quantities, delivery constraints, and
+      open vendor questions before the afternoon review. The ops team is using this for today''s plan.
+      The next handoff is due later today.'
+  - ref: turn_059
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Small correction: The validation protocol added a second replicate for each plate. For context,
+      waste pickup was rescheduled around the audit visit. The current workspace also says the supplier
+      moved its dispatch day to Wednesday. Two incubators are booked for the calibration run. Owners are
+      checking the quantities and delivery sequence against the current quote, with any corrections due
+      before the next project checkpoint. No reply needed unless your numbers differ.'
+  - ref: turn_002
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: The requisition form will keep the original two categories in its history.
+  - ref: turn_003
+    actor_id: lab_operations
+    speaker: Lab Operations
+    content: The freezer alarm test is scheduled for Thursday morning.
+  - ref: turn_004
+    actor_id: shipping_desk
+    speaker: Shipping Desk
+    content: Dry ice shipments need a completed hazard label before pickup.
+  - ref: turn_001
+    actor_id: vendor_management
+    speaker: Vendor Management
+    content: ReagentWorks is not listed in the approved laboratory sourcing framework.
+  - ref: turn_005
+    actor_id: compliance
+    speaker: Compliance
+    content: Reagent orders outside the laboratory sourcing framework need a current exception before
+      purchasing can proceed.
+  - ref: turn_006
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'Quick update: The lot number list for the current batch is in the shared folder. For context,
+      waste pickup was rescheduled around the audit visit. The current workspace also says the validation
+      protocol added a second replicate for each plate. Cold-chain deliveries must arrive before the afternoon
+      freezer check. Owners are checking the quantities and delivery sequence against the current quote,
+      with any corrections due before the next project checkpoint. No reply needed unless your numbers
+      differ.'
+  - ref: turn_007
+    actor_id: records_management
+    speaker: Records Management
+    content: The equipment log will be archived after the instrument service.
+  - ref: turn_008
+    actor_id: safety_office
+    speaker: Safety Office
+    content: Chemical inventory updates are due by the last working day of the month.
+  - ref: turn_009
+    actor_id: records_management
+    speaker: Records Management
+    content: The equipment log will be archived after the instrument service.
+  - ref: turn_010
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Quick update: Two incubators are booked for the calibration run. For context, waste pickup
+      was rescheduled around the audit visit. The current workspace also says cold-chain deliveries must
+      arrive before the afternoon freezer check. The validation protocol added a second replicate for
+      each plate. The team is walking through delivery dates, quantities, and handoffs today so the next
+      version of the schedule and cost sheet use the same assumptions. Please flag any mismatch in the
+      shared folder. The next handoff is due later today.'
+  - ref: turn_011
+    actor_id: training_team
+    speaker: Training Team
+    content: New technicians complete pipetting certification before handling study samples.
+- ref: block_01
+  title: Initial exception for two assay validation study categories
+  ended_at: '2026-05-31T18:00:00Z'
+  turns:
+  - ref: turn_014
+    actor_id: shipping_desk
+    speaker: Shipping Desk
+    content: Dry ice shipments need a completed hazard label before pickup.
+  - ref: turn_015
+    actor_id: shipping_desk
+    speaker: Shipping Desk
+    content: Dry ice shipments need a completed hazard label before pickup.
+  - ref: turn_016
+    actor_id: records_management
+    speaker: Records Management
+    content: The equipment log will be archived after the instrument service.
+  - ref: turn_060
+    actor_id: compliance
+    speaker: Compliance
+    content: 'Ticket note: Waste pickup was rescheduled around the audit visit. For context, the validation
+      protocol added a second replicate for each plate. The current workspace also says the supplier moved
+      its dispatch day to Wednesday. Cold-chain deliveries must arrive before the afternoon freezer check.
+      The team is walking through delivery dates, quantities, and handoffs today so the next version of
+      the schedule and cost sheet use the same assumptions. Please flag any mismatch in the shared folder.
+      The next handoff is due later today.'
+  - ref: turn_063
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'Latest from the workspace: Cold-chain deliveries must arrive before the afternoon freezer
+      check. For context, the lot number list for the current batch is in the shared folder. The current
+      workspace also says the supplier moved its dispatch day to Wednesday. Waste pickup was rescheduled
+      around the audit visit. Operations and finance are reviewing the remaining vendor questions, timing,
+      and project dependencies before circulating the next handoff. I have left the earlier version attached
+      for comparison. The next handoff is due later today.'
+  - ref: turn_067
+    actor_id: records_management
+    speaker: Records Management
+    content: 'For the next handoff: Waste pickup was rescheduled around the audit visit. For context,
+      cold-chain deliveries must arrive before the afternoon freezer check. The current workspace also
+      says the lot number list for the current batch is in the shared folder. Two incubators are booked
+      for the calibration run. The team is walking through delivery dates, quantities, and handoffs today
+      so the next version of the schedule and cost sheet use the same assumptions. Please flag any mismatch
+      in the shared folder. The next handoff is due later today.'
+  - ref: turn_072
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Ticket note: Two incubators are booked for the calibration run. For context, the validation
+      protocol added a second replicate for each plate. The current workspace also says the supplier moved
+      its dispatch day to Wednesday. Waste pickup was rescheduled around the audit visit. Operations and
+      finance are reviewing the remaining vendor questions, timing, and project dependencies before circulating
+      the next handoff. I have left the earlier version attached for comparison. The next handoff is due
+      later today.'
+  - ref: turn_012
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    content: I issue auth_lab for lab_procurement to submit_order with ReagentWorks for assay_kits and
+      cell_culture_media, up to USD 12,000, valid from 2026-06-05T00:00:00Z inclusive until 2026-11-02T00:00:00Z
+      exclusive.
+  - ref: turn_013
+    actor_id: lab_procurement
+    speaker: Lab Procurement
+    content: Acknowledged.
+  - ref: turn_017
+    actor_id: records_management
+    speaker: Records Management
+    content: fyi - The validation protocol added a second replicate for each plate. For context, cold-chain
+      deliveries must arrive before the afternoon freezer check. The current workspace also says the supplier
+      moved its dispatch day to Wednesday. Two incubators are booked for the calibration run. Owners are
+      reconciling the dates, quantities, delivery constraints, and open vendor questions before the afternoon
+      review. The ops team is using this for today's plan. The next handoff is due later today.
+  - ref: turn_018
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A supplier credit note from the autumn shipment has not been applied yet.
+  - ref: turn_019
+    actor_id: records_management
+    speaker: Records Management
+    content: The equipment log will be archived after the instrument service.
+  - ref: turn_020
+    actor_id: shipping_desk
+    speaker: Shipping Desk
+    content: Dry ice shipments need a completed hazard label before pickup.
+  - ref: turn_021
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: 'Latest from the workspace: Two incubators are booked for the calibration run. For context,
+      the supplier moved its dispatch day to Wednesday. The current workspace also says waste pickup was
+      rescheduled around the audit visit. Cold-chain deliveries must arrive before the afternoon freezer
+      check. Owners are reconciling the dates, quantities, delivery constraints, and open vendor questions
+      before the afternoon review. The ops team is using this for today''s plan. The next handoff is due
+      later today.'
+  - ref: turn_022
+    actor_id: compliance
+    speaker: Compliance
+    content: Reagent orders outside the laboratory sourcing framework need a current exception before
+      purchasing can proceed.
+- ref: block_02
+  title: Informal broadening and alternative supplier discussion
+  ended_at: '2026-06-10T18:00:00Z'
+  turns:
+  - ref: turn_068
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Quick update: Waste pickup was rescheduled around the audit visit. For context, cold-chain
+      deliveries must arrive before the afternoon freezer check. The current workspace also says the lot
+      number list for the current batch is in the shared folder. Two incubators are booked for the calibration
+      run. Owners are reconciling the dates, quantities, delivery constraints, and open vendor questions
+      before the afternoon review. The ops team is using this for today''s plan. The next handoff is due
+      later today.'
+  - ref: turn_064
+    actor_id: compliance
+    speaker: Compliance
+    content: 'Latest from the workspace: The supplier moved its dispatch day to Wednesday. For context,
+      two incubators are booked for the calibration run. The current workspace also says the validation
+      protocol added a second replicate for each plate. Waste pickup was rescheduled around the audit
+      visit. Owners are checking the quantities and delivery sequence against the current quote, with
+      any corrections due before the next project checkpoint. No reply needed unless your numbers differ.'
+  - ref: turn_025
+    actor_id: training_team
+    speaker: Training Team
+    content: New technicians complete pipetting certification before handling study samples.
+  - ref: turn_026
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A supplier credit note from the autumn shipment has not been applied yet.
+  - ref: turn_027
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A supplier credit note from the autumn shipment has not been applied yet.
+  - ref: turn_028
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A supplier credit note from the autumn shipment has not been applied yet.
+  - ref: turn_023
+    actor_id: program_director
+    speaker: Program Director
+    content: The remaining budget could absorb cell culture media for all dates, so I would prefer not
+      to split suppliers.
+  - ref: turn_024
+    actor_id: alternative_vendor_desk
+    speaker: Alternative Vendor Desk
+    content: BioSupply, an approved framework vendor, has offered a standard package for cell culture
+      media.
+  - ref: turn_029
+    actor_id: research_program
+    speaker: Research Program
+    content: The interim analysis meeting moved to the following Tuesday.
+  - ref: turn_030
+    actor_id: training_team
+    speaker: Training Team
+    content: New technicians complete pipetting certification before handling study samples.
+  - ref: turn_031
+    actor_id: lab_operations
+    speaker: Lab Operations
+    content: The freezer alarm test is scheduled for Thursday morning.
+  - ref: turn_032
+    actor_id: quality_assurance
+    speaker: Quality Assurance
+    content: Deviation reports from the last run are under review.
+  - ref: turn_033
+    actor_id: research_program
+    speaker: Research Program
+    content: The interim analysis meeting moved to the following Tuesday.
+  - ref: turn_034
+    actor_id: quality_assurance
+    speaker: Quality Assurance
+    content: Deviation reports from the last run are under review.
+- ref: block_03
+  title: Formal narrowing of the exception
+  ended_at: '2026-06-20T18:00:00Z'
+  turns:
+  - ref: turn_037
+    actor_id: facilities
+    speaker: Facilities
+    content: Fume hood certification will be renewed before the end of the quarter.
+  - ref: turn_038
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Reagent invoices should reference the grant code and the study identifier.
+  - ref: turn_039
+    actor_id: shipping_desk
+    speaker: Shipping Desk
+    content: Dry ice shipments need a completed hazard label before pickup.
+  - ref: turn_040
+    actor_id: facilities
+    speaker: Facilities
+    content: Fume hood certification will be renewed before the end of the quarter.
+  - ref: turn_069
+    actor_id: events_procurement
+    speaker: Events Procurement
+    content: 'Latest from the workspace: Two incubators are booked for the calibration run. For context,
+      waste pickup was rescheduled around the audit visit. The current workspace also says the lot number
+      list for the current batch is in the shared folder. The supplier moved its dispatch day to Wednesday.
+      Operations and finance are reviewing the remaining vendor questions, timing, and project dependencies
+      before circulating the next handoff. I have left the earlier version attached for comparison. The
+      next handoff is due later today.'
+  - ref: turn_035
+    actor_id: chief_financial_officer
+    speaker: Chief Financial Officer
+    content: I narrow auth_lab so its allowed categories are now only assay_kits. cell_culture_media is
+      removed. The maximum is reduced to USD 8,400, and the authorization is now valid until 2026-07-23T00:00:00Z
+      exclusive. All other authorization fields remain unchanged.
+  - ref: turn_036
+    actor_id: lab_procurement
+    speaker: Lab Procurement
+    content: Understood. The current category list is assay_kits only.
+  - ref: turn_041
+    actor_id: shipping_desk
+    speaker: Shipping Desk
+    content: Dry ice shipments need a completed hazard label before pickup.
+  - ref: turn_042
+    actor_id: quality_assurance
+    speaker: Quality Assurance
+    content: Deviation reports from the last run are under review.
+  - ref: turn_043
+    actor_id: procurement_systems
+    speaker: Procurement Systems
+    content: The requisition form will keep the original two categories in its history.
+  - ref: turn_044
+    actor_id: safety_office
+    speaker: Safety Office
+    content: Chemical inventory updates are due by the last working day of the month.
+  - ref: turn_045
+    actor_id: events_procurement
+    speaker: Events Procurement
+    content: 'Small correction: Waste pickup was rescheduled around the audit visit. For context, the
+      supplier moved its dispatch day to Wednesday. The current workspace also says cold-chain deliveries
+      must arrive before the afternoon freezer check. The lot number list for the current batch is in
+      the shared folder. Owners are checking the quantities and delivery sequence against the current
+      quote, with any corrections due before the next project checkpoint. No reply needed unless your
+      numbers differ.'
+  - ref: turn_046
+    actor_id: research_program
+    speaker: Research Program
+    content: The interim analysis meeting moved to the following Tuesday.
+  - ref: turn_047
+    actor_id: records_management
+    speaker: Records Management
+    content: 'Latest from the workspace: Waste pickup was rescheduled around the audit visit. For context,
+      two incubators are booked for the calibration run. The current workspace also says the lot number
+      list for the current batch is in the shared folder. The supplier moved its dispatch day to Wednesday.
+      Owners are checking the quantities and delivery sequence against the current quote, with any corrections
+      due before the next project checkpoint. No reply needed unless your numbers differ.'
+- ref: block_04
+  title: Post-change operations and purchase handoff
+  ended_at: '2026-06-30T18:00:00Z'
+  turns:
+  - ref: turn_070
+    actor_id: events_procurement
+    speaker: Events Procurement
+    content: 'Small correction: The supplier moved its dispatch day to Wednesday. For context, two incubators
+      are booked for the calibration run. The current workspace also says the lot number list for the
+      current batch is in the shared folder. Cold-chain deliveries must arrive before the afternoon freezer
+      check. Operations and finance are reviewing the remaining vendor questions, timing, and project
+      dependencies before circulating the next handoff. I have left the earlier version attached for comparison.
+      The next handoff is due later today.'
+  - ref: turn_065
+    actor_id: records_management
+    speaker: Records Management
+    content: 'For the next handoff: The validation protocol added a second replicate for each plate. For
+      context, cold-chain deliveries must arrive before the afternoon freezer check. The current workspace
+      also says the lot number list for the current batch is in the shared folder. Waste pickup was rescheduled
+      around the audit visit. The team is walking through delivery dates, quantities, and handoffs today
+      so the next version of the schedule and cost sheet use the same assumptions. Please flag any mismatch
+      in the shared folder. The next handoff is due later today.'
+  - ref: turn_061
+    actor_id: records_management
+    speaker: Records Management
+    content: 'For the next handoff: Cold-chain deliveries must arrive before the afternoon freezer check.
+      For context, two incubators are booked for the calibration run. The current workspace also says
+      waste pickup was rescheduled around the audit visit. The lot number list for the current batch is
+      in the shared folder. Owners are reconciling the dates, quantities, delivery constraints, and open
+      vendor questions before the afternoon review. The ops team is using this for today''s plan. The
+      next handoff is due later today.'
+  - ref: turn_048
+    actor_id: records_management
+    speaker: Records Management
+    content: The equipment log will be archived after the instrument service.
+  - ref: turn_049
+    actor_id: lab_operations
+    speaker: Lab Operations
+    content: The freezer alarm test is scheduled for Thursday morning.
+  - ref: turn_050
+    actor_id: accounts_payable
+    speaker: Accounts Payable
+    content: A supplier credit note from the autumn shipment has not been applied yet.
+  - ref: turn_051
+    actor_id: facilities
+    speaker: Facilities
+    content: Fume hood certification will be renewed before the end of the quarter.
+  - ref: turn_052
+    actor_id: lab_operations
+    speaker: Lab Operations
+    content: The freezer alarm test is scheduled for Thursday morning.
+  - ref: turn_053
+    actor_id: safety_office
+    speaker: Safety Office
+    content: Chemical inventory updates are due by the last working day of the month.
+  - ref: turn_054
+    actor_id: shipping_desk
+    speaker: Shipping Desk
+    content: Dry ice shipments need a completed hazard label before pickup.
+  - ref: turn_055
+    actor_id: safety_office
+    speaker: Safety Office
+    content: Chemical inventory updates are due by the last working day of the month.
+  - ref: turn_056
+    actor_id: finance_operations
+    speaker: Finance Operations
+    content: Reagent invoices should reference the grant code and the study identifier.
+  - ref: turn_057
+    actor_id: shipping_desk
+    speaker: Shipping Desk
+    content: Dry ice shipments need a completed hazard label before pickup.
+  - ref: turn_058
+    actor_id: research_program
+    speaker: Research Program
+    content: The interim analysis meeting moved to the following Tuesday.
+events:
+- ref: event_issue
+  event_type: issue
+  issuer: chief_financial_officer
+  block_ref: block_01
+  effective_at: '2026-05-31T12:00:00Z'
+  authorization_ref: auth_lab
+  source_turn_refs:
+  - turn_012
+  record:
+    authorization_ref: auth_lab
+    issuer: chief_financial_officer
+    grantee: lab_procurement
+    effect: permit_exception
+    action: submit_order
+    vendor: ReagentWorks
+    allowed_categories:
+    - assay_kits
+    - cell_culture_media
+    max_amount: 12000
+    currency: USD
+    valid_from: '2026-06-05T00:00:00Z'
+    valid_until: '2026-11-02T00:00:00Z'
+    status: active
+    source_turn_refs:
+    - turn_012
+- ref: event_patch
+  event_type: patch
+  issuer: chief_financial_officer
+  block_ref: block_03
+  effective_at: '2026-06-20T12:00:00Z'
+  authorization_ref: auth_lab
+  source_turn_refs:
+  - turn_035
+  patch:
+    allowed_categories:
+    - assay_kits
+    max_amount: 8400
+    valid_until: '2026-07-23T00:00:00Z'
+probe_pairs:
+- ref: amount
+  dimension: amount
+  in_scope:
+    grantee: lab_procurement
+    action: submit_order
+    vendor: ReagentWorks
+    category: assay_kits
+    amount: 6700
+    currency: USD
+    action_time: '2026-07-02T12:00:00Z'
+  out_of_scope:
+    grantee: lab_procurement
+    action: submit_order
+    vendor: ReagentWorks
+    category: assay_kits
+    amount: 10200
+    currency: USD
+    action_time: '2026-07-02T12:00:00Z'
+- ref: time
+  dimension: time
+  in_scope:
+    grantee: lab_procurement
+    action: submit_order
+    vendor: ReagentWorks
+    category: assay_kits
+    amount: 6700
+    currency: USD
+    action_time: '2026-07-02T12:00:00Z'
+  out_of_scope:
+    grantee: lab_procurement
+    action: submit_order
+    vendor: ReagentWorks
+    category: assay_kits
+    amount: 6700
+    currency: USD
+    action_time: '2026-07-24T12:00:00Z'
+- ref: category
+  dimension: category
+  in_scope:
+    grantee: lab_procurement
+    action: submit_order
+    vendor: ReagentWorks
+    category: assay_kits
+    amount: 6700
+    currency: USD
+    action_time: '2026-07-02T12:00:00Z'
+  out_of_scope:
+    grantee: lab_procurement
+    action: submit_order
+    vendor: ReagentWorks
+    category: cell_culture_media
+    amount: 6700
+    currency: USD
+    action_time: '2026-07-02T12:00:00Z'
+tags:
+- lab
+- generated
+- gap_2
+- stale_0
