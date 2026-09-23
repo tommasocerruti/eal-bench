@@ -201,3 +201,25 @@ Items 1, 5, 6, 7, 8, 10, 13 ("All executors pass..."), 14, 15, 18, 20 as propose
 | Finance | 37/48 (77.1%) | 18/48 (37.5%) | 19 |
 
 So Table 32's 93.3% and B.1's 60.7% are the same quantity under two field sets, and cybersecurity's row is unaffected. Applied: one clause in the Table 32 caption naming the difference. Recomputing Table 32 without the citation field would need the five original writers' memories, which are not in the repository (their row comes from the frozen values), so the caption clause is the fix.
+
+## Co-author follow-ups (2026-09-22)
+
+### Seed coverage audit
+
+Table 2 is three seeds throughout, for the four memory-condition rows and the three writer-side rows alike: the instruction, hybrid and rebuild conditions each rest on 63 runs (seven writers, three seeds, three domains) and the denominators are 1,512, 2,688 and 1,344 unauthorized trials per condition.
+
+Table 3 is one seed in both the baseline and the pressure columns. The printed baselines match the single pressure-study seed exactly and not the three-seed pool (Nemotron procurement 8.0/94.1 against 7.5/92.8; Qwen-Plus finance 43.8/93.0 against 42.8/90.1). Procurement and cybersecurity have pressure runs only at the canonical seed. Finance has three writer seeds for the five original writers (`finance-redesign-final-s<seed>-<writer>-pressure`, all replayed with executor seed 20260816) but only the canonical seed for Inkling and DeepSeek V4.1 Flash, so the shared seed is the only common ground and the table uses it.
+
+Three seeds: primary matrices, formation, exact-state repair (390 trials = 208 + 182), the writer instruction, hybrid, rebuild every three blocks, the aligned gate comparison, both event-sourcing tables, the failure-cause table, and the writer cue study. One seed: pressure, the closed loop, writer-side compute, the generated histories, both capacity ablations, the two representation-level gate tables, and the executor cue figure. Every caption that lacked a seed statement now carries one.
+
+### Rejected updates now come from the write-validation log
+
+`results/diagnosis/failures.csv` already carried the harness outcome of each write attempt at the failing block (`attempt_statuses`), so no rerun or re-judge was needed. An update counts as rejected when the last attempt is neither accepted nor a no-change, the case in which the manager keeps the previous profile; the judges decide among the remaining labels, and a row whose write landed has its majority recomputed with any update-rejected votes dropped. Scripts: `deterministic_cause.py`, applied by `apply_det_and_seeds.py`.
+
+The panel and the log agree on 3,506 of 3,569 rows (98.2%, Cohen's kappa 0.96). Every disagreement is in cybersecurity: 53 rows the harness rejected that the panel called a misapplied change, and 10 the panel called rejected where the write landed (six retries that succeeded, four no-changes). Procurement is 0 against 0 and finance 4 against 4.
+
+Changed cells in the failure-cause table: open-loop cybersecurity 51/478 becomes 26/503; closed-loop shared blocks 16/61 becomes 8/69; the agent's own lines 3/.../4 becomes 2/.../5; cybersecurity under the instruction 60/571 becomes 48/581; the total row becomes 1,998 / 285 / 119 / 1,157 / 10. C.3 becomes 528 of 574 against 335 of 348. The mechanism figure was regenerated. The unanimity sentence now reports the log-versus-panel agreement and the 95% unanimity over the 2,412 rows the panel still decides.
+
+### Transition rates over seven writers
+
+The 5,550 denominator was the five original writers; the two added writers contribute 2,220 positions and the two sum to the 7,770 already printed above it. Recomputed over all seven (`transitions_added.py`): error introduction 776/7,770 (10.0%), persistence 3,617/7,770 (46.6%), self-repair 306/7,770 (3.9%), against the printed 10.6%, 51.7% and 3.7%.

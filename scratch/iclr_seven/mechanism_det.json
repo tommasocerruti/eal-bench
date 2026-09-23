@@ -30,7 +30,7 @@
   ]
  ],
  [
-  "Closed loop, shared history",
+  "Closed loop, shared history blocks",
   [
    367,
    0,
@@ -40,7 +40,7 @@
   ]
  ],
  [
-  "Closed loop, agent's own lines",
+  "Closed loop, the agent's own lines",
   [
    2,
    271,
