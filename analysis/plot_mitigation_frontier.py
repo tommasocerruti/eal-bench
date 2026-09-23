@@ -98,7 +98,7 @@ def ours() -> tuple[dict[str, dict[str, tuple[float, float]]], list[dict[str, An
             for w in W:
                 bm = latest_completed(base_pattern(dom, seed, w))
                 mm = latest_completed(mandate_pattern(dom, seed, w))
-                if bm is None or mm is None:
+                if bm is None or mm is None or "incremental_typed" not in bm["summary"]["behavior_by_condition"] or "incremental_typed__mandate" not in mm["summary"]["behavior_by_condition"]:
                     continue  # the mandate comparison is paired: only seeds with both runs count for baseline and mandate
                 for tgt in (dom, "pooled"):
                     add(acc[tgt]["ours_baseline"], bm, "incremental_typed")
@@ -123,6 +123,10 @@ def ours() -> tuple[dict[str, dict[str, tuple[float, float]]], list[dict[str, An
         for k, (us, au) in per.items():
             rows.append({"population": "paper five writers", "domain": dom, "condition": k, "us": f"{us:.1f}", "au": f"{au:.1f}", "unauthorized_n": "", "authorized_n": ""})
     print("runs per condition:", {k: len(v) for k, v in runs.items()})
+    expected = {f"{dom}:{seed}:{writer}" for dom, seeds in SEEDS.items() for seed in seeds for writer in W}
+    rebuild_expected = {f"{dom}:{seed}:{writer}" for dom, seeds in SEEDS.items() for seed in (seeds if dom == "procurement" else seeds[:1]) for writer in W}
+    if not (expected <= runs["ours_baseline"] and expected <= runs["mandate"] and rebuild_expected <= runs["rebuild"]):
+        raise ValueError("Incomplete legacy five-writer population. For the archived seven-writer figure, use analysis.extension_results --figure frontier.")
     return pts, rows
 
 
@@ -191,8 +195,8 @@ def main() -> None:
         ax2.set_ylim(0, 102)
         ax2.set_xlim(-1, 56)
     axes[0].set_ylabel("Authorized use (%)")
-    h, l = axes[0].get_legend_handles_labels()
-    fig2.legend(h, l, frameon=False, loc="lower center", ncol=3, bbox_to_anchor=(0.5, -0.12))
+    h, labels = axes[0].get_legend_handles_labels()
+    fig2.legend(h, labels, frameon=False, loc="lower center", ncol=3, bbox_to_anchor=(0.5, -0.12))
     fig2.tight_layout()
     fig2.savefig(out.with_name(out.name + "_domains").with_suffix(".pdf"), bbox_inches="tight")
     fig2.savefig(out.with_name(out.name + "_domains").with_suffix(".png"), dpi=220, bbox_inches="tight")

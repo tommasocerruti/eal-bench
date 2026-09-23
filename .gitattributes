@@ -2,3 +2,6 @@
 domains/*/data/** linguist-generated=true
 results/**/manifest.json linguist-generated=true
 results/*/paper/counts.json linguist-generated=true
+
+# Preserve the exact bytes of hash-pinned results on every platform.
+results/** -text

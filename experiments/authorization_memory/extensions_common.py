@@ -18,6 +18,7 @@ from eal_bench.llm.logger import JSONLLogger
 
 from .langmem_writer import _freeze
 from .persistence import canonical_json, content_hash, git_info, runtime_info, write_json, write_jsonl
+from .runner import _implementation_files
 from .schemas import FrozenEvidence, MemoryArtifact, MemoryOrigin, NormalizedTrial
 from .study_plan import ExecutorJob
 from .tokens import count_reference_tokens, reference_tokenizer_name
@@ -43,14 +44,21 @@ def base_manifest(
     presentation: PresentationProfile,
     implementation_files: Sequence[Path],
 ) -> dict[str, Any]:
+    corpus_version = str(options.get("corpus_version") or domain.corpus.default_version)
+    root = Path(__file__).resolve().parents[2]
+    implementation_files = sorted({path.resolve() for path in (*implementation_files, *_implementation_files(domain), *root.joinpath("domains").glob("*.py"), root / "src/eal_bench/config.yaml")})
     return {
+        "schema_version": "extension_run_manifest_v1",
+        "corpus_version": corpus_version,
+        "source_files": {path.resolve().relative_to(root).as_posix(): file_sha256(path) for path in domain.corpus.source_files(corpus_version)},
+        "corpus_provenance": dict(domain.corpus.provenance(corpus_version)),
         "study": study,
         "domain_id": domain.domain_id,
         "domain_adapter_version": domain.adapter_version,
         "options": {key: str(value) if isinstance(value, Path) else value for key, value in options.items()},
         "presentation": presentation.to_dict(),
         "presentation_hash": content_hash(presentation.to_dict()),
-        "implementation_files": {path.as_posix(): file_sha256(path) for path in implementation_files},
+        "implementation_files": {path.relative_to(root).as_posix(): file_sha256(path) for path in implementation_files},
         "git": git_info(),
         "runtime": runtime_info(),
         "started_at": datetime.now(timezone.utc).isoformat(),
@@ -62,7 +70,60 @@ def write_rows(run_dir: Path, name: str, rows: Iterable[Any]) -> int:
 
 
 def write_manifest(run_dir: Path, manifest: Mapping[str, Any]) -> None:
-    write_json(run_dir / "manifest.json", {**manifest, "finished_at": datetime.now(timezone.utc).isoformat()})
+    payload = dict(manifest)
+    payload["files"] = {
+        path.stem: {"path": path.name, "sha256": file_sha256(path),
+                    "rows": sum(bool(line.strip()) for line in path.read_bytes().splitlines())}
+        for path in sorted(run_dir.glob("*.jsonl"))
+    }
+    if payload.get("status") == "completed":
+        payload["finished_at"] = datetime.now(timezone.utc).isoformat()
+    write_json(run_dir / "manifest.json", payload)
+
+
+def verify_replay_source(source: Path, manifest: Mapping[str, Any], *, allow_unverified: bool = False) -> dict[str, Any]:
+    """Check every consumed/copied artifact before replay, including offline planning."""
+    required = {"evidence.jsonl"}
+    if manifest.get("study") == "writer":
+        required.add("trials.jsonl")
+    optional = {"memories.jsonl", "memory_attempts.jsonl", "memory_states.jsonl", "formation.jsonl"}
+    files = manifest.get("files") or {}
+    inventory = {}
+    unverified = []
+    for name in sorted(required | {name for name in optional if (source / name).is_file()}):
+        path = source / name
+        digest = file_sha256(path)
+        record = files.get(path.stem)
+        if record is None:
+            unverified.append(name)
+        elif record.get("path") != name or record.get("sha256") != digest:
+            raise ValueError(f"Source artifact differs from its manifest: {path}")
+        inventory[name] = {"sha256": digest, "verified_against_manifest": record is not None}
+    root = Path(__file__).resolve().parents[2]
+    source_files = manifest.get("source_files") or {}
+    if not source_files:
+        unverified.append("corpus source hashes")
+    domain_files = {
+        path: digest for path, digest in (manifest.get("implementation_files") or {}).items()
+        if path.replace("\\", "/").startswith("domains/") or "/domains/" in path.replace("\\", "/")
+    }
+    verified_sources = {}
+    for recorded_path, digest in (*source_files.items(), *domain_files.items()):
+        portable = recorded_path.replace("\\", "/")
+        # Older manifests recorded the original checkout's absolute domain paths.
+        if "/domains/" in portable:
+            portable = "domains/" + portable.split("/domains/", 1)[1]
+        path = (root / portable).resolve()
+        if not path.is_relative_to(root) or not path.is_file() or file_sha256(path) != digest:
+            raise ValueError(f"Source corpus/implementation differs from its manifest: {recorded_path}")
+        verified_sources[portable] = digest
+    if unverified and not allow_unverified:
+        raise ValueError("Source lacks recorded hashes for " + ", ".join(unverified)
+                         + "; legacy replay requires --allow-unverified-source")
+    return {"manifest_sha256": file_sha256(source / "manifest.json"),
+            "verification": "unverified_legacy" if unverified else "verified",
+            "source_files": verified_sources, "files": inventory}
+
 
 
 def make_artifact(

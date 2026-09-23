@@ -127,7 +127,6 @@ def main() -> None:
         ax_top = fig.add_subplot(inner[0])
         ax_bot = fig.add_subplot(inner[1], sharex=ax_top)
         rounds = sorted({r for (_, r) in data[dom]})
-        n_chains = len(data[dom].get(("action", 1), {}))
         for arm, label in (("action", "Own log written back"), ("neutral", "Neutral control")):
             au, us = [], []
             for r in rounds:

@@ -3,9 +3,7 @@
 from __future__ import annotations
 
 import os as _os
-# Completion budget of the event writer. The paper's protocol uses 4,096 tokens; writers that reason inside the
-# completion (Inkling) need more, set EAL_EVENT_WRITER_MAX_TOKENS when launching such a run.
-EVENT_WRITER_MAX_TOKENS = int(_os.environ.get("EAL_EVENT_WRITER_MAX_TOKENS", "4096"))
+
 
 import copy
 
@@ -92,6 +90,11 @@ from .validation import (
     validate_event_sourcing_offline,
     validate_options,
 )
+
+
+# Completion budget of the event writer. The paper's protocol uses 4,096 tokens; writers that reason inside the
+# completion (Inkling) need more, set EAL_EVENT_WRITER_MAX_TOKENS when launching such a run.
+EVENT_WRITER_MAX_TOKENS = int(_os.environ.get("EAL_EVENT_WRITER_MAX_TOKENS", "4096"))
 
 
 def shared_study_profile() -> StudyProfile:

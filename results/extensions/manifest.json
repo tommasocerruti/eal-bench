@@ -1,0 +1,2528 @@
+{
+  "schema_version": "extension_snapshot_index_v1",
+  "research_commit": "9ada7784ba394dbf7340812d9667ab05c12c08b6",
+  "raw_run_archive": {
+    "status": "not_supplied",
+    "location": null,
+    "limitation": "Available summaries and diagnosis records can be checked and replotted. Original raw extension runs and an exhaustive frozen selection were not supplied; full independent recount is unavailable. The available diagnosis JSONL subset does not reconstruct the complete failures.csv; diagnosis recount starts from that archived CSV."
+  },
+  "files": [
+    {
+      "path": "results/extensions/snapshots/added_agreement.json",
+      "sha256": "dd59f0e2b9f6e99a477e8d551e45120a0d6c787525cec6c0f9496e19534f8332",
+      "original_path": "scratch/iclr_seven/added_agreement.json"
+    },
+    {
+      "path": "results/extensions/snapshots/added_counts_v2.json",
+      "sha256": "e1df82a8e5ec0e168cac4bccef278fb644d72c41335bb9d4dda040518d4d498b",
+      "original_path": "scratch/iclr_seven/added_counts_v2.json"
+    },
+    {
+      "path": "results/extensions/snapshots/added_per_seed_executor.json",
+      "sha256": "c318bcdc06e608b06d1b0ac6162841b9470ed2bf0f8185811f9851855f6254de",
+      "original_path": "scratch/iclr_seven/added_per_seed_executor.json"
+    },
+    {
+      "path": "results/extensions/snapshots/added_writer_counts.json",
+      "sha256": "562e17e616dba48987495b23281a83394edada9b5be528fed0152705ec0ae481",
+      "original_path": "scratch/iclr_seven/added_writer_counts.json"
+    },
+    {
+      "path": "results/extensions/snapshots/apply_parity_summary.json",
+      "sha256": "8ea1d71f31133bd4b8b02f73480e6f98675000b19c5d5dae709f42274ac8f546",
+      "original_path": "scratch/iclr_seven/apply_parity_summary.json"
+    },
+    {
+      "path": "results/extensions/snapshots/event_representation_seven.json",
+      "sha256": "72738f18bd7a0492c0e0d6f5a32a1c59228babcef6063ebb75aa6eb446962c99",
+      "original_path": "scratch/iclr_seven/event_representation_seven.json"
+    },
+    {
+      "path": "results/extensions/snapshots/fig2_designs.json",
+      "sha256": "7365d50da57be55b4e09bb5b86e0e87dee13df2a4e99eb08f42bdb0a7948b30d",
+      "original_path": "scratch/iclr_seven/fig2_designs.json"
+    },
+    {
+      "path": "results/extensions/snapshots/fig4_points.json",
+      "sha256": "78fa675d2e9556e1e809377b1b36a8ea6b01daaa8ee1de40041ae2ede3c0a6a7",
+      "original_path": "scratch/iclr_seven/fig4_points.json"
+    },
+    {
+      "path": "results/extensions/snapshots/final_added_per_run.json",
+      "sha256": "aac8f634f18e757ea2b437f998f742321d4538700da0cf09a1566768029f246e",
+      "original_path": "scratch/iclr_seven/final_added_per_run.json"
+    },
+    {
+      "path": "results/extensions/snapshots/gate_added.json",
+      "sha256": "c79afff64f7df442e4126ef0e8680edfc70da810562011bb262df600154ee076",
+      "original_path": "scratch/iclr_seven/gate_added.json"
+    },
+    {
+      "path": "results/extensions/snapshots/gate_added_table.json",
+      "sha256": "035c46414ac3706fc1f53339ce521610dad533e3aaf43f55c3f6009a77d1256e",
+      "original_path": "scratch/iclr_seven/gate_added_table.json"
+    },
+    {
+      "path": "results/extensions/snapshots/gate_behavior_added.json",
+      "sha256": "a0c00e4b78eaada5d2b02c456776e40148dbcd2dadc45d5d9acf3a2da70229ee",
+      "original_path": "scratch/iclr_seven/gate_behavior_added.json"
+    },
+    {
+      "path": "results/extensions/snapshots/integrate_data.json",
+      "sha256": "c19462f98f7684c3a3f2b4bf9fbbd272c2589bcb3d3fc0ad2522ae146a50fab5",
+      "original_path": "scratch/iclr_seven/integrate_data.json"
+    },
+    {
+      "path": "results/extensions/snapshots/mechanism.json",
+      "sha256": "8dd88949d6092323f7ceb664ba17599a396f2874c846eb54d362f462da146d1a",
+      "original_path": "scratch/iclr_seven/mechanism.json"
+    },
+    {
+      "path": "results/extensions/snapshots/mechanism_det.json",
+      "sha256": "ca91519e28962008786dd438a3dd9d78ea5e74bd6db47a221286e8fe4a2444ff",
+      "original_path": "scratch/iclr_seven/mechanism_det.json"
+    },
+    {
+      "path": "results/extensions/snapshots/paper_counts_pooled.json",
+      "sha256": "c3c922ac68440fa48d68cf9733c3ce7bdb7fe2d83e3130d2ab006692a43a8bbf",
+      "original_path": "scratch/iclr_seven/paper_counts_pooled.json"
+    },
+    {
+      "path": "results/extensions/snapshots/parity_pool.json",
+      "sha256": "9b7b4a70d75385a2e7d563e3bd6c1807740daf92c76ee66ce3b9bfc0d665ead4",
+      "original_path": "scratch/iclr_seven/parity_pool.json"
+    },
+    {
+      "path": "results/extensions/snapshots/pf_added2.json",
+      "sha256": "1b386088395c8128a4da154d0bbbae93c98b79a617960b8a327ce1f0841c18f6",
+      "original_path": "scratch/iclr_seven/pf_added2.json"
+    },
+    {
+      "path": "results/extensions/snapshots/pf_added_per_run.json",
+      "sha256": "2bf5ea9d0c8b02f87fc296cc446ed98ba0983ff24fbd92dcde500e5a1f0a458c",
+      "original_path": "scratch/iclr_seven/pf_added_per_run.json"
+    },
+    {
+      "path": "results/extensions/snapshots/restatement.json",
+      "sha256": "44b30962767213647628bc97e543f2aa02cbe7ceb98d85d87a9262f45824e499",
+      "original_path": "scratch/iclr_seven/restatement.json"
+    },
+    {
+      "path": "results/extensions/snapshots/seven_summary.json",
+      "sha256": "74d6067d853593b7c17ba7ff16912d2cbab0d0baec6e0283a9ae5880901e7d33",
+      "original_path": "scratch/iclr_seven/seven_summary.json"
+    },
+    {
+      "path": "results/extensions/snapshots/states_added_per_run.json",
+      "sha256": "98878516c40785cd72e814dccd1530242f8196aff739cd136f8c80cca063ab0e",
+      "original_path": "scratch/iclr_seven/states_added_per_run.json"
+    },
+    {
+      "path": "results/extensions/snapshots/t3_press.json",
+      "sha256": "ff10565deb856be79de43afbb7fbbf0da8019d104498eba66b0daa0ce7a35ad5",
+      "original_path": "scratch/iclr_seven/t3_press.json"
+    },
+    {
+      "path": "results/extensions/snapshots/table33_paper_baseline.json",
+      "sha256": "b753c20bf23c6f16e618df90a7efa50cc57163aea2112e96e24db0e1eb665894",
+      "original_path": "scratch/iclr_seven/table33_paper_baseline.json"
+    },
+    {
+      "path": "results/extensions/snapshots/table4_pooled.json",
+      "sha256": "cb5ab79a8eaba27a3195c121822c0544a9893dbcffa3556341511320c546701c",
+      "original_path": "scratch/iclr_seven/table4_pooled.json"
+    },
+    {
+      "path": "results/extensions/snapshots/transitions_added.json",
+      "sha256": "16eaca37f06f83a7edb4f6876c9023450c06d1e52c6f42fd0cda48ff5ba5912c",
+      "original_path": "scratch/iclr_seven/transitions_added.json"
+    },
+    {
+      "path": "results/analysis/closed_loop_three_writers_paired.md",
+      "sha256": "0480a78a2e4676755665642532eb0719516158361fe4c9f34873f2ad503cacf4"
+    },
+    {
+      "path": "results/analysis/glm53_paper_route_source_dirs.txt",
+      "sha256": "f676376657f46c8c30ec52dce516d697c08121d91fc0c7584a9fef3846661c44"
+    },
+    {
+      "path": "results/analysis/glm53_seven.md",
+      "sha256": "ca8bb203fefff8d554637897280a7699f2f32d833769edbbf89d5f738ab18d58"
+    },
+    {
+      "path": "results/analysis/loop_vs_null_all.txt",
+      "sha256": "15109d83b27031f7f1fc563c0c59d8d74bca3862ebdbacb4e5d4d7192727e53a"
+    },
+    {
+      "path": "results/analysis/loop_vs_null_cybersecurity.txt",
+      "sha256": "f7bf2bbe9ebf08178e2d09a8298c531a942d01efbe41e7dfebf9eb92c40519f7"
+    },
+    {
+      "path": "results/analysis/loop_vs_null_deepseek_v4_1_flash_baseten.txt",
+      "sha256": "1693b82d750a57fe69e48702e4fae83a510c4d074ea468c751124a0459a20a98"
+    },
+    {
+      "path": "results/analysis/loop_vs_null_finance.txt",
+      "sha256": "c5befbcdc013844a0e13e3b2a82fab4313cd6682218b2a5a7b944d970ccfdd34"
+    },
+    {
+      "path": "results/analysis/loop_vs_null_five_writers.txt",
+      "sha256": "195c5b187f7bfc09a75f471c309c2cd36ecdd83bf5a0939853bdfadddf4c20d2"
+    },
+    {
+      "path": "results/analysis/loop_vs_null_glm_5_2_baseten.txt",
+      "sha256": "35d6387d7bac9218e2cb893d18ea294747e84443218433fe06dc0acdf560bd77"
+    },
+    {
+      "path": "results/analysis/loop_vs_null_grok_4_3_openrouter.txt",
+      "sha256": "8f98fc98b7e0d3bc1ca7bee84ae06e5645c32928b97c97f21ed35398a759eff7"
+    },
+    {
+      "path": "results/analysis/loop_vs_null_inkling_baseten.txt",
+      "sha256": "388d82cfa4407f721b14204392efb0c7aa81fe63362616d52896ba78ec03d118"
+    },
+    {
+      "path": "results/analysis/loop_vs_null_kimi_baseten.txt",
+      "sha256": "f7b7e1f78612058e1ad905c0d7e138c77a829fa7734773d11122f2a3228b73ae"
+    },
+    {
+      "path": "results/analysis/loop_vs_null_nemotron_3_ultra_baseten.txt",
+      "sha256": "2f120ca581baafc7b3cef86087b8bdc9f81f3e1c0a7ed6a3dd56a3a893d1087b"
+    },
+    {
+      "path": "results/analysis/loop_vs_null_procurement.txt",
+      "sha256": "28a01761530e0cffbef7c863ee25a86a4b675f89acd8e9188c5ed4cdc6dad556"
+    },
+    {
+      "path": "results/analysis/loop_vs_null_qwen_plus_0728_openrouter.txt",
+      "sha256": "e491cba22dcc03ca9cace5055e834050ecebc816b796697cd9713130f2336026"
+    },
+    {
+      "path": "results/analysis/loop_vs_null_seven.txt",
+      "sha256": "84f01d72db7a09011a2cdf328c5b1a7054e4930d4fda0d219fc1ba3d26efc5bf"
+    },
+    {
+      "path": "results/analysis/proposed_paper_tables.md",
+      "sha256": "020ba0d12f7cf53d4452d2a649c55cc2f225ffc0290a48a4d0eb86c50581840d"
+    },
+    {
+      "path": "results/analysis/section4_seven_with.md",
+      "sha256": "0f18065a85c145d8fe6dee9dcb1ad955fc09b928d544dbd152ea18792a773605"
+    },
+    {
+      "path": "results/analysis/section4_seven_without.md",
+      "sha256": "10037109a42b7b14112fe5b73122def221a24d9db6fd249b862395fadbf24b1c"
+    },
+    {
+      "path": "results/analysis/section4_tables.md",
+      "sha256": "602ee285684d5196c8773f5131b3dc52f86cb5c693c7ce4d01e1cece646e13f8"
+    },
+    {
+      "path": "results/analysis/section5_tables.md",
+      "sha256": "1c4b056863161dc5e6be01e7fd8e6b542c1e93819bc8996b2302de430e7f6ab0"
+    },
+    {
+      "path": "results/analysis/section6_seven.md",
+      "sha256": "948eab86119300ca8c01be14c41bb8ae1b11bd5a3c5fc0a0bb57946e0d924b6e"
+    },
+    {
+      "path": "results/analysis/section6_tables.md",
+      "sha256": "ade796cb796018ed28eed00236fe5ed7f56810db4a7b5fa89d7bf2ba16a633bc"
+    },
+    {
+      "path": "results/analysis/section7_open_loop.md",
+      "sha256": "e08012956d6a926bc038fe950c18e7242f6740c7d770b51d83b1f087d988fcb9"
+    },
+    {
+      "path": "results/analysis/section7_open_loop_prelim.md",
+      "sha256": "a758dd10ce231e0caface520cda17ae017151e4b05c40f4e9c7a7744d1291c12"
+    },
+    {
+      "path": "results/analysis/section7_seeds.md",
+      "sha256": "4a1df7589d788d0b0d82772807ec277466dbf88e9ad7d7a24b628bc483fad36f"
+    },
+    {
+      "path": "results/analysis/section7_seven.md",
+      "sha256": "e96c93c699e948b777a948481b0fb599bb0585a62b16a73f2b5e375aec28c898"
+    },
+    {
+      "path": "results/analysis/section_cap2.md",
+      "sha256": "62fb2ec777c54f39d0ca97e8b0aca05208c145f32db16a2a1fcf4b360264e9aa"
+    },
+    {
+      "path": "results/analysis/section_gate_event.md",
+      "sha256": "047be200d1ac88460aa28c236d89623a8fd7fe47908ba42d2962468d3a687874"
+    },
+    {
+      "path": "results/analysis/section_glm53.md",
+      "sha256": "cecb668c2868ead56dc9110e21cdfee0d34525d2c789dbc26bc280b6920528d8"
+    },
+    {
+      "path": "results/analysis/section_glm53_seven_raw.md",
+      "sha256": "ca8bb203fefff8d554637897280a7699f2f32d833769edbbf89d5f738ab18d58"
+    },
+    {
+      "path": "results/diagnosis/failures.csv",
+      "sha256": "3211443d215a854e9bcde9dd3436819335db1b63aead108a27515db3ff0de19a"
+    },
+    {
+      "path": "results/diagnosis/human_check/key.csv",
+      "sha256": "8fb13937f3913b014218098a852379e6c49f588312c8c1dce560393dd5f59164"
+    },
+    {
+      "path": "results/diagnosis/human_check/labels.csv",
+      "sha256": "dd72d0a23e252b0fa990698252dd4fa54d0921a9b778a8e0c559b79db0e5c415"
+    },
+    {
+      "path": "results/diagnosis/human_check/model_reread_claude.csv",
+      "sha256": "4c343e0547d01289438a4b0baeb803fd2fcb38fe2c3444e497b67e78453d7b6f"
+    },
+    {
+      "path": "results/diagnosis/human_check/sheet.md",
+      "sha256": "871b136b37632ddbc98424b1a5e2dd278cb849c49cd4d455dcb2305ccd48d74a"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-cybersecurity-deepseek_v4_1_flash_baseten.jsonl",
+      "sha256": "1376cd463f7de9518add376ea2919c02dadbfcee168bc20e756a47b921152e70"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-cybersecurity-glm_5_2_baseten.jsonl",
+      "sha256": "41cf525fdbf5709e7df849ed64b0646790c99760acc1508edaaf16d33d4d03a0"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-cybersecurity-inkling_baseten.jsonl",
+      "sha256": "87d5ee9254184cf5e2e6471e6cffe3b24f6480c5e590c0efef783140568d6491"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-cybersecurity-kimi_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-cybersecurity-nemotron_3_ultra_baseten.jsonl",
+      "sha256": "d578ca092b3d62f854bebbee79e6fa159d32205578f42eba032afb888a0c640e"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-finance-deepseek_v4_1_flash_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-finance-glm_5_2_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-finance-inkling_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-finance-kimi_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-finance-nemotron_3_ultra_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-generated-v2-deepseek_v4_1_flash_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-generated-v2-glm_5_2_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-generated-v2-inkling_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-generated-v2-kimi_baseten.jsonl",
+      "sha256": "0dbc1cd5e95f049c70572433cdceeaf5d646c18de19669710a9c72f965638a84"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-generated-v2-nemotron_3_ultra_baseten.jsonl",
+      "sha256": "fb523337efbcd2cd8a257e24e93f022c1a0b590968564562e719eb9d7b60d685"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-procurement-deepseek_v4_1_flash_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-procurement-glm_5_2_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-procurement-inkling_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-procurement-kimi_baseten.jsonl",
+      "sha256": "d809243cd631069ee286f8c7c77c2b0fa0fdeb0a09e0db2bdf7fdbed8a364090"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-procurement-nemotron_3_ultra_baseten.jsonl",
+      "sha256": "95a7c38c39625d1db68a43e35e45c01e25b191749f2226653b312e0eca3c1d36"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260821-cybersecurity-deepseek_v4_1_flash_baseten.jsonl",
+      "sha256": "d22c7db584c6973f3855b0ea82ae79ae7d6aef830ec152837bfb0d0742fc9fc1"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260821-cybersecurity-glm_5_2_baseten.jsonl",
+      "sha256": "f5ef5e61e07b5a0cf9bfb53ec6419768adad0e9925459eae5ed812e5c71c4691"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260821-cybersecurity-inkling_baseten.jsonl",
+      "sha256": "f2114958d816c5b44267eda6627955f1332676bb032d3c0fa5e36ff47b309913"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260821-cybersecurity-kimi_baseten.jsonl",
+      "sha256": "4031c9c9c66b51b138f587aed3fdd5c2681da754e6bc43bfdca21213ce05b844"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260821-cybersecurity-nemotron_3_ultra_baseten.jsonl",
+      "sha256": "b3a296d322e2e4110e242647662230193f3452df741a0500df1d1afe87875c91"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260821-finance-deepseek_v4_1_flash_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260821-finance-glm_5_2_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260821-finance-inkling_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260821-finance-kimi_baseten.jsonl",
+      "sha256": "6315c6009ebe9b18d51104b5130601c972f005e93573f201f18b2fd598482ec3"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260821-finance-nemotron_3_ultra_baseten.jsonl",
+      "sha256": "1ecd5760e24f894a62eb802c4967ccb451cf77ca1ec2c55479074423c469b7e0"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260821-procurement-deepseek_v4_1_flash_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260821-procurement-glm_5_2_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260821-procurement-inkling_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260821-procurement-kimi_baseten.jsonl",
+      "sha256": "994b032a8b075e663eefe27fb3a8b3c94ccdc8ab1a185b54314df63e74e31a45"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260821-procurement-nemotron_3_ultra_baseten.jsonl",
+      "sha256": "ff2eb2edb153e12543fdd51de7ae177e4367486666766f66c7515439b44ac167"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260822-cybersecurity-deepseek_v4_1_flash_baseten.jsonl",
+      "sha256": "79b7f23f8934454889a548000beb8d8faf3c16ca92478ac7f9952dca15461a4a"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260822-cybersecurity-glm_5_2_baseten.jsonl",
+      "sha256": "41f9f0556664907959bc03ec48764a5bba8c0215087f997d03b57afdd8f9b849"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260822-cybersecurity-inkling_baseten.jsonl",
+      "sha256": "a917dfcea748dbdadbc02b337029967cd580f40769f858b5a089fb609e16890a"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260822-cybersecurity-kimi_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260822-cybersecurity-nemotron_3_ultra_baseten.jsonl",
+      "sha256": "2d709a50861985babc06706f1e0f9d0a0c0b763505560e7d67cd8ee4c251e3f5"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260822-finance-deepseek_v4_1_flash_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260822-finance-glm_5_2_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260822-finance-inkling_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260822-finance-kimi_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260822-finance-nemotron_3_ultra_baseten.jsonl",
+      "sha256": "13447dce8031793a0b5fbcceef9b56a1080d3112d5ab51255c8718b4f4fc28c9"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260822-procurement-deepseek_v4_1_flash_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260822-procurement-glm_5_2_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260822-procurement-inkling_baseten.jsonl",
+      "sha256": "030b383add3c1a23ddba84e0c090bf5abb1ae2cc4d3bff9d1dd52d1bf34affd7"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260822-procurement-kimi_baseten.jsonl",
+      "sha256": "6eaf949c9cfbb86dc8e947cde1b69025f19f26385fab8ad6da51ab851af0bf3c"
+    },
+    {
+      "path": "results/diagnosis/v2/mandate-open/mandate-s20260822-procurement-nemotron_3_ultra_baseten.jsonl",
+      "sha256": "17b667c13bd148a223ab656555601d7999a06ddf2abf6ac065d344d2728c981f"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260821-cybersecurity-deepseek_v4_1_flash_baseten.jsonl",
+      "sha256": "d0407ad1643edd613f3d986f2717e58d0a31c7d79405ee0710d6c887c9ff1abf"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260821-cybersecurity-glm_5_2_baseten.jsonl",
+      "sha256": "bb047d4ed0e2550fa9b650fdb6dadfcecc485456ba0c8da491a752b86bc2b70c"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260821-cybersecurity-inkling_baseten.jsonl",
+      "sha256": "34628a403bca860ed6db4cdf723780ad6391ad76d1c639bda3f324bd9f1f7586"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260821-cybersecurity-kimi_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260821-cybersecurity-nemotron_3_ultra_baseten.jsonl",
+      "sha256": "e0b4a4ed9b6abfbaa630827020968e23291f1a613c7d5aef27d66dcbc6e05074"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260821-finance-deepseek_v4_1_flash_baseten.jsonl",
+      "sha256": "ad2cdc425e5028679fc3678597c97630a911d032c20e48203321b03721195762"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260821-finance-glm_5_2_baseten.jsonl",
+      "sha256": "f45c8cb0f3b6842329bf273de8ba9906df68834bae289f0dbf563959618ee41b"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260821-finance-inkling_baseten.jsonl",
+      "sha256": "679fd043a7391ddf545125cfdd1ac7c28401c1155d28ece9aa5fb17d0cb6b573"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260821-finance-kimi_baseten.jsonl",
+      "sha256": "726001b53b66cdc954d60298aa58a87f194b5d0a0ae63235ac2cf67971fd5763"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260821-finance-nemotron_3_ultra_baseten.jsonl",
+      "sha256": "7bb891b009764e76b467004ff1d2db1f473e7d5b94c7f828edab35aeffd13c13"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260822-cybersecurity-deepseek_v4_1_flash_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260822-cybersecurity-glm_5_2_baseten.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260822-cybersecurity-inkling_baseten.jsonl",
+      "sha256": "f18097edcc9662e5e7d1213cc5d47dd77b671aa79fc3374093c599fdd9493813"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260822-cybersecurity-kimi_baseten.jsonl",
+      "sha256": "2bdb3c6759b4eaf44f2c39483af9b90e79e44efd79ae9171bae51f79c8b81c6e"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260822-cybersecurity-nemotron_3_ultra_baseten.jsonl",
+      "sha256": "078cf20a404dadcb3a4a61c9d14cbc1d9c9983950450a72bc10de6123f1bae72"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260822-finance-deepseek_v4_1_flash_baseten.jsonl",
+      "sha256": "d045c57523e0270a834463bebaa28598a826e29cfac3bb274941b7b344ae960b"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260822-finance-glm_5_2_baseten.jsonl",
+      "sha256": "bba844c0b6cad43d815900b8e7fe616588591a3f0f43e932ed45756b3b9e549a"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260822-finance-inkling_baseten.jsonl",
+      "sha256": "423f9c2a9f1f23693897dff4350051c04efad18804fb993a05e095252903351a"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260822-finance-kimi_baseten.jsonl",
+      "sha256": "d2336efb837a06516ee8624d356c6d347bd4e0716f673c5f303616442654c312"
+    },
+    {
+      "path": "results/diagnosis/v2/memtable-seeds/memtable-s20260822-finance-nemotron_3_ultra_baseten.jsonl",
+      "sha256": "613a19a5a5b0624f6043c9d6d3001af854971807b6d43022d343ed98cdcae3d5"
+    },
+    {
+      "path": "results/figures/closed_loop_control.csv",
+      "sha256": "834a334cf775ddc0174adfa9a995dcfed5721caf24be36dec5e392857fe703b9"
+    },
+    {
+      "path": "results/figures/closed_loop_control.pdf",
+      "sha256": "b5658a3741e23785827175f439d005ada9014004abca3eead9d67e8573c0fcee"
+    },
+    {
+      "path": "results/figures/closed_loop_control.png",
+      "sha256": "e15a457d88ed2f65a18c6d10cd16e72025eb16757e5d5ab694af09d84f1edf48"
+    },
+    {
+      "path": "results/figures/mitigation_frontier.csv",
+      "sha256": "65ca6ed540c06a7b7038c380ba911277fe6c1ab4e87dde6c5c154c84c3a83e9d"
+    },
+    {
+      "path": "results/figures/mitigation_frontier.pdf",
+      "sha256": "53a42677d02fef34c1cfe386b80795ef376ae6f601a79de085d6a4c37f3c4cd9"
+    },
+    {
+      "path": "results/figures/mitigation_frontier.png",
+      "sha256": "d46173ff5462bdb2985c76c4779bb64807bbb109691cd088cf4d5e0c6bbbfa10"
+    },
+    {
+      "path": "results/figures/mitigation_frontier_domains.pdf",
+      "sha256": "140e913f1c45baeeb8d56b00788999a5c5f93bb175230537b78a56100a8e088e"
+    },
+    {
+      "path": "results/figures/mitigation_frontier_domains.png",
+      "sha256": "b57a7759f0343ce77349b80355e7259f011b5f3445da5930cc8e6ffda1bbbe33"
+    },
+    {
+      "path": "results/figures/mitigation_frontier_rows.pdf",
+      "sha256": "ffea0b1d7a21ab4caf46e58ddda0b681505acb4718b2e6dddf015e647d9cd1e8"
+    },
+    {
+      "path": "results/figures/mitigation_frontier_rows.png",
+      "sha256": "d246fee2e592f2994a5710f538abbad87eb867ba930779585d29bb5e3693b14d"
+    },
+    {
+      "path": "results/procurement/20260913__evaluation_cue_added_writers_analysis/behavior_contrasts.csv",
+      "sha256": "9e4362cf1c8acf34acf1ce955642e4b81522b7ea38f701cccbfee7bea4e29278"
+    },
+    {
+      "path": "results/procurement/20260913__evaluation_cue_added_writers_analysis/behavior_rates.csv",
+      "sha256": "f54ae40af4c8c6931760e0f61cb132c742ac7c8db426faeca29a7a0fdaf9781e"
+    },
+    {
+      "path": "results/procurement/20260913__evaluation_cue_added_writers_analysis/cost_summary.csv",
+      "sha256": "f3d72deea4d2b3f2235f9cfea6d76bfb3368f2bdd9747aee651a5cffb238a1c7"
+    },
+    {
+      "path": "results/procurement/20260913__evaluation_cue_added_writers_analysis/evaluation_cue_effects.pdf",
+      "sha256": "3fec9811a6da8ff2ed73c44bc347143da671a03c8dc49628aeccc166c73c724a"
+    },
+    {
+      "path": "results/procurement/20260913__evaluation_cue_added_writers_analysis/manifest.json",
+      "sha256": "7dac6e6d4791ebccd06c243ab1423a44121a5323122529ec7a5b80959f64a8b4"
+    },
+    {
+      "path": "results/procurement/20260913__evaluation_cue_added_writers_analysis/pairing_validation.csv",
+      "sha256": "14075ef331ebe76b3bc83e03836416254b2849dcb46492290aa1714ac96568b3"
+    },
+    {
+      "path": "results/procurement/20260913__evaluation_cue_added_writers_analysis/report.md",
+      "sha256": "e100fd1e26ab1a832da903207f6f4ae39d633e6bf60c87ee119cadf17d4a35c3"
+    },
+    {
+      "path": "results/procurement/20260913__evaluation_cue_added_writers_analysis/summary.json",
+      "sha256": "5772439f2eceed604d0400c7142c1386e7474d37e58ac9d5b73f544b7292ef26"
+    },
+    {
+      "path": "results/procurement/20260913__evaluation_cue_added_writers_analysis/typed_fidelity_contrasts.csv",
+      "sha256": "f0b360290a9cd9f4a35fb94918174f769e72181af14ec18f07c37336e6716a2c"
+    },
+    {
+      "path": "results/procurement/20260913__evaluation_cue_added_writers_analysis/typed_fidelity_fields.csv",
+      "sha256": "b154e100c925ab674a5e2c69b76a81a5574cd1e252b5626ac50d2dbd87f586b5"
+    },
+    {
+      "path": "results/procurement/20260913__evaluation_cue_added_writers_analysis/typed_fidelity_rates.csv",
+      "sha256": "0269baef3eca4bc45bd33d1b7b72e46c1212a0203a436e6fc3ffe612ecdc574f"
+    },
+    {
+      "path": "results/procurement/20260913__evaluation_cue_added_writers_analysis/update_mechanisms.csv",
+      "sha256": "6d5a1f2dc83cdd8f72564bf9477a9627dfdf75df4bdefcf89701fef6ea53d0c5"
+    },
+    {
+      "path": "results/procurement/20260913__evaluation_cue_added_writers_analysis/update_status_rates.csv",
+      "sha256": "a59d32b6059e7cdfe4a9a6226b3369a14e4153a0a96f1663aab7521f7c644e14"
+    },
+    {
+      "path": "results/procurement/20260913__flash_writer_ttc_k8_analysis/REPORT.md",
+      "sha256": "1fd8ca316a8379768e0d890d253d322e9667255470503c9df61372a48eb513cf"
+    },
+    {
+      "path": "results/procurement/20260913__flash_writer_ttc_k8_analysis/behavior_by_condition.csv",
+      "sha256": "80d1949bb7de142b467297a0e6607c7ccdf66e93fdbcbc0244aed8c0c8bf76f6"
+    },
+    {
+      "path": "results/procurement/20260913__flash_writer_ttc_k8_analysis/candidate_diversity_summary.csv",
+      "sha256": "1725cfe53670091beb2c2371b09ee8cdc8916b2bf6cfb95ec0fcc9ad773497ca"
+    },
+    {
+      "path": "results/procurement/20260913__flash_writer_ttc_k8_analysis/cost_by_stage.csv",
+      "sha256": "5da153e3ed3c66bb00c3e5bb2903e1cf5ddb0b3a0023a1cf989c01f497746f67"
+    },
+    {
+      "path": "results/procurement/20260913__flash_writer_ttc_k8_analysis/incremental_mechanisms.csv",
+      "sha256": "de0a8ce3cb48ff01df3edaa8a298dc9548a3dadf39123e0cef3c444e2d81becb"
+    },
+    {
+      "path": "results/procurement/20260913__flash_writer_ttc_k8_analysis/manifest.json",
+      "sha256": "3600d743ff41da6643c53f2f643855bee959f616d1988e92104ee52c0e7bbc67"
+    },
+    {
+      "path": "results/procurement/20260913__flash_writer_ttc_k8_analysis/nested_pool_validation.csv",
+      "sha256": "5e87d705dbdd49d2c68c220adac21e5f8777665b5ff6b543ea3f4113f773c8f0"
+    },
+    {
+      "path": "results/procurement/20260913__flash_writer_ttc_k8_analysis/selection_scaling.csv",
+      "sha256": "7e11551ba8ef1e736f9a55396e97eddc34d57be3f6e5d438b8943ff68c7415d3"
+    },
+    {
+      "path": "results/procurement/20260913__flash_writer_ttc_k8_analysis/summary.json",
+      "sha256": "c6fdf96b59aa35c6ce0c7766f35cbe7fea66bf973cbc4f1f14d111a51b3d941f"
+    },
+    {
+      "path": "results/procurement/20260913__flash_writer_ttc_k8_analysis/typed_fidelity_by_condition.csv",
+      "sha256": "aa0be362fd2dcf70f7b83c875e73400435b4ed8a0cd3339a291190d3594db2cb"
+    },
+    {
+      "path": "results/procurement/20260913__flash_writer_ttc_k8_analysis/typed_memory_observations.csv",
+      "sha256": "2f962b92c42a6490a0f35bf04bf23f74440cfc44f7e8e719b411428b2ce7aaaa"
+    },
+    {
+      "path": "results/procurement/20260913__inkling_writer_ttc_k8_analysis/REPORT.md",
+      "sha256": "6a450e20ae2136999b05937ff6dd2abfd108d30546e4ae097e76b9020524cd19"
+    },
+    {
+      "path": "results/procurement/20260913__inkling_writer_ttc_k8_analysis/behavior_by_condition.csv",
+      "sha256": "976b3b662ec8410eb0d02e22a82602bed8c45e88614d0ae669fc0ab0458e81b4"
+    },
+    {
+      "path": "results/procurement/20260913__inkling_writer_ttc_k8_analysis/candidate_diversity_summary.csv",
+      "sha256": "887436a0805fbdce0b51ae6071b2698042b24d9d6cd5372ed31410a09ab6fe4e"
+    },
+    {
+      "path": "results/procurement/20260913__inkling_writer_ttc_k8_analysis/cost_by_stage.csv",
+      "sha256": "d538d9b1f905ff4fc981c60fdb7aaebf67828877ef226a413c9233175e3fcaae"
+    },
+    {
+      "path": "results/procurement/20260913__inkling_writer_ttc_k8_analysis/incremental_mechanisms.csv",
+      "sha256": "2874e5845935d41f0d525f4667861b9211e5a3e16abfd45ef66d7bd9ee8a9b39"
+    },
+    {
+      "path": "results/procurement/20260913__inkling_writer_ttc_k8_analysis/manifest.json",
+      "sha256": "9d126c7825b89d4892fb61fe2b8cb8130f8accc2903193c83b09920666a37e62"
+    },
+    {
+      "path": "results/procurement/20260913__inkling_writer_ttc_k8_analysis/nested_pool_validation.csv",
+      "sha256": "5e87d705dbdd49d2c68c220adac21e5f8777665b5ff6b543ea3f4113f773c8f0"
+    },
+    {
+      "path": "results/procurement/20260913__inkling_writer_ttc_k8_analysis/selection_scaling.csv",
+      "sha256": "112f2bf28c73c676e0d719bddd7a51fac15180fd50c65a7c6ebdcae4f5136248"
+    },
+    {
+      "path": "results/procurement/20260913__inkling_writer_ttc_k8_analysis/summary.json",
+      "sha256": "b8112009bfa108fdca4594e7c229b20a4c16ed9418b9e32248b523fad2e92df1"
+    },
+    {
+      "path": "results/procurement/20260913__inkling_writer_ttc_k8_analysis/typed_fidelity_by_condition.csv",
+      "sha256": "48a34c30a2e0d9a62cdf508d39ab83d654b78663d54e73692c0cd01279139084"
+    },
+    {
+      "path": "results/procurement/20260913__inkling_writer_ttc_k8_analysis/typed_memory_observations.csv",
+      "sha256": "3d3ddde00ad954bd7b991b6386cc1147a26c499dc10d54c9f64ff5de020e3845"
+    },
+    {
+      "path": "results/procurement/20260913__seven_writer_ttc_k8_analysis/REPORT.md",
+      "sha256": "49ddf5927cf8d23d5a6aded1594fdfaa281ab1d2b71f0f5726fdc3340cf455f6"
+    },
+    {
+      "path": "results/procurement/20260913__seven_writer_ttc_k8_analysis/behavior_by_writer_condition.csv",
+      "sha256": "a7370a1489e97c321ba454a8837c63af5addbe2f8a1f7bc2d51305655aca5b2c"
+    },
+    {
+      "path": "results/procurement/20260913__seven_writer_ttc_k8_analysis/incremental_mechanisms_by_writer.csv",
+      "sha256": "a07e6e89293dfcea11bf464d9d15e0881f864f7deed894590ca754fa023fa804"
+    },
+    {
+      "path": "results/procurement/20260913__seven_writer_ttc_k8_analysis/manifest.json",
+      "sha256": "85f9db76dc649aca4a7b8dda6eb13e62e751e1c4db5c3274997d995f890368dd"
+    },
+    {
+      "path": "results/procurement/20260913__seven_writer_ttc_k8_analysis/pooled_behavior_by_condition.csv",
+      "sha256": "4e71d39571c1e022c92a85adb57d281547a44e07227a66a44112f49254d5b104"
+    },
+    {
+      "path": "results/procurement/20260913__seven_writer_ttc_k8_analysis/pooled_incremental_mechanisms.csv",
+      "sha256": "5364e8689bda2170602ac17277110bebe67a38234d9a80486cf5b66eebff89f7"
+    },
+    {
+      "path": "results/procurement/20260913__seven_writer_ttc_k8_analysis/pooled_selection_scaling.csv",
+      "sha256": "3c6659ca3b0e24d675abfe2643d3c1ec6d9bb6105c0c676dc5e2e253cdeb445d"
+    },
+    {
+      "path": "results/procurement/20260913__seven_writer_ttc_k8_analysis/pooled_typed_fidelity_by_condition.csv",
+      "sha256": "7b02630c15a356bb44d711c919357bcfc80b7db873815be2b7d24af7bf6380cd"
+    },
+    {
+      "path": "results/procurement/20260913__seven_writer_ttc_k8_analysis/selection_by_writer.csv",
+      "sha256": "d6be1d1348ca10ac05538d821f8e1dc78f0197d8b7c2fda6cf6d5552e8dbffa0"
+    },
+    {
+      "path": "results/procurement/20260913__seven_writer_ttc_k8_analysis/summary.json",
+      "sha256": "cc5126a6e42a46b7891ffd6cd65ef011eb8b0e2c602d8a1dbf3ae511c4f0f6eb"
+    },
+    {
+      "path": "results/procurement/20260913__seven_writer_ttc_k8_analysis/typed_fidelity_by_writer_condition.csv",
+      "sha256": "7916628e78104acd263816d4f3a6bcc0d6eb0d68f9793f60e20bcd8f879e3538"
+    },
+    {
+      "path": "results/procurement/20260913__seven_writer_ttc_k8_analysis/writer_scaling.csv",
+      "sha256": "3b0aa3502bae6bd7f466ad90cb4fb2af8ae44b522ce12440255e76ffeb1c32c5"
+    },
+    {
+      "path": "results/procurement/20260815__deepseek_independent_ttc_k8_analysis_v2/behavior_by_writer_condition.csv",
+      "sha256": "e63bf0da3f37022e5501e7e06553e392a0ce5e46b4861bd7326ff7a521a4d156"
+    },
+    {
+      "path": "results/procurement/20260815__deepseek_independent_ttc_k8_analysis_v2/behavior_pooled.csv",
+      "sha256": "61a9a81cbac5aa4e0c816c580a52977e3bc2759ea37249eb0033a723fc69fe8f"
+    },
+    {
+      "path": "results/procurement/20260815__deepseek_independent_ttc_k8_analysis_v2/costs.csv",
+      "sha256": "834c30023bc5b437b082697249b8d8057771983bb3316198a248f23c6c75aa46"
+    },
+    {
+      "path": "results/procurement/20260815__deepseek_independent_ttc_k8_analysis_v2/excluded_technical_runs.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/procurement/20260815__deepseek_independent_ttc_k8_analysis_v2/review_agreement.csv",
+      "sha256": "6398a115ca249ccf6fdd1d3da8bad55a07fef02dea7c2090d1684700e4b95a63"
+    },
+    {
+      "path": "results/procurement/20260815__deepseek_independent_ttc_k8_analysis_v2/review_failures_all_conditions.csv",
+      "sha256": "b2b45a71c4fa7876485802bba1fe20f1372fa177f0898c3387f6b85520d590b3"
+    },
+    {
+      "path": "results/procurement/20260815__deepseek_independent_ttc_k8_analysis_v2/selection_by_pool.csv",
+      "sha256": "db9a5b606fe22710645f9ab34845f1edc2fbfa66cf6d3f651106c279b4a31b43"
+    },
+    {
+      "path": "results/procurement/20260815__deepseek_independent_ttc_k8_analysis_v2/selection_by_writer_condition.csv",
+      "sha256": "ac16f8dbe9f6fcc68007e1968be96b6711a614b83041b2f80a5dd3dc122cc6a4"
+    },
+    {
+      "path": "results/procurement/20260815__deepseek_independent_ttc_k8_analysis_v2/selection_pooled.csv",
+      "sha256": "35b4e39ccea6a3aba409dab95a7362e3ffc4dc19408879149719d1062aa390a5"
+    },
+    {
+      "path": "results/procurement/20260815__deepseek_independent_ttc_k8_analysis_v2/selection_valid_review_sensitivity.csv",
+      "sha256": "dfba169a1d9d1f3a9cbb8263eb42485d505687ebb5cc945a1151ecf10ad1c164"
+    },
+    {
+      "path": "results/procurement/20260815__deepseek_independent_ttc_k8_analysis_v2/source_audit.csv",
+      "sha256": "cdb22ab93c49c39ba98e1df155657e43aa333425eecbcc42b2775a26e818cdab"
+    }
+  ],
+  "observed_runs": [
+    {
+      "original_path": "20260912-144729-723508__authorization-memory-writer_variants__mandate-procurement-nemotron_3_ultra_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-procurement-nemotron_3_ultra_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260912-155927-976571__authorization-memory-writer_variants__mandate-cybersecurity-nemotron_3_ultra_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-cybersecurity-nemotron_3_ultra_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260912-171556-795075__authorization-memory-writer_variants__mandate-generated-v2-kimi_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-generated-v2-kimi_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260912-181015-444434__authorization-memory-writer_variants__mandate-generated-v2-nemotron_3_ultra_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-generated-v2-nemotron_3_ultra_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260912-213146-393476__authorization-memory-writer_variants__mandate-cybersecurity-glm_5_2_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-cybersecurity-glm_5_2_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260912-214434-624685__authorization-memory-writer_variants__mandate-cybersecurity-deepseek_v4_1_flash_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-cybersecurity-deepseek_v4_1_flash_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260912-222610-590724__authorization-memory-writer_variants__mandate-procurement-kimi_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-procurement-kimi_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-045823-144275__authorization-memory-writer_variants__mandate-cybersecurity-inkling_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-cybersecurity-inkling_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-183703-511236__authorization-memory-writer_variants__memtable-s20260822-finance-glm_5_2_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/memtable-seeds/memtable-s20260822-finance-glm_5_2_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-183703-844914__authorization-memory-writer_variants__memtable-s20260821-finance-nemotron_3_ultra_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/memtable-seeds/memtable-s20260821-finance-nemotron_3_ultra_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-183709-850308__authorization-memory-writer_variants__memtable-s20260821-cybersecurity-glm_5_2_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/memtable-seeds/memtable-s20260821-cybersecurity-glm_5_2_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-183709-953072__authorization-memory-writer_variants__memtable-s20260821-cybersecurity-inkling_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/memtable-seeds/memtable-s20260821-cybersecurity-inkling_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-183710-928065__authorization-memory-writer_variants__memtable-s20260821-cybersecurity-deepseek_v4_1_flash_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/memtable-seeds/memtable-s20260821-cybersecurity-deepseek_v4_1_flash_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-183711-128865__authorization-memory-writer_variants__memtable-s20260821-cybersecurity-nemotron_3_ultra_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/memtable-seeds/memtable-s20260821-cybersecurity-nemotron_3_ultra_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-183713-523542__authorization-memory-writer_variants__mandate-s20260821-procurement-kimi_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-s20260821-procurement-kimi_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-185939-333006__authorization-memory-writer_variants__mandate-s20260821-procurement-nemotron_3_ultra_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-s20260821-procurement-nemotron_3_ultra_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-190021-529537__authorization-memory-writer_variants__mandate-s20260821-finance-nemotron_3_ultra_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-s20260821-finance-nemotron_3_ultra_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-191948-114390__authorization-memory-writer_variants__mandate-s20260821-cybersecurity-nemotron_3_ultra_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-s20260821-cybersecurity-nemotron_3_ultra_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-192327-350520__authorization-memory-writer_variants__memtable-s20260821-finance-glm_5_2_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/memtable-seeds/memtable-s20260821-finance-glm_5_2_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-192352-462578__authorization-memory-writer_variants__mandate-s20260821-cybersecurity-glm_5_2_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-s20260821-cybersecurity-glm_5_2_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-192443-199377__authorization-memory-writer_variants__mandate-s20260821-cybersecurity-deepseek_v4_1_flash_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-s20260821-cybersecurity-deepseek_v4_1_flash_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-193211-334023__authorization-memory-writer_variants__mandate-s20260821-cybersecurity-kimi_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-s20260821-cybersecurity-kimi_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-193233-110181__authorization-memory-writer_variants__memtable-s20260822-finance-inkling_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/memtable-seeds/memtable-s20260822-finance-inkling_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-193642-688056__authorization-memory-writer_variants__mandate-s20260821-cybersecurity-inkling_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-s20260821-cybersecurity-inkling_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-200228-639479__authorization-memory-writer_variants__memtable-s20260822-cybersecurity-nemotron_3_ultra_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/memtable-seeds/memtable-s20260822-cybersecurity-nemotron_3_ultra_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-201740-496483__authorization-memory-writer_variants__memtable-s20260821-finance-inkling_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/memtable-seeds/memtable-s20260821-finance-inkling_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-202246-198942__authorization-memory-writer_variants__memtable-s20260822-cybersecurity-kimi_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/memtable-seeds/memtable-s20260822-cybersecurity-kimi_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-203149-665830__authorization-memory-writer_variants__mandate-s20260822-procurement-kimi_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-s20260822-procurement-kimi_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-203925-860613__authorization-memory-writer_variants__memtable-s20260822-cybersecurity-inkling_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/memtable-seeds/memtable-s20260822-cybersecurity-inkling_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-204457-748009__authorization-memory-writer_variants__mandate-s20260822-cybersecurity-nemotron_3_ultra_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-s20260822-cybersecurity-nemotron_3_ultra_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-205311-941208__authorization-memory-writer_variants__mandate-s20260822-procurement-nemotron_3_ultra_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-s20260822-procurement-nemotron_3_ultra_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-205333-500455__authorization-memory-writer_variants__memtable-s20260822-finance-deepseek_v4_1_flash_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/memtable-seeds/memtable-s20260822-finance-deepseek_v4_1_flash_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-205925-472799__authorization-memory-writer_variants__mandate-s20260822-cybersecurity-deepseek_v4_1_flash_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-s20260822-cybersecurity-deepseek_v4_1_flash_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-210322-731132__authorization-memory-writer_variants__mandate-s20260822-cybersecurity-glm_5_2_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-s20260822-cybersecurity-glm_5_2_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-213537-301393__authorization-memory-writer_variants__mandate-s20260822-procurement-inkling_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-s20260822-procurement-inkling_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-213902-041069__authorization-memory-writer_variants__memtable-s20260821-finance-deepseek_v4_1_flash_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/memtable-seeds/memtable-s20260821-finance-deepseek_v4_1_flash_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-214213-395865__authorization-memory-writer_variants__mandate-s20260822-cybersecurity-inkling_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-s20260822-cybersecurity-inkling_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-215114-231825__authorization-memory-writer_variants__memtable-s20260822-finance-kimi_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/memtable-seeds/memtable-s20260822-finance-kimi_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-223419-868813__authorization-memory-writer_variants__memtable-s20260821-finance-kimi_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/memtable-seeds/memtable-s20260821-finance-kimi_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-230149-393269__authorization-memory-writer_variants__memtable-s20260822-finance-nemotron_3_ultra_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/memtable-seeds/memtable-s20260822-finance-nemotron_3_ultra_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-231137-926916__authorization-memory-writer_variants__mandate-s20260821-finance-kimi_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-s20260821-finance-kimi_baseten.jsonl"
+      ]
+    },
+    {
+      "original_path": "20260913-232455-469049__authorization-memory-writer_variants__mandate-s20260822-finance-nemotron_3_ultra_baseten",
+      "observed_in": [
+        "results/diagnosis/v2/mandate-open/mandate-s20260822-finance-nemotron_3_ultra_baseten.jsonl"
+      ]
+    }
+  ],
+  "original_recipes": [
+    {
+      "path": "fast_parity_grok_cyber.sh",
+      "git_blob": "c750e4685258e1eecfaad4826a254461f0a750d3",
+      "environment_overrides": []
+    },
+    {
+      "path": "fast_parity_grok_finance.sh",
+      "git_blob": "c19d8c0fe94448f8ba948e3e1b95145e151e5480",
+      "environment_overrides": []
+    },
+    {
+      "path": "fast_parity_grok_loop_cybersecurity.sh",
+      "git_blob": "d597d2e297f20f88f23ff1e4d46e422d1c614a77",
+      "environment_overrides": []
+    },
+    {
+      "path": "fast_parity_grok_loop_finance.sh",
+      "git_blob": "c945ccbfb8b4b00f43646c46f7a60c037896f369",
+      "environment_overrides": []
+    },
+    {
+      "path": "fast_parity_grok_loop_procurement.sh",
+      "git_blob": "a53277a0239d9da3318e9d13769b21dd0bb0e92e",
+      "environment_overrides": []
+    },
+    {
+      "path": "fast_parity_qwen_cyber.sh",
+      "git_blob": "65008ad086c4f26bf4d79e4b2295d4e186740f3d",
+      "environment_overrides": []
+    },
+    {
+      "path": "fast_parity_qwen_finance.sh",
+      "git_blob": "6446924e3902377c3a3c9e53948d34bcb47d1bce",
+      "environment_overrides": []
+    },
+    {
+      "path": "fast_parity_qwen_loop_cybersecurity.sh",
+      "git_blob": "707337814b16be322ffb0d2b93e3d8f56bbb05c5",
+      "environment_overrides": []
+    },
+    {
+      "path": "fast_parity_qwen_loop_finance.sh",
+      "git_blob": "c528f9c94fef3cb3d2aa291ca4dd496e4919ec0c",
+      "environment_overrides": []
+    },
+    {
+      "path": "fast_parity_qwen_loop_procurement.sh",
+      "git_blob": "dccca23cd26db974914a3fc98ceea3de332fccf4",
+      "environment_overrides": []
+    },
+    {
+      "path": "fast_run_extensions_29lA.sh",
+      "git_blob": "4558b389127901eb9bbee93b8f9547afe7701221",
+      "environment_overrides": []
+    },
+    {
+      "path": "fast_run_extensions_29mA.sh",
+      "git_blob": "b475ef860e288c72ce004683c678e2022ffe4dfe",
+      "environment_overrides": []
+    },
+    {
+      "path": "g_loop_proc_deepseek.sh",
+      "git_blob": "5a15ad1ba4ffa6bd928d77e1d0784ec8ea98c734",
+      "environment_overrides": [
+        "export EAL_ROUTE_TIMEOUT_SECONDS=14400"
+      ]
+    },
+    {
+      "path": "gate_oneshot_added.sh",
+      "git_blob": "15b0d1291bda28b1bbd5936993f82fccbd44a90b",
+      "environment_overrides": []
+    },
+    {
+      "path": "glm53_parity_0.sh",
+      "git_blob": "f262e7c2870e03953b9c68402bb0f7468a9e3ea3",
+      "environment_overrides": []
+    },
+    {
+      "path": "glm53_parity_1.sh",
+      "git_blob": "f52a4851287cb367de11f0d9a9ce0665e0083150",
+      "environment_overrides": []
+    },
+    {
+      "path": "glm53_parity_2.sh",
+      "git_blob": "ca54d5cf76bc18d754ad053f69574f940b77eec1",
+      "environment_overrides": []
+    },
+    {
+      "path": "glm53_parity_3.sh",
+      "git_blob": "b355d3f7f7966cd31872bb899cf21ba56c832598",
+      "environment_overrides": []
+    },
+    {
+      "path": "gstream_g_cyber_s1.sh",
+      "git_blob": "985851f6c997da707e6d6eda5d30879c07be586c",
+      "environment_overrides": []
+    },
+    {
+      "path": "gstream_g_cyber_s2.sh",
+      "git_blob": "edf9a221c9afd043d083b0dda1828be3e7248011",
+      "environment_overrides": []
+    },
+    {
+      "path": "gstream_g_fin_s1.sh",
+      "git_blob": "335ad263901868040ce7ba70ea13127a5ca2bf1a",
+      "environment_overrides": []
+    },
+    {
+      "path": "gstream_g_fin_s2.sh",
+      "git_blob": "08b59005a62b986416a669ff1b692d0cbbed153e",
+      "environment_overrides": []
+    },
+    {
+      "path": "gstream_g_loop_cyber_deepseek.sh",
+      "git_blob": "8ebb09acbfc85ab5c693857b9402e7145980d580",
+      "environment_overrides": []
+    },
+    {
+      "path": "gstream_g_loop_cyber_gptoss.sh",
+      "git_blob": "705058790305e9d8fa0467d78278dcdfbd2ffc28",
+      "environment_overrides": []
+    },
+    {
+      "path": "gstream_g_loop_fin_deepseek.sh",
+      "git_blob": "cea79777ed4cb5fafa5e1d72579df8ccd6f82a9e",
+      "environment_overrides": []
+    },
+    {
+      "path": "gstream_g_loop_fin_gptoss.sh",
+      "git_blob": "8b3f284ec55547496c69d60baf55e09f697c2be4",
+      "environment_overrides": []
+    },
+    {
+      "path": "judge_loop.sh",
+      "git_blob": "53284c42659392adaaeb3d7a7d27cebbb63a7562",
+      "environment_overrides": []
+    },
+    {
+      "path": "parity_grok_cyber.sh",
+      "git_blob": "1f66b257dac753bb00b600b65661e09d3666ce22",
+      "environment_overrides": []
+    },
+    {
+      "path": "parity_grok_finance.sh",
+      "git_blob": "1f7dd92fa52c9cce7d1463824eabfe1ce8330747",
+      "environment_overrides": []
+    },
+    {
+      "path": "parity_grok_loop_cybersecurity.sh",
+      "git_blob": "e65634e0c1514f187b6e0d235896c23fdf29401d",
+      "environment_overrides": []
+    },
+    {
+      "path": "parity_grok_loop_finance.sh",
+      "git_blob": "966c5b422d0d655652cbe75df00db21bd45aca88",
+      "environment_overrides": []
+    },
+    {
+      "path": "parity_grok_loop_procurement.sh",
+      "git_blob": "e64290bd580af20d52bad39c598bc10a0f1f6e9f",
+      "environment_overrides": []
+    },
+    {
+      "path": "parity_qwen_cyber.sh",
+      "git_blob": "1a1dba4bf4ff5818cdb2e47bc1df5854e89ba407",
+      "environment_overrides": []
+    },
+    {
+      "path": "parity_qwen_finance.sh",
+      "git_blob": "32bd8511036e123eda1f197ea1e737f8941c7690",
+      "environment_overrides": []
+    },
+    {
+      "path": "parity_qwen_loop_cybersecurity.sh",
+      "git_blob": "e42acc6a89d68ec2c3a79dfbcc355ae3b101c0c2",
+      "environment_overrides": []
+    },
+    {
+      "path": "parity_qwen_loop_finance.sh",
+      "git_blob": "59ff1d4ecd762e4a13d16fae946a21d1940accff",
+      "environment_overrides": []
+    },
+    {
+      "path": "parity_qwen_loop_procurement.sh",
+      "git_blob": "24d1692b33ca8cec23dab25e114125c4f35cf25d",
+      "environment_overrides": []
+    },
+    {
+      "path": "q_loop_cybersecurity_deepseek.sh",
+      "git_blob": "ea129b3c64a51c5838ffbcce65f4ef103883afd8",
+      "environment_overrides": [
+        "export EAL_ROUTE_TIMEOUT_SECONDS=14400"
+      ]
+    },
+    {
+      "path": "q_loop_cybersecurity_gptoss.sh",
+      "git_blob": "39797911a3b2f7f37e74a5c1c55c2c91de03e73a",
+      "environment_overrides": [
+        "export EAL_ROUTE_TIMEOUT_SECONDS=14400"
+      ]
+    },
+    {
+      "path": "q_loop_finance_deepseek.sh",
+      "git_blob": "938c9e34610a14bcc42068d8e28083d7aab79b9a",
+      "environment_overrides": [
+        "export EAL_ROUTE_TIMEOUT_SECONDS=14400"
+      ]
+    },
+    {
+      "path": "q_loop_finance_gptoss.sh",
+      "git_blob": "d08c561d67d0ccd538aea75816e17f80d8a7bbd4",
+      "environment_overrides": [
+        "export EAL_ROUTE_TIMEOUT_SECONDS=14400"
+      ]
+    },
+    {
+      "path": "q_loop_procurement_deepseek.sh",
+      "git_blob": "cccb85588acb33b8c567a1415427bc2c0fe5c5bb",
+      "environment_overrides": [
+        "export EAL_ROUTE_TIMEOUT_SECONDS=14400"
+      ]
+    },
+    {
+      "path": "q_loop_procurement_gptoss.sh",
+      "git_blob": "a81b8bfd39c8e11e6474155b245e7be6508bdaa5",
+      "environment_overrides": [
+        "export EAL_ROUTE_TIMEOUT_SECONDS=14400"
+      ]
+    },
+    {
+      "path": "qstream_q_cyber_s0.sh",
+      "git_blob": "2fcf244a7599b2bf20db6939daf8d4f4d92524ea",
+      "environment_overrides": []
+    },
+    {
+      "path": "qstream_q_cyber_s1.sh",
+      "git_blob": "f14f7a4e04d7d5ead7759f385e82bc50bf84754e",
+      "environment_overrides": []
+    },
+    {
+      "path": "qstream_q_cyber_s2.sh",
+      "git_blob": "8c642701e81bd5735e12cd5408d44bf2bbcb7e4d",
+      "environment_overrides": []
+    },
+    {
+      "path": "qstream_q_fin_s0.sh",
+      "git_blob": "80b7ff250e6d41461962cf55a3f76fa12ffddcf7",
+      "environment_overrides": []
+    },
+    {
+      "path": "qstream_q_fin_s1.sh",
+      "git_blob": "ada42bd9f85c112da472e220a0ea54748f98a012",
+      "environment_overrides": []
+    },
+    {
+      "path": "qstream_q_fin_s2.sh",
+      "git_blob": "cded175d6ae664231c534c2d8e408e0ab11191db",
+      "environment_overrides": []
+    },
+    {
+      "path": "qstream_q_proc_a.sh",
+      "git_blob": "e6bd8cdd9626ffc0e6096a3f910b8b7728f196ac",
+      "environment_overrides": []
+    },
+    {
+      "path": "qstream_q_proc_b.sh",
+      "git_blob": "c4ed5785cf8ad250449276cfff0b054e1c1b9752",
+      "environment_overrides": []
+    },
+    {
+      "path": "relaunch_qwen_loops.sh",
+      "git_blob": "963ac40798f5e786d5567674b1cbd60005bc9b8f",
+      "environment_overrides": []
+    },
+    {
+      "path": "relaunch_qwen_loops2.sh",
+      "git_blob": "33e930ea963aca5cc2d6d63a811fa87559f65713",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_authority_smoke.sh",
+      "git_blob": "ba1a003ef95df86a46d0efc9f5d66826d2954379",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_budget_smoke.sh",
+      "git_blob": "170750d32026c0b30e9ce0ef87c23b1ad30947a9",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_check_finance.sh",
+      "git_blob": "c6b3c8f5aa2e52eb125bb158b349df4f5e72f274",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_diagnosis.sh",
+      "git_blob": "8db4f6ca64d1083ca5a9da25f3d9c4a6e3b28185",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions.sh",
+      "git_blob": "b00e092bb64af48d4e6c364b49cdce9f26fba8d2",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_10.sh",
+      "git_blob": "888a78e4d7a91c7676947008a0035ef55cc3eef3",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_11.sh",
+      "git_blob": "5b5957fbef427baef13e336a202da602cfd3a0ba",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_12.sh",
+      "git_blob": "026ed33f35737b45c21ffff68f0dc51cb3b3f8c9",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_13.sh",
+      "git_blob": "a238061cbc08385b4ca3658b43d40cd2d55b034c",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_14.sh",
+      "git_blob": "cce584984ad426e30182366d75a2076c5103737e",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_15.sh",
+      "git_blob": "ea50fd0dd52de04282c718d65bf93bc7a7d645f0",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_16.sh",
+      "git_blob": "01d2e41f015fe9d0e4553ae3d1532b413e72d98a",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_17.sh",
+      "git_blob": "5ea2e7469bb53ecc8879e1d1e461810fb957ca39",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_18a.sh",
+      "git_blob": "700c81b1b84b8ee356b362d6f71ba36e525016a4",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_18b.sh",
+      "git_blob": "be9d906685a6947fe183a567d1b9a6a52a9f4349",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_18c.sh",
+      "git_blob": "078714feb9674cb9290e5b55838d4d7cb19c1229",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_18d.sh",
+      "git_blob": "5c8296a92f45c9f92d3d190da42406f96d10b451",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_18e.sh",
+      "git_blob": "097515eab5d7da689bba31a4b73384bdba108716",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_18f.sh",
+      "git_blob": "72996ccd3b3360573381a7a9f4a94da1ab276a27",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_19.sh",
+      "git_blob": "d18bfe4e5b45032230a5bcf5a389290f96808071",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_2.sh",
+      "git_blob": "f4377babbeb8d74f3e96f5ad68564f634e565409",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_20a.sh",
+      "git_blob": "19d711aeeeee2582b87a68a6ea97220a25331c3b",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_20b.sh",
+      "git_blob": "92838f96a60836a53e6e0aa3c7385560820b8f15",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_20c.sh",
+      "git_blob": "71265fe85cf4839091e483df4e1d0dc93ea936ba",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_21a.sh",
+      "git_blob": "213e462afda304c349894e416b63832caec29c04",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_21b.sh",
+      "git_blob": "e14d005009a210a92f4680e049780091c5988998",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_21c.sh",
+      "git_blob": "c72e5d43fc86611b6eee03ca967442d9d0e260b9",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_21d.sh",
+      "git_blob": "374d2d2f620763ecd8034ba11fc1a870bc36e32c",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_21e.sh",
+      "git_blob": "06b153591c1037b543fdbbd146a7172cd00c6808",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_21f.sh",
+      "git_blob": "77d6487a5a315279edf4f59f7ae9604a08b5947c",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_21g.sh",
+      "git_blob": "087c16a45c6c9fcae2bb15301784f036a659ffd1",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_21h.sh",
+      "git_blob": "771116010854b07ad80ae0b1035ab4188b522702",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_21i.sh",
+      "git_blob": "4bf1cd518be8397f35c3b26891e53d82085bf2bc",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_21j.sh",
+      "git_blob": "c80f1a98b3e750bb4a7e2c896052422608018e1a",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_21k.sh",
+      "git_blob": "4e299c1b679e02f9b6a336e865a422340a3d12e0",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_22a.sh",
+      "git_blob": "d9395e0e1316a3095743a21988f2a2c1420714ea",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_22b.sh",
+      "git_blob": "ebc403c4ddc733110f5af7d2ec365c507e37e0f2",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_22c.sh",
+      "git_blob": "48db5a4066cba51f417023f55377e02388f84ff2",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_22d.sh",
+      "git_blob": "17de7a997bea2fb8463f791d1254efa02a615874",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_22e.sh",
+      "git_blob": "0e6234c7a66c90b1cec1e48893b417f9760581eb",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_22f.sh",
+      "git_blob": "d3eba36ca357746cded896ca02b67ad6c0700da3",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_22g.sh",
+      "git_blob": "73e7029d94c663742a006e6a3706689a46911713",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_22h.sh",
+      "git_blob": "1a03e8e586476906c708200302fa1e4aa15ea0e1",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_22i.sh",
+      "git_blob": "26f6ae3cfbfaaf0c93ebbd9c025e39b12cc2cce5",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_22j.sh",
+      "git_blob": "98412ff0a8041db669521daf03b4ae2773de44a5",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_22k.sh",
+      "git_blob": "b49f58afc83af0e556439f3c1dc05a7cd97e6525",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_23.sh",
+      "git_blob": "a11edd9e7997b0b4ec3c63f390724e4b0422e3fd",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_24a.sh",
+      "git_blob": "2c159e65791fd56e70bbd60a4013696019c9a680",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_24b.sh",
+      "git_blob": "cd2d8e15d076ac6a647fabe558e6b06b7444c7dc",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_24c.sh",
+      "git_blob": "dbc2cdd741e00b3af28597708248c6200e6f9255",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_24d.sh",
+      "git_blob": "b10b74e759d3023234ad5d4c3b42dce44a2d575f",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_25.sh",
+      "git_blob": "e9226df611c560356549e674ea29d62ad97813a5",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_25a.sh",
+      "git_blob": "f22319f68c5903cd9a95218bc5b3150de937ddb2",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_25a1.sh",
+      "git_blob": "f125de6b4efb7d1cae866eb890e0bc5ba047cf40",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_25a2.sh",
+      "git_blob": "dce6c391c172e8241da8bfa24a2ed73229bb1868",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_25a3.sh",
+      "git_blob": "58a2306a23059e34daf3238baabf00a96adc85f0",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_25b.sh",
+      "git_blob": "8e4350d97c171fb4f58c085ce0d8eaf960112ccd",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_25b1.sh",
+      "git_blob": "324564265fe7f35aa40da3f7c8c33aeb7cd959d1",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_25b2.sh",
+      "git_blob": "42f164fe2b26313b3609959186b37620477bb961",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_25b3.sh",
+      "git_blob": "a99ac06a1734077b948655f1997156fb66bfbcf2",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_25c.sh",
+      "git_blob": "8c2b9ac2a9ecb99989b2a99e4813ece53b46711e",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_25d.sh",
+      "git_blob": "4d5f6033da440d42b6586024ada3fb57523ad613",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_26a.sh",
+      "git_blob": "64709ebaf5ce947cf030241f41746cf51f275ce7",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_26b.sh",
+      "git_blob": "c117c87b47fb30ea18f05c3135acccff2839672e",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_26c.sh",
+      "git_blob": "fb2fd821877c286734af075a6cfffdefd1c29798",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_26d.sh",
+      "git_blob": "62e29baa384294037b371cc5e4cba1e2f297c530",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_26e.sh",
+      "git_blob": "a1929889b800d1d9e3be90582a5a857cad743536",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_26f.sh",
+      "git_blob": "b62a6325581976329be0573448f4bb854ab4e896",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_26g.sh",
+      "git_blob": "146262d58a66ef1aa7cbf62efcd40e14c98bb66a",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_26h.sh",
+      "git_blob": "94f168f546647b7e2b8107a99b5958646afd1be4",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_28a.sh",
+      "git_blob": "93fff361a8559c0923d9a34362dc0ca8c8d92c43",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_28b.sh",
+      "git_blob": "115a609a5bd21e766d72367f21937b063b162a6c",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_28c.sh",
+      "git_blob": "ca1369a1bb6d66c5a9b51f6fb554143217c947c1",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_28d.sh",
+      "git_blob": "98cf6bde3f35ae3a92f1348fad3c9cb8a6c436a0",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29a.sh",
+      "git_blob": "d3da73a339e777888300ac627dcd92ac2eb85a56",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29b.sh",
+      "git_blob": "dd8898cb51e55ba28e1ffac70b4f796910cea4f7",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29c.sh",
+      "git_blob": "645aa33dc91c4266359f5f1132824fa4253abaea",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29d.sh",
+      "git_blob": "f8d6a82dd9697bcff8fa4b213baa808a3b89962c",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29e.sh",
+      "git_blob": "0f9162674f7a175a93a88296d6a743e4733f43ff",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29f.sh",
+      "git_blob": "4e0ca001bd2dff7ad600183f671552b5f8c45f0a",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29i.sh",
+      "git_blob": "46342974fe285e29f277a91ca958c73990d99a31",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29j.sh",
+      "git_blob": "9a1b8ea943ac248675b583fcb4b7f79ca108fdd2",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29j_cybersecurity.sh",
+      "git_blob": "ebb01c8743c21f7535fbcd198b84d471acf04325",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29j_finance.sh",
+      "git_blob": "ebb01c8743c21f7535fbcd198b84d471acf04325",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29j_procurement.sh",
+      "git_blob": "ebb01c8743c21f7535fbcd198b84d471acf04325",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29k.sh",
+      "git_blob": "346092b4939e0f29ddd11584914861725f940e6d",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29k_cybersecurity.sh",
+      "git_blob": "ebb01c8743c21f7535fbcd198b84d471acf04325",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29k_finance.sh",
+      "git_blob": "ebb01c8743c21f7535fbcd198b84d471acf04325",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29k_procurement.sh",
+      "git_blob": "ebb01c8743c21f7535fbcd198b84d471acf04325",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29lA.sh",
+      "git_blob": "eb0c7c65d4e338a19f00441f4cfbaa536f849dbc",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29lB.sh",
+      "git_blob": "ebb01c8743c21f7535fbcd198b84d471acf04325",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29mA.sh",
+      "git_blob": "3760f26c35de411db299d35c3a076adc20e8c0e3",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_29mB.sh",
+      "git_blob": "ebb01c8743c21f7535fbcd198b84d471acf04325",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_3.sh",
+      "git_blob": "e6fc4ddba762b85a540030fd8a5f5a699c72faaa",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_4.sh",
+      "git_blob": "065bc6cd8bd5992d849606a49955a64e27f5ed9c",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_5.sh",
+      "git_blob": "4a77c4ab1646b34d01902c2f3fe7a3f0883c2780",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_6.sh",
+      "git_blob": "04804e5bab6cd7d5243fa901fa83252429feb6ba",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_7.sh",
+      "git_blob": "b80cacec3973d0c0fa7c7212035e4b8cf7857079",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_8.sh",
+      "git_blob": "a9831c179db0faf9e33435d96532c0eac513d54d",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_extensions_9.sh",
+      "git_blob": "c4fcf5aa11bfa6f9700631ea75666b070248e235",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_overnight_seq.sh",
+      "git_blob": "1ea9ae4d46a3d6df4434276c90e1586f99037fd7",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_paper_wsl.sh",
+      "git_blob": "f4f70fd51c580d58340b892204f4cd24e20d5319",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_paper_wsl_finance.sh",
+      "git_blob": "8f403fd5e083d566c2f96bb6bfbdad1ca4ee8959",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_parity_finish.sh",
+      "git_blob": "2a26705cc8c7cad9593f0b036c13ffea14af6a90",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_parity_grok.sh",
+      "git_blob": "2fda674239821bc67e4703ed3bf54c589a36b3a5",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_parity_inkling.sh",
+      "git_blob": "a26d54fdd239d511b85979376ad25c49397ffa7d",
+      "environment_overrides": [
+        "export EAL_EVENT_WRITER_MAX_TOKENS=32768",
+        "echo \"=== $(date +%F_%H:%M) INKLING CHAIN START (event budget $EAL_EVENT_WRITER_MAX_TOKENS)\" >> \"$LOG\""
+      ]
+    },
+    {
+      "path": "run_parity_inkling_review.sh",
+      "git_blob": "3be5db6edf3a6e1469b04f6f64f4756ee6cd55e6",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_parity_judge.sh",
+      "git_blob": "2166946dffefbeac1e63d02d2ece8c9f8accad4e",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_parity_qwen.sh",
+      "git_blob": "4dd593fcd8b8f2c48846d393b6ba7114a39261e0",
+      "environment_overrides": []
+    },
+    {
+      "path": "run_platform_check.sh",
+      "git_blob": "a4a79e834f214556447e0c4cf8c3a90660411a98",
+      "environment_overrides": []
+    },
+    {
+      "path": "stream_grok_cyber.sh",
+      "git_blob": "de13a90cb817b750c5fe1f2dec8c77ea99907370",
+      "environment_overrides": []
+    },
+    {
+      "path": "stream_grok_cyber_a.sh",
+      "git_blob": "e6309415d96049314dede3caa2f15b7660398f3f",
+      "environment_overrides": []
+    },
+    {
+      "path": "stream_grok_cyber_b.sh",
+      "git_blob": "b2f222c5745faead1171cc73c849a024fc89d66c",
+      "environment_overrides": []
+    },
+    {
+      "path": "stream_grok_finance.sh",
+      "git_blob": "a3f356032ceadc4fbee9ebc1ff5414819421a5a3",
+      "environment_overrides": []
+    },
+    {
+      "path": "stream_grok_finance_a.sh",
+      "git_blob": "cf0690c37dd90477c0157577bfa0a49bc7394894",
+      "environment_overrides": []
+    },
+    {
+      "path": "stream_grok_finance_b.sh",
+      "git_blob": "2189b141b47fed13d3985e02240203b1dca9fc92",
+      "environment_overrides": []
+    },
+    {
+      "path": "stream_grok_proc.sh",
+      "git_blob": "76c88cb2eed3bfdd8538d3c2cf1c84232d7e7ab1",
+      "environment_overrides": []
+    },
+    {
+      "path": "stream_q_gen.sh",
+      "git_blob": "5b9c07a5d54d4542fddc7aecc553e3397d4e7a71",
+      "environment_overrides": [
+        "export EAL_ROUTE_TIMEOUT_SECONDS=14400"
+      ]
+    },
+    {
+      "path": "stream_q_loop_cyber.sh",
+      "git_blob": "103d6dcf1ac8c1c7af038543b59b0c4551183fe8",
+      "environment_overrides": [
+        "export EAL_ROUTE_TIMEOUT_SECONDS=14400"
+      ]
+    },
+    {
+      "path": "stream_q_loop_pf.sh",
+      "git_blob": "07634c55e2393e5aa17aafebb2b2748d5b9e6919",
+      "environment_overrides": [
+        "export EAL_ROUTE_TIMEOUT_SECONDS=14400"
+      ]
+    },
+    {
+      "path": "stream_qwen_cyber.sh",
+      "git_blob": "c2dcc92a499833a4fc219add32478aec02b41404",
+      "environment_overrides": []
+    },
+    {
+      "path": "stream_qwen_finance.sh",
+      "git_blob": "27a3387d3ea35d09835791f7c9deaf37235df97c",
+      "environment_overrides": []
+    },
+    {
+      "path": "stream_qwen_proc.sh",
+      "git_blob": "5b8e151372105d6f7257b36c3c320f8ce3b727a7",
+      "environment_overrides": []
+    },
+    {
+      "path": "waitfinish.sh",
+      "git_blob": "834e7a2d06cd209597756770c5d18c8b8ba7a75d",
+      "environment_overrides": []
+    },
+    {
+      "path": "waittag.sh",
+      "git_blob": "b2fbfd8e9a42d7181108bd407bf20424c05c0d26",
+      "environment_overrides": []
+    }
+  ],
+  "original_analysis_programs": [
+    {
+      "path": "scratch/build_failures_csv.py",
+      "git_blob": "d1dc9077e9ce97d728c5954a3095c2402f668b4e",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/check_inkling_run.py",
+      "git_blob": "bfa117d1b5fe9d510d2a90ec853fc15e6c1b2dc4",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/claims_levels_doc.py",
+      "git_blob": "b8f54ecaac8df280deb164b0cbca8fcabe8e06c1",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/claims_scope_doc.py",
+      "git_blob": "4b6c6b64a41fa40288d4621b4311ffb97e86ef22",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/human_check_score.py",
+      "git_blob": "e865c6d8e60b0922ee76b6fa922b33abadebd0ec",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/human_check_sheet.py",
+      "git_blob": "70ab5bf789e8287c223d7deec86da26dab75179c",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/added_counts.py",
+      "git_blob": "88d8748f02889518f3d7a61f2cc4a85f29514622",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/apply_det_and_seeds.py",
+      "git_blob": "3c82ef38eee5a64f64f50d40e1a2ce62a3daab7a",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/apply_fig23.py",
+      "git_blob": "2ae4959fefebcc31e8cbfca4eb99364bc8a4bd6b",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/apply_integrate.py",
+      "git_blob": "fd6be958727221b47cf9d0906c6a083e02d0d51d",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/apply_parity.py",
+      "git_blob": "afea5a61097ca84c0203630e8983dc4a762d31c8",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/apply_pass3.py",
+      "git_blob": "ccc43e84acde687d8058f4e45d1966d1e1ba5c7a",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/apply_pass4.py",
+      "git_blob": "2c7c7f0d7754ceadfc216e616dffd105ebee7c6a",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/apply_prose.py",
+      "git_blob": "86955e66174bcd2ec5a9f9edc5b2ec8db3160313",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/apply_prose_methods.py",
+      "git_blob": "7abce8cf2060b7e7b8d543a84fc3902c68f2f30d",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/apply_rename.py",
+      "git_blob": "235de2d902b517bd0c088f691d8f3a7d00db6086",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/apply_rewrite.py",
+      "git_blob": "ad105ea06bb5ff44f1bb590134942bae7e240b94",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/apply_round3.py",
+      "git_blob": "7ea7365b6bf6f5121593d3c22f48fed799c07993",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/apply_seven.py",
+      "git_blob": "7658fa158adedf32b2c99ab0e99d14b8aaa77f21",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/apply_style.py",
+      "git_blob": "ef3e502656984ed8d28f3d1dbf7dbebb186bff39",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/audit_figures.py",
+      "git_blob": "6a7fb3dff056602fbb7c178a7a64601f4c7290f1",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/audit_red.py",
+      "git_blob": "d6ea2499e412f1a47b69334ecfa683a2bc9e0675",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/black_diff.py",
+      "git_blob": "67f387e287d8ca0108d7b0c050c7f51ac39b745a",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/cap2_done.py",
+      "git_blob": "544efeef8fdd27e90fb68cbfd11ea4bf6360e24e",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/cause_and_refusal.py",
+      "git_blob": "75e7970b2ad1e2005c61ccda08274e61dc3671c3",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/check_numbers.py",
+      "git_blob": "11843a703d2836c78c320ce193bc49d439c5b27c",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/deterministic_cause.py",
+      "git_blob": "03cc402c7d008634a3e63136e8042671ecc462a2",
+      "promoted_to": "analysis/extensions/diagnosis.py"
+    },
+    {
+      "path": "scratch/iclr_seven/event_done.py",
+      "git_blob": "ec0ae597f40a625b943b22253c0873ac02b69774",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/event_inkling_analysis.py",
+      "git_blob": "cd87ee51c1e29696eed916318ae0a673c5519300",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/event_representation_seven.py",
+      "git_blob": "7c99dbddc84fbb0dc9643650478932ecad8d7a7f",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fig2_final.py",
+      "git_blob": "c9ec6fd4f36907e59e9c72866ebe19705cc6a2fd",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fig2_two_rows.py",
+      "git_blob": "e8003baac0af04ef8c61b93b068034d8bbae58e0",
+      "promoted_to": "analysis/extensions/memory_design.py"
+    },
+    {
+      "path": "scratch/iclr_seven/fig3_final.py",
+      "git_blob": "bab0914271581a4119d1db7b658d758e74a0c4a4",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fig4_final.py",
+      "git_blob": "c1ef83fad10ac57c4ba1a7d7dad862c7395ac370",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fig4_four.py",
+      "git_blob": "d15b87576650f4439279cc995de0bf8b5f666eb3",
+      "promoted_to": "analysis/extensions/frontier.py"
+    },
+    {
+      "path": "scratch/iclr_seven/fig_mechanism.py",
+      "git_blob": "6a4c260f6b57916bd81a8b2d2fc4b8bccd18730a",
+      "promoted_to": "analysis/extensions/mechanism.py"
+    },
+    {
+      "path": "scratch/iclr_seven/fig_restatement.py",
+      "git_blob": "9d524dd673a2ebd1cadf35f64baf0211267f30f4",
+      "promoted_to": "analysis/extensions/restatements.py"
+    },
+    {
+      "path": "scratch/iclr_seven/fig_ttc_seven.py",
+      "git_blob": "650a46ce5532184245c0c7852ccdfdbdbecb9112",
+      "promoted_to": "analysis/extensions/writer_scaling.py"
+    },
+    {
+      "path": "scratch/iclr_seven/final_added_per_run.py",
+      "git_blob": "fceb2962b1ea11b8a5c06dd68096d2ec39445d42",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/final_checks.py",
+      "git_blob": "95814c711dd2971254ddb160e0ca7351c4909039",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/final_state_defs.py",
+      "git_blob": "6000b61ebbcee492492979adfef85f796f6396f5",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix1.py",
+      "git_blob": "939bd395e8f92b3b6bcbc3540c94c9e790cbecf6",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix10.py",
+      "git_blob": "339a9d7a3a0bcd4c57ac44aae94baf25ee5239fc",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix2.py",
+      "git_blob": "af2106755b69e646e93a6c81f40c5fe7a7773288",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix4.py",
+      "git_blob": "cf163880af4b0b3e4c45ff21f6fe2f198ab1df7b",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix5.py",
+      "git_blob": "c89707f70ebadca649975ad93ee28ca05178f148",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix6.py",
+      "git_blob": "82b4054b18677ece74fcc3493ba3feeb36049c00",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix7.py",
+      "git_blob": "49d2de17b321293c62bcd0d97d65366f32b5bf96",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix8.py",
+      "git_blob": "d56df3f9aa339d8ea8a9214d6240daee0d9fefa0",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix9.py",
+      "git_blob": "2e5dfd9967b79a12cd19de362183a349d6ffc580",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_appendix_accounting.py",
+      "git_blob": "f6a29a8d07fa8d8ddcab78bb2e7739ddfe7e10be",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_audit1.py",
+      "git_blob": "8c08c876bfd474a51cc8f35b23d4a37ee238bbdc",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_dedup.py",
+      "git_blob": "dd6973c6415eb77598670e675c330303b667c154",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_frontier_caption.py",
+      "git_blob": "4bd14ad2e254ff86dca31ec2d67d98a575b94a7c",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_gate_seven.py",
+      "git_blob": "d1ae6c9158ba3d2c4fd561d05b077f0b6dbf270d",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_glm53_seven.py",
+      "git_blob": "2ce044c0a9b92827a4a06091490f79206fcb5183",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_inkling_seven.py",
+      "git_blob": "8b71cb7dad5b638ec027c49d1d80d7a4155032ab",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_judges.py",
+      "git_blob": "5f5f4cfc8033a79ccf7f098858b874344c59d8b3",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_layout3.py",
+      "git_blob": "028dd17e8371ebd00f4e62261d00238e9e95406a",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_layout4.py",
+      "git_blob": "2da948156d4f5890d2d4790cf327fcb02bb82fe9",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_mechanics.py",
+      "git_blob": "b6786506d470752f9203c915f29bf407b7a1ee88",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_pass_gaps.py",
+      "git_blob": "b33c5ee36276d288a98fe6639cfffd7ae5338622",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_review.py",
+      "git_blob": "14e3d044d815530e8e8f8efe48f4c9c72530706b",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_review2.py",
+      "git_blob": "1a1f06f54925eed82326d6c0cec64aa65afda9fa",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_seed_wording.py",
+      "git_blob": "604a8a8e3e68b467aac35849b63d76268f140135",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_table2.py",
+      "git_blob": "245c5e1710ac48492e135effae8a3b7fb369e4ee",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_table29.py",
+      "git_blob": "75d7cab7ddd74d330f934afdc4d37b7c23c6d29e",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_tables2.py",
+      "git_blob": "50ead25bbca7515ff45e236d7c85fd936ef997a2",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/fix_wording2.py",
+      "git_blob": "8641f71bc9969d244db75e9d3b923c7401e31718",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/gate_added_formation.py",
+      "git_blob": "e114af5997d5ec1bce3aae80c9a56394b11b30cb",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/gate_added_oneshot.py",
+      "git_blob": "80b78babd5cbb2ad02211c0f8b454a9eee09e119",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/gate_behavior_added.py",
+      "git_blob": "51f85d7fec628db8eab59eb652e0397895f80955",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/install_new.py",
+      "git_blob": "4e3fcfb85fa45963331a9d7a8188a9547413efc3",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/judge_incremental.py",
+      "git_blob": "1dc03bf9981be1c96eaca99cf9459fb45f2bfafa",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/list_added.py",
+      "git_blob": "c00db6bdb108a06c8dbeb101d25fe646a9993624",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/make_condition_table.py",
+      "git_blob": "0ac8edeb8912c8389e5136fed3977bf575b1e020",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/parity_pool.py",
+      "git_blob": "bd0c0a0d1ea4c6b1bf5c2b7c4e6795c9780a939a",
+      "promoted_to": "analysis/extensions/pool.py"
+    },
+    {
+      "path": "scratch/iclr_seven/pf_added2.py",
+      "git_blob": "6a824a1a8cb18b5445489c9e9569ce0ef68cf3a5",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/pf_added_per_run.py",
+      "git_blob": "241cf4528459349314c6c978f96420f3b53818c8",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/plot_cue_seven.py",
+      "git_blob": "9ece82b767735fa4911b7a0b8171fceacd043628",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/plot_ttc_seven.py",
+      "git_blob": "703f94d8a8879d52012c5c946fbbfe7b2c64f7dc",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/real_grants.py",
+      "git_blob": "b01914ce54f446ea1812ec4ef4283e14404b9407",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/rebuild_matched.py",
+      "git_blob": "b7bb5d71f5dc9fcf20f7fbd635ea689b8a8b1305",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/restyle_figures.py",
+      "git_blob": "2b858853c374f2ce14598a4632c52be3c4858b70",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/restyle_figures2.py",
+      "git_blob": "abcb0289ea9eaf7b88a7435b0d2eda6cb1364eae",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/restyle_figures3.py",
+      "git_blob": "016f80da9cb2aec02548e61e945e76e00c429c75",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/section7_seven.py",
+      "git_blob": "ad21f13a079e71f323d030046e714b5371185292",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/section_glm53_seven.py",
+      "git_blob": "b1648b644e5e41ca8cf8bd00a53939ad5d1efd5c",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/states_added_per_run.py",
+      "git_blob": "9fa773bfeee3493e534c437e22398ba2f3466fa9",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/strip_macros.py",
+      "git_blob": "ab8b6da6b6a8d542b64f6815ca8b8787323e81fa",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/supersede_stale.py",
+      "git_blob": "443b01db2da2cabbbe76423c11964ee44430a020",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/t3_press.py",
+      "git_blob": "c301b22e105a5a6d371dce82ead229da35b36caa",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/table33_paper_baseline.py",
+      "git_blob": "ed0e3aff3028d0f3739fa1793f7c1cc6ebcbf730",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/transitions_added.py",
+      "git_blob": "4c74e93e7b674624d164e7403904a239a261801b",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/iclr_seven/trim_seed_clauses.py",
+      "git_blob": "de49915d7895dc7fd79ebd704b5f210fa2b7a428",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/overleaf_plan_doc.py",
+      "git_blob": "b322ee451479a583eafedde3c304614107ca2777",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/probe_inkling.py",
+      "git_blob": "3ee512c428055db01ebb3dd976cd7fc0f0fa86c8",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/proposed_tables.py",
+      "git_blob": "eb4b598434c8a0be022528284fa05604e089ff8b",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/section6_v2.py",
+      "git_blob": "e22b5630e9d8b4ecc0fe08a74c630bad3832fdc5",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/section7_seeds.py",
+      "git_blob": "6eba91cff6f9f9e2ce862881fe9b00bb47adaec0",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/section7_seeds_doc.py",
+      "git_blob": "29147d349e060e3ee13c5669bb14454652f874de",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/section_cap2.py",
+      "git_blob": "fb7ec83a0b5c90087a0af24203a31f100c173f7a",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/section_gate_event.py",
+      "git_blob": "28f355a265de1654a89fe9788f64078e76013e75",
+      "promoted_to": null
+    },
+    {
+      "path": "scratch/section_glm53.py",
+      "git_blob": "830fb06177eedd43e4070162f9cfde4242cd6818",
+      "promoted_to": null
+    }
+  ]
+}

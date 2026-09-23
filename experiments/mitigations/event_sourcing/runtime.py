@@ -3,9 +3,7 @@
 from __future__ import annotations
 
 import os as _os
-# Completion budget of the event writer. The paper's protocol uses 4,096 tokens; writers that reason inside the
-# completion (Inkling) need more, set EAL_EVENT_WRITER_MAX_TOKENS when launching such a run.
-EVENT_WRITER_MAX_TOKENS = int(_os.environ.get("EAL_EVENT_WRITER_MAX_TOKENS", "4096"))
+
 
 import copy
 
@@ -93,6 +91,11 @@ from .core import (
     event_writer_messages,
     validate_event_arguments,
 )
+
+
+# Completion budget of the event writer. The paper's protocol uses 4,096 tokens; writers that reason inside the
+# completion (Inkling) need more, set EAL_EVENT_WRITER_MAX_TOKENS when launching such a run.
+EVENT_WRITER_MAX_TOKENS = int(_os.environ.get("EAL_EVENT_WRITER_MAX_TOKENS", "4096"))
 
 
 @dataclass

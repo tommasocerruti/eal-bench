@@ -32,6 +32,7 @@ from experiments.authorization_memory.extensions_common import (
     freeze_artifact,
     jobs_for_evidence,
     make_artifact,
+    verify_replay_source,
     write_manifest,
     write_rows,
 )
@@ -74,6 +75,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--writer-instruction", default=None, help="one line prepended to the writer's instructions; condition ids get the --instruction-tag suffix")
     parser.add_argument("--instruction-tag", default="instructed")
     parser.add_argument("--source-run", default=None, help="executor-only replay: reuse the frozen memories of a completed run of this study and run only the executor stage with --executor-targets; the writer stage is skipped and the writer-side files are copied")
+    parser.add_argument("--allow-unverified-source", action="store_true", help="explicitly allow legacy replay inputs without recorded hashes; records their current hashes without claiming historical verification")
     parser.add_argument("--capacity-scale", type=float, default=None, help="multiply the calibrated primary memory capacity (tokens) by this factor; recorded in the manifest as capacity_scale. Used to test whether a failure that is a rejected oversize update disappears when the profile fits")
     parser.add_argument("--dry-run", action="store_true")
     return parser
@@ -88,6 +90,7 @@ def _replay(args: argparse.Namespace, base: Any, presentation: Any, presentation
         raise SystemExit(f"source run must be a completed {STUDY_ID} or writer-route run: {source}")
     if source_manifest.get("domain_id") != base.domain_id:
         raise SystemExit(f"source run is for domain {source_manifest.get('domain_id')!r}, not {base.domain_id!r}")
+    source_integrity = verify_replay_source(source, source_manifest, allow_unverified=args.allow_unverified_source)
     if not args.dry_run and not args.estimated_cost_usd:
         raise SystemExit("live runs require --estimated-cost-usd")
     corpus_version = source_manifest.get("corpus_version") or source_manifest.get("options", {}).get("corpus_version") or base.corpus.default_version
@@ -124,9 +127,10 @@ def _replay(args: argparse.Namespace, base: Any, presentation: Any, presentation
     run_dir = create_run_dir(base.domain_id, f"authorization-memory-{STUDY_ID}", tag=args.tag, root=Path("results"))
     llm = build_llm(run_dir)
     manifest = base_manifest(
-        study=STUDY_ID, domain=base, options={**vars(args), "replay_of": str(source), "source_options": source_manifest.get("options", {})}, presentation=presentation,
+        study=STUDY_ID, domain=base, options={**vars(args), "corpus_version": corpus_version, "replay_of": str(source), "source_options": source_manifest.get("options", {})}, presentation=presentation,
         implementation_files=[Path(__file__), Path("experiments/authorization_memory/hybrid_memory.py"), Path("experiments/authorization_memory/writing_methods.py"), Path("experiments/authorization_memory/langmem_writer.py")],
     )
+    manifest["source_integrity"] = source_integrity
     manifest.update(corpus_version=corpus_version, capacity_tokens=source_manifest.get("capacity_tokens"), conditions=conditions, replay_of=str(source), source_study=source_study, planned={"writer_updates": 0, "executor_calls": len(jobs) * len(targets)}, status="running")
     write_manifest(run_dir, manifest)
     trials, executor_contexts = run_executor_jobs(llm, base, jobs, study_id=STUDY_ID, executor_task="executor", executor_targets=targets, executor_runs=1, batch_size=args.batch_size, seed=seed, presentation=presentation)

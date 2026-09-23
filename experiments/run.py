@@ -364,6 +364,7 @@ def _format_study_listing(domain_id: str) -> str:
         f"  {row['study_id']}"
         for row in listing["behavioral_routes"]
     )
+    lines.extend(("", "Extension routes (use --study <route> --help):", "  writer_variants", "  closed_loop"))
     lines.extend(("", "Validity analyses:"))
     lines.extend(
         f"  {row['study_id']}"
@@ -893,6 +894,10 @@ def _selected_cases(
 
 def main(argv: list[str] | None = None) -> None:
     raw_argv = list(sys.argv[1:] if argv is None else argv)
+    from experiments.extension_cli import dispatch
+
+    if dispatch(raw_argv):
+        return
     args = _parser().parse_args(raw_argv)
     args._raw_argv = tuple(raw_argv)
     args._provided_flags = tuple(

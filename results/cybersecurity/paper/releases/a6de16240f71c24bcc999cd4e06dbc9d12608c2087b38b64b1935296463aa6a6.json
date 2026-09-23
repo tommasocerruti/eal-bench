@@ -1,0 +1,174 @@
+{
+  "schema_version": "final_v1",
+  "release_id": "cybersecurity_v1",
+  "domain_id": "cybersecurity",
+  "maturity": "core",
+  "freeze_status": "claim_frozen",
+  "canonical_seed": 20260812,
+  "capacity": {
+    "corpus_version": "calibration_v1",
+    "artifact": "capacity_calibration_v1.json",
+    "sha256": "a00caf83c58746b213f9511627e70868f591b957ae3e71e1869f60c9f404b6c1",
+    "freeze_status": "frozen",
+    "primary_policy": "2x_largest_faithful_payload_at_any_checkpoint"
+  },
+  "claim_corpus": {
+    "corpus_version": "benchmark_v1",
+    "status": "completed",
+    "source_files": {
+      "corpus_v3/benchmark_v1_base.yaml": "3626c3aef57e53bb2718f2bd1c35e68169be150089d56ac328d8c987cba26f2c",
+      "data/benchmark_v1_base.json": "4b6cb0ee7e880edf619fe0447993cd1462e8f9d4dceed0f5ace61f90489dab62",
+      "compile_v3.py": "e10a3bd1bb75740bdbee543db560da26859ca1b6a2081bdf4e347f97b38c53c7",
+      "corpus_v3.py": "9af2797ff5c42b370229d6496711e1d885684e709a95a3f60e2b341f5357ad00",
+      "corpus_v7.py": "b113050b3abf8d9a54e67bd9cceb1a145ee525fdedf43c2493f6e73e5e2a5019",
+      "corpus_v10.py": "ace3b242cff0fa845c71ea1caf92ad3f119f4b78f2b8567a36f56ca748db7282",
+      "corpus_v11.py": "ed1affd83a2a1a0a342717ac5803b1e24eb2afbb15be17399beaea8ad1e06ed0",
+      "corpus_v12.py": "798137d734db98ce06391c0287a709df725fa56721c972b0e3d72801f750e44f",
+      "corpus_final.py": "d098df0de41510019c82d1effc0c797e62e91618560688d09a72bf0caf75e8e3"
+    },
+    "sha256": "889a48dd228d35edd761201f0749e32e6e29e911cf2e4ce1e20785e9276f085c",
+    "case_count": 16,
+    "family_count": 16,
+    "authorization_decisions": 128,
+    "attractiveness_rankings": 64,
+    "freeze_status": "frozen",
+    "paid_execution_authorized": true
+  },
+  "presentation": {
+    "presentation_id": "naturalistic_v1",
+    "source": "presentations/naturalistic_v1.json",
+    "sha256": "fd2f56e4fe630522c977bfbefbeef505c40b5ceda5651daa143f27ebe52a2d68",
+    "freeze_status": "frozen"
+  },
+  "pressure_profile": {
+    "profile_id": "financial_urgency_v1",
+    "source": "pressure_profiles/financial_urgency_v1.json",
+    "sha256": "144c33f3ecd5b8d9f4e0c2f81cbef9833fa93539bdfec0e74c1b38732ab0a0ac",
+    "authority_invariant": true,
+    "classification_source": "evidence_role",
+    "freeze_status": "frozen"
+  },
+  "memory": {
+    "implementation_id": "langmem_profile",
+    "implementation_sha256": "bd98a82055492a8311fb5b1d93a31bbede967762b79fa3696bb00f1e658ece03",
+    "typed_schema_version": "4",
+    "typed_schema_sha256": "4a593c5f34e7463a3fc6e2ab975f4330197b15f3805749c0114c9022245647c0",
+    "bounded_attempts": 2,
+    "invalid_update_policy": "atomic_retention"
+  },
+  "analysis_plan": {
+    "source": "analysis_plan.json",
+    "sha256": "1124e0770106306a98f49367f92c4d2502063ab703fd63f746a9194e6567c629",
+    "freeze_status": "frozen"
+  },
+  "implementation": {
+    "adapter.py": "bd8e92a86d4248a138dbf8ca5364509a039e1c62ac5e7dddab498e8f36ce8e7e",
+    "capacity.py": "fb8fe3bc604a74152ba745a39ec80649f2e9f54467fa7d92e4f4041391aec35e",
+    "corpus.py": "eca10de8b419d6909bd47052b0f75470ccfb5e5810d45eb5cd711d76b14960ec",
+    "corpus_final.py": "d098df0de41510019c82d1effc0c797e62e91618560688d09a72bf0caf75e8e3",
+    "models.py": "49e9a3541312b529437528ffe91f95e5c590d1d893e868427ea8f68dc540715c",
+    "pressure_final.py": "b0a4c84a5d659581c968dcf0f352bf985714653b2d36457db3c84fe40eb1636b",
+    "release.py": "1a7394f9e699fb7ad9684f26c740804352847769498874be40d21865c3b3c9b3",
+    "studies.py": "16d20c07d8288f7fa507344f7d656173a2a562f5a4f7a4b2d653e68321ddd653"
+  },
+  "review": {
+    "manifest": "reviews/benchmark_v1.json",
+    "sha256": "c7407e0aafbce86021c2422d24258179302be2fd4f56138f9566e0d534f7034b",
+    "status": "approved_with_owner_waiver",
+    "authorization_decisions": 128,
+    "attractiveness_rankings": 64
+  },
+  "run_plan": {
+    "source": "run_plan.json",
+    "sha256": "0c4d64803ef87c7c1eb885ad721725b7e2e213cbf24515e9bae6c881e1aa195a",
+    "freeze_status": "frozen",
+    "pricing_estimate": {
+      "status": "approved",
+      "artifact": "pre_run_cost_estimate.json",
+      "sha256": "0fecb7b9fd1076eccf974e4feb531e9c7037471d2cedf9783820bc03dfe0b19f",
+      "expected_cost_usd": 11.19036651,
+      "approved_cap_usd": 12.0
+    }
+  },
+  "results": {
+    "status": "completed_official_pass_aggressive_miss",
+    "eligible_to_merge": true,
+    "outcome_based_resampling": false,
+    "bundle": {
+      "path": "../../results/cybersecurity/cybersecurity_v1__results_bundle.json",
+      "sha256": "ec6dcc107ab902cbefb5789346fc31746d97f10635dd3e917ea01efd5be5472b"
+    },
+    "run_manifests": {
+      "controls": {
+        "path": "../../results/cybersecurity/20260808-003532-015910__authorization-memory-controls__cybersecurity-v1-claim-controls/manifest.json",
+        "sha256": "4f783fc7773e643a94c1513fa2df497ca264da3ca60463aa15fb8d9e844ab657"
+      },
+      "pressure": {
+        "path": "../../results/cybersecurity/20260808-010105-777828__authorization-memory-pressure__cybersecurity-v1-claim-pressure/manifest.json",
+        "sha256": "197880dd440bbf1f25b721ccf2c0174d6b1bc96b1800e7d5d0cb69208bb7f013"
+      },
+      "writer": {
+        "path": "../../results/cybersecurity/20260808-005219-551057__authorization-memory-writer__cybersecurity-v1-claim-writer/manifest.json",
+        "sha256": "060b799e23ac9018383b0f2655a38819b50905ed6201c37f1dac7dbaafc73330"
+      }
+    },
+    "reports": {
+      "actual_cost": {
+        "path": "../../results/cybersecurity/cybersecurity_v1__actual_cost.json",
+        "sha256": "cdc2ff822ce97a3deb3413ea38b7bbf72f68e2328e8fde23a5d17a24cd9be1ed"
+      },
+      "aggressive_threshold_report": {
+        "path": "../../results/cybersecurity/cybersecurity_v1__aggressive_threshold_report.json",
+        "sha256": "9de0bb1ceee613f6f9da6ecd8a4a5f7bb02cf8ba96ad7957d0d8ec51daac1818"
+      },
+      "checkpoint_fidelity": {
+        "path": "../../results/cybersecurity/cybersecurity_v1__checkpoint_fidelity.json",
+        "sha256": "2d619cf5e0bb76e30bf45d25b13e725f4d30fc2079261319d9b5e1c94879e0a8"
+      },
+      "controls_summary": {
+        "path": "../../results/cybersecurity/cybersecurity_v1__controls_summary.json",
+        "sha256": "f955d00fa6e9702a788c0deeeb48cc16cef35dcefd347cf083498fd68c96368d"
+      },
+      "deepseek_gate": {
+        "path": "../../results/cybersecurity/cybersecurity_v1__deepseek_gate.json",
+        "sha256": "b90e3bdccbf744eab918b54e74903b007fc41fa7fe52f6172cd565b832d78513"
+      },
+      "gptoss_gate": {
+        "path": "../../results/cybersecurity/cybersecurity_v1__gptoss_gate.json",
+        "sha256": "d15f1f134bcc9245ef11ccc30f895ea90cc0aaa6d84dde2ed56f1951a76dba4f"
+      },
+      "mechanism_report": {
+        "path": "../../results/cybersecurity/cybersecurity_v1__mechanism_report.json",
+        "sha256": "d3134ec77cf756e1264556bdd29044e9adb09d3d24b13997e3356c4439fcc29a"
+      },
+      "natural_witness_report": {
+        "path": "../../results/cybersecurity/cybersecurity_v1__natural_witness_report.json",
+        "sha256": "1c900bf5e6cb9e116c49d4ba0eff66d8198808d98404546a9fd5152335384231"
+      },
+      "official_threshold_report": {
+        "path": "../../results/cybersecurity/cybersecurity_v1__official_threshold_report.json",
+        "sha256": "d15f1f134bcc9245ef11ccc30f895ea90cc0aaa6d84dde2ed56f1951a76dba4f"
+      },
+      "offline_rescore": {
+        "path": "../../results/cybersecurity/cybersecurity_v1__offline_rescore.json",
+        "sha256": "691e66c35ba36b125f028542deab77398bca4666db2bf18621273796bd0eaf4d"
+      },
+      "pressure_summary": {
+        "path": "../../results/cybersecurity/cybersecurity_v1__pressure_summary.json",
+        "sha256": "fcd6a4fc65aee180128e32a0171092f83d64e4a56c0b9c4534169345e93fe504"
+      },
+      "typed_attribution_report": {
+        "path": "../../results/cybersecurity/cybersecurity_v1__typed_attribution_report.json",
+        "sha256": "068483c8ba9ed7595009a5048a7500aa3869e26acd05caea3e0085c0c07354ee"
+      },
+      "writer_failure_diagnostics": {
+        "path": "../../results/cybersecurity/cybersecurity_v1__writer_failure_diagnostics.json",
+        "sha256": "e745dbcb1849c3067ae8e58669c3218c78640a0a8ee76a7635994bcd2c681d6c"
+      },
+      "writer_summary": {
+        "path": "../../results/cybersecurity/cybersecurity_v1__writer_summary.json",
+        "sha256": "8e8d41eeec32637009248078356a150712f9c108d78385894eae6d19c06940a3"
+      }
+    }
+  }
+}

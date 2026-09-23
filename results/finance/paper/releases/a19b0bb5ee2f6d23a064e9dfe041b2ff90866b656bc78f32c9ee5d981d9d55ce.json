@@ -1,0 +1,275 @@
+{
+  "schema_version": "finance_redesign_release_v1",
+  "release_id": "finance_redesign_v1",
+  "domain_id": "finance",
+  "maturity": "core",
+  "freeze_status": "claim_frozen",
+  "canonical_seed": 20260816,
+  "evaluation_seeds": [
+    20260816,
+    20260821,
+    20260822
+  ],
+  "capacity": {
+    "corpus_version": "calibration_v1",
+    "artifact": "capacity_calibration.json",
+    "sha256": "1e885e43400ac233f53d60a8c7fbc8e52feaaf7c19e687bf0e6b1e79fc8c1f28",
+    "primary_tokens": 5860,
+    "primary_policy": "2x_largest_faithful_payload_at_any_checkpoint",
+    "freeze_status": "frozen"
+  },
+  "claim_corpus": {
+    "corpus_version": "benchmark_v1",
+    "status": "completed_held_out_evaluation",
+    "source_files": {
+      "data/benchmark_v1.json": "23b175f00509692f13dd5462cd2504a9aae36b81a26f6db4ec86ca4f7bbe48e4",
+      "v2_blueprint.json": "a6a8b7695f8ac766f75952bc42e3e6848029a1117e6f75f5920058ab131d3d7d",
+      "compile_redesign.py": "c51b4e324789bff1f1c1b541db311100b241d3de7a2cc6716b88a9a02229e256",
+      "corpus_redesign.py": "20f2f0d3db810ef9bcc2dd52b004bda517c9bbdc7c170a2e652a1ecc414f215c",
+      "corpus.py": "2ae522a6b26f994b2ccf6528c3bed0e27566019f80c6f205b533b07c26c6788e"
+    },
+    "sha256": "e16f7342262b32188cff39e315c6041505195aceffea500d56a6a3e99a551966",
+    "case_count": 8,
+    "family_count": 8,
+    "authorization_decisions": 64,
+    "freeze_status": "frozen",
+    "paid_execution_authorized": true,
+    "development_iteration": "finance_redesign_dev_014"
+  },
+  "presentation": {
+    "presentation_id": "naturalistic_v1",
+    "source": "presentations/naturalistic_v1.json",
+    "sha256": "7da8754a8cae5d0bd757b0d668e50d4b96dd61379504b6065435ba095691655f",
+    "freeze_status": "frozen"
+  },
+  "pressure_profile": {
+    "profile_id": "loss_containment_v1",
+    "source": "pressure_profiles/loss_containment_v1.json",
+    "sha256": "c6261b6e9273c59692217d8cc5f83135e063dd70393c69c1a2e4281142e55cca",
+    "authority_invariant": true,
+    "freeze_status": "frozen"
+  },
+  "memory": {
+    "implementation_id": "langmem_profile",
+    "implementation_sha256": "e19c96fdcf904476b6e469775566b05d288232cc2e0143b5167f4656d4f33bdb",
+    "typed_schema_version": "5",
+    "typed_schema_sha256": "a141c26ecbda7c88c4b3f054ca89c4439af6237862721844a50f21afac02e9b8",
+    "bounded_attempts": 2,
+    "invalid_update_policy": "atomic_retention",
+    "target_specific_handling": false
+  },
+  "analysis_plan": {
+    "source": "analysis_plan.json",
+    "sha256": "84559c3e2466c95ebbc318b372c670bea1157fc41c1d7fec7cf556c5e7c323a4",
+    "freeze_status": "frozen"
+  },
+  "implementation": {
+    "adapter.py": "1dcd3852d36fde0072acc7131674cedcf9f7b855ed005ac3bedd26c1ceffe938",
+    "build_redesign_final_precommit.py": "ac216b880861e36f43079bdd9ec673527fd84688b5e1f06f5b25f9799b5a013e",
+    "capacity.py": "10a6db8f2280b4b89ba7482164730f54ebb11b5ade4aeca1af64b32689ab416c",
+    "compile_redesign.py": "c51b4e324789bff1f1c1b541db311100b241d3de7a2cc6716b88a9a02229e256",
+    "corpus.py": "2ae522a6b26f994b2ccf6528c3bed0e27566019f80c6f205b533b07c26c6788e",
+    "corpus_redesign.py": "20f2f0d3db810ef9bcc2dd52b004bda517c9bbdc7c170a2e652a1ecc414f215c",
+    "models.py": "a8defd0c02985269c9479bd6293625afa85ff69df1085ba1b2f6a6d769d8ae9b",
+    "pressure.py": "1ddc19d81bf9b225276162c01f785fd8d2decc2a191010d0f36b6cebf5cd2748",
+    "release.py": "c9d3d731d2275cf62791e52da6be7b656d781fb6e2f69f9b7e8719b45a9ac64e",
+    "semantics.py": "6624c535e886a9945418d799b9e006f42fb58ac5eecb1f81bd224c8d32d2e97b",
+    "studies.py": "343a02b3712e618e7c5d973513f4d6c42ad9c65e138d71c82fa1962aee8ef11a"
+  },
+  "review": {
+    "status": "approved",
+    "approved_on": "2026-08-22",
+    "basis": "Owner-authorized autonomous first-pass freeze and held-out evaluation"
+  },
+  "run_plan": {
+    "source": "run_plan.json",
+    "sha256": "fc80e8453997d1e3c96e1bc9d6bb2bd8e3f72d92e50cb5118a0d8a6e676768bc",
+    "status": "completed",
+    "freeze_status": "frozen",
+    "route_authorizations": {
+      "controls": true,
+      "writer": true,
+      "pressure": true,
+      "witness_replay": false
+    },
+    "pricing_estimate": {
+      "artifact": "pre_run_cost_estimate.json",
+      "sha256": "151f3b76a479475713541522835c0e696c97ff534c507f7c569ff78e45fb6420",
+      "status": "approved",
+      "approved_complete_project_ceiling_usd": 300
+    }
+  },
+  "final_precommit": {
+    "path": "redesign_final_precommit.json",
+    "sha256": "1f32eb4def3ca1b5a8a61b3187e072b3c49b00c21cd9541c6dcfc58a16e09dd2",
+    "status": "completed"
+  },
+  "offline_validation": {
+    "report": "redesign_final_route_validation.json",
+    "sha256": "f59f1ccbd6fdfff92f1e75b3bf0ee0b2f95609c0cdf9bc92e9556c0adc3c2256",
+    "network_calls": 0,
+    "routes_precommitted": 33,
+    "routes_validated_before_sources": 18,
+    "pressure_routes_require_exact_source_validation": 15,
+    "status": "passed"
+  },
+  "legacy_archive": {
+    "manifest": "archive/legacy_finance_v1/archive_manifest.json",
+    "sha256": "38976e742c4d1f5049d6d26d5db8a4db82719b5926e7973a840a97552beb9344",
+    "active_benchmark_surface": false
+  },
+  "results": {
+    "status": "completed_held_out_evaluation",
+    "outcome_based_resampling": false,
+    "complete_artifact_audit": true,
+    "paper_facing_metric": "exact_request_unauthorized_submission",
+    "reports": {
+      "final_json": {
+        "path": "../../results/finance_redesign/final_held_out_evaluation.json",
+        "sha256": "c39545add07586dba9056bffda72bd3e31df04e2d4f9e8c64b3fbf22d4c619fa"
+      },
+      "final_markdown": {
+        "path": "../../results/finance_redesign/final_held_out_evaluation.md",
+        "sha256": "7c57b82924494848518319ce57d82869a0228ecfe5f10e413d0674edd80971d3"
+      },
+      "artifact_audit": {
+        "path": "../../results/finance_redesign/final_artifact_audit.json",
+        "sha256": "edc899dc101fa1fdd823bbc983e58f51ffae43a9e1a1dae343fe9ec6e7634888"
+      }
+    },
+    "run_manifests": {
+      "controls_s20260816": {
+        "path": "../../results/finance/20260822-111425-896146__authorization-memory-controls__finance-redesign-final-s20260816-controls/manifest.json",
+        "sha256": "ed39d5c97c54ad48154373880d1c92e9d0c616cab15327180f89ad82ffbf10d4"
+      },
+      "writer_s20260816_nemotron_3_ultra": {
+        "path": "../../results/finance/20260822-112650-855859__authorization-memory-writer__finance-redesign-final-s20260816-nemotron_3_ultra/manifest.json",
+        "sha256": "6a69817cab5de128dcacdc7987d24cf5c26f1a2fd63add0db9310a6202b607dd"
+      },
+      "pressure_s20260816_nemotron_3_ultra": {
+        "path": "../../results/finance/20260822-114807-416862__authorization-memory-pressure__finance-redesign-final-s20260816-nemotron_3_ultra-pressure/manifest.json",
+        "sha256": "e1196eb3ec2030e5dfee4cade430d14ed21cdcce197c7647f365033a2f52fb72"
+      },
+      "writer_s20260816_kimi": {
+        "path": "../../results/finance/20260822-115627-330299__authorization-memory-writer__finance-redesign-final-s20260816-kimi/manifest.json",
+        "sha256": "54853fb6f1dc64421beebf00b934fadfa6cd764630eb7b3823c7f9598032f9e0"
+      },
+      "pressure_s20260816_kimi": {
+        "path": "../../results/finance/20260822-124934-701406__authorization-memory-pressure__finance-redesign-final-s20260816-kimi-pressure/manifest.json",
+        "sha256": "e7eaac96bbff34f24d46409c2e0b9181d93534317449333e56f6c5fce8ae479f"
+      },
+      "writer_s20260816_glm_5_2": {
+        "path": "../../results/finance/20260822-125728-231234__authorization-memory-writer__finance-redesign-final-s20260816-glm_5_2/manifest.json",
+        "sha256": "dc93269dc60e0c6f55b5021966536f33f6ac4ce08ebe6bf6a5f21118da84ce99"
+      },
+      "pressure_s20260816_glm_5_2": {
+        "path": "../../results/finance/20260822-140213-541433__authorization-memory-pressure__finance-redesign-final-s20260816-glm_5_2-pressure/manifest.json",
+        "sha256": "a5191fd28cc1c6e7d2cc384093abc93a14a5e24eb8f51c69b630ab76de3af53d"
+      },
+      "writer_s20260816_grok_4_3": {
+        "path": "../../results/finance/20260822-140952-641099__authorization-memory-writer__finance-redesign-final-s20260816-grok_4_3/manifest.json",
+        "sha256": "22548ccc0fac316e4551d8973e51fad24e31cfd39a668f2845bd83d4969a987d"
+      },
+      "pressure_s20260816_grok_4_3": {
+        "path": "../../results/finance/20260822-142149-289227__authorization-memory-pressure__finance-redesign-final-s20260816-grok_4_3-pressure/manifest.json",
+        "sha256": "c497a5123296b8cdd8ac8b6da8768d58796523e85a34f23cfbdc4d4e55af4a21"
+      },
+      "writer_s20260816_qwen_plus_0728": {
+        "path": "../../results/finance/20260822-142943-893915__authorization-memory-writer__finance-redesign-final-s20260816-qwen_plus_0728/manifest.json",
+        "sha256": "4822296d996e45f0a271795308b082cf922e7c5af339111f8723bc43ed97c1ab"
+      },
+      "pressure_s20260816_qwen_plus_0728": {
+        "path": "../../results/finance/20260822-151438-539590__authorization-memory-pressure__finance-redesign-final-s20260816-qwen_plus_0728-pressure/manifest.json",
+        "sha256": "cf3ecd58ba8f23ce23f20517fbd5cc7760c57de4860907632de831c002ac6ba9"
+      },
+      "controls_s20260821": {
+        "path": "../../results/finance/20260822-152434-528488__authorization-memory-controls__finance-redesign-final-s20260821-controls/manifest.json",
+        "sha256": "843ba48a0ba7dce39ed3d4308253e4e50de395d478f3ce4450831491f508ac67"
+      },
+      "writer_s20260821_nemotron_3_ultra": {
+        "path": "../../results/finance/20260822-153346-539365__authorization-memory-writer__finance-redesign-final-s20260821-nemotron_3_ultra/manifest.json",
+        "sha256": "c446e5b5ea5aea3a5ec9f7cf6250e53a3ae2b4b29436d53fbe02b86a988a4f2a"
+      },
+      "pressure_s20260821_nemotron_3_ultra": {
+        "path": "../../results/finance/20260822-155405-705664__authorization-memory-pressure__finance-redesign-final-s20260821-nemotron_3_ultra-pressure/manifest.json",
+        "sha256": "a4af44493f417c473a23c69d5d68ccf6bfba23414db458374ed34ad9216e9015"
+      },
+      "writer_s20260821_kimi": {
+        "path": "../../results/finance/20260822-160144-633930__authorization-memory-writer__finance-redesign-final-s20260821-kimi/manifest.json",
+        "sha256": "b65e195dea1996cc191bed4c2c553dd751877114c783e9f508bcf17ba9c82e99"
+      },
+      "pressure_s20260821_kimi": {
+        "path": "../../results/finance/20260822-162004-461355__authorization-memory-pressure__finance-redesign-final-s20260821-kimi-pressure/manifest.json",
+        "sha256": "20dbad70afea6af2b72f669c45d8c50f477f24792bc218900c2893acd53b60c8"
+      },
+      "writer_s20260821_glm_5_2": {
+        "path": "../../results/finance/20260822-162844-688797__authorization-memory-writer__finance-redesign-final-s20260821-glm_5_2/manifest.json",
+        "sha256": "30e3a412ff34fc93b92c70aa950e458009d2b586d2157fec8a69b753c7a561b9"
+      },
+      "pressure_s20260821_glm_5_2": {
+        "path": "../../results/finance/20260822-170436-614450__authorization-memory-pressure__finance-redesign-final-s20260821-glm_5_2-pressure/manifest.json",
+        "sha256": "fab23faf8e5dce52133ca1f81818bb724b88031861eca1ce9404fbc14ee7cd81"
+      },
+      "writer_s20260821_grok_4_3": {
+        "path": "../../results/finance/20260822-171747-195871__authorization-memory-writer__finance-redesign-final-s20260821-grok_4_3/manifest.json",
+        "sha256": "535b3995b2c3bd367a09488167909a055004b2d3a42814e0c59e3ed8a379b4d7"
+      },
+      "pressure_s20260821_grok_4_3": {
+        "path": "../../results/finance/20260822-173209-960395__authorization-memory-pressure__finance-redesign-final-s20260821-grok_4_3-pressure/manifest.json",
+        "sha256": "1ee343256abe2e15e777a0c4c98b90bc9fcbaea84e2b82902ed69d698e61a58c"
+      },
+      "writer_s20260821_qwen_plus_0728": {
+        "path": "../../results/finance/20260822-173951-108881__authorization-memory-writer__finance-redesign-final-s20260821-qwen_plus_0728/manifest.json",
+        "sha256": "581409724edf2d73cc2df20a3e09117130aab915ab01ef84086421eb7fe5d76a"
+      },
+      "pressure_s20260821_qwen_plus_0728": {
+        "path": "../../results/finance/20260822-182546-428550__authorization-memory-pressure__finance-redesign-final-s20260821-qwen_plus_0728-pressure/manifest.json",
+        "sha256": "189f8c36499206f8632a408ed7c7c8108141595cd295653c6111e940138d9581"
+      },
+      "controls_s20260822": {
+        "path": "../../results/finance/20260822-183326-895025__authorization-memory-controls__finance-redesign-final-s20260822-controls/manifest.json",
+        "sha256": "cb4214f486ff13e80139587ebff589787569c6b2974a1c5dd6f5576030a49e8e"
+      },
+      "writer_s20260822_nemotron_3_ultra": {
+        "path": "../../results/finance/20260822-184244-584261__authorization-memory-writer__finance-redesign-final-s20260822-nemotron_3_ultra/manifest.json",
+        "sha256": "df0e5cb7ea0bd87ecf403076390f6fe931d5b91f25f46662a48b0064e1fda30f"
+      },
+      "pressure_s20260822_nemotron_3_ultra": {
+        "path": "../../results/finance/20260822-190008-856839__authorization-memory-pressure__finance-redesign-final-s20260822-nemotron_3_ultra-pressure/manifest.json",
+        "sha256": "6357c2e3d825cfb088d7d62bffe012d8d1c632a57c5f28c713024012ec6e19c9"
+      },
+      "writer_s20260822_kimi": {
+        "path": "../../results/finance/20260822-190753-158642__authorization-memory-writer__finance-redesign-final-s20260822-kimi/manifest.json",
+        "sha256": "c1133e71b64b63350bfcb1166a48d787b1d816524f73794df88e18345b166f6b"
+      },
+      "pressure_s20260822_kimi": {
+        "path": "../../results/finance/20260822-193549-267928__authorization-memory-pressure__finance-redesign-final-s20260822-kimi-pressure/manifest.json",
+        "sha256": "295023553b7baf5b596126621eab44053fbd5ddb805b56a8efe9d02fa6ca9823"
+      },
+      "writer_s20260822_glm_5_2": {
+        "path": "../../results/finance/20260822-194333-975148__authorization-memory-writer__finance-redesign-final-s20260822-glm_5_2/manifest.json",
+        "sha256": "2b46521c26206e0c869861fdb65d7d82ce79037ff4e882033d4021339c7dd405"
+      },
+      "pressure_s20260822_glm_5_2": {
+        "path": "../../results/finance/20260822-202600-198411__authorization-memory-pressure__finance-redesign-final-s20260822-glm_5_2-pressure/manifest.json",
+        "sha256": "08765b1cf28a4aa47774fdbde055755387058bdf12195052ed80ab03b83574fe"
+      },
+      "writer_s20260822_grok_4_3": {
+        "path": "../../results/finance/20260822-203345-490057__authorization-memory-writer__finance-redesign-final-s20260822-grok_4_3/manifest.json",
+        "sha256": "027e81312eaeacfc3fbc25ebe0f6570607750622a95198b46c5cddcbdd216898"
+      },
+      "pressure_s20260822_grok_4_3": {
+        "path": "../../results/finance/20260822-204612-259183__authorization-memory-pressure__finance-redesign-final-s20260822-grok_4_3-pressure/manifest.json",
+        "sha256": "4a6aa3929be90f13d874afaa2479b00dcd8d82eb9b419c58b5e20701736c1208"
+      },
+      "writer_s20260822_qwen_plus_0728": {
+        "path": "../../results/finance/20260822-205328-832265__authorization-memory-writer__finance-redesign-final-s20260822-qwen_plus_0728/manifest.json",
+        "sha256": "4be7dbf6f949764d4683d72d75d726c605ac0feec0138b4c3e2e8a55dd32c009"
+      },
+      "pressure_s20260822_qwen_plus_0728": {
+        "path": "../../results/finance/20260822-213547-038537__authorization-memory-pressure__finance-redesign-final-s20260822-qwen_plus_0728-pressure/manifest.json",
+        "sha256": "f0fbc7e5b00f43e9c04de6702c281662698813542a3507eae57516a6808dbc7f"
+      }
+    }
+  }
+}
