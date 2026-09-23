@@ -223,3 +223,18 @@ Changed cells in the failure-cause table: open-loop cybersecurity 51/478 becomes
 ### Transition rates over seven writers
 
 The 5,550 denominator was the five original writers; the two added writers contribute 2,220 positions and the two sum to the 7,770 already printed above it. Recomputed over all seven (`transitions_added.py`): error introduction 776/7,770 (10.0%), persistence 3,617/7,770 (46.6%), self-repair 306/7,770 (3.9%), against the printed 10.6%, 51.7% and 3.7%.
+
+### Full main-versus-appendix pass (2026-09-22)
+
+Checks run, all mechanical:
+
+- Every denominator in the paper factored against the writer, seed, executor and request counts. Nothing factors to five writers. The only five-writer and four-writer denominators left are the capacity ablations, and both captions name their writers.
+- Legacy values from the five-writer version (50.2, 28.3, 51.0, 98.6 as a formation rate, 3,464, 444, 494, 1,980, 5,550, 2,250, 733, 26.4, 12.6) no longer appear anywhere.
+- Every main-text number quoted beside a cross-reference was checked against the referenced block. Six flagged, all false positives: the restatement rates live in the companion table rather than the figure, and the executor-agreement bounds are the appendix's fractions expressed as percentages (5925/6048 = 98.0%, 10688/10752 = 99.4%).
+- All twelve memory-condition cells of Table 2 reproduce the exact counts of the three-seed aggregate table.
+- Table 2's Average column is correct when computed from unrounded domain rates, which is what its caption now says: the writer instruction averages 13.5362 and text one-shot 1.3462, so 13.5 and 1.3 are right and the reviewer's 13.6 and 1.4 are not.
+- Table 2's writer-side rows reproduce Table 35 exactly, and the frontier figure's five points are Table 35's and Table 28's and Table 31's pooled values.
+- Table 3 checked cell by cell against the per-executor pressure table: 112 cells, no mismatches, including the Average block.
+- The closed-loop, event-sourcing, compute and repair numbers in the main text match their appendix tables (504 chains, 14.3 points, 23.4 to 9.3, 93.0 to 68.6, 386/390 = 99.0%).
+
+Two gaps found and closed. The 5.4% surviving false-authority rate in Section 4.6 had no counts anywhere in the appendix; the gate appendix now gives 149 of 2,772 over the same three-seed population and says the survivors are almost all cybersecurity. The GLM 5.3 sentence said "164 executor-only replays", which reads as a request count when it is a run count, and now says so.
