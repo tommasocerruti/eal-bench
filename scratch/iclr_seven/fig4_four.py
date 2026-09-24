@@ -14,8 +14,8 @@ OUT = sys.argv[1]
 PTS = {k: tuple(v) for k, v in json.load(open("scratch/iclr_seven/fig4_points.json", encoding="utf-8")).items()}
 PTS["baseline"] = tuple(json.load(open("scratch/iclr_seven/table4_pooled.json", encoding="utf-8"))["typed_incremental_pooled"])
 SPEC = {"baseline": ("o", "tab:blue", 8, "Typed incremental", (7, -16, "left")),
-        "gate": ("s", "tab:orange", 7, "Source-authority gate", (7, -14, "left")),
-        "event": ("s", "tab:green", 7, "Bounded event" + chr(10) + "sourcing", (7, -18, "left")),
+        "gate": ("s", "tab:orange", 7, "Source filtering", (7, -14, "left")),
+        "event": ("s", "tab:green", 7, "Event-based" + chr(10) + "memory", (7, -18, "left")),
         "instruction": ("D", "tab:red", 6.5, "Writer instruction", (-8, -22, "right"))}
 plt.rcParams.update({"font.family": "DejaVu Sans", "mathtext.fontset": "dejavusans", "font.size": 8, "axes.labelsize": 8, "legend.fontsize": 7.5, "pdf.fonttype": 42, "ps.fonttype": 42,
                      "savefig.facecolor": "white", "figure.facecolor": "white"})

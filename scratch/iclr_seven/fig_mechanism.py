@@ -17,7 +17,7 @@ ROWS = [  # setting, failures per label: restatement applied, own action as appr
 import os, json
 if os.path.exists("scratch/iclr_seven/mechanism.json"):
     ROWS = [(r[0], r[1]) for r in json.load(open("scratch/iclr_seven/mechanism.json", encoding="utf-8"))]
-LABELS = ["Restatement applied", "Own action read as approval", "Authoritative change misapplied", "Update rejected", "Other"]
+LABELS = ["Restatement applied", "Own action read as approval", "Change misapplied", "Update rejected", "Other"]
 COLORS = ["#DD8452", "#C44E52", "#8172B3", "#4C72B0", "#BBBBBB"]
 plt.rcParams.update({"font.family": "DejaVu Sans", "mathtext.fontset": "dejavusans", "font.size": 7.5, "axes.labelsize": 7.5, "xtick.labelsize": 7, "ytick.labelsize": 7,
                      "axes.spines.top": False, "axes.spines.right": False, "savefig.bbox": "tight", "pdf.fonttype": 42})

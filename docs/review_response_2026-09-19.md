@@ -238,3 +238,34 @@ Checks run, all mechanical:
 - The closed-loop, event-sourcing, compute and repair numbers in the main text match their appendix tables (504 chains, 14.3 points, 23.4 to 9.3, 93.0 to 68.6, 386/390 = 99.0%).
 
 Two gaps found and closed. The 5.4% surviving false-authority rate in Section 4.6 had no counts anywhere in the appendix; the gate appendix now gives 149 of 2,772 over the same three-seed population and says the survivors are almost all cybersecurity. The GLM 5.3 sentence said "164 executor-only replays", which reads as a request count when it is a run count, and now says so.
+
+## Copy-edit pass after the merged co-author revision (2026-09-23)
+
+The co-authors compressed the abstract, introduction, related work, problem formulation and results, and reworked two appendix column layouts. The paper lost a page, to 44. This pass covered the merged text.
+
+Naming carried over from the main paper to the appendices. Three mitigation names had drifted apart:
+
+- The main paper calls the first defense *source filtering*; the appendix called it "gold cited-source authority gating" and referred to "the gate" throughout. The subsection is now *Source filtering*, and the prose, the two captions, the column header and the table row use the filter wording.
+- The main paper calls the second defense *event-based memory*; the appendix called it "bounded event-sourced authorization memory". The subsection is now *Event-based memory*, with the implementation terms (event log, reducer) kept where they describe the mechanism.
+- The hidden ground truth is *ground truth* in the main paper but was still the "canonical ledger", "canonical state", "canonical replay", "canonical authorization records" and "canonical event" in six appendix files. All are now ground-truth wording. "Canonical seed" is a different sense and is unchanged, as are the placeholder strings inside the reproduced prompts.
+
+Figure 4 still labeled its two origin-based points "Source-authority gate" and "Bounded event sourcing". It was regenerated from `scratch/iclr_seven/fig4_four.py` with "Source filtering" and "Event-based memory"; the four points are unchanged.
+
+Headings and captions. The subsection "Where the failure enters and what the writer did there" is now *Failure attribution*. Seven appendix captions opened with a full finding sentence in bold, two of them running to two clauses; each now opens with a short noun phrase, and no finding was dropped, because the surrounding prose states each one.
+
+Defects fixed in the merged text:
+
+- The introduction defined the paper's central term as "creates apparent authority", the one place the old name survived.
+- A contribution bullet said "memory repair" where the method is *exact-state repair*.
+- "This mechanism provides an evaluation that does not introduce the risk of potential misinterpretation of how the writer has encoded authorization state by an LLM judge" left the judge dangling; rewritten.
+- The calibration sentence said "free-form memories" where the representation is *free-text*, and was missing the comma pair around its conditional clause.
+- "Appendix~C.4" was hardcoded rather than a reference. It resolves to `app:rebuild`, which is C.4 today.
+- "correctly-attributed" (hyphen after an -ly adverb), two curly apostrophes, four double spaces, "Memory repair intervention shows" and "All executors pass model inclusion criteria" (there are two executors, and the criteria are the calibration criteria).
+- "the correct permission as they change" disagreed in number.
+- Domain names were capitalized mid-sentence in 25 places across seven appendix files while the main paper lowercases them. Table panel headers and prompt text keep their capitals.
+- "unapplicable" -> "inapplicable" phrasing, "precommitted" -> "pre-committed", "4.1% and 4.1%" -> "4.1% at both", "hurts 6 of the 7 writers" -> "degrades 6 of 7".
+- The word "population" appeared three times in the gate appendix and is gone.
+- The judged-failure table mixed `1360` with `3{,}569` in one row, and its "own action read as approval" header was the only lowercase one.
+- The repair-table caption produced a one-word last line and called formation "the bottleneck", which collides with the selection bottleneck of Section 4.5; it now reads "isolating formation in memory as the cause."
+
+Checks after the pass: latexmk exit 0, no undefined references or citations, 44 pages, references on page 10, `final_checks.py` problems 0, `audit_figures.py` mismatches 0, no duplicate or dangling labels, no unreferenced floats, and a dictionary pass over the extracted prose returns only proper nouns and package names.
