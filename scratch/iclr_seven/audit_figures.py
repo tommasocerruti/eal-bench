@@ -42,9 +42,11 @@ print("Fig2 top vs Table 4: checked", k, "cells")
 # ---- Figure 2 bottom row and Figure 5 writer-side points vs Table 34
 D = json.load(open("scratch/iclr_seven/parity_pool.json", encoding="utf-8"))["designs"]
 t34 = table_block(tex["extension_mitigations_appendix.tex"], "tab:writer-side-mitigations")
+t34 = re.sub(B + B + r"cellcolor\{[^}]*\}", "", t34)
+t34 = re.sub(B + B + r"textbf\{([0-9.]+)\}", r"BSLASH1", t34).replace("BSLASH1", chr(92) + "1")
 rows = {m.group(1): [float(x) for x in m.group(2).split("&")] for m in re.finditer(r"\n\s*(Procurement|Cybersecurity|Finance) & ([0-9. &]+) " + B + B + B + B, t34)}
-pooled = re.search(B + B + r"textbf\{Pooled\}((?: & " + B + B + r"textbf\{[0-9.]+\}){8})", t34)
-rows["pooled"] = [float(x) for x in re.findall(r"\{([0-9.]+)\}", pooled.group(1))]
+pooled = re.search(B + B + r"textbf\{Pooled\} & ([0-9. &]+) " + B + B + B + B, t34)
+rows["pooled"] = [float(x) for x in pooled.group(1).split("&")]
 n = 0
 for dom, key in (("procurement", "Procurement"), ("cybersecurity", "Cybersecurity"), ("finance", "Finance"), ("pooled", "pooled")):
     vals = rows[key]
